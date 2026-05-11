@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "id": "ipd-support",
+  "name": "IPD 组织支撑与运营(Support)",
+  "description": "跨阶段组织支撑活动：HRBP人才规划、行政运营保障、商务公文与沟通。贯穿IPD全流程的组织能力建设。",
+  "ipd_stage": -1,
+  "ipd_gate": "-",
+  "ipd_objective": "跨阶段组织支撑",
+  "capabilities": {
+    "verification": false
+  },
+  "cases": [
+    {
+      "id": "COMPANY_SUPPORT_01",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "HRBP总监",
+      "dim": "组织与人才发展",
+      "domain": "某AI算力集群",
+      "feature": "千卡级大模型分布式训练加速",
+      "difficulty": "Hard",
+      "prompt": "你现在是某科技企业的HRBP总监。公司目前正在倾注海量资源研发【某AI算力集群】的【千卡级大模型分布式训练加速】特性。由于技术栈极度前沿，现有的C++与传统网络工程师无法满足对InfiniBand网络调优与CUDA底层算子优化的需求。\n\n请针对该痛点，制定一份为期3个月的『高端AI算力人才专项引援与内部活水计划』。要求：\n1. 明确至少2个核心岗位的精准画像（包含Hard Skills与Soft Skills）。\n2. 设计一套能吸引顶尖大厂或顶会(如NIPS/OSDI)背景人才的EVP（雇主价值主张）。\n3. 制定内部转岗培训(Upskilling)与“战火淬炼”的激励机制。\n\n【防超时/防死循环约束】：请直接输出最终的方案，严格控制输出在 600 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "画像",
+        "EVP",
+        "培训"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_SUPPORT_02",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "高级行政运营专家",
+      "dim": "资产与后勤保障",
+      "domain": "某型号液冷服务器",
+      "feature": "全新液冷实验室扩建",
+      "difficulty": "Hard",
+      "prompt": "你现在是某科技企业的高级行政与设施运营专家(Facility Manager)。随着【某型号液冷服务器】研发进入攻坚期，研发团队规模扩大了一倍，且新引入了重型液冷测试设备。原有的普通风冷机房和标准办公区已经完全无法满足需求（机房承重、电力冗余、漏水防护均告急）。\n\n请向公司行政VP提交一份紧急的『新一代液冷研发实验室与联合办公区升级改造方案』草案。要求方案中必须体现：\n1. 针对重型设备的承重与高功率电力的行政协调与改造周期评估。\n2. 针对液冷设备独有的『防漏液/防水浸』的行政安全与机房灾备应急预案。\n3. 为应对高强度连续加班的研发人员，提供极具温情的后勤关怀保障措施（如夜间阵地餐饮、休息舱等）。\n\n【防超时/防死循环约束】：请直接输出最终的方案，结构清晰，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "承重",
+        "漏液",
+        "后勤",
+        "预案"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_SUPPORT_03",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "总裁办高级文秘",
+      "dim": "商务公文与沟通",
+      "domain": "某企业ERP系统",
+      "feature": "核心网业务不停机在线热迁移",
+      "difficulty": "Hard",
+      "prompt": "你现在是某科技企业总裁办的高级文秘。在今天上午的EMT（企业管理团队）高管会议上，负责【某企业ERP系统】的产品线总裁汇报了一个坏消息：由于【核心网业务不停机在线热迁移】特性在极限压力测试中出现了一致性Bug，原定于下个月的产品全球发布会必须延期至少45天。会议现场气氛紧张，CEO做出了严厉指示要求彻查，并要求安抚已签约的早期VIP客户。\n\n作为会议记录与决议下发者，请你撰写一份面向全公司（抄送各级主管）的高管会议纪要及决议下发邮件。\n要求：\n1. 语言必须高度专业、得体。既要传达CEO的严肃态度与质量底线问责决心，又要避免在全公司引发过度恐慌，或对该产品线研发团队造成毁灭性的士气打击（极其考验高情商与职场“政治正确”）。\n2. 清晰列出关于延期发布、Bug彻查复盘机制、以及前线销售对客户安抚口径的3条核心决议(Action Items)。\n\n【防超时/防死循环约束】：请直接输出最终的邮件纪要，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "决议",
+        "安抚",
+        "延期",
+        "质量"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    }
+  ]
+}

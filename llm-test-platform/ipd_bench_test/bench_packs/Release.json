@@ -1,0 +1,1014 @@
+{
+  "schemaVersion": 1,
+  "id": "ipd-release",
+  "name": "IPD S5: 发布阶段(Launch) - LDCP评审门",
+  "description": "IPD流程S5阶段：成功上市并放量。发布决策、市场推广、渠道/交付准备、规模量产/部署。LDCP发布决策评审。",
+  "ipd_stage": 5,
+  "ipd_gate": "LDCP",
+  "ipd_objective": "成功上市并放量",
+  "capabilities": {
+    "verification": false
+  },
+  "cases": [
+    {
+      "id": "COMPANY_IPD_S5_01",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【兆瓦级(1040kW)柔性充电功率调度】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_02",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能数据AI平台",
+      "feature": "云边端异构算力无缝跨域协同",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能数据AI平台】产品的全新大版本研发，该版本的核心主打特性是【云边端异构算力无缝跨域协同】。\n\n该版本重点突破了AI算力瓶颈。请面向【大模型算法科学家与AI基础设施负责人】，撰写一封产品Launch（首发）邮件。重点提炼该特性如何提升算力利用率(MFU)、缩短训练周期，并强调开发者生态的易用性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某AI平台智能"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_03",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某AI算力集群",
+      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某AI算力集群】产品的全新大版本研发，该版本的核心主打特性是【冷板式液冷高密散热与盲插盲拔】。\n\n该版本是公司在AI智算中心领域的拳头产品。请面向【智算中心架构师与算力中心运营商】，撰写一段新品发布会(Launch Event)的演讲逐字稿摘要。要求极具感染力，重点突出算力密度与分布式通信性能的代际领先优势。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_04",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某AI算力集群",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某AI算力集群】产品的全新大版本研发，该版本的核心主打特性是【业务微秒级时延与极速网络吞吐】。\n\n该版本是公司在AI智算中心领域的拳头产品。请面向【智算中心架构师与算力中心运营商】，撰写一段新品发布会(Launch Event)的演讲逐字稿摘要。要求极具感染力，重点突出算力密度与分布式通信性能的代际领先优势。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_05",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器管理平台",
+      "feature": "千卡级大模型分布式训练加速",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器管理平台】产品的全新大版本研发，该版本的核心主打特性是【千卡级大模型分布式训练加速】。\n\n该版本引入了极其强悍的底座防护能力。请面向【企业CISO(首席信息安全官)】，撰写一份正式的安全与合规特性发布公告。重点说明该特性如何从硬件根信赖(Root of Trust)层面防范勒索软件并保障数据主权。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_06",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "云边端异构算力无缝跨域协同",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【云边端异构算力无缝跨域协同】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_07",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某HCI超融合基础设施",
+      "feature": "云边端异构算力无缝跨域协同",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某HCI超融合基础设施】产品的全新大版本研发，该版本的核心主打特性是【云边端异构算力无缝跨域协同】。\n\n该版本大幅降低了存储与网络的运维成本。请面向【数据中心系统管理员】，撰写一份Customer Success（客户成功）公告。重点聚焦该特性如何降低平均故障恢复时间(MTTR)并实现IT基础设施的自动驾驶(Autonomous Operations)。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_08",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器操作系统",
+      "feature": "硬件级内存加密与防勒索隔离",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器操作系统】产品的全新大版本研发，该版本的核心主打特性是【硬件级内存加密与防勒索隔离】。\n\n目前该版本已通过全网灰度测试。请面向【核心网与金融政企客户的IT运维总监】，撰写一份以“零宕机与SLA保障”为核心卖点的版本发布声明(Release Note)。重点说明该特性如何解决传统业务升级时的痛点。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_09",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "核心网业务不停机在线热迁移",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【核心网业务不停机在线热迁移】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_10",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某AI算力集群",
+      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某AI算力集群】产品的全新大版本研发，该版本的核心主打特性是【兆瓦级(1040kW)柔性充电功率调度】。\n\n该版本是公司在AI智算中心领域的拳头产品。请面向【智算中心架构师与算力中心运营商】，撰写一段新品发布会(Launch Event)的演讲逐字稿摘要。要求极具感染力，重点突出算力密度与分布式通信性能的代际领先优势。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_11",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某企业ERP系统",
+      "feature": "千卡级大模型分布式训练加速",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某企业ERP系统】产品的全新大版本研发，该版本的核心主打特性是【千卡级大模型分布式训练加速】。\n\n该版本在月底结账与高频交易场景下表现优异。请面向【企业CFO及财务IT总监】，撰写一份新版本上线的商业宣发文案。重点阐述该特性如何保障高并发下的财务数据绝对一致性与极速响应。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某ERP系统企业"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_12",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能数据AI平台",
+      "feature": "硬件级内存加密与防勒索隔离",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能数据AI平台】产品的全新大版本研发，该版本的核心主打特性是【硬件级内存加密与防勒索隔离】。\n\n该版本重点突破了AI算力瓶颈。请面向【大模型算法科学家与AI基础设施负责人】，撰写一封产品Launch（首发）邮件。重点提炼该特性如何提升算力利用率(MFU)、缩短训练周期，并强调开发者生态的易用性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某AI平台智能"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_13",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某型号液冷服务器",
+      "feature": "云边端异构算力无缝跨域协同",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某型号液冷服务器】产品的全新大版本研发，该版本的核心主打特性是【云边端异构算力无缝跨域协同】。\n\n该版本在绿色节能方面取得重大突破。请面向【大型数据中心建设方及ESG(环境社会治理)负责人】，撰写一份官方新闻稿(Press Release)。重点突出该特性如何极致降低PUE，并在运维层面实现如同风冷一样的便捷性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_14",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某型号液冷服务器",
+      "feature": "超大规模集群智能故障自愈",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某型号液冷服务器】产品的全新大版本研发，该版本的核心主打特性是【超大规模集群智能故障自愈】。\n\n该版本在绿色节能方面取得重大突破。请面向【大型数据中心建设方及ESG(环境社会治理)负责人】，撰写一份官方新闻稿(Press Release)。重点突出该特性如何极致降低PUE，并在运维层面实现如同风冷一样的便捷性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_15",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某边缘计算节点",
+      "feature": "硬件级内存加密与防勒索隔离",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某边缘计算节点】产品的全新大版本研发，该版本的核心主打特性是【硬件级内存加密与防勒索隔离】。\n\n该版本彻底打通了云边端的数据流。请面向【工业IoT与智慧工厂的渠道集成商(Partner)】，撰写一份渠道赋能(Briefing)文档的核心段落。重点说明该特性如何在弱网环境下保证业务连续性，以及如何帮助渠道商拓宽边缘场景的售卖机会。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "工作站X3 "
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_16",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某AI算力集群",
+      "feature": "超大规模集群智能故障自愈",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某AI算力集群】产品的全新大版本研发，该版本的核心主打特性是【超大规模集群智能故障自愈】。\n\n该版本是公司在AI智算中心领域的拳头产品。请面向【智算中心架构师与算力中心运营商】，撰写一段新品发布会(Launch Event)的演讲逐字稿摘要。要求极具感染力，重点突出算力密度与分布式通信性能的代际领先优势。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_17",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某边缘计算节点",
+      "feature": "超大规模集群智能故障自愈",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某边缘计算节点】产品的全新大版本研发，该版本的核心主打特性是【超大规模集群智能故障自愈】。\n\n该版本彻底打通了云边端的数据流。请面向【工业IoT与智慧工厂的渠道集成商(Partner)】，撰写一份渠道赋能(Briefing)文档的核心段落。重点说明该特性如何在弱网环境下保证业务连续性，以及如何帮助渠道商拓宽边缘场景的售卖机会。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "工作站X3 "
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_18",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能液冷超充站",
+      "feature": "核心网业务不停机在线热迁移",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能液冷超充站】产品的全新大版本研发，该版本的核心主打特性是【核心网业务不停机在线热迁移】。\n\n该版本针对节假日高速服务区等潮汐充电场景进行了深度优化。请面向【超充站运营商与加盟商】，撰写一段产品宣传册(Brochure)的文案。重点强调该特性如何提升翻台率、降低电网冲击并增加单站营收。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_19",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能液冷超充站",
+      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能液冷超充站】产品的全新大版本研发，该版本的核心主打特性是【冷板式液冷高密散热与盲插盲拔】。\n\n该版本针对节假日高速服务区等潮汐充电场景进行了深度优化。请面向【超充站运营商与加盟商】，撰写一段产品宣传册(Brochure)的文案。重点强调该特性如何提升翻台率、降低电网冲击并增加单站营收。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_20",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某企业ERP系统",
+      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某企业ERP系统】产品的全新大版本研发，该版本的核心主打特性是【兆瓦级(1040kW)柔性充电功率调度】。\n\n该版本在月底结账与高频交易场景下表现优异。请面向【企业CFO及财务IT总监】，撰写一份新版本上线的商业宣发文案。重点阐述该特性如何保障高并发下的财务数据绝对一致性与极速响应。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某ERP系统企业"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_21",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某AI算力集群",
+      "feature": "云边端异构算力无缝跨域协同",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某AI算力集群】产品的全新大版本研发，该版本的核心主打特性是【云边端异构算力无缝跨域协同】。\n\n该版本是公司在AI智算中心领域的拳头产品。请面向【智算中心架构师与算力中心运营商】，撰写一段新品发布会(Launch Event)的演讲逐字稿摘要。要求极具感染力，重点突出算力密度与分布式通信性能的代际领先优势。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_22",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某HCI超融合基础设施",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某HCI超融合基础设施】产品的全新大版本研发，该版本的核心主打特性是【业务微秒级时延与极速网络吞吐】。\n\n该版本大幅降低了存储与网络的运维成本。请面向【数据中心系统管理员】，撰写一份Customer Success（客户成功）公告。重点聚焦该特性如何降低平均故障恢复时间(MTTR)并实现IT基础设施的自动驾驶(Autonomous Operations)。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_23",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能数据AI平台",
+      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能数据AI平台】产品的全新大版本研发，该版本的核心主打特性是【兆瓦级(1040kW)柔性充电功率调度】。\n\n该版本重点突破了AI算力瓶颈。请面向【大模型算法科学家与AI基础设施负责人】，撰写一封产品Launch（首发）邮件。重点提炼该特性如何提升算力利用率(MFU)、缩短训练周期，并强调开发者生态的易用性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某AI平台智能"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_24",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器管理平台",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器管理平台】产品的全新大版本研发，该版本的核心主打特性是【业务微秒级时延与极速网络吞吐】。\n\n该版本引入了极其强悍的底座防护能力。请面向【企业CISO(首席信息安全官)】，撰写一份正式的安全与合规特性发布公告。重点说明该特性如何从硬件根信赖(Root of Trust)层面防范勒索软件并保障数据主权。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_25",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某HCI超融合基础设施",
+      "feature": "核心网业务不停机在线热迁移",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某HCI超融合基础设施】产品的全新大版本研发，该版本的核心主打特性是【核心网业务不停机在线热迁移】。\n\n该版本大幅降低了存储与网络的运维成本。请面向【数据中心系统管理员】，撰写一份Customer Success（客户成功）公告。重点聚焦该特性如何降低平均故障恢复时间(MTTR)并实现IT基础设施的自动驾驶(Autonomous Operations)。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_26",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能液冷超充站",
+      "feature": "超大规模集群智能故障自愈",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能液冷超充站】产品的全新大版本研发，该版本的核心主打特性是【超大规模集群智能故障自愈】。\n\n该版本针对节假日高速服务区等潮汐充电场景进行了深度优化。请面向【超充站运营商与加盟商】，撰写一段产品宣传册(Brochure)的文案。重点强调该特性如何提升翻台率、降低电网冲击并增加单站营收。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_27",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "千卡级大模型分布式训练加速",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【千卡级大模型分布式训练加速】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_28",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器操作系统",
+      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器操作系统】产品的全新大版本研发，该版本的核心主打特性是【冷板式液冷高密散热与盲插盲拔】。\n\n目前该版本已通过全网灰度测试。请面向【核心网与金融政企客户的IT运维总监】，撰写一份以“零宕机与SLA保障”为核心卖点的版本发布声明(Release Note)。重点说明该特性如何解决传统业务升级时的痛点。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_29",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【冷板式液冷高密散热与盲插盲拔】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_30",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某AI算力集群",
+      "feature": "核心网业务不停机在线热迁移",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某AI算力集群】产品的全新大版本研发，该版本的核心主打特性是【核心网业务不停机在线热迁移】。\n\n该版本是公司在AI智算中心领域的拳头产品。请面向【智算中心架构师与算力中心运营商】，撰写一段新品发布会(Launch Event)的演讲逐字稿摘要。要求极具感染力，重点突出算力密度与分布式通信性能的代际领先优势。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_31",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某HCI超融合基础设施",
+      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某HCI超融合基础设施】产品的全新大版本研发，该版本的核心主打特性是【兆瓦级(1040kW)柔性充电功率调度】。\n\n该版本大幅降低了存储与网络的运维成本。请面向【数据中心系统管理员】，撰写一份Customer Success（客户成功）公告。重点聚焦该特性如何降低平均故障恢复时间(MTTR)并实现IT基础设施的自动驾驶(Autonomous Operations)。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_32",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能液冷超充站",
+      "feature": "硬件级内存加密与防勒索隔离",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能液冷超充站】产品的全新大版本研发，该版本的核心主打特性是【硬件级内存加密与防勒索隔离】。\n\n该版本针对节假日高速服务区等潮汐充电场景进行了深度优化。请面向【超充站运营商与加盟商】，撰写一段产品宣传册(Brochure)的文案。重点强调该特性如何提升翻台率、降低电网冲击并增加单站营收。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_33",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能液冷超充站",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能液冷超充站】产品的全新大版本研发，该版本的核心主打特性是【业务微秒级时延与极速网络吞吐】。\n\n该版本针对节假日高速服务区等潮汐充电场景进行了深度优化。请面向【超充站运营商与加盟商】，撰写一段产品宣传册(Brochure)的文案。重点强调该特性如何提升翻台率、降低电网冲击并增加单站营收。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_34",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器操作系统",
+      "feature": "千卡级大模型分布式训练加速",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器操作系统】产品的全新大版本研发，该版本的核心主打特性是【千卡级大模型分布式训练加速】。\n\n目前该版本已通过全网灰度测试。请面向【核心网与金融政企客户的IT运维总监】，撰写一份以“零宕机与SLA保障”为核心卖点的版本发布声明(Release Note)。重点说明该特性如何解决传统业务升级时的痛点。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_35",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某边缘计算节点",
+      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某边缘计算节点】产品的全新大版本研发，该版本的核心主打特性是【兆瓦级(1040kW)柔性充电功率调度】。\n\n该版本彻底打通了云边端的数据流。请面向【工业IoT与智慧工厂的渠道集成商(Partner)】，撰写一份渠道赋能(Briefing)文档的核心段落。重点说明该特性如何在弱网环境下保证业务连续性，以及如何帮助渠道商拓宽边缘场景的售卖机会。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "工作站X3 "
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_36",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某企业ERP系统",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某企业ERP系统】产品的全新大版本研发，该版本的核心主打特性是【业务微秒级时延与极速网络吞吐】。\n\n该版本在月底结账与高频交易场景下表现优异。请面向【企业CFO及财务IT总监】，撰写一份新版本上线的商业宣发文案。重点阐述该特性如何保障高并发下的财务数据绝对一致性与极速响应。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某ERP系统企业"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_37",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某AI算力集群",
+      "feature": "硬件级内存加密与防勒索隔离",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某AI算力集群】产品的全新大版本研发，该版本的核心主打特性是【硬件级内存加密与防勒索隔离】。\n\n该版本是公司在AI智算中心领域的拳头产品。请面向【智算中心架构师与算力中心运营商】，撰写一段新品发布会(Launch Event)的演讲逐字稿摘要。要求极具感染力，重点突出算力密度与分布式通信性能的代际领先优势。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_38",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器管理平台",
+      "feature": "核心网业务不停机在线热迁移",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器管理平台】产品的全新大版本研发，该版本的核心主打特性是【核心网业务不停机在线热迁移】。\n\n该版本引入了极其强悍的底座防护能力。请面向【企业CISO(首席信息安全官)】，撰写一份正式的安全与合规特性发布公告。重点说明该特性如何从硬件根信赖(Root of Trust)层面防范勒索软件并保障数据主权。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_39",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某边缘计算节点",
+      "feature": "千卡级大模型分布式训练加速",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某边缘计算节点】产品的全新大版本研发，该版本的核心主打特性是【千卡级大模型分布式训练加速】。\n\n该版本彻底打通了云边端的数据流。请面向【工业IoT与智慧工厂的渠道集成商(Partner)】，撰写一份渠道赋能(Briefing)文档的核心段落。重点说明该特性如何在弱网环境下保证业务连续性，以及如何帮助渠道商拓宽边缘场景的售卖机会。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "工作站X3 "
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_40",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器操作系统",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器操作系统】产品的全新大版本研发，该版本的核心主打特性是【业务微秒级时延与极速网络吞吐】。\n\n目前该版本已通过全网灰度测试。请面向【核心网与金融政企客户的IT运维总监】，撰写一份以“零宕机与SLA保障”为核心卖点的版本发布声明(Release Note)。重点说明该特性如何解决传统业务升级时的痛点。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_41",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能液冷超充站",
+      "feature": "千卡级大模型分布式训练加速",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能液冷超充站】产品的全新大版本研发，该版本的核心主打特性是【千卡级大模型分布式训练加速】。\n\n该版本针对节假日高速服务区等潮汐充电场景进行了深度优化。请面向【超充站运营商与加盟商】，撰写一段产品宣传册(Brochure)的文案。重点强调该特性如何提升翻台率、降低电网冲击并增加单站营收。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_42",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能数据AI平台",
+      "feature": "核心网业务不停机在线热迁移",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能数据AI平台】产品的全新大版本研发，该版本的核心主打特性是【核心网业务不停机在线热迁移】。\n\n该版本重点突破了AI算力瓶颈。请面向【大模型算法科学家与AI基础设施负责人】，撰写一封产品Launch（首发）邮件。重点提炼该特性如何提升算力利用率(MFU)、缩短训练周期，并强调开发者生态的易用性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某AI平台智能"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_43",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【业务微秒级时延与极速网络吞吐】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_44",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "硬件级内存加密与防勒索隔离",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【硬件级内存加密与防勒索隔离】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_45",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某HCI超融合基础设施",
+      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某HCI超融合基础设施】产品的全新大版本研发，该版本的核心主打特性是【冷板式液冷高密散热与盲插盲拔】。\n\n该版本大幅降低了存储与网络的运维成本。请面向【数据中心系统管理员】，撰写一份Customer Success（客户成功）公告。重点聚焦该特性如何降低平均故障恢复时间(MTTR)并实现IT基础设施的自动驾驶(Autonomous Operations)。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_46",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能体平台",
+      "feature": "超大规模集群智能故障自愈",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能体平台】产品的全新大版本研发，该版本的核心主打特性是【超大规模集群智能故障自愈】。\n\n该版本带来了极致的端侧体验。请面向【智能设备极客玩家与第三方开发者】，撰写一份B2C风格的版本更新日志(Changelog)。要求使用极客、有活力的语言，重点描述该特性如何让设备更聪明、更省电、更稳定。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_47",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某智能数据AI平台",
+      "feature": "超大规模集群智能故障自愈",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某智能数据AI平台】产品的全新大版本研发，该版本的核心主打特性是【超大规模集群智能故障自愈】。\n\n该版本重点突破了AI算力瓶颈。请面向【大模型算法科学家与AI基础设施负责人】，撰写一封产品Launch（首发）邮件。重点提炼该特性如何提升算力利用率(MFU)、缩短训练周期，并强调开发者生态的易用性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "某AI平台智能"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_48",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器管理平台",
+      "feature": "硬件级内存加密与防勒索隔离",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器管理平台】产品的全新大版本研发，该版本的核心主打特性是【硬件级内存加密与防勒索隔离】。\n\n该版本引入了极其强悍的底座防护能力。请面向【企业CISO(首席信息安全官)】，撰写一份正式的安全与合规特性发布公告。重点说明该特性如何从硬件根信赖(Root of Trust)层面防范勒索软件并保障数据主权。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_49",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某服务器操作系统",
+      "feature": "云边端异构算力无缝跨域协同",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某服务器操作系统】产品的全新大版本研发，该版本的核心主打特性是【云边端异构算力无缝跨域协同】。\n\n目前该版本已通过全网灰度测试。请面向【核心网与金融政企客户的IT运维总监】，撰写一份以“零宕机与SLA保障”为核心卖点的版本发布声明(Release Note)。重点说明该特性如何解决传统业务升级时的痛点。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    },
+    {
+      "id": "COMPANY_IPD_S5_50",
+      "ipd_stage": "发布阶段(Release)",
+      "role": "技术营销(GTM)工程师",
+      "dim": "发布阶段",
+      "domain": "某型号液冷服务器",
+      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "difficulty": "Low",
+      "prompt": "你现在是某科技企业IPD流程【发布阶段】的GTM(Go-to-Market)经理。你们团队刚刚完成了【某型号液冷服务器】产品的全新大版本研发，该版本的核心主打特性是【冷板式液冷高密散热与盲插盲拔】。\n\n该版本在绿色节能方面取得重大突破。请面向【大型数据中心建设方及ESG(环境社会治理)负责人】，撰写一份官方新闻稿(Press Release)。重点突出该特性如何极致降低PUE，并在运维层面实现如同风冷一样的便捷性。\n\n【内容约束】：\n1. 抛弃生硬的研发术语堆砌，使用符合目标受众视角的商业化/市场化语言。\n2. 包含一个抓人眼球的主标题。\n3. 提炼出至少3个核心客户收益(Customer Benefits)的要点。\n\n【防超时/防死循环约束】：请直接输出最终的市场文案结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "text",
+      "eval_rule": [
+        "Fusion"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "keyword_matcher"
+    }
+  ]
+}

@@ -1,0 +1,3072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vLLM VRAM 计算器</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-primary: #f1f5f9;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --border-highlight: #cbd5e1;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --accent-green: #3b82f6;
+      --accent-green-dim: #2563eb;
+      --accent-red: #ef4444;
+      --accent-yellow: #f59e0b;
+      --accent-blue: #0ea5e9;
+      --accent-purple: #8b5cf6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 1200px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .panel {
+        padding: 1.25rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .panel {
+        padding: 1rem;
+      }
+
+      .input-row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .panel-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+      }
+
+      .panel-title {
+        font-size: 1rem;
+      }
+
+      .panel-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .presets {
+        gap: 0.4rem;
+      }
+
+      .preset-btn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+      }
+
+      .hf-input-row {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .hf-fetch-btn {
+        width: 100%;
+        padding: 0.75rem;
+      }
+
+      .breakdown-table th,
+      .breakdown-table td {
+        padding: 0.5rem 0.4rem;
+        font-size: 0.8rem;
+      }
+
+      .memory-legend {
+        gap: 0.5rem;
+      }
+
+      .legend-item {
+        font-size: 0.75rem;
+      }
+
+      .command-output {
+        font-size: 0.75rem;
+        padding: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0.75rem;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .panel {
+        padding: 0.875rem;
+      }
+
+      .result-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+
+      .model-info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .panel:hover {
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .panel-icon.gpu { background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-blue) 50%); }
+    .panel-icon.model { background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%); }
+    .panel-icon.config { background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-red) 100%); }
+    .panel-icon.result { background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%); }
+
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="number"]:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Keyboard focus indicators for accessibility (WCAG 2.1 AA compliance) */
+    input[type="number"]:focus-visible,
+    select:focus-visible,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--color-success);
+      outline-offset: 2px;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button {
+      opacity: 1;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    /* Results Panel */
+    .results-section {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .results-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    .result-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .result-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .result-value.highlight {
+      color: var(--accent-green);
+      font-size: 1.1rem;
+    }
+
+    .result-value.warning {
+      color: var(--accent-yellow);
+    }
+
+    .result-value.error {
+      color: var(--accent-red);
+    }
+
+    /* Memory Bar */
+    .memory-bar-container {
+      margin-top: 1.5rem;
+    }
+
+    .memory-bar-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .memory-bar {
+      height: 24px;
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+
+    .memory-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+      position: relative;
+    }
+
+    .memory-segment.weights { background: var(--accent-blue); cursor: pointer; }
+    .memory-segment.kv-cache { background: var(--accent-purple); cursor: pointer; }
+    .memory-segment.cuda-graphs { background: var(--accent-yellow); cursor: pointer; }
+    .memory-segment.overhead { background: var(--accent-red); opacity: 0.7; cursor: pointer; }
+    .memory-segment.free { background: var(--accent-green); opacity: 0.3; cursor: default; }
+
+    /* Memory Bar Tooltip */
+    .memory-segment {
+      position: relative;
+    }
+
+    .memory-segment::before {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 10px;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .memory-segment::after {
+      content: '';
+      position: absolute;
+      bottom: calc(100% + 3px);
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--bg-tertiary);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      z-index: 100;
+    }
+
+    .memory-segment:hover::before,
+    .memory-segment:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .memory-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .legend-color.weights { background: var(--accent-blue); }
+    .legend-color.kv-cache { background: var(--accent-purple); }
+    .legend-color.cuda-graphs { background: var(--accent-yellow); }
+    .legend-color.overhead { background: var(--accent-red); opacity: 0.7; }
+    .legend-color.free { background: var(--accent-green); opacity: 0.3; }
+
+    /* Status Badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .status-badge.ok {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent-green);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .status-badge.warning {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--accent-yellow);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .status-badge.error {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--accent-red);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Command Output */
+    .command-output {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .command-output .flag {
+      color: var(--accent-green);
+    }
+
+    .command-output .value {
+      color: var(--accent-yellow);
+    }
+
+    /* Presets */
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .preset-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--accent-green);
+      color: var(--text-primary);
+    }
+
+    .preset-btn.active {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    /* Breakdown table */
+    .breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .breakdown-table th,
+    .breakdown-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .breakdown-table th {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .breakdown-table td {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .breakdown-table td:last-child {
+      text-align: right;
+    }
+
+    .breakdown-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .breakdown-table .total-row td {
+      font-weight: 600;
+      color: var(--accent-green);
+      border-top: 2px solid var(--border);
+    }
+
+    /* HuggingFace Integration */
+    .hf-input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .hf-input-row input[type="text"] {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .hf-input-row input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .hf-input-row input[type="text"]::placeholder {
+      color: var(--text-muted);
+    }
+
+    .hf-fetch-btn {
+      padding: 0.75rem 1.25rem;
+      background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
+      border: none;
+      border-radius: 8px;
+      color: var(--bg-primary);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
+    }
+
+    .hf-fetch-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .hf-fetch-btn:active {
+      transform: translateY(0);
+    }
+
+    .hf-fetch-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .hf-fetch-btn .spinner {
+      width: 18px;
+      height: 18px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hint.success {
+      color: var(--accent-green);
+    }
+
+    .hint.error {
+      color: var(--accent-red);
+    }
+
+    .hint.loading {
+      color: var(--accent-yellow);
+    }
+
+    /* 内置模型快速选择 */
+    .builtin-presets-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .vendor-select-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .vendor-select-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .vendor-label {
+      min-width: 80px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .builtin-model-select {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .builtin-model-select:hover {
+      border-color: var(--accent-purple);
+    }
+
+    .builtin-model-select:focus {
+      outline: none;
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .vendor-select-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+      
+      .vendor-label {
+        min-width: auto;
+      }
+    }
+
+    /* Model info card */
+    .model-info-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .model-info-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .model-info-icon {
+      font-size: 1.5rem;
+    }
+
+    .model-info-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+
+    .model-info-author {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .model-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem 1rem;
+    }
+
+    .model-info-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
+
+    .model-info-item .label {
+      color: var(--text-muted);
+    }
+
+    .model-info-item .value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: var(--text-secondary);
+    }
+
+    .model-info-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .model-tag {
+      padding: 0.2rem 0.5rem;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .model-tag.quant {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--accent-purple);
+    }
+
+    .model-tag.arch {
+      background: rgba(68, 136, 255, 0.2);
+      color: var(--accent-blue);
+    }
+
+    /* Section Divider */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0 1rem 0;
+      gap: 1rem;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-divider span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* Collapsible Section */
+    .section-divider.collapsible {
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
+
+    .section-divider.collapsible:hover span {
+      color: var(--text-primary);
+    }
+
+    .section-divider.collapsible .toggle-icon {
+      transition: transform 0.2s ease;
+    }
+
+    .section-divider.collapsible.collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    #quant-section-content {
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    #quant-section-content.collapsed {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    /* MoE specific styling */
+    .moe-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .moe-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .moe-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-green);
+      cursor: pointer;
+    }
+
+    .moe-toggle label {
+      margin-bottom: 0;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    .moe-fields {
+      display: none;
+    }
+
+    .moe-fields.visible {
+      display: block;
+    }
+
+    /* KV Cache Comparison Bar */
+    .kv-comparison-bar-container {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .kv-comparison-bar {
+      height: 20px;
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .kv-comparison-fill {
+      height: 100%;
+      transition: width 0.3s ease, background 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--bg-primary);
+      position: relative;
+    }
+
+    .kv-comparison-fill.ok {
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-green-dim));
+    }
+
+    .kv-comparison-fill.warning {
+      background: linear-gradient(90deg, var(--accent-yellow), #d97706);
+    }
+
+    .kv-comparison-fill.error {
+      background: linear-gradient(90deg, var(--accent-red), #dc2626);
+    }
+
+    .kv-comparison-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header role="banner">
+      <h1>vLLM VRAM 计算器</h1>
+      <p class="subtitle">规划 LLM 部署的 GPU/NPU 显存分配</p>
+    </header>
+
+    <div class="grid">
+      <!-- Left Column: Inputs -->
+      <div class="inputs-column">
+        <!-- GPU Configuration -->
+        <div class="panel" role="region" aria-labelledby="gpu-config-title">
+          <div class="panel-header">
+            <div class="panel-icon gpu" aria-hidden="true"><i data-lucide="monitor" style="width: 20px; height: 20px;"></i></div>
+            <h2 class="panel-title" id="gpu-config-title">GPU/NPU 配置</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="gpu-preset">GPU/NPU 预设</label>
+            <select id="gpu-preset" aria-label="Select GPU preset from common models">
+              <option value="custom">自定义（手动输入）</option>
+              <optgroup label="消费级 GPU">
+                <option value="12.9">RTX 4070 Ti (12GB)</option>
+                <option value="17.2">RTX 4080 (16GB)</option>
+                <option value="25.8">RTX 4090 (24GB)</option>
+                <option value="25.4">RTX 3090 (24GB)</option>
+                <option value="34.2">RTX 5090 (32GB)</option>
+              </optgroup>
+              <optgroup label="专业级 GPU">
+                <option value="51.5">RTX 6000 Ada (48GB)</option>
+                <option value="51.5">L40 (48GB)</option>
+                <option value="51.5">L40S (48GB)</option>
+                <option value="51.0">A6000 (48GB)</option>
+                <option value="48.0">RTX PRO 5000 (48GB)</option>
+                <option value="72.0">RTX PRO 5000 (72GB)</option>
+                <option value="42.5">A100 (40GB)</option>
+                <option value="85.2">A100 (80GB)</option>
+                <option value="85.5">H100 (80GB)</option>
+                <option value="96.0">RTX Pro 6000 (96GB)</option>
+                <option value="96.0">RTX Pro 6000 Max (96GB)</option>
+                <option value="84.0">RTX Pro 6000D (84GB)</option>
+                <option value="112.0">950 PR (112GB)</option>
+                <option value="150.5">H200 (141GB)</option>
+                <option value="64.0" selected>NPU 910B (64GB)</option>
+                <option value="128.0">NPU 910C (128GB)</option>
+              </optgroup>
+            </select>
+            <p class="hint">实际可用显存（nvidia-smi 显示值，十进制 GB）</p>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="gpu-vram">每卡显存 (GB)</label>
+              <input type="number" id="gpu-vram" value="64.0" min="1" max="192" step="0.1"
+                aria-label="VRAM per GPU in decimal gigabytes"
+                aria-describedby="gpu-vram-hint">
+              <p class="hint" id="gpu-vram-hint">1 GB = 1,000³ bytes（十进制）</p>
+            </div>
+            <div class="form-group">
+              <label for="num-gpus">GPU/NPU 数量（TP 大小）</label>
+              <input type="number" id="num-gpus" value="2" min="1" max="8" step="1"
+                aria-label="Number of GPUs for tensor parallelism">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="gpu-utilization">GPU/NPU 显存利用率</label>
+            <input type="number" id="gpu-utilization" value="0.90" min="0.5" max="0.99" step="0.01"
+              aria-label="GPU memory utilization ratio"
+              aria-describedby="gpu-util-hint">
+            <p class="hint" id="gpu-util-hint">通常 0.85-0.95。较低值可为峰值预留更多空间</p>
+          </div>
+        </div>
+
+        <!-- Model Configuration -->
+        <div class="panel" style="margin-top: 1.5rem;" role="region" aria-labelledby="model-config-title">
+          <div class="panel-header">
+            <div class="panel-icon model" aria-hidden="true"><i data-lucide="brain" style="width: 20px; height: 20px;"></i></div>
+            <h2 class="panel-title" id="model-config-title">模型配置</h2>
+          </div>
+
+          <!-- 统一的模型选择区域 -->
+          <div class="selection-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div class="form-group">
+              <label for="model-vendor">厂商</label>
+              <select id="model-vendor" class="form-control" style="width: 100%; padding: 0.6rem; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary);">
+                <option value="DeepSeek">DeepSeek</option>
+                <option value="Qwen">Qwen</option>
+                <option value="GLM">GLM</option>
+                <option value="Custom">自定义/其他</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="model-preset">预设模型</label>
+              <select id="model-preset" class="form-control" style="width: 100%; padding: 0.6rem; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary);">
+                <!-- 动态填充 -->
+              </select>
+            </div>
+          </div>
+
+          <!-- HuggingFace / ModelScope Integration -->
+          <div class="form-group">
+            <label for="hf-model-id">获取模型信息 (HuggingFace / ModelScope)</label>
+            <div class="hf-input-row" style="margin-bottom: 0.5rem;">
+              <select id="model-source" class="form-control" style="width: auto; padding: 0.75rem 1rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); cursor: pointer;">
+                <option value="huggingface">HuggingFace</option>
+                <option value="modelscope">ModelScope</option>
+              </select>
+              <input type="text" id="hf-model-id" placeholder="e.g. deepseek-ai/DeepSeek-V3"
+                aria-label="Model ID"
+                aria-describedby="hf-status">
+              <button class="hf-fetch-btn" id="hf-fetch-btn"
+                aria-label="Fetch model configuration">
+                <span class="btn-text">获取</span>
+                <span class="btn-loading" style="display: none;" aria-hidden="true">
+                  <svg class="spinner" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <p class="hint" id="hf-status" role="status" aria-live="polite">输入 ID，然后点击获取</p>
+          </div>
+
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="model-weights">参数量（B）</label>
+              <input type="number" id="model-weights" value="36.3" min="0.1" max="500" step="0.1">
+              <p class="hint">BF16 基础大小（来自 HF 或手动输入）。实际 = 此值 × 量化比例</p>
+            </div>
+            <div class="form-group">
+              <label for="num-layers">层数</label>
+              <input type="number" id="num-layers" value="32" min="1" max="200" step="1">
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="kv-heads">KV Heads (GQA)</label>
+              <input type="number" id="kv-heads" value="8" min="1" max="128" step="1">
+              <p class="hint">Key-Value 注意力头数</p>
+            </div>
+            <div class="form-group">
+              <label for="head-dim">Head 维度</label>
+              <input type="number" id="head-dim" value="64" min="32" max="256" step="8">
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="attn-heads">注意力头数（总数）</label>
+              <input type="number" id="attn-heads" value="8" min="1" max="128" step="1">
+              <p class="hint">总注意力头数（≥ KV heads）</p>
+            </div>
+            <div class="form-group">
+              <label for="activation-dtype">激活数据类型</label>
+              <select id="activation-dtype">
+                <option value="2">BF16/FP16 (2 bytes)</option>
+                <option value="1" selected>FP8/INT8 (1 byte)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-row" style="margin-top: 1rem;">
+            <div class="form-group">
+              <label for="attention-type">注意力架构</label>
+              <select id="attention-type">
+                <option value="auto" selected>自动检测</option>
+                <option value="mha">MHA (Multi-Head Attention)</option>
+                <option value="gqa">GQA (Grouped Query Attention)</option>
+                <option value="mla">MLA (Multi-head Latent Attention)</option>
+              </select>
+              <p class="hint" id="attention-type-detected">输入 HuggingFace 模型 ID 以自动检测</p>
+            </div>
+            <div class="form-group" id="kv-lora-rank-group" style="display: none;">
+              <label for="kv-lora-rank">KV LoRA Rank</label>
+              <input type="number" id="kv-lora-rank" value="1536" min="64" max="8192" step="64">
+              <p class="hint">MLA 压缩维度（从 HF 自动检测）</p>
+            </div>
+          </div>
+
+          <!-- Quantization Configuration -->
+          <div class="section-divider collapsible" id="quant-toggle" style="cursor: pointer; user-select: none;">
+            <span>量化设置</span>
+            <i data-lucide="chevron-down" class="toggle-icon" style="width: 16px; height: 16px; transition: transform 0.2s ease;"></i>
+          </div>
+
+          <div id="quant-section-content">
+<div class="form-group">
+<label for="quant-method">权重量化</label>
+                <select id="quant-method">
+                  <option value="none">BF16 (2 字节/参数)</option>
+                  <option value="int8" selected>INT8 (1 字节/参数)</option>
+                  <option value="fp8">FP8 (1 字节/参数)</option>
+                  <option value="int4">INT4 (0.5 字节/参数)</option>
+                  <option value="fp4">FP4 (0.5 字节/参数)</option>
+                </select>
+                <p class="hint">实际权重 = 参数量(BF16) × (字节数/参数 ÷ 2)</p>
+             </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Results -->
+      <div class="results-column">
+        <!-- vLLM Configuration -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-icon config"><i data-lucide="settings" style="width: 20px; height: 20px;"></i></div>
+            <h2 class="panel-title">vLLM 配置</h2>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="max-model-len">最大模型长度</label>
+              <input type="number" id="max-model-len" value="131072" min="1024" max="1048576" step="1024">
+              <p class="hint">最大上下文窗口</p>
+            </div>
+            <div class="form-group">
+              <label for="max-num-seqs">最大并发序列数</label>
+              <input type="number" id="max-num-seqs" value="8" min="1" max="256" step="1">
+              <p class="hint">并发序列数量</p>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="max-batched-tokens">最大批处理 Token 数</label>
+              <input type="number" id="max-batched-tokens" value="65536" min="1024" max="262144" step="1024">
+              <p class="hint">每次前向传播的 Token 数</p>
+            </div>
+            <div class="form-group">
+              <label for="kv-cache-dtype">KV Cache 数据类型</label>
+              <select id="kv-cache-dtype">
+                <option value="2" selected>BF16/FP16 (2 字节)</option>
+                <option value="1">FP8 (1 字节)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="cuda-graphs">CUDA Graphs</label>
+              <select id="cuda-graphs">
+                <option value="1" selected>启用（自动计算）</option>
+                <option value="0">禁用 (--enforce-eager)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="overhead-estimate">预估开销 (GB)</label>
+              <input type="number" id="overhead-estimate" value="0" min="0" step="0.01" readonly>
+              <p class="hint">根据激活缓冲区计算</p>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="form-group">
+              <label for="overhead-padding">额外开销 (GB)</label>
+              <input type="number" id="overhead-padding" value="1.0" min="0" max="10" step="0.1">
+              <p class="hint">框架/MoE/编译开销。大模型建议 1-2 GB，小模型 0.5 GB</p>
+            </div>
+            <div class="form-group">
+              <label for="overhead-notes">开销输入</label>
+              <div class="hint" id="overhead-notes">
+                Prefill + decode tokens × 每 GPU 隐藏层大小 × dtype
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 1.5rem;" role="region" aria-labelledby="memory-breakdown-title">
+          <div class="panel-header">
+            <div class="panel-icon result" aria-hidden="true"><i data-lucide="bar-chart-3" style="width: 20px; height: 20px;"></i></div>
+            <h2 class="panel-title" id="memory-breakdown-title">内存分配明细（每卡）</h2>
+          </div>
+
+          <table class="breakdown-table" role="table" aria-label="Memory usage breakdown per GPU">
+            <thead>
+              <tr>
+                <th scope="col">组件</th>
+                <th scope="col">大小</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown-body">
+              <!-- Filled by JS -->
+            </tbody>
+          </table>
+
+          <div class="memory-bar-container">
+<div class="memory-bar-label">
+               <span>内存使用</span>
+               <span id="memory-percent" aria-live="polite">0%</span>
+             </div>
+            <div class="memory-bar" id="memory-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="GPU memory usage percentage">
+              <!-- Filled by JS -->
+            </div>
+<div class="memory-legend">
+               <div class="legend-item"><div class="legend-color weights"></div>权重</div>
+               <div class="legend-item"><div class="legend-color kv-cache"></div>KV Cache</div>
+               <div class="legend-item"><div class="legend-color cuda-graphs"></div>CUDA Graphs</div>
+               <div class="legend-item"><div class="legend-color overhead"></div>开销</div>
+               <div class="legend-item"><div class="legend-color free"></div>空闲</div>
+             </div>
+          </div>
+
+          <div id="status-container" role="status" aria-live="polite" aria-atomic="true"></div>
+        </div>
+
+        <!-- Capacity Analysis -->
+        <div class="panel" style="margin-top: 1.5rem;">
+          <div class="panel-header">
+            <div class="panel-icon config"><i data-lucide="trending-up" style="width: 20px; height: 20px;"></i></div>
+            <h2 class="panel-title">容量分析</h2>
+          </div>
+
+          <div class="results-section">
+<div class="section-title">KV Cache：可分配 vs 需求</div>
+             <div class="result-row">
+               <span class="result-label">可分配 KV Cache 空间（每卡）</span>
+               <span class="result-value" id="kv-allocated-display">-</span>
+             </div>
+             <div class="result-row">
+               <span class="result-label">需求（max-model-len × max-num-seqs）</span>
+               <span class="result-value" id="kv-required-display">-</span>
+             </div>
+             <div class="result-row">
+               <span class="result-label">利用率</span>
+               <span class="result-value" id="kv-utilization-display">-</span>
+             </div>
+             <div class="kv-comparison-bar-container">
+               <div class="kv-comparison-label">需求 vs 已分配</div>
+              <div class="kv-comparison-bar">
+                <div class="kv-comparison-fill" id="kv-comparison-fill"></div>
+              </div>
+            </div>
+            <div id="kv-comparison-status"></div>
+          </div>
+
+          <div class="results-section">
+<div class="section-title">KV Cache 容量</div>
+             <div class="result-row">
+               <span class="result-label">可用于 KV Cache</span>
+               <span class="result-value" id="kv-available">-</span>
+             </div>
+<div class="result-row">
+                <span class="result-label">每 Token 字节数</span>
+                <span class="result-value" id="bytes-per-token">-</span>
+              </div>
+              <p class="hint" id="bytes-per-token-formula" style="margin-top: -0.5rem; margin-bottom: 0.5rem;"></p>
+              <div class="result-row">
+                <span class="result-label">Cache 中最大 Token 数</span>
+                <span class="result-value highlight" id="max-tokens">-</span>
+              </div>
+            </div>
+
+           <div class="results-section">
+             <div class="section-title">有效限制</div>
+             <div class="result-row">
+               <span class="result-label">最大上下文（单序列）</span>
+               <span class="result-value" id="max-context-single">-</span>
+             </div>
+             <div class="result-row">
+               <span class="result-label">平均上下文（所有序列）</span>
+               <span class="result-value" id="avg-context-all">-</span>
+             </div>
+             <div class="result-row">
+               <span class="result-label">推荐 max-num-seqs</span>
+               <span class="result-value highlight" id="recommended-seqs">-</span>
+             </div>
+           </div>
+        </div>
+
+        <!-- Generated Command -->
+        <div class="panel" style="margin-top: 1.5rem;">
+          <div class="panel-header">
+            <div class="panel-icon model"><i data-lucide="terminal" style="width: 20px; height: 20px;"></i></div>
+<h2 class="panel-title">生成的 vLLM 命令</h2>
+           </div>
+           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+             <span class="hint"><i data-lucide="copy" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 点击复制命令</span>
+           </div>
+          <div class="command-output" id="command-output" style="cursor: pointer; position: relative;" onclick="copyCommandToClipboard()">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Built-in Models Data
+    const BUILTIN_MODELS = {
+      'DeepSeek': [
+        { name: 'DeepSeek-V3.2', id: 'deepseek-ai/DeepSeek-V3.2' },
+        { name: 'DeepSeek-R1', id: 'deepseek-ai/DeepSeek-R1' },
+      ],
+      'Qwen': [
+        { name: 'Qwen3-32B', id: 'Qwen/Qwen3-32B' },
+        { name: 'Qwen3-14B', id: 'Qwen/Qwen3-14B' },
+      ],
+      'GLM': [
+        { name: 'GLM-5', id: 'zai-org/GLM-5' },
+        { name: 'GLM-4.7', id: 'zai-org/GLM-4.7' },
+      ],
+    };
+
+    // DOM Elements
+    const inputs = {
+      gpuVram: document.getElementById('gpu-vram'),
+      numGpus: document.getElementById('num-gpus'),
+      gpuUtilization: document.getElementById('gpu-utilization'),
+      modelWeights: document.getElementById('model-weights'),
+      numLayers: document.getElementById('num-layers'),
+      kvHeads: document.getElementById('kv-heads'),
+      headDim: document.getElementById('head-dim'),
+      attnHeads: document.getElementById('attn-heads'),
+      maxModelLen: document.getElementById('max-model-len'),
+      maxNumSeqs: document.getElementById('max-num-seqs'),
+      maxBatchedTokens: document.getElementById('max-batched-tokens'),
+      kvCacheDtype: document.getElementById('kv-cache-dtype'),
+      activationDtype: document.getElementById('activation-dtype'),
+      cudaGraphs: document.getElementById('cuda-graphs'),
+      overheadEstimate: document.getElementById('overhead-estimate'),
+      overheadPadding: document.getElementById('overhead-padding'),
+      attentionType: document.getElementById('attention-type'),
+      kvLoraRank: document.getElementById('kv-lora-rank'),
+      // Model Selection Elements
+      modelVendor: document.getElementById('model-vendor'),
+      modelPreset: document.getElementById('model-preset'),
+    };
+
+    // Initialize Model Selection
+    function initModelSelection() {
+      const vendorSelect = inputs.modelVendor;
+      const presetSelect = inputs.modelPreset;
+      const hfInput = document.getElementById('hf-model-id');
+
+      function updatePresets() {
+        const vendor = vendorSelect.value;
+        presetSelect.innerHTML = '';
+        
+        if (vendor === 'Custom') {
+          presetSelect.disabled = true;
+          const option = document.createElement('option');
+          option.value = '';
+          option.textContent = 'Enter ID below';
+          presetSelect.appendChild(option);
+          return;
+        }
+
+        presetSelect.disabled = false;
+        const models = BUILTIN_MODELS[vendor] || [];
+        models.forEach(m => {
+          const option = document.createElement('option');
+          option.value = m.id;
+          option.textContent = m.name;
+          presetSelect.appendChild(option);
+        });
+
+        if (models.length > 0) {
+          hfInput.value = models[0].id;
+        }
+      }
+
+      vendorSelect.addEventListener('change', updatePresets);
+      
+      presetSelect.addEventListener('change', () => {
+        hfInput.value = presetSelect.value;
+      });
+
+      // Initial populate
+      updatePresets();
+    }
+
+    initModelSelection();
+
+    // Attention type detection state
+    let detectedAttentionType = null;
+    let extractedKvLoraRank = null;
+    let fetchedModelId = null;
+    let fetchedHiddenSize = null;
+    let fetchedCheckpointBytes = null;
+    let fetchedCheckpointSource = null;
+    let detectedQuantMethod = 'none';
+
+    const quantInputs = {
+      method: document.getElementById('quant-method')
+    };
+
+    function normalizeQuantMethod(value) {
+      if (!value) return 'none';
+
+      const normalized = String(value).toLowerCase();
+
+      if (normalized.includes('mxfp4') || normalized === 'fp4') return 'fp4';
+      if (normalized.includes('fp8')) return 'fp8';
+      if (normalized.includes('awq') || normalized.includes('gptq') || normalized.includes('4bit') || normalized.includes('4-bit') || normalized.includes('bnb') || normalized.includes('exl2') || normalized === 'int4') {
+        return 'int4';
+      }
+      if (normalized.includes('8bit') || normalized.includes('8-bit') || normalized === 'int8') return 'int8';
+      if (normalized === 'bf16' || normalized === 'bfloat16' || normalized === 'fp16' || normalized === 'float16' || normalized === 'none') return 'none';
+
+      return 'none';
+    }
+
+    function getEstimatedBytesPerParam(method) {
+      const quantMethod = normalizeQuantMethod(method);
+      const baseBytes = getQuantBytesPerParam(quantMethod);
+
+      if (quantMethod === 'int4') {
+        return baseBytes + (4 / 128);
+      }
+
+      if (quantMethod === 'fp4') {
+        return baseBytes + (2 / 128);
+      }
+
+      return baseBytes;
+    }
+
+    function getBytesPerDtypeLabel(label) {
+      const normalized = String(label || '').toUpperCase();
+      const dtypeBytes = {
+        'BF16': 2,
+        'BFLOAT16': 2,
+        'F16': 2,
+        'FLOAT16': 2,
+        'HALF': 2,
+        'F32': 4,
+        'FLOAT32': 4,
+        'FP32': 4,
+        'F64': 8,
+        'FLOAT64': 8,
+        'FP64': 8,
+        'F8_E4M3': 1,
+        'F8_E5M2': 1,
+        'FP8': 1,
+        'I8': 1,
+        'INT8': 1,
+        'U8': 1,
+        'UINT8': 1,
+        'I16': 2,
+        'INT16': 2,
+        'U16': 2,
+        'UINT16': 2,
+        'I32': 4,
+        'INT32': 4,
+        'U32': 4,
+        'UINT32': 4,
+        'I64': 8,
+        'INT64': 8,
+        'U64': 8,
+        'UINT64': 8,
+        'I4': 0.5,
+        'INT4': 0.5,
+        'U4': 0.5,
+        'UINT4': 0.5,
+      };
+
+      return dtypeBytes[normalized] ?? null;
+    }
+
+    function estimateCheckpointBytesFromSafetensorsParameters(parameters) {
+      if (!parameters || typeof parameters !== 'object') {
+        return null;
+      }
+
+      let totalBytes = 0;
+      for (const [dtype, count] of Object.entries(parameters)) {
+        const bytesPerElement = getBytesPerDtypeLabel(dtype);
+        if (bytesPerElement === null || !Number.isFinite(count)) {
+          return null;
+        }
+        totalBytes += count * bytesPerElement;
+      }
+
+      return totalBytes > 0 ? totalBytes : null;
+    }
+
+    function detectQuantMethod(modelInfo, config, tags = []) {
+      const configQuantMethod = normalizeQuantMethod(config?.quantization_config?.quant_method);
+      if (configQuantMethod !== 'none') {
+        return configQuantMethod;
+      }
+
+      const apiConfigQuantMethod = normalizeQuantMethod(modelInfo?.config?.quantization_config?.quant_method);
+      if (apiConfigQuantMethod !== 'none') {
+        return apiConfigQuantMethod;
+      }
+
+      for (const tag of tags) {
+        const tagMethod = normalizeQuantMethod(tag);
+        if (tagMethod !== 'none') {
+          return tagMethod;
+        }
+      }
+
+      return 'none';
+    }
+
+    function resetFetchedModelMetadata() {
+      detectedAttentionType = null;
+      extractedKvLoraRank = null;
+      fetchedModelId = null;
+      fetchedHiddenSize = null;
+      fetchedCheckpointBytes = null;
+      fetchedCheckpointSource = null;
+      detectedQuantMethod = 'none';
+    }
+
+    function getQuantMultiplier(method) {
+      const multipliers = {
+        'none': 1.0,
+        'int8': 0.5,
+        'fp8': 0.5,
+        'int4': 0.25,
+        'fp4': 0.25
+      };
+      return multipliers[method] || 1.0;
+    }
+
+    function getQuantBytesPerParam(method) {
+      const bytes = {
+        'none': 2,
+        'int8': 1,
+        'fp8': 1,
+        'int4': 0.5,
+        'fp4': 0.5
+      };
+      return bytes[method] || 2;
+    }
+
+    function getQuantLabel(method) {
+      const labels = {
+        'none': 'BF16',
+        'int8': 'INT8',
+        'fp8': 'FP8',
+        'int4': 'INT4',
+        'fp4': 'FP4'
+      };
+      return labels[method] || 'BF16';
+    }
+
+    // HuggingFace Integration
+    const hfModelId = document.getElementById('hf-model-id');
+    const modelSource = document.getElementById('model-source');
+    const hfFetchBtn = document.getElementById('hf-fetch-btn');
+    const hfStatus = document.getElementById('hf-status');
+    const btnText = hfFetchBtn.querySelector('.btn-text');
+    const btnLoading = hfFetchBtn.querySelector('.btn-loading');
+
+    // Model info card container (will be created dynamically)
+    let modelInfoCard = null;
+
+    // HuggingFace API cache using localStorage (7-day TTL)
+    const HF_CACHE_PREFIX = 'vllm_calc_hf_';
+    const HF_CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+
+    function getCachedModel(modelId) {
+      try {
+        const cacheKey = HF_CACHE_PREFIX + modelId;
+        const cached = localStorage.getItem(cacheKey);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        const age = Date.now() - timestamp;
+
+        if (age > HF_CACHE_TTL) {
+          localStorage.removeItem(cacheKey);
+          return null;
+        }
+
+        return data;
+      } catch (error) {
+        console.error('Cache read error:', error);
+        return null;
+      }
+    }
+
+    function cacheModel(modelId, data) {
+      try {
+        const cacheKey = HF_CACHE_PREFIX + modelId;
+        const cacheData = {
+          data: data,
+          timestamp: Date.now()
+        };
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+
+        // Clean old cache entries (keep only 50 most recent)
+        cleanOldCache();
+      } catch (error) {
+        console.error('Cache write error:', error);
+      }
+    }
+
+    function cleanOldCache() {
+      try {
+        const cacheEntries = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith(HF_CACHE_PREFIX)) {
+            const item = JSON.parse(localStorage.getItem(key));
+            cacheEntries.push({ key, timestamp: item.timestamp });
+          }
+        }
+
+        // Sort by timestamp descending
+        cacheEntries.sort((a, b) => b.timestamp - a.timestamp);
+
+        // Remove old entries beyond 50
+        for (let i = 50; i < cacheEntries.length; i++) {
+          localStorage.removeItem(cacheEntries[i].key);
+        }
+      } catch (error) {
+        console.error('Cache cleanup error:', error);
+      }
+    }
+
+    async function fetchHuggingFaceModel(modelId) {
+      // Clean up model ID
+      modelId = modelId.trim();
+      if (!modelId) {
+        throw new Error('Please enter a model ID');
+      }
+
+      // Create abort controller for timeout (10 seconds)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+      const source = document.getElementById('model-source').value;
+
+      try {
+        let modelInfoUrl, configUrl, safetensorsIndexUrl;
+        
+        if (source === 'modelscope') {
+          // ModelScope API and raw file URLs lack CORS, so we wrap them in a public CORS proxy
+          const proxy = "https://api.codetabs.com/v1/proxy?quest=";
+          modelInfoUrl = proxy + encodeURIComponent(`https://www.modelscope.cn/api/v1/models/${modelId}`);
+          configUrl = proxy + encodeURIComponent(`https://modelscope.cn/api/v1/models/${modelId}/repo?Revision=master&FilePath=config.json`);
+          safetensorsIndexUrl = proxy + encodeURIComponent(`https://modelscope.cn/api/v1/models/${modelId}/repo?Revision=master&FilePath=model.safetensors.index.json`);
+        } else {
+          // HuggingFace API and raw file URLs
+          modelInfoUrl = `https://huggingface.co/api/models/${modelId}`;
+          configUrl = `https://huggingface.co/${modelId}/resolve/main/config.json`;
+          safetensorsIndexUrl = `https://huggingface.co/${modelId}/resolve/main/model.safetensors.index.json`;
+        }
+
+        let modelInfoRes, configRes, safetensorsIndexRes;
+        
+        if (source === 'modelscope') {
+          // ModelScope proxy has rate limits (429) for concurrent requests, fetch sequentially
+          modelInfoRes = await fetch(modelInfoUrl, { signal: controller.signal });
+          configRes = await fetch(configUrl, { signal: controller.signal });
+          safetensorsIndexRes = await fetch(safetensorsIndexUrl, { signal: controller.signal });
+        } else {
+          // Fetch metadata in parallel with timeout
+          [modelInfoRes, configRes, safetensorsIndexRes] = await Promise.all([
+            fetch(modelInfoUrl, { signal: controller.signal }),
+            fetch(configUrl, { signal: controller.signal }),
+            fetch(safetensorsIndexUrl, { signal: controller.signal })
+          ]);
+        }
+
+        clearTimeout(timeoutId);
+
+        if (!modelInfoRes.ok) {
+          if (modelInfoRes.status === 404) {
+            throw new Error(`Model "${modelId}" not found on ${source === 'modelscope' ? 'ModelScope' : 'HuggingFace'}. Please check the spelling and try again.`);
+          } else if (modelInfoRes.status === 403 || modelInfoRes.status === 401) {
+            throw new Error(`Model "${modelId}" is private or gated. You may need to authenticate.`);
+          } else {
+            throw new Error(`Failed to fetch model (HTTP ${modelInfoRes.status})`);
+          }
+        }
+
+        let modelInfo = await modelInfoRes.json();
+        // Normalize ModelScope response to match expected HF structure where possible
+        if (source === 'modelscope' && modelInfo.Data) {
+          modelInfo = modelInfo.Data;
+          modelInfo.modelId = modelId; // Ensure modelId is set
+        }
+
+        let config = null;
+        if (configRes.ok) {
+          config = await configRes.json();
+        }
+
+        let safetensorsIndex = null;
+        if (safetensorsIndexRes.ok) {
+          safetensorsIndex = await safetensorsIndexRes.json();
+        }
+
+        return { modelInfo, config, safetensorsIndex };
+      } catch (error) {
+        clearTimeout(timeoutId);
+        if (error.name === 'AbortError') {
+          throw new Error('Request timed out. Please check your connection and try again.');
+        }
+        throw error;
+      }
+    }
+
+    const KNOWN_MODEL_PARAMS = {
+      'deepseek-v3': 671,
+      'deepseekv3': 671,
+      'deepseek-v2': 236,
+      'deepseekv2': 236,
+      'deepseek-v2.5': 236,
+      'deepseek-r1': 671,
+      'deepseekr1': 671,
+      'llama-3.1-405b': 405,
+      'llama-3.1-70b': 70,
+      'llama-3.1-8b': 8,
+      'llama-3-70b': 70,
+      'llama-3-8b': 8,
+      'llama-2-70b': 70,
+      'llama-2-13b': 13,
+      'llama-2-7b': 7,
+      'qwen2.5-72b': 72,
+      'qwen2.5-32b': 32,
+      'qwen2.5-14b': 14,
+      'qwen2.5-7b': 7,
+      'qwen3-32b': 32,
+      'qwen3-14b': 14,
+      'mistral-7b': 7,
+      'mixtral-8x7b': 47,
+      'mixtral-8x22b': 141,
+      'gemma-7b': 7,
+      'gemma-2-27b': 27,
+      'gemma-2-9b': 9,
+      'phi-3-medium': 14,
+      'phi-3-mini': 3.8,
+      'command-r': 35,
+      'command-r-plus': 104,
+    };
+
+    function estimateModelParamsFromConfig(config) {
+      if (!config) return null;
+
+      const hiddenSize = config.hidden_size || config.d_model || config.n_embd || config.dim;
+      const numLayers = config.num_hidden_layers || config.n_layer || config.num_layers || config.n_layers;
+      const vocabSize = config.vocab_size;
+      const intermediateSize = config.intermediate_size;
+
+      if (!hiddenSize || !numLayers) return null;
+
+      const archLower = (config.architectures?.[0] || '').toLowerCase();
+      const isMoe = config.n_routed_experts || 
+                    config.num_experts || 
+                    archLower.includes('moe') ||
+                    archLower.includes('mixtral') ||
+                    archLower.includes('deepseekv3') ||
+                    archLower.includes('deepseekv2');
+
+      if (isMoe) {
+        return estimateMoeParams(config);
+      }
+
+      let params = 0;
+
+      const attnHeads = config.num_attention_heads || config.n_head || 1;
+      const kvHeads = config.num_key_value_heads || config.num_kv_heads || attnHeads;
+      const headDim = config.head_dim || (hiddenSize / attnHeads);
+
+      params += numLayers * (4 * hiddenSize * hiddenSize);
+      
+      if (intermediateSize) {
+        params += numLayers * (3 * hiddenSize * intermediateSize);
+      } else {
+        const typicalIntermediate = hiddenSize * 4;
+        params += numLayers * (3 * hiddenSize * typicalIntermediate);
+      }
+
+      params += numLayers * (2 * hiddenSize);
+
+      if (vocabSize) {
+        params += vocabSize * hiddenSize;
+      }
+
+      if (params > 0) {
+        return params / 1e9;
+      }
+
+      return null;
+    }
+
+    function estimateMoeParams(config) {
+      const hiddenSize = config.hidden_size;
+      const numLayers = config.num_hidden_layers || config.num_layers;
+      const vocabSize = config.vocab_size;
+      const intermediateSize = config.intermediate_size;
+      
+      const nRoutedExperts = config.n_routed_experts || config.num_experts || 0;
+      const nSharedExperts = config.n_shared_experts || 1;
+      const moeIntermediateSize = config.moe_intermediate_size || intermediateSize;
+      const firstKDenseReplace = config.first_k_dense_replace || 0;
+
+      if (!hiddenSize || !numLayers) return null;
+
+      let params = 0;
+
+      const attnHeads = config.num_attention_heads || 128;
+      const qkNopeHeadDim = config.qk_nope_head_dim || config.head_dim || (hiddenSize / attnHeads);
+      const qkRopeHeadDim = config.qk_rope_head_dim || 64;
+      const kvLoraRank = config.kv_lora_rank;
+      const qLoraRank = config.q_lora_rank;
+      const vHeadDim = config.v_head_dim || qkNopeHeadDim;
+
+      const isMla = kvLoraRank && qLoraRank;
+      const numNextnPredictLayers = config.num_nextn_predict_layers || 0;
+
+      for (let layer = 0; layer < numLayers + numNextnPredictLayers; layer++) {
+        if (isMla) {
+          params += hiddenSize * kvLoraRank;
+          params += kvLoraRank * (qkNopeHeadDim + qkRopeHeadDim) * attnHeads;
+          params += kvLoraRank;
+          params += qLoraRank * hiddenSize;
+          params += attnHeads * qLoraRank;
+          params += attnHeads * qLoraRank * (qkNopeHeadDim + qkRopeHeadDim);
+          params += attnHeads * qkNopeHeadDim;
+          params += hiddenSize * kvLoraRank;
+        } else {
+          const headDim = config.head_dim || (hiddenSize / attnHeads);
+          params += hiddenSize * headDim * attnHeads;
+          params += hiddenSize * headDim * (config.num_key_value_heads || attnHeads);
+          params += headDim * hiddenSize * attnHeads;
+          params += headDim * hiddenSize * (config.num_key_value_heads || attnHeads);
+        }
+        
+        if (layer < firstKDenseReplace && intermediateSize) {
+          params += hiddenSize * intermediateSize;
+          params += intermediateSize * hiddenSize;
+        } else if (moeIntermediateSize && nRoutedExperts > 0) {
+          const expertParams = hiddenSize * moeIntermediateSize * 3;
+          params += nRoutedExperts * expertParams;
+          if (nSharedExperts > 0) {
+            params += nSharedExperts * expertParams;
+          }
+        }
+      }
+
+      if (vocabSize) {
+        params += vocabSize * hiddenSize;
+      }
+
+      if (params > 0) {
+        return params / 1e9;
+      }
+
+      return null;
+    }
+
+    function estimateModelParams(modelInfo, config, safetensorsIndex = null) {
+      if (modelInfo.safetensors?.parameters) {
+        const params = modelInfo.safetensors.parameters.total;
+        if (params && Number.isFinite(params)) {
+          return params / 1e9;
+        }
+        const dtypeParams = Object.entries(modelInfo.safetensors.parameters)
+          .filter(([key]) => key !== 'total')
+          .reduce((a, [, b]) => a + b, 0);
+        if (dtypeParams > 0) {
+          return dtypeParams / 1e9;
+        }
+      }
+
+      const modelIdLower = (modelInfo.modelId || '').toLowerCase();
+      for (const [key, value] of Object.entries(KNOWN_MODEL_PARAMS)) {
+        if (modelIdLower.includes(key)) {
+          return value;
+        }
+      }
+
+      const nameMatch = modelInfo.modelId?.match(/(\d+(?:\.\d+)?)[bB]/);
+      if (nameMatch) {
+        return parseFloat(nameMatch[1]);
+      }
+
+      const configEstimate = estimateModelParamsFromConfig(config);
+      if (configEstimate) {
+        return configEstimate;
+      }
+
+      return null;
+    }
+
+    function extractModelConfig(modelInfo, config, safetensorsIndex = null) {
+      const result = {
+        name: modelInfo.modelId?.split('/').pop() || 'Unknown',
+        author: modelInfo.modelId?.split('/')[0] || 'Unknown',
+        architecture: null,
+        numLayers: null,
+        attnHeads: null,
+        kvHeads: null,
+        headDim: null,
+        hiddenSize: null,
+        maxContext: null,
+        paramsB: null,
+        paramsSource: null,
+        quantization: null,
+        detectedQuantMethod: 'none',
+        checkpointBytes: null,
+        checkpointSource: null,
+        attentionType: null,
+        kvLoraRank: null,
+        tags: modelInfo.tags || []
+      };
+
+      // Extract architecture
+      if (config?.architectures?.length) {
+        result.architecture = config.architectures[0];
+      } else if (modelInfo.config?.architectures?.length) {
+        result.architecture = modelInfo.config.architectures[0];
+      } else if (modelInfo.pipeline_tag) {
+        result.architecture = modelInfo.pipeline_tag;
+      }
+
+      result.detectedQuantMethod = detectQuantMethod(modelInfo, config, result.tags);
+
+      // Extract from config.json
+      if (config) {
+        result.hiddenSize = config.hidden_size || config.d_model || config.n_embd || config.dim;
+
+        // Number of layers
+        result.numLayers = config.num_hidden_layers || 
+                          config.n_layer || 
+                          config.num_layers ||
+                          config.n_layers;
+
+        // KV heads (for GQA)
+        result.kvHeads = config.num_key_value_heads || 
+                        config.num_kv_heads ||
+                        config.kv_heads ||
+                        config.num_attention_heads || // fallback to MHA
+                        config.n_head;
+
+        // Attention heads (total)
+        result.attnHeads = config.num_attention_heads ||
+                          config.n_head ||
+                          config.attention_heads ||
+                          config.num_heads;
+
+        // Head dimension
+        if (config.head_dim) {
+          result.headDim = config.head_dim;
+        } else if (result.hiddenSize && (config.num_attention_heads || config.n_head)) {
+          result.headDim = result.hiddenSize / (config.num_attention_heads || config.n_head);
+        }
+
+        // Max context
+        result.maxContext = config.max_position_embeddings ||
+                           config.max_seq_len ||
+                           config.max_sequence_length ||
+                           config.n_positions ||
+                           config.seq_length;
+      }
+
+      // Estimate parameter count
+      result.paramsB = estimateModelParams(modelInfo, config, safetensorsIndex);
+      result.paramsSource = null;
+      if (modelInfo.safetensors?.parameters) {
+        result.paramsSource = 'HF API safetensors.parameters';
+      } else if (safetensorsIndex?.metadata?.total_size) {
+        result.paramsSource = 'safetensors.index.json total_size';
+      } else if (KNOWN_MODEL_PARAMS[(modelInfo.modelId || '').toLowerCase().split('/')[1]?.split('-')[0]]) {
+        result.paramsSource = 'Known model mapping';
+      } else if (modelInfo.modelId?.match(/(\d+(?:\.\d+)?)[bB]/)) {
+        result.paramsSource = 'Model name parsing';
+      } else if (result.paramsB) {
+        result.paramsSource = 'Config.json estimation';
+      }
+
+      const checkpointBytesFromSafetensors = estimateCheckpointBytesFromSafetensorsParameters(modelInfo.safetensors?.parameters);
+      if (checkpointBytesFromSafetensors) {
+        result.checkpointBytes = checkpointBytesFromSafetensors;
+        result.checkpointSource = 'HF safetensors.parameters';
+      } else if (Number.isFinite(safetensorsIndex?.metadata?.total_size)) {
+        result.checkpointBytes = safetensorsIndex.metadata.total_size;
+        result.checkpointSource = 'HF model.safetensors.index.json';
+      }
+
+      const quantizationLabels = {
+        none: 'BF16',
+        int8: 'INT8',
+        fp8: 'FP8',
+        int4: 'INT4',
+        fp4: 'MXFP4',
+      };
+      result.quantization = quantizationLabels[result.detectedQuantMethod] || null;
+
+      // Attention architecture detection
+      if (config?.attention_type) {
+        const type = config.attention_type.toLowerCase();
+        if (type === 'mla' || type === 'multi-head-latent-attention') {
+          result.attentionType = 'mla';
+        } else if (type === 'gqa' || type === 'grouped-query-attention') {
+          result.attentionType = 'gqa';
+        } else if (type === 'mha' || type === 'multi-head-attention') {
+          result.attentionType = 'mha';
+        }
+      }
+
+      // Detect MLA from architecture names
+      if (!result.attentionType && config?.architectures) {
+        for (const arch of config.architectures) {
+          const archLower = arch.toLowerCase();
+          if (/deepseekv[23]forcausallm/.test(archLower)) {
+            result.attentionType = 'mla';
+            break;
+          }
+          if (archLower.includes('mla')) {
+            result.attentionType = 'mla';
+            break;
+          }
+        }
+      }
+
+      // Extract kv_lora_rank for MLA
+      if (result.attentionType === 'mla') {
+        const rankFields = ['kv_lora_rank', 'kv_compression_dim', 'compressed_kv_dim', 'kv_latent_dim'];
+        for (const field of rankFields) {
+          if (config[field] && Number.isFinite(config[field])) {
+            result.kvLoraRank = config[field];
+            break;
+          }
+        }
+
+        // If not found in config, try to infer from model name
+        if (!result.kvLoraRank && result.name) {
+          const nameLower = result.name.toLowerCase();
+          if (nameLower.includes('deepseek-v3') || nameLower.includes('deepseekv3')) {
+            result.kvLoraRank = 1536;
+          } else if (nameLower.includes('deepseek-v2') || nameLower.includes('deepseekv2')) {
+            result.kvLoraRank = 512;
+          }
+        }
+      }
+
+      return result;
+    }
+
+    function renderModelInfoCard(modelConfig) {
+      // Remove existing card if any
+      if (modelInfoCard) {
+        modelInfoCard.remove();
+      }
+
+      const card = document.createElement('div');
+      card.className = 'model-info-card';
+      card.innerHTML = `
+        <div class="model-info-header">
+          <span class="model-info-icon"><i data-lucide="download-cloud" style="width: 24px; height: 24px;"></i></span>
+          <div>
+            <div class="model-info-name">${modelConfig.name}</div>
+            <div class="model-info-author">by ${modelConfig.author}</div>
+          </div>
+        </div>
+        <div class="model-info-grid">
+          <div class="model-info-item">
+<span class="label">架构</span>
+             <span class="value">${modelConfig.architecture || '未知'}</span>
+           </div>
+           <div class="model-info-item">
+             <span class="label">层数</span>
+             <span class="value">${modelConfig.numLayers || '?'}</span>
+           </div>
+           <div class="model-info-item">
+             <span class="label">KV Heads</span>
+             <span class="value">${modelConfig.kvHeads || '?'}</span>
+           </div>
+           <div class="model-info-item">
+             <span class="label">注意力头</span>
+             <span class="value">${modelConfig.attnHeads || '?'}</span>
+           </div>
+           <div class="model-info-item">
+            <span class="label">Head 维度</span>
+             <span class="value">${modelConfig.headDim || '?'}</span>
+           </div>
+           <div class="model-info-item">
+             <span class="label">隐藏维度</span>
+             <span class="value">${modelConfig.hiddenSize || '?'}</span>
+           </div>
+           <div class="model-info-item">
+             <span class="label">最大上下文</span>
+             <span class="value">${modelConfig.maxContext ? formatNumber(modelConfig.maxContext) : '?'}</span>
+           </div>
+<div class="model-info-item">
+              <span class="label">参数量</span>
+              <span class="value">${modelConfig.paramsB ? modelConfig.paramsB.toFixed(1) + ' B' : '?'}${modelConfig.paramsSource ? ` <span style="font-size:0.7em;color:var(--text-muted);">(${modelConfig.paramsSource})</span>` : ''}</span>
+            </div>
+            <div class="model-info-item">
+              <span class="label">Checkpoint</span>
+              <span class="value">${modelConfig.checkpointBytes ? formatBytes(modelConfig.checkpointBytes / 1e9) : '?'}</span>
+            </div>
+        </div>
+        <div class="model-info-tags">
+          ${modelConfig.architecture ? `<span class="model-tag arch">${modelConfig.architecture}</span>` : ''}
+          ${modelConfig.quantization ? `<span class="model-tag quant">${modelConfig.quantization}</span>` : ''}
+          ${modelConfig.tags.slice(0, 5).map(t => `<span class="model-tag">${t}</span>`).join('')}
+        </div>
+      `;
+
+      // Insert after the HF input row
+      const hfFormGroup = hfModelId.closest('.form-group');
+      hfFormGroup.after(card);
+      modelInfoCard = card;
+      
+      // Initialize Lucide icons for the new card
+      lucide.createIcons();
+    }
+
+    function applyModelConfig(modelConfig) {
+      // Apply extracted values to form
+      if (modelConfig.numLayers) {
+        inputs.numLayers.value = modelConfig.numLayers;
+      }
+      if (modelConfig.kvHeads) {
+        inputs.kvHeads.value = modelConfig.kvHeads;
+      }
+      if (modelConfig.attnHeads) {
+        inputs.attnHeads.value = modelConfig.attnHeads;
+      } else if (modelConfig.kvHeads) {
+        inputs.attnHeads.value = modelConfig.kvHeads;
+      }
+      if (modelConfig.headDim) {
+        inputs.headDim.value = Math.round(modelConfig.headDim);
+      }
+      fetchedHiddenSize = modelConfig.hiddenSize || null;
+      if (modelConfig.maxContext) {
+        inputs.maxModelLen.value = modelConfig.maxContext;
+      }
+      if (modelConfig.paramsB) {
+        inputs.modelWeights.value = modelConfig.paramsB.toFixed(1);
+      }
+      fetchedCheckpointBytes = modelConfig.checkpointBytes || null;
+      fetchedCheckpointSource = modelConfig.checkpointSource || null;
+      detectedQuantMethod = modelConfig.detectedQuantMethod || 'none';
+      fetchedModelId = hfModelId.value.trim() || modelConfig.name;
+
+      // Apply quantization settings
+      if (modelConfig.quantization) {
+        const quantMap = {
+          'AWQ': 'int4',
+          'GPTQ': 'int4',
+          'MXFP4': 'fp4',
+          'FP8': 'fp8',
+          '4BIT': 'int4',
+          '8BIT': 'int8',
+          'BNB': 'int4',
+          'EXL2': 'int4',
+          'GGUF': 'int4'
+        };
+        const mappedQuant = quantMap[modelConfig.quantization] || 'none';
+        quantInputs.method.value = mappedQuant;
+      }
+
+      // Apply attention type detection
+      if (modelConfig.attentionType) {
+        detectedAttentionType = modelConfig.attentionType;
+        extractedKvLoraRank = modelConfig.kvLoraRank;
+
+        // Update UI hint
+        updateAttentionTypeUI();
+
+        console.log(`Detected attention type: ${modelConfig.attentionType}`,
+                    modelConfig.kvLoraRank ? `(kv_lora_rank=${modelConfig.kvLoraRank})` : '');
+      }
+
+      // Recalculate
+      calculate();
+    }
+
+    async function handleFetchClick() {
+      const modelId = hfModelId.value.trim();
+
+      // Reset detection state before fetch to prevent stale data from previous model
+      resetFetchedModelMetadata();
+      updateAttentionTypeUI(); // Clear UI immediately
+
+      // Check cache first
+      const cached = getCachedModel(modelId);
+      if (cached) {
+hfStatus.textContent = '正在从缓存加载...';
+         hfStatus.className = 'hint loading';
+
+         setTimeout(() => {
+           const modelConfig = extractModelConfig(cached.modelInfo, cached.config, cached.safetensorsIndex);
+           renderModelInfoCard(modelConfig);
+           applyModelConfig(modelConfig);
+
+const missingFields = [];
+            if (!modelConfig.numLayers) missingFields.push('层数');
+            if (!modelConfig.attnHeads) missingFields.push('注意力头');
+            if (!modelConfig.kvHeads) missingFields.push('KV heads');
+            if (!modelConfig.headDim) missingFields.push('Head 维度');
+            if (!modelConfig.paramsB) missingFields.push('参数量');
+
+           if (missingFields.length > 0) {
+             hfStatus.textContent = `已从缓存加载！部分值需手动输入：${missingFields.join(', ')}`;
+             hfStatus.className = 'hint warning';
+           } else {
+             hfStatus.textContent = `成功加载 ${modelConfig.name}（缓存）`;
+             hfStatus.className = 'hint success';
+           }
+         }, 100);
+
+        return;
+      }
+
+      // Update UI state for network fetch
+      hfFetchBtn.disabled = true;
+      btnText.style.display = 'none';
+      btnLoading.style.display = 'block';
+      hfStatus.textContent = '正在从 HuggingFace 获取模型配置...';
+      hfStatus.className = 'hint loading';
+
+      try {
+        const { modelInfo, config, safetensorsIndex } = await fetchHuggingFaceModel(modelId);
+
+        // Cache the result
+        cacheModel(modelId, { modelInfo, config, safetensorsIndex });
+
+        const modelConfig = extractModelConfig(modelInfo, config, safetensorsIndex);
+
+        // Render info card
+        renderModelInfoCard(modelConfig);
+
+        // Apply to form
+        applyModelConfig(modelConfig);
+
+        // Success message
+const missingFields = [];
+          if (!modelConfig.numLayers) missingFields.push('层数');
+          if (!modelConfig.attnHeads) missingFields.push('注意力头');
+          if (!modelConfig.kvHeads) missingFields.push('KV heads');
+          if (!modelConfig.headDim) missingFields.push('Head 维度');
+          if (!modelConfig.paramsB) missingFields.push('参数量');
+
+         if (missingFields.length > 0) {
+           hfStatus.textContent = `已加载！部分值需手动输入：${missingFields.join(', ')}`;
+           hfStatus.className = 'hint warning';
+         } else {
+           hfStatus.textContent = `成功加载 ${modelConfig.name}`;
+           hfStatus.className = 'hint success';
+         }
+
+      } catch (error) {
+        hfStatus.textContent = `错误：${error.message}`;
+        hfStatus.className = 'hint error';
+
+        // Remove model card on error
+        if (modelInfoCard) {
+          modelInfoCard.remove();
+          modelInfoCard = null;
+        }
+
+        // Reset detection UI on error
+        resetFetchedModelMetadata();
+        updateAttentionTypeUI();
+      } finally {
+        hfFetchBtn.disabled = false;
+        btnText.style.display = 'block';
+        btnLoading.style.display = 'none';
+      }
+    }
+
+    hfFetchBtn.addEventListener('click', handleFetchClick);
+    
+    // Allow Enter key or Ctrl+Enter to trigger fetch
+    hfModelId.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey || !e.shiftKey)) {
+        e.preventDefault();
+        handleFetchClick();
+      }
+    });
+
+    hfModelId.addEventListener('input', () => {
+      if (hfModelId.value.trim() !== fetchedModelId) {
+        resetFetchedModelMetadata();
+        updateAttentionTypeUI();
+        calculate();
+      }
+    });
+
+    // Global keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Ctrl/Cmd + K: Focus model search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        hfModelId.focus();
+      }
+
+      // Escape: Clear focused input
+      if (e.key === 'Escape') {
+        if (document.activeElement &&
+            (document.activeElement.tagName === 'INPUT' ||
+             document.activeElement.tagName === 'SELECT')) {
+          document.activeElement.blur();
+        }
+      }
+    });
+
+    // GPU Preset dropdown
+    const gpuPreset = document.getElementById('gpu-preset');
+    gpuPreset.addEventListener('change', () => {
+      const value = gpuPreset.value;
+      if (value !== 'custom') {
+        inputs.gpuVram.value = value;
+        calculate();
+      }
+    });
+
+    // Reset dropdown to "Custom" when VRAM is manually edited
+    inputs.gpuVram.addEventListener('input', () => {
+      const currentValue = parseFloat(inputs.gpuVram.value);
+      const presetValue = parseFloat(gpuPreset.value);
+
+      // If the value doesn't match the current preset, switch to "custom"
+      if (gpuPreset.value !== 'custom' && currentValue !== presetValue) {
+        gpuPreset.value = 'custom';
+      }
+    });
+
+    // Add input listeners
+    Object.values(inputs).forEach(input => {
+      input.addEventListener('input', calculate);
+      input.addEventListener('change', calculate);
+    });
+
+    Object.values(quantInputs).forEach(input => {
+      input.addEventListener('input', calculate);
+      input.addEventListener('change', calculate);
+    });
+
+    // Update attention type UI based on selection and detection
+    function updateAttentionTypeUI() {
+      const selector = inputs.attentionType;
+      const hint = document.getElementById('attention-type-detected');
+      const kvLoraRankGroup = document.getElementById('kv-lora-rank-group');
+      const selectedType = selector.value;
+      
+      if (selectedType === 'auto') {
+        // Show detected type or default
+        if (detectedAttentionType) {
+          const modelName = hfModelId.value.split('/').pop() || 'model';
+          hint.textContent = `检测到：${detectedAttentionType.toUpperCase()} (${modelName})`;
+          hint.className = 'hint success';
+          
+          // Show kv_lora_rank input if MLA detected
+          if (detectedAttentionType === 'mla') {
+            kvLoraRankGroup.style.display = 'block';
+            if (extractedKvLoraRank) {
+              // Only update if value hasn't been manually changed (is default or empty)
+              const currentValue = parseInt(inputs.kvLoraRank.value, 10);
+              if (!currentValue || currentValue === 1536) {
+                inputs.kvLoraRank.value = extractedKvLoraRank;
+              }
+              hint.textContent += `, latent_dim=${extractedKvLoraRank}`;
+            }
+          } else {
+            kvLoraRankGroup.style.display = 'none';
+          }
+        } else {
+          hint.textContent = '无法检测，使用默认：GQA';
+          hint.className = 'hint warning';
+          kvLoraRankGroup.style.display = 'none';
+        }
+      } else {
+        // Manual selection
+        hint.textContent = `手动设置为：${selectedType.toUpperCase()}`;
+        hint.className = 'hint';
+        
+        // Show kv_lora_rank for MLA
+        if (selectedType === 'mla') {
+          kvLoraRankGroup.style.display = 'block';
+        } else {
+          kvLoraRankGroup.style.display = 'none';
+        }
+      }
+    }
+
+    // Get effective attention type (considering auto-detect)
+    function getEffectiveAttentionType() {
+      const selected = inputs.attentionType.value;
+      if (selected !== 'auto') {
+        return selected;
+      }
+      return detectedAttentionType || 'gqa'; // Default to GQA for safety
+    }
+
+    // Get effective kv_lora_rank
+    function getEffectiveKvLoraRank() {
+      const attentionType = getEffectiveAttentionType();
+      
+      if (attentionType !== 'mla') {
+        return null;
+      }
+      
+      // Use extracted value if available and valid
+      if (extractedKvLoraRank && extractedKvLoraRank >= 64 && extractedKvLoraRank <= 8192) {
+        return extractedKvLoraRank;
+      }
+      
+      // Use user input
+      const userValue = toInt(inputs.kvLoraRank.value, 1536);
+      if (userValue >= 64 && userValue <= 8192) {
+        return userValue;
+      }
+      
+      // Default values for known models
+      const modelId = hfModelId.value.toLowerCase();
+      if (modelId.includes('deepseek-v3') || modelId.includes('deepseekv3')) {
+        return 1536;
+      }
+      if (modelId.includes('deepseek-v2') || modelId.includes('deepseekv2')) {
+        return 512;
+      }
+      
+      return 1536; // Conservative default
+    }
+
+    // Update UI when attention type changes
+    inputs.attentionType.addEventListener('change', () => {
+      updateAttentionTypeUI();
+    });
+
+    // Event listeners for kv_lora_rank input
+    inputs.kvLoraRank.addEventListener('input', calculate);
+    inputs.kvLoraRank.addEventListener('change', calculate);
+
+    function formatBytes(gb) {
+      if (gb >= 1) return gb.toFixed(2) + ' GB';
+      return (gb * 1024).toFixed(0) + ' MB';
+    }
+
+    function formatNumber(num) {
+      if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+      if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+      return num.toFixed(0);
+    }
+
+    function toNumber(value, fallback = 0) {
+      const parsed = Number.parseFloat(value);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    }
+
+    function toInt(value, fallback = 0) {
+      const parsed = Number.parseInt(value, 10);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    }
+
+    function calculate() {
+      // UNITS: All memory values use decimal GB (1 GB = 1,000,000,000 bytes)
+      // This matches GPU manufacturer specs and is consistent throughout calculations.
+      // Note: vLLM reports in GiB (binary), where 1 GiB = 1,073,741,824 bytes.
+      // Conversion: GB (decimal) × 0.931323 ≈ GiB (binary)
+
+// Get values
+      const gpuVram = Math.max(0, toNumber(inputs.gpuVram.value));  // GB (decimal)
+      const numGpus = Math.max(1, toInt(inputs.numGpus.value, 1));
+      const gpuUtilization = Math.min(1, Math.max(0, toNumber(inputs.gpuUtilization.value)));
+      const baseParams = Math.max(0, toNumber(inputs.modelWeights.value));  // 参数量（B，十亿）
+      const quantMethod = quantInputs.method.value;
+      const estimatedBytesPerParam = getEstimatedBytesPerParam(quantMethod);  // 每参数字节数（含必要 metadata 近似）
+      const estimatedModelWeights = baseParams * estimatedBytesPerParam;  // 权重大小（GB）= 参数量 × 字节数/参数
+      const numLayers = Math.max(1, toInt(inputs.numLayers.value, 1));
+      const kvHeads = Math.max(1, toInt(inputs.kvHeads.value, 1));
+      const headDim = Math.max(1, toInt(inputs.headDim.value, 1));
+      const attnHeadsInput = Math.max(1, toInt(inputs.attnHeads.value, kvHeads));
+      const maxModelLen = Math.max(1, toInt(inputs.maxModelLen.value, 1));
+      const maxNumSeqs = Math.max(1, toInt(inputs.maxNumSeqs.value, 1));
+      const maxBatchedTokens = Math.max(1, toInt(inputs.maxBatchedTokens.value, 1));
+      const kvCacheDtypeBytes = Math.max(1, toInt(inputs.kvCacheDtype.value, 2));
+      const activationDtypeBytes = Math.max(1, toInt(inputs.activationDtype.value, 2));
+      const cudaGraphsEnabled = inputs.cudaGraphs.value === '1';
+      const overheadPadding = Math.max(0, toNumber(inputs.overheadPadding.value));  // GB (decimal)
+
+      const quantLabel = getQuantLabel(quantMethod);
+
+      // Calculate per-GPU values (all in GB decimal)
+      const availableVram = gpuVram * gpuUtilization;
+      const effectiveDetectedQuantMethod = normalizeQuantMethod(detectedQuantMethod);
+      const useCheckpointWeights = Number.isFinite(fetchedCheckpointBytes) && fetchedCheckpointBytes > 0 && quantMethod === effectiveDetectedQuantMethod;
+      const modelWeights = useCheckpointWeights ? (fetchedCheckpointBytes / 1e9) : estimatedModelWeights;
+      const weightsPerGpu = modelWeights / numGpus;
+      const attnHeads = Math.max(attnHeadsInput, kvHeads);
+      if (attnHeadsInput !== attnHeads) {
+        inputs.attnHeads.value = attnHeads;
+      }
+      const attnHeadsPerGpu = Math.ceil(attnHeads / numGpus);
+      const hiddenSizePerGpu = fetchedHiddenSize ? (fetchedHiddenSize / numGpus) : (attnHeadsPerGpu * headDim);
+      const prefillTokens = maxBatchedTokens;
+      const decodeTokens = maxNumSeqs;
+      const activationTokens = prefillTokens + decodeTokens;
+      const activationBytes = activationTokens * hiddenSizePerGpu * activationDtypeBytes;
+      const overheadEstimate = (activationBytes * 2) / 1e9;
+      inputs.overheadEstimate.value = overheadEstimate.toFixed(2);
+      const totalOverhead = overheadEstimate + overheadPadding;
+      // CUDA graphs: vLLM captures graphs for multiple batch sizes and sequence lengths.
+      // PIECEWISE mode typically captures 50-100+ graphs. Multiply by 10-12x to account for this.
+      // For large models (>30B) or MoE, this can be 2-4 GB. Users should adjust if needed.
+      const cudaGraphMultiplier = 10;  // Empirically ~10x activation buffer for multi-graph capture
+      const cudaGraphsSize = cudaGraphsEnabled ? (activationBytes / 1e9) * cudaGraphMultiplier : 0;
+      const overheadNotes = document.getElementById('overhead-notes');
+      overheadNotes.textContent = `${formatNumber(activationTokens)} tokens × ${formatNumber(hiddenSizePerGpu)} hidden × ${activationDtypeBytes} bytes × 2 buffers`;
+      
+      // KV cache calculation based on attention architecture
+      const attentionType = getEffectiveAttentionType();
+      let bytesPerTokenPerLayer;
+
+      if (attentionType === 'mla') {
+        // MLA (Multi-head Latent Attention): Store compressed latent vectors
+        // Per token per layer: 2 (K+V) * kv_lora_rank * dtype_bytes
+        // Note: MLA doesn't use tensor parallelism for KV cache (latent dim is not split)
+        const kvLoraRank = getEffectiveKvLoraRank();
+        bytesPerTokenPerLayer = 2 * kvLoraRank * kvCacheDtypeBytes;
+      } else {
+        // GQA/MHA: Traditional multi-head attention
+        // Per token per layer: 2 (K+V) * kvHeads * headDim * dtype_bytes
+        // With TP, KV heads are split across GPUs
+        const kvHeadsPerGpu = Math.ceil(kvHeads / numGpus);
+        bytesPerTokenPerLayer = 2 * kvHeadsPerGpu * headDim * kvCacheDtypeBytes;
+      }
+      const bytesPerToken = bytesPerTokenPerLayer * numLayers;
+      const bytesPerTokenKB = bytesPerToken / 1024;
+      
+      // Available for KV cache
+      const fixedOverhead = weightsPerGpu + cudaGraphsSize + totalOverhead;
+      const kvAvailable = Math.max(0, availableVram - fixedOverhead);
+      const kvAvailableBytes = kvAvailable * 1e9; // GB to bytes (decimal)
+
+      // Max tokens that can fit in KV cache
+      const maxTokensInCache = Math.floor(kvAvailableBytes / bytesPerToken);
+
+      // Effective limits
+      const maxContextSingle = Math.min(maxModelLen, maxTokensInCache);
+      const avgContextAll = Math.floor(maxTokensInCache / maxNumSeqs);
+
+      // Recommended seqs (targeting ~32K avg context)
+      const targetAvgContext = 32768;
+      const recommendedSeqs = Math.max(1, Math.floor(maxTokensInCache / targetAvgContext));
+
+      // vLLM allocates the FULL KV cache pool at startup, not just estimated active usage.
+      // This matches what nvidia-smi shows in real deployments.
+      const kvCacheAllocated = kvAvailable;  // Full KV cache pool allocation
+
+      // Total usage (what nvidia-smi will show)
+      const totalUsage = weightsPerGpu + kvCacheAllocated + cudaGraphsSize + totalOverhead;
+      const usagePercent = gpuVram > 0 ? (totalUsage / gpuVram) * 100 : 0;
+      const freeSpace = Math.max(0, gpuVram - totalUsage);
+
+      // Update breakdown table
+      const breakdownBody = document.getElementById('breakdown-body');
+      breakdownBody.innerHTML = `
+        <tr>
+          <td>模型权重 (${quantLabel})</td>
+          <td>${formatBytes(weightsPerGpu)}</td>
+        </tr>
+        <tr>
+          <td style="color: var(--text-muted); font-size: 0.8em;">&nbsp;&nbsp;${useCheckpointWeights ? `来源：${fetchedCheckpointSource || 'HF checkpoint'}` : `参数量：${baseParams.toFixed(1)}B × ${estimatedBytesPerParam.toFixed(4)} bytes`}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>KV Cache 池（可分配）</td>
+          <td>${formatBytes(kvCacheAllocated)}</td>
+        </tr>
+        <tr>
+          <td>CUDA Graphs</td>
+          <td>${formatBytes(cudaGraphsSize)}</td>
+        </tr>
+        <tr>
+          <td>开销（激活）</td>
+          <td>${formatBytes(overheadEstimate)}</td>
+        </tr>
+        <tr>
+          <td>开销（额外）</td>
+          <td>${formatBytes(overheadPadding)}</td>
+        </tr>
+        <tr class="total-row">
+          <td>总分配</td>
+          <td>${formatBytes(totalUsage)}</td>
+        </tr>
+        <tr>
+          <td>可用（${(gpuUtilization * 100).toFixed(0)}% × ${gpuVram}GB）</td>
+          <td>${formatBytes(availableVram)}</td>
+        </tr>
+        <tr>
+          <td>剩余空间</td>
+          <td>${formatBytes(Math.max(0, availableVram - totalUsage))}</td>
+        </tr>
+      `;
+
+      // Update memory bar
+      const memoryBar = document.getElementById('memory-bar');
+      const weightsPercent = gpuVram > 0 ? (weightsPerGpu / gpuVram) * 100 : 0;
+      const kvPercent = gpuVram > 0 ? (kvCacheAllocated / gpuVram) * 100 : 0;
+      const cudaPercent = gpuVram > 0 ? (cudaGraphsSize / gpuVram) * 100 : 0;
+      const overheadPercent = gpuVram > 0 ? (totalOverhead / gpuVram) * 100 : 0;
+      const freePercent = gpuVram > 0 ? (freeSpace / gpuVram) * 100 : 0;
+
+      memoryBar.innerHTML = `
+        <div class="memory-segment weights" style="width: ${weightsPercent}%" data-tooltip="权重 (${quantLabel}): ${formatBytes(weightsPerGpu)} (${weightsPercent.toFixed(1)}%)"></div>
+        <div class="memory-segment kv-cache" style="width: ${kvPercent}%" data-tooltip="KV Cache: ${formatBytes(kvCacheAllocated)} (${kvPercent.toFixed(1)}%)"></div>
+        <div class="memory-segment cuda-graphs" style="width: ${cudaPercent}%" data-tooltip="CUDA Graphs: ${formatBytes(cudaGraphsSize)} (${cudaPercent.toFixed(1)}%)"></div>
+        <div class="memory-segment overhead" style="width: ${overheadPercent}%" data-tooltip="开销: ${formatBytes(totalOverhead)} (${overheadPercent.toFixed(1)}%)"></div>
+        <div class="memory-segment free" style="width: ${freePercent}%" data-tooltip="空闲: ${formatBytes(freeSpace)} (${freePercent.toFixed(1)}%)"></div>
+      `;
+
+      document.getElementById('memory-percent').textContent = usagePercent.toFixed(1) + '%';
+
+      // Calculate KV cache comparison
+      const requiredTokens = maxModelLen * maxNumSeqs;
+      const requiredKvBytes = requiredTokens * bytesPerToken;
+      const requiredKvGB = requiredKvBytes / 1e9;
+      const kvUtilization = maxTokensInCache > 0 ? (requiredTokens / maxTokensInCache) * 100 : 0;
+
+      // Update KV cache comparison section
+      document.getElementById('kv-allocated-display').textContent = formatBytes(kvAvailable);
+      document.getElementById('kv-required-display').textContent = formatBytes(requiredKvGB);
+
+      const kvUtilizationElem = document.getElementById('kv-utilization-display');
+      kvUtilizationElem.textContent = kvUtilization.toFixed(1) + '%';
+
+      // Color code the utilization
+      if (kvUtilization > 100) {
+        kvUtilizationElem.className = 'result-value error';
+      } else if (kvUtilization > 90) {
+        kvUtilizationElem.className = 'result-value warning';
+      } else {
+        kvUtilizationElem.className = 'result-value highlight';
+      }
+
+      // Update KV comparison visual bar
+      const kvComparisonFill = document.getElementById('kv-comparison-fill');
+      const kvBarWidth = Math.min(100, kvUtilization);
+      let kvBarClass;
+
+      if (kvUtilization > 100) {
+        kvBarClass = 'error';
+      } else if (kvUtilization > 90) {
+        kvBarClass = 'warning';
+      } else if (kvUtilization > 70) {
+        kvBarClass = 'warning';
+      } else {
+        kvBarClass = 'ok';
+      }
+
+      kvComparisonFill.style.width = kvBarWidth + '%';
+      kvComparisonFill.className = `kv-comparison-fill ${kvBarClass}`;
+      kvComparisonFill.textContent = kvUtilization.toFixed(1) + '%';
+
+      // Update KV comparison status badge
+      const kvComparisonStatus = document.getElementById('kv-comparison-status');
+      let kvStatusClass, kvStatusText;
+
+if (requiredTokens > maxTokensInCache) {
+         kvStatusClass = 'error';
+         const shortage = requiredTokens - maxTokensInCache;
+         kvStatusText = `<i data-lucide="alert-triangle" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> KV Cache 不足：还需要 ${formatNumber(shortage)} 个 token。请减小 max-model-len 或 max-num-seqs`;
+       } else if (kvUtilization > 90) {
+         kvStatusClass = 'warning';
+         kvStatusText = `<i data-lucide="zap" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> KV Cache 利用率 ${kvUtilization.toFixed(0)}% - 非常紧张，负载下可能出现问题`;
+       } else if (kvUtilization > 70) {
+         kvStatusClass = 'warning';
+         kvStatusText = `<i data-lucide="check-circle" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> KV Cache 利用率 ${kvUtilization.toFixed(0)}% - 可接受但需监控使用情况`;
+       } else {
+         kvStatusClass = 'ok';
+         const headroom = maxTokensInCache - requiredTokens;
+         kvStatusText = `<i data-lucide="check-circle" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 预留空间充足：超出需求 ${formatNumber(headroom)} 个 token`;
+       }
+
+      kvComparisonStatus.innerHTML = `<div class="status-badge ${kvStatusClass}" style="margin-top: 1rem; width: 100%;">${kvStatusText}</div>`;
+
+      // Update capacity analysis
+      document.getElementById('kv-available').textContent = formatBytes(kvAvailable);
+      document.getElementById('bytes-per-token').textContent = bytesPerTokenKB.toFixed(1) + ' KB';
+      
+      // Generate bytes-per-token calculation formula
+      let formulaText;
+      if (attentionType === 'mla') {
+        const kvLoraRank = getEffectiveKvLoraRank();
+        formulaText = `计算过程：2(K+V) × ${kvLoraRank} kv_lora_rank × ${kvCacheDtypeBytes}B × ${numLayers}层`;
+      } else {
+        const kvHeadsPerGpu = Math.ceil(kvHeads / numGpus);
+        formulaText = `计算过程：2(K+V) × ${kvHeadsPerGpu} KV_heads/GPU × ${headDim} dim × ${kvCacheDtypeBytes}B × ${numLayers}层`;
+      }
+      document.getElementById('bytes-per-token-formula').textContent = formulaText;
+      
+      document.getElementById('max-tokens').textContent = formatNumber(maxTokensInCache);
+      document.getElementById('max-context-single').textContent = formatNumber(maxContextSingle);
+      document.getElementById('avg-context-all').textContent = formatNumber(avgContextAll);
+      document.getElementById('recommended-seqs').textContent = recommendedSeqs;
+
+      // Add MLA mode indicator if applicable
+      const mlaIndicator = document.getElementById('mla-mode-indicator');
+      if (attentionType === 'mla') {
+        const kvLoraRank = getEffectiveKvLoraRank();
+        if (!mlaIndicator) {
+          const indicator = document.createElement('div');
+          indicator.id = 'mla-mode-indicator';
+          indicator.className = 'hint';
+          indicator.style.cssText = 'margin-top: 0.5rem; color: var(--accent-blue);';
+indicator.innerHTML = `<i data-lucide="lightbulb" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> MLA 模式：使用压缩潜在维度 (kv_lora_rank=${kvLoraRank}) 计算 KV Cache`;
+           document.getElementById('kv-available').parentElement.after(indicator);
+         } else {
+           mlaIndicator.innerHTML = `<i data-lucide="lightbulb" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> MLA 模式：使用压缩潜在维度 (kv_lora_rank=${kvLoraRank}) 计算 KV Cache`;
+          mlaIndicator.style.display = 'block';
+        }
+      } else if (mlaIndicator) {
+        mlaIndicator.style.display = 'none';
+      }
+
+      // Update status
+      const statusContainer = document.getElementById('status-container');
+      let statusClass, statusText;
+
+if (totalUsage > availableVram) {
+         statusClass = 'error';
+         statusText = '<i data-lucide="alert-triangle" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> OOM 风险：请减小上下文、并发数或启用 FP8 KV Cache';
+       } else if (totalUsage > availableVram * 0.95) {
+         statusClass = 'warning';
+         statusText = '<i data-lucide="zap" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 紧张：负载下可能 OOM。建议减小 max-num-seqs';
+       } else {
+         statusClass = 'ok';
+         statusText = '<i data-lucide="check-circle" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 配置正常';
+       }
+
+      // Calculate GiB values for vLLM comparison (1 GB decimal = 0.931323 GiB binary)
+      const availableVramGiB = availableVram * 0.931323;
+      const kvAvailableGiB = kvAvailable * 0.931323;
+
+      statusContainer.innerHTML = `
+        <div class="status-badge ${statusClass}">${statusText}</div>
+        <p class="hint" style="margin-top: 1rem; text-align: center;">
+          <i data-lucide="lightbulb" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> vLLM 对比：可用 ${availableVramGiB.toFixed(2)} GiB（二进制）• KV Cache ${kvAvailableGiB.toFixed(2)} GiB
+        </p>
+      `;
+
+      // Generate command
+      const commandOutput = document.getElementById('command-output');
+      let command = `<span class="flag">--model</span> <span class="value">MODEL_NAME</span>\n`;
+      command += `<span class="flag">--tensor-parallel-size</span> <span class="value">${numGpus}</span>\n`;
+      command += `<span class="flag">--max-model-len</span> <span class="value">${maxModelLen}</span>\n`;
+      command += `<span class="flag">--max-num-seqs</span> <span class="value">${maxNumSeqs}</span>\n`;
+      command += `<span class="flag">--max-num-batched-tokens</span> <span class="value">${maxBatchedTokens}</span>\n`;
+      command += `<span class="flag">--gpu-memory-utilization</span> <span class="value">${gpuUtilization}</span>\n`;
+      command += `<span class="flag">--enable-chunked-prefill</span>\n`;
+      
+      if (!cudaGraphsEnabled) {
+        command += `<span class="flag">--enforce-eager</span>\n`;
+      }
+      
+      if (numGpus > 1) {
+        command += `<span class="flag">--disable-custom-all-reduce</span>\n`;
+      }
+
+      commandOutput.innerHTML = command;
+      
+      // Reinitialize Lucide icons for dynamic content
+      lucide.createIcons();
+    }
+
+    // ============================================================================
+    // COPY COMMAND TO CLIPBOARD
+    // ============================================================================
+    function copyCommandToClipboard() {
+      const commandOutput = document.getElementById('command-output');
+      const html = commandOutput.innerHTML;
+      
+      // Extract text content from HTML
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      const plainText = tempDiv.textContent || tempDiv.innerText || '';
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(plainText.trim()).then(() => {
+        // Show success feedback
+        const originalCursor = commandOutput.style.cursor;
+        const originalBg = commandOutput.style.background;
+        commandOutput.style.cursor = 'default';
+        commandOutput.style.background = 'rgba(59, 130, 246, 0.1)';
+        
+        // Show toast notification
+        showToast('命令已复制到剪贴板！', 'success');
+        
+        setTimeout(() => {
+          commandOutput.style.cursor = originalCursor;
+          commandOutput.style.background = originalBg;
+        }, 1000);
+      }).catch(err => {
+        console.error('Failed to copy command:', err);
+        showToast('复制命令失败', 'error');
+      });
+    }
+
+    // ============================================================================
+    // TOAST NOTIFICATION SYSTEM
+    // ============================================================================
+    function showToast(message, type = 'success') {
+      // Remove existing toast if any
+      const existingToast = document.getElementById('toast-notification');
+      if (existingToast) {
+        existingToast.remove();
+      }
+      
+      const toast = document.createElement('div');
+      toast.id = 'toast-notification';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      `;
+      
+      if (type === 'success') {
+        toast.style.background = 'rgba(59, 130, 246, 0.15)';
+        toast.style.color = 'var(--accent-green)';
+        toast.style.border = '1px solid rgba(59, 130, 246, 0.3)';
+      } else {
+        toast.style.background = 'rgba(239, 68, 68, 0.15)';
+        toast.style.color = 'var(--accent-red)';
+        toast.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+      }
+      
+      const iconName = type === 'success' ? 'check-circle' : 'alert-circle';
+      toast.innerHTML = `<i data-lucide="${iconName}" style="width: 18px; height: 18px;"></i>${message}`;
+      
+      document.body.appendChild(toast);
+      lucide.createIcons();
+      
+      // Animate in
+      requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+      });
+      
+      // Auto remove after 3 seconds
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // ============================================================================
+    // CONFIGURATION AUTO-SAVE & RESTORE
+    // ============================================================================
+
+    const CONFIG_STORAGE_KEY = 'vllm_calc_config_v1';
+
+    function saveConfiguration() {
+      try {
+        const config = {
+          modelVendor: inputs.modelVendor.value,
+          modelPreset: inputs.modelPreset.value,
+          hfModelId: hfModelId.value,
+          gpuVram: inputs.gpuVram.value,
+          numGpus: inputs.numGpus.value,
+
+          gpuUtilization: inputs.gpuUtilization.value,
+          modelWeights: inputs.modelWeights.value,
+          numLayers: inputs.numLayers.value,
+          kvHeads: inputs.kvHeads.value,
+          headDim: inputs.headDim.value,
+          attnHeads: inputs.attnHeads.value,
+          maxModelLen: inputs.maxModelLen.value,
+          maxNumSeqs: inputs.maxNumSeqs.value,
+          maxBatchedTokens: inputs.maxBatchedTokens.value,
+          kvCacheDtype: inputs.kvCacheDtype.value,
+          activationDtype: inputs.activationDtype.value,
+          cudaGraphs: inputs.cudaGraphs.value,
+          overheadPadding: inputs.overheadPadding.value,
+          quantMethod: quantInputs.method.value,
+          attentionType: inputs.attentionType.value,
+          kvLoraRank: inputs.kvLoraRank.value,
+          timestamp: Date.now()
+        };
+
+        localStorage.setItem(CONFIG_STORAGE_KEY, JSON.stringify(config));
+      } catch (error) {
+        console.error('Failed to save configuration:', error);
+      }
+    }
+
+    function restoreConfiguration() {
+      try {
+        const saved = localStorage.getItem(CONFIG_STORAGE_KEY);
+        if (!saved) return false;
+
+        const config = JSON.parse(saved);
+
+        // Check if saved config is recent (within 30 days)
+        const age = Date.now() - (config.timestamp || 0);
+        if (age > 30 * 24 * 60 * 60 * 1000) {
+          localStorage.removeItem(CONFIG_STORAGE_KEY);
+          return false;
+        }
+
+        // Restore values
+        if (config.modelVendor) inputs.modelVendor.value = config.modelVendor;
+        
+        // Trigger presets update based on restored vendor
+        const vendorSelect = inputs.modelVendor;
+        const presetSelect = inputs.modelPreset;
+        const hfInput = document.getElementById('hf-model-id');
+        
+        const updatePresets = () => {
+          const vendor = vendorSelect.value;
+          presetSelect.innerHTML = '';
+          if (vendor === 'Custom') {
+            presetSelect.disabled = true;
+            const option = document.createElement('option');
+            option.value = '';
+option.textContent = '在下方输入 ID';
+            presetSelect.appendChild(option);
+          } else {
+            presetSelect.disabled = false;
+            const models = BUILTIN_MODELS[vendor] || [];
+            models.forEach(m => {
+              const option = document.createElement('option');
+              option.value = m.id;
+              option.textContent = m.name;
+              presetSelect.appendChild(option);
+            });
+          }
+        };
+        
+        updatePresets();
+        
+        if (config.modelPreset) presetSelect.value = config.modelPreset;
+        if (config.hfModelId) hfInput.value = config.hfModelId;
+
+        if (config.gpuVram) inputs.gpuVram.value = config.gpuVram;
+
+        if (config.numGpus) inputs.numGpus.value = config.numGpus;
+        if (config.gpuUtilization) inputs.gpuUtilization.value = config.gpuUtilization;
+        if (config.modelWeights) inputs.modelWeights.value = config.modelWeights;
+        if (config.numLayers) inputs.numLayers.value = config.numLayers;
+        if (config.kvHeads) inputs.kvHeads.value = config.kvHeads;
+        if (config.headDim) inputs.headDim.value = config.headDim;
+        if (config.attnHeads) inputs.attnHeads.value = config.attnHeads;
+        if (config.maxModelLen) inputs.maxModelLen.value = config.maxModelLen;
+        if (config.maxNumSeqs) inputs.maxNumSeqs.value = config.maxNumSeqs;
+        if (config.maxBatchedTokens) inputs.maxBatchedTokens.value = config.maxBatchedTokens;
+        if (config.kvCacheDtype) inputs.kvCacheDtype.value = config.kvCacheDtype;
+        if (config.activationDtype) inputs.activationDtype.value = config.activationDtype;
+        if (config.cudaGraphs) inputs.cudaGraphs.value = config.cudaGraphs;
+        if (config.overheadPadding) inputs.overheadPadding.value = config.overheadPadding;
+        if (config.quantMethod) quantInputs.method.value = config.quantMethod;
+        if (config.attentionType) inputs.attentionType.value = config.attentionType;
+        if (config.kvLoraRank) inputs.kvLoraRank.value = config.kvLoraRank;
+
+        return true;
+      } catch (error) {
+        console.error('Failed to restore configuration:', error);
+        return false;
+      }
+    }
+
+    // Debounced save (2 seconds after last change)
+    const debouncedConfigSave = debounce(saveConfiguration, 2000);
+
+    // Auto-save on any input change
+    Object.values(inputs).forEach(input => {
+      input.addEventListener('input', debouncedConfigSave);
+      input.addEventListener('change', debouncedConfigSave);
+    });
+
+    Object.values(quantInputs).forEach(input => {
+      input.addEventListener('input', debouncedConfigSave);
+      input.addEventListener('change', debouncedConfigSave);
+    });
+
+    // ============================================================================
+    // COLLAPSIBLE SECTIONS
+    // ============================================================================
+    
+    // Quantization section toggle
+    const quantToggle = document.getElementById('quant-toggle');
+    const quantContent = document.getElementById('quant-section-content');
+    const QUANT_COLLAPSE_KEY = 'vllm_calc_quant_collapsed';
+    
+    if (quantToggle && quantContent) {
+      // Restore collapsed state from localStorage
+      const isCollapsed = localStorage.getItem(QUANT_COLLAPSE_KEY) === 'true';
+      if (isCollapsed) {
+        quantToggle.classList.add('collapsed');
+        quantContent.classList.add('collapsed');
+      }
+      
+      quantToggle.addEventListener('click', () => {
+        const nowCollapsed = quantContent.classList.toggle('collapsed');
+        quantToggle.classList.toggle('collapsed', nowCollapsed);
+        localStorage.setItem(QUANT_COLLAPSE_KEY, nowCollapsed);
+      });
+    }
+
+    // ============================================================================
+    // INITIAL SETUP
+    // ============================================================================
+
+    // Restore configuration on page load
+    const restored = restoreConfiguration();
+
+    // Initial calculation (after restoring config)
+    calculate();
+
+    // Initialize all Lucide icons after page load
+    lucide.createIcons();
+  </script>
+</body>
+</html>

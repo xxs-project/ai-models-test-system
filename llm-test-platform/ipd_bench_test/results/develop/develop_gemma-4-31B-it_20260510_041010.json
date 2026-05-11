@@ -1,0 +1,652 @@
+[
+  {
+    "id": "COMPANY_IPD_S3_01",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 50.54478597640991,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”问题。在纯净的 MySQL 5.7 中，由于它是一个关系型数据库而非通用编程语言，它**没有**内置的 `listen()` 或 `socket()` 函数来直接监听 TCP 端口。\n\n然而，通过利用 MySQL 5.7 的 **`sys_exec`**（通过加载 UDF 用户自定义函数）或 **`SELECT ... INTO OUTFILE`** 结合操作系统的..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_02",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 19.97454810142517,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_03",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.265225648880005,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_04",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 35.123756885528564,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.9634850025177,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_06",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 17.221522569656372,
+    "status": "success",
+    "gen_text": "```java\n// 1. Global Exception Handler\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(IllegalArgumentException.class)\n    public ResponseEntity<String> handleIllegal..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_07",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 20.06315803527832,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_08",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.353015899658203,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 31.816109895706177,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  st..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.962829351425171,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_11",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 49.03696894645691,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”问题。在纯净的 MySQL 5.7 中，由于它是一个数据库而非通用编程语言，它**没有**内置的 `listen()` 或 `socket()` 函数。\n\n然而，通过利用 MySQL 的 **`sys_exec`**（通过 UDF 用户自定义函数扩展）或 **`SELECT ... INTO OUTFILE`** 结合操作系统的管道/网络设备，可以在理论上实现。\n\n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_12",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 21.708711862564087,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_13",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.122475147247314,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_14",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 34.21471548080444,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_15",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.759015083312988,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_16",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 15.965586185455322,
+    "status": "success",
+    "gen_text": "```java\n// 1. Global Exception Handler\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(IllegalArgumentException.class)\n    public ResponseEntity<String> handleIllegal..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_17",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 20.405352354049683,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_18",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.193853855133057,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_19",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 35.90427589416504,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_20",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.7953519821167,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_21",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 59.27195334434509,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”问题。在纯净的 MySQL 5.7 中，由于它是一个关系型数据库而非通用编程语言，它**没有**内置的 `listen()` 或 `socket()` 函数来直接监听 TCP 端口。\n\n然而，通过利用 MySQL 5.7 的 **`sys_exec`**（通过加载 UDF 用户自定义函数）或 **`SELECT ... INTO OUTFILE`** 结合操作系统的..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_22",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 20.455230712890625,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_23",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.221858739852905,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_24",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 35.86732840538025,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_25",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.8362295627594,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_26",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 17.209109783172607,
+    "status": "success",
+    "gen_text": "```java\n// 1. Global Exception Handler\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(IllegalArgumentException.class)\n    public ResponseEntity<String> handleIllegal..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_27",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 20.43242573738098,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_28",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.239766836166382,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_29",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.024797439575195,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_30",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.811059474945068,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_31",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 55.618186712265015,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”问题。在纯净的 MySQL 5.7 中，由于它是一个数据库而非通用编程语言，它**没有**内置的 `listen()` 或 `socket()` 函数。\n\n然而，通过利用 MySQL 5.7 的 **`sys_exec`**（通过加载 UDF 用户自定义函数）或 **`SELECT ... INTO OUTFILE`** 结合操作系统的管道/网络特性，我们可以实现一..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_32",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 18.631638288497925,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_33",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.17390489578247,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_34",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 35.22118425369263,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_35",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.772658109664917,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_36",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 17.201956748962402,
+    "status": "success",
+    "gen_text": "```java\n// 1. Global Exception Handler\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(IllegalArgumentException.class)\n    public ResponseEntity<String> handleIllegal..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_37",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 18.638887643814087,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_38",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.228986978530884,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_39",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.02709650993347,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_40",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.827053785324097,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_41",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 53.18288707733154,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”问题。在纯净的 MySQL 5.7 中，由于它是一个数据库而非通用编程语言，它**没有**内置的 `listen()` 或 `socket()` 函数。\n\n然而，通过利用 MySQL 5.7 的 **`sys_exec`**（通过加载 UDF 用户自定义函数）或 **`SELECT ... INTO OUTFILE`** 结合操作系统的管道/网络特性，我们可以实现一..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_42",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 18.27013897895813,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_43",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.26039171218872,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_44",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.25421953201294,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_45",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.85036325454712,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_46",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 16.000993490219116,
+    "status": "success",
+    "gen_text": "```java\n// 1. Global Exception Handler\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(IllegalArgumentException.class)\n    public ResponseEntity<String> handleIllegal..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_47",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 20.66466760635376,
+    "status": "success",
+    "gen_text": "```python\nimport pandas as pd\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed JSON logs\n    and calculates the average.\n    \"\"\"\n    v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_48",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr', '代码块']"
+    },
+    "latency": 10.203770637512207,
+    "status": "success",
+    "gen_text": "1. **悬空指针/Use-After-Free**：主线程 `delete[] data` 后，分离线程 `t` 访问已释放内存。\n2. **资源泄漏/生命周期失控**：`detach()` 导致线程生命周期脱离控制，无法保证在程序退出前完成执行。\n\n```cpp\n#include <iostream>\n#include <thread>\n#include <memory>\n#include <..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_49",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 33.83348822593689,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  username: string;\n  email: string;\n  avatar: string;\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status: 'pe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_50",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.756893396377563,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    t.dept_name, \n    t.emp_name, \n    t.salary\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rn := IF(@prev_dept = e.dept_id, @rn + 1, 1) AS ..."
+  }
+]

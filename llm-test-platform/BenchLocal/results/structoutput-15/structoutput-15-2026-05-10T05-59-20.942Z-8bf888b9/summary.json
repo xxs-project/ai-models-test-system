@@ -1,0 +1,664 @@
+{
+  "runId": "structoutput-15-2026-05-10T05-59-20.942Z-8bf888b9",
+  "runDir": "/home/xxs/models-test-system/llm-test-platform/BenchLocal/results/structoutput-15/structoutput-15-2026-05-10T05-59-20.942Z-8bf888b9",
+  "benchPackId": "structoutput-15",
+  "benchPackName": "StructOutput-15",
+  "executionMode": "parallel",
+  "startedAt": "2026-05-10T05:59:20.975Z",
+  "completedAt": "2026-05-10T05:59:21.007Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "structoutput-15",
+      "benchPackName": "StructOutput-15",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "structoutput-15",
+      "benchPackName": "StructOutput-15",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "structoutput-15-2026-05-10T05-59-20.942Z-8bf888b9",
+      "models": [
+        {
+          "id": "local_model:Xfusion@2026",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-01",
+      "title": "Simple JSON Object",
+      "index": 1,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-02",
+      "title": "CSV with Headers",
+      "index": 2,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-03",
+      "title": "YAML Configuration",
+      "index": 3,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-04",
+      "title": "TOML Configuration",
+      "index": 4,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-05",
+      "title": "SQL CREATE + INSERT",
+      "index": 5,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-06",
+      "title": "ICS Calendar Event",
+      "index": 6,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-07",
+      "title": "Nested JSON with Arrays and Nulls",
+      "index": 7,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-08",
+      "title": "CSV with Special Characters",
+      "index": 8,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-09",
+      "title": "XML with Namespaces and Attributes",
+      "index": 9,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-10",
+      "title": "JSON to Markdown Table",
+      "index": 10,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-11",
+      "title": "Natural Language to Mermaid Diagram",
+      "index": 11,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-12",
+      "title": "HTML Table with Semantic Markup",
+      "index": 12,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-13",
+      "title": "JSON with Tricky Values",
+      "index": 13,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-14",
+      "title": "CSV Adversarial — The Delimiter Minefield",
+      "index": 14,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-15",
+      "title": "Binary Format Boundary — BSON",
+      "index": 15,
+      "total": 15
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-01",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-02",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-03",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-04",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-05",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-06",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-07",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-08",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-09",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-10",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-11",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-12",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-13",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-14",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-15",
+      "message": "Calling model"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-01",
+      "result": {
+        "scenarioId": "SO-01",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-01 Simple JSON Object\nuser_turn_1=Generate a JSON object for a book with these details: title \"The Great Gatsby\", author \"F. Scott Fitzgerald\", year 1925, genre \"Novel\", in_print true.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-01"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-03",
+      "result": {
+        "scenarioId": "SO-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-03 YAML Configuration\nuser_turn_1=Generate a YAML configuration for a web server with these settings: host \"0.0.0.0\", port 8080, debug false, allowed_origins is a list containing \"https://example.com\" and \"https://app.example.com\", and database has nested fields: host \"localhost\", port 5432, name \"myapp_db\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-02",
+      "result": {
+        "scenarioId": "SO-02",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-02 CSV with Headers\nuser_turn_1=Generate a CSV file with headers: name, age, city, email. Include these 3 records:\n- Alice Johnson, 32, Portland, alice@example.com\n- Bob Smith, 45, Chicago, bob@example.com\n- Carol White, 28, Austin, carol@example.com\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-03"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-02"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-06",
+      "result": {
+        "scenarioId": "SO-06",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-06 ICS Calendar Event\nuser_turn_1=Generate an ICS calendar event for a team meeting on April 15, 2026, from 2:00 PM to 3:30 PM Eastern Time. Title: \"Q2 Planning Session\". Location: \"Conference Room B\". Description: \"Quarterly planning meeting - bring your project updates\". Organizer: alice@company.com.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-07",
+      "result": {
+        "scenarioId": "SO-07",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-07 Nested JSON with Arrays and Nulls\nuser_turn_1=Generate a JSON object representing an API response for a user profile. The user has: id 42, username \"j_doe\", email null (not verified yet), roles array with \"editor\" and \"viewer\", address object with street \"123 Main St\", city \"Springfield\", state \"IL\", zip \"62704\", and phone_numbers array containing two objects: one with type \"mobile\", number \"+1-555-0123\", primary true, and one with type \"work\", number null, primary false. Include a metadata object with last_login \"2026-03-15T10:30:00Z\" and login_count 847.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-09",
+      "result": {
+        "scenarioId": "SO-09",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-09 XML with Namespaces and Attributes\nuser_turn_1=Generate an XML document representing a book catalog. The root element is \"catalog\" with namespace \"http://example.com/books\" and attribute version=\"2.0\". Include 2 books, each with attributes id and lang. Book 1: id=\"bk101\", lang=\"en\", title \"Rust Programming\", author \"Steve Klabnik\", price 39.99 with currency attribute \"USD\". Book 2: id=\"bk102\", lang=\"ja\", title \"プログラミングRust\", author \"Steve Klabnik\", price 4500 with currency attribute \"JPY\". Include an XML declaration.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-05",
+      "result": {
+        "scenarioId": "SO-05",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-05 SQL CREATE + INSERT\nuser_turn_1=Generate SQL to create a table called \"employees\" with columns: id (integer, primary key, auto increment), name (varchar 100, not null), department (varchar 50), salary (decimal 10,2), hire_date (date). Then insert 2 rows: \"Alice Chen\", \"Engineering\", 95000.00, \"2023-06-15\" and \"Bob Park\", \"Marketing\", 78500.50, \"2024-01-10\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-08",
+      "result": {
+        "scenarioId": "SO-08",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-08 CSV with Special Characters\nuser_turn_1=Generate a CSV with headers: company, description, revenue, ceo. Include these 3 records:\n- Acme, Inc., \"Makes everything, from anvils to rockets\", $1.2B, Jane \"JJ\" Smith\n- O'Brien & Sons, \"Family-owned since 1952\", $45M, Patrick O'Brien\n- 株式会社テスト (Test Corp), \"Japanese tech company\", ¥500B, 田中太郎\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-04",
+      "result": {
+        "scenarioId": "SO-04",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-04 TOML Configuration\nuser_turn_1=Generate a TOML configuration file for a Rust project with: package name \"my_cli\", version \"0.1.0\", edition \"2021\", authors list with \"Alice <alice@example.com>\". Dependencies section: serde version \"1.0\" with features [\"derive\"], clap version \"4.5\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-15",
+      "result": {
+        "scenarioId": "SO-15",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-15 Binary Format Boundary — BSON\nuser_turn_1=Generate a BSON document with fields name \"Alice\" and age 30.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-10",
+      "result": {
+        "scenarioId": "SO-10",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-10 JSON to Markdown Table\nuser_turn_1=Convert this JSON array into a Markdown table:\n[{\"name\": \"Alice\", \"score\": 95, \"grade\": \"A\"}, {\"name\": \"Bob\", \"score\": 82, \"grade\": \"B+\"}, {\"name\": \"Carol\", \"score\": 78, \"grade\": \"C+\"}, {\"name\": \"Dave\", \"score\": 91, \"grade\": \"A-\"}]\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-12",
+      "result": {
+        "scenarioId": "SO-12",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-12 HTML Table with Semantic Markup\nuser_turn_1=Generate an HTML table showing quarterly revenue. Headers: Quarter, Revenue, Growth. Data: Q1 $1.2M +5%, Q2 $1.4M +16.7%, Q3 $1.1M -21.4%, Q4 $1.8M +63.6%. Use thead, tbody, and th elements properly. Add a caption \"2025 Quarterly Revenue\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-11",
+      "result": {
+        "scenarioId": "SO-11",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-11 Natural Language to Mermaid Diagram\nuser_turn_1=Generate a Mermaid flowchart for this process: User submits a form. System validates the input. If valid, save to database and send confirmation email, then show success page. If invalid, show error message and return to form.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-13",
+      "result": {
+        "scenarioId": "SO-13",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-13 JSON with Tricky Values\nuser_turn_1=Generate a JSON object with these exact key-value pairs: empty_string should be \"\" (an empty string), null_value should be null, zero should be 0, false_value should be false, empty_array should be [], empty_object should be {}, special_chars should be the string containing a backslash, a double quote, a newline, and a tab: `\\\"\\n\\t`, nested_null should be an object with key \"a\" set to null and key \"b\" set to an array containing null and 1.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Xfusion@2026",
+      "scenarioId": "SO-14",
+      "result": {
+        "scenarioId": "SO-14",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-14 CSV Adversarial — The Delimiter Minefield\nuser_turn_1=Generate a CSV with headers: id, description, formula, notes. Include these 2 records:\nRow 1: id 1, description is: He said \"hello, world\" and left, formula is: =SUM(A1,B1), notes is: Line one\\nLine two (actual newline in the value)\nRow 2: id 2, description is: Simple value, formula is: =IF(A1>0,\"yes\",\"no\"), notes is empty\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-06"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-07"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-09"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-05"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-08"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-04"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-15"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-10"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-12"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-11"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-13"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-14"
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:Xfusion@2026": {
+          "totalScore": 0,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Basic Single-Format",
+              "score": 0,
+              "weight": 15
+            },
+            {
+              "id": "B",
+              "label": "Less Common Formats",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "C",
+              "label": "Complex Structures",
+              "score": 0,
+              "weight": 25
+            },
+            {
+              "id": "D",
+              "label": "Conversion & Multi-Format",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Adversarial Edge Cases",
+              "score": 0,
+              "weight": 20
+            }
+          ],
+          "summary": "★ Poor"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:Xfusion@2026": [
+      {
+        "scenarioId": "SO-01",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-01 Simple JSON Object\nuser_turn_1=Generate a JSON object for a book with these details: title \"The Great Gatsby\", author \"F. Scott Fitzgerald\", year 1925, genre \"Novel\", in_print true.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-03 YAML Configuration\nuser_turn_1=Generate a YAML configuration for a web server with these settings: host \"0.0.0.0\", port 8080, debug false, allowed_origins is a list containing \"https://example.com\" and \"https://app.example.com\", and database has nested fields: host \"localhost\", port 5432, name \"myapp_db\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-02",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-02 CSV with Headers\nuser_turn_1=Generate a CSV file with headers: name, age, city, email. Include these 3 records:\n- Alice Johnson, 32, Portland, alice@example.com\n- Bob Smith, 45, Chicago, bob@example.com\n- Carol White, 28, Austin, carol@example.com\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-06",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-06 ICS Calendar Event\nuser_turn_1=Generate an ICS calendar event for a team meeting on April 15, 2026, from 2:00 PM to 3:30 PM Eastern Time. Title: \"Q2 Planning Session\". Location: \"Conference Room B\". Description: \"Quarterly planning meeting - bring your project updates\". Organizer: alice@company.com.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-07",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-07 Nested JSON with Arrays and Nulls\nuser_turn_1=Generate a JSON object representing an API response for a user profile. The user has: id 42, username \"j_doe\", email null (not verified yet), roles array with \"editor\" and \"viewer\", address object with street \"123 Main St\", city \"Springfield\", state \"IL\", zip \"62704\", and phone_numbers array containing two objects: one with type \"mobile\", number \"+1-555-0123\", primary true, and one with type \"work\", number null, primary false. Include a metadata object with last_login \"2026-03-15T10:30:00Z\" and login_count 847.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-09",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-09 XML with Namespaces and Attributes\nuser_turn_1=Generate an XML document representing a book catalog. The root element is \"catalog\" with namespace \"http://example.com/books\" and attribute version=\"2.0\". Include 2 books, each with attributes id and lang. Book 1: id=\"bk101\", lang=\"en\", title \"Rust Programming\", author \"Steve Klabnik\", price 39.99 with currency attribute \"USD\". Book 2: id=\"bk102\", lang=\"ja\", title \"プログラミングRust\", author \"Steve Klabnik\", price 4500 with currency attribute \"JPY\". Include an XML declaration.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-05",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-05 SQL CREATE + INSERT\nuser_turn_1=Generate SQL to create a table called \"employees\" with columns: id (integer, primary key, auto increment), name (varchar 100, not null), department (varchar 50), salary (decimal 10,2), hire_date (date). Then insert 2 rows: \"Alice Chen\", \"Engineering\", 95000.00, \"2023-06-15\" and \"Bob Park\", \"Marketing\", 78500.50, \"2024-01-10\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-08",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-08 CSV with Special Characters\nuser_turn_1=Generate a CSV with headers: company, description, revenue, ceo. Include these 3 records:\n- Acme, Inc., \"Makes everything, from anvils to rockets\", $1.2B, Jane \"JJ\" Smith\n- O'Brien & Sons, \"Family-owned since 1952\", $45M, Patrick O'Brien\n- 株式会社テスト (Test Corp), \"Japanese tech company\", ¥500B, 田中太郎\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-04",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-04 TOML Configuration\nuser_turn_1=Generate a TOML configuration file for a Rust project with: package name \"my_cli\", version \"0.1.0\", edition \"2021\", authors list with \"Alice <alice@example.com>\". Dependencies section: serde version \"1.0\" with features [\"derive\"], clap version \"4.5\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-15",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-15 Binary Format Boundary — BSON\nuser_turn_1=Generate a BSON document with fields name \"Alice\" and age 30.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-10",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-10 JSON to Markdown Table\nuser_turn_1=Convert this JSON array into a Markdown table:\n[{\"name\": \"Alice\", \"score\": 95, \"grade\": \"A\"}, {\"name\": \"Bob\", \"score\": 82, \"grade\": \"B+\"}, {\"name\": \"Carol\", \"score\": 78, \"grade\": \"C+\"}, {\"name\": \"Dave\", \"score\": 91, \"grade\": \"A-\"}]\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-12",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-12 HTML Table with Semantic Markup\nuser_turn_1=Generate an HTML table showing quarterly revenue. Headers: Quarter, Revenue, Growth. Data: Q1 $1.2M +5%, Q2 $1.4M +16.7%, Q3 $1.1M -21.4%, Q4 $1.8M +63.6%. Use thead, tbody, and th elements properly. Add a caption \"2025 Quarterly Revenue\".\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-11",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-11 Natural Language to Mermaid Diagram\nuser_turn_1=Generate a Mermaid flowchart for this process: User submits a form. System validates the input. If valid, save to database and send confirmation email, then show success page. If invalid, show error message and return to form.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-13",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-13 JSON with Tricky Values\nuser_turn_1=Generate a JSON object with these exact key-value pairs: empty_string should be \"\" (an empty string), null_value should be null, zero should be 0, false_value should be false, empty_array should be [], empty_object should be {}, special_chars should be the string containing a backslash, a double quote, a newline, and a tab: `\\\"\\n\\t`, nested_null should be an object with key \"a\" set to null and key \"b\" set to an array containing null and 1.\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      },
+      {
+        "scenarioId": "SO-14",
+        "status": "fail",
+        "score": 0,
+        "summary": "The model `Xfusion@2026` does not exist.",
+        "rawLog": "model=Xfusion@2026\nscenario=SO-14 CSV Adversarial — The Delimiter Minefield\nuser_turn_1=Generate a CSV with headers: id, description, formula, notes. Include these 2 records:\nRow 1: id 1, description is: He said \"hello, world\" and left, formula is: =SUM(A1,B1), notes is: Line one\\nLine two (actual newline in the value)\nRow 2: id 2, description is: Simple value, formula is: =IF(A1>0,\"yes\",\"no\"), notes is empty\nerror=The model `Xfusion@2026` does not exist.\nverdict=fail\nscore=0\nsummary=The model `Xfusion@2026` does not exist."
+      }
+    ]
+  },
+  "scores": {
+    "local_model:Xfusion@2026": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Basic Single-Format",
+          "score": 0,
+          "weight": 15
+        },
+        {
+          "id": "B",
+          "label": "Less Common Formats",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "C",
+          "label": "Complex Structures",
+          "score": 0,
+          "weight": 25
+        },
+        {
+          "id": "D",
+          "label": "Conversion & Multi-Format",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Adversarial Edge Cases",
+          "score": 0,
+          "weight": 20
+        }
+      ],
+      "summary": "★ Poor"
+    }
+  }
+}

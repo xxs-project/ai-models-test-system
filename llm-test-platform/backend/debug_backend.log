@@ -1,0 +1,2595 @@
+INFO:     Started server process [244886]
+INFO:     Waiting for application startup.
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "设备状态自动监控" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:__main__:设备自动监控任务已启动，间隔: 60秒
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:55062 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:49:37 UTC)" (scheduled at 2026-02-06 03:49:37.886581+00:00)
+INFO:__main__:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:自动监控完成，共监控 1 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:50:37 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:51:37 UTC)" (scheduled at 2026-02-06 03:50:37.886581+00:00)
+INFO:__main__:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:自动监控完成，共监控 1 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:51:37 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:52:37 UTC)" (scheduled at 2026-02-06 03:51:37.886581+00:00)
+INFO:__main__:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:自动监控完成，共监控 1 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:52:37 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:53:37 UTC)" (scheduled at 2026-02-06 03:52:37.886581+00:00)
+INFO:__main__:开始自动监控所有设备状态...
+INFO:__main__:自动监控完成，共监控 0 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:53:37 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:54:37 UTC)" (scheduled at 2026-02-06 03:53:37.886581+00:00)
+INFO:__main__:开始自动监控所有设备状态...
+INFO:__main__:自动监控完成，共监控 0 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:54:37 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:55:37 UTC)" (scheduled at 2026-02-06 03:54:37.886581+00:00)
+INFO:__main__:开始自动监控所有设备状态...
+INFO:__main__:自动监控完成，共监控 0 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:55:37 UTC)" executed successfully
+INFO:     127.0.0.1:35852 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:56:37 UTC)" (scheduled at 2026-02-06 03:55:37.886581+00:00)
+INFO:__main__:开始自动监控所有设备状态...
+INFO:__main__:自动监控完成，共监控 0 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-02-06 03:56:37 UTC)" executed successfully
+INFO:     127.0.0.1:53750 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45726 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45726 - "GET /api/devices?page=1&size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45726 - "GET /api/devices?search=192.168 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45726 - "GET /api/devices?status=Online HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45726 - "GET /api/devices?acc_type=HasAcc HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.200, triggering background check
+INFO:     127.0.0.1:45726 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.200
+INFO:__main__:Device created: 192.168.1.201, triggering background check
+INFO:     127.0.0.1:45726 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.201
+INFO:     127.0.0.1:45726 - "GET /api/devices/2 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.202, triggering background check
+INFO:     127.0.0.1:45726 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.202
+INFO:     127.0.0.1:45726 - "PUT /api/devices/3 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.203, triggering background check
+INFO:     127.0.0.1:45726 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.203
+INFO:     127.0.0.1:45726 - "DELETE /api/devices/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45726 - "GET /api/devices/4 HTTP/1.1" 404 Not Found
+INFO:__main__:Device created: 192.168.1.204, triggering background check
+INFO:     127.0.0.1:45726 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.204
+INFO:__main__:Manually refreshing device: 192.168.1.204
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.203: timed out
+WARNING:monitor_impl:Device 192.168.1.203 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:Device 192.168.1.204 refreshed successfully: Offline
+INFO:     127.0.0.1:45726 - "POST /api/devices/4/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45726 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:apscheduler.scheduler:Removed job device_monitor_job
+INFO:apscheduler.scheduler:Added job "设备状态监控" to job store "default"
+INFO:__main__:设备监控任务已更新，间隔: 120秒
+INFO:     127.0.0.1:45726 - "PUT /api/settings HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:00:36 UTC)" (scheduled at 2026-02-06 03:58:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:00:36 UTC)" executed successfully
+INFO:     127.0.0.1:32876 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:32882 - "POST /api/api/devices HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:32884 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:33788 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:02:36 UTC)" (scheduled at 2026-02-06 04:00:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:02:36 UTC)" executed successfully
+INFO:     127.0.0.1:33802 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:33814 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34166 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34182 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53882 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53890 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54694 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54708 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:43802 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:43814 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54596 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54606 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54614 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:48242 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36534 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36546 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57986 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57988 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57506 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57516 - "GET /api/api/devices?page=1&size=20 HTTP/1.1" 404 Not Found
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:04:36 UTC)" (scheduled at 2026-02-06 04:02:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:04:36 UTC)" executed successfully
+INFO:     127.0.0.1:47258 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36356 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:36366 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:36372 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36376 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36382 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36398 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36406 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36408 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:47550 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52344 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49846 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54484 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34350 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:06:36 UTC)" (scheduled at 2026-02-06 04:04:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:06:36 UTC)" executed successfully
+INFO:     127.0.0.1:42430 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56372 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55844 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46920 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53972 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33968 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33982 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33998 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:08:36 UTC)" (scheduled at 2026-02-06 04:06:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:08:36 UTC)" executed successfully
+INFO:     127.0.0.1:34020 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:34036 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:34050 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34166 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34178 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34194 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34196 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34210 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34226 - "DELETE /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34242 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34254 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+Exception in thread Thread-8 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:44196 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37586 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52322 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60234 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50382 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34218 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52100 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47404 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:10:36 UTC)" (scheduled at 2026-02-06 04:08:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:10:36 UTC)" executed successfully
+INFO:     127.0.0.1:35884 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35900 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35910 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39804 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:39812 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:39816 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39832 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39834 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39842 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39854 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39868 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.199, triggering background check
+INFO:     127.0.0.1:39876 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.199
+INFO:     127.0.0.1:39882 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39888 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39902 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39904 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:Manually refreshing device: 192.168.1.100
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.199: timed out
+WARNING:monitor_impl:Device 192.168.1.199 is offline
+Exception in thread Thread-10 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:Device 192.168.1.100 refreshed successfully: Offline
+INFO:     127.0.0.1:39908 - "POST /api/devices/1/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60432 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60442 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:12:36 UTC)" (scheduled at 2026-02-06 04:10:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:12:36 UTC)" executed successfully
+INFO:     127.0.0.1:49482 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43126 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57966 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46408 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40500 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35350 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57506 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57512 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57524 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41300 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40268 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59256 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52136 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60438 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:14:36 UTC)" (scheduled at 2026-02-06 04:12:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:14:36 UTC)" executed successfully
+INFO:     127.0.0.1:33264 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56226 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51368 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37652 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:37658 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:37664 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37680 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54704 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54728 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54734 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.199, triggering background check
+INFO:     127.0.0.1:54736 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.199
+INFO:     127.0.0.1:54752 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54762 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54772 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54786 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:54802 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54812 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54820 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.199: timed out
+WARNING:monitor_impl:Device 192.168.1.199 is offline
+Exception in thread Thread-12 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:55018 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35328 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:16:36 UTC)" (scheduled at 2026-02-06 04:14:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:16:36 UTC)" executed successfully
+INFO:     127.0.0.1:44460 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50072 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50088 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50098 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35706 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36416 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57960 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39198 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54890 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52250 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45242 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51232 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41126 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:18:36 UTC)" (scheduled at 2026-02-06 04:16:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:18:36 UTC)" executed successfully
+INFO:     127.0.0.1:32786 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51612 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38754 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:38760 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:38770 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38772 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38778 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38792 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38800 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38806 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.199, triggering background check
+INFO:     127.0.0.1:38812 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.199
+INFO:     127.0.0.1:38826 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38838 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38844 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38858 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:38866 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38868 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41570 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.199: timed out
+WARNING:monitor_impl:Device 192.168.1.199 is offline
+Exception in thread Thread-14 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:36178 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34508 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:20:36 UTC)" (scheduled at 2026-02-06 04:18:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:20:36 UTC)" executed successfully
+INFO:     127.0.0.1:47936 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51042 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36848 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56130 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56146 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56658 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48998 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33196 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52734 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56446 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43412 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44136 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:22:36 UTC)" (scheduled at 2026-02-06 04:20:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:22:36 UTC)" executed successfully
+INFO:     127.0.0.1:41390 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39146 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50118 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:50124 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:50126 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50128 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:24:36 UTC)" (scheduled at 2026-02-06 04:22:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:50134 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50144 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50152 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50160 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.199, triggering background check
+INFO:     127.0.0.1:50166 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.199
+INFO:     127.0.0.1:50172 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50182 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50192 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50200 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:44706 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:24:36 UTC)" executed successfully
+INFO:     127.0.0.1:44722 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44724 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44732 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.199: timed out
+WARNING:monitor_impl:Device 192.168.1.199 is offline
+Exception in thread Thread-16 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:44744 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44756 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44770 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43010 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54036 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38404 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49936 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59170 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56024 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45788 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37176 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38012 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60912 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:26:36 UTC)" (scheduled at 2026-02-06 04:24:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:26:36 UTC)" executed successfully
+INFO:     127.0.0.1:36862 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52582 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47932 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36644 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36408 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:36414 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:36426 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36438 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.101, triggering background check
+INFO:     127.0.0.1:36440 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.101
+INFO:     127.0.0.1:36444 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36450 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.102, triggering background check
+INFO:     127.0.0.1:36458 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.102
+INFO:     127.0.0.1:36468 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36476 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.103, triggering background check
+INFO:     127.0.0.1:36492 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.103
+INFO:     127.0.0.1:36504 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36510 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.104, triggering background check
+INFO:     127.0.0.1:36512 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.104
+INFO:     127.0.0.1:36524 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36528 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.105, triggering background check
+INFO:     127.0.0.1:36542 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.105
+INFO:     127.0.0.1:36552 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36556 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.106, triggering background check
+INFO:     127.0.0.1:36572 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.106
+INFO:     127.0.0.1:36584 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:36592 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.107, triggering background check
+INFO:     127.0.0.1:51082 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.107
+INFO:     127.0.0.1:51090 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:28:36 UTC)" (scheduled at 2026-02-06 04:26:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:monitor_impl:Checking device: 192.168.1.101
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+INFO:monitor_impl:Checking device: 192.168.1.102
+INFO:     127.0.0.1:38180 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+INFO:monitor_impl:Checking device: 192.168.1.103
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:38192 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:38204 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38212 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38222 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38226 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38242 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38244 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.199, triggering background check
+INFO:     127.0.0.1:38260 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.199
+INFO:     127.0.0.1:38274 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38290 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38296 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+INFO:monitor_impl:Checking device: 192.168.1.104
+INFO:     127.0.0.1:38312 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:38318 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38320 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38330 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38336 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.199: timed out
+WARNING:monitor_impl:Device 192.168.1.199 is offline
+Exception in thread Thread-26 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+INFO:monitor_impl:Checking device: 192.168.1.105
+INFO:     127.0.0.1:54942 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54948 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54952 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+INFO:monitor_impl:Checking device: 192.168.1.106
+INFO:     127.0.0.1:33812 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+INFO:monitor_impl:Checking device: 192.168.1.107
+INFO:     127.0.0.1:33820 - "GET /api/devices?page=1&size=20&arch=x86_64 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33822 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33834 - "GET /api/devices?page=1&size=20&acc_type=HasAcc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33840 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+ERROR:__main__:刷新设备状态失败: UPDATE statement on table 'device' expected to update 8 row(s); 0 were matched.
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:28:36 UTC)" executed successfully
+INFO:     127.0.0.1:33378 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53010 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39230 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36690 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52046 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48166 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:48178 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:48184 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48196 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.101, triggering background check
+INFO:     127.0.0.1:48212 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.101
+INFO:     127.0.0.1:48224 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48234 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.102, triggering background check
+INFO:     127.0.0.1:48244 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.102
+INFO:     127.0.0.1:48254 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48266 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.103, triggering background check
+INFO:     127.0.0.1:48268 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.103
+INFO:     127.0.0.1:48282 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48294 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.104, triggering background check
+INFO:     127.0.0.1:55968 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.104
+INFO:     127.0.0.1:55972 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55974 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.105, triggering background check
+INFO:     127.0.0.1:55980 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.105
+INFO:     127.0.0.1:55994 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56004 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.106, triggering background check
+INFO:     127.0.0.1:56016 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.106
+INFO:     127.0.0.1:56026 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56030 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:Device created: 192.168.1.107, triggering background check
+INFO:     127.0.0.1:56046 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.107
+INFO:     127.0.0.1:56048 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56060 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+INFO:__main__:Device created: 192.168.1.108, triggering background check
+INFO:     127.0.0.1:56070 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.108
+INFO:     127.0.0.1:56076 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56088 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+INFO:__main__:Device created: 192.168.1.109, triggering background check
+INFO:     127.0.0.1:56090 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.109
+INFO:     127.0.0.1:56104 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56120 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+INFO:__main__:Device created: 192.168.1.110, triggering background check
+INFO:     127.0.0.1:56124 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.110
+INFO:     127.0.0.1:56132 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56146 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+INFO:__main__:Device created: 192.168.1.111, triggering background check
+INFO:     127.0.0.1:56148 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.111
+INFO:     127.0.0.1:56152 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56162 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+INFO:__main__:Device created: 192.168.1.112, triggering background check
+INFO:     127.0.0.1:56176 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.112
+INFO:     127.0.0.1:56178 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56182 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+INFO:__main__:Device created: 192.168.1.113, triggering background check
+INFO:     127.0.0.1:56190 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.113
+INFO:     127.0.0.1:56200 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56206 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+INFO:__main__:Device created: 192.168.1.114, triggering background check
+INFO:     127.0.0.1:56216 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.114
+INFO:     127.0.0.1:56224 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56240 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.108: timed out
+WARNING:monitor_impl:Device 192.168.1.108 is offline
+INFO:__main__:Device created: 192.168.1.115, triggering background check
+INFO:     127.0.0.1:56250 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.115
+INFO:     127.0.0.1:56258 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56260 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.109: timed out
+WARNING:monitor_impl:Device 192.168.1.109 is offline
+INFO:__main__:Device created: 192.168.1.116, triggering background check
+INFO:     127.0.0.1:56264 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.116
+INFO:     127.0.0.1:56268 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56284 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.110: timed out
+WARNING:monitor_impl:Device 192.168.1.110 is offline
+INFO:__main__:Device created: 192.168.1.117, triggering background check
+INFO:     127.0.0.1:56300 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.117
+INFO:     127.0.0.1:56302 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56968 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.111: timed out
+WARNING:monitor_impl:Device 192.168.1.111 is offline
+INFO:__main__:Device created: 192.168.1.118, triggering background check
+INFO:     127.0.0.1:56980 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.118
+INFO:     127.0.0.1:56994 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.112: timed out
+WARNING:monitor_impl:Device 192.168.1.112 is offline
+INFO:     127.0.0.1:57008 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.119, triggering background check
+INFO:     127.0.0.1:57014 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.119
+INFO:     127.0.0.1:57026 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.113: timed out
+WARNING:monitor_impl:Device 192.168.1.113 is offline
+INFO:     127.0.0.1:57036 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.120, triggering background check
+INFO:     127.0.0.1:57050 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.120
+INFO:     127.0.0.1:57060 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.114: timed out
+WARNING:monitor_impl:Device 192.168.1.114 is offline
+INFO:     127.0.0.1:57072 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.121, triggering background check
+INFO:     127.0.0.1:57084 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.121
+INFO:     127.0.0.1:57100 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.115: timed out
+WARNING:monitor_impl:Device 192.168.1.115 is offline
+INFO:     127.0.0.1:57108 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.122, triggering background check
+INFO:     127.0.0.1:57116 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.122
+INFO:     127.0.0.1:57124 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.116: timed out
+WARNING:monitor_impl:Device 192.168.1.116 is offline
+INFO:     127.0.0.1:57130 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.123, triggering background check
+INFO:     127.0.0.1:57136 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.123
+INFO:     127.0.0.1:57146 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.117: timed out
+WARNING:monitor_impl:Device 192.168.1.117 is offline
+INFO:     127.0.0.1:57148 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.124, triggering background check
+INFO:     127.0.0.1:57160 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.124
+INFO:     127.0.0.1:57168 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57174 - "GET /api/devices?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:30:36 UTC)" (scheduled at 2026-02-06 04:28:36.076922+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.118: timed out
+WARNING:monitor_impl:Device 192.168.1.118 is offline
+INFO:     127.0.0.1:57186 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.119: timed out
+WARNING:monitor_impl:Device 192.168.1.119 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.120: timed out
+WARNING:monitor_impl:Device 192.168.1.120 is offline
+INFO:     127.0.0.1:57190 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57200 - "GET /api/devices?page=1&size=20&search=%27%3B+DROP+TABLE+devices%3B+-- HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.121: timed out
+WARNING:monitor_impl:Device 192.168.1.121 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.122: timed out
+WARNING:monitor_impl:Device 192.168.1.122 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.123: timed out
+WARNING:monitor_impl:Device 192.168.1.123 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.124: timed out
+WARNING:monitor_impl:Device 192.168.1.124 is offline
+Exception in thread Thread-51 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:45160 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:monitor_impl:Checking device: 192.168.1.101
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:45174 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:45178 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45182 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45192 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45204 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45214 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45216 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+INFO:monitor_impl:Checking device: 192.168.1.102
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+Exception in thread Thread-52 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:45228 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+INFO:monitor_impl:Checking device: 192.168.1.103
+INFO:     127.0.0.1:53326 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+INFO:monitor_impl:Checking device: 192.168.1.104
+INFO:     127.0.0.1:53338 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53348 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53348 - "GET /api/devices?page=1&size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53348 - "GET /api/devices?search=192.168 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53348 - "GET /api/devices?status=Online HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53348 - "GET /api/devices?acc_type=HasAcc HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.200, triggering background check
+INFO:     127.0.0.1:53348 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.200
+INFO:__main__:Device created: 192.168.1.201, triggering background check
+INFO:     127.0.0.1:53348 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.201
+INFO:     127.0.0.1:53348 - "GET /api/devices/2 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.202, triggering background check
+INFO:     127.0.0.1:53348 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.202
+INFO:     127.0.0.1:53348 - "PUT /api/devices/3 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.203, triggering background check
+INFO:     127.0.0.1:53348 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.203
+INFO:     127.0.0.1:53348 - "DELETE /api/devices/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53348 - "GET /api/devices/4 HTTP/1.1" 404 Not Found
+INFO:__main__:Device created: 192.168.1.204, triggering background check
+INFO:     127.0.0.1:53348 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.204
+INFO:__main__:Manually refreshing device: 192.168.1.204
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+INFO:monitor_impl:Checking device: 192.168.1.105
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.203: timed out
+WARNING:monitor_impl:Device 192.168.1.203 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:Device 192.168.1.204 refreshed successfully: Offline
+INFO:     127.0.0.1:53348 - "POST /api/devices/4/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53348 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:apscheduler.scheduler:Removed job device_monitor_job
+INFO:apscheduler.scheduler:Added job "设备状态监控" to job store "default"
+INFO:__main__:设备监控任务已更新，间隔: 120秒
+INFO:     127.0.0.1:53348 - "PUT /api/settings HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+INFO:monitor_impl:Checking device: 192.168.1.106
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+INFO:monitor_impl:Checking device: 192.168.1.107
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+INFO:monitor_impl:Checking device: 192.168.1.108
+ERROR:monitor_impl:Connection failed to 192.168.1.108: timed out
+WARNING:monitor_impl:Device 192.168.1.108 is offline
+INFO:monitor_impl:Checking device: 192.168.1.109
+ERROR:monitor_impl:Connection failed to 192.168.1.109: timed out
+WARNING:monitor_impl:Device 192.168.1.109 is offline
+INFO:monitor_impl:Checking device: 192.168.1.110
+ERROR:monitor_impl:Connection failed to 192.168.1.110: timed out
+WARNING:monitor_impl:Device 192.168.1.110 is offline
+INFO:monitor_impl:Checking device: 192.168.1.111
+ERROR:monitor_impl:Connection failed to 192.168.1.111: timed out
+WARNING:monitor_impl:Device 192.168.1.111 is offline
+INFO:monitor_impl:Checking device: 192.168.1.112
+ERROR:monitor_impl:Connection failed to 192.168.1.112: timed out
+WARNING:monitor_impl:Device 192.168.1.112 is offline
+INFO:monitor_impl:Checking device: 192.168.1.113
+ERROR:monitor_impl:Connection failed to 192.168.1.113: timed out
+WARNING:monitor_impl:Device 192.168.1.113 is offline
+INFO:monitor_impl:Checking device: 192.168.1.114
+ERROR:monitor_impl:Connection failed to 192.168.1.114: timed out
+WARNING:monitor_impl:Device 192.168.1.114 is offline
+INFO:monitor_impl:Checking device: 192.168.1.115
+ERROR:monitor_impl:Connection failed to 192.168.1.115: timed out
+WARNING:monitor_impl:Device 192.168.1.115 is offline
+INFO:monitor_impl:Checking device: 192.168.1.116
+ERROR:monitor_impl:Connection failed to 192.168.1.116: timed out
+WARNING:monitor_impl:Device 192.168.1.116 is offline
+INFO:monitor_impl:Checking device: 192.168.1.117
+ERROR:monitor_impl:Connection failed to 192.168.1.117: timed out
+WARNING:monitor_impl:Device 192.168.1.117 is offline
+INFO:monitor_impl:Checking device: 192.168.1.118
+ERROR:monitor_impl:Connection failed to 192.168.1.118: timed out
+WARNING:monitor_impl:Device 192.168.1.118 is offline
+INFO:monitor_impl:Checking device: 192.168.1.119
+ERROR:monitor_impl:Connection failed to 192.168.1.119: timed out
+WARNING:monitor_impl:Device 192.168.1.119 is offline
+INFO:monitor_impl:Checking device: 192.168.1.120
+ERROR:monitor_impl:Connection failed to 192.168.1.120: timed out
+WARNING:monitor_impl:Device 192.168.1.120 is offline
+INFO:monitor_impl:Checking device: 192.168.1.121
+ERROR:monitor_impl:Connection failed to 192.168.1.121: timed out
+WARNING:monitor_impl:Device 192.168.1.121 is offline
+INFO:monitor_impl:Checking device: 192.168.1.122
+INFO:     127.0.0.1:55442 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.122: timed out
+WARNING:monitor_impl:Device 192.168.1.122 is offline
+INFO:monitor_impl:Checking device: 192.168.1.123
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:37508 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:37524 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37534 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37538 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37550 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37566 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37576 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.199, triggering background check
+INFO:     127.0.0.1:37578 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.199
+INFO:     127.0.0.1:37594 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37604 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37618 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37630 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.123: timed out
+WARNING:monitor_impl:Device 192.168.1.123 is offline
+INFO:monitor_impl:Checking device: 192.168.1.124
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:37638 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37640 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37652 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37668 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.199: timed out
+WARNING:monitor_impl:Device 192.168.1.199 is offline
+Exception in thread Thread-59 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:48056 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.124: timed out
+WARNING:monitor_impl:Device 192.168.1.124 is offline
+ERROR:__main__:刷新设备状态失败: UPDATE statement on table 'device' expected to update 18 row(s); 1 were matched.
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:30:36 UTC)" executed successfully
+INFO:     127.0.0.1:48062 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48078 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48092 - "GET /api/devices?page=1&size=20&status=Offline HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48104 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48108 - "GET /api/devices?page=1&size=20&arch=x86_64 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48118 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48134 - "GET /api/devices?page=1&size=20&acc_type=HasAcc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48144 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48146 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48150 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48152 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48160 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48164 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48180 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48190 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53276 - "POST /api/devices HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:53284 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.101, triggering background check
+INFO:     127.0.0.1:53294 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.101
+INFO:     127.0.0.1:53302 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53314 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.102, triggering background check
+INFO:     127.0.0.1:53316 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.102
+INFO:     127.0.0.1:53318 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53324 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.103, triggering background check
+INFO:     127.0.0.1:53340 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.103
+INFO:     127.0.0.1:53352 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53360 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.104, triggering background check
+INFO:     127.0.0.1:53366 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.104
+INFO:     127.0.0.1:53374 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53382 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.105, triggering background check
+INFO:     127.0.0.1:53386 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.105
+INFO:     127.0.0.1:53400 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53406 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.106, triggering background check
+INFO:     127.0.0.1:53420 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.106
+INFO:     127.0.0.1:53434 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53440 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.107, triggering background check
+INFO:     127.0.0.1:53454 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.107
+INFO:     127.0.0.1:53468 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53472 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.108, triggering background check
+INFO:     127.0.0.1:53484 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.108
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+INFO:     127.0.0.1:53492 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53498 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.109, triggering background check
+INFO:     127.0.0.1:53508 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.109
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+INFO:     127.0.0.1:53520 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53522 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+INFO:__main__:Device created: 192.168.1.110, triggering background check
+INFO:     127.0.0.1:53524 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.110
+INFO:     127.0.0.1:53530 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53544 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+INFO:__main__:Device created: 192.168.1.111, triggering background check
+INFO:     127.0.0.1:53554 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.111
+INFO:     127.0.0.1:53558 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53574 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+INFO:__main__:Device created: 192.168.1.112, triggering background check
+INFO:     127.0.0.1:53580 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.112
+INFO:     127.0.0.1:53586 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53596 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+INFO:__main__:Device created: 192.168.1.113, triggering background check
+INFO:     127.0.0.1:53598 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.113
+INFO:     127.0.0.1:53614 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50008 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+INFO:__main__:Device created: 192.168.1.114, triggering background check
+INFO:     127.0.0.1:50016 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.114
+INFO:     127.0.0.1:50026 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50030 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.108: timed out
+WARNING:monitor_impl:Device 192.168.1.108 is offline
+INFO:__main__:Device created: 192.168.1.115, triggering background check
+INFO:     127.0.0.1:50044 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.115
+INFO:     127.0.0.1:50050 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50062 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.109: timed out
+WARNING:monitor_impl:Device 192.168.1.109 is offline
+INFO:__main__:Device created: 192.168.1.116, triggering background check
+INFO:     127.0.0.1:50070 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.116
+INFO:     127.0.0.1:50086 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.110: timed out
+WARNING:monitor_impl:Device 192.168.1.110 is offline
+INFO:     127.0.0.1:50096 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:33:02 UTC)" (scheduled at 2026-02-06 04:31:02.926113+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:__main__:Device created: 192.168.1.117, triggering background check
+INFO:     127.0.0.1:50106 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.117
+INFO:     127.0.0.1:50110 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.111: timed out
+WARNING:monitor_impl:Device 192.168.1.111 is offline
+INFO:     127.0.0.1:50124 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.118, triggering background check
+INFO:     127.0.0.1:50134 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.118
+INFO:     127.0.0.1:50142 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.112: timed out
+WARNING:monitor_impl:Device 192.168.1.112 is offline
+INFO:     127.0.0.1:50154 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.119, triggering background check
+INFO:     127.0.0.1:50164 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.119
+INFO:     127.0.0.1:50172 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.113: timed out
+WARNING:monitor_impl:Device 192.168.1.113 is offline
+INFO:     127.0.0.1:50188 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.120, triggering background check
+INFO:     127.0.0.1:50194 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.120
+INFO:     127.0.0.1:50206 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.114: timed out
+WARNING:monitor_impl:Device 192.168.1.114 is offline
+INFO:     127.0.0.1:50216 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.121, triggering background check
+INFO:     127.0.0.1:50232 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.121
+INFO:     127.0.0.1:50236 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.115: timed out
+WARNING:monitor_impl:Device 192.168.1.115 is offline
+INFO:     127.0.0.1:50242 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.122, triggering background check
+INFO:     127.0.0.1:50250 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.122
+INFO:     127.0.0.1:50260 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.116: timed out
+WARNING:monitor_impl:Device 192.168.1.116 is offline
+INFO:     127.0.0.1:50264 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.123, triggering background check
+INFO:     127.0.0.1:50270 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.123
+INFO:     127.0.0.1:50284 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:monitor_impl:Checking device: 192.168.1.101
+ERROR:monitor_impl:Connection failed to 192.168.1.117: timed out
+WARNING:monitor_impl:Device 192.168.1.117 is offline
+INFO:     127.0.0.1:50288 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.124, triggering background check
+INFO:     127.0.0.1:50294 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.124
+INFO:     127.0.0.1:50302 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50318 - "GET /api/devices?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.118: timed out
+WARNING:monitor_impl:Device 192.168.1.118 is offline
+INFO:     127.0.0.1:50320 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.119: timed out
+WARNING:monitor_impl:Device 192.168.1.119 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.120: timed out
+WARNING:monitor_impl:Device 192.168.1.120 is offline
+INFO:     127.0.0.1:50330 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56856 - "GET /api/devices?page=1&size=20&search=%27%3B+DROP+TABLE+devices%3B+-- HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.121: timed out
+WARNING:monitor_impl:Device 192.168.1.121 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.122: timed out
+WARNING:monitor_impl:Device 192.168.1.122 is offline
+INFO:     127.0.0.1:56866 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.123: timed out
+WARNING:monitor_impl:Device 192.168.1.123 is offline
+INFO:     127.0.0.1:56880 - "POST /api/devices HTTP/1.1" 400 Bad Request
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+INFO:monitor_impl:Checking device: 192.168.1.102
+ERROR:monitor_impl:Connection failed to 192.168.1.124: timed out
+WARNING:monitor_impl:Device 192.168.1.124 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+INFO:monitor_impl:Checking device: 192.168.1.103
+INFO:     127.0.0.1:56896 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39710 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39722 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39738 - "GET /api/devices HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+INFO:monitor_impl:Checking device: 192.168.1.104
+INFO:     127.0.0.1:39754 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39758 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39766 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39774 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+INFO:monitor_impl:Checking device: 192.168.1.105
+INFO:     127.0.0.1:50828 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+INFO:monitor_impl:Checking device: 192.168.1.106
+INFO:     127.0.0.1:50838 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50846 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50846 - "GET /api/devices?page=1&size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50846 - "GET /api/devices?search=192.168 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50846 - "GET /api/devices?status=Online HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50846 - "GET /api/devices?acc_type=HasAcc HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.200, triggering background check
+INFO:     127.0.0.1:50846 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.200
+INFO:__main__:Device created: 192.168.1.201, triggering background check
+INFO:     127.0.0.1:50846 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.201
+INFO:     127.0.0.1:50846 - "GET /api/devices/2 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.202, triggering background check
+INFO:     127.0.0.1:50846 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.202
+INFO:     127.0.0.1:50846 - "PUT /api/devices/3 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.203, triggering background check
+INFO:     127.0.0.1:50846 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.203
+INFO:     127.0.0.1:50846 - "DELETE /api/devices/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50846 - "GET /api/devices/4 HTTP/1.1" 404 Not Found
+INFO:__main__:Device created: 192.168.1.204, triggering background check
+INFO:     127.0.0.1:50846 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.204
+INFO:__main__:Manually refreshing device: 192.168.1.204
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+INFO:monitor_impl:Checking device: 192.168.1.107
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.203: timed out
+WARNING:monitor_impl:Device 192.168.1.203 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:Device 192.168.1.204 refreshed successfully: Offline
+INFO:     127.0.0.1:50846 - "POST /api/devices/4/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50846 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:apscheduler.scheduler:Removed job device_monitor_job
+INFO:apscheduler.scheduler:Added job "设备状态监控" to job store "default"
+INFO:__main__:设备监控任务已更新，间隔: 120秒
+INFO:     127.0.0.1:50846 - "PUT /api/settings HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+INFO:monitor_impl:Checking device: 192.168.1.108
+ERROR:monitor_impl:Connection failed to 192.168.1.108: timed out
+WARNING:monitor_impl:Device 192.168.1.108 is offline
+INFO:monitor_impl:Checking device: 192.168.1.109
+ERROR:monitor_impl:Connection failed to 192.168.1.109: timed out
+WARNING:monitor_impl:Device 192.168.1.109 is offline
+INFO:monitor_impl:Checking device: 192.168.1.110
+ERROR:monitor_impl:Connection failed to 192.168.1.110: timed out
+WARNING:monitor_impl:Device 192.168.1.110 is offline
+INFO:monitor_impl:Checking device: 192.168.1.111
+ERROR:monitor_impl:Connection failed to 192.168.1.111: timed out
+WARNING:monitor_impl:Device 192.168.1.111 is offline
+INFO:monitor_impl:Checking device: 192.168.1.112
+ERROR:monitor_impl:Connection failed to 192.168.1.112: timed out
+WARNING:monitor_impl:Device 192.168.1.112 is offline
+INFO:monitor_impl:Checking device: 192.168.1.113
+ERROR:monitor_impl:Connection failed to 192.168.1.113: timed out
+WARNING:monitor_impl:Device 192.168.1.113 is offline
+INFO:monitor_impl:Checking device: 192.168.1.114
+ERROR:monitor_impl:Connection failed to 192.168.1.114: timed out
+WARNING:monitor_impl:Device 192.168.1.114 is offline
+INFO:monitor_impl:Checking device: 192.168.1.115
+ERROR:monitor_impl:Connection failed to 192.168.1.115: timed out
+WARNING:monitor_impl:Device 192.168.1.115 is offline
+INFO:monitor_impl:Checking device: 192.168.1.116
+ERROR:monitor_impl:Connection failed to 192.168.1.116: timed out
+WARNING:monitor_impl:Device 192.168.1.116 is offline
+ERROR:__main__:刷新设备状态失败: UPDATE statement on table 'device' expected to update 11 row(s); 4 were matched.
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:33:02 UTC)" executed successfully
+INFO:     127.0.0.1:39872 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.100, triggering background check
+INFO:     127.0.0.1:39886 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:39896 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39900 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39912 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39916 - "PUT /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39926 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39932 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.199, triggering background check
+INFO:     127.0.0.1:44352 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.199
+INFO:     127.0.0.1:44356 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44358 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44374 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44384 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:     127.0.0.1:44400 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44404 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44410 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44418 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.199: timed out
+WARNING:monitor_impl:Device 192.168.1.199 is offline
+Exception in thread Thread-90 (<lambda>):
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 429, in <lambda>
+    threading.Thread(target=lambda: refresh_single_device(db_device.id)).start()
+  File "/home/models-test-system_v1.0/llm-test-platform/backend/main.py", line 85, in refresh_single_device
+    session.commit()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 948, in _emit_update_statements
+    raise orm_exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: UPDATE statement on table 'device' expected to update 1 row(s); 0 were matched.
+INFO:     127.0.0.1:44434 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44448 - "GET /api/devices?page=1&size=20&search=192.168.1.100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44450 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44460 - "GET /api/devices?page=1&size=20&status=Offline HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44476 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44488 - "GET /api/devices?page=1&size=20&arch=x86_64 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36036 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36052 - "GET /api/devices?page=1&size=20&acc_type=HasAcc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36056 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36066 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36080 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36094 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36104 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36106 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36122 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36128 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36144 - "POST /api/devices HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:36160 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.101, triggering background check
+INFO:     127.0.0.1:36172 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.101
+INFO:     127.0.0.1:36184 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36198 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.102, triggering background check
+INFO:     127.0.0.1:36212 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.102
+INFO:     127.0.0.1:36220 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36226 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.103, triggering background check
+INFO:     127.0.0.1:36240 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.103
+INFO:     127.0.0.1:36242 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36248 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.104, triggering background check
+INFO:     127.0.0.1:36254 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.104
+INFO:     127.0.0.1:36256 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36258 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.105, triggering background check
+INFO:     127.0.0.1:36268 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.105
+INFO:     127.0.0.1:36272 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37208 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.106, triggering background check
+INFO:     127.0.0.1:37216 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.106
+INFO:     127.0.0.1:37224 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37230 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.107, triggering background check
+INFO:     127.0.0.1:37232 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.107
+INFO:     127.0.0.1:37244 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+INFO:     127.0.0.1:37260 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.108, triggering background check
+INFO:     127.0.0.1:37270 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.108
+INFO:     127.0.0.1:37278 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+INFO:     127.0.0.1:37288 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.109, triggering background check
+INFO:     127.0.0.1:37300 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.109
+INFO:     127.0.0.1:37308 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+INFO:     127.0.0.1:37322 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.110, triggering background check
+INFO:     127.0.0.1:37328 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.110
+INFO:     127.0.0.1:37330 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+INFO:     127.0.0.1:37344 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.111, triggering background check
+INFO:     127.0.0.1:37354 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.111
+INFO:     127.0.0.1:37356 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+INFO:     127.0.0.1:37370 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.112, triggering background check
+INFO:     127.0.0.1:37382 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.112
+INFO:     127.0.0.1:37386 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+INFO:     127.0.0.1:37396 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.113, triggering background check
+INFO:     127.0.0.1:37402 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.113
+INFO:     127.0.0.1:37412 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+INFO:     127.0.0.1:37418 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.114, triggering background check
+INFO:     127.0.0.1:37432 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.114
+INFO:     127.0.0.1:37448 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.108: timed out
+WARNING:monitor_impl:Device 192.168.1.108 is offline
+INFO:     127.0.0.1:37456 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.115, triggering background check
+INFO:     127.0.0.1:37466 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.115
+INFO:     127.0.0.1:37476 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.109: timed out
+WARNING:monitor_impl:Device 192.168.1.109 is offline
+INFO:     127.0.0.1:37488 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.116, triggering background check
+INFO:     127.0.0.1:37500 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.116
+INFO:     127.0.0.1:37516 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.110: timed out
+WARNING:monitor_impl:Device 192.168.1.110 is offline
+INFO:     127.0.0.1:37532 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.117, triggering background check
+INFO:     127.0.0.1:37538 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.117
+INFO:     127.0.0.1:37542 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.111: timed out
+WARNING:monitor_impl:Device 192.168.1.111 is offline
+INFO:     127.0.0.1:37558 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.118, triggering background check
+INFO:     127.0.0.1:37566 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.118
+INFO:     127.0.0.1:37582 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.112: timed out
+WARNING:monitor_impl:Device 192.168.1.112 is offline
+INFO:     127.0.0.1:34226 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.119, triggering background check
+INFO:     127.0.0.1:34230 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.119
+INFO:     127.0.0.1:34234 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.113: timed out
+WARNING:monitor_impl:Device 192.168.1.113 is offline
+INFO:     127.0.0.1:34240 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.120, triggering background check
+INFO:     127.0.0.1:34242 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.120
+INFO:     127.0.0.1:34244 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.114: timed out
+WARNING:monitor_impl:Device 192.168.1.114 is offline
+INFO:     127.0.0.1:34252 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.121, triggering background check
+INFO:     127.0.0.1:34268 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.121
+INFO:     127.0.0.1:34282 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.115: timed out
+WARNING:monitor_impl:Device 192.168.1.115 is offline
+INFO:     127.0.0.1:34288 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.122, triggering background check
+INFO:     127.0.0.1:34292 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.122
+INFO:     127.0.0.1:34304 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.116: timed out
+WARNING:monitor_impl:Device 192.168.1.116 is offline
+INFO:     127.0.0.1:34314 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.123, triggering background check
+INFO:     127.0.0.1:34318 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.123
+INFO:     127.0.0.1:34332 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.117: timed out
+WARNING:monitor_impl:Device 192.168.1.117 is offline
+INFO:     127.0.0.1:34344 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.124, triggering background check
+INFO:     127.0.0.1:34350 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.124
+INFO:     127.0.0.1:34354 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34366 - "GET /api/devices?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.118: timed out
+WARNING:monitor_impl:Device 192.168.1.118 is offline
+INFO:     127.0.0.1:34382 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.119: timed out
+WARNING:monitor_impl:Device 192.168.1.119 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.120: timed out
+WARNING:monitor_impl:Device 192.168.1.120 is offline
+INFO:     127.0.0.1:34396 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34406 - "GET /api/devices?page=1&size=20&search=%27%3B+DROP+TABLE+devices%3B+-- HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.121: timed out
+WARNING:monitor_impl:Device 192.168.1.121 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.122: timed out
+WARNING:monitor_impl:Device 192.168.1.122 is offline
+INFO:     127.0.0.1:34414 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.123: timed out
+WARNING:monitor_impl:Device 192.168.1.123 is offline
+INFO:__main__:Device created: 192.168.1.166, triggering background check
+INFO:     127.0.0.1:34422 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.166
+INFO:     127.0.0.1:34426 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.124: timed out
+WARNING:monitor_impl:Device 192.168.1.124 is offline
+INFO:     127.0.0.1:34434 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44202 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44218 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44234 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44248 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44252 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44258 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:__main__:Manually refreshing device: 192.168.1.100
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.166: timed out
+WARNING:monitor_impl:Device 192.168.1.166 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:Device 192.168.1.100 refreshed successfully: Offline
+INFO:     127.0.0.1:44264 - "POST /api/devices/1/refresh HTTP/1.1" 200 OK
+INFO:__main__:Manually refreshing device: 192.168.1.100
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:Device 192.168.1.100 refreshed successfully: Offline
+INFO:     127.0.0.1:44272 - "POST /api/devices/1/refresh HTTP/1.1" 200 OK
+INFO:__main__:Manually refreshing device: 192.168.1.100
+INFO:monitor_impl:Checking device: 192.168.1.100
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:__main__:Device 192.168.1.100 refreshed successfully: Offline
+INFO:     127.0.0.1:44274 - "POST /api/devices/1/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44286 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44296 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:35:39 UTC)" (scheduled at 2026-02-06 04:33:39.226079+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.100
+INFO:     127.0.0.1:38246 - "DELETE /api/devices/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38254 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38264 - "DELETE /api/devices/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38276 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38284 - "DELETE /api/devices/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38300 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45928 - "DELETE /api/devices/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45938 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45946 - "DELETE /api/devices/5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45962 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45972 - "DELETE /api/devices/6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45974 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45978 - "DELETE /api/devices/7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45980 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45988 - "DELETE /api/devices/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45996 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46010 - "DELETE /api/devices/9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46012 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46014 - "DELETE /api/devices/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46028 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46040 - "DELETE /api/devices/11 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46044 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46052 - "DELETE /api/devices/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46056 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.100: timed out
+WARNING:monitor_impl:Device 192.168.1.100 is offline
+INFO:monitor_impl:Checking device: 192.168.1.101
+INFO:     127.0.0.1:46064 - "DELETE /api/devices/13 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46078 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46086 - "DELETE /api/devices/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46098 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46104 - "DELETE /api/devices/15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46120 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46126 - "DELETE /api/devices/16 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46142 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46156 - "DELETE /api/devices/17 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46158 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46166 - "DELETE /api/devices/18 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46182 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46186 - "DELETE /api/devices/19 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46198 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46212 - "DELETE /api/devices/20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46228 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46238 - "DELETE /api/devices/21 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46240 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46242 - "DELETE /api/devices/22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46256 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46270 - "DELETE /api/devices/23 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46286 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46302 - "DELETE /api/devices/24 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46308 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46314 - "DELETE /api/devices/25 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46318 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.101: timed out
+WARNING:monitor_impl:Device 192.168.1.101 is offline
+INFO:monitor_impl:Checking device: 192.168.1.102
+INFO:     127.0.0.1:46328 - "DELETE /api/devices/26 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46344 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46356 - "GET /api/devices?page=1&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56442 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56442 - "GET /api/devices?page=1&size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56442 - "GET /api/devices?search=192.168 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56442 - "GET /api/devices?status=Online HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56442 - "GET /api/devices?acc_type=HasAcc HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.200, triggering background check
+INFO:     127.0.0.1:56442 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.200
+INFO:__main__:Device created: 192.168.1.201, triggering background check
+INFO:     127.0.0.1:56442 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.201
+INFO:     127.0.0.1:56442 - "GET /api/devices/2 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.202, triggering background check
+INFO:     127.0.0.1:56442 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.202
+INFO:     127.0.0.1:56442 - "PUT /api/devices/3 HTTP/1.1" 200 OK
+INFO:__main__:Device created: 192.168.1.203, triggering background check
+INFO:     127.0.0.1:56442 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.203
+INFO:     127.0.0.1:56442 - "DELETE /api/devices/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56442 - "GET /api/devices/4 HTTP/1.1" 404 Not Found
+INFO:__main__:Device created: 192.168.1.204, triggering background check
+INFO:     127.0.0.1:56442 - "POST /api/devices HTTP/1.1" 200 OK
+INFO:monitor_impl:Checking device: 192.168.1.204
+INFO:__main__:Manually refreshing device: 192.168.1.204
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.102: timed out
+WARNING:monitor_impl:Device 192.168.1.102 is offline
+INFO:monitor_impl:Checking device: 192.168.1.103
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.203: timed out
+WARNING:monitor_impl:Device 192.168.1.203 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:Device 192.168.1.204 refreshed successfully: Offline
+INFO:     127.0.0.1:56442 - "POST /api/devices/4/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56442 - "GET /api/settings HTTP/1.1" 200 OK
+INFO:apscheduler.scheduler:Removed job device_monitor_job
+INFO:apscheduler.scheduler:Added job "设备状态监控" to job store "default"
+INFO:__main__:设备监控任务已更新，间隔: 120秒
+INFO:     127.0.0.1:56442 - "PUT /api/settings HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 192.168.1.103: timed out
+WARNING:monitor_impl:Device 192.168.1.103 is offline
+INFO:monitor_impl:Checking device: 192.168.1.104
+ERROR:monitor_impl:Connection failed to 192.168.1.104: timed out
+WARNING:monitor_impl:Device 192.168.1.104 is offline
+INFO:monitor_impl:Checking device: 192.168.1.105
+ERROR:monitor_impl:Connection failed to 192.168.1.105: timed out
+WARNING:monitor_impl:Device 192.168.1.105 is offline
+INFO:monitor_impl:Checking device: 192.168.1.106
+ERROR:monitor_impl:Connection failed to 192.168.1.106: timed out
+WARNING:monitor_impl:Device 192.168.1.106 is offline
+INFO:monitor_impl:Checking device: 192.168.1.107
+ERROR:monitor_impl:Connection failed to 192.168.1.107: timed out
+WARNING:monitor_impl:Device 192.168.1.107 is offline
+INFO:monitor_impl:Checking device: 192.168.1.108
+ERROR:monitor_impl:Connection failed to 192.168.1.108: timed out
+WARNING:monitor_impl:Device 192.168.1.108 is offline
+INFO:monitor_impl:Checking device: 192.168.1.109
+ERROR:monitor_impl:Connection failed to 192.168.1.109: timed out
+WARNING:monitor_impl:Device 192.168.1.109 is offline
+INFO:monitor_impl:Checking device: 192.168.1.110
+ERROR:monitor_impl:Connection failed to 192.168.1.110: timed out
+WARNING:monitor_impl:Device 192.168.1.110 is offline
+INFO:monitor_impl:Checking device: 192.168.1.111
+ERROR:monitor_impl:Connection failed to 192.168.1.111: timed out
+WARNING:monitor_impl:Device 192.168.1.111 is offline
+INFO:monitor_impl:Checking device: 192.168.1.112
+ERROR:monitor_impl:Connection failed to 192.168.1.112: timed out
+WARNING:monitor_impl:Device 192.168.1.112 is offline
+INFO:monitor_impl:Checking device: 192.168.1.113
+ERROR:monitor_impl:Connection failed to 192.168.1.113: timed out
+WARNING:monitor_impl:Device 192.168.1.113 is offline
+INFO:monitor_impl:Checking device: 192.168.1.114
+ERROR:monitor_impl:Connection failed to 192.168.1.114: timed out
+WARNING:monitor_impl:Device 192.168.1.114 is offline
+INFO:monitor_impl:Checking device: 192.168.1.115
+ERROR:monitor_impl:Connection failed to 192.168.1.115: timed out
+WARNING:monitor_impl:Device 192.168.1.115 is offline
+INFO:monitor_impl:Checking device: 192.168.1.116
+ERROR:monitor_impl:Connection failed to 192.168.1.116: timed out
+WARNING:monitor_impl:Device 192.168.1.116 is offline
+INFO:monitor_impl:Checking device: 192.168.1.117
+ERROR:monitor_impl:Connection failed to 192.168.1.117: timed out
+WARNING:monitor_impl:Device 192.168.1.117 is offline
+INFO:monitor_impl:Checking device: 192.168.1.118
+ERROR:monitor_impl:Connection failed to 192.168.1.118: timed out
+WARNING:monitor_impl:Device 192.168.1.118 is offline
+INFO:monitor_impl:Checking device: 192.168.1.119
+ERROR:monitor_impl:Connection failed to 192.168.1.119: timed out
+WARNING:monitor_impl:Device 192.168.1.119 is offline
+INFO:monitor_impl:Checking device: 192.168.1.120
+ERROR:monitor_impl:Connection failed to 192.168.1.120: timed out
+WARNING:monitor_impl:Device 192.168.1.120 is offline
+INFO:monitor_impl:Checking device: 192.168.1.121
+ERROR:monitor_impl:Connection failed to 192.168.1.121: timed out
+WARNING:monitor_impl:Device 192.168.1.121 is offline
+INFO:monitor_impl:Checking device: 192.168.1.122
+ERROR:monitor_impl:Connection failed to 192.168.1.122: timed out
+WARNING:monitor_impl:Device 192.168.1.122 is offline
+INFO:monitor_impl:Checking device: 192.168.1.123
+ERROR:monitor_impl:Connection failed to 192.168.1.123: timed out
+WARNING:monitor_impl:Device 192.168.1.123 is offline
+INFO:monitor_impl:Checking device: 192.168.1.124
+ERROR:monitor_impl:Connection failed to 192.168.1.124: timed out
+WARNING:monitor_impl:Device 192.168.1.124 is offline
+INFO:monitor_impl:Checking device: 192.168.1.166
+ERROR:monitor_impl:Connection failed to 192.168.1.166: timed out
+WARNING:monitor_impl:Device 192.168.1.166 is offline
+ERROR:__main__:刷新设备状态失败: UPDATE statement on table 'device' expected to update 26 row(s); 4 were matched.
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:35:39 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:37:56 UTC)" (scheduled at 2026-02-06 04:35:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:37:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:39:56 UTC)" (scheduled at 2026-02-06 04:37:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:39:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:41:56 UTC)" (scheduled at 2026-02-06 04:39:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:41:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:43:56 UTC)" (scheduled at 2026-02-06 04:41:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:43:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:45:56 UTC)" (scheduled at 2026-02-06 04:43:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:45:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:47:56 UTC)" (scheduled at 2026-02-06 04:45:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:47:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:49:56 UTC)" (scheduled at 2026-02-06 04:47:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:49:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:51:56 UTC)" (scheduled at 2026-02-06 04:49:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:51:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:53:56 UTC)" (scheduled at 2026-02-06 04:51:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:53:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:55:56 UTC)" (scheduled at 2026-02-06 04:53:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:55:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:57:56 UTC)" (scheduled at 2026-02-06 04:55:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:57:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:59:56 UTC)" (scheduled at 2026-02-06 04:57:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 04:59:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:01:56 UTC)" (scheduled at 2026-02-06 04:59:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:01:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:03:56 UTC)" (scheduled at 2026-02-06 05:01:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:03:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:05:56 UTC)" (scheduled at 2026-02-06 05:03:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:05:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:07:56 UTC)" (scheduled at 2026-02-06 05:05:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:07:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:09:56 UTC)" (scheduled at 2026-02-06 05:07:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:09:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:11:56 UTC)" (scheduled at 2026-02-06 05:09:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:11:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:13:56 UTC)" (scheduled at 2026-02-06 05:11:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:13:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:15:56 UTC)" (scheduled at 2026-02-06 05:13:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:15:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:17:56 UTC)" (scheduled at 2026-02-06 05:15:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:17:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:19:56 UTC)" (scheduled at 2026-02-06 05:17:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:19:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:21:56 UTC)" (scheduled at 2026-02-06 05:19:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:21:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:23:56 UTC)" (scheduled at 2026-02-06 05:21:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:23:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:25:56 UTC)" (scheduled at 2026-02-06 05:23:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:25:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:27:56 UTC)" (scheduled at 2026-02-06 05:25:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:27:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:29:56 UTC)" (scheduled at 2026-02-06 05:27:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:29:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:31:56 UTC)" (scheduled at 2026-02-06 05:29:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:31:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:33:56 UTC)" (scheduled at 2026-02-06 05:31:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:33:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:35:56 UTC)" (scheduled at 2026-02-06 05:33:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:35:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:37:56 UTC)" (scheduled at 2026-02-06 05:35:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:37:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:39:56 UTC)" (scheduled at 2026-02-06 05:37:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:39:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:41:56 UTC)" (scheduled at 2026-02-06 05:39:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:41:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:43:56 UTC)" (scheduled at 2026-02-06 05:41:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:43:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:45:56 UTC)" (scheduled at 2026-02-06 05:43:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:45:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:47:56 UTC)" (scheduled at 2026-02-06 05:45:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:47:56 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:49:56 UTC)" (scheduled at 2026-02-06 05:47:56.299626+00:00)
+INFO:__main__:开始刷新所有设备状态...
+INFO:monitor_impl:Checking device: 192.168.1.200
+ERROR:monitor_impl:Connection failed to 192.168.1.200: timed out
+WARNING:monitor_impl:Device 192.168.1.200 is offline
+INFO:monitor_impl:Checking device: 192.168.1.201
+ERROR:monitor_impl:Connection failed to 192.168.1.201: timed out
+WARNING:monitor_impl:Device 192.168.1.201 is offline
+INFO:monitor_impl:Checking device: 192.168.1.202
+ERROR:monitor_impl:Connection failed to 192.168.1.202: timed out
+WARNING:monitor_impl:Device 192.168.1.202 is offline
+INFO:monitor_impl:Checking device: 192.168.1.204
+ERROR:monitor_impl:Connection failed to 192.168.1.204: timed out
+WARNING:monitor_impl:Device 192.168.1.204 is offline
+INFO:__main__:设备状态刷新完成
+INFO:apscheduler.executors.default:Job "设备状态监控 (trigger: interval[0:02:00], next run at: 2026-02-06 05:49:56 UTC)" executed successfully

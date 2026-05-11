@@ -1,0 +1,85 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e6]
+        - generic [ref=e9]: 大模型测试平台
+      - navigation [ref=e13]:
+        - link "仪表板" [ref=e14] [cursor=pointer]:
+          - /url: /
+          - button "仪表板" [ref=e15]:
+            - img [ref=e16]
+            - text: 仪表板
+        - link "设备管理" [ref=e19] [cursor=pointer]:
+          - /url: /devices
+          - button "设备管理" [ref=e20]:
+            - img [ref=e21]
+            - text: 设备管理
+        - link "测试管理" [ref=e24] [cursor=pointer]:
+          - /url: /tests
+          - button "测试管理" [ref=e25]:
+            - img [ref=e26]
+            - text: 测试管理
+        - link "结果呈现" [ref=e28] [cursor=pointer]:
+          - /url: /results
+          - button "结果呈现" [ref=e29]:
+            - img [ref=e30]
+            - text: 结果呈现
+        - link "系统设置" [ref=e32] [cursor=pointer]:
+          - /url: /settings
+          - button "系统设置" [ref=e33]:
+            - img [ref=e34]
+            - text: 系统设置
+    - generic [ref=e37]:
+      - banner [ref=e38]:
+        - generic [ref=e39]:
+          - img [ref=e40]
+          - generic [ref=e42]: "设备状态:"
+          - generic [ref=e43]: 6 在线 / 6 总数
+        - generic [ref=e45]: "测试任务: 0 执行中"
+      - main [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - heading "结果呈现" [level=1] [ref=e50]
+              - paragraph [ref=e51]: 查看和分析测试结果，对比性能数据
+            - generic [ref=e52]:
+              - button "手动添加" [ref=e53] [cursor=pointer]:
+                - img [ref=e54]
+                - text: 手动添加
+              - button "导入CSV" [ref=e57] [cursor=pointer]:
+                - img [ref=e58]
+                - text: 导入CSV
+          - generic [ref=e62]:
+            - tablist [ref=e63]:
+              - tab "基准测试" [ref=e64] [cursor=pointer]
+              - tab "性能对比" [ref=e65] [cursor=pointer]:
+                - img [ref=e66]
+                - text: 性能对比
+              - tab "性能趋势图" [selected] [ref=e71] [cursor=pointer]:
+                - img [ref=e72]
+                - text: 性能趋势图
+              - tab "对比报告" [ref=e75] [cursor=pointer]
+            - tabpanel "性能趋势图" [ref=e76]:
+              - generic [ref=e78]:
+                - heading "选择性能版本进行对比 (2-10个)" [level=3] [ref=e79]
+                - generic [ref=e81]:
+                  - img [ref=e82]
+                  - textbox "搜索：编号、模型、服务器、芯片、框架、版本号..." [active] [ref=e85]: Model-15
+                - generic [ref=e86]:
+                  - generic [ref=e87]:
+                    - generic [ref=e88]: 上下文长度 (I/O)
+                    - combobox "上下文长度 (I/O)" [ref=e89] [cursor=pointer]:
+                      - generic: 2048 / 2048
+                      - img [ref=e90]
+                  - generic [ref=e92]:
+                    - generic [ref=e93]: 已选择 0 个版本
+                    - button "性能对比图" [disabled]:
+                      - img
+                      - text: 性能对比图
+                - paragraph [ref=e94]: 请至少选择 2 个性能版本进行对比
+  - region "Notifications alt+T"
+```

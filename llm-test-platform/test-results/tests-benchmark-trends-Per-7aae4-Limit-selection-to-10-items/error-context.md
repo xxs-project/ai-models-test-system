@@ -1,0 +1,182 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e6]
+        - generic [ref=e9]: 大模型测试平台
+      - navigation [ref=e13]:
+        - link "仪表板" [ref=e14] [cursor=pointer]:
+          - /url: /
+          - button "仪表板" [ref=e15]:
+            - img [ref=e16]
+            - text: 仪表板
+        - link "设备管理" [ref=e19] [cursor=pointer]:
+          - /url: /devices
+          - button "设备管理" [ref=e20]:
+            - img [ref=e21]
+            - text: 设备管理
+        - link "测试管理" [ref=e24] [cursor=pointer]:
+          - /url: /tests
+          - button "测试管理" [ref=e25]:
+            - img [ref=e26]
+            - text: 测试管理
+        - link "结果呈现" [ref=e28] [cursor=pointer]:
+          - /url: /results
+          - button "结果呈现" [ref=e29]:
+            - img [ref=e30]
+            - text: 结果呈现
+        - link "系统设置" [ref=e32] [cursor=pointer]:
+          - /url: /settings
+          - button "系统设置" [ref=e33]:
+            - img [ref=e34]
+            - text: 系统设置
+    - generic [ref=e37]:
+      - banner [ref=e38]:
+        - generic [ref=e39]:
+          - img [ref=e40]
+          - generic [ref=e42]: "设备状态:"
+          - generic [ref=e43]: 6 在线 / 6 总数
+        - generic [ref=e45]: "测试任务: 0 执行中"
+      - main [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - heading "结果呈现" [level=1] [ref=e50]
+              - paragraph [ref=e51]: 查看和分析测试结果，对比性能数据
+            - generic [ref=e52]:
+              - button "手动添加" [ref=e53] [cursor=pointer]:
+                - img [ref=e54]
+                - text: 手动添加
+              - button "导入CSV" [ref=e57] [cursor=pointer]:
+                - img [ref=e58]
+                - text: 导入CSV
+          - generic [ref=e62]:
+            - tablist [ref=e63]:
+              - tab "基准测试" [ref=e64] [cursor=pointer]
+              - tab "性能对比" [ref=e65] [cursor=pointer]:
+                - img [ref=e66]
+                - text: 性能对比
+              - tab "性能趋势图" [active] [selected] [ref=e71] [cursor=pointer]:
+                - img [ref=e72]
+                - text: 性能趋势图
+              - tab "对比报告" [ref=e75] [cursor=pointer]
+            - tabpanel "性能趋势图" [ref=e76]:
+              - generic [ref=e78]:
+                - heading "选择性能版本进行对比 (2-10个)" [level=3] [ref=e79]
+                - generic [ref=e81]:
+                  - img [ref=e82]
+                  - textbox "搜索：编号、模型、服务器、芯片、框架、版本号..." [ref=e85]
+                - generic [ref=e86]:
+                  - generic [ref=e87]:
+                    - checkbox "Qwen3-0.6B" [ref=e88] [cursor=pointer]
+                    - generic [ref=e89]:
+                      - generic [ref=e90] [cursor=pointer]: Qwen3-0.6B
+                      - paragraph [ref=e91]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e92]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e93]: "备注: 自动导入，任务ID: 4"
+                      - code [ref=e94]: BM-20260225021903-08EA
+                  - generic [ref=e95]:
+                    - checkbox "Qwen3-1.7B" [ref=e96] [cursor=pointer]
+                    - generic [ref=e97]:
+                      - generic [ref=e98] [cursor=pointer]: Qwen3-1.7B
+                      - paragraph [ref=e99]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e100]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e101]: "备注: 自动导入，任务ID: 6"
+                      - code [ref=e102]: BM-20260225034543-F70C
+                  - generic [ref=e103]:
+                    - checkbox "Qwen3-1.7B-FP8" [ref=e104] [cursor=pointer]
+                    - generic [ref=e105]:
+                      - generic [ref=e106] [cursor=pointer]: Qwen3-1.7B-FP8
+                      - paragraph [ref=e107]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e108]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e109]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e110]: BM-20260225231635-211D
+                  - generic [ref=e111]:
+                    - checkbox "Qwen2.5-7B" [ref=e112] [cursor=pointer]
+                    - generic [ref=e113]:
+                      - generic [ref=e114] [cursor=pointer]: Qwen2.5-7B
+                      - paragraph [ref=e115]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e116]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e117]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e118]: BM-20260225231635-EFE9
+                  - generic [ref=e119]:
+                    - checkbox "Qwen3-4B" [ref=e120] [cursor=pointer]
+                    - generic [ref=e121]:
+                      - generic [ref=e122] [cursor=pointer]: Qwen3-4B
+                      - paragraph [ref=e123]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e124]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e125]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e126]: BM-20260225231635-5776
+                  - generic [ref=e127]:
+                    - checkbox "Qwen3-14B" [ref=e128] [cursor=pointer]
+                    - generic [ref=e129]:
+                      - generic [ref=e130] [cursor=pointer]: Qwen3-14B
+                      - paragraph [ref=e131]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e132]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e133]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e134]: BM-20260225231635-CEC5
+                  - generic [ref=e135]:
+                    - checkbox "Qwen3-32B-NVFP4" [ref=e136] [cursor=pointer]
+                    - generic [ref=e137]:
+                      - generic [ref=e138] [cursor=pointer]: Qwen3-32B-NVFP4
+                      - paragraph [ref=e139]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e140]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e141]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e142]: BM-20260225231635-3021
+                  - generic [ref=e143]:
+                    - checkbox "Qwen2.5-0.5B" [ref=e144] [cursor=pointer]
+                    - generic [ref=e145]:
+                      - generic [ref=e146] [cursor=pointer]: Qwen2.5-0.5B
+                      - paragraph [ref=e147]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e148]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e149]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e150]: BM-20260225231635-CF52
+                  - generic [ref=e151]:
+                    - checkbox "Qwen3-14B-FP8" [ref=e152] [cursor=pointer]
+                    - generic [ref=e153]:
+                      - generic [ref=e154] [cursor=pointer]: Qwen3-14B-FP8
+                      - paragraph [ref=e155]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e156]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e157]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e158]: BM-20260225231635-AB68
+                  - generic [ref=e159]:
+                    - checkbox "DeepSeek-R1-Distill-Qwen-32B" [ref=e160] [cursor=pointer]
+                    - generic [ref=e161]:
+                      - generic [ref=e162] [cursor=pointer]: DeepSeek-R1-Distill-Qwen-32B
+                      - paragraph [ref=e163]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e164]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e165]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e166]: BM-20260225231635-C5DD
+                  - generic [ref=e167]:
+                    - checkbox "Qwen2.5-32B" [ref=e168] [cursor=pointer]
+                    - generic [ref=e169]:
+                      - generic [ref=e170] [cursor=pointer]: Qwen2.5-32B
+                      - paragraph [ref=e171]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e172]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e173]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e174]: BM-20260225231635-4996
+                  - generic [ref=e175]:
+                    - checkbox "Qwen2.5-0.5B" [ref=e176] [cursor=pointer]
+                    - generic [ref=e177]:
+                      - generic [ref=e178] [cursor=pointer]: Qwen2.5-0.5B
+                      - paragraph [ref=e179]: G8600 · Ascend 910B2C
+                      - paragraph [ref=e180]: vLLM · v0.12.0rc1
+                      - paragraph [ref=e181]: "备注: 自动导入（全套模型测试），任务ID: 8"
+                      - code [ref=e182]: BM-20260225231635-4F01
+                - generic [ref=e183]:
+                  - generic [ref=e184]:
+                    - generic [ref=e185]: 上下文长度 (I/O)
+                    - combobox "上下文长度 (I/O)" [ref=e186] [cursor=pointer]:
+                      - generic: 2048 / 2048
+                      - img [ref=e187]
+                  - generic [ref=e189]:
+                    - generic [ref=e190]: 已选择 0 个版本
+                    - button "性能对比图" [disabled]:
+                      - img
+                      - text: 性能对比图
+                - paragraph [ref=e191]: 请至少选择 2 个性能版本进行对比
+  - region "Notifications alt+T"
+```

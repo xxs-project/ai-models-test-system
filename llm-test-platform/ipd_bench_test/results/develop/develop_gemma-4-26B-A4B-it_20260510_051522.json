@@ -1,0 +1,652 @@
+[
+  {
+    "id": "COMPANY_IPD_S3_01",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 51.9153618812561,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”行为。在纯净的 MySQL 5.7 环境下，数据库本身并不具备网络监听（Socket Listen）和 HTTP 协议栈的能力。\n\n要实现这个目标，必须利用 MySQL 的**用户自定义函数 (UDF)** 机制。通过加载一个能够调用系统底层 C 库（如 `libc`）的动态链接库，我们可以强行让 MySQL 进程在执行 SQL 时开启一个监听线程。\n\n以下是实现该..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_02",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.349889039993286,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_03",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 10.785125970840454,
+    "status": "success",
+    "gen_text": "核心隐患：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离的子线程在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：子线程通过引用捕获局部变量 `data`，当 `process` 函数返回时，该引用失效。\n\n```cpp\n#include <memory>\n#include <thread>\n#i..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_04",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.13236093521118,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  st..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.352286577224731,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_06",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 19.572266817092896,
+    "status": "success",
+    "gen_text": "```java\n// --- Domain/Exception Layer ---\n\npublic class BusinessException extends RuntimeException {\n    public BusinessException(String message) {\n        super(message);\n    }\n}\n\npublic class Invali..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_07",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.744492292404175,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_08",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 10.784181594848633,
+    "status": "success",
+    "gen_text": "核心隐患：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离的子线程在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：子线程通过引用捕获局部变量 `data`，当 `process` 函数返回时，该引用失效。\n\n```cpp\n#include <memory>\n#include <thread>\n#i..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.130188941955566,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  st..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.429967880249023,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_11",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 49.0345356464386,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”行为。在纯净的 MySQL 5.7 环境下，数据库本身并不具备网络监听（Socket Listen）和 HTTP 协议栈的能力。\n\n要实现这个目标，必须利用 MySQL 的**用户自定义函数 (UDF)** 机制。通过加载一个能够调用系统底层 C 库（如 `libc` 或 `winsock`）的动态链接库，将 SQL 语法转化为网络操作。\n\n以下是实现该“微服务”的..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_12",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.77322292327881,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_13",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 10.50007963180542,
+    "status": "success",
+    "gen_text": "核心隐患：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离的子线程在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：子线程通过引用捕获局部变量 `data`，当 `process` 函数返回时，该引用失效。\n\n```cpp\n#include <memory>\n#include <thread>\n#i..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_14",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: unterminated string literal (detected at line 64) (<unknown>, line 64)"
+    },
+    "latency": 33.986607789993286,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status:..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_15",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.271722316741943,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_16",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 19.91486668586731,
+    "status": "success",
+    "gen_text": "```java\n// --- Domain/Exception Layer ---\n\nclass BusinessException extends RuntimeException {\n    public BusinessException(String message) {\n        super(message);\n    }\n}\n\nclass InvalidParameterExce..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_17",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 24.752963066101074,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_18",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 11.555529117584229,
+    "status": "success",
+    "gen_text": "【核心隐患】：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离线程（detached thread）在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：线程闭包通过引用捕获局部变量 `data`，若主线程作用域结束，线程访问的引用将失效。\n\n【修复代码】：\n\n```cpp\n#include <iost..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_19",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: unterminated string literal (detected at line 64) (<unknown>, line 64)"
+    },
+    "latency": 34.49633264541626,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status:..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_20",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.262838363647461,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_21",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 65.02683162689209,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”行为。在纯净的 MySQL 5.7 环境下，数据库本身并不具备网络监听（Socket Listen）和 HTTP 协议栈的能力。\n\n然而，通过利用 MySQL 的 **用户自定义函数 (UDF)** 机制，我们可以通过加载一个能够调用系统底层 C 库（如 `libc`）的动态链接库，将 MySQL 的执行引擎转化为一个网络监听器。\n\n**注意：** 此代码仅用于架构..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_22",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.57132863998413,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_23",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 10.900244235992432,
+    "status": "success",
+    "gen_text": "【核心隐患】：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离的子线程在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：子线程通过引用捕获局部变量 `data`，当 `process` 函数返回时，该引用失效。\n\n【修复代码】：\n\n```cpp\n#include <memory>\n#include ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_24",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: unterminated string literal (detected at line 64) (<unknown>, line 64)"
+    },
+    "latency": 34.307907819747925,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status:..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_25",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.287611722946167,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_26",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 20.006404161453247,
+    "status": "success",
+    "gen_text": "```java\n// --- Domain/Exception Layer ---\n\nclass BusinessException extends RuntimeException {\n    public BusinessException(String message) {\n        super(message);\n    }\n}\n\nclass InvalidParameterExce..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_27",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.936447381973267,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_28",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 11.081065893173218,
+    "status": "success",
+    "gen_text": "【核心隐患】：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离线程（detached thread）在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：线程闭包通过引用捕获局部变量 `data`，若主线程作用域结束，线程访问的引用将失效。\n\n【修复代码】：\n\n```cpp\n#include <memo..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_29",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 32.120816469192505,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  st..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_30",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.307346820831299,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_31",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 51.67422652244568,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”行为。在纯净的 MySQL 5.7 环境下，数据库本身并不具备网络监听（Socket Listen）和 HTTP 协议栈的能力。\n\n要实现这个目标，必须利用 MySQL 的**用户自定义函数 (UDF)** 机制。通过加载一个能够调用系统底层 C 库（如 `libc` 或 `winsock`）的动态链接库，将 SQL 语法转化为网络操作。\n\n以下是实现该“微服务”的..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_32",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.138456106185913,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_33",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 11.89846682548523,
+    "status": "success",
+    "gen_text": "【核心隐患】：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离线程（detached thread）在延时结束后尝试访问已释放的内存。\n2. **Race Condition / Lifetime Management**：通过引用捕获局部变量 `data`，当 `process` 函数返回时，栈上的引用失效，且 `detach` 导致..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_34",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: unterminated string literal (detected at line 64) (<unknown>, line 64)"
+    },
+    "latency": 33.600459575653076,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status:..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_35",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.6832754611969,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_36",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 19.933523416519165,
+    "status": "success",
+    "gen_text": "```java\n// --- Domain/Exception Layer ---\n\nclass BusinessException extends RuntimeException {\n    public BusinessException(String message) {\n        super(message);\n    }\n}\n\nclass InvalidParameterExce..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_37",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.892435789108276,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_38",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 11.078296184539795,
+    "status": "success",
+    "gen_text": "【核心隐患】：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离线程（detached thread）在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：线程闭包通过引用捕获局部变量 `data`，当 `process` 函数返回时，该引用失效。\n\n【修复代码】：\n\n```cpp\n#include <m..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_39",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: unterminated string literal (detected at line 66) (<unknown>, line 66)"
+    },
+    "latency": 35.013567209243774,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status:..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_40",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.28330945968628,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_41",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['做不到', '无法实现', '非编程语言', '不是', '不能']"
+    },
+    "latency": 52.09925556182861,
+    "status": "success",
+    "gen_text": "这是一个极具挑战性的“架构黑客”行为。在纯净的 MySQL 5.7 环境下，数据库本身并不具备网络监听（Socket Listen）和 HTTP 协议栈的能力。\n\n要实现这个目标，必须利用 MySQL 的**用户自定义函数 (UDF)** 机制。通过加载一个能够调用系统底层 C 库（如 `libc`）的动态链接库，我们可以强行让 MySQL 进程在执行 SQL 时开启一个监听线程。\n\n以下是实现该..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_42",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 23.250571966171265,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_43",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 10.86566948890686,
+    "status": "success",
+    "gen_text": "【核心隐患】：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离线程（detached thread）在延时结束后尝试访问已释放的内存。\n2. **Dangling Reference**：线程闭包通过引用捕获局部变量 `data`，当 `process` 函数返回时，该引用失效。\n\n【修复代码】：\n\n```cpp\n#include <m..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_44",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: unterminated string literal (detected at line 66) (<unknown>, line 66)"
+    },
+    "latency": 33.760408878326416,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Types Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  orderId: string;\n  amount: number;\n  status..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_45",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.315510749816895,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_46",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 20.12438988685608,
+    "status": "success",
+    "gen_text": "```java\n// --- Domain/Exception Layer ---\n\nclass BusinessException extends RuntimeException {\n    public BusinessException(String message) {\n        super(message);\n    }\n}\n\nclass InvalidParameterExce..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_47",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 21.914166688919067,
+    "status": "success",
+    "gen_text": "```python\nimport json\n\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    Safely extracts 'cost' values from a list of potentially malformed/dirty JSON-like dictionaries\n    and calculates the average.\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_48",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr', '代码块']"
+    },
+    "latency": 11.546472311019897,
+    "status": "success",
+    "gen_text": "【核心隐患】：\n1. **Use-After-Free (UAF)**：主线程执行 `delete[] data` 后，分离线程（detached thread）在延时结束后尝试访问已释放的内存。\n2. **Race Condition / Dangling Reference**：线程通过引用捕获局部变量 `data`，当 `process` 函数返回时，该引用失效，导致未定义行为。\n\n【修复代..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_49",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: unterminated string literal (detected at line 66) (<unknown>, line 66)"
+    },
+    "latency": 34.52005672454834,
+    "status": "success",
+    "gen_text": "```typescript\n/**\n * Interface Definitions\n */\ninterface User {\n  id: string;\n  name: string;\n  avatar: string;\n  role: 'admin' | 'user';\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status:..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_50",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.298167705535889,
+    "status": "success",
+    "gen_text": "```sql\nSELECT \n    dept_name, \n    emp_name, \n    salary, \n    salary_rank\nFROM (\n    SELECT \n        d.dept_name, \n        e.emp_name, \n        e.salary,\n        @rank := IF(@prev_dept = e.dept_id, \n..."
+  }
+]

@@ -1,0 +1,652 @@
+[
+  {
+    "id": "COMPANY_IPD_S4_01",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 14.672927618026733,
+    "status": "success",
+    "gen_text": "我对该场景边界值的理解是：数据边界在于单次处理的凭证条数极限、金额精度极限（如小数点后多位）以及跨会计期间的数据一致性边界。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **海量数据对账性能与准确性验证** | 单次对账凭证数 > 100万条，涉及多币种、多核算维度 | 1. 进入期末对账模块；2. 选择目标期间；3..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_02",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 13.398988008499146,
+    "status": "success",
+    "gen_text": "我对该场景边界值的理解是：在系统高负载运行、内核关键数据结构正在变更、或补丁与现有内核版本/已加载模块存在版本冲突等极端状态下，热升级过程的原子性与系统稳定性。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **内核热升级功能验证** | 目标内核版本 v5.15.0-patch | 1. 启动目标OS；2. 执行内核..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.431602239608765,
+    "status": "success",
+    "gen_text": "我对该场景边界值的理解是：验证在集群节点规模达到设计上限、网络链路极度不稳定或扩容过程中资源水位处于临界点时，系统能否维持数据一致性并实现自动化闭环。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **集群扩容一致性验证** | 新增节点：2台；现有节点：4台；存储容量：50% | 1. 在集群运行状态下，通过管理界面..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_04",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.471222162246704,
+    "status": "success",
+    "gen_text": "我对该业务场景边界值的理解是：数据规模的极限（如单次处理百万级凭证）、时间维度的临界点（如跨月/跨年结账）以及数据一致性的极端异常情况（如业财数据不匹配或并发冲突）。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **海量数据性能与准确性验证** | 单月业务单据 > 100万条，财务凭证 > 50万条 | 1. 选择..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.870983600616455,
+    "status": "success",
+    "gen_text": "我对【断网弱网下的边缘业务自恢复】边界值的理解是：网络状态在“完全中断（0%丢包/0kbps）”与“极度不稳定（高丢包率/极低带宽/高延迟）”的临界点，以及业务逻辑从“本地自治模式”切换回“云端同步模式”的瞬间。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **完全断网下的本地自治与重连恢复** | 网络状态：完全断..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_06",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.031886339187622,
+    "status": "success",
+    "gen_text": "我对该业务场景边界值的理解是：边界值定义为单次处理凭证数量的极限阈值（如百万级）、会计期间切换的临界点（如跨月/跨年）、以及业财数据差异为零或达到极小精度偏差时的逻辑判定。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **海量数据并发对账性能验证** | 单次任务包含 100 万条业务单据及对应财务凭证 | 1. 进..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_07",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.511308193206787,
+    "status": "success",
+    "gen_text": "我对该业务场景边界值的理解是：配置下发的规模边界在于整机柜最大节点数（如48/64节点）的并发极限，时间边界在于“秒级”要求的时延抖动范围，以及网络拥塞或节点异常时的容错边界。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **全量节点并发配置下发验证** | 整机柜最大节点数（如64节点），配置参数：VLAN/IP/..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_08",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 16.38858127593994,
+    "status": "success",
+    "gen_text": "我对【兆瓦级充电桩多枪动态功率分配】边界值的理解是：功率分配的边界在于单枪最大功率限值、多枪总功率上限、以及当总需求功率超过设备额定容量时，系统在满足最小充电电流需求与优先级策略之间的切换临界点。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **多枪动态功率平分验证** | 总功率：1000kW；枪数：4枪；单枪需求..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.430537700653076,
+    "status": "success",
+    "gen_text": "我对【整机柜节点秒级带外配置下发】边界值的理解是：配置下发任务的并发节点规模极限（如单次最大节点数）、网络带宽/时延波动下的指令到达时序一致性，以及节点在线/离线/异常状态切换时的任务状态闭环。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **全量节点并发下发功能验证** | 整机柜最大节点数（如48节点），标准配置..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.603006839752197,
+    "status": "success",
+    "gen_text": "我对该场景边界值的理解是：流体阻力与泵阀调节的边界在于泵速调节的物理极限（最小/最大转速）、流体压力降的临界阈值（防止管路爆裂或气蚀）以及控制器响应延迟的极限。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n| :--- | :--- | :--- | :--- |\n| **协同调节闭环逻辑验证** | 目标温升：5℃；当前流阻：中等；泵速：50% | 1. 模拟提升服务器功耗；2..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_11",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 27.353480577468872,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 场景建模：断网 $\\rightarrow$ 边缘侧数据无法上报云端 $\\rightarrow$ 触发本地缓存机制（通常为磁盘/数据库/消息队列） $\\rightarrow$ 传感器爆发式上报 $\\rightarrow$ 边缘侧资源（CPU/IO/内存）压力激增。\n2. 瓶颈推演：\n   - 数据流入阶段：边缘网关处理协议转换的CPU开销。\n   - 存储阶段：数据写入本..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_12",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.26561999320984,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 场景建模：弱网/断网 $\\rightarrow$ 边缘侧数据无法实时上报云端 $\\rightarrow$ 触发本地缓存机制 $\\rightarrow$ 传感器爆发式上报 $\\rightarrow$ 缓存压力剧增 $\\rightarrow$ 网络恢复 $\\rightarrow$ 缓存数据回传压力。\n2. 瓶颈推演：\n   - 写入阶段：海量并发写入 $\\rightarro..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_13",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.189735412597656,
+    "status": "success",
+    "gen_text": "<thinking>\n1. **场景建模**：千万级并发连接 $\\rightarrow$ 极高的文件描述符（FD）消耗与内存占用；频繁上下文切换 $\\rightarrow$ 用户态/内核态频繁切换（Syscall）及进程/线程调度开销。\n2. **功能关联**：兆瓦级功率调度 $\\rightarrow$ 实时性要求极高，调度算法需在极短时间内完成计算并下发指令，若内核响应延迟，将导致电力调度失稳。..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_14",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.1184139251709,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 场景分析：十万台物理机 BMC 同时注册属于典型的“惊群效应（Thundering Herd）”。\n2. 流量特征：短时间内爆发海量 TCP 连接、身份认证请求、设备元数据写入请求。\n3. 链路推演：BMC -> 负载均衡 (LB) -> API 网关 -> 认证服务/管理服务 -> 数据库 (DB) / 缓存 (Redis)。\n4. 瓶颈推演：\n   - 网络层：LB..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_15",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.526716709136963,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 场景分析：千万级终端 + WebSocket + 高频推送 = 海量长连接 + 极高IOPS + 频繁上下文切换。\n2. 压力路径：终端 -> 长连接网关 (Gateway) -> 智能体调度器 (Agent Scheduler) -> 大模型推理/训练集群。\n3. 瓶颈推演：\n   - 网关层：千万级连接意味着单机FD（文件描述符）限制、内存消耗（TCP Buffer..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_16",
+    "eval_res": {
+      "total": 86,
+      "format": 40,
+      "logic": 26,
+      "constraint": 20,
+      "reason": "Missing keywords"
+    },
+    "latency": 23.404917001724243,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 场景特征：海量小文件（IOPS密集型）+ 大规模张量（带宽密集型）+ 故障自愈（控制面/监控面压力）。\n2. 瓶颈推演：\n   - IO层：海量小文件会导致文件系统Metadata（元数据）查询成为瓶颈，引发高IO Wait。\n   - 传输层：数据从存储到GPU的DMA传输或CPU内存拷贝会受限于PCIe带宽或内存带宽。\n   - 计算层：大规模Tensor吞吐会导致..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_17",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 22.87404465675354,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 业务场景分析：ERP财务结账属于典型的“重事务、高并发、写密集型”场景。千万级凭证生成意味着海量的数据库Insert/Update操作，且涉及复杂的会计科目平衡逻辑，极易触发行锁/表锁竞争。\n2. 底座特性关联：千卡级大模型加速特性虽提升了计算效率，但在ERP业务流中，若模型用于辅助财务预测或智能分录，其推理请求会与事务数据库争抢I/O带宽及网络带宽。\n3. 瓶颈推演：..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_18",
+    "eval_res": {
+      "total": 86,
+      "format": 40,
+      "logic": 26,
+      "constraint": 20,
+      "reason": "Missing keywords"
+    },
+    "latency": 25.229514122009277,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 场景分析：千万级并发连接意味着海量的TCP控制块（TCB）占用内存，以及极高频的握手/挥手请求。\n2. 内核压力点：\n   - 网络协议栈：大量中断触发（IRQ）导致软中断（softirq）负载激增。\n   - 上下文切换：千万级连接在多核间调度，导致频繁的内核态/用户态切换及进程/线程上下文切换。\n   - 内存管理：内核页表、连接跟踪表（conntrack）及网络缓..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_19",
+    "eval_res": {
+      "total": 73,
+      "format": 40,
+      "logic": 13,
+      "constraint": 20,
+      "reason": "Missing keywords"
+    },
+    "latency": 22.92351508140564,
+    "status": "success",
+    "gen_text": "<thinking>\n1. **场景分析**：十万台物理机同时发起 BMC 注册，属于典型的“惊群效应”（Thundering Herd）。\n2. **流量特征**：短时间内爆发极高并发的 TCP 连接、TLS 握手、身份鉴权请求及数据库写入。\n3. **瓶颈推演**：\n   - **接入层**：负载均衡（LB）或网关（Gateway）处理海量并发连接时，可能触发文件描述符（FD）耗尽或连接池溢出..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_20",
+    "eval_res": {
+      "total": 73,
+      "format": 40,
+      "logic": 13,
+      "constraint": 20,
+      "reason": "Missing keywords"
+    },
+    "latency": 23.140294551849365,
+    "status": "success",
+    "gen_text": "<thinking>\n1. 负载特征：CPU/GPU全功率满载 $\\rightarrow$ 热流密度极高 $\\rightarrow$ 瞬时热冲击。\n2. 环境特征：环境温升 $\\rightarrow$ 冷源侧（CDU/散热器）换热效率下降 $\\rightarrow$ 温差梯度缩小。\n3. 协同逻辑：温控算法响应时间 vs 热积累速度。若泵阀调节（PWM/PID）滞后于热流变化，会导致芯片结温突破阈..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_21",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 22.0244562625885,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对该HCI产品的底层特性，我识别出以下三个高风险缺陷场景：\n\n### 1. 异构指令集与内存加密引擎的映射冲突\n*   **场景描述**：硬件级内存加密依赖CPU特定指令集（如x86的TME/MKTME或ARM的Realm Management Extension）。在混合编排环境下，若调度器将依赖加密特性的虚拟机/容器误调度至不支持该指令集或加密策略不一致..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_22",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 19.6671085357666,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“云边端异构算力无缝跨域协同”特性，我识别出以下三个最易出现的底层兼容性缺陷场景及验证手段：\n\n### 1. 指令集架构（ISA）差异导致的算子执行异常\n*   **缺陷场景**：在混合编排（x86 + ARM）环境下，AI框架下发的底层算子（如AVX-512 vs ARM NEON）若未实现架构感知，会导致计算结果不一致、非法指令异常（Illegal I..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_23",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 19.949040174484253,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“智能液冷超充站”核心网业务的热迁移特性，在异构环境下最易出现的3个底层兼容性缺陷场景如下：\n\n### 1. CPU 指令集架构（ISA）不匹配导致的指令非法异常\n*   **场景描述：** 业务进程在x86集群上运行时，若编译时开启了高级指令集优化（如AVX-512），热迁移至仅支持基础指令集的ARM集群或旧版x86集群时，目标机无法识别该指令，直接触发..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_24",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 22.385326862335205,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“智能液冷超充站”硬件级内存加密与防勒索隔离特性，在异构环境下最易出现的3个底层兼容性缺陷场景如下：\n\n### 1. 指令集架构（ISA）差异导致的加密原语失效\n*   **场景描述：** 硬件级加密依赖特定指令集（如x86的AES-NI或ARM的Cryptographic Extensions）。在混合编排环境下，若调度器将加密任务从x86节点调度至未配..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_25",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 21.77653956413269,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“硬件级内存加密与防勒索隔离”特性，在异构环境下的核心风险在于**底层指令集映射、内核内存管理机制差异及调度一致性**。以下是三个最易出现的缺陷场景：\n\n### 1. 指令集与加密引擎的指令集差异（ISA Mismatch）\n*   **缺陷场景**：在x86（利用Intel TME/AMD SME）与ARM（利用TrustZone/Realm）混合编排时..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_26",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 20.596729278564453,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“千卡级大模型分布式训练”这一高并发、高带宽、强一致性的场景，在异构环境下最易出现的3个底层兼容性缺陷场景如下：\n\n### 1. 异构指令集导致的算子精度与计算偏差（ISA Inconsistency）\n*   **场景描述：** 在x86与ARM混合编排时，底层数学库（如MKL vs OpenBLAS）或编译器（GCC vs LLVM）对浮点数指令集（A..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_27",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 22.014983892440796,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“超大规模集群智能故障自愈”特性，在异构环境下最易出现的3个底层兼容性缺陷场景及验证手段如下：\n\n### 1. 指令集架构（ISA）差异导致的自愈Agent执行异常\n*   **缺陷场景：** 自愈Agent在进行底层硬件状态巡检或故障隔离（如隔离PCIe设备）时，若使用了特定架构的汇编指令（如x86的AVX/SSE或ARM的NEON），在跨架构编排时，A..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_28",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 18.398907899856567,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对AI算力集群“核心网业务不停机在线热迁移”特性，在异构环境下最易出现的3个底层兼容性缺陷场景如下：\n\n**1. CPU指令集架构（ISA）不一致导致的执行异常**\n*   **缺陷场景：** 业务进程在x86架构下编译时使用了特定指令集（如AVX-512），热迁移至ARM架构或精简版x86集群时，由于目标机缺乏对应指令集，会导致非法指令异常（SIGILL）..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_29",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.58208990097046,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“超大规模集群智能故障自愈”特性，在异构环境下的核心风险在于**底层指令集差异**与**内核调度机制不一致**导致的自愈逻辑失效。以下是三个最易出现的缺陷场景及验证手段：\n\n### 1. 指令集架构（ISA）导致的自愈Agent崩溃\n*   **缺陷场景：** 自愈Agent（如用于采集硬件Telemetry数据的守护进程）在编写时使用了特定架构的优化指令..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_30",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.673012256622314,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的兼容性测试工程师，针对“智能液冷超充站”这种软硬结合、涉及高密散热与盲插特性的产品，在异构算力环境部署时，最易出现的3个底层兼容性缺陷场景如下：\n\n### 1. 异构架构下的驱动/内核模块加载冲突 (Kernel-Level Mismatch)\n*   **场景描述：** 液冷控制逻辑通常依赖底层驱动（如I2C/SMBus控制温控芯片）。在x86与ARM混合编排时，若驱动程序未..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_31",
+    "eval_res": {
+      "total": 86,
+      "format": 40,
+      "logic": 26,
+      "constraint": 20,
+      "reason": "Missing keywords"
+    },
+    "latency": 25.55475115776062,
+    "status": "success",
+    "gen_text": "<thinking>\n针对兆瓦级高频调度的业务场景，微服务间的事务一致性无法依赖传统分布式事务（2PC/XA）来保证性能，通常采用“最终一致性”或“补偿机制（Saga模式）”。\n契约测试（Contract Testing）的核心在于验证“提供者（Provider）”是否满足“消费者（Consumer）”的预期。\n在验证数据一致性与回滚机制时，策略应从：1. 字段语义契约（确保数据结构一致）；2. ..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_32",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 26.81720280647278,
+    "status": "success",
+    "gen_text": "<thinking>\n针对AI算力集群这种高并发、高可靠要求的硬件控制微服务，事务一致性验证不能仅依赖端到端（E2E）测试，必须通过契约测试在接口层建立“语义约束”。\n核心策略：\n1. 契约定义：将IAM认证状态与日志审计的成功/失败状态定义为契约中的关键字段（Payload Schema）。\n2. 状态机模拟：在消费者端（Consumer）模拟IAM返回“Token失效”或日志审计“写入超时”的..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_33",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.133131980895996,
+    "status": "success",
+    "gen_text": "<thinking>\n针对微秒级时延要求的AI平台，传统的集成测试（E2E）因链路过长、环境不稳定，难以定位微秒级抖动及复杂的分布式事务问题。\n我的策略是：利用“消费者驱动契约测试（CDCT）”实现解耦，通过契约定义接口的“语义边界”与“状态机约束”。针对事务回滚，不验证数据库底层，而是验证“补偿逻辑（Compensating Transaction）”在契约层面的触发条件与幂等性，确保在IAM或..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_34",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.680402755737305,
+    "status": "success",
+    "gen_text": "<thinking>\n针对智能液冷超充站的微秒级时延需求，传统的端到端集成测试由于网络抖动和环境复杂性，难以精准定位接口契约问题。\n针对事务一致性，需采取“消费者驱动契约（CDC）”与“补偿机制验证”相结合的策略：\n1. 契约层面：利用Pact等工具，通过定义Consumer端的期望（Expectation）来约束Provider的响应，确保IAM与日志审计接口的字段类型、枚举值及响应时延阈值严格..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_35",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.37753415107727,
+    "status": "success",
+    "gen_text": "<thinking>\n针对兆瓦级功率调度这一高并发、强一致性场景，微服务事务无法通过传统数据库ACID实现，必须依赖分布式事务补偿（Saga模式）或最终一致性。\n契约测试的核心目标不是验证业务逻辑，而是验证“交互协议”的正确性。\n针对数据一致性：需验证Provider（IAM/日志服务）返回的字段类型、枚举值、错误码是否与Consumer（调度平台）的预期严格匹配，防止因字段解析失败导致的“伪成功..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_36",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.481417894363403,
+    "status": "success",
+    "gen_text": "<thinking>\n针对HCI超融合产品在千卡级训练场景下的高并发特性，微服务间的事务一致性不能依赖传统的分布式事务协议（如2PC），因为其在高并发下会导致严重的性能瓶颈。\n测试策略应从“预防”转向“契约约束”：\n1. 接口契约（Schema）验证：确保IAM与日志服务的响应结构符合预期，防止因字段缺失导致的逻辑中断。\n2. 状态机契约（Stateful Contract）：模拟分布式事务中的中..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_37",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.872844696044922,
+    "status": "success",
+    "gen_text": "<thinking>\n针对“不停机在线热迁移”这一高可用场景，核心挑战在于分布式环境下的状态一致性。由于涉及外部IAM与日志审计，传统的端到端（E2E）测试成本高且难以模拟异常。\n我的策略是：利用**消费者驱动契约测试（CDCT）**，将验证重点从“链路通畅”转向“语义一致性”。\n1. **数据一致性**：通过契约定义字段约束（类型、枚举、长度），确保微服务在迁移状态切换时，传递给IAM的Toke..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_38",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 26.463075160980225,
+    "status": "success",
+    "gen_text": "<thinking>\n针对HCI超融合架构下的兆瓦级充电调度场景，其核心挑战在于：高并发下的分布式事务一致性（尤其是涉及IAM鉴权与审计日志的跨服务调用）。\n由于是微服务架构，传统的端到端（E2E）测试过于沉重且难以定位故障。\n我的策略是：\n1. 利用契约测试（Consumer-Driven Contract Testing, CDCT）解耦服务间的依赖，确保Schema一致性。\n2. 在契约中引..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_39",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.604302167892456,
+    "status": "success",
+    "gen_text": "<thinking>\n针对硬件级内存加密（涉及密钥交换）与防勒索隔离（涉及状态变更）的特性，微服务间的事务一致性挑战在于：IAM认证与日志审计是外部强依赖，属于分布式事务中的非本地资源。\n测试策略应从“契约保障数据结构一致性”与“故障模拟保障状态一致性”两个维度展开：\n1. 契约层面：利用消费者驱动契约（CDC）确保加密指令与身份令牌的字段语义严格匹配。\n2. 事务层面：通过契约中的“异常响应模式..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_40",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.14899182319641,
+    "status": "success",
+    "gen_text": "<thinking>\n针对AI算力集群这种高并发、低时延场景，微服务间的事务一致性不能依赖传统的分布式事务（2PC/XA），因为其性能损耗无法满足微秒级需求。测试策略应从“契约驱动”转向“状态机驱动”：\n1. **契约层面**：通过Consumer-Driven Contracts (CDC) 约束字段类型与枚举值，确保IAM/日志服务的Schema变更不破坏算力调度逻辑。\n2. **事务层面**..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_41",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 30.258511781692505,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对HCI超融合架构中“热迁移”这一高权限、高敏感度的核心业务逻辑，渗透测试的重点在于：**管理平面（Management Plane）向控制平面（Control Plane）下发指令时的参数校验缺陷**。\n\n热迁移通常涉及对虚拟机（VM）状态、内存镜像及网络配置的底层操作。攻击者若能通过管理API注入恶意指令，即可实现从Web端到Hypervisor宿主机的RCE或..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_42",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.48874306678772,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对“核心网业务不停机在线热迁移”这一高可用特性，其攻击面通常集中在**迁移控制平面（Control Plane）的指令解析器**以及**虚拟机/容器状态同步的Agent**上。\n\n此类特性通常涉及大量的系统级调用（如 `virsh`, `docker exec`, `iptables`）来确保网络流量在迁移瞬间的无缝切换。如果迁移指令中的参数（如目标IP、迁移标识符..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_43",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 31.62957239151001,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的红蓝对抗专家，针对“硬件级内存加密”与“防勒索隔离”特性的渗透测试，核心目标是验证：**攻击者是否能通过内核态/驱动层的逻辑漏洞，绕过内存加密的边界保护，实现对加密内存区域的非法访问或通过提权控制隔离机制。**\n\n### 1. 渗透验证思路\n由于硬件加密通常在内存控制器（Memory Controller）层实现，软件层面的RCE往往通过**驱动程序接口（IOCTL）**或**..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_44",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.927302837371826,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对“千卡级分布式训练加速”特性，攻击面通常集中在**分布式调度器（Scheduler）**、**任务分发接口（Task Dispatcher）**以及**计算节点通信协议（如基于gRPC/NCCL的自定义封装）**。\n\n在分布式训练场景下，黑客常通过篡改训练脚本参数、构造畸形的配置文件或劫持通信报文，试图在计算节点（Worker）执行系统级命令。\n\n### 验证Po..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_45",
+    "eval_res": {
+      "total": 86,
+      "format": 40,
+      "logic": 26,
+      "constraint": 20,
+      "reason": "Missing keywords"
+    },
+    "latency": 29.351948022842407,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对“硬件级内存加密与防勒索隔离”特性，攻击者的核心目标是绕过硬件隔离层，通过控制管理平面（Management Plane）或固件接口（Firmware Interface）实现对加密内存区域的非法访问或提权。\n\n以下是针对该特性可能存在的**管理接口命令注入（RCE）**及**内存越权访问（提权）**的验证PoC思路。\n\n### 1. 验证PoC伪代码 (Pyth..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_46",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 29.46966791152954,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对边缘计算节点的高性能特性，攻击者通常会利用其为了追求“微秒级时延”而可能省略的参数校验逻辑（如直接将网络包字段传递给系统调用）进行渗透。\n\n### 渗透验证思路\n在边缘计算场景下，高性能数据面（Data Plane）常使用DPDK或自定义协议栈。若控制面（Control Plane）在处理特定的网络管理指令（如配置路由、设置QoS策略）时，未对解析后的字符串进行严..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_47",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 27.850512504577637,
+    "status": "success",
+    "gen_text": "在IPD验证阶段，针对“云边端异构算力无缝跨域协同”特性，攻击面主要集中在**跨域指令分发协议（如自定义RPC或MQTT）**、**算力调度任务描述文件（YAML/JSON）**以及**边缘节点Agent的指令解析引擎**。\n\n### 渗透验证思路\n黑客通常会伪造一个高权限的调度指令，利用边缘侧Agent在解析任务参数时，未对系统调用字符进行严格过滤的漏洞，实现从“调度指令”到“系统命令”的转化。..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_48",
+    "eval_res": {
+      "total": 86,
+      "format": 40,
+      "logic": 26,
+      "constraint": 20,
+      "reason": "Missing keywords"
+    },
+    "latency": 24.43597674369812,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对“冷板式液冷+盲插盲拔”这一硬件特性，攻击面通常不在物理层本身，而在于**管理平面（BMC/IPMI）与硬件传感器数据交互的逻辑层**。\n\n由于盲插盲拔涉及热插拔过程中的状态快速切换，若BMC在处理传感器异常告警（如：液冷压力骤变、温控逻辑重置）时，将解析到的硬件标识符或状态字符串直接传递给系统Shell执行（例如：用于自动触发冷却策略的脚本），则可能存在命令注入..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_49",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.902685403823853,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对该硬件特性的安全风险，攻击面通常不在物理液冷结构本身，而在于**控制液冷泵流速、监测温控传感器及管理盲插接口状态的底层BMC（基板管理控制器）或控制固件的Web/API管理接口**。\n\n黑客通常通过篡改控制指令（如调节泵速的参数）来实现RCE。以下是针对此类嵌入式控制系统的渗透验证思路。\n\n### 1. 验证PoC伪代码 (针对控制接口的命令注入)\n\n假设该平台的..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_50",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.770564317703247,
+    "status": "success",
+    "gen_text": "作为IPD验证阶段的安全专家，针对该HCI产品的“冷板式液冷”与“盲插盲拔”特性，攻击面主要集中在**BMC（基板管理控制器）**与**传感器监控接口**。黑客会利用盲插过程中的热插拔事件触发协议解析异常，或通过传感器数据上报接口进行注入。\n\n### 渗透验证思路\n攻击者试图通过伪造液冷温控传感器的上报数据（如通过I2C/IPMI协议），在BMC解析包含特殊字符的监测字符串时，诱发命令注入。\n\n#..."
+  }
+]

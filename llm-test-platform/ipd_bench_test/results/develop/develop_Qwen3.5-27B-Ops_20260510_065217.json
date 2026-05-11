@@ -1,0 +1,652 @@
+[
+  {
+    "id": "COMPANY_IPD_S3_01",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '非编程语言', '不能']"
+    },
+    "latency": 36.599764347076416,
+    "status": "success",
+    "gen_text": "这是一个非常有趣的问题，但需要我诚实地回答。\n\n问题要求：使用纯净的 MySQL 5.7 原生SQL语法，编写一个能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。\n\n让我分析一下这个要求的可行性：\n\n1. **MySQL 5.7 的核心功能**：\n   - MySQL 是一个关系型数据库管理系统\n   - 它的主要功能是存储、查询和管理数据\n   - 它使用 SQL ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_02",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 33.10959243774414,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_03",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 28.998335361480713,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_04",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 88.75060844421387,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.698957443237305,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_06",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 71.25964045524597,
+    "status": "success",
+    "gen_text": "Let me analyze the refactoring requirements:\n\n1. **Constructor Injection**: Replace `@Autowired` field injection with constructor injection (Spring Boot best practice)\n\n2. **Service Layer Extraction**..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_07",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 33.10907053947449,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_08",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 28.99595355987549,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 88.74852395057678,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.697754859924316,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_11",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '非编程语言', '不能']"
+    },
+    "latency": 40.25059986114502,
+    "status": "success",
+    "gen_text": "这是一个非常有趣的问题，但需要我诚实地回答。\n\n问题要求：使用纯净的 MySQL 5.7 原生SQL语法，编写一个能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。\n\n让我分析一下这个要求的可行性：\n\n1. **MySQL 5.7 的核心功能**：\n   - MySQL 是一个关系型数据库管理系统\n   - 它的主要功能是存储、查询和管理数据\n   - 它使用 SQL ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_12",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 37.643725872039795,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_13",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 29.790220260620117,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_14",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 59.353837728500366,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_15",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.975409984588623,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_16",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 63.71779537200928,
+    "status": "success",
+    "gen_text": "Let me analyze the refactoring requirements:\n\n1. **Constructor Injection**: Replace `@Autowired` field injection with constructor injection (Spring Boot best practice)\n\n2. **Service Layer Extraction**..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_17",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 37.65524959564209,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_18",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 29.953544855117798,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_19",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 69.26215696334839,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_20",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 27.405936002731323,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_21",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '非编程语言', '不能']"
+    },
+    "latency": 35.81761384010315,
+    "status": "success",
+    "gen_text": "这是一个非常有趣的问题，但需要我诚实地回答。\n\n问题要求：使用纯净的 MySQL 5.7 原生SQL语法，编写一个能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。\n\n让我分析一下这个要求的可行性：\n\n1. **MySQL 5.7 的核心功能**：\n   - MySQL 是一个关系型数据库管理系统\n   - 它的主要功能是存储、查询和管理数据\n   - 它使用 SQL ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_22",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 37.69909048080444,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_23",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 31.297667741775513,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_24",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 60.425886392593384,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_25",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 35.59550976753235,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_26",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 70.29185914993286,
+    "status": "success",
+    "gen_text": "Let me analyze the refactoring requirements:\n\n1. **Constructor Injection**: Replace `@Autowired` field injection with constructor injection (Spring Boot best practice)\n\n2. **Service Layer Extraction**..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_27",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 30.023181200027466,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_28",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 27.323142290115356,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_29",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 70.59580254554749,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_30",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 27.853129386901855,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_31",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '非编程语言', '不能']"
+    },
+    "latency": 57.32254719734192,
+    "status": "success",
+    "gen_text": "这是一个非常有趣的问题，但需要我诚实地回答。\n\n问题要求：使用纯净的 MySQL 5.7 原生SQL语法，编写一个能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。\n\n让我分析一下这个要求的可行性：\n\n1. **MySQL 5.7 的核心功能**：\n   - MySQL 是一个关系型数据库管理系统\n   - 它的主要功能是存储、查询和管理数据\n   - 它使用 SQL ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_32",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 38.351168155670166,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_33",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 31.08845615386963,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_34",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 70.77324724197388,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_35",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.4222412109375,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_36",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 72.9492769241333,
+    "status": "success",
+    "gen_text": "Let me analyze the refactoring requirements:\n\n1. **Constructor Injection**: Replace `@Autowired` field injection with constructor injection (Spring Boot best practice)\n\n2. **Service Layer Extraction**..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_37",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 30.902242422103882,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_38",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 31.385900020599365,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_39",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 70.85620188713074,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_40",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 36.209155559539795,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_41",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['不支持', '做不到', '非编程语言']"
+    },
+    "latency": 67.55712175369263,
+    "status": "success",
+    "gen_text": "这是一个非常有趣的问题，但需要我诚实地回答。\n\n问题要求：使用纯净的 MySQL 5.7 原生SQL语法，编写一个能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。\n\n让我分析一下这个要求的可行性：\n\n1. **MySQL 5.7 的核心功能**：\n   - MySQL 是一个关系型数据库管理系统\n   - 它的主要功能是存储、查询和管理数据\n   - 它使用 SQL ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_42",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 38.32688045501709,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_43",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 39.497230052948,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_44",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 69.5246479511261,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_45",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 27.818917751312256,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_46",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 64.84268093109131,
+    "status": "success",
+    "gen_text": "Let me analyze the refactoring requirements:\n\n1. **Constructor Injection**: Replace `@Autowired` field injection with constructor injection (Spring Boot best practice)\n\n2. **Service Layer Extraction**..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_47",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['Exception']"
+    },
+    "latency": 30.65695881843567,
+    "status": "success",
+    "gen_text": "Let me analyze this problem step by step:\n\n1. **Input Analysis**: The JSON data has several types of dirty data:\n   - `{\"id\": 1, \"info\": {\"cost\": 12.5}}` - Valid data\n   - `{\"id\": 2, \"info\": null}` - ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_48",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['代码块']"
+    },
+    "latency": 31.64963984489441,
+    "status": "success",
+    "gen_text": "Let me analyze this code for thread safety and memory management issues:\n\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_49",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 67.74621725082397,
+    "status": "success",
+    "gen_text": "1.  **Analyze the Request:**\n    *   **Role:** Senior Frontend Developer.\n    *   **Task:** Implement `fetchDashboardData()` to concurrently fetch `/api/user`, `/api/orders`, `/api/metrics`.\n    *   *..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_50",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 35.61516499519348,
+    "status": "success",
+    "gen_text": "Let me think about how to approach this coding problem.\n\nProblem: 【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_nam..."
+  }
+]

@@ -1,0 +1,926 @@
+import { useState, useCallback } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Badge } from '@/components/ui/badge'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { FileUp, Download, AlertCircle, CheckCircle, FileWarning, RefreshCw, Copy, FileText, Settings } from 'lucide-react'
+import { toast } from 'sonner'
+import type { BenchmarkMetricsEntry, BenchmarkConfig } from '@/lib/types'
+
+// CSV解析结果接口
+interface CsvParseResult {
+  headers: string[]
+  rows: string[][]
+  metrics: BenchmarkMetricsEntry[]
+  errors: CsvRowError[]
+  warnings: CsvRowWarning[]
+  config?: Partial<BenchmarkConfig>
+}
+
+// 行错误接口
+interface CsvRowError {
+  rowIndex: number
+  message: string
+  type: 'error' | 'warning'
+}
+
+// 行警告接口
+interface CsvRowWarning {
+  rowIndex: number
+  field: string
+  message: string
+  value: string
+}
+
+// 列映射配置
+interface ColumnMapping {
+  concurrency: string
+  inputLength: string
+  outputLength: string
+  ttft: string
+  tpot: string
+  tokensPerSecond: string
+}
+
+interface CsvImportEnhancedProps {
+  isOpen: boolean
+  onClose: () => void
+  onImport: (config: BenchmarkConfig, metrics: BenchmarkMetricsEntry[]) => void
+  existingBenchmarks: { modelName: string; serverName: string; testDate: string }[]
+  isLoading?: boolean
+}
+
+const defaultConfig: BenchmarkConfig = {
+  submitter: '',
+  modelName: '',
+  serverName: '',
+  framework: 'MindIE',
+  frameworkVersion: '',
+  chipName: '',
+  shardingConfig: '',
+  operatorAcceleration: '',
+  frameworkParams: '',
+  testDate: new Date().toISOString().split('T')[0],
+  notes: '',
+}
+
+// CSV模板内容
+const CSV_TEMPLATE = `modelName,serverName,chipName,framework,frameworkVersion,shardingConfig,operatorAcceleration,frameworkParams,submitter,testDate,notes
+Qwen-14B,server-01,GPU-A100,MindIE,v1.0.1,tp=4,FlashAttention,--tp=4,admin,2024-01-15,测试备注
+
+concurrency,inputLength,outputLength,ttft,tpot,tokensPerSecond
+1,1024,128,45.2,12.5,156.3
+2,1024,128,48.5,13.2,142.8
+4,1024,128,52.1,14.8,128.5
+8,1024,128,58.3,16.5,112.4
+16,1024,128,68.7,19.2,96.7`
+
+// 下载CSV模板
+const downloadTemplate = () => {
+  const blob = new Blob([CSV_TEMPLATE], { type: 'text/csv;charset=utf-8;' })
+  const link = document.createElement('a')
+  link.href = URL.createObjectURL(blob)
+  link.download = 'benchmark_template.csv'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  toast.success('模板下载成功')
+}
+
+// 验证单条指标
+const validateMetric = (metric: BenchmarkMetricsEntry, index: number): CsvRowError[] => {
+  const errors: CsvRowError[] = []
+
+  if (metric.concurrency <= 0) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: 并发数必须大于0 (当前: ${metric.concurrency})`, type: 'error' })
+  }
+  if (metric.concurrency > 10000) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: 并发数超过合理范围 (当前: ${metric.concurrency})`, type: 'warning' })
+  }
+
+  if (metric.inputLength <= 0) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: 输入长度必须大于0`, type: 'error' })
+  }
+  if (metric.inputLength > 100000) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: 输入长度过大`, type: 'warning' })
+  }
+
+  if (metric.outputLength <= 0) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: 输出长度必须大于0`, type: 'error' })
+  }
+
+  if (metric.ttft < 0) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: TTFT不能为负数`, type: 'error' })
+  }
+  if (metric.ttft > 10000) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: TTFT值异常 (>10s)`, type: 'warning' })
+  }
+
+  if (metric.tpot < 0) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: TPOT不能为负数`, type: 'error' })
+  }
+
+  if (metric.tokensPerSecond < 0) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: TPS不能为负数`, type: 'error' })
+  }
+  if (metric.tokensPerSecond > 10000) {
+    errors.push({ rowIndex: index, message: `第${index + 1}行: TPS值异常 (>10000)`, type: 'warning' })
+  }
+
+  // 一致性检查
+  const expectedTps = 1000 / metric.tpot
+  if (metric.tpot > 0 && Math.abs(metric.tokensPerSecond - expectedTps) / expectedTps > 0.5) {
+    errors.push({ 
+      rowIndex: index, 
+      message: `第${index + 1}行: TPS与TPOT不一致 (期望约${expectedTps.toFixed(1)})`, 
+      type: 'warning' 
+    })
+  }
+
+  return errors
+}
+
+// 检测重复数据
+const checkDuplicates = (
+  metrics: BenchmarkMetricsEntry[],
+  existingBenchmarks: { modelName: string; serverName: string; testDate: string }[],
+  currentConfig: { modelName: string; serverName: string; testDate: string }
+): CsvRowError[] => {
+  const warnings: CsvRowError[] = []
+  
+  // 检查是否与现有数据重复
+  const isDuplicate = existingBenchmarks.some(
+    b => b.modelName === currentConfig.modelName && 
+         b.serverName === currentConfig.serverName &&
+         b.testDate === currentConfig.testDate
+  )
+  
+  if (isDuplicate) {
+    warnings.push({
+      rowIndex: -1,
+      message: `警告: 已存在相同的测试记录 (${currentConfig.modelName}@${currentConfig.serverName}@${currentConfig.testDate})`,
+      type: 'warning'
+    })
+  }
+
+  return warnings
+}
+
+export function CsvImportEnhanced({
+  isOpen,
+  onClose,
+  onImport,
+  existingBenchmarks,
+  isLoading = false,
+}: CsvImportEnhancedProps) {
+  const [csvContent, setCsvContent] = useState('')
+  const [csvFileName, setCsvFileName] = useState('')
+  const [parsedData, setParsedData] = useState<CsvParseResult | null>(null)
+  const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set())
+  const [columnMapping, setColumnMapping] = useState<ColumnMapping>({
+    concurrency: 'concurrency',
+    inputLength: 'inputLength',
+    outputLength: 'outputLength',
+    ttft: 'ttft',
+    tpot: 'tpot',
+    tokensPerSecond: 'tokensPerSecond',
+  })
+  const [showMapping, setShowMapping] = useState(false)
+  const [config, setConfig] = useState<Partial<BenchmarkConfig>>(defaultConfig)
+  const [configErrors, setConfigErrors] = useState<Record<string, string>>({})
+  const [activeTab, setActiveTab] = useState<'file' | 'paste'>('file')
+  const [pasteContent, setPasteContent] = useState('')
+  const [importMode, setImportMode] = useState<'config_first' | 'metrics_only'>('config_first')
+
+  // 解析CSV
+  const parseCSV = useCallback((content: string, extractConfig: boolean = false): CsvParseResult => {
+    const lines = content.trim().split('\n')
+    if (lines.length < 2) {
+      throw new Error('CSV文件格式不正确，至少需要包含标题行和一行数据')
+    }
+
+    let headers = lines[0].split(',').map(h => h.trim())
+    let metricsStartIndex = 1
+    let parsedConfig: Partial<BenchmarkConfig> = {}
+
+    if (extractConfig) {
+      const configHeaders = headers
+      const configLine = lines[1].split(',').map(v => v.trim())
+
+      const configMapping: Record<string, keyof BenchmarkConfig> = {
+        'modelName': 'modelName',
+        'serverName': 'serverName',
+        'chipName': 'chipName',
+        'framework': 'framework',
+        'frameworkVersion': 'frameworkVersion',
+        'shardingConfig': 'shardingConfig',
+        'operatorAcceleration': 'operatorAcceleration',
+        'frameworkParams': 'frameworkParams',
+        'submitter': 'submitter',
+        'testDate': 'testDate',
+        'notes': 'notes',
+      }
+
+      configMapping.forEach((configField, configHeader) => {
+        const idx = configHeaders.findIndex(h => h.toLowerCase() === configHeader.toLowerCase())
+        if (idx !== -1 && idx < configLine.length) {
+          parsedConfig[configField] = configLine[idx]
+        }
+      })
+
+      if (lines[2] && lines[2].toLowerCase().includes('concurrency')) {
+        headers = lines[2].split(',').map(h => h.trim())
+        metricsStartIndex = 3
+      } else {
+        headers = []
+        metricsStartIndex = lines.length
+      }
+    }
+
+    const rows: string[][] = []
+    const metrics: BenchmarkMetricsEntry[] = []
+    const errors: CsvRowError[] = []
+
+    for (let i = metricsStartIndex; i < lines.length; i++) {
+      if (!lines[i].trim()) continue
+
+      const values = lines[i].split(',').map(v => v.trim())
+      rows.push(values)
+
+      const getValue = (field: keyof ColumnMapping): number => {
+        const colName = columnMapping[field]
+        const idx = headers.findIndex(h => h.toLowerCase().includes(colName.toLowerCase()))
+        if (idx === -1 || idx >= values.length) return NaN
+        return parseFloat(values[idx])
+      }
+
+      const concurrency = getValue('concurrency')
+      const inputLength = getValue('inputLength') || 1024
+      const outputLength = getValue('outputLength') || 128
+      const ttft = getValue('ttft')
+      const tpot = getValue('tpot')
+      const tokensPerSecond = getValue('tokensPerSecond')
+
+      if (!isNaN(concurrency) && !isNaN(ttft) && !isNaN(tpot) && !isNaN(tokensPerSecond)) {
+        const metric: BenchmarkMetricsEntry = {
+          concurrency,
+          inputLength,
+          outputLength,
+          ttft,
+          tpot,
+          tokensPerSecond,
+        }
+
+        const rowErrors = validateMetric(metric, i - metricsStartIndex)
+        errors.push(...rowErrors)
+
+        if (!rowErrors.some(e => e.type === 'error')) {
+          metrics.push(metric)
+        }
+      } else {
+        errors.push({
+          rowIndex: i - metricsStartIndex,
+          message: `第${i + 1 - metricsStartIndex}行: 数据解析失败，缺少必要字段`,
+          type: 'error'
+        })
+      }
+    }
+
+    return {
+      headers,
+      rows,
+      metrics,
+      errors,
+      warnings: [],
+      config: parsedConfig
+    }
+  }, [columnMapping])
+
+  // 处理文件上传
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    if (!file.name.endsWith('.csv')) {
+      toast.error('请上传CSV格式文件')
+      return
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('文件大小不能超过10MB')
+      return
+    }
+
+    setCsvFileName(file.name)
+    const reader = new FileReader()
+
+    reader.onload = (e) => {
+      const content = e.target?.result as string
+      setCsvContent(content)
+
+      try {
+        const extractConfig = importMode === 'config_first'
+        const result = parseCSV(content, extractConfig)
+        setParsedData(result)
+        setSelectedRows(new Set(result.metrics.map((_, i) => i)))
+
+        if (result.config && Object.keys(result.config).length > 0) {
+          setConfig(prev => ({ ...prev, ...result.config }))
+        }
+
+        if (result.errors.length > 0) {
+          const errorCount = result.errors.filter(e => e.type === 'error').length
+          const warningCount = result.errors.filter(e => e.type === 'warning').length
+          toast.info(`解析完成: ${result.metrics.length}条有效数据, ${errorCount}个错误, ${warningCount}个警告`)
+        } else {
+          toast.success(`成功解析 ${result.metrics.length} 条数据`)
+        }
+      } catch (error: any) {
+        toast.error(`解析失败: ${error.message}`)
+        setParsedData(null)
+      }
+    }
+
+    reader.onerror = () => {
+      toast.error('文件读取失败')
+    }
+
+    reader.readAsText(file)
+  }
+
+  // 处理文本粘贴
+  const handlePaste = () => {
+    if (!pasteContent.trim()) {
+      toast.error('请输入CSV数据')
+      return
+    }
+
+    try {
+      const extractConfig = importMode === 'config_first'
+      const result = parseCSV(pasteContent, extractConfig)
+      setParsedData(result)
+      setSelectedRows(new Set(result.metrics.map((_, i) => i)))
+
+      if (result.config && Object.keys(result.config).length > 0) {
+        setConfig(prev => ({ ...prev, ...result.config }))
+      }
+
+      if (result.errors.length > 0) {
+        const errorCount = result.errors.filter(e => e.type === 'error').length
+        const warningCount = result.errors.filter(e => e.type === 'warning').length
+        toast.info(`解析完成: ${result.metrics.length}条有效数据, ${errorCount}个错误, ${warningCount}个警告`)
+      } else {
+        toast.success(`成功解析 ${result.metrics.length} 条数据`)
+      }
+    } catch (error: any) {
+      toast.error(`解析失败: ${error.message}`)
+      setParsedData(null)
+    }
+  }
+
+    // 文件大小检查 (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('文件大小不能超过10MB')
+      return
+    }
+
+    setCsvFileName(file.name)
+    const reader = new FileReader()
+    
+    reader.onload = (e) => {
+      const content = e.target?.result as string
+      setCsvContent(content)
+      
+      try {
+        const result = parseCSV(content)
+        setParsedData(result)
+        // 默认全选
+        setSelectedRows(new Set(result.metrics.map((_, i) => i)))
+        
+        if (result.errors.length > 0) {
+          const errorCount = result.errors.filter(e => e.type === 'error').length
+          const warningCount = result.errors.filter(e => e.type === 'warning').length
+          toast.info(`解析完成: ${result.metrics.length}条有效数据, ${errorCount}个错误, ${warningCount}个警告`)
+        } else {
+          toast.success(`成功解析 ${result.metrics.length} 条数据`)
+        }
+      } catch (error: any) {
+        toast.error(`解析失败: ${error.message}`)
+        setParsedData(null)
+      }
+    }
+
+    reader.onerror = () => {
+      toast.error('文件读取失败')
+    }
+
+    reader.readAsText(file)
+  }
+
+  // 处理拖拽
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    const file = e.dataTransfer.files[0]
+    if (file && file.name.endsWith('.csv')) {
+      const input = document.getElementById('csv-file-enhanced') as HTMLInputElement
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+      input.files = dataTransfer.files
+      input.dispatchEvent(new Event('change', { bubbles: true }))
+    }
+  }
+
+  // 切换行选择
+  const toggleRowSelection = (index: number) => {
+    setSelectedRows(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(index)) {
+        newSet.delete(index)
+      } else {
+        newSet.add(index)
+      }
+      return newSet
+    })
+  }
+
+  // 全选/取消全选
+  const toggleAllSelection = () => {
+    if (parsedData) {
+      if (selectedRows.size === parsedData.metrics.length) {
+        setSelectedRows(new Set())
+      } else {
+        setSelectedRows(new Set(parsedData.metrics.map((_, i) => i)))
+      }
+    }
+  }
+
+  // 验证配置
+  const validateConfig = (): boolean => {
+    const errors: Record<string, string> = {}
+
+    if (!config.modelName?.trim()) {
+      errors.modelName = '请输入模型名称'
+    }
+
+    if (!config.serverName?.trim()) {
+      errors.serverName = '请输入服务器名称'
+    }
+
+    if (!config.chipName?.trim()) {
+      errors.chipName = '请输入AI芯片型号'
+    }
+
+    setConfigErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  // 更新配置
+  const updateConfig = (field: keyof BenchmarkConfig, value: string) => {
+    setConfig(prev => ({ ...prev, [field]: value }))
+    if (configErrors[field]) {
+      setConfigErrors(prev => { const newErrors = { ...prev }; delete newErrors[field]; return newErrors })
+    }
+  }
+
+  // 执行导入
+  const handleImport = () => {
+    if (!parsedData || selectedRows.size === 0) {
+      toast.error('请选择要导入的数据')
+      return
+    }
+
+    if (importMode === 'config_first' && !validateConfig()) {
+      toast.error('请完善配置信息')
+      return
+    }
+
+    const selectedMetrics = parsedData.metrics.filter((_, i) => selectedRows.has(i))
+    const finalConfig: BenchmarkConfig = {
+      ...defaultConfig,
+      ...config,
+      testDate: config.testDate || new Date().toISOString().split('T')[0],
+    }
+
+    onImport(finalConfig, selectedMetrics)
+
+    setCsvContent('')
+    setCsvFileName('')
+    setParsedData(null)
+    setSelectedRows(new Set())
+    setConfig(defaultConfig)
+  }
+
+  // 关闭对话框
+  const handleClose = () => {
+    setCsvContent('')
+    setCsvFileName('')
+    setParsedData(null)
+    setSelectedRows(new Set())
+    setConfig(defaultConfig)
+    setConfigErrors({})
+    setPasteContent('')
+    onClose()
+  }
+
+  return (
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden bg-white">
+        <DialogHeader className="border-b pb-4">
+          <DialogTitle className="text-xl font-bold flex items-center gap-2">
+            <FileUp className="w-5 h-5" />
+            增强CSV导入
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="grid gap-4 py-4 overflow-y-auto max-h-[calc(90vh-200px)]">
+          <div className="flex items-center justify-between bg-slate-50 p-3 rounded-lg">
+            <div className="text-sm text-slate-600">
+              <span className="font-medium">提示:</span> 首次使用请下载模板了解CSV格式，支持配置信息与性能指标一起导入
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={downloadTemplate} className="gap-2">
+                <Download className="w-4 h-4" />
+                下载模板
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 p-3 bg-blue-50 rounded-lg">
+            <span className="text-sm font-medium text-blue-700">导入模式:</span>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                checked={importMode === 'config_first'}
+                onChange={() => setImportMode('config_first')}
+                className="w-4 h-4"
+              />
+              <span className="text-sm text-blue-700">配置+指标</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                checked={importMode === 'metrics_only'}
+                onChange={() => setImportMode('metrics_only')}
+                className="w-4 h-4"
+              />
+              <span className="text-sm text-blue-700">仅指标</span>
+            </label>
+          </div>
+
+          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'file' | 'paste')}>
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="file" className="gap-2">
+                <FileUp className="w-4 h-4" />
+                文件上传
+              </TabsTrigger>
+              <TabsTrigger value="paste" className="gap-2">
+                <Copy className="w-4 h-4" />
+                文本粘贴
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="file" className="space-y-4">
+              <div
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={handleDrop}
+                className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer"
+              >
+                <input
+                  type="file"
+                  id="csv-file-enhanced"
+                  accept=".csv"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                <label htmlFor="csv-file-enhanced" className="cursor-pointer block">
+                  <FileUp className="w-10 h-10 mx-auto text-slate-400 mb-2" />
+                  <p className="text-sm font-medium text-slate-700">
+                    {csvFileName ? `已选择: ${csvFileName}` : '点击选择CSV文件或将文件拖拽到此处'}
+                  </p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    支持CSV格式，最大10MB
+                  </p>
+                </label>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="paste" className="space-y-4">
+              <Alert>
+                <FileText className="h-4 w-4" />
+                <AlertDescription>
+                  从Excel或CSV文件复制粘贴数据到此处。格式：并发数,TTFT,TPOT,TPS,输入长度,输出长度
+                </AlertDescription>
+              </Alert>
+              <Textarea
+                value={pasteContent}
+                onChange={(e) => setPasteContent(e.target.value)}
+                placeholder="在此粘贴CSV数据..."
+                className="min-h-[200px] font-mono text-sm"
+              />
+              <Button onClick={handlePaste} className="w-full">
+                <FileText className="w-4 h-4 mr-2" />
+                解析粘贴内容
+              </Button>
+            </TabsContent>
+          </Tabs>
+
+          {importMode === 'config_first' && (
+            <div className="border rounded-lg p-4 bg-slate-50">
+              <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
+                <Settings className="w-4 h-4" />
+                测试配置信息
+                <span className="text-xs text-slate-500 font-normal">（*为必填项）</span>
+              </h4>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">模型名称 *</Label>
+                  <Input
+                    value={config.modelName || ''}
+                    onChange={(e) => updateConfig('modelName', e.target.value)}
+                    placeholder="如：Qwen-14B"
+                    className={`h-8 text-sm ${configErrors.modelName ? 'border-red-500' : ''}`}
+                  />
+                  {configErrors.modelName && (
+                    <span className="text-[10px] text-red-500">{configErrors.modelName}</span>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">服务器名称 *</Label>
+                  <Input
+                    value={config.serverName || ''}
+                    onChange={(e) => updateConfig('serverName', e.target.value)}
+                    placeholder="如：server-01"
+                    className={`h-8 text-sm ${configErrors.serverName ? 'border-red-500' : ''}`}
+                  />
+                  {configErrors.serverName && (
+                    <span className="text-[10px] text-red-500">{configErrors.serverName}</span>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">AI芯片 *</Label>
+                  <Input
+                    value={config.chipName || ''}
+                    onChange={(e) => updateConfig('chipName', e.target.value)}
+                    placeholder="如：GPU-A100"
+                    className={`h-8 text-sm ${configErrors.chipName ? 'border-red-500' : ''}`}
+                  />
+                  {configErrors.chipName && (
+                    <span className="text-[10px] text-red-500">{configErrors.chipName}</span>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">推理框架</Label>
+                  <Select
+                    value={config.framework}
+                    onValueChange={(v) => updateConfig('framework', v)}
+                  >
+                    <SelectTrigger className="h-8 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="MindIE">MindIE</SelectItem>
+                      <SelectItem value="VLLM">VLLM</SelectItem>
+                      <SelectItem value="TensorRT-LLM">TensorRT-LLM</SelectItem>
+                      <SelectItem value="DeepSpeed">DeepSpeed</SelectItem>
+                      <SelectItem value="vLLM">vLLM</SelectItem>
+                      <SelectItem value="其他">其他</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">框架版本</Label>
+                  <Input
+                    value={config.frameworkVersion || ''}
+                    onChange={(e) => updateConfig('frameworkVersion', e.target.value)}
+                    placeholder="如：v1.0.1"
+                    className="h-8 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">切分参数</Label>
+                  <Input
+                    value={config.shardingConfig || ''}
+                    onChange={(e) => updateConfig('shardingConfig', e.target.value)}
+                    placeholder="如：tp=4"
+                    className="h-8 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">提交人</Label>
+                  <Input
+                    value={config.submitter || ''}
+                    onChange={(e) => updateConfig('submitter', e.target.value)}
+                    className="h-8 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">测试日期</Label>
+                  <Input
+                    type="date"
+                    value={config.testDate || ''}
+                    onChange={(e) => updateConfig('testDate', e.target.value)}
+                    className="h-8 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">算子加速</Label>
+                  <Input
+                    value={config.operatorAcceleration || ''}
+                    onChange={(e) => updateConfig('operatorAcceleration', e.target.value)}
+                    placeholder="如：FlashAttention"
+                    className="h-8 text-sm"
+                  />
+                </div>
+                <div className="col-span-3 space-y-1">
+                  <Label className="text-xs">框架启动参数</Label>
+                  <Input
+                    value={config.frameworkParams || ''}
+                    onChange={(e) => updateConfig('frameworkParams', e.target.value)}
+                    placeholder="如：--tp=4 --pp=2"
+                    className="h-8 text-sm"
+                  />
+                </div>
+                <div className="col-span-3 space-y-1">
+                  <Label className="text-xs">备注</Label>
+                  <Textarea
+                    value={config.notes || ''}
+                    onChange={(e) => updateConfig('notes', e.target.value)}
+                    placeholder="输入其他备注信息..."
+                    className="min-h-[60px] text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {parsedData && (
+            <div className="space-y-4">
+              <div className="grid grid-cols-4 gap-3">
+                <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+                  <p className="text-2xl font-bold text-green-600">{parsedData.metrics.length}</p>
+                  <p className="text-xs text-green-700">有效数据</p>
+                </div>
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
+                  <p className="text-2xl font-bold text-red-600">
+                    {parsedData.errors.filter(e => e.type === 'error').length}
+                  </p>
+                  <p className="text-xs text-red-700">错误</p>
+                </div>
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-center">
+                  <p className="text-2xl font-bold text-yellow-600">
+                    {parsedData.errors.filter(e => e.type === 'warning').length}
+                  </p>
+                  <p className="text-xs text-yellow-700">警告</p>
+                </div>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+                  <p className="text-2xl font-bold text-blue-600">{selectedRows.size}</p>
+                  <p className="text-xs text-blue-700">已选择</p>
+                </div>
+              </div>
+
+              {parsedData.errors.length > 0 && (
+                <Alert variant="destructive" className="border-yellow-500 bg-yellow-50">
+                  <FileWarning className="h-4 w-4" />
+                  <AlertDescription>
+                    <div className="max-h-32 overflow-y-auto text-sm">
+                      {parsedData.errors.map((error, i) => (
+                        <div key={i} className={error.type === 'error' ? 'text-red-600' : 'text-yellow-700'}>
+                          {error.type === 'error' ? '❌' : '⚠️'} {error.message}
+                        </div>
+                      ))}
+                    </div>
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              <div className="border rounded-lg">
+                <div className="flex items-center justify-between p-3 border-b bg-slate-50">
+                  <h4 className="font-medium text-sm">数据预览</h4>
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      checked={parsedData.metrics.length > 0 && selectedRows.size === parsedData.metrics.length}
+                      onCheckedChange={toggleAllSelection}
+                    />
+                    <span className="text-sm text-slate-600">全选</span>
+                  </div>
+                </div>
+                <ScrollArea className="h-[300px]">
+                  <Table>
+                    <TableHeader className="sticky top-0 bg-white">
+                      <TableRow>
+                        <TableHead className="w-12">选择</TableHead>
+                        <TableHead>并发数</TableHead>
+                        <TableHead>输入/输出</TableHead>
+                        <TableHead>TTFT(ms)</TableHead>
+                        <TableHead>TPOT(ms)</TableHead>
+                        <TableHead>TPS</TableHead>
+                        <TableHead>状态</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {parsedData.metrics.map((metric, index) => {
+                        const rowErrors = parsedData.errors.filter(e => e.rowIndex === index)
+                        const hasError = rowErrors.some(e => e.type === 'error')
+                        const hasWarning = rowErrors.some(e => e.type === 'warning')
+
+                        return (
+                          <TableRow
+                            key={index}
+                            className={hasError ? 'bg-red-50' : hasWarning ? 'bg-yellow-50' : ''}
+                          >
+                            <TableCell>
+                              <Checkbox
+                                checked={selectedRows.has(index)}
+                                onCheckedChange={() => toggleRowSelection(index)}
+                                disabled={hasError}
+                              />
+                            </TableCell>
+                            <TableCell>{metric.concurrency}</TableCell>
+                            <TableCell>{metric.inputLength}/{metric.outputLength}</TableCell>
+                            <TableCell>{metric.ttft.toFixed(2)}</TableCell>
+                            <TableCell>{metric.tpot.toFixed(2)}</TableCell>
+                            <TableCell>{metric.tokensPerSecond.toFixed(2)}</TableCell>
+                            <TableCell>
+                              {hasError ? (
+                                <Badge variant="destructive" className="text-xs">
+                                  <AlertCircle className="w-3 h-3 mr-1" />
+                                  错误
+                                </Badge>
+                              ) : hasWarning ? (
+                                <Badge variant="secondary" className="text-xs bg-yellow-100 text-yellow-800">
+                                  <FileWarning className="w-3 h-3 mr-1" />
+                                  警告
+                                </Badge>
+                              ) : (
+                                <Badge variant="outline" className="text-xs text-green-600">
+                                  <CheckCircle className="w-3 h-3 mr-1" />
+                                  正常
+                                </Badge>
+                              )}
+                            </TableCell>
+                          </TableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </ScrollArea>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <DialogFooter className="border-t pt-4">
+          <Button variant="outline" onClick={handleClose} disabled={isLoading}>
+            取消
+          </Button>
+          <Button
+            onClick={handleImport}
+            disabled={!parsedData || selectedRows.size === 0 || isLoading}
+            className="gap-2"
+          >
+            {isLoading ? (
+              <>
+                <RefreshCw className="w-4 h-4 animate-spin" />
+                导入中...
+              </>
+            ) : (
+              <>
+                <FileUp className="w-4 h-4" />
+                导入选中的 {selectedRows.size} 条数据
+              </>
+            )}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+export default CsvImportEnhanced
