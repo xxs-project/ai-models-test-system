@@ -10,8 +10,8 @@ interface PerformanceTrendChartsProps {
   selectedCombo: string
   modelName1: string
   modelName2: string
-  gpuCount1: number
-  gpuCount2: number
+  cardCount1: number
+  cardCount2: number
 }
 
 export function PerformanceTrendCharts({
@@ -20,8 +20,8 @@ export function PerformanceTrendCharts({
   selectedCombo,
   modelName1,
   modelName2,
-  gpuCount1,
-  gpuCount2,
+  cardCount1,
+  cardCount2,
 }: PerformanceTrendChartsProps) {
   // Filter metrics by selected context length and sort by concurrency
   const filteredData = useMemo(() => {
@@ -41,20 +41,20 @@ export function PerformanceTrendCharts({
       const m2 = metrics2.get(key)
       const [c] = key.split('-')
       
-      const tpsPerGpu1 = m1 ? m1.tokensPerSecond / gpuCount1 : undefined
-      const tpsPerGpu2 = m2 ? m2.tokensPerSecond / gpuCount2 : undefined
+      const tpsPerCard1 = m1 ? m1.tokensPerSecond / cardCount1 : undefined
+      const tpsPerCard2 = m2 ? m2.tokensPerSecond / cardCount2 : undefined
 
       // Calculate percentage differences (B vs A)
       const ttftPercentage = m1 && m2 ? ((m2.ttft - m1.ttft) / m1.ttft) * 100 : undefined
       const tpotPercentage = m1 && m2 ? ((m2.tpot - m1.tpot) / m1.tpot) * 100 : undefined
       const tpsPercentage = m1 && m2 ? ((m2.tokensPerSecond - m1.tokensPerSecond) / m1.tokensPerSecond) * 100 : undefined
-      const tpsPerGpuPercentage = tpsPerGpu1 && tpsPerGpu2 ? ((tpsPerGpu2 - tpsPerGpu1) / tpsPerGpu1) * 100 : undefined
+      const tpsPerCardPercentage = tpsPerCard1 && tpsPerCard2 ? ((tpsPerCard2 - tpsPerCard1) / tpsPerCard1) * 100 : undefined
 
       // Calculate ratios (B / A)
       const ttftRatio = m1 && m2 ? m2.ttft / m1.ttft : undefined
       const tpotRatio = m1 && m2 ? m2.tpot / m1.tpot : undefined
       const tpsRatio = m1 && m2 ? m2.tokensPerSecond / m1.tokensPerSecond : undefined
-      const tpsPerGpuRatio = tpsPerGpu1 && tpsPerGpu2 ? tpsPerGpu2 / tpsPerGpu1 : undefined
+      const tpsPerCardRatio = tpsPerCard1 && tpsPerCard2 ? tpsPerCard2 / tpsPerCard1 : undefined
 
       return {
         concurrency: c,
@@ -62,12 +62,12 @@ export function PerformanceTrendCharts({
         ttftPercentage,
         tpotPercentage,
         tpsPercentage,
-        tpsPerGpuPercentage,
+        tpsPerCardPercentage,
         // Ratio data
         ttftRatio,
         tpotRatio,
         tpsRatio,
-        tpsPerGpuRatio,
+        tpsPerCardRatio,
         // Performance values
         ttft1: m1?.ttft,
         ttft2: m2?.ttft,
@@ -75,11 +75,11 @@ export function PerformanceTrendCharts({
         tpot2: m2?.tpot,
         tps1: m1?.tokensPerSecond,
         tps2: m2?.tokensPerSecond,
-        tpsPerGpu1,
-        tpsPerGpu2,
+        tpsPerCard1,
+        tpsPerCard2,
       }
     })
-  }, [metrics1, metrics2, selectedCombo, gpuCount1, gpuCount2])
+  }, [metrics1, metrics2, selectedCombo, cardCount1, cardCount2])
 
   const chartConfig = {
     percentage: {
@@ -306,7 +306,7 @@ export function PerformanceTrendCharts({
           {renderPercentageChart('ttftPercentage', `${modelName1} TTFT对比百分比趋势图`)}
           {renderPercentageChart('tpotPercentage', `${modelName1} TPOT对比百分比趋势图`)}
           {renderPercentageChart('tpsPercentage', `${modelName1} TPS对比百分比趋势图`)}
-          {renderPercentageChart('tpsPerGpuPercentage', `${modelName1} 每卡TPS对比百分比趋势图`)}
+          {renderPercentageChart('tpsPerCardPercentage', `${modelName1} 每卡TPS对比百分比趋势图`)}
         </div>
       </div>
 
@@ -317,7 +317,7 @@ export function PerformanceTrendCharts({
           {renderRatioChart('ttftRatio', `${modelName1} TTFT对比比值趋势图`)}
           {renderRatioChart('tpotRatio', `${modelName1} TPOT对比比值趋势图`)}
           {renderRatioChart('tpsRatio', `${modelName1} TPS对比比值趋势图`)}
-          {renderRatioChart('tpsPerGpuRatio', `${modelName1} 每卡TPS对比比值趋势图`)}
+          {renderRatioChart('tpsPerCardRatio', `${modelName1} 每卡TPS对比比值趋势图`)}
         </div>
       </div>
 
@@ -328,7 +328,7 @@ export function PerformanceTrendCharts({
           {renderBarChart('ttft1', 'ttft2', `${modelName1} TTFT性能柱状图`, 'TTFT (ms)')}
           {renderBarChart('tpot1', 'tpot2', `${modelName1} TPOT性能柱状图`, 'TPOT (ms)')}
           {renderBarChart('tps1', 'tps2', `${modelName1} TPS性能柱状图`, 'TPS (tokens/s)')}
-          {renderBarChart('tpsPerGpu1', 'tpsPerGpu2', `${modelName1} 每卡TPS性能柱状图`, '每卡TPS')}
+          {renderBarChart('tpsPerCard1', 'tpsPerCard2', `${modelName1} 每卡TPS性能柱状图`, '每卡TPS')}
         </div>
       </div>
     </div>

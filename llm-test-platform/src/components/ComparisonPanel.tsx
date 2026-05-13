@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Benchmark, PerformanceMetrics, Report } from '@/lib/types'
 import { CaretUp, CaretDown, FloppyDisk, FileText, Plus, Copy, ArrowsLeftRight, ChartLine, Export } from '@phosphor-icons/react'
-import { cn, parseGpuCount, generateUniqueId } from '@/lib/utils'
+import { cn, parseCardCount, generateUniqueId } from '@/lib/utils'
 import { useReports, useSaveReport } from '@/hooks/use-benchmarks'
 import { toast } from 'sonner'
 import { PerformanceTrendCharts } from './PerformanceTrendCharts'
@@ -37,14 +37,14 @@ export function ComparisonPanel({ benchmark1, benchmark2 }: ComparisonPanelProps
   const [isSwapped, setIsSwapped] = useState(false)
   const [showTrendCharts, setShowTrendCharts] = useState(false)
 
-  const gpuCount1 = useMemo(() => parseGpuCount(benchmark1.config.shardingConfig), [benchmark1.config.shardingConfig])
-  const gpuCount2 = useMemo(() => parseGpuCount(benchmark2.config.shardingConfig), [benchmark2.config.shardingConfig])
+  const cardCount1 = useMemo(() => parseCardCount(benchmark1.config.shardingConfig), [benchmark1.config.shardingConfig])
+  const cardCount2 = useMemo(() => parseCardCount(benchmark2.config.shardingConfig), [benchmark2.config.shardingConfig])
 
   // Swap benchmarks if isSwapped is true
   const displayBenchmark1 = isSwapped ? benchmark2 : benchmark1
   const displayBenchmark2 = isSwapped ? benchmark1 : benchmark2
-  const displayGpuCount1 = isSwapped ? gpuCount2 : gpuCount1
-  const displayGpuCount2 = isSwapped ? gpuCount1 : gpuCount2
+  const displayCardCount1 = isSwapped ? cardCount2 : cardCount1
+  const displayCardCount2 = isSwapped ? cardCount1 : cardCount2
 
   const handleSwap = () => {
     setIsSwapped(!isSwapped)
@@ -442,8 +442,8 @@ export function ComparisonPanel({ benchmark1, benchmark2 }: ComparisonPanelProps
                   const m2 = metrics2.get(key)
                   const [c] = key.split('-')
 
-                  const tpsPerGpu1 = m1 ? m1.tokensPerSecond / displayGpuCount1 : undefined
-                  const tpsPerGpu2 = m2 ? m2.tokensPerSecond / displayGpuCount2 : undefined
+                  const tpsPerCard1 = m1 ? m1.tokensPerSecond / displayCardCount1 : undefined
+                  const tpsPerCard2 = m2 ? m2.tokensPerSecond / displayCardCount2 : undefined
 
                   return (
                     <TableRow key={`special-${key}`}>
@@ -480,10 +480,10 @@ export function ComparisonPanel({ benchmark1, benchmark2 }: ComparisonPanelProps
                       <TableCell>
                         <div className="flex flex-col items-center gap-1">
                           <div className="flex items-center gap-4 text-sm">
-                            <span className="text-blue-600 font-medium">{tpsPerGpu1?.toFixed(2) ?? '-'}</span>
-                            <span className="text-purple-600 font-bold">{tpsPerGpu2?.toFixed(2) ?? '-'}</span>
+                            <span className="text-blue-600 font-medium">{tpsPerCard1?.toFixed(2) ?? '-'}</span>
+                            <span className="text-purple-600 font-bold">{tpsPerCard2?.toFixed(2) ?? '-'}</span>
                           </div>
-                          {formatDiff(tpsPerGpu1, tpsPerGpu2)}
+                          {formatDiff(tpsPerCard1, tpsPerCard2)}
                         </div>
                       </TableCell>
                     </TableRow>
@@ -501,8 +501,8 @@ export function ComparisonPanel({ benchmark1, benchmark2 }: ComparisonPanelProps
                 selectedCombo={selectedCombo}
                 modelName1={displayBenchmark1.config.modelName}
                 modelName2={displayBenchmark2.config.modelName}
-                gpuCount1={displayGpuCount1}
-                gpuCount2={displayGpuCount2}
+                cardCount1={displayCardCount1}
+                cardCount2={displayCardCount2}
               />
             </div>
           )}
@@ -567,8 +567,8 @@ export function ComparisonPanel({ benchmark1, benchmark2 }: ComparisonPanelProps
                 const m2 = metrics2.get(key)
                 const [c, i, o] = key.split('-')
 
-                const tpsPerGpu1 = m1 ? m1.tokensPerSecond / displayGpuCount1 : undefined
-                const tpsPerGpu2 = m2 ? m2.tokensPerSecond / displayGpuCount2 : undefined
+                const tpsPerCard1 = m1 ? m1.tokensPerSecond / displayCardCount1 : undefined
+                const tpsPerCard2 = m2 ? m2.tokensPerSecond / displayCardCount2 : undefined
 
                 return (
                   <TableRow key={key}>
@@ -605,10 +605,10 @@ export function ComparisonPanel({ benchmark1, benchmark2 }: ComparisonPanelProps
                     <TableCell>
                       <div className="flex flex-col items-center gap-1">
                         <div className="flex items-center gap-4 text-sm">
-                          <span className="text-blue-600 font-medium">{tpsPerGpu1?.toFixed(2) ?? '-'}</span>
-                          <span className="text-purple-600 font-bold">{tpsPerGpu2?.toFixed(2) ?? '-'}</span>
+                          <span className="text-blue-600 font-medium">{tpsPerCard1?.toFixed(2) ?? '-'}</span>
+                          <span className="text-purple-600 font-bold">{tpsPerCard2?.toFixed(2) ?? '-'}</span>
                         </div>
-                        {formatDiff(tpsPerGpu1, tpsPerGpu2)}
+                        {formatDiff(tpsPerCard1, tpsPerCard2)}
                       </div>
                     </TableCell>
                   </TableRow>

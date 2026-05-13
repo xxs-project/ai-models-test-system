@@ -40,9 +40,9 @@ CSV_COLUMN_ALIASES = {
     'concurrency': ['concurrency', 'process num', 'c', 'process', '并发数'],
     'inputLength': ['inputlength', 'input length', 'input', 'il', 'avg input tokens', '输入长度'],
     'outputLength': ['outputlength', 'output length', 'output', 'ol', 'avg output tokens', '输出长度'],
-    'ttft': ['ttft', 'ttft (ms)', '首token', 'first token', '首token时间'],
-    'tpot': ['tpot', 'per token', '每token'],
-    'tokensPerSecond': ['tokenspersecond', 'tps', '每秒token', 'tokens per second'],
+    'ttft': ['ttft', 'ttft (ms)', 'mean ttft (ms)', '首token', 'first token', '首token时间'],
+    'tpot': ['tpot', 'mean tpot (ms)', 'per token', '每token'],
+    'tokensPerSecond': ['tokenspersecond', 'tps', 'output throughput (tok/s)', '每秒token', 'tokens per second'],
     'totalTimeMs': ['totaltimems', 'total time (ms)', 'totaltime', '总时间'],
 }
 
@@ -501,16 +501,58 @@ def download_remote_results_with_sftp(
         framework_label = 'vllm' if task.inference_framework == 1 else 'mindie'
         test_mode_label = 'single' if task.test_mode == 1 else 'all'
         
-        # 结果目录名（例如 results_vllm_single_123）
-        task_id = task.id
-        results_dir_name = f"results_{framework_label}_{test_mode_label}_{task_id}" if task_id else f"results_{framework_label}_{test_mode_label}"
-        remote_results_path = f"{script_path}/{results_dir_name}"
+        # 检查启动模式
+        startup_mode = getattr(task, 'startup_mode', 'container')
         
-        # 检查远程结果目录是否存在
-        try:
-            sftp.stat(remote_results_path)
-        except FileNotFoundError:
-            raise FileNotFoundError(f"远程结果目录不存在: {remote_results_path}")
+        if startup_mode == 'api':
+            # 直连API模式路径处理
+            remote_results_path = f"{script_path}/perf_test/api_benchmark_auto/results"
+            results_dir_name = "api_benchmark_auto/results"
+            
+            try:
+                sftp.stat(remote_results_path)
+            except FileNotFoundError:
+                raise FileNotFoundError(f"远程直连API结果目录不存在: {remote_results_path}")
+                
+            arch = getattr(device, 'arch', 'x86_64')
+            if test_mode_label == 'single':
+                model_name = getattr(task, 'model_name', '')
+                prefix = f"{arch}_{model_name}_"
+            else:
+                prefix = f"{arch}_"
+                
+            remote_subdirs = []
+            try:
+                for entry in sftp.listdir_attr(remote_results_path):
+                    if entry.st_mode & 0o40000 and entry.filename.startswith(prefix):  # 是目录且匹配前缀
+                        remote_subdirs.append(entry)
+            except Exception as e:
+                raise ValueError(f"无法列出远程目录 {remote_results_path}: {e}")
+                
+            if not remote_subdirs:
+                raise FileNotFoundError(f"未找到匹配前缀 {prefix} 的API测试结果目录")
+                
+            if test_mode_label == 'single':
+                # 单模型获取最新的目录
+                remote_subdirs.sort(key=lambda x: x.st_mtime, reverse=True)
+                target_subdirs = [remote_subdirs[0].filename]
+                target_subdir = target_subdirs[0] # for compatibility later in the block
+            else:
+                # 全套获取最新的一批目录（这里简单地全部拿下来，可能需要限制时间等，先全下）
+                target_subdirs = [x.filename for x in remote_subdirs]
+                target_subdir = target_subdirs[0] # just dummy
+            
+        else:
+            # 默认容器模式路径处理
+            task_id = task.id
+            results_dir_name = f"results_{framework_label}_{test_mode_label}_{task_id}" if task_id else f"results_{framework_label}_{test_mode_label}"
+            remote_results_path = f"{script_path}/{results_dir_name}"
+            
+            # 检查远程结果目录是否存在
+            try:
+                sftp.stat(remote_results_path)
+            except FileNotFoundError:
+                raise FileNotFoundError(f"远程结果目录不存在: {remote_results_path}")
             
         # 查找具体的版本目录
         # 注意：这里需要处理 framework_version 可能带空格的问题
@@ -519,107 +561,114 @@ def download_remote_results_with_sftp(
         # 构造期望的目录前缀
         expected_prefix = f"{framework_label}_"
         
-        remote_subdirs = []
-        try:
-            for entry in sftp.listdir_attr(remote_results_path):
-                if entry.st_mode & 0o40000:  # 是目录
-                    remote_subdirs.append(entry.filename)
-        except Exception as e:
-            raise ValueError(f"无法列出远程目录 {remote_results_path}: {e}")
-            
-        target_subdir = None
-        
-        # 策略1: 精确匹配 stripped 版本 (vllm_v0.12.0rc1)
-        stripped_name = f"{framework_label}_{framework_version_stripped}"
-        if stripped_name in remote_subdirs:
-            target_subdir = stripped_name
-            
-        # 策略2: 如果没找到，尝试匹配原始版本（可能带空格）
-        if not target_subdir and task.framework_version:
-             original_name = f"{framework_label}_{task.framework_version}"
-             if original_name in remote_subdirs:
-                 target_subdir = original_name
-        
-        # 策略3: 尝试匹配带空格的版本 (vllm_ v0.12.0rc1) - 针对之前出现的 bug
-        if not target_subdir:
-            spaced_name = f"{framework_label}_ {framework_version_stripped}"
-            if spaced_name in remote_subdirs:
-                target_subdir = spaced_name
-
-        # 策略4: 如果还没找到，查找包含 stripped 版本的目录
-        if not target_subdir:
-            for subdir in remote_subdirs:
-                if subdir.startswith(expected_prefix) and framework_version_stripped in subdir:
-                    target_subdir = subdir
-                    break
-        
-        if not target_subdir:
-            # 如果只有一个子目录，且符合 vllm_ 开头，就默认使用它（容错）
-            valid_subdirs = [d for d in remote_subdirs if d.startswith(expected_prefix)]
-            if len(valid_subdirs) == 1:
-                target_subdir = valid_subdirs[0]
-                logger.warning(f"未找到精确匹配的版本目录，使用唯一的子目录: {target_subdir}")
-            else:
-                raise FileNotFoundError(f"在 {remote_results_path} 中未找到匹配 {framework_version_stripped} 的版本目录. 可选目录: {remote_subdirs}")
-        
-        logger.info(f"定位到远程版本目录: {target_subdir}")
-        
-        # 开始下载
-        full_remote_path = f"{remote_results_path}/{target_subdir}"
-        full_local_path = os.path.join(local_temp_dir, results_dir_name, target_subdir)
-        os.makedirs(full_local_path, exist_ok=True)
-        
-        # 下载CSV文件
-        csv_files = []
-        try:
-            for entry in sftp.listdir_attr(full_remote_path):
-                if entry.filename.endswith('.csv'):
-                     csv_files.append(entry.filename)
-        except Exception as e:
-            raise ValueError(f"无法列出远程目录 {full_remote_path}: {e}")
-            
-        if not csv_files:
-             raise FileNotFoundError(f"远程目录 {full_remote_path} 中没有CSV文件")
-             
-        for csv_file in csv_files:
-            remote_file = f"{full_remote_path}/{csv_file}"
-            local_file = os.path.join(full_local_path, csv_file)
-            sftp.get(remote_file, local_file)
-            logger.info(f"下载CSV文件: {csv_file}")
-            
-        # 下载日志文件 (在 log 子目录中)
-        remote_log_dir = f"{full_remote_path}/log"
-        local_log_dir = os.path.join(full_local_path, "log")
-        
-        try:
-            sftp.stat(remote_log_dir)
-            # log 目录存在，下载日志
-            os.makedirs(local_log_dir, exist_ok=True)
-            log_files = []
-            for entry in sftp.listdir_attr(remote_log_dir):
-                if entry.filename.endswith('.log'):
-                    log_files.append(entry.filename)
-            
-            for log_file in log_files:
-                remote_file = f"{remote_log_dir}/{log_file}"
-                local_file = os.path.join(local_log_dir, log_file)
-                sftp.get(remote_file, local_file)
-                logger.info(f"下载日志文件: {log_file}")
+        if startup_mode != 'api':
+            remote_subdirs = []
+            try:
+                for entry in sftp.listdir_attr(remote_results_path):
+                    if entry.st_mode & 0o40000:  # 是目录
+                        remote_subdirs.append(entry.filename)
+            except Exception as e:
+                raise ValueError(f"无法列出远程目录 {remote_results_path}: {e}")
                 
-        except FileNotFoundError:
-            logger.warning(f"远程日志目录不存在: {remote_log_dir}，跳过日志下载")
-        except Exception as e:
-            logger.warning(f"下载日志失败: {e}，跳过")
+            target_subdir = None
             
+            # 策略1: 精确匹配 stripped 版本 (vllm_v0.12.0rc1)
+            stripped_name = f"{framework_label}_{framework_version_stripped}"
+            if stripped_name in remote_subdirs:
+                target_subdir = stripped_name
+                
+            # 策略2: 如果没找到，尝试匹配原始版本（可能带空格）
+            if not target_subdir and task.framework_version:
+                 original_name = f"{framework_label}_{task.framework_version}"
+                 if original_name in remote_subdirs:
+                     target_subdir = original_name
+            
+            # 策略3: 尝试匹配带空格的版本 (vllm_ v0.12.0rc1) - 针对之前出现的 bug
+            if not target_subdir:
+                spaced_name = f"{framework_label}_ {framework_version_stripped}"
+                if spaced_name in remote_subdirs:
+                    target_subdir = spaced_name
+
+            # 策略4: 如果还没找到，查找包含 stripped 版本的目录
+            if not target_subdir:
+                for subdir in remote_subdirs:
+                    if subdir.startswith(expected_prefix) and framework_version_stripped in subdir:
+                        target_subdir = subdir
+                        break
+            
+            if not target_subdir:
+                # 如果只有一个子目录，且符合 vllm_ 开头，就默认使用它（容错）
+                valid_subdirs = [d for d in remote_subdirs if d.startswith(expected_prefix)]
+                if len(valid_subdirs) == 1:
+                    target_subdir = valid_subdirs[0]
+                    logger.warning(f"未找到精确匹配的版本目录，使用唯一的子目录: {target_subdir}")
+                else:
+                    raise FileNotFoundError(f"在 {remote_results_path} 中未找到匹配 {framework_version_stripped} 的版本目录. 可选目录: {remote_subdirs}")
+        
+        # 对于容器模式只有一个 target_subdir, API 模式可能有多个
+        if startup_mode != 'api' or test_mode_label == 'single':
+            subdirs_to_download = [target_subdir]
+        else:
+            subdirs_to_download = target_subdirs
+            
+        logger.info(f"定位到远程版本目录: {subdirs_to_download}")
+        
+        for subdir in subdirs_to_download:
+            # 开始下载
+            full_remote_path = f"{remote_results_path}/{subdir}"
+            full_local_path = os.path.join(local_temp_dir, results_dir_name, subdir)
+            os.makedirs(full_local_path, exist_ok=True)
+            
+            # 下载CSV文件
+            csv_files = []
+            try:
+                for entry in sftp.listdir_attr(full_remote_path):
+                    if entry.filename.endswith('.csv'):
+                         csv_files.append(entry.filename)
+            except Exception as e:
+                raise ValueError(f"无法列出远程目录 {full_remote_path}: {e}")
+                
+            if not csv_files:
+                 logger.warning(f"远程目录 {full_remote_path} 中没有CSV文件")
+                 continue
+                 
+            for csv_file in csv_files:
+                remote_file = f"{full_remote_path}/{csv_file}"
+                local_file = os.path.join(full_local_path, csv_file)
+                sftp.get(remote_file, local_file)
+                logger.info(f"下载CSV文件: {csv_file}")
+                
+            # 下载日志文件 (在 log 子目录中)
+            remote_log_dir = f"{full_remote_path}/log"
+            local_log_dir = os.path.join(full_local_path, "log")
+            
+            try:
+                sftp.stat(remote_log_dir)
+                # log 目录存在，下载日志
+                os.makedirs(local_log_dir, exist_ok=True)
+                log_files = []
+                for entry in sftp.listdir_attr(remote_log_dir):
+                    if entry.filename.endswith('.log'):
+                        log_files.append(entry.filename)
+                
+                for log_file in log_files:
+                    remote_file = f"{remote_log_dir}/{log_file}"
+                    local_file = os.path.join(local_log_dir, log_file)
+                    sftp.get(remote_file, local_file)
+                    logger.info(f"下载日志文件: {log_file}")
+                    
+            except FileNotFoundError:
+                logger.warning(f"远程日志目录不存在: {remote_log_dir}，跳过日志下载")
+            except Exception as e:
+                logger.warning(f"下载日志失败: {e}，跳过")
+                
         sftp.close()
         ssh_client.close()
         
-        # 返回本地的基础路径 (用于 glob 查找)
-        # 注意：这里返回的是相对路径结构，以便后续代码兼容
-        # 但后续代码使用的是 os.path.join(base_path, ...)，如果 base_path 是相对的，它会基于 CWD
-        # 所以我们需要让 auto_import_service 的 context 切换到 local_temp_dir
-        # 或者返回绝对路径
-        return full_local_path
+        if startup_mode == 'api' and test_mode_label == 'all':
+            return os.path.join(local_temp_dir, results_dir_name)
+        else:
+            return os.path.join(local_temp_dir, results_dir_name, target_subdir)
         
     except Exception as e:
         if ssh_client:
@@ -659,8 +708,14 @@ async def auto_import_single_model_result(
             
             # 2. 查找CSV文件
             framework_label = 'vllm' if task.inference_framework == 1 else 'mindie'
-            csv_pattern = os.path.join(local_base_path, f"{device.arch}_{framework_label}_results_*.csv")
-            csv_files = glob.glob(csv_pattern)
+            startup_mode = getattr(task, 'startup_mode', 'container')
+            
+            if startup_mode == 'api':
+                csv_pattern = os.path.join(local_base_path, "core_metrics.csv")
+                csv_files = glob.glob(csv_pattern)
+            else:
+                csv_pattern = os.path.join(local_base_path, f"{device.arch}_{framework_label}_results_*.csv")
+                csv_files = glob.glob(csv_pattern)
             
             if not csv_files:
                 raise FileNotFoundError(f"未找到CSV文件: {csv_pattern}")
@@ -674,12 +729,22 @@ async def auto_import_single_model_result(
             
             logger.info(f"找到CSV文件: {csv_path}")
             
-            # 3. 从CSV文件名提取元数据（与全套测试保持一致）
-            # 使用 parse_filename_metadata 进行更严格的验证
-            metadata = parse_filename_metadata(csv_filename)
-            model_name = metadata['model_name']
-            npu_count = int(metadata['npu_count'])
-            graph_mode = metadata['graph_mode']
+            # 3. 提取元数据
+            if startup_mode == 'api':
+                # 从目录名提取元数据
+                dir_name = os.path.basename(local_base_path)
+                parts = dir_name.split('_')
+                # dir_name format: {arch}_{model_name}_{ip}_{port}_{time}_{graph_mode}
+                # To handle model_name with underscores, we just extract what we know
+                model_name = task.model_name
+                graph_mode = parts[-1] if len(parts) > 1 else 'aclgraph'
+                npu_count = getattr(task, 'npu_count', 1)
+            else:
+                # 从CSV文件名提取元数据（与全套测试保持一致）
+                metadata = parse_filename_metadata(csv_filename)
+                model_name = metadata['model_name']
+                npu_count = int(metadata['npu_count'])
+                graph_mode = metadata['graph_mode']
             
             logger.info(f"从文件名提取 - 模型: {model_name}, NPU: {npu_count}, 图模式: {graph_mode}")
             
@@ -690,17 +755,26 @@ async def auto_import_single_model_result(
                 raise ValueError("CSV文件中没有有效的性能数据")
             
             # 5. 生成服务器名称
-            server_name = get_server_name(device.accelerator_type or "", device.arch or "")
+            startup_mode = getattr(task, 'startup_mode', 'container')
+            if startup_mode == 'api':
+                server_name = getattr(task, 'server_model', '') or get_server_name(device.accelerator_type or "", device.arch or "")
+                chip_name = getattr(task, 'accelerator_card', '') or device.accelerator_type or ""
+            else:
+                server_name = get_server_name(device.accelerator_type or "", device.arch or "")
+                chip_name = device.accelerator_type or ""
             logger.info(f"服务器名称: {server_name}")
             
-            # 6. 生成切分参数（从CSV文件名提取的NPU数量）
+            # 6. 生成切分参数
             sharding_config = get_sharding_config(npu_count)
             logger.info(f"切分参数: {sharding_config}")
             
-            # 7. 查找并解析vLLM启动日志（使用从文件名提取的元数据）
-            log_dir = os.path.join(local_base_path, "log")
-            log_pattern = f"{device.arch}_start_{framework_label}_{model_name}_*_{npu_count}_npu_{graph_mode}.log"
-            framework_params = extract_framework_params(log_dir, log_pattern)
+            # 7. 查找并解析框架启动参数
+            if startup_mode == 'api':
+                framework_params = getattr(task, 'framework_startup_args', '')
+            else:
+                log_dir = os.path.join(local_base_path, "log")
+                log_pattern = f"{device.arch}_start_{framework_label}_{model_name}_*_{npu_count}_npu_{graph_mode}.log"
+                framework_params = extract_framework_params(log_dir, log_pattern)
             
             # 8. 确定测试日期
             test_date = task.end_time
@@ -715,19 +789,23 @@ async def auto_import_single_model_result(
             # 9. 构建配置 (基础配置)
             framework_name = "vLLM" if task.inference_framework == 1 else "MindIE"
             
+            notes_str = f"自动导入，任务: {task.task_name}"
+            if getattr(task, 'task_description', ''):
+                notes_str += f" - {task.task_description}"
+            
             base_config_dict = {
                 "submitter": task.created_by or "system",
                 "modelName": model_name,  # 从CSV文件名提取
                 "serverName": server_name,
-                "chipName": device.accelerator_type or "",
+                "chipName": chip_name,
                 "framework": framework_name,
                 "frameworkVersion": task.framework_version or "",
-                "shardingConfig": sharding_config,  # 从CSV文件名提取的NPU数量生成
+                "shardingConfig": sharding_config,
                 "graphMode": graph_mode,  # 从CSV文件名提取
                 "operatorAcceleration": "",
                 "frameworkParams": framework_params,
                 "testDate": test_date,
-                "notes": f"自动导入，任务ID: {task.id}"
+                "notes": notes_str
             }
             
             # 分组处理
@@ -852,8 +930,19 @@ async def auto_import_all_models_result(
             
             # 2. 查找所有CSV文件
             framework_label = 'vllm' if task.inference_framework == 1 else 'mindie'
-            csv_pattern = os.path.join(local_base_path, f"{device.arch}_{framework_label}_results_*.csv")
-            csv_files = glob.glob(csv_pattern)
+            startup_mode = getattr(task, 'startup_mode', 'container')
+            
+            if startup_mode == 'api':
+                # 对于全套API测试，这里可能逻辑会有所不同。假设结果在父目录下。
+                # 但根据 download_remote_results_with_sftp 中 API 的处理，我们拿到的 local_base_path 是某个具体的模型目录
+                # 如果是全套测试，可能有很多个模型目录。这部分可能需要重构，但先按照单个处理。
+                # 由于 auto_import_all_models_result 目前主要用于容器模式。如果有API全套，我们需要 glob 所有的子目录
+                parent_dir = local_base_path
+                csv_pattern = os.path.join(parent_dir, "*", "core_metrics.csv")
+                csv_files = glob.glob(csv_pattern)
+            else:
+                csv_pattern = os.path.join(local_base_path, f"{device.arch}_{framework_label}_results_*.csv")
+                csv_files = glob.glob(csv_pattern)
             
             if not csv_files:
                 raise FileNotFoundError(f"未找到CSV文件: {csv_pattern}")
@@ -868,11 +957,41 @@ async def auto_import_all_models_result(
                 try:
                     logger.info(f"处理CSV文件: {filename}")
                     
-                    # 3. 从文件名提取元数据
-                    metadata = parse_filename_metadata(filename)
-                    model_name = metadata['model_name']
-                    npu_count = int(metadata['npu_count'])
-                    graph_mode = metadata['graph_mode']
+                    # 3. 提取元数据
+                    if startup_mode == 'api':
+                        dir_name = os.path.basename(os.path.dirname(csv_file))
+                        parts = dir_name.split('_')
+                        # 尝试启发式提取模型名
+                        # 格式: {arch}_{model_name}_{ip}_{port}_{time}_{graph_mode}
+                        # 由于全套测试中 task.model_name 可能不准，我们需要从目录名提取
+                        # 假设前面的 arch_ 取消，后面的 _ip_port_time_graph 取消
+                        try:
+                            # 提取 arch
+                            arch = getattr(device, 'arch', 'x86_64')
+                            if dir_name.startswith(f"{arch}_"):
+                                model_part = dir_name[len(arch)+1:]
+                            else:
+                                model_part = dir_name
+                            
+                            # 找到 IP 地址的开始
+                            ip_match = re.search(r'_(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})_', model_part)
+                            if ip_match:
+                                model_name = model_part[:ip_match.start()]
+                            else:
+                                model_name = task.model_name # fallback
+                                
+                            graph_mode = parts[-1] if len(parts) > 1 else 'aclgraph'
+                            npu_count = getattr(task, 'npu_count', 1)
+                        except Exception as e:
+                            logger.error(f"解析API模式全套测试元数据失败: {e}")
+                            model_name = task.model_name
+                            graph_mode = 'aclgraph'
+                            npu_count = getattr(task, 'npu_count', 1)
+                    else:
+                        metadata = parse_filename_metadata(filename)
+                        model_name = metadata['model_name']
+                        npu_count = int(metadata['npu_count'])
+                        graph_mode = metadata['graph_mode']
                     
                     # 4. 解析CSV文件
                     parsed_data = parse_csv_file(csv_file)
@@ -882,15 +1001,23 @@ async def auto_import_all_models_result(
                         continue
                     
                     # 5. 生成服务器名称
-                    server_name = get_server_name(device.accelerator_type or "", device.arch or "")
+                    if startup_mode == 'api':
+                        server_name = getattr(task, 'server_model', '') or get_server_name(device.accelerator_type or "", device.arch or "")
+                        chip_name = getattr(task, 'accelerator_card', '') or device.accelerator_type or ""
+                    else:
+                        server_name = get_server_name(device.accelerator_type or "", device.arch or "")
+                        chip_name = device.accelerator_type or ""
                     
                     # 6. 生成切分参数
                     sharding_config = get_sharding_config(npu_count)
                     
-                    # 7. 查找并解析vLLM启动日志
-                    log_dir = os.path.join(local_base_path, "log")
-                    log_pattern = f"{device.arch}_start_{framework_label}_{model_name}_*_{npu_count}_npu_{graph_mode}.log"
-                    framework_params = extract_framework_params(log_dir, log_pattern)
+                    # 7. 查找并解析框架启动参数
+                    if startup_mode == 'api':
+                        framework_params = getattr(task, 'framework_startup_args', '')
+                    else:
+                        log_dir = os.path.join(local_base_path, "log")
+                        log_pattern = f"{device.arch}_start_{framework_label}_{model_name}_*_{npu_count}_npu_{graph_mode}.log"
+                        framework_params = extract_framework_params(log_dir, log_pattern)
                     
                     # 8. 确定测试日期
                     test_date = task.end_time
@@ -904,11 +1031,15 @@ async def auto_import_all_models_result(
                     # 9. 构建配置 (基础配置)
                     framework_name = "vLLM" if task.inference_framework == 1 else "MindIE"
                     
+                    notes_str = f"自动导入（全套模型），任务: {task.task_name}"
+                    if getattr(task, 'task_description', ''):
+                        notes_str += f" - {task.task_description}"
+                    
                     base_config_dict = {
                         "submitter": task.created_by or "system",
                         "modelName": model_name,
                         "serverName": server_name,
-                        "chipName": device.accelerator_type or "",
+                        "chipName": chip_name,
                         "framework": framework_name,
                         "frameworkVersion": task.framework_version or "",
                         "shardingConfig": sharding_config,
@@ -916,7 +1047,7 @@ async def auto_import_all_models_result(
                         "operatorAcceleration": "",
                         "frameworkParams": framework_params,
                         "testDate": test_date,
-                        "notes": f"自动导入（全套模型测试），任务ID: {task.id}"
+                        "notes": notes_str
                     }
                     
                     # 分组处理
@@ -1026,7 +1157,10 @@ async def auto_import_task_result(
     Raises:
         ValueError: 任务不存在或未完成
     """
-    from backend.services.command_builder import TaskStatus
+    try:
+        from backend.services.command_builder import TaskStatus
+    except ImportError:
+        from services.command_builder import TaskStatus
     
     # 1. 获取任务信息
     task = session.get(Task, task_id)
@@ -1038,9 +1172,33 @@ async def auto_import_task_result(
         raise ValueError(f"任务未完成，无法导入。当前状态: {task.status}")
     
     # 3. 获取设备信息
-    device = session.get(Device, task.device_id)
-    if not device:
-        raise ValueError(f"设备信息不存在: {task.device_id}")
+    device = session.get(Device, task.device_id) if task.device_id else None
+    
+    # 针对直连API模式：如果设备不存在，构造一个虚拟Device对象
+    startup_mode = getattr(task, 'startup_mode', 'container')
+    if startup_mode == 'api':
+        if not device:
+            import urllib.parse
+            # 创建虚拟设备对象
+            device = Device(ip='', port=22, username='root', password='')
+            
+            if getattr(task, 'base_url', ''):
+                parsed_url = urllib.parse.urlparse(task.base_url)
+                api_ip = parsed_url.hostname if parsed_url.hostname else task.base_url.split('://')[-1].split(':')[0].split('/')[0]
+                device.ip = api_ip
+            
+            if getattr(task, 'api_key', ''):
+                device.password = task.api_key
+            
+            # 由于未绑定真实设备，从Task里取一些备用信息
+            device.arch = getattr(task, 'processor_type', 'x86_64').lower()
+            if device.arch == 'gpu':
+                device.arch = 'x86_64' # GPU default to x86_64
+            
+            logger.info(f"API模式，构造虚拟设备信息: IP={device.ip}, 用户=root")
+    else:
+        if not device:
+            raise ValueError(f"设备信息不存在: {task.device_id}")
     
     # 4. 根据测试模式调用不同的导入逻辑
     if task.test_mode == 1:  # 单模型性能测试

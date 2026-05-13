@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LabelList } from 'recharts'
 import { Benchmark, PerformanceMetrics } from '@/lib/types'
-import { parseGpuCount } from '@/lib/utils'
+import { parseCardCount } from '@/lib/utils'
 import { ChartLine, Search, TrendingUp } from 'lucide-react'
 
 interface MultiVersionTrendChartsProps {
@@ -154,11 +154,11 @@ export function MultiVersionTrendCharts({ benchmarks }: MultiVersionTrendChartsP
         const metric = aggregated.get(key)
         
         if (metric) {
-          const gpuCount = parseGpuCount(benchmark.config.shardingConfig)
+          const cardCount = parseCardCount(benchmark.config.shardingConfig)
           dataPoint[`ttft_${benchmark.id}`] = metric.ttft
           dataPoint[`tpot_${benchmark.id}`] = metric.tpot
           dataPoint[`tps_${benchmark.id}`] = metric.tokensPerSecond
-          dataPoint[`tpsPerGpu_${benchmark.id}`] = metric.tokensPerSecond / gpuCount
+          dataPoint[`tpsPerCard_${benchmark.id}`] = metric.tokensPerSecond / cardCount
         }
       })
       
@@ -499,8 +499,8 @@ export function MultiVersionTrendCharts({ benchmarks }: MultiVersionTrendChartsP
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-center">每卡TPS性能对比</h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {renderBarChart('tpsPerGpu', '每卡 TPS 性能柱状图', '每卡 TPS')}
-                  {renderTrendChart('tpsPerGpu', '每卡 TPS 性能趋势图', '每卡 TPS')}
+                  {renderBarChart('tpsPerCard', '每卡 TPS 性能柱状图', '每卡 TPS')}
+                  {renderTrendChart('tpsPerCard', '每卡 TPS 性能趋势图', '每卡 TPS')}
                 </div>
               </div>
             </>

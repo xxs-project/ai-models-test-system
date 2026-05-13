@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Benchmark } from '@/lib/types'
-import { parseGpuCount } from '@/lib/utils'
+import { parseCardCount } from '@/lib/utils'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ChartBar, FileText, Settings, Activity } from 'lucide-react'
 
@@ -20,6 +20,8 @@ export function BenchmarkViewOnlyDialog({
   onOpenChange,
 }: BenchmarkViewOnlyDialogProps) {
   if (!benchmark) return null
+
+  const cardCount = benchmark ? parseCardCount(benchmark.config.shardingConfig) : 1;
 
   const handleOpen = (isOpen: boolean) => {
     onOpenChange(isOpen)
@@ -83,7 +85,7 @@ export function BenchmarkViewOnlyDialog({
                     <p className="font-medium">
                       {benchmark.config.shardingConfig || '-'}
                       <span className="ml-1 text-xs text-muted-foreground">
-                        ({parseGpuCount(benchmark.config.shardingConfig)}卡)
+                        ({parseCardCount(benchmark.config.shardingConfig)}卡)
                       </span>
                     </p>
                   </div>
@@ -137,7 +139,7 @@ export function BenchmarkViewOnlyDialog({
                         <TableHead className="text-center">输出长度</TableHead>
                         <TableHead className="text-center">TTFT (ms)</TableHead>
                         <TableHead className="text-center">TPOT (ms)</TableHead>
-                        <TableHead className="text-center">TPS (tokens/s)</TableHead>
+                        <TableHead className="text-center">每卡 TPS</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -156,7 +158,7 @@ export function BenchmarkViewOnlyDialog({
                             <TableCell className="text-center font-mono">{metric.outputLength ?? 0}</TableCell>
                             <TableCell className="text-center font-mono">{(metric.ttft ?? 0).toFixed(2)}</TableCell>
                             <TableCell className="text-center font-mono">{(metric.tpot ?? 0).toFixed(2)}</TableCell>
-                            <TableCell className="text-center font-mono">{(metric.tokensPerSecond ?? 0).toFixed(2)}</TableCell>
+                            <TableCell className="text-center font-mono">{((metric.tokensPerSecond ?? 0) / cardCount).toFixed(2)}</TableCell>
                           </TableRow>
                         ))
                       )}
@@ -191,7 +193,7 @@ export function BenchmarkViewOnlyDialog({
                       <div className="bg-muted/50 p-4 rounded-lg">
                         <span className="text-sm text-muted-foreground">平均TPS</span>
                         <p className="text-2xl font-bold">
-                          {(benchmark.metrics.reduce((sum, m) => sum + (m.tokensPerSecond || 0), 0) / benchmark.metrics.length).toFixed(2)}
+                          {((benchmark.metrics.reduce((sum, m) => sum + (m.tokensPerSecond || 0), 0) / benchmark.metrics.length) / cardCount).toFixed(2)}
                         </p>
                       </div>
                       <div className="bg-muted/50 p-4 rounded-lg">
@@ -212,12 +214,12 @@ export function BenchmarkViewOnlyDialog({
                               <div 
                                 className="h-full bg-blue-500" 
                                 style={{ 
-                                  width: `${Math.min(100, (metric.tokensPerSecond / Math.max(...benchmark.metrics.map(m => m.tokensPerSecond || 1))) * 100)}%` 
+                                  width: `${Math.min(100, ((metric.tokensPerSecond / cardCount) / Math.max(...benchmark.metrics.map(m => (m.tokensPerSecond || 1) / cardCount))) * 100)}%` 
                                 }} 
                               />
                             </div>
                             <span className="text-sm text-muted-foreground w-24 text-right">
-                              {metric.tokensPerSecond.toFixed(2)} TPS
+                              {(metric.tokensPerSecond / cardCount).toFixed(2)} TPS
                             </span>
                           </div>
                         ))}

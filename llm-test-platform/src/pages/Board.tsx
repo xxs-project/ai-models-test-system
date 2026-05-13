@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Eye, ArrowUpDown, Search } from 'lucide-react'
 import { useBenchmarks } from '@/hooks/use-benchmarks'
 import { Benchmark } from '@/lib/types'
+import { parseCardCount } from '@/lib/utils'
 import { BenchmarkViewOnlyDialog } from '@/components/BenchmarkViewOnlyDialog'
 import ReactECharts from 'echarts-for-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -443,6 +444,8 @@ function PerfBoard() {
       if (filterServer !== 'all' && b.config.serverName !== filterServer) return
       if (filterCard !== 'all' && b.config.chipName !== filterCard) return
 
+      const cardCount = parseCardCount(b.config.shardingConfig)
+
       b.metrics.forEach(m => {
         if (filterConcurrency !== 'all' && String(m.concurrency) !== filterConcurrency) return
         if (filterContext !== 'all' && `${m.inputLength}/${m.outputLength}` !== filterContext) return
@@ -458,7 +461,7 @@ function PerfBoard() {
           outputLength: m.outputLength,
           ttft: m.ttft,
           tpot: m.tpot,
-          tps: m.tokensPerSecond,
+          tps: m.tokensPerSecond / cardCount,
           raw: b
         })
       })
@@ -556,7 +559,7 @@ function PerfBoard() {
                 <TableHead>TPOT (ms)</TableHead>
                 <TableHead>
                   <div className="flex items-center gap-1 cursor-pointer hover:text-slate-900 select-none" onClick={() => setSortDirection(d => d === 'asc' ? 'desc' : 'asc')}>
-                    TPS(tokens/s)
+                    每卡TPS
                     <ArrowUpDown className={`w-3 h-3 ${sortDirection ? 'text-blue-500' : 'text-slate-400'}`} />
                   </div>
                 </TableHead>

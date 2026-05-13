@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Benchmark, BenchmarkMetricsEntry } from '@/lib/types'
 import { Pencil, Save, X, Trash2, Plus } from 'lucide-react'
 import { toast } from 'sonner'
+import { parseCardCount } from '@/lib/utils'
 
 interface BenchmarkDetailDialogProps {
   benchmark: Benchmark | null
@@ -26,6 +27,7 @@ export function BenchmarkDetailDialog({
   onSave,
   isSaving = false,
 }: BenchmarkDetailDialogProps) {
+  const cardCount = benchmark ? parseCardCount(benchmark.config.shardingConfig) : 1;
   const [editConfig, setEditConfig] = useState<Benchmark['config'] | null>(null)
   const [editMetrics, setEditMetrics] = useState<BenchmarkMetricsEntry[]>([])
   const [editingMetricIndex, setEditingMetricIndex] = useState<number | null>(null)
@@ -244,7 +246,7 @@ export function BenchmarkDetailDialog({
                         <TableHead className="text-center">输出长度</TableHead>
                         <TableHead className="text-center">TTFT (ms)</TableHead>
                         <TableHead className="text-center">TPOT (ms)</TableHead>
-                        <TableHead className="text-center">TPS (tokens/s)</TableHead>
+                        <TableHead className="text-center">每卡 TPS</TableHead>
                         <TableHead className="text-center">操作</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -305,8 +307,8 @@ export function BenchmarkDetailDialog({
                                   <Input
                                     type="number"
                                     className="w-32 text-center"
-                                    value={tempMetric.tokensPerSecond}
-                                    onChange={(e) => setTempMetric({ ...tempMetric, tokensPerSecond: parseFloat(e.target.value) || 0 })}
+                                    value={tempMetric.tokensPerSecond / cardCount}
+                                    onChange={(e) => setTempMetric({ ...tempMetric, tokensPerSecond: (parseFloat(e.target.value) || 0) * cardCount })}
                                   />
                                 </TableCell>
                                 <TableCell className="text-center">
@@ -327,7 +329,7 @@ export function BenchmarkDetailDialog({
                                 <TableCell className="text-center font-mono">{metric.outputLength ?? 0}</TableCell>
                                 <TableCell className="text-center font-mono">{(metric.ttft ?? 0).toFixed(2)}</TableCell>
                                 <TableCell className="text-center font-mono">{(metric.tpot ?? 0).toFixed(2)}</TableCell>
-                                <TableCell className="text-center font-mono">{(metric.tokensPerSecond ?? 0).toFixed(2)}</TableCell>
+                                <TableCell className="text-center font-mono">{((metric.tokensPerSecond ?? 0) / cardCount).toFixed(2)}</TableCell>
                                 <TableCell className="text-center">
                                   <div className="flex items-center justify-center gap-1">
                                     <Button size="icon" variant="ghost" onClick={() => handleStartEditMetric(index)}>
