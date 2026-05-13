@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { Input } from '@/components/ui/input'
@@ -71,6 +71,22 @@ const formSchema = z.object({
   task_description: z.string().max(500, '最多500字符').optional(),
   test_type: z.coerce.number(),
   test_mode: z.coerce.number(),
+  startup_mode: z.enum(['api', 'container']).default('container'),
+
+  // API mode specific fields
+  base_url: z.string().optional(),
+  api_key: z.string().optional(),
+  parameter_combination: z.string().optional(),
+  parameter_combinations: z.array(z.object({
+    input_len: z.string(),
+    output_len: z.string(),
+    num_prompts: z.string(),
+    max_concurrency: z.string()
+  })).optional(),
+  processor_type: z.string().optional(),
+  server_model: z.string().optional(),
+  framework_startup_args: z.string().optional(),
+  accelerator_card: z.string().optional(),
 
   // Device Selection
   device_selection_mode: z.enum(['list', 'manual']),
@@ -94,7 +110,8 @@ const formSchema = z.object({
   dataset_name: z.string().optional(),
 }).superRefine((data, ctx) => {
   // Device Validation
-  if (data.device_selection_mode === 'list') {
+  if (data.startup_mode === 'container') {
+    if (data.device_selection_mode === 'list') {
     if (!data.device_id) {
        ctx.addIssue({ path: ['device_id'], code: z.ZodIssueCode.custom, message: '请选择设备' })
     }
@@ -104,6 +121,7 @@ const formSchema = z.object({
     }
     if (!data.username) ctx.addIssue({ path: ['username'], code: z.ZodIssueCode.custom, message: '必填' })
     if (!data.password) ctx.addIssue({ path: ['password'], code: z.ZodIssueCode.custom, message: '必填' })
+    }
   }
 
   // Single Model Validation (test_mode = 1)
@@ -129,7 +147,6 @@ export function TaskList() {
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
-  const [typeFilter, setTypeFilter] = useState<string>('all')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
   const [viewTask, setViewTask] = useState<Task | null>(null)
@@ -142,7 +159,6 @@ export function TaskList() {
     size: 20,
     search: search || undefined,
     status: statusFilter === 'all' ? undefined : statusFilter,
-    test_type: typeFilter === 'all' ? undefined : typeFilter,
   })
 
   const { data: devicesData } = useDevices({ size: 100 })
@@ -164,6 +180,15 @@ export function TaskList() {
       task_description: '',
       test_type: 1, // 性能测试
       test_mode: 1, // 单模型
+      startup_mode: 'container',
+      base_url: '',
+      api_key: '',
+      parameter_combination: '',
+      parameter_combinations: [{ input_len: '', output_len: '', num_prompts: '', max_concurrency: '' }],
+      processor_type: 'NPU',
+      server_model: '',
+      framework_startup_args: '',
+      accelerator_card: '',
       device_selection_mode: 'list',
       device_id: '',
       save_device: false,
@@ -182,9 +207,15 @@ export function TaskList() {
     },
   })
 
+    const { fields: paramFields, append: appendParam, remove: removeParam } = useFieldArray({
+    control: form.control,
+    name: "parameter_combinations"
+  })
+
   // Watchers for conditional logic
   const testType = form.watch('test_type')
   const testMode = form.watch('test_mode')
+  const startupMode = form.watch('startup_mode')
   const inferenceFramework = form.watch('inference_framework')
   const deviceSelectionMode = form.watch('device_selection_mode')
   const selectedDeviceId = form.watch('device_id')
@@ -220,6 +251,14 @@ export function TaskList() {
         priority: values.priority,
         test_type: values.test_type,
         test_mode: values.test_mode,
+        startup_mode: values.startup_mode,
+        base_url: values.base_url,
+        api_key: values.api_key,
+        parameter_combination: values.parameter_combinations && values.parameter_combinations.length > 0 ? JSON.stringify(values.parameter_combinations) : '',
+        processor_type: values.processor_type,
+        server_model: values.server_model,
+        framework_startup_args: values.framework_startup_args,
+        accelerator_card: values.accelerator_card,
         device_id: values.device_selection_mode === 'list' && values.device_id ? parseInt(values.device_id) : undefined,
         device_ip: values.device_ip,
         device_username: values.username,  // Map username to device_username
@@ -277,6 +316,20 @@ export function TaskList() {
   }
 
   const handleEdit = (task: Task) => {
+    let parsedCombinations = [{ input_len: '', output_len: '', num_prompts: '', max_concurrency: '' }];
+    if (task.parameter_combination) {
+      try {
+        const parsed = JSON.parse(task.parameter_combination);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          parsedCombinations = parsed;
+        } else if (typeof parsed === 'object') {
+           // Handle old format if it was a single object
+           parsedCombinations = [ { input_len: String(parsed.input_len || ''), output_len: String(parsed.output_len || ''), num_prompts: String(parsed.num_prompts || ''), max_concurrency: String(parsed.max_concurrency || '') } ];
+        }
+      } catch (e) {
+        console.error("Failed to parse parameter_combination", e);
+      }
+    }
     setEditingTask(task)
     form.reset({
       task_name: task.task_name || '',
@@ -284,6 +337,15 @@ export function TaskList() {
       task_description: task.task_description || '',
       test_type: task.test_type ?? 1,
       test_mode: task.test_mode ?? 1,
+      startup_mode: task.startup_mode || 'container',
+      base_url: task.base_url || '',
+      api_key: task.api_key || '',
+      parameter_combination: task.parameter_combination || '',
+      parameter_combinations: parsedCombinations,
+      processor_type: task.processor_type || 'NPU',
+      server_model: task.server_model || '',
+      framework_startup_args: task.framework_startup_args || '',
+      accelerator_card: task.accelerator_card || '',
       device_selection_mode: task.device_id ? 'list' : 'manual',
       device_id: task.device_id?.toString() || '',
       device_ip: task.device_ip || '',
@@ -315,6 +377,9 @@ export function TaskList() {
         toast.success('任务删除成功')
         setDeleteConfirmOpen(false)
         setTaskToDelete(null)
+        if (tasks.length === 1 && page > 1) {
+          setPage((p) => p - 1)
+        }
       } catch (error) {
         toast.error('删除失败')
       }
@@ -382,6 +447,15 @@ export function TaskList() {
             task_description: '',
             test_type: 1,
             test_mode: 1,
+            startup_mode: 'container',
+            base_url: '',
+            api_key: '',
+            parameter_combination: '',
+            parameter_combinations: [{ input_len: '', output_len: '', num_prompts: '', max_concurrency: '' }],
+            processor_type: 'NPU',
+            server_model: '',
+            framework_startup_args: '',
+      accelerator_card: '',
             device_selection_mode: 'list',
             device_id: '',
             save_device: false,
@@ -425,16 +499,6 @@ export function TaskList() {
             <SelectItem value="3">执行中</SelectItem>
             <SelectItem value="4">已完成</SelectItem>
             <SelectItem value="5">失败</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={typeFilter} onValueChange={setTypeFilter}>
-          <SelectTrigger className="w-[150px]" aria-label="类型">
-            <SelectValue placeholder="类型" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">全部</SelectItem>
-            <SelectItem value="1">单模型</SelectItem>
-            <SelectItem value="2">全套模型</SelectItem>
           </SelectContent>
         </Select>
         <Button variant="outline" onClick={() => queryClient.invalidateQueries({ queryKey: ['tasks'] })}>
@@ -629,7 +693,7 @@ export function TaskList() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>优先级 <span className="text-red-500">*</span></FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                        <Select onValueChange={field.onChange} value={String(field.value)}>
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue placeholder="选择优先级" />
@@ -664,14 +728,15 @@ export function TaskList() {
               {/* 测试配置 */}
               <div className="space-y-4 border-b border-slate-100 pb-6">
                 <h3 className="font-semibold text-slate-900">测试配置</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-4">
+
                   <FormField
                     control={form.control}
                     name="test_type"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>测试类型 <span className="text-red-500">*</span></FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                        <Select onValueChange={field.onChange} value={String(field.value)}>
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue />
@@ -692,7 +757,7 @@ export function TaskList() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>测试模式 <span className="text-red-500">*</span></FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                        <Select onValueChange={field.onChange} value={String(field.value)}>
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue />
@@ -707,9 +772,135 @@ export function TaskList() {
                       </FormItem>
                     )}
                   />
+                  {Number(testType) === 1 && Number(testMode) === 1 && (
+                  <FormField
+                    control={form.control}
+                    name="startup_mode"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>启动模式 <span className="text-red-500">*</span></FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="api">直连API</SelectItem>
+                            <SelectItem value="container">容器化启动</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  )}
                 </div>
               </div>
 
+              {startupMode === 'api' && (
+                <>
+                  <div className="space-y-4 border-b border-slate-100 pb-6">
+                    <h3 className="font-semibold text-slate-900">性能测试配置</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormField control={form.control} name="base_url" render={({ field }) => (
+                        <FormItem><FormLabel>接口地址 (BASE_URL) <span className="text-red-500">*</span></FormLabel><FormControl><Input placeholder="http://api..." {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="model_name" render={({ field }) => (
+                        <FormItem><FormLabel>模型名称 <span className="text-red-500">*</span></FormLabel><FormControl><Input placeholder="Qwen-14B" {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="api_key" render={({ field }) => (
+                        <FormItem><FormLabel>鉴权密钥</FormLabel><FormControl><Input placeholder="Bearer token..." {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="model_path" render={({ field }) => (
+                        <FormItem><FormLabel>模型路径 <span className="text-red-500">*</span></FormLabel><FormControl><Input placeholder="/data/models/..." {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <div className="col-span-2 space-y-2 border p-4 rounded-lg bg-gray-50/50">
+                        <FormLabel>参数组合</FormLabel>
+                        <div className="space-y-2 mt-1">
+                          <div className="flex gap-2 items-center px-1">
+                            <div className="flex-1 grid grid-cols-4 gap-4 text-xs font-semibold text-slate-500 text-left">
+                              <div>input_len</div>
+                              <div>output_len</div>
+                              <div>num_prompts</div>
+                              <div>max_concurrency</div>
+                            </div>
+                            <div className="w-[80px]"></div>
+                          </div>
+                          {paramFields.map((field, index) => (
+                            <div key={field.id} className="flex gap-2 items-start">
+                              <div className="flex-1 grid grid-cols-4 gap-4">
+                                <FormField control={form.control} name={`parameter_combinations.${index}.input_len`} render={({field}) => <FormItem><FormControl><Input placeholder="1024" {...field} /></FormControl></FormItem>} />
+                                <FormField control={form.control} name={`parameter_combinations.${index}.output_len`} render={({field}) => <FormItem><FormControl><Input placeholder="1024" {...field} /></FormControl></FormItem>} />
+                                <FormField control={form.control} name={`parameter_combinations.${index}.num_prompts`} render={({field}) => <FormItem><FormControl><Input placeholder="1" {...field} /></FormControl></FormItem>} />
+                                <FormField control={form.control} name={`parameter_combinations.${index}.max_concurrency`} render={({field}) => <FormItem><FormControl><Input placeholder="1" {...field} /></FormControl></FormItem>} />
+                              </div>
+                              <div className="flex items-center gap-1 w-[80px] mt-1">
+                                {index === paramFields.length - 1 && (
+                                  <Button type="button" variant="outline" size="icon" onClick={() => appendParam({ input_len: '', output_len: '', num_prompts: '', max_concurrency: '' })}>
+                                    <Plus className="w-4 h-4" />
+                                  </Button>
+                                )}
+                                {paramFields.length > 1 && (
+                                  <Button type="button" variant="ghost" size="icon" onClick={() => removeParam(index)} className="text-red-500 hover:text-red-700 hover:bg-red-50">
+                                    <Trash2 className="w-4 h-4" />
+                                  </Button>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <FormField control={form.control} name="test_path" render={({ field }) => (
+                        <FormItem><FormLabel>测试路径 <span className="text-red-500">*</span></FormLabel><FormControl><Input placeholder="/data/scripts/..." {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="processor_type" render={({ field }) => (
+                        <FormItem><FormLabel>处理器类型 <span className="text-red-500">*</span></FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                            <SelectContent><SelectItem value="NPU">NPU</SelectItem><SelectItem value="GPU">GPU</SelectItem></SelectContent>
+                          </Select><FormMessage />
+                        </FormItem>
+                      )} />
+                      <FormField control={form.control} name="graph_mode" render={({ field }) => (
+                        <FormItem><FormLabel>图模式</FormLabel><FormControl><Input placeholder="aclgraph" {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 pb-6">
+                    <h3 className="font-semibold text-slate-900">服务器及推理框架配置</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormField control={form.control} name="server_model" render={({ field }) => (
+                        <FormItem><FormLabel>服务器机型</FormLabel><FormControl><Input placeholder="Atlas 800T A2" {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="accelerator_card" render={({ field }) => (
+                        <FormItem><FormLabel>加速卡</FormLabel><FormControl><Input placeholder="比如910B等" {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="npu_count" render={({ field }) => (
+                        <FormItem><FormLabel>加速卡数量 <span className="text-red-500">*</span></FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="inference_framework" render={({ field }) => (
+                        <FormItem><FormLabel>推理框架 <span className="text-red-500">*</span></FormLabel>
+                          <Select onValueChange={field.onChange} value={String(field.value)}>
+                            <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                            <SelectContent><SelectItem value="1">vLLM</SelectItem><SelectItem value="2">MindIE</SelectItem></SelectContent>
+                          </Select><FormMessage />
+                        </FormItem>
+                      )} />
+                      <FormField control={form.control} name="framework_version" render={({ field }) => (
+                        <FormItem><FormLabel>推理框架版本 <span className="text-red-500">*</span></FormLabel><FormControl><Input placeholder="v1.0.1" {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="framework_startup_args" render={({ field }) => (
+                        <FormItem><FormLabel>框架启动参数</FormLabel><FormControl><Input placeholder="--tensor-parallel-size 1" {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {startupMode === 'container' && (
+                <>
               {/* 设备配置 */}
               <div className="space-y-4 border-b border-slate-100 pb-6">
                  <h3 className="font-semibold text-slate-900">设备配置</h3>
@@ -889,7 +1080,7 @@ export function TaskList() {
                       </FormItem>
                     )}
                    />
-                    {/* 5. 模型名称 - 仅单模型测试显示 */}
+                    {/* 5. 模型名称 */}
                     {Number(testMode) === 1 && (
                     <FormField
                      control={form.control}
@@ -905,14 +1096,38 @@ export function TaskList() {
                      )}
                     />
                     )}
-                    {/* 6. NPU数量 - 仅单模型测试显示 */}
+                    {/* 处理器 - 仅性能测试显示 */}
+                    {Number(testType) === 1 && (
+                    <FormField
+                     control={form.control}
+                     name="processor_type"
+                     render={({ field }) => (
+                       <FormItem>
+                         <FormLabel>处理器类型 <span className="text-red-500">*</span></FormLabel>
+                         <Select onValueChange={field.onChange} value={field.value || 'NPU'}>
+                           <FormControl>
+                             <SelectTrigger>
+                               <SelectValue placeholder="选择处理器类型" />
+                             </SelectTrigger>
+                           </FormControl>
+                           <SelectContent>
+                             <SelectItem value="NPU">NPU</SelectItem>
+                             <SelectItem value="GPU">GPU</SelectItem>
+                           </SelectContent>
+                         </Select>
+                         <FormMessage />
+                       </FormItem>
+                     )}
+                    />
+                    )}
+                    {/* 6. 加速卡数量 */}
                     {Number(testMode) === 1 && (
                     <FormField
                      control={form.control}
                      name="npu_count"
                      render={({ field }) => (
                        <FormItem>
-                         <FormLabel>NPU数量 <span className="text-red-500">*</span></FormLabel>
+                         <FormLabel>加速卡数量 <span className="text-red-500">*</span></FormLabel>
                          <FormControl>
                            <Input type="number" {...field} />
                          </FormControl>
@@ -922,7 +1137,7 @@ export function TaskList() {
                     />
                     )}
                     
-                    {/* 7. 图模式 - 仅单模型测试且vLLM显示 */}
+                    {/* 7. 图模式 */}
                     {Number(testMode) === 1 && Number(inferenceFramework) === 1 && (
                     <FormField
                      control={form.control}
@@ -938,7 +1153,7 @@ export function TaskList() {
                      )}
                     />
                     )}
-                    {/* 8. 执行标识 - 仅单模型测试且vLLM显示 */}
+                    {/* 8. 执行标识 */}
                     {Number(testMode) === 1 && Number(inferenceFramework) === 1 && (
                     <FormField
                      control={form.control}
@@ -946,7 +1161,7 @@ export function TaskList() {
                      render={({ field }) => (
                        <FormItem>
                          <FormLabel>执行标识 <span className="text-red-500">*</span></FormLabel>
-                         <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                         <Select onValueChange={field.onChange} value={String(field.value)}>
                            <FormControl>
                              <SelectTrigger>
                                <SelectValue />
@@ -981,6 +1196,8 @@ export function TaskList() {
                     )}
                   </div>
                </div>
+              </>
+              )}
 
               <DialogFooter className="gap-3">
                 <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
@@ -996,7 +1213,7 @@ export function TaskList() {
       </Dialog>
 
       <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
-        <DialogContent className="max-w-2xl bg-white border-2 border-slate-300 shadow-2xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white border-2 border-slate-300 shadow-2xl">
           <DialogHeader className="border-b border-slate-200 pb-4">
             <DialogTitle className="text-xl font-bold text-slate-900">任务详情</DialogTitle>
           </DialogHeader>
@@ -1031,6 +1248,12 @@ export function TaskList() {
                   <h4 className="text-sm font-medium text-gray-500">测试模式</h4>
                   <p className="mt-1 text-sm text-gray-900">{viewTask.test_mode === 1 ? '单模型测试' : '全套模型测试'}</p>
                 </div>
+                {viewTask.test_type === 1 && viewTask.test_mode === 1 && (
+                <div>
+                  <h4 className="text-sm font-medium text-gray-500">启动模式</h4>
+                  <p className="mt-1 text-sm text-gray-900">{viewTask.startup_mode === 'api' ? '直连API' : '容器化启动'}</p>
+                </div>
+                )}
                 <div>
                   <h4 className="text-sm font-medium text-gray-500">创建人</h4>
                   <p className="mt-1 text-sm text-gray-900">{viewTask.created_by}</p>
@@ -1060,37 +1283,95 @@ export function TaskList() {
                       <span className="text-xs text-gray-500 block">模型路径</span>
                       <span className="text-sm break-all">{viewTask.model_path}</span>
                      </div>
+                     <div>
+                       <span className="text-xs text-gray-500 block">测试路径</span>
+                       <span className="text-sm break-all">{viewTask.script_path || '-'}</span>
+                     </div>
+                                          {/* 仅性能测试显示处理器 */}
+                     {viewTask.test_type === 1 && (
+                       <div>
+                         <span className="text-xs text-gray-500 block">处理器类型</span>
+                         <span className="text-sm">{viewTask.processor_type || '-'}</span>
+                       </div>
+                     )}
+                     {viewTask.test_mode === 1 && (
+                       <>
+                         <div>
+                           <span className="text-xs text-gray-500 block">模型名称</span>
+                           <span className="text-sm">{viewTask.model_name || '-'}</span>
+                         </div>
+                         <div>
+                           <span className="text-xs text-gray-500 block">加速卡数量</span>
+                           <span className="text-sm">{viewTask.npu_count || '-'}</span>
+                         </div>
+                         {/* 图模式 - 仅vLLM显示 */}
+                         {viewTask.inference_framework === 1 && (
+                           <div>
+                             <span className="text-xs text-gray-500 block">图模式</span>
+                             <span className="text-sm">{viewTask.graph_mode || '-'}</span>
+                           </div>
+                         )}
+                         {/* 执行标识 - 仅vLLM显示 */}
+                         {viewTask.inference_framework === 1 && (
+                           <div>
+                             <span className="text-xs text-gray-500 block">执行标识</span>
+                             <span className="text-sm">
+                               {viewTask.execution_flag === '1' ? '自定义性能脚本' : 
+                                viewTask.execution_flag === '2' ? 'VLLM基准测试脚本' : 
+                                viewTask.execution_flag || '-'}
+                             </span>
+                           </div>
+                         )}
+                       </>
+                     )}
+                     {viewTask.test_type === 2 && viewTask.test_mode === 1 && (
+                       <div>
+                         <span className="text-xs text-gray-500 block">数据集名称</span>
+                         <span className="text-sm">{viewTask.dataset_name || '-'}</span>
+                       </div>
+                     )}
                        {viewTask.test_mode === 1 && (
                          <>
-                           <div>
-                             <span className="text-xs text-gray-500 block">测试路径</span>
-                             <span className="text-sm break-all">{viewTask.script_path || '-'}</span>
-                           </div>
-                           <div>
-                             <span className="text-xs text-gray-500 block">模型名称</span>
-                             <span className="text-sm">{viewTask.model_name}</span>
-                           </div>
-                           <div>
-                             <span className="text-xs text-gray-500 block">NPU数量</span>
-                             <span className="text-sm">{viewTask.npu_count || '-'}</span>
-                           </div>
-                           {/* 图模式 - 仅vLLM显示 */}
-                           {viewTask.inference_framework === 1 && (
-                             <div>
-                               <span className="text-xs text-gray-500 block">图模式</span>
-                               <span className="text-sm">{viewTask.graph_mode || '-'}</span>
-                             </div>
-                           )}
-                           {/* 执行标识 - 仅vLLM显示 */}
-                           {viewTask.inference_framework === 1 && (
-                             <div>
-                               <span className="text-xs text-gray-500 block">执行标识</span>
-                               <span className="text-sm">
-                                 {viewTask.execution_flag === '1' ? '自定义性能脚本' : 
-                                  viewTask.execution_flag === '2' ? 'VLLM基准测试脚本' : 
-                                  viewTask.execution_flag || '-'}
-                               </span>
-                             </div>
+                           {viewTask.startup_mode === 'api' && (
+                             <>
+                               <div>
+                                 <span className="text-xs text-gray-500 block">接口地址</span>
+                                 <span className="text-sm break-all">{viewTask.base_url || '-'}</span>
+                               </div>
+                               <div>
+                                 <span className="text-xs text-gray-500 block">鉴权密钥</span>
+                                 <span className="text-sm">{viewTask.api_key ? '***' : '-'}</span>
+                               </div>
+
+                               <div>
+                                 <span className="text-xs text-gray-500 block">服务器机型</span>
+                                 <span className="text-sm">{viewTask.server_model || '-'}</span>
+                               </div>
+                               <div>
+                                 <span className="text-xs text-gray-500 block">加速卡</span>
+                                 <span className="text-sm">{viewTask.accelerator_card || '-'}</span>
+                               </div>
+                               <div className="col-span-2">
+                                 <span className="text-xs text-gray-500 block">框架启动参数</span>
+                                 <span className="text-sm break-all">{viewTask.framework_startup_args || '-'}</span>
+                               </div>
+                               <div className="col-span-2">
+                                 <span className="text-xs text-gray-500 block mb-1">参数组合</span>
+                                 <div className="text-sm bg-white p-2 border rounded">
+                                   {viewTask.parameter_combination ? (
+                                     <pre className="whitespace-pre-wrap">
+                                       {(() => {
+                                         try {
+                                           return JSON.stringify(JSON.parse(viewTask.parameter_combination), null, 2);
+                                         } catch (e) {
+                                           return viewTask.parameter_combination;
+                                         }
+                                       })()}
+                                     </pre>
+                                   ) : '-'}
+                                 </div>
+                               </div>
+                             </>
                            )}
                          </>
                        )}

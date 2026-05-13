@@ -15,6 +15,7 @@ vi.mock('../hooks/use-tasks', () => ({
   useDeleteTask: vi.fn(() => ({ mutateAsync: vi.fn(), isPending: false })),
   useExecuteTask: vi.fn(() => ({ mutateAsync: vi.fn(), isPending: false })),
   useCancelTask: vi.fn(() => ({ mutateAsync: vi.fn(), isPending: false })),
+  useAutoImportTask: vi.fn(() => ({ mutateAsync: vi.fn(), isPending: false })),
 }))
 
 vi.mock('../hooks/use-devices', () => ({
@@ -152,7 +153,7 @@ describe('性能测试管理模块测试', () => {
       renderTaskList()
 
       // 验证页面标题
-      expect(screen.getByText('性能测试管理')).toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: '性能测试' })).toBeInTheDocument()
       expect(screen.getByText('管理测试任务，监控执行状态')).toBeInTheDocument()
 
       // 验证创建任务按钮

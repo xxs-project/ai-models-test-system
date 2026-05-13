@@ -1,0 +1,924 @@
+DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+🔷 配置参数 - 模型路径: /data/models
+🔷 配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+🔷 配置参数 - 温度: 0.65, 请求速率: 0
+🔷 配置参数 - Docker标签: v0.12.0rc1
+🔷 清理可能残留的VLLM容器和临时文件...
+0
+🔷 检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)
+🔷 🚀 开始自动化VLLM基准测试 (混合并行模式)
+🔷 模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+🔷 测试模型数: 78 | NPU总计: 16 张
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-32B] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen3-32B] 推理服务启动成功 (容器: vllm_qwen3_32b_1769755352_aclgraph)
+start container_name: vllm_qwen3_32b_1769755352_aclgraph
+🔷 [Qwen3-32B_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B] 性能测试已启动 (PID: 2560363)
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2801, NPU: 4,5,6,7)...
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-32B] 推理服务已就绪 (耗时: 80秒)
+✅ [Qwen3-32B] 推理服务启动成功 (容器: vllm_qwen3_32b_1769755476_eager)
+start container_name: vllm_qwen3_32b_1769755476_eager
+🔷 [Qwen3-32B_eager] 启动性能测试...
+开始测试模型：Qwen3-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B] 性能测试已启动 (PID: 2566279)
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2802, NPU: 8,9,10,11)...
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-32B] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen3-32B] 推理服务启动成功 (容器: vllm_qwen3_32b_1769755560_xlite)
+start container_name: vllm_qwen3_32b_1769755560_xlite
+🔷 [Qwen3-32B_xlite] 启动性能测试...
+开始测试模型：Qwen3-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B] 性能测试已启动 (PID: 2575181)
+🔷 [Qwen3-Next-80B-A3B-Instruct] 处理测试配置: Qwen3-Next-80B-A3B-Instruct (需要 4 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-Next-80B-A3B-Instruct] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen3-Next-80B-A3B-Instruct] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 测试完成，清理推理服务容器: vllm_qwen3_32b_1769755352_aclgraph
+🔷 [Qwen3-Next-80B-A3B-Instruct] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔷 [Qwen3-Next-80B-A3B-Instruct] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-32B] 测试完成，清理推理服务容器: vllm_qwen3_32b_1769755476_eager
+🔷 [Qwen3-32B] 测试完成，清理推理服务容器: vllm_qwen3_32b_1769755560_xlite
+✅ [Qwen3-Next-80B-A3B-Instruct] 推理服务已就绪 (耗时: 150秒)
+✅ [Qwen3-Next-80B-A3B-Instruct] 推理服务启动成功 (容器: vllm_qwen3_next_80b_a3b_instruct_1769756119_eager)
+start container_name: vllm_qwen3_next_80b_a3b_instruct_1769756119_eager
+🔷 [Qwen3-Next-80B-A3B-Instruct_eager] 启动性能测试...
+开始测试模型：Qwen3-Next-80B-A3B-Instruct, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-Next-80B-A3B-Instruct] 性能测试已启动 (PID: 2608801)
+🔷 [Qwen3-VL-30B-A3B-Instruct] 处理测试配置: Qwen3-VL-30B-A3B-Instruct (需要 4 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-VL-30B-A3B-Instruct] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要4张
+🔷 [Qwen3-VL-30B-A3B-Instruct] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-VL-30B-A3B-Instruct] 启动推理服务 (端口: 2801, NPU: 4,5,6,7)...
+🔷 [Qwen3-VL-30B-A3B-Instruct] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-VL-30B-A3B-Instruct] 推理服务已就绪 (耗时: 170秒)
+✅ [Qwen3-VL-30B-A3B-Instruct] 推理服务启动成功 (容器: vllm_qwen3_vl_30b_a3b_instruct_1769756273_aclgraph)
+start container_name: vllm_qwen3_vl_30b_a3b_instruct_1769756273_aclgraph
+🔷 [Qwen3-VL-30B-A3B-Instruct_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-VL-30B-A3B-Instruct, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-VL-30B-A3B-Instruct] 性能测试已启动 (PID: 2622018)
+🔷 [Qwen3-VL-30B-A3B-Instruct] 处理测试配置: Qwen3-VL-30B-A3B-Instruct (需要 4 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-VL-30B-A3B-Instruct] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要4张
+🔷 [Qwen3-VL-30B-A3B-Instruct] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-VL-30B-A3B-Instruct] 启动推理服务 (端口: 2802, NPU: 8,9,10,11)...
+🔷 [Qwen3-VL-30B-A3B-Instruct] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-VL-30B-A3B-Instruct] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen3-VL-30B-A3B-Instruct] 推理服务启动成功 (容器: vllm_qwen3_vl_30b_a3b_instruct_1769756448_eager)
+start container_name: vllm_qwen3_vl_30b_a3b_instruct_1769756448_eager
+🔷 [Qwen3-VL-30B-A3B-Instruct_eager] 启动性能测试...
+开始测试模型：Qwen3-VL-30B-A3B-Instruct, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-VL-30B-A3B-Instruct] 性能测试已启动 (PID: 2630994)
+🔷 [Qwen3-VL-32B-Instruct] 处理测试配置: Qwen3-VL-32B-Instruct (需要 4 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-VL-32B-Instruct] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen3-VL-32B-Instruct] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-VL-30B-A3B-Instruct] 测试完成，清理推理服务容器: vllm_qwen3_vl_30b_a3b_instruct_1769756273_aclgraph
+🔷 [Qwen3-VL-32B-Instruct] 启动推理服务 (端口: 2801, NPU: 4,5,6,7)...
+🔷 [Qwen3-VL-32B-Instruct] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-VL-30B-A3B-Instruct] 测试完成，清理推理服务容器: vllm_qwen3_vl_30b_a3b_instruct_1769756448_eager
+✅ [Qwen3-VL-32B-Instruct] 推理服务已就绪 (耗时: 160秒)
+✅ [Qwen3-VL-32B-Instruct] 推理服务启动成功 (容器: vllm_qwen3_vl_32b_instruct_1769757440_aclgraph)
+start container_name: vllm_qwen3_vl_32b_instruct_1769757440_aclgraph
+🔷 [Qwen3-VL-32B-Instruct_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-VL-32B-Instruct, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-VL-32B-Instruct] 性能测试已启动 (PID: 2722951)
+🔷 [Qwen3-VL-32B-Instruct] 处理测试配置: Qwen3-VL-32B-Instruct (需要 4 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-VL-32B-Instruct] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要4张
+🔷 [Qwen3-VL-32B-Instruct] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-VL-32B-Instruct] 启动推理服务 (端口: 2802, NPU: 8,9,10,11)...
+🔷 [Qwen3-VL-32B-Instruct] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-VL-32B-Instruct] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen3-VL-32B-Instruct] 推理服务启动成功 (容器: vllm_qwen3_vl_32b_instruct_1769757604_eager)
+start container_name: vllm_qwen3_vl_32b_instruct_1769757604_eager
+🔷 [Qwen3-VL-32B-Instruct_eager] 启动性能测试...
+开始测试模型：Qwen3-VL-32B-Instruct, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-VL-32B-Instruct] 性能测试已启动 (PID: 2729593)
+🔷 [Qwen3-32B-NVFP4] 处理测试配置: Qwen3-32B-NVFP4 (需要 4 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B-NVFP4] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen3-32B-NVFP4] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-Next-80B-A3B-Instruct] 测试完成，清理推理服务容器: vllm_qwen3_next_80b_a3b_instruct_1769756119_eager
+🔷 [Qwen3-32B-NVFP4] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔷 [Qwen3-32B-NVFP4] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-32B-NVFP4] 推理服务已就绪 (耗时: 280秒)
+✅ [Qwen3-32B-NVFP4] 推理服务启动成功 (容器: vllm_qwen3_32b_nvfp4_1769758018_aclgraph)
+start container_name: vllm_qwen3_32b_nvfp4_1769758018_aclgraph
+🔷 [Qwen3-32B-NVFP4_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-32B-NVFP4, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B-NVFP4] 性能测试已启动 (PID: 2766860)
+🔷 [Qwen3-32B-NVFP4] 处理测试配置: Qwen3-32B-NVFP4 (需要 4 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B-NVFP4] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen3-32B-NVFP4] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-VL-32B-Instruct] 测试完成，清理推理服务容器: vllm_qwen3_vl_32b_instruct_1769757604_eager
+🔷 [Qwen3-32B-NVFP4] 启动推理服务 (端口: 2802, NPU: 8,9,10,11)...
+🔷 [Qwen3-32B-NVFP4] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-VL-32B-Instruct] 测试完成，清理推理服务容器: vllm_qwen3_vl_32b_instruct_1769757440_aclgraph
+✅ [Qwen3-32B-NVFP4] 推理服务已就绪 (耗时: 240秒)
+✅ [Qwen3-32B-NVFP4] 推理服务启动成功 (容器: vllm_qwen3_32b_nvfp4_1769758737_eager)
+start container_name: vllm_qwen3_32b_nvfp4_1769758737_eager
+🔷 [Qwen3-32B-NVFP4_eager] 启动性能测试...
+开始测试模型：Qwen3-32B-NVFP4, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B-NVFP4] 性能测试已启动 (PID: 2837597)
+🔷 [Qwen2.5-72B] 处理测试配置: Qwen2.5-72B (需要 4 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-72B] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要4张
+🔷 [Qwen2.5-72B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen2.5-72B] 启动推理服务 (端口: 2801, NPU: 4,5,6,7)...
+🔷 [Qwen2.5-72B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-72B] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen2.5-72B] 推理服务启动成功 (容器: vllm_qwen2_5_72b_1769758981_aclgraph)
+start container_name: vllm_qwen2_5_72b_1769758981_aclgraph
+🔷 [Qwen2.5-72B_aclgraph] 启动性能测试...
+开始测试模型：Qwen2.5-72B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-72B] 性能测试已启动 (PID: 2845017)
+🔷 [Qwen2.5-72B] 处理测试配置: Qwen2.5-72B (需要 4 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-72B] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen2.5-72B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B-NVFP4] 测试完成，清理推理服务容器: vllm_qwen3_32b_nvfp4_1769758018_aclgraph
+🔷 [Qwen2.5-72B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔷 [Qwen2.5-72B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-72B] 推理服务已就绪 (耗时: 80秒)
+✅ [Qwen2.5-72B] 推理服务启动成功 (容器: vllm_qwen2_5_72b_1769759167_eager)
+start container_name: vllm_qwen2_5_72b_1769759167_eager
+🔷 [Qwen2.5-72B_eager] 启动性能测试...
+开始测试模型：Qwen2.5-72B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-72B] 性能测试已启动 (PID: 2853877)
+🔷 [Qwen2.5-72B] 处理测试配置: Qwen2.5-72B (需要 4 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-72B] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen2.5-72B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B-NVFP4] 测试完成，清理推理服务容器: vllm_qwen3_32b_nvfp4_1769758737_eager
+🔷 [Qwen2.5-72B] 启动推理服务 (端口: 2802, NPU: 8,9,10,11)...
+🔷 [Qwen2.5-72B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-72B] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen2.5-72B] 推理服务启动成功 (容器: vllm_qwen2_5_72b_1769759996_xlite)
+start container_name: vllm_qwen2_5_72b_1769759996_xlite
+🔷 [Qwen2.5-72B_xlite] 启动性能测试...
+开始测试模型：Qwen2.5-72B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-72B] 性能测试已启动 (PID: 2899965)
+🔷 [Qwen2.5-32B] 处理测试配置: Qwen2.5-32B (需要 4 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-32B] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen2.5-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen2.5-72B] 测试完成，清理推理服务容器: vllm_qwen2_5_72b_1769758981_aclgraph
+🔷 [Qwen2.5-32B] 启动推理服务 (端口: 2801, NPU: 4,5,6,7)...
+🔷 [Qwen2.5-32B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-72B] 测试完成，清理推理服务容器: vllm_qwen2_5_72b_1769759167_eager
+✅ [Qwen2.5-32B] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen2.5-32B] 推理服务启动成功 (容器: vllm_qwen2_5_32b_1769760182_aclgraph)
+start container_name: vllm_qwen2_5_32b_1769760182_aclgraph
+🔷 [Qwen2.5-32B_aclgraph] 启动性能测试...
+开始测试模型：Qwen2.5-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-32B] 性能测试已启动 (PID: 2910235)
+🔷 [Qwen2.5-32B] 处理测试配置: Qwen2.5-32B (需要 4 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-32B] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要4张
+🔷 [Qwen2.5-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen2.5-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔷 [Qwen2.5-32B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-32B] 推理服务已就绪 (耗时: 80秒)
+✅ [Qwen2.5-32B] 推理服务启动成功 (容器: vllm_qwen2_5_32b_1769760296_eager)
+start container_name: vllm_qwen2_5_32b_1769760296_eager
+🔷 [Qwen2.5-32B_eager] 启动性能测试...
+开始测试模型：Qwen2.5-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-32B] 性能测试已启动 (PID: 2949287)
+🔷 [Qwen2.5-32B] 处理测试配置: Qwen2.5-32B (需要 4 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-32B] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要4张
+🔷 [Qwen2.5-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen2.5-32B] 测试完成，清理推理服务容器: vllm_qwen2_5_32b_1769760182_aclgraph
+🔷 [Qwen2.5-32B] 启动推理服务 (端口: 2801, NPU: 4,5,6,7)...
+🔷 [Qwen2.5-32B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-32B] 测试完成，清理推理服务容器: vllm_qwen2_5_32b_1769760296_eager
+✅ [Qwen2.5-32B] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen2.5-32B] 推理服务启动成功 (容器: vllm_qwen2_5_32b_1769760938_xlite)
+start container_name: vllm_qwen2_5_32b_1769760938_xlite
+🔷 [Qwen2.5-32B_xlite] 启动性能测试...
+开始测试模型：Qwen2.5-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-32B] 性能测试已启动 (PID: 2986581)
+🔷 [Qwen3-30B-A3B] 处理测试配置: Qwen3-30B-A3B (需要 2 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-30B-A3B] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要2张
+🔷 [Qwen3-30B-A3B] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen3-30B-A3B] 启动推理服务 (端口: 2800, NPU: 0,1)...
+🔷 [Qwen3-30B-A3B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-30B-A3B] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen3-30B-A3B] 推理服务启动成功 (容器: vllm_qwen3_30b_a3b_1769761063_aclgraph)
+start container_name: vllm_qwen3_30b_a3b_1769761063_aclgraph
+🔷 [Qwen3-30B-A3B_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-30B-A3B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-30B-A3B] 性能测试已启动 (PID: 2992470)
+🔷 [Qwen3-30B-A3B] 处理测试配置: Qwen3-30B-A3B (需要 2 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-30B-A3B] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要2张
+🔷 [Qwen3-30B-A3B] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen3-30B-A3B] 启动推理服务 (端口: 2803, NPU: 2,3)...
+🔷 [Qwen3-30B-A3B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-72B] 测试完成，清理推理服务容器: vllm_qwen2_5_72b_1769759996_xlite
+✅ [Qwen3-30B-A3B] 推理服务已就绪 (耗时: 80秒)
+✅ [Qwen3-30B-A3B] 推理服务启动成功 (容器: vllm_qwen3_30b_a3b_1769761177_eager)
+start container_name: vllm_qwen3_30b_a3b_1769761177_eager
+🔷 [Qwen3-30B-A3B_eager] 启动性能测试...
+开始测试模型：Qwen3-30B-A3B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-30B-A3B] 性能测试已启动 (PID: 2997477)
+🔷 [Qwen3-14B] 处理测试配置: Qwen3-14B (需要 2 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-14B] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要2张
+🔷 [Qwen3-14B] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen3-14B] 启动推理服务 (端口: 2802, NPU: 8,9)...
+🔷 [Qwen3-14B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-14B] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen3-14B] 推理服务启动成功 (容器: vllm_qwen3_14b_1769761261_aclgraph)
+start container_name: vllm_qwen3_14b_1769761261_aclgraph
+🔷 [Qwen3-14B_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-14B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-14B] 性能测试已启动 (PID: 3004279)
+🔷 [Qwen3-14B] 处理测试配置: Qwen3-14B (需要 2 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-14B] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要2张
+🔷 [Qwen3-14B] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen3-14B] 启动推理服务 (端口: 2804, NPU: 10,11)...
+🔷 [Qwen3-14B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-14B] 推理服务已就绪 (耗时: 80秒)
+✅ [Qwen3-14B] 推理服务启动成功 (容器: vllm_qwen3_14b_1769761376_eager)
+start container_name: vllm_qwen3_14b_1769761376_eager
+🔷 [Qwen3-14B_eager] 启动性能测试...
+开始测试模型：Qwen3-14B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-14B] 性能测试已启动 (PID: 3010208)
+🔷 [Qwen3-32B-NVFP4] 处理测试配置: Qwen3-32B-NVFP4 (需要 2 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B-NVFP4] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要2张
+🔷 [Qwen3-32B-NVFP4] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen3-32B-NVFP4] 启动推理服务 (端口: 2805, NPU: 14,15)...
+🔷 [Qwen3-32B-NVFP4] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-32B] 测试完成，清理推理服务容器: vllm_qwen2_5_32b_1769760938_xlite
+🔷 [Qwen3-30B-A3B] 测试完成，清理推理服务容器: vllm_qwen3_30b_a3b_1769761063_aclgraph
+✅ [Qwen3-32B-NVFP4] 推理服务已就绪 (耗时: 390秒)
+✅ [Qwen3-32B-NVFP4] 推理服务启动成功 (容器: vllm_qwen3_32b_nvfp4_1769761460_aclgraph)
+start container_name: vllm_qwen3_32b_nvfp4_1769761460_aclgraph
+🔷 [Qwen3-32B-NVFP4_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-32B-NVFP4, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B-NVFP4] 性能测试已启动 (PID: 3032601)
+🔷 [Qwen3-32B-NVFP4] 处理测试配置: Qwen3-32B-NVFP4 (需要 2 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B-NVFP4] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要2张
+🔷 [Qwen3-32B-NVFP4] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen3-32B-NVFP4] 启动推理服务 (端口: 2800, NPU: 0,1)...
+🔷 [Qwen3-32B-NVFP4] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-14B] 测试完成，清理推理服务容器: vllm_qwen3_14b_1769761261_aclgraph
+🔷 [Qwen3-30B-A3B] 测试完成，清理推理服务容器: vllm_qwen3_30b_a3b_1769761177_eager
+🔷 [Qwen3-14B] 测试完成，清理推理服务容器: vllm_qwen3_14b_1769761376_eager
+✅ [Qwen3-32B-NVFP4] 推理服务已就绪 (耗时: 330秒)
+✅ [Qwen3-32B-NVFP4] 推理服务启动成功 (容器: vllm_qwen3_32b_nvfp4_1769761855_eager)
+start container_name: vllm_qwen3_32b_nvfp4_1769761855_eager
+🔷 [Qwen3-32B-NVFP4_eager] 启动性能测试...
+开始测试模型：Qwen3-32B-NVFP4, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B-NVFP4] 性能测试已启动 (PID: 3080311)
+🔷 [Qwen2.5-14B] 处理测试配置: Qwen2.5-14B (需要 2 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-14B] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要2张
+🔷 [Qwen2.5-14B] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen2.5-14B] 启动推理服务 (端口: 2801, NPU: 2,3)...
+🔷 [Qwen2.5-14B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-14B] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen2.5-14B] 推理服务启动成功 (容器: vllm_qwen2_5_14b_1769762190_aclgraph)
+start container_name: vllm_qwen2_5_14b_1769762190_aclgraph
+🔷 [Qwen2.5-14B_aclgraph] 启动性能测试...
+开始测试模型：Qwen2.5-14B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-14B] 性能测试已启动 (PID: 3086199)
+🔷 [Qwen2.5-14B] 处理测试配置: Qwen2.5-14B (需要 2 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-14B] NPU状态: 总计16张 | 可用8张 | 占用8张 | 需要2张
+🔷 [Qwen2.5-14B] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen2.5-14B] 启动推理服务 (端口: 2802, NPU: 4,5)...
+🔷 [Qwen2.5-14B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-14B] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen2.5-14B] 推理服务启动成功 (容器: vllm_qwen2_5_14b_1769762304_eager)
+start container_name: vllm_qwen2_5_14b_1769762304_eager
+🔷 [Qwen2.5-14B_eager] 启动性能测试...
+开始测试模型：Qwen2.5-14B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-14B] 性能测试已启动 (PID: 3090346)
+🔷 [Qwen2.5-14B] 处理测试配置: Qwen2.5-14B (需要 2 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-14B] NPU状态: 总计16张 | 可用6张 | 占用10张 | 需要2张
+🔷 [Qwen2.5-14B] 等待NPU资源分配 (需要 2 卡)...
+🔷 [Qwen2.5-14B] 启动推理服务 (端口: 2803, NPU: 6,7)...
+🔷 [Qwen2.5-14B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-14B] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen2.5-14B] 推理服务启动成功 (容器: vllm_qwen2_5_14b_1769762378_xlite)
+start container_name: vllm_qwen2_5_14b_1769762378_xlite
+🔷 [Qwen2.5-14B_xlite] 启动性能测试...
+开始测试模型：Qwen2.5-14B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-14B] 性能测试已启动 (PID: 3097765)
+🔷 [Qwen_Qwen3-32B-FP8] 处理测试配置: Qwen_Qwen3-32B-FP8 (需要 2 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen_Qwen3-32B-FP8] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要2张
+⚠️  [Qwen_Qwen3-32B-FP8] 跳过测试: Qwen_Qwen3-32B-FP8 (模型路径不存在或不可读: /data/models/Qwen_Qwen3-32B-FP8)
+🔷 [Qwen_Qwen3-32B-FP8] 处理测试配置: Qwen_Qwen3-32B-FP8 (需要 2 卡, 模式: eager)
+🔷 [Qwen_Qwen3-32B-FP8] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要2张
+⚠️  [Qwen_Qwen3-32B-FP8] 跳过测试: Qwen_Qwen3-32B-FP8 (模型路径不存在或不可读: /data/models/Qwen_Qwen3-32B-FP8)
+🔷 [Qwen_Qwen3-30B-A3B-FP8] 处理测试配置: Qwen_Qwen3-30B-A3B-FP8 (需要 2 卡, 模式: aclgraph)
+🔷 [Qwen_Qwen3-30B-A3B-FP8] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要2张
+⚠️  [Qwen_Qwen3-30B-A3B-FP8] 跳过测试: Qwen_Qwen3-30B-A3B-FP8 (模型路径不存在或不可读: /data/models/Qwen_Qwen3-30B-A3B-FP8)
+🔷 [Qwen_Qwen3-30B-A3B-FP8] 处理测试配置: Qwen_Qwen3-30B-A3B-FP8 (需要 2 卡, 模式: eager)
+🔷 [Qwen_Qwen3-30B-A3B-FP8] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要2张
+⚠️  [Qwen_Qwen3-30B-A3B-FP8] 跳过测试: Qwen_Qwen3-30B-A3B-FP8 (模型路径不存在或不可读: /data/models/Qwen_Qwen3-30B-A3B-FP8)
+🔷 [Qwen3-14B-FP8] 处理测试配置: Qwen3-14B-FP8 (需要 1 卡, 模式: aclgraph)
+🔷 [Qwen3-14B-FP8] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要1张
+🔷 [Qwen3-14B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-14B-FP8] 启动推理服务 (端口: 2804, NPU: 8)...
+🔷 [Qwen3-14B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-14B-FP8] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen3-14B-FP8] 推理服务启动成功 (容器: vllm_qwen3_14b_fp8_1769762501_aclgraph)
+start container_name: vllm_qwen3_14b_fp8_1769762501_aclgraph
+🔷 [Qwen3-14B-FP8_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-14B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-14B-FP8] 性能测试已启动 (PID: 3106364)
+🔷 [Qwen3-14B-FP8] 处理测试配置: Qwen3-14B-FP8 (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-14B-FP8] NPU状态: 总计16张 | 可用3张 | 占用13张 | 需要1张
+🔷 [Qwen3-14B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-14B-FP8] 启动推理服务 (端口: 2806, NPU: 9)...
+🔷 [Qwen3-14B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-14B-FP8] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-14B-FP8] 推理服务启动成功 (容器: vllm_qwen3_14b_fp8_1769762625_eager)
+start container_name: vllm_qwen3_14b_fp8_1769762625_eager
+🔷 [Qwen3-14B-FP8_eager] 启动性能测试...
+开始测试模型：Qwen3-14B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-14B-FP8] 性能测试已启动 (PID: 3112148)
+🔷 [Qwen3-8B] 处理测试配置: Qwen3-8B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-8B] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要1张
+🔷 [Qwen3-8B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-8B] 启动推理服务 (端口: 2807, NPU: 10)...
+🔷 [Qwen3-8B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-8B] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen3-8B] 推理服务启动成功 (容器: vllm_qwen3_8b_1769762700_aclgraph)
+start container_name: vllm_qwen3_8b_1769762700_aclgraph
+🔷 [Qwen3-8B_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-8B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-8B] 性能测试已启动 (PID: 3120032)
+🔷 [Qwen3-8B] 处理测试配置: Qwen3-8B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-8B] NPU状态: 总计16张 | 可用1张 | 占用15张 | 需要1张
+🔷 [Qwen3-8B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-8B] 启动推理服务 (端口: 2808, NPU: 11)...
+🔷 [Qwen3-8B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-14B] 测试完成，清理推理服务容器: vllm_qwen2_5_14b_1769762190_aclgraph
+✅ [Qwen3-8B] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-8B] 推理服务启动成功 (容器: vllm_qwen3_8b_1769762814_eager)
+start container_name: vllm_qwen3_8b_1769762814_eager
+🔷 [Qwen3-8B_eager] 启动性能测试...
+开始测试模型：Qwen3-8B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-8B] 性能测试已启动 (PID: 3125414)
+🔷 [Qwen3-8B-FP8] 处理测试配置: Qwen3-8B-FP8 (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-8B-FP8] NPU状态: 总计16张 | 可用2张 | 占用14张 | 需要1张
+🔷 [Qwen3-8B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-8B-FP8] 启动推理服务 (端口: 2801, NPU: 2)...
+🔷 [Qwen3-8B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-14B] 测试完成，清理推理服务容器: vllm_qwen2_5_14b_1769762304_eager
+✅ [Qwen3-8B-FP8] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen3-8B-FP8] 推理服务启动成功 (容器: vllm_qwen3_8b_fp8_1769762889_aclgraph)
+start container_name: vllm_qwen3_8b_fp8_1769762889_aclgraph
+🔷 [Qwen3-8B-FP8_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-8B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-8B-FP8] 性能测试已启动 (PID: 3134303)
+🔷 [Qwen3-8B-FP8] 处理测试配置: Qwen3-8B-FP8 (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-8B-FP8] NPU状态: 总计16张 | 可用3张 | 占用13张 | 需要1张
+🔷 [Qwen3-8B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-8B-FP8] 启动推理服务 (端口: 2802, NPU: 3)...
+🔷 [Qwen3-8B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-14B] 测试完成，清理推理服务容器: vllm_qwen2_5_14b_1769762378_xlite
+✅ [Qwen3-8B-FP8] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-8B-FP8] 推理服务启动成功 (容器: vllm_qwen3_8b_fp8_1769763003_eager)
+start container_name: vllm_qwen3_8b_fp8_1769763003_eager
+🔷 [Qwen3-8B-FP8_eager] 启动性能测试...
+开始测试模型：Qwen3-8B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-8B-FP8] 性能测试已启动 (PID: 3140151)
+🔷 [Qwen3-4B] 处理测试配置: Qwen3-4B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-4B] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要1张
+🔷 [Qwen3-4B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-4B] 启动推理服务 (端口: 2803, NPU: 4)...
+🔷 [Qwen3-4B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-4B] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen3-4B] 推理服务启动成功 (容器: vllm_qwen3_4b_1769763077_aclgraph)
+start container_name: vllm_qwen3_4b_1769763077_aclgraph
+🔷 [Qwen3-4B_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-4B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-4B] 性能测试已启动 (PID: 3147651)
+🔷 [Qwen3-4B] 处理测试配置: Qwen3-4B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-4B] NPU状态: 总计16张 | 可用3张 | 占用13张 | 需要1张
+🔷 [Qwen3-4B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-4B] 启动推理服务 (端口: 2809, NPU: 5)...
+🔷 [Qwen3-4B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-32B-NVFP4] 测试完成，清理推理服务容器: vllm_qwen3_32b_nvfp4_1769761460_aclgraph
+✅ [Qwen3-4B] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-4B] 推理服务启动成功 (容器: vllm_qwen3_4b_1769763182_eager)
+start container_name: vllm_qwen3_4b_1769763182_eager
+🔷 [Qwen3-4B_eager] 启动性能测试...
+开始测试模型：Qwen3-4B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-4B] 性能测试已启动 (PID: 3154304)
+🔷 [Qwen3-4B-FP8] 处理测试配置: Qwen3-4B-FP8 (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-4B-FP8] NPU状态: 总计16张 | 可用4张 | 占用12张 | 需要1张
+🔷 [Qwen3-4B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-4B-FP8] 启动推理服务 (端口: 2805, NPU: 6)...
+🔷 [Qwen3-4B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-8B] 测试完成，清理推理服务容器: vllm_qwen3_8b_1769762700_aclgraph
+🔷 [Qwen3-8B] 测试完成，清理推理服务容器: vllm_qwen3_8b_1769762814_eager
+✅ [Qwen3-4B-FP8] 推理服务已就绪 (耗时: 120秒)
+✅ [Qwen3-4B-FP8] 推理服务启动成功 (容器: vllm_qwen3_4b_fp8_1769763256_aclgraph)
+start container_name: vllm_qwen3_4b_fp8_1769763256_aclgraph
+🔷 [Qwen3-4B-FP8_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-4B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-4B-FP8] 性能测试已启动 (PID: 3163713)
+🔷 [Qwen3-4B-FP8] 处理测试配置: Qwen3-4B-FP8 (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-4B-FP8] NPU状态: 总计16张 | 可用5张 | 占用11张 | 需要1张
+🔷 [Qwen3-4B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-4B-FP8] 启动推理服务 (端口: 2807, NPU: 7)...
+🔷 [Qwen3-4B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-14B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_14b_fp8_1769762501_aclgraph
+✅ [Qwen3-4B-FP8] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-4B-FP8] 推理服务启动成功 (容器: vllm_qwen3_4b_fp8_1769763381_eager)
+start container_name: vllm_qwen3_4b_fp8_1769763381_eager
+🔷 [Qwen3-4B-FP8_eager] 启动性能测试...
+开始测试模型：Qwen3-4B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-4B-FP8] 性能测试已启动 (PID: 3169456)
+🔷 [Qwen3-1.7B] 处理测试配置: Qwen3-1.7B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-1.7B] NPU状态: 总计16张 | 可用5张 | 占用11张 | 需要1张
+🔷 [Qwen3-1.7B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-1.7B] 启动推理服务 (端口: 2804, NPU: 8)...
+🔷 [Qwen3-1.7B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-14B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_14b_fp8_1769762625_eager
+🔷 [Qwen3-8B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_8b_fp8_1769762889_aclgraph
+🔷 [Qwen3-32B-NVFP4] 测试完成，清理推理服务容器: vllm_qwen3_32b_nvfp4_1769761855_eager
+✅ [Qwen3-1.7B] 推理服务已就绪 (耗时: 110秒)
+✅ [Qwen3-1.7B] 推理服务启动成功 (容器: vllm_qwen3_1_7b_1769763455_aclgraph)
+start container_name: vllm_qwen3_1_7b_1769763455_aclgraph
+🔷 [Qwen3-1.7B_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-1.7B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-1.7B] 性能测试已启动 (PID: 3178040)
+🔷 [Qwen3-1.7B] 处理测试配置: Qwen3-1.7B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-1.7B] NPU状态: 总计16张 | 可用8张 | 占用8张 | 需要1张
+🔷 [Qwen3-1.7B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-4B] 测试完成，清理推理服务容器: vllm_qwen3_4b_1769763077_aclgraph
+🔷 [Qwen3-1.7B] 启动推理服务 (端口: 2800, NPU: 0)...
+🔷 [Qwen3-1.7B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-8B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_8b_fp8_1769763003_eager
+✅ [Qwen3-1.7B] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-1.7B] 推理服务启动成功 (容器: vllm_qwen3_1_7b_1769763570_eager)
+start container_name: vllm_qwen3_1_7b_1769763570_eager
+🔷 [Qwen3-1.7B_eager] 启动性能测试...
+开始测试模型：Qwen3-1.7B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-1.7B] 性能测试已启动 (PID: 3183957)
+🔷 [Qwen3-1.7B-FP8] 处理测试配置: Qwen3-1.7B-FP8 (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-1.7B-FP8] NPU状态: 总计16张 | 可用9张 | 占用7张 | 需要1张
+🔷 [Qwen3-1.7B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-1.7B-FP8] 启动推理服务 (端口: 2801, NPU: 1)...
+🔷 [Qwen3-1.7B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-4B] 测试完成，清理推理服务容器: vllm_qwen3_4b_1769763182_eager
+✅ [Qwen3-1.7B-FP8] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen3-1.7B-FP8] 推理服务启动成功 (容器: vllm_qwen3_1_7b_fp8_1769763644_aclgraph)
+start container_name: vllm_qwen3_1_7b_fp8_1769763644_aclgraph
+🔷 [Qwen3-1.7B-FP8_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-1.7B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-1.7B-FP8] 性能测试已启动 (PID: 3192003)
+🔷 [Qwen3-1.7B-FP8] 处理测试配置: Qwen3-1.7B-FP8 (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-1.7B-FP8] NPU状态: 总计16张 | 可用9张 | 占用7张 | 需要1张
+🔷 [Qwen3-1.7B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-1.7B-FP8] 启动推理服务 (端口: 2802, NPU: 2)...
+🔷 [Qwen3-1.7B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-1.7B-FP8] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-1.7B-FP8] 推理服务启动成功 (容器: vllm_qwen3_1_7b_fp8_1769763749_eager)
+start container_name: vllm_qwen3_1_7b_fp8_1769763749_eager
+🔷 [Qwen3-1.7B-FP8_eager] 启动性能测试...
+开始测试模型：Qwen3-1.7B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-1.7B-FP8] 性能测试已启动 (PID: 3197846)
+🔷 [Qwen3-0.6B] 处理测试配置: Qwen3-0.6B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-0.6B] NPU状态: 总计16张 | 可用8张 | 占用8张 | 需要1张
+🔷 [Qwen3-0.6B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-0.6B] 启动推理服务 (端口: 2803, NPU: 3)...
+🔷 [Qwen3-0.6B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-4B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_4b_fp8_1769763256_aclgraph
+🔷 [Qwen3-1.7B] 测试完成，清理推理服务容器: vllm_qwen3_1_7b_1769763455_aclgraph
+✅ [Qwen3-0.6B] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen3-0.6B] 推理服务启动成功 (容器: vllm_qwen3_0_6b_1769763823_aclgraph)
+start container_name: vllm_qwen3_0_6b_1769763823_aclgraph
+🔷 [Qwen3-0.6B_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-0.6B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-0.6B] 性能测试已启动 (PID: 3205604)
+🔷 [Qwen3-0.6B] 处理测试配置: Qwen3-0.6B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-0.6B] NPU状态: 总计16张 | 可用9张 | 占用7张 | 需要1张
+🔷 [Qwen3-0.6B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-0.6B] 启动推理服务 (端口: 2804, NPU: 4)...
+🔷 [Qwen3-0.6B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-4B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_4b_fp8_1769763381_eager
+🔷 [Qwen3-1.7B] 测试完成，清理推理服务容器: vllm_qwen3_1_7b_1769763570_eager
+✅ [Qwen3-0.6B] 推理服务已就绪 (耗时: 60秒)
+✅ [Qwen3-0.6B] 推理服务启动成功 (容器: vllm_qwen3_0_6b_1769763927_eager)
+start container_name: vllm_qwen3_0_6b_1769763927_eager
+🔷 [Qwen3-0.6B_eager] 启动性能测试...
+开始测试模型：Qwen3-0.6B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-0.6B] 性能测试已启动 (PID: 3244853)
+🔷 [Qwen3-0.6B-FP8] 处理测试配置: Qwen3-0.6B-FP8 (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-0.6B-FP8] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen3-0.6B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-0.6B-FP8] 启动推理服务 (端口: 2800, NPU: 0)...
+🔷 [Qwen3-0.6B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-1.7B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_1_7b_fp8_1769763644_aclgraph
+✅ [Qwen3-0.6B-FP8] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen3-0.6B-FP8] 推理服务启动成功 (容器: vllm_qwen3_0_6b_fp8_1769763992_aclgraph)
+start container_name: vllm_qwen3_0_6b_fp8_1769763992_aclgraph
+🔷 [Qwen3-0.6B-FP8_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-0.6B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-0.6B-FP8] 性能测试已启动 (PID: 3252101)
+🔷 [Qwen3-0.6B-FP8] 处理测试配置: Qwen3-0.6B-FP8 (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-0.6B-FP8] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen3-0.6B-FP8] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-0.6B-FP8] 启动推理服务 (端口: 2801, NPU: 1)...
+🔷 [Qwen3-0.6B-FP8] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-0.6B-FP8] 推理服务已就绪 (耗时: 60秒)
+✅ [Qwen3-0.6B-FP8] 推理服务启动成功 (容器: vllm_qwen3_0_6b_fp8_1769764096_eager)
+start container_name: vllm_qwen3_0_6b_fp8_1769764096_eager
+🔷 [Qwen3-0.6B-FP8_eager] 启动性能测试...
+开始测试模型：Qwen3-0.6B-FP8, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-0.6B-FP8] 性能测试已启动 (PID: 3257646)
+🔷 [Qwen3-VL-8B-Instruct] 处理测试配置: Qwen3-VL-8B-Instruct (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-VL-8B-Instruct] NPU状态: 总计16张 | 可用9张 | 占用7张 | 需要1张
+🔷 [Qwen3-VL-8B-Instruct] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-VL-8B-Instruct] 启动推理服务 (端口: 2805, NPU: 5)...
+🔷 [Qwen3-VL-8B-Instruct] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-0.6B] 测试完成，清理推理服务容器: vllm_qwen3_0_6b_1769763823_aclgraph
+🔷 [Qwen3-1.7B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_1_7b_fp8_1769763749_eager
+✅ [Qwen3-VL-8B-Instruct] 推理服务已就绪 (耗时: 130秒)
+✅ [Qwen3-VL-8B-Instruct] 推理服务启动成功 (容器: vllm_qwen3_vl_8b_instruct_1769764160_aclgraph)
+start container_name: vllm_qwen3_vl_8b_instruct_1769764160_aclgraph
+🔷 [Qwen3-VL-8B-Instruct_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-VL-8B-Instruct, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-VL-8B-Instruct] 性能测试已启动 (PID: 3266697)
+🔷 [Qwen3-VL-8B-Instruct] 处理测试配置: Qwen3-VL-8B-Instruct (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-VL-8B-Instruct] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen3-VL-8B-Instruct] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-0.6B] 测试完成，清理推理服务容器: vllm_qwen3_0_6b_1769763927_eager
+🔷 [Qwen3-VL-8B-Instruct] 启动推理服务 (端口: 2802, NPU: 2)...
+🔷 [Qwen3-VL-8B-Instruct] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-VL-8B-Instruct] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen3-VL-8B-Instruct] 推理服务启动成功 (容器: vllm_qwen3_vl_8b_instruct_1769764295_eager)
+start container_name: vllm_qwen3_vl_8b_instruct_1769764295_eager
+🔷 [Qwen3-VL-8B-Instruct_eager] 启动性能测试...
+开始测试模型：Qwen3-VL-8B-Instruct, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-VL-8B-Instruct] 性能测试已启动 (PID: 3271810)
+🔷 [Qwen2.5-7B] 处理测试配置: Qwen2.5-7B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-7B] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen2.5-7B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-7B] 启动推理服务 (端口: 2803, NPU: 3)...
+🔷 [Qwen2.5-7B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-0.6B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_0_6b_fp8_1769763992_aclgraph
+✅ [Qwen2.5-7B] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen2.5-7B] 推理服务启动成功 (容器: vllm_qwen2_5_7b_1769764369_aclgraph)
+start container_name: vllm_qwen2_5_7b_1769764369_aclgraph
+🔷 [Qwen2.5-7B_aclgraph] 启动性能测试...
+开始测试模型：Qwen2.5-7B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-7B] 性能测试已启动 (PID: 3278678)
+🔷 [Qwen2.5-7B] 处理测试配置: Qwen2.5-7B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-7B] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen2.5-7B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-7B] 启动推理服务 (端口: 2800, NPU: 0)...
+🔷 [Qwen2.5-7B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-0.6B-FP8] 测试完成，清理推理服务容器: vllm_qwen3_0_6b_fp8_1769764096_eager
+✅ [Qwen2.5-7B] 推理服务已就绪 (耗时: 60秒)
+✅ [Qwen2.5-7B] 推理服务启动成功 (容器: vllm_qwen2_5_7b_1769764473_eager)
+start container_name: vllm_qwen2_5_7b_1769764473_eager
+🔷 [Qwen2.5-7B_eager] 启动性能测试...
+开始测试模型：Qwen2.5-7B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-7B] 性能测试已启动 (PID: 3283197)
+🔷 [Qwen2.5-7B] 处理测试配置: Qwen2.5-7B (需要 1 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-7B] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen2.5-7B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-7B] 启动推理服务 (端口: 2801, NPU: 1)...
+🔷 [Qwen2.5-7B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-7B] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen2.5-7B] 推理服务启动成功 (容器: vllm_qwen2_5_7b_1769764538_xlite)
+start container_name: vllm_qwen2_5_7b_1769764538_xlite
+🔷 [Qwen2.5-7B_xlite] 启动性能测试...
+开始测试模型：Qwen2.5-7B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-7B] 性能测试已启动 (PID: 3291215)
+🔷 [Qwen2.5-3B] 处理测试配置: Qwen2.5-3B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-3B] NPU状态: 总计16张 | 可用9张 | 占用7张 | 需要1张
+🔷 [Qwen2.5-3B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-3B] 启动推理服务 (端口: 2804, NPU: 4)...
+🔷 [Qwen2.5-3B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-3B] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen2.5-3B] 推理服务启动成功 (容器: vllm_qwen2_5_3b_1769764642_aclgraph)
+start container_name: vllm_qwen2_5_3b_1769764642_aclgraph
+🔷 [Qwen2.5-3B_aclgraph] 启动性能测试...
+开始测试模型：Qwen2.5-3B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-3B] 性能测试已启动 (PID: 3298172)
+🔷 [Qwen2.5-3B] 处理测试配置: Qwen2.5-3B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-3B] NPU状态: 总计16张 | 可用8张 | 占用8张 | 需要1张
+🔷 [Qwen2.5-3B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-3B] 启动推理服务 (端口: 2806, NPU: 6)...
+🔷 [Qwen2.5-3B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-3B] 推理服务已就绪 (耗时: 70秒)
+✅ [Qwen2.5-3B] 推理服务启动成功 (容器: vllm_qwen2_5_3b_1769764747_eager)
+start container_name: vllm_qwen2_5_3b_1769764747_eager
+🔷 [Qwen2.5-3B_eager] 启动性能测试...
+开始测试模型：Qwen2.5-3B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-3B] 性能测试已启动 (PID: 3304587)
+🔷 [Qwen2.5-3B] 处理测试配置: Qwen2.5-3B (需要 1 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-3B] NPU状态: 总计16张 | 可用7张 | 占用9张 | 需要1张
+🔷 [Qwen2.5-3B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-3B] 启动推理服务 (端口: 2807, NPU: 7)...
+🔷 [Qwen2.5-3B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-7B] 测试完成，清理推理服务容器: vllm_qwen2_5_7b_1769764369_aclgraph
+🔷 [Qwen2.5-7B] 测试完成，清理推理服务容器: vllm_qwen2_5_7b_1769764473_eager
+✅ [Qwen2.5-3B] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen2.5-3B] 推理服务启动成功 (容器: vllm_qwen2_5_3b_1769764821_xlite)
+start container_name: vllm_qwen2_5_3b_1769764821_xlite
+🔷 [Qwen2.5-3B_xlite] 启动性能测试...
+开始测试模型：Qwen2.5-3B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-3B] 性能测试已启动 (PID: 3313580)
+🔷 [Qwen2.5-1.5B] 处理测试配置: Qwen2.5-1.5B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-1.5B] NPU状态: 总计16张 | 可用8张 | 占用8张 | 需要1张
+🔷 [Qwen2.5-1.5B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-1.5B] 启动推理服务 (端口: 2800, NPU: 0)...
+🔷 [Qwen2.5-1.5B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-1.5B] 推理服务已就绪 (耗时: 100秒)
+✅ [Qwen2.5-1.5B] 推理服务启动成功 (容器: vllm_qwen2_5_1_5b_1769764925_aclgraph)
+start container_name: vllm_qwen2_5_1_5b_1769764925_aclgraph
+🔷 [Qwen2.5-1.5B_aclgraph] 启动性能测试...
+开始测试模型：Qwen2.5-1.5B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-1.5B] 性能测试已启动 (PID: 3321116)
+🔷 [Qwen2.5-1.5B] 处理测试配置: Qwen2.5-1.5B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-1.5B] NPU状态: 总计16张 | 可用7张 | 占用9张 | 需要1张
+🔷 [Qwen2.5-1.5B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-1.5B] 启动推理服务 (端口: 2803, NPU: 3)...
+🔷 [Qwen2.5-1.5B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-3B] 测试完成，清理推理服务容器: vllm_qwen2_5_3b_1769764642_aclgraph
+🔷 [Qwen3-VL-8B-Instruct] 测试完成，清理推理服务容器: vllm_qwen3_vl_8b_instruct_1769764295_eager
+🔷 [Qwen2.5-7B] 测试完成，清理推理服务容器: vllm_qwen2_5_7b_1769764538_xlite
+✅ [Qwen2.5-1.5B] 推理服务已就绪 (耗时: 60秒)
+✅ [Qwen2.5-1.5B] 推理服务启动成功 (容器: vllm_qwen2_5_1_5b_1769765030_eager)
+start container_name: vllm_qwen2_5_1_5b_1769765030_eager
+🔷 [Qwen2.5-1.5B_eager] 启动性能测试...
+开始测试模型：Qwen2.5-1.5B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-1.5B] 性能测试已启动 (PID: 3326873)
+🔷 [Qwen2.5-1.5B] 处理测试配置: Qwen2.5-1.5B (需要 1 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-1.5B] NPU状态: 总计16张 | 可用9张 | 占用7张 | 需要1张
+🔷 [Qwen2.5-1.5B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-1.5B] 启动推理服务 (端口: 2801, NPU: 1)...
+🔷 [Qwen2.5-1.5B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen3-VL-8B-Instruct] 测试完成，清理推理服务容器: vllm_qwen3_vl_8b_instruct_1769764160_aclgraph
+🔷 [Qwen2.5-3B] 测试完成，清理推理服务容器: vllm_qwen2_5_3b_1769764747_eager
+✅ [Qwen2.5-1.5B] 推理服务已就绪 (耗时: 90秒)
+✅ [Qwen2.5-1.5B] 推理服务启动成功 (容器: vllm_qwen2_5_1_5b_1769765094_xlite)
+start container_name: vllm_qwen2_5_1_5b_1769765094_xlite
+🔷 [Qwen2.5-1.5B_xlite] 启动性能测试...
+开始测试模型：Qwen2.5-1.5B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-1.5B] 性能测试已启动 (PID: 3334225)
+🔷 [Qwen2.5-0.5B] 处理测试配置: Qwen2.5-0.5B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-0.5B] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen2.5-0.5B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-0.5B] 启动推理服务 (端口: 2802, NPU: 2)...
+🔷 [Qwen2.5-0.5B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-3B] 测试完成，清理推理服务容器: vllm_qwen2_5_3b_1769764821_xlite
+🔷 [Qwen2.5-1.5B] 测试完成，清理推理服务容器: vllm_qwen2_5_1_5b_1769764925_aclgraph
+✅ [Qwen2.5-0.5B] 推理服务已就绪 (耗时: 90秒)
+✅ [Qwen2.5-0.5B] 推理服务启动成功 (容器: vllm_qwen2_5_0_5b_1769765189_aclgraph)
+start container_name: vllm_qwen2_5_0_5b_1769765189_aclgraph
+🔷 [Qwen2.5-0.5B_aclgraph] 启动性能测试...
+开始测试模型：Qwen2.5-0.5B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-0.5B] 性能测试已启动 (PID: 3341826)
+🔷 [Qwen2.5-0.5B] 处理测试配置: Qwen2.5-0.5B (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-0.5B] NPU状态: 总计16张 | 可用11张 | 占用5张 | 需要1张
+🔷 [Qwen2.5-0.5B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-0.5B] 启动推理服务 (端口: 2800, NPU: 0)...
+🔷 [Qwen2.5-0.5B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen2.5-0.5B] 推理服务已就绪 (耗时: 60秒)
+✅ [Qwen2.5-0.5B] 推理服务启动成功 (容器: vllm_qwen2_5_0_5b_1769765283_eager)
+start container_name: vllm_qwen2_5_0_5b_1769765283_eager
+🔷 [Qwen2.5-0.5B_eager] 启动性能测试...
+开始测试模型：Qwen2.5-0.5B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-0.5B] 性能测试已启动 (PID: 3347595)
+🔷 [Qwen2.5-0.5B] 处理测试配置: Qwen2.5-0.5B (需要 1 卡, 模式: xlite)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen2.5-0.5B] NPU状态: 总计16张 | 可用10张 | 占用6张 | 需要1张
+🔷 [Qwen2.5-0.5B] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen2.5-0.5B] 启动推理服务 (端口: 2804, NPU: 4)...
+🔷 [Qwen2.5-0.5B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-1.5B] 测试完成，清理推理服务容器: vllm_qwen2_5_1_5b_1769765030_eager
+🔷 [Qwen2.5-1.5B] 测试完成，清理推理服务容器: vllm_qwen2_5_1_5b_1769765094_xlite
+✅ [Qwen2.5-0.5B] 推理服务已就绪 (耗时: 90秒)
+✅ [Qwen2.5-0.5B] 推理服务启动成功 (容器: vllm_qwen2_5_0_5b_1769765347_xlite)
+start container_name: vllm_qwen2_5_0_5b_1769765347_xlite
+🔷 [Qwen2.5-0.5B_xlite] 启动性能测试...
+开始测试模型：Qwen2.5-0.5B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen2.5-0.5B] 性能测试已启动 (PID: 3354961)
+🔷 [Qwen3-32B-NVFP4] 处理测试配置: Qwen3-32B-NVFP4 (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B-NVFP4] NPU状态: 总计16张 | 可用11张 | 占用5张 | 需要1张
+🔷 [Qwen3-32B-NVFP4] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-32B-NVFP4] 启动推理服务 (端口: 2801, NPU: 1)...
+🔷 [Qwen3-32B-NVFP4] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [Qwen2.5-0.5B] 测试完成，清理推理服务容器: vllm_qwen2_5_0_5b_1769765189_aclgraph
+🔷 [Qwen2.5-0.5B] 测试完成，清理推理服务容器: vllm_qwen2_5_0_5b_1769765283_eager
+🔷 [Qwen2.5-0.5B] 测试完成，清理推理服务容器: vllm_qwen2_5_0_5b_1769765347_xlite
+✅ [Qwen3-32B-NVFP4] 推理服务已就绪 (耗时: 590秒)
+✅ [Qwen3-32B-NVFP4] 推理服务启动成功 (容器: vllm_qwen3_32b_nvfp4_1769765442_aclgraph)
+start container_name: vllm_qwen3_32b_nvfp4_1769765442_aclgraph
+🔷 [Qwen3-32B-NVFP4_aclgraph] 启动性能测试...
+开始测试模型：Qwen3-32B-NVFP4, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B-NVFP4] 性能测试已启动 (PID: 3413842)
+🔷 [Qwen3-32B-NVFP4] 处理测试配置: Qwen3-32B-NVFP4 (需要 1 卡, 模式: eager)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B-NVFP4] NPU状态: 总计16张 | 可用13张 | 占用3张 | 需要1张
+🔷 [Qwen3-32B-NVFP4] 等待NPU资源分配 (需要 1 卡)...
+🔷 [Qwen3-32B-NVFP4] 启动推理服务 (端口: 2800, NPU: 0)...
+🔷 [Qwen3-32B-NVFP4] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-32B-NVFP4] 推理服务已就绪 (耗时: 530秒)
+✅ [Qwen3-32B-NVFP4] 推理服务启动成功 (容器: vllm_qwen3_32b_nvfp4_1769766037_eager)
+start container_name: vllm_qwen3_32b_nvfp4_1769766037_eager
+🔷 [Qwen3-32B-NVFP4_eager] 启动性能测试...
+开始测试模型：Qwen3-32B-NVFP4, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B-NVFP4] 性能测试已启动 (PID: 3434243)
+🔷 [DeepSeek-R1-Distill-Qwen-1.5B] 处理测试配置: DeepSeek-R1-Distill-Qwen-1.5B (需要 1 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [DeepSeek-R1-Distill-Qwen-1.5B] NPU状态: 总计16张 | 可用12张 | 占用4张 | 需要1张
+⚠️  [DeepSeek-R1-Distill-Qwen-1.5B] 跳过测试: DeepSeek-R1-Distill-Qwen-1.5B (模型路径不存在或不可读: /data/models/DeepSeek-R1-Distill-Qwen-1.5B)
+🔷 [DeepSeek-R1-Distill-Qwen-7B] 处理测试配置: DeepSeek-R1-Distill-Qwen-7B (需要 1 卡, 模式: aclgraph)
+🔷 [DeepSeek-R1-Distill-Qwen-7B] NPU状态: 总计16张 | 可用12张 | 占用4张 | 需要1张
+⚠️  [DeepSeek-R1-Distill-Qwen-7B] 跳过测试: DeepSeek-R1-Distill-Qwen-7B (模型路径不存在或不可读: /data/models/DeepSeek-R1-Distill-Qwen-7B)
+🔷 [DeepSeek-R1-Distill-Llama-8B] 处理测试配置: DeepSeek-R1-Distill-Llama-8B (需要 1 卡, 模式: aclgraph)
+🔷 [DeepSeek-R1-Distill-Llama-8B] NPU状态: 总计16张 | 可用12张 | 占用4张 | 需要1张
+⚠️  [DeepSeek-R1-Distill-Llama-8B] 跳过测试: DeepSeek-R1-Distill-Llama-8B (模型路径不存在或不可读: /data/models/DeepSeek-R1-Distill-Llama-8B)
+🔷 [DeepSeek-R1-Distill-Qwen-14B] 处理测试配置: DeepSeek-R1-Distill-Qwen-14B (需要 2 卡, 模式: aclgraph)
+🔷 [DeepSeek-R1-Distill-Qwen-14B] NPU状态: 总计16张 | 可用12张 | 占用4张 | 需要2张
+⚠️  [DeepSeek-R1-Distill-Qwen-14B] 跳过测试: DeepSeek-R1-Distill-Qwen-14B (模型路径不存在或不可读: /data/models/DeepSeek-R1-Distill-Qwen-14B)
+🔷 [DeepSeek-R1-Distill-Qwen-32B] 处理测试配置: DeepSeek-R1-Distill-Qwen-32B (需要 4 卡, 模式: aclgraph)
+🔷 [DeepSeek-R1-Distill-Qwen-32B] NPU状态: 总计16张 | 可用12张 | 占用4张 | 需要4张
+🔷 [DeepSeek-R1-Distill-Qwen-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [DeepSeek-R1-Distill-Qwen-32B] 启动推理服务 (端口: 2802, NPU: 2,3,4,5)...
+🔷 [DeepSeek-R1-Distill-Qwen-32B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [DeepSeek-R1-Distill-Qwen-32B] 推理服务已就绪 (耗时: 110秒)
+✅ [DeepSeek-R1-Distill-Qwen-32B] 推理服务启动成功 (容器: vllm_deepseek_r1_distill_qwen_32b_1769766580_aclgraph)
+start container_name: vllm_deepseek_r1_distill_qwen_32b_1769766580_aclgraph
+🔷 [DeepSeek-R1-Distill-Qwen-32B_aclgraph] 启动性能测试...
+开始测试模型：DeepSeek-R1-Distill-Qwen-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [DeepSeek-R1-Distill-Qwen-32B] 性能测试已启动 (PID: 3440698)
+🔷 [DeepSeek-R1-Distill-Llama-70B] 处理测试配置: DeepSeek-R1-Distill-Llama-70B (需要 8 卡, 模式: aclgraph)
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all_0130/vllm_v0.12.0rc1/log
+🔷 [DeepSeek-R1-Distill-Llama-70B] NPU状态: 总计16张 | 可用8张 | 占用8张 | 需要8张
+⚠️  [DeepSeek-R1-Distill-Llama-70B] 跳过测试: DeepSeek-R1-Distill-Llama-70B (模型路径不存在或不可读: /data/models/DeepSeek-R1-Distill-Llama-70B)
+🔷 [Qwen2.5-32B] 处理测试配置: Qwen2.5-32B (需要 4 卡, 模式: aclgraph)
+🔷 [Qwen2.5-32B] NPU状态: 总计16张 | 可用8张 | 占用8张 | 需要4张
+🔷 [Qwen2.5-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen2.5-32B] 启动推理服务 (端口: 2803, NPU: 6,7,8,9)...
+🔷 [Qwen2.5-32B] 正在等待推理服务启动 (最大等待: 1200s)
+🔷 [DeepSeek-R1-Distill-Qwen-32B] 测试完成，清理推理服务容器: vllm_deepseek_r1_distill_qwen_32b_1769766580_aclgraph
+❌ [Qwen2.5-32B] 推理服务启动超时 (等待时间: 1200s)
+❌ [Qwen2.5-32B] 服务就绪检查失败，清理容器: vllm_qwen2_5_32b_1769766696_aclgraph
+start container_name: 
+❌ [Qwen2.5-32B_aclgraph] 推理服务启动失败
+🔷 [QwQ-32B] 处理测试配置: QwQ-32B (需要 4 卡, 模式: aclgraph)
+🔷 [QwQ-32B] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要4张
+⚠️  [QwQ-32B] 跳过测试: QwQ-32B (模型路径不存在或不可读: /data/models/QwQ-32B)
+🔷 [Qwen2.5-32B-Instruct] 处理测试配置: Qwen2.5-32B-Instruct (需要 4 卡, 模式: aclgraph)
+🔷 [Qwen2.5-32B-Instruct] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要4张
+⚠️  [Qwen2.5-32B-Instruct] 跳过测试: Qwen2.5-32B-Instruct (模型路径不存在或不可读: /data/models/Qwen2.5-32B-Instruct)
+🔷 [Qwen3-32B-w8a8-MindIE] 处理测试配置: Qwen3-32B-w8a8-MindIE (需要 2 卡, 模式: aclgraph)
+🔷 [Qwen3-32B-w8a8-MindIE] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要2张
+⚠️  [Qwen3-32B-w8a8-MindIE] 跳过测试: Qwen3-32B-w8a8-MindIE (模型路径不存在或不可读: /data/models/Qwen3-32B-w8a8-MindIE)
+🔷 [DeepSeek-V3-0324] 处理测试配置: DeepSeek-V3-0324 (需要 16 卡, 模式: aclgraph)
+🔷 [DeepSeek-V3-0324] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要16张
+⚠️  [DeepSeek-V3-0324] 跳过测试: DeepSeek-V3-0324 (模型路径不存在或不可读: /data/models/DeepSeek-V3-0324)
+🔷 [aleoyang_Qwen3-32B-w8a8-MindIE] 处理测试配置: aleoyang_Qwen3-32B-w8a8-MindIE (需要 2 卡, 模式: aclgraph)
+🔷 [aleoyang_Qwen3-32B-w8a8-MindIE] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要2张
+⚠️  [aleoyang_Qwen3-32B-w8a8-MindIE] 跳过测试: aleoyang_Qwen3-32B-w8a8-MindIE (模型路径不存在或不可读: /data/models/aleoyang_Qwen3-32B-w8a8-MindIE)
+🔷 [Qwen3-235B-A22B] 处理测试配置: Qwen3-235B-A22B (需要 16 卡, 模式: aclgraph)
+🔷 [Qwen3-235B-A22B] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要16张
+⚠️  [Qwen3-235B-A22B] 跳过测试: Qwen3-235B-A22B (模型路径不存在或不可读: /data/models/Qwen3-235B-A22B)
+🔷 [DeepSeek-V3.2-Exp-w8a8] 处理测试配置: DeepSeek-V3.2-Exp-w8a8 (需要 16 卡, 模式: torchair)
+🔷 [DeepSeek-V3.2-Exp-w8a8] NPU状态: 总计16张 | 可用14张 | 占用2张 | 需要16张
+🔷 [DeepSeek-V3.2-Exp-w8a8] 等待NPU资源分配 (需要 16 卡)...
+🔷 [Qwen3-32B-NVFP4] 测试完成，清理推理服务容器: vllm_qwen3_32b_nvfp4_1769765442_aclgraph
+🔷 [Qwen3-32B-NVFP4] 测试完成，清理推理服务容器: vllm_qwen3_32b_nvfp4_1769766037_eager
+🔷 [DeepSeek-V3.2-Exp-w8a8] 启动推理服务 (端口: 2800, NPU: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)...
+🔷 [DeepSeek-V3.2-Exp-w8a8] 正在等待推理服务启动 (最大等待: 1200s)
+❌ [DeepSeek-V3.2-Exp-w8a8] 推理服务启动超时 (等待时间: 1200s)
+❌ [DeepSeek-V3.2-Exp-w8a8] 服务就绪检查失败，清理容器: vllm_deepseek_v3_2_exp_w8a8_1769769093_torchair
+start container_name: 
+❌ [DeepSeek-V3.2-Exp-w8a8_torchair] 推理服务启动失败
+🔷 [DeepSeek-R1] 处理测试配置: DeepSeek-R1 (需要 16 卡, 模式: eager)
+🔷 [DeepSeek-R1] NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要16张
+⚠️  [DeepSeek-R1] 跳过测试: DeepSeek-R1 (模型路径不存在或不可读: /data/models/DeepSeek-R1)
+run_benchmark_all_models.sh: line 939: syntax error near unexpected token `('
+run_benchmark_all_models.sh: line 939: `log "info" "📊 测试完成: 成功 ${#successful_tests[@]} | 失败 ${#failed_tests[@]} | 跳过 ${#skipped_tests[@]} (共 ${#TEST_CONFIGS[@]} 个)"'
+⚠️  收到退出信号，开始清理资源...
+🔷 终止运行中的性能测试进程...
+🔷 清理VLLM容器...
+✅ 资源清理完成
+❌ 脚本异常退出 (退出码: 2)

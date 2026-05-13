@@ -1,0 +1,1584 @@
+DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+🔍 DEBUG: 调试模式已启用
+🔷 配置参数 - 模型路径: /data/models
+🔷 配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
+🔷 配置参数 - 温度: 0.65, 请求速率: 0
+🔷 配置参数 - Docker标签: v0.12.0rc1
+🔷 清理可能残留的VLLM容器和临时文件...
+0
+🔷 检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)
+🔷 🚀 开始自动化VLLM基准测试 (混合并行模式)
+🔷 模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
+🔷 测试模型数: 78 | NPU总计: 16 张
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔍 DEBUG: [Qwen3-32B] 容器: vllm_qwen3_32b_1769647893_aclgraph | NPU: 0,1,2,3 | 端口: 2800
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
++ DEFAULT_HOST=127.0.0.1
++ DEFAULT_PORT_RANGE_START=2800
++ DEFAULT_PORT_RANGE_END=2899
++ DEFAULT_TEMPERATURE=0.65
++ DEFAULT_REQUEST_RATE=0
++ DEFAULT_DOCKER_TAG=v0.12.0rc1
++ PROXY_IP=192.168.110.10
++ PROXY_PORT=10082
+++ pwd
++ DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
++ echo DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
++ BASE_MODEL_PATH=
++ RESULT_DIR=
++ DOCKER_TAG=
++ DEBUG_MODE=false
++ SINGLE_MODE=
++ SINGLE_NPU_COUNT=
++ SINGLE_MODE=
++ TEST_CONFIGS=('Qwen3-32B:4:aclgraph' 'Qwen3-32B:4:eager' 'Qwen3-32B:4:xlite' 'Qwen3-Next-80B-A3B-Instruct:4:eager' 'Qwen3-VL-30B-A3B-Instruct:4:aclgraph' 'Qwen3-VL-30B-A3B-Instruct:4:eager' 'Qwen3-VL-32B-Instruct:4:aclgraph' 'Qwen3-VL-32B-Instruct:4:eager' 'Qwen3-32B-NVFP4:4:aclgraph' 'Qwen3-32B-NVFP4:4:eager' 'Qwen2.5-72B:4:aclgraph' 'Qwen2.5-72B:4:eager' 'Qwen2.5-72B:4:xlite' 'Qwen2.5-32B:4:aclgraph' 'Qwen2.5-32B:4:eager' 'Qwen2.5-32B:4::xlite' 'Qwen3-30B-A3B:2:aclgraph' 'Qwen3-30B-A3B:2:eager' 'Qwen3-14B:2:aclgraph' 'Qwen3-14B:2:eager' 'Qwen3-32B-NVFP4:2:aclgraph' 'Qwen3-32B-NVFP4:2:eager' 'Qwen2.5-14B:2:aclgraph' 'Qwen2.5-14B:2:eager' 'Qwen2.5-14B:2:xlite' 'Qwen_Qwen3-32B-FP8:2:aclgraph' 'Qwen_Qwen3-32B-FP8:2:eager' 'Qwen_Qwen3-30B-A3B-FP8:2:aclgraph' 'Qwen_Qwen3-30B-A3B-FP8:2:eager' 'Qwen3-14B-FP8:1:aclgraph' 'Qwen3-14B-FP8:1:eager' 'Qwen3-8B:1:aclgraph' 'Qwen3-8B:1:eager' 'Qwen3-8B-FP8:1:aclgraph' 'Qwen3-8B-FP8:1:eager' 'Qwen3-4B:1:aclgraph' 'Qwen3-4B:1:eager' 'Qwen3-4B-FP8:1:aclgraph' 'Qwen3-4B-FP8:1:eager' 'Qwen3-1.7B:1:aclgraph' 'Qwen3-1.7B:1:eager' 'Qwen3-1.7B-FP8:1:aclgraph' 'Qwen3-1.7B-FP8:1:eager' 'Qwen3-0.6B:1:aclgraph' 'Qwen3-0.6B:1:eager' 'Qwen3-0.6B-FP8:1:aclgraph' 'Qwen3-0.6B-FP8:1:eager' 'Qwen3-VL-8B-Instruct:1:aclgraph' 'Qwen3-VL-8B-Instruct:1:eager' 'Qwen2.5-7B:1:aclgraph' 'Qwen2.5-7B:1:eager' 'Qwen2.5-7B:1:xlite' 'Qwen2.5-3B:1:aclgraph' 'Qwen2.5-3B:1:eager' 'Qwen2.5-3B:1:xlite' 'Qwen2.5-1.5B:1:aclgraph' 'Qwen2.5-1.5B:1:eager' 'Qwen2.5-1.5B:1:xlite' 'Qwen2.5-0.5B:1:aclgraph' 'Qwen2.5-0.5B:1:eager' 'Qwen2.5-0.5B:1:xlite' 'Qwen3-32B-NVFP4:1:aclgraph' 'Qwen3-32B-NVFP4:1:eager' 'DeepSeek-R1-Distill-Qwen-1.5B:1:aclgraph' 'DeepSeek-R1-Distill-Qwen-7B:1:aclgraph' 'DeepSeek-R1-Distill-Llama-8B:1:aclgraph' 'DeepSeek-R1-Distill-Qwen-14B:2:aclgraph' 'DeepSeek-R1-Distill-Qwen-32B:4:aclgraph' 'DeepSeek-R1-Distill-Llama-70B:8:aclgraph' 'Qwen2.5-32B:4:aclgraph' 'QwQ-32B:4:aclgraph' 'Qwen2.5-32B-Instruct:4:aclgraph' 'Qwen3-32B-w8a8-MindIE:2:aclgraph' 'DeepSeek-V3-0324:16:aclgraph' 'aleoyang_Qwen3-32B-w8a8-MindIE:2:aclgraph' 'Qwen3-235B-A22B:16:aclgraph' 'DeepSeek-V3.2-Exp-w8a8:16:torchair' 'DeepSeek-R1:16:eager')
++ declare -a TEST_CONFIGS
++ AVAILABLE_NPUS=()
++ declare -a AVAILABLE_NPUS
++ RUNNING_BENCHMARKS=()
++ declare -a RUNNING_BENCHMARKS
++ ALLOCATED_PORTS=()
++ declare -a ALLOCATED_PORTS
++ trap cleanup_on_exit SIGINT SIGTERM EXIT
++ [[ 7 -gt 0 ]]
++ case "$1" in
++ '[' -z /data/models ']'
++ BASE_MODEL_PATH=/data/models
++ shift 2
++ [[ 5 -gt 0 ]]
++ case "$1" in
++ '[' -z results_all ']'
++++ dirname results_all
+++ cd .
++++ basename results_all
+++ cd results_all
+++ pwd
++ RESULT_DIR=/data/models-test/scripts/vllm_benchmark_auto/results_all
++ shift 2
++ [[ 3 -gt 0 ]]
++ case "$1" in
++ EXECUTABLE_MODULE=1
++ shift 2
++ [[ 1 -gt 0 ]]
++ case "$1" in
++ DEBUG_MODE=true
++ log debug 调试模式已启用
++ local level=debug
++ local message=调试模式已启用
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ '[' true = true ']'
++ echo -e '🔍 DEBUG: 调试模式已启用'
+🔍 DEBUG: 调试模式已启用
++ shift
++ [[ 0 -gt 0 ]]
++ '[' -z /data/models ']'
++ '[' '!' -e /data/models ']'
++ '[' '!' -r /data/models ']'
++ '[' -z /data/models-test/scripts/vllm_benchmark_auto/results_all ']'
++ TEMPERATURE=0.65
++ REQUEST_RATE=0
++ DOCKER_TAG=v0.12.0rc1
++ RESULT_DIR=/data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
++ mkdir -p /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
++ RESULT_LOG_DIR=/data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1/log
++ mkdir -p /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1/log
+++ uname -m
++ ARCH=x86_64
++ log info '配置参数 - 模型路径: /data/models'
++ local level=info
++ local 'message=配置参数 - 模型路径: /data/models'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 配置参数 - 模型路径: /data/models'
+🔷 配置参数 - 模型路径: /data/models
++ log info '配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1'
++ local level=info
++ local 'message=配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1'
+🔷 配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
++ log info '配置参数 - 温度: 0.65, 请求速率: 0'
++ local level=info
++ local 'message=配置参数 - 温度: 0.65, 请求速率: 0'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 配置参数 - 温度: 0.65, 请求速率: 0'
+🔷 配置参数 - 温度: 0.65, 请求速率: 0
++ log info '配置参数 - Docker标签: v0.12.0rc1'
++ local level=info
++ local 'message=配置参数 - Docker标签: v0.12.0rc1'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 配置参数 - Docker标签: v0.12.0rc1'
+🔷 配置参数 - Docker标签: v0.12.0rc1
++ log info 清理可能残留的VLLM容器和临时文件...
++ local level=info
++ local message=清理可能残留的VLLM容器和临时文件...
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 清理可能残留的VLLM容器和临时文件...'
+🔷 清理可能残留的VLLM容器和临时文件...
+++ docker ps -aq --filter name=xxs_vllm_
++ old_containers=
++ '[' -n '' ']'
++ rm -f '/tmp/test_result_*.tmp'
++ rm -f '/tmp/benchmark_*.log'
++ init_npu_devices
++ local npu_info
+++ npu-smi info
++ npu_info='+------------------------------------------------------------------------------------------------+
+| npu-smi 25.2.0                   Version: 25.2.0                                               |
++---------------------------+---------------+----------------------------------------------------+
+| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|
+| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |
++===========================+===============+====================================================+
+| 0     910B2C              | OK            | 85.4        30                0    / 0             |
+| 0                         | 0000:5A:00.0  | 0           0    / 0          3414 / 65536         |
++===========================+===============+====================================================+
+| 1     910B2C              | OK            | 89.9        32                0    / 0             |
+| 0                         | 0000:19:00.0  | 0           0    / 0          3412 / 65536         |
++===========================+===============+====================================================+
+| 2     910B2C              | OK            | 85.4        32                0    / 0             |
+| 0                         | 0000:49:00.0  | 0           0    / 0          3411 / 65536         |
++===========================+===============+====================================================+
+| 3     910B2C              | OK            | 86.1        32                0    / 0             |
+| 0                         | 0000:39:00.0  | 0           0    / 0          3412 / 65536         |
++===========================+===============+====================================================+
+| 4     910B2C              | OK            | 86.7        32                0    / 0             |
+| 0                         | 0000:DA:00.0  | 0           0    / 0          3410 / 65536         |
++===========================+===============+====================================================+
+| 5     910B2C              | OK            | 93.5        34                0    / 0             |
+| 0                         | 0000:99:00.0  | 0           0    / 0          3409 / 65536         |
++===========================+===============+====================================================+
+| 6     910B2C              | OK            | 83.9        31                0    / 0             |
+| 0                         | 0000:B8:00.0  | 0           0    / 0          3408 / 65536         |
++===========================+===============+====================================================+
+| 7     910B2C              | OK            | 85.8        33                0    / 0             |
+| 0                         | 0000:C8:00.0  | 0           0    / 0          3409 / 65536         |
++===========================+===============+====================================================+
+| 8     910B2C              | OK            | 85.7        32                0    / 0             |
+| 0                         | 0000:59:00.0  | 0           0    / 0          3410 / 65536         |
++===========================+===============+====================================================+
+| 9     910B2C              | OK            | 88.3        33                0    / 0             |
+| 0                         | 0000:18:00.0  | 0           0    / 0          3409 / 65536         |
++===========================+===============+====================================================+
+| 10    910B2C              | OK            | 90.4        32                0    / 0             |
+| 0                         | 0000:48:00.0  | 0           0    / 0          3409 / 65536         |
++===========================+===============+====================================================+
+| 11    910B2C              | OK            | 87.8        33                0    / 0             |
+| 0                         | 0000:38:00.0  | 0           0    / 0          3409 / 65536         |
++===========================+===============+====================================================+
+| 12    910B2C              | OK            | 93.4        32                0    / 0             |
+| 0                         | 0000:D9:00.0  | 0           0    / 0          3409 / 65536         |
++===========================+===============+====================================================+
+| 13    910B2C              | OK            | 89.1        33                0    / 0             |
+| 0                         | 0000:98:00.0  | 0           0    / 0          3408 / 65536         |
++===========================+===============+====================================================+
+| 14    910B2C              | OK            | 84.5        31                0    / 0             |
+| 0                         | 0000:B9:00.0  | 0           0    / 0          3408 / 65536         |
++===========================+===============+====================================================+
+| 15    910B2C              | OK            | 92.3        33                0    / 0             |
+| 0                         | 0000:C9:00.0  | 0           0    / 0          3409 / 65536         |
++===========================+===============+====================================================+
++---------------------------+---------------+----------------------------------------------------+
+| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |
++===========================+===============+====================================================+
+| No running processes found in NPU 0                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 1                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 2                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 3                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 4                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 5                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 6                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 7                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 8                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 9                                                            |
++===========================+===============+====================================================+
+| No running processes found in NPU 10                                                           |
++===========================+===============+====================================================+
+| No running processes found in NPU 11                                                           |
++===========================+===============+====================================================+
+| No running processes found in NPU 12                                                           |
++===========================+===============+====================================================+
+| No running processes found in NPU 13                                                           |
++===========================+===============+====================================================+
+| No running processes found in NPU 14                                                           |
++===========================+===============+====================================================+
+| No running processes found in NPU 15                                                           |
++===========================+===============+====================================================+'
++ AVAILABLE_NPUS=()
++ IFS=
++ read -r line
++ [[ +------------------------------------------------------------------------------------------------+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | npu-smi 25.2.0                   Version: 25.2.0                                               | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +---------------------------+---------------+----------------------------------------------------+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)| =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 0     910B2C              | OK            | 85.4        30                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:5A:00.0  | 0           0    / 0          3414 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 1     910B2C              | OK            | 89.9        32                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:19:00.0  | 0           0    / 0          3412 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 2     910B2C              | OK            | 85.4        32                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:49:00.0  | 0           0    / 0          3411 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 3     910B2C              | OK            | 86.1        32                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:39:00.0  | 0           0    / 0          3412 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 4     910B2C              | OK            | 86.7        32                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:DA:00.0  | 0           0    / 0          3410 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 5     910B2C              | OK            | 93.5        34                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:99:00.0  | 0           0    / 0          3409 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 6     910B2C              | OK            | 83.9        31                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:B8:00.0  | 0           0    / 0          3408 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 7     910B2C              | OK            | 85.8        33                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:C8:00.0  | 0           0    / 0          3409 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 8     910B2C              | OK            | 85.7        32                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:59:00.0  | 0           0    / 0          3410 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 9     910B2C              | OK            | 88.3        33                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:18:00.0  | 0           0    / 0          3409 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 10    910B2C              | OK            | 90.4        32                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:48:00.0  | 0           0    / 0          3409 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 11    910B2C              | OK            | 87.8        33                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:38:00.0  | 0           0    / 0          3409 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 12    910B2C              | OK            | 93.4        32                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:D9:00.0  | 0           0    / 0          3409 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 13    910B2C              | OK            | 89.1        33                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:98:00.0  | 0           0    / 0          3408 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 14    910B2C              | OK            | 84.5        31                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:B9:00.0  | 0           0    / 0          3408 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | 15    910B2C              | OK            | 92.3        33                0    / 0             | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ AVAILABLE_NPUS+=("${BASH_REMATCH[1]}")
++ IFS=
++ read -r line
++ [[ | 0                         | 0000:C9:00.0  | 0           0    / 0          3409 / 65536         | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +---------------------------+---------------+----------------------------------------------------+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | NPU     Chip              | Process id    | Process name             | Process memory(MB)      | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 0                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 1                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 2                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 3                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 4                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 5                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 6                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 7                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 8                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 9                                                            | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 10                                                           | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 11                                                           | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 12                                                           | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 13                                                           | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 14                                                           | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ | No running processes found in NPU 15                                                           | =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ [[ +===========================+===============+====================================================+ =~ ^\|[[:space:]]*([0-9]+)[[:space:]]+910B(2C|3|4)[[:space:]]*\|[[:space:]]*OK ]]
++ IFS=
++ read -r line
++ echo 0
+0
++ '[' 16 -eq 0 ']'
++ log info '检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)'
++ local level=info
++ local 'message=检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)'
+🔷 检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)
++ return 0
++ successful_tests=()
++ declare -a successful_tests
++ failed_tests=()
++ declare -a failed_tests
++ skipped_tests=()
++ declare -a skipped_tests
++ '[' -n '' ']'
++ log info '🚀 开始自动化VLLM基准测试 (混合并行模式)'
++ local level=info
++ local 'message=🚀 开始自动化VLLM基准测试 (混合并行模式)'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 🚀 开始自动化VLLM基准测试 (混合并行模式)'
+🔷 🚀 开始自动化VLLM基准测试 (混合并行模式)
++ log info '模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1'
++ local level=info
++ local 'message=模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1'
+🔷 模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
++ log info '测试模型数: 78 | NPU总计: 16 张'
++ local level=info
++ local 'message=测试模型数: 78 | NPU总计: 16 张'
++ local task_prefix=
++ '[' -n '' ']'
++ case "$level" in
++ echo -e '🔷 测试模型数: 78 | NPU总计: 16 张'
+🔷 测试模型数: 78 | NPU总计: 16 张
++ for config in "${TEST_CONFIGS[@]}"
++ IFS=:
++ read -r model_name npu_count mode
++ mode=aclgraph
++ log info '处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)' Qwen3-32B
++ local level=info
++ local 'message=处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)'
++ local task_prefix=
++ '[' -n Qwen3-32B ']'
++ task_prefix='[Qwen3-32B] '
++ case "$level" in
++ echo -e '🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)'
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)
++ read -ra current_available_npus
+++ get_current_available_npus
++++ npu-smi info
++++ grep 'No running processes found in NPU'
++++ grep -o 'NPU [0-9]*'
++++ grep -o '[0-9]*'
++++ tr '\n' ' '
+++ local 'available_npus=0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 '
+++ local filtered_npus=
+++ for npu_id in $available_npus
+++ '[' 0 -ge 0 ']'
+++ '[' 0 -le 15 ']'
+++ filtered_npus=' 0 '
+++ for npu_id in $available_npus
+++ '[' 1 -ge 0 ']'
+++ '[' 1 -le 15 ']'
+++ filtered_npus=' 0  1 '
+++ for npu_id in $available_npus
+++ '[' 2 -ge 0 ']'
+++ '[' 2 -le 15 ']'
+++ filtered_npus=' 0  1  2 '
+++ for npu_id in $available_npus
+++ '[' 3 -ge 0 ']'
+++ '[' 3 -le 15 ']'
+++ filtered_npus=' 0  1  2  3 '
+++ for npu_id in $available_npus
+++ '[' 4 -ge 0 ']'
+++ '[' 4 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4 '
+++ for npu_id in $available_npus
+++ '[' 5 -ge 0 ']'
+++ '[' 5 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5 '
+++ for npu_id in $available_npus
+++ '[' 6 -ge 0 ']'
+++ '[' 6 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6 '
+++ for npu_id in $available_npus
+++ '[' 7 -ge 0 ']'
+++ '[' 7 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7 '
+++ for npu_id in $available_npus
+++ '[' 8 -ge 0 ']'
+++ '[' 8 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8 '
+++ for npu_id in $available_npus
+++ '[' 9 -ge 0 ']'
+++ '[' 9 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9 '
+++ for npu_id in $available_npus
+++ '[' 10 -ge 0 ']'
+++ '[' 10 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10 '
+++ for npu_id in $available_npus
+++ '[' 11 -ge 0 ']'
+++ '[' 11 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11 '
+++ for npu_id in $available_npus
+++ '[' 12 -ge 0 ']'
+++ '[' 12 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12 '
+++ for npu_id in $available_npus
+++ '[' 13 -ge 0 ']'
+++ '[' 13 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12  13 '
+++ for npu_id in $available_npus
+++ '[' 14 -ge 0 ']'
+++ '[' 14 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14 '
+++ for npu_id in $available_npus
+++ '[' 15 -ge 0 ']'
+++ '[' 15 -le 15 ']'
+++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15 '
+++ echo ' 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15 '
++ log info 'NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张' Qwen3-32B
++ local level=info
++ local 'message=NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张'
++ local task_prefix=
++ '[' -n Qwen3-32B ']'
++ task_prefix='[Qwen3-32B] '
++ case "$level" in
++ echo -e '🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张'
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张
++ model_path=/data/models/Qwen3-32B
++ '[' '!' -e /data/models/Qwen3-32B ']'
++ '[' '!' -r /data/models/Qwen3-32B ']'
++ '[' 4 -gt 16 ']'
++ log info '等待NPU资源分配 (需要 4 卡)...' Qwen3-32B
++ local level=info
++ local 'message=等待NPU资源分配 (需要 4 卡)...'
++ local task_prefix=
++ '[' -n Qwen3-32B ']'
++ task_prefix='[Qwen3-32B] '
++ case "$level" in
++ echo -e '🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...'
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+++ wait_for_available_npus 4 Qwen3-32B
+++ local required_count=4
+++ local model_name=Qwen3-32B
+++ local max_wait_minutes=600
+++ local wait_minutes=0
+++ true
++++ get_current_available_npus
+++++ npu-smi info
+++++ grep 'No running processes found in NPU'
+++++ grep -o 'NPU [0-9]*'
+++++ grep -o '[0-9]*'
+++++ tr '\n' ' '
++++ local 'available_npus=0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 '
++++ local filtered_npus=
++++ for npu_id in $available_npus
++++ '[' 0 -ge 0 ']'
++++ '[' 0 -le 15 ']'
++++ filtered_npus=' 0 '
++++ for npu_id in $available_npus
++++ '[' 1 -ge 0 ']'
++++ '[' 1 -le 15 ']'
++++ filtered_npus=' 0  1 '
++++ for npu_id in $available_npus
++++ '[' 2 -ge 0 ']'
++++ '[' 2 -le 15 ']'
++++ filtered_npus=' 0  1  2 '
++++ for npu_id in $available_npus
++++ '[' 3 -ge 0 ']'
++++ '[' 3 -le 15 ']'
++++ filtered_npus=' 0  1  2  3 '
++++ for npu_id in $available_npus
++++ '[' 4 -ge 0 ']'
++++ '[' 4 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4 '
++++ for npu_id in $available_npus
++++ '[' 5 -ge 0 ']'
++++ '[' 5 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5 '
++++ for npu_id in $available_npus
++++ '[' 6 -ge 0 ']'
++++ '[' 6 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6 '
++++ for npu_id in $available_npus
++++ '[' 7 -ge 0 ']'
++++ '[' 7 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7 '
++++ for npu_id in $available_npus
++++ '[' 8 -ge 0 ']'
++++ '[' 8 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8 '
++++ for npu_id in $available_npus
++++ '[' 9 -ge 0 ']'
++++ '[' 9 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9 '
++++ for npu_id in $available_npus
++++ '[' 10 -ge 0 ']'
++++ '[' 10 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10 '
++++ for npu_id in $available_npus
++++ '[' 11 -ge 0 ']'
++++ '[' 11 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11 '
++++ for npu_id in $available_npus
++++ '[' 12 -ge 0 ']'
++++ '[' 12 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12 '
++++ for npu_id in $available_npus
++++ '[' 13 -ge 0 ']'
++++ '[' 13 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12  13 '
++++ for npu_id in $available_npus
++++ '[' 14 -ge 0 ']'
++++ '[' 14 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14 '
++++ for npu_id in $available_npus
++++ '[' 15 -ge 0 ']'
++++ '[' 15 -le 15 ']'
++++ filtered_npus=' 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15 '
++++ echo ' 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15 '
+++ local 'available_npus_str= 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15 '
+++ '[' 0 -eq 0 ']'
+++ read -ra available_npus
+++ '[' 16 -ge 4 ']'
+++ selected_npus=('0' '1' '2' '3')
+++ local selected_npus
++++ IFS=,
++++ echo 0,1,2,3
+++ local npu_list=0,1,2,3
+++ echo 0,1,2,3
+++ return 0
++ allocated_npus=0,1,2,3
++ '[' 0 -ne 0 ']'
++ '[' -z 0,1,2,3 ']'
+++ get_available_port
+++ local port
+++ (( port=DEFAULT_PORT_RANGE_START ))
+++ (( port<=DEFAULT_PORT_RANGE_END ))
+++ netstat -tuln
+++ grep -q ':2800 '
+++ ss -tuln
+++ grep -q ':2800 '
+++ [[ !    =~  2800  ]]
+++ ALLOCATED_PORTS+=("$port")
+++ echo 2800
+++ return 0
++ port=2800
++ '[' 0 -ne 0 ']'
++ '[' -z 2800 ']'
++ log info '启动推理服务 (端口: 2800, NPU: 0,1,2,3)...' Qwen3-32B
++ local level=info
++ local 'message=启动推理服务 (端口: 2800, NPU: 0,1,2,3)...'
++ local task_prefix=
++ '[' -n Qwen3-32B ']'
++ task_prefix='[Qwen3-32B] '
++ case "$level" in
++ echo -e '🔷 [Qwen3-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...'
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+++ start_inference_service Qwen3-32B 4 0,1,2,3 2800 aclgraph
+++ local model_name=Qwen3-32B
+++ local npu_count=4
+++ local allocated_npus=0,1,2,3
+++ local port=2800
+++ local mode=aclgraph
+++ local model_path=/data/models/Qwen3-32B
++++ echo Qwen3-32B
++++ tr '[:upper:]' '[:lower:]'
++++ sed 's/[^a-z0-9]/_/g'
+++ local safe_model_name=qwen3_32b
++++ date +%s
+++ local container_name=vllm_qwen3_32b_1769647968_aclgraph
+++ local docker_image=quay.io/ascend/vllm-ascend:v0.12.0rc1
+++ log debug '容器: vllm_qwen3_32b_1769647968_aclgraph | NPU: 0,1,2,3 | 端口: 2800' Qwen3-32B
+++ local level=debug
+++ local 'message=容器: vllm_qwen3_32b_1769647968_aclgraph | NPU: 0,1,2,3 | 端口: 2800'
+++ local task_prefix=
+++ '[' -n Qwen3-32B ']'
+++ task_prefix='[Qwen3-32B] '
+++ case "$level" in
+++ '[' true = true ']'
+++ echo -e '🔍 DEBUG: [Qwen3-32B] 容器: vllm_qwen3_32b_1769647968_aclgraph | NPU: 0,1,2,3 | 端口: 2800'
+🔍 DEBUG: [Qwen3-32B] 容器: vllm_qwen3_32b_1769647968_aclgraph | NPU: 0,1,2,3 | 端口: 2800
++++ date +%s
+++ local log_file=/data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1/log/x86_64_start_vllm_Qwen3-32B_1769647968_4_npu_aclgraph.log
++++ docker run -itd --privileged --net=host --name vllm_qwen3_32b_1769647968_aclgraph --device /dev/davinci_manager --device /dev/devmm_svm --device /dev/hisi_hdc -v /usr/local/dcmi:/usr/local/dcmi -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi -v /usr/local/Ascend/driver/lib64/:/usr/local/Ascend/driver/lib64/ -v /usr/local/Ascend/driver:/usr/local/Ascend/driver -v /etc/ascend_install.info:/etc/ascend_install.info -v /root/.cache:/root/.cache -v /root/.pip:/root/.pip -v /data/models/Qwen3-32B:/data/models/Qwen3-32B -v /workspace:/workspace -v /home:/home -v /data:/data -v /data2:/data2 -v /nfs:/nfs -e PIP_CONFIG_FILE=/root/.pip/pip.conf -e VLLM_USE_V1=1 -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3 -e model_path=/data/models/Qwen3-32B -e model_name=Qwen3-32B -e npu_count=4 -e port=2800 -e mode=aclgraph -e result_dir=/data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1 -e code_path=/data/models-test/scripts/vllm_benchmark_auto quay.io/ascend/vllm-ascend:v0.12.0rc1 bash -c 'bash /data/models-test/scripts/vllm_benchmark_auto/start_vllm_sever.sh 2>&1 | tee -a /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1/log/x86_64_start_vllm_Qwen3-32B_1769647968_4_npu_aclgraph.log'
+++ local container_id=3aaf03cf5008d27b36899b25a7e9734adc68ee9c738af6244ab1163ac25f8c8a
+++ '[' 0 -eq 0 ']'
+++ '[' -n 3aaf03cf5008d27b36899b25a7e9734adc68ee9c738af6244ab1163ac25f8c8a ']'
+++ wait_for_service_ready 127.0.0.1 2800 Qwen3-32B
+++ local host=127.0.0.1
+++ local port=2800
+++ local model_name=Qwen3-32B
+++ local max_wait_seconds=1200
+++ local wait_time=0
+++ local check_interval=10
+++ log info '正在等待推理服务启动 (最大等待: 1200s)' Qwen3-32B
+++ local level=info
+++ local 'message=正在等待推理服务启动 (最大等待: 1200s)'
+++ local task_prefix=
+++ '[' -n Qwen3-32B ']'
+++ task_prefix='[Qwen3-32B] '
+++ case "$level" in
+++ echo -e '🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)'
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
+++ '[' 0 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=10
+++ '[' 10 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=20
+++ '[' 20 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=30
+++ '[' 30 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=40
+++ '[' 40 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=50
+++ '[' 50 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=60
+++ '[' 60 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=70
+++ '[' 70 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=80
+++ '[' 80 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=90
+++ '[' 90 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=100
+++ '[' 100 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=110
+++ '[' 110 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=120
+++ '[' 120 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=130
+++ '[' 130 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=140
+++ '[' 140 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=150
+++ '[' 150 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=160
+++ '[' 160 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=170
+++ '[' 170 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=180
+++ '[' 180 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=190
+++ '[' 190 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=200
+++ '[' 200 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=210
+++ '[' 210 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=220
+++ '[' 220 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=230
+++ '[' 230 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=240
+++ '[' 240 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=250
+++ '[' 250 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=260
+++ '[' 260 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=270
+++ '[' 270 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=280
+++ '[' 280 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=290
+++ '[' 290 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=300
+++ '[' 300 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=310
+++ '[' 310 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=320
+++ '[' 320 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=330
+++ '[' 330 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=340
+++ '[' 340 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=350
+++ '[' 350 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=360
+++ '[' 360 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=370
+++ '[' 370 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=380
+++ '[' 380 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=390
+++ '[' 390 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=400
+++ '[' 400 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=410
+++ '[' 410 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=420
+++ '[' 420 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=430
+++ '[' 430 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=440
+++ '[' 440 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=450
+++ '[' 450 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=460
+++ '[' 460 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=470
+++ '[' 470 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=480
+++ '[' 480 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=490
+++ '[' 490 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=500
+++ '[' 500 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=510
+++ '[' 510 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=520
+++ '[' 520 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=530
+++ '[' 530 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=540
+++ '[' 540 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=550
+++ '[' 550 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=560
+++ '[' 560 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=570
+++ '[' 570 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=580
+++ '[' 580 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=590
+++ '[' 590 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=600
+++ '[' 600 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=610
+++ '[' 610 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=620
+++ '[' 620 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=630
+++ '[' 630 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=640
+++ '[' 640 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=650
+++ '[' 650 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=660
+++ '[' 660 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=670
+++ '[' 670 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=680
+++ '[' 680 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=690
+++ '[' 690 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=700
+++ '[' 700 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=710
+++ '[' 710 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=720
+++ '[' 720 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=730
+++ '[' 730 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=740
+++ '[' 740 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=750
+++ '[' 750 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=760
+++ '[' 760 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=770
+++ '[' 770 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=780
+++ '[' 780 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=790
+++ '[' 790 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=800
+++ '[' 800 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=810
+++ '[' 810 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=820
+++ '[' 820 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=830
+++ '[' 830 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=840
+++ '[' 840 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=850
+++ '[' 850 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=860
+++ '[' 860 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=870
+++ '[' 870 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=880
+++ '[' 880 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=890
+++ '[' 890 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=900
+++ '[' 900 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=910
+++ '[' 910 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=920
+++ '[' 920 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=930
+++ '[' 930 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=940
+++ '[' 940 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=950
+++ '[' 950 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=960
+++ '[' 960 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=970
+++ '[' 970 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=980
+++ '[' 980 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=990
+++ '[' 990 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1000
+++ '[' 1000 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1010
+++ '[' 1010 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1020
+++ '[' 1020 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1030
+++ '[' 1030 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1040
+++ '[' 1040 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1050
+++ '[' 1050 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1060
+++ '[' 1060 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1070
+++ '[' 1070 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1080
+++ '[' 1080 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1090
+++ '[' 1090 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1100
+++ '[' 1100 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1110
+++ '[' 1110 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1120
+++ '[' 1120 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1130
+++ '[' 1130 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+++ wait_time=1140
+++ '[' 1140 -lt 1200 ']'
++++ curl -s -w '%{http_code}' -o /dev/null --max-time 10 http://127.0.0.1:2800/v1/models
+++ models_response=000
+++ '[' 000 = 200 ']'
+++ sleep 10
+DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+🔍 DEBUG: 调试模式已启用
+🔷 配置参数 - 模型路径: /data/models
+🔷 配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
+🔷 配置参数 - 温度: 0.65, 请求速率: 0
+🔷 配置参数 - Docker标签: v0.12.0rc1
+🔷 清理可能残留的VLLM容器和临时文件...
+0
+🔷 检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)
+🔷 🚀 开始自动化VLLM基准测试 (混合并行模式)
+🔷 模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
+🔷 测试模型数: 78 | NPU总计: 16 张
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔍 DEBUG: [Qwen3-32B] 容器: vllm_qwen3_32b_1769649495_aclgraph | NPU: 0,1,2,3 | 端口: 2800
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
+DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+🔍 DEBUG: 调试模式已启用
+🔷 配置参数 - 模型路径: /data/models
+🔷 配置参数 - 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
+🔷 配置参数 - 温度: 0.65, 请求速率: 0
+🔷 配置参数 - Docker标签: v0.12.0rc1
+🔷 清理可能残留的VLLM容器和临时文件...
+0
+🔷 检测到NPU设备: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 (共 16 张)
+🔷 🚀 开始自动化VLLM基准测试 (混合并行模式)
+🔷 模型路径: /data/models | 结果目录: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
+🔷 测试模型数: 78 | NPU总计: 16 张
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: aclgraph)
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔍 DEBUG: [Qwen3-32B] 容器: vllm_qwen3_32b_1769649674_aclgraph | NPU: 0,1,2,3 | 端口: 2800
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
+❌ [Qwen3-32B] 推理服务启动超时 (等待时间: 1200s)
+❌ [Qwen3-32B] 服务就绪检查失败，清理容器: vllm_qwen3_32b_1769649674_aclgraph
+🔍 DEBUG: 尝试清理容器: vllm_qwen3_32b_1769649674_aclgraph
+🔍 DEBUG: 正在删除容器: vllm_qwen3_32b_1769649674_aclgraph
+🔍 DEBUG: 容器删除成功: vllm_qwen3_32b_1769649674_aclgraph
+start container_name: 
+❌ [Qwen3-32B] 推理服务启动失败
+🔍 DEBUG: 已释放端口: 2800
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: eager)
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用16张 | 占用0张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2800, NPU: 0,1,2,3)...
+🔍 DEBUG: [Qwen3-32B] 容器: vllm_qwen3_32b_1769650880_eager | NPU: 0,1,2,3 | 端口: 2800
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)
+✅ [Qwen3-32B] 推理服务已就绪 (耗时: 90秒)
+✅ [Qwen3-32B] 推理服务启动成功 (容器: vllm_qwen3_32b_1769650880_eager)
+start container_name: vllm_qwen3_32b_1769650880_eager
+🔷 [Qwen3-32B] 启动性能测试...
+开始测试模型：Qwen3-32B, DEFAULT_DIR=/data/models-test/scripts/vllm_benchmark_auto
+✅ [Qwen3-32B] 性能测试已启动 (PID: 3749205)
+🔷 [Qwen3-32B] 处理测试配置: Qwen3-32B (需要 4 卡, 模式: xlite)
+🔍 DEBUG: [Qwen3-32B] 测试日志保存到: /data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1/log/x86_64_benchmark_Qwen3-32B_1769650971_4_npu_eager.log
+Result_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1
+Result_log_dir:/data/models-test/scripts/vllm_benchmark_auto/results_all/vllm_v0.12.0rc1/log
+🔷 [Qwen3-32B] NPU状态: 总计16张 | 可用12张 | 占用4张 | 需要4张
+🔷 [Qwen3-32B] 等待NPU资源分配 (需要 4 卡)...
+🔷 [Qwen3-32B] 启动推理服务 (端口: 2801, NPU: 4,5,6,7)...
+🔍 DEBUG: [Qwen3-32B] 容器: vllm_qwen3_32b_1769650975_xlite | NPU: 4,5,6,7 | 端口: 2801
+🔷 [Qwen3-32B] 正在等待推理服务启动 (最大等待: 1200s)

@@ -55,7 +55,7 @@ export function Dashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">仪表板</h1>
-          <p className="text-gray-500 mt-1">大模型测试平台概览</p>
+          <p className="text-gray-500 mt-1">大模型测评平台概览</p>
         </div>
       </div>
 

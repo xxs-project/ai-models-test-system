@@ -1,0 +1,26 @@
+🏃 Running perf test...
+Running test with P=1, I=2048, O=2048
+=====================================================
+Thread Num: 1 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 1
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2158.0
+=====================================================
+Total TPS with    prefill(tokens/s)         : 37.4087
+Total TPS without prefill                   : 38.0756
+Mean TPS with    prefill                    : 37.4087
+Mean TPS without prefill                    : 38.0756
+=====================================================
+Mean TTFT(ms)                               : 1036.3803
+Max  TTFT(ms)                               : 1036.3803
+Min  TTFT(ms)                               : 1036.3803
+=====================================================
+Mean TPOT(ms)                               : 26.2635
+Max  TPOT(ms)                               : 26.2635
+Min  TPOT(ms)                               : 26.2635
+=====================================================
+Total Time(s)                               : 57.6871
+Request Throughput(requests/s)              : 0.0173
+=====================================================
+Running test with P=8, I=2048, O=2048

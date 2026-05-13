@@ -84,7 +84,7 @@ class TestQwen3_14BFullFlow:
             "graph_mode": "eager",
             "execution_flag": "1",
             "model_path": "/data/models",
-            "inference_framework": "vllm",
+            "inference_framework": 1,
             "framework_version": "v0.12.0rc1",
             "context_lengths": "1024,2048,4096",
             "concurrencies": "1,8,16,32,64",
@@ -137,7 +137,7 @@ class TestQwen3_14BFullFlow:
             assert task.device_id == self.device_id
             assert task.model_name == "Qwen3-14B"
             assert task.npu_count == 2
-            assert task.inference_framework == "vllm"
+            assert task.inference_framework == 1
             assert task.framework_version == "v0.12.0rc1"
             assert task.script_path == "/data/models-test/scripts/vllm_benchmark_auto"
     

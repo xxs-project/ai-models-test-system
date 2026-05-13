@@ -1,0 +1,153 @@
+{
+  "versions": {
+    "default": {
+      "vllm_version": "0.16.0"
+    }
+  },
+  "models": {
+    "Qwen3-32B": {
+      "args": ["--swap-space", "16"]
+    },
+    "Qwen3-Next-80B-A3B-Instruct": {
+      "args": ["--gpu-memory-utilization", "0.7"]
+    },
+    "Qwen3-VL-30B-A3B-Instruct": {
+      "args": [
+        "--dtype", "bfloat16",
+        "--max-model-len", "16384",
+        "--max-num-batched-tokens", "16384",
+        "--gpu-memory-utilization", "0.9",
+        "--limit-mm-per-prompt", "{\"image\":4, \"video\":0}",
+        "--swap-space", "16"
+      ]
+    },
+    "Qwen3-VL-32B-Instruct": {
+      "args": [
+        "--dtype", "bfloat16",
+        "--max-model-len", "16384",
+        "--max-num-batched-tokens", "16384",
+        "--gpu-memory-utilization", "0.9",
+        "--limit-mm-per-prompt", "{\"image\":4, \"video\":0}",
+        "--swap-space", "16"
+      ]
+    },
+    "Qwen3-32B-NVFP4": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen2.5-72B": {
+      "args": ["--swap-space", "16"]
+    },
+    "Qwen2.5-32B": {
+      "args": ["--swap-space", "16"]
+    },
+    "Qwen3-30B-A3B": {
+      "args": []
+    },
+    "Qwen3-14B": {
+      "args": []
+    },
+    "Qwen2.5-14B": {
+      "args": []
+    },
+    "Qwen_Qwen3-32B-FP8": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen_Qwen3-30B-A3B-FP8": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen3-14B-FP8": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen3-8B": {
+      "args": []
+    },
+    "Qwen3-8B-FP8": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen3-4B": {
+      "args": []
+    },
+    "Qwen3-4B-FP8": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen3-1.7B": {
+      "args": []
+    },
+    "Qwen3-1.7B-FP8": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen3-0.6B": {
+      "args": []
+    },
+    "Qwen3-0.6B-FP8": {
+      "args": ["--quantization", "fp8"]
+    },
+    "Qwen3-VL-8B-Instruct": {
+      "args": [
+        "--dtype", "bfloat16",
+        "--max-model-len", "16384",
+        "--gpu-memory-utilization", "0.9",
+        "--limit-mm-per-prompt", "{\"image\":4}"
+      ]
+    },
+    "Qwen2.5-7B": {
+      "args": []
+    },
+    "Qwen2.5-3B": {
+      "args": []
+    },
+    "Qwen2.5-1.5B": {
+      "args": []
+    },
+    "Qwen2.5-0.5B": {
+      "args": []
+    },
+    "DeepSeek-R1-Distill-Qwen-1.5B": {
+      "args": []
+    },
+    "DeepSeek-R1-Distill-Qwen-7B": {
+      "args": []
+    },
+    "DeepSeek-R1-Distill-Llama-8B": {
+      "args": []
+    },
+    "DeepSeek-R1-Distill-Qwen-14B": {
+      "args": []
+    },
+    "DeepSeek-R1-Distill-Qwen-32B": {
+      "args": []
+    },
+    "DeepSeek-R1-Distill-Llama-70B": {
+      "args": []
+    },
+    "Qwen2.5-32B-Instruct": {
+      "args": []
+    },
+    "QwQ-32B": {
+      "args": []
+    },
+    "DeepSeek-V3-0324": {
+      "args": []
+    },
+    "Qwen3-235B-A22B": {
+      "args": []
+    },
+    "DeepSeek-R1": {
+      "args": [
+        "--max-model-len", "16000",
+        "--max-num-batched-tokens", "16000"
+      ]
+    },
+    "default": {
+      "args": []
+    }
+  },
+  "modes": {
+    "eager": {
+      "args": ["--enforce-eager"]
+    },
+    "default": {
+      "args": []
+    }
+  }
+}

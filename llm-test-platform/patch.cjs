@@ -1,37 +1,45 @@
 const fs = require('fs');
-let code = fs.readFileSync('src/pages/EvalResults.tsx', 'utf8');
+let code = fs.readFileSync('src/pages/TaskList.tsx', 'utf8');
 
-// Replace compareOptions
-code = code.replace(
-  /const compareOptions = activeComparisonReports\.length > 1 \? \{[\s\S]*?\} : null;/g,
-  `const isIpdComparison = activeComparisonReports.length > 0 && activeComparisonReports[0].type === 'IPD';
+const startupModeBlock = `                  {Number(testType) === 1 && Number(testMode) === 1 && (
+                  <FormField
+                    control={form.control}
+                    name="startup_mode"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>启动模式 <span className="text-red-500">*</span></FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="api">直连API</SelectItem>
+                            <SelectItem value="container">容器化启动</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  )}`;
 
-  const compareOptions = activeComparisonReports.length > 1 ? {
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    legend: { top: 10, type: 'scroll' },
-    grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-    xAxis: { 
-      type: 'category', 
-      data: Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name)))) 
-    },
-    yAxis: { type: 'value', ...(isIpdComparison ? {} : { max: 100 }) },
-    series: activeComparisonReports.map(r => ({
-      name: \`\${r.model_name} (\${r.time})\`,
-      type: 'bar',
-      label: {
-        show: true,
-        position: 'top',
-        formatter: isIpdComparison ? '{c}' : '{c}%',
-        fontSize: 10,
-        color: '#666'
-      },
-      data: Array.from(new Set(activeComparisonReports.flatMap(rx => rx.packs.map((p: any) => p.name)))).map(packName => {
-        const pack = r.packs.find((p: any) => p.name === packName);
-        if (!pack) return 0;
-        return isIpdComparison ? pack.score : (pack.maxScore > 0 ? (pack.score / pack.maxScore * 100).toFixed(2) : 0);
-      })
-    }))
-  } : null;`
-);
+code = code.replace(startupModeBlock, '');
 
-fs.writeFileSync('src/pages/EvalResults.tsx', code);
+const testModeEnd = `                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />`;
+
+// Find the last occurrence of testModeEnd within the testing config section
+const parts = code.split('name="test_mode"');
+const part1 = parts[0];
+const part2 = parts[1];
+const injectIndex = part2.indexOf(testModeEnd) + testModeEnd.length;
+
+const newPart2 = part2.substring(0, injectIndex) + '\n' + startupModeBlock + part2.substring(injectIndex);
+
+code = part1 + 'name="test_mode"' + newPart2;
+
+fs.writeFileSync('src/pages/TaskList.tsx', code);

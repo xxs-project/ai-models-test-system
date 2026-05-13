@@ -498,6 +498,7 @@ async def read_tasks(
     search: str = Query(None),
     status: str = Query(None),
     test_type: str = Query(None),
+    test_mode: str = Query(None),
     session: Session = Depends(get_session)
 ):
     statement = select(Task)
@@ -509,6 +510,8 @@ async def read_tasks(
         statement = statement.where(Task.status == int(status))
     if test_type:
         statement = statement.where(Task.test_type == int(test_type))
+    if test_mode:
+        statement = statement.where(Task.test_mode == int(test_mode))
     
     total = session.exec(select(func.count()).select_from(statement.subquery())).one()
     statement = statement.offset((page - 1) * size).limit(size)
@@ -576,7 +579,19 @@ async def check_task_executable(task_id: int, session: Session = Depends(get_ses
     
     # 获取设备信息
     device_info = None
-    if task.device_id:
+    if task.test_type == 1 and task.test_mode == 1 and task.startup_mode == 'api':
+        import urllib.parse
+        parsed_url = urllib.parse.urlparse(task.base_url) if task.base_url else None
+        api_ip = parsed_url.hostname if parsed_url and parsed_url.hostname else (task.base_url.split('://')[-1].split(':')[0].split('/')[0] if task.base_url else '')
+        api_password = task.api_key or ''
+        device_info = {
+            'ip': api_ip,
+            'port': 22,
+            'username': 'root',
+            'password': api_password
+        }
+
+    if not device_info and task.device_id:
         device = session.get(Device, task.device_id)
         if device:
             device_info = {
@@ -667,7 +682,19 @@ async def execute_task(task_id: int, session: Session = Depends(get_session)):
     from services.task_checker import TaskExecutionChecker
     
     device_info = None
-    if task.device_id:
+    if task.test_type == 1 and task.test_mode == 1 and task.startup_mode == 'api':
+        import urllib.parse
+        parsed_url = urllib.parse.urlparse(task.base_url) if task.base_url else None
+        api_ip = parsed_url.hostname if parsed_url and parsed_url.hostname else (task.base_url.split('://')[-1].split(':')[0].split('/')[0] if task.base_url else '')
+        api_password = task.api_key or ''
+        device_info = {
+            'ip': api_ip,
+            'port': 22,
+            'username': 'root',
+            'password': api_password
+        }
+
+    if not device_info and task.device_id:
         device = session.get(Device, task.device_id)
         if device:
             device_info = {
@@ -766,6 +793,7 @@ async def auto_import_task_result(task_id: int, session: Session = Depends(get_s
         raise HTTPException(status_code=500, detail=f"导入失败: {str(e)}")
 
 def execute_task_background(task_id):
+    import os
     """
     后台执行测试任务（增强版）
 
@@ -822,7 +850,23 @@ def execute_task_background(task_id):
         try:
             # 1. 获取设备信息
             device_info = None
-            if task.device_id:
+            
+            # API模式下设备IP来自base_url，密码来自api_key
+            if task.test_type == 1 and task.test_mode == 1 and task.startup_mode == 'api':
+                import urllib.parse
+                parsed_url = urllib.parse.urlparse(task.base_url)
+                api_ip = parsed_url.hostname if parsed_url.hostname else task.base_url.split('://')[-1].split(':')[0].split('/')[0]
+                api_password = task.api_key
+                logger.info(f"API模式，从配置解析目标机器 IP: {api_ip}")
+                
+                device_info = {
+                    'ip': api_ip,
+                    'port': 22,
+                    'username': 'root', # 默认root
+                    'password': api_password
+                }
+            
+            if not device_info and task.device_id:
                 device = session.get(Device, task.device_id)
                 if device:
                     device_info = {
@@ -911,6 +955,11 @@ def execute_task_background(task_id):
                 'task_name': task.task_name,
                 'test_type': task.test_type,
                 'test_mode': task.test_mode,
+                'startup_mode': task.startup_mode,
+                'base_url': task.base_url,
+                'api_key': task.api_key,
+                'parameter_combination': task.parameter_combination,
+                'processor_type': task.processor_type,
                 'inference_framework': task.inference_framework,
                 'framework_version': task.framework_version,
                 'model_path': task.model_path,
@@ -918,6 +967,7 @@ def execute_task_background(task_id):
                 'npu_count': task.npu_count,
                 'graph_mode': task.graph_mode,
                 'execution_flag': task.execution_flag or '1',
+                'dataset_name': task.dataset_name,
             }
             
             # 4. 构建测试命令
@@ -940,9 +990,36 @@ def execute_task_background(task_id):
                 logger.error(error_msg)
                 raise Exception(error_msg)
 
+
             logger.info(f"[OK] 脚本路径存在: {script_path}")
 
+            # ----- ADDED CODE: 拷贝 perf_test 目录到远端 -----
+            local_perf_test_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'perf_test')
+            if os.path.exists(local_perf_test_dir):
+                logger.info(f"打包本地 perf_test 目录: {local_perf_test_dir}")
+                tar_cmd = f"cd {os.path.dirname(local_perf_test_dir)} && tar -czf /tmp/perf_test.tar.gz {os.path.basename(local_perf_test_dir)}"
+                os.system(tar_cmd)
+                
+                logger.info("通过SFTP上传 perf_test.tar.gz 到目标机器")
+                sftp = ssh_client.open_sftp()
+                sftp.put("/tmp/perf_test.tar.gz", f"{script_path}/perf_test.tar.gz")
+                sftp.close()
+                
+                logger.info("在目标机器上解压 perf_test.tar.gz")
+                stdin, stdout, stderr = ssh_client.exec_command(f"cd {script_path} && tar -xzf perf_test.tar.gz")
+                # Wait for command to finish
+                exit_status = stdout.channel.recv_exit_status()
+                if exit_status != 0:
+                    err = stderr.read().decode()
+                    logger.warning(f"解压可能遇到问题: {err}")
+                else:
+                    logger.info("解压 perf_test 完成")
+            else:
+                logger.warning(f"本地未找到 perf_test 目录: {local_perf_test_dir}，跳过拷贝")
+            # --------------------------------------------------
+
             # 验证模型路径存在
+
             model_path = task.model_path
             logger.info(f"验证模型路径: {model_path}")
 
@@ -1410,7 +1487,19 @@ async def get_task_logs(
 
     # 获取设备信息
     device_info = None
-    if task.device_id:
+    if task.test_type == 1 and task.test_mode == 1 and task.startup_mode == 'api':
+        import urllib.parse
+        parsed_url = urllib.parse.urlparse(task.base_url) if task.base_url else None
+        api_ip = parsed_url.hostname if parsed_url and parsed_url.hostname else (task.base_url.split('://')[-1].split(':')[0].split('/')[0] if task.base_url else '')
+        api_password = task.api_key or ''
+        device_info = {
+            'ip': api_ip,
+            'port': 22,
+            'username': 'root',
+            'password': api_password
+        }
+
+    if not device_info and task.device_id:
         device = session.get(Device, task.device_id)
         if device:
             device_info = {
@@ -1506,7 +1595,19 @@ async def get_task_process_info(task_id: int, session: Session = Depends(get_ses
 
     # 获取设备信息
     device_info = None
-    if task.device_id:
+    if task.test_type == 1 and task.test_mode == 1 and task.startup_mode == 'api':
+        import urllib.parse
+        parsed_url = urllib.parse.urlparse(task.base_url) if task.base_url else None
+        api_ip = parsed_url.hostname if parsed_url and parsed_url.hostname else (task.base_url.split('://')[-1].split(':')[0].split('/')[0] if task.base_url else '')
+        api_password = task.api_key or ''
+        device_info = {
+            'ip': api_ip,
+            'port': 22,
+            'username': 'root',
+            'password': api_password
+        }
+
+    if not device_info and task.device_id:
         device = session.get(Device, task.device_id)
         if device:
             device_info = {
@@ -1707,8 +1808,8 @@ async def start_eval_task(task_id: int, session: Session = Depends(get_session))
     has_ipd = "IPD" in packs_list
     standard_packs = [p for p in packs_list if p != "IPD"]
     
-    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal")
-    ipd_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ipd_bench_test")
+    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal")
+    ipd_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "ipd_bench_test")
     
     commands = []
     if standard_packs:
@@ -1779,7 +1880,7 @@ async def get_eval_results():
     import re
     from datetime import datetime
     
-    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal", "results")
+    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal", "results")
     if not os.path.exists(bench_dir):
         return {"reports": []}
         
@@ -1918,8 +2019,8 @@ async def start_eval(req: EvalStartRequest):
     has_ipd = "IPD" in packs_list
     standard_packs = [p for p in packs_list if p != "IPD"]
     
-    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal")
-    ipd_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ipd_bench_test")
+    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal")
+    ipd_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "ipd_bench_test")
     
     commands = []
     
@@ -1958,7 +2059,7 @@ async def start_eval(req: EvalStartRequest):
 @app.delete("/api/eval/results/{filename}")
 async def delete_eval_result(filename: str):
     import os
-    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal", "results")
+    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal", "results")
     filepath = os.path.join(bench_dir, filename)
     if os.path.exists(filepath) and filename.endswith("_report.md"):
         try:
@@ -1971,7 +2072,7 @@ async def delete_eval_result(filename: str):
                 
             # ALSO delete from ipd_bench_test/results if it's an IPD report
             if filename.startswith("ipd_bench_"):
-                ipd_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ipd_bench_test", "results")
+                ipd_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "ipd_bench_test", "results")
                 ipd_md = os.path.join(ipd_dir, filename)
                 ipd_json = os.path.join(ipd_dir, filename.replace("_report.md", "_report.json"))
                 if os.path.exists(ipd_md):
@@ -1995,7 +2096,7 @@ async def create_eval_comparison(data: EvalComparisonCreate):
     import uuid
     from datetime import datetime
     
-    comparisons_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal", "results", "comparisons")
+    comparisons_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal", "results", "comparisons")
     os.makedirs(comparisons_dir, exist_ok=True)
     
     comp_id = f"comp_{uuid.uuid4().hex[:8]}"
@@ -2018,7 +2119,7 @@ async def get_eval_comparisons():
     import os
     import json
     
-    comparisons_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal", "results", "comparisons")
+    comparisons_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal", "results", "comparisons")
     if not os.path.exists(comparisons_dir):
         return {"comparisons": []}
         
@@ -2037,7 +2138,7 @@ async def get_eval_comparisons():
 @app.delete("/api/eval/comparisons/{comp_id}")
 async def delete_eval_comparison(comp_id: str):
     import os
-    comparisons_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal", "results", "comparisons")
+    comparisons_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal", "results", "comparisons")
     filepath = os.path.join(comparisons_dir, f"{comp_id}.json")
     if os.path.exists(filepath):
         os.remove(filepath)

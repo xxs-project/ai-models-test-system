@@ -28,7 +28,7 @@ export function SystemSettings() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="siteName">站点名称</Label>
-              <Input id="siteName" defaultValue="大模型测试平台" />
+              <Input id="siteName" defaultValue="大模型测评平台" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="language">语言</Label>

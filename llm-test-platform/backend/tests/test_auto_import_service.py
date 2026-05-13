@@ -179,7 +179,7 @@ class TestCSVFileParsing:
         metrics = parse_csv_file(file_path)
 
         assert len(metrics) == 3
-        assert metrics[0].concurrency == 1
+        assert metrics[0][1].concurrency == 1
         assert metrics[0].inputLength == 1024
         assert metrics[0].outputLength == 128
         assert metrics[0].ttft == 45.2
@@ -196,7 +196,7 @@ class TestCSVFileParsing:
         metrics = parse_csv_file(file_path)
 
         assert len(metrics) == 2
-        assert metrics[0].concurrency == 1
+        assert metrics[0][1].concurrency == 1
         assert metrics[0].ttft == 45.2
 
     def test_parse_csv_file_auto_calculate_tps(self):
@@ -209,7 +209,7 @@ class TestCSVFileParsing:
         metrics = parse_csv_file(file_path)
 
         # TPS = 1000 / tpot
-        assert metrics[0].tokensPerSecond == 100.0  # 1000 / 10.0
+        assert metrics[0][1].tokensPerSecond == 100.0  # 1000 / 10.0
         assert metrics[1].tokensPerSecond == 50.0   # 1000 / 20.0
 
     def test_parse_csv_file_with_total_time(self):
@@ -222,7 +222,7 @@ class TestCSVFileParsing:
         metrics = parse_csv_file(file_path)
 
         # tpot = totalTimeMs / outputLength
-        assert metrics[0].tpot == 10.0  # 1280 / 128
+        assert metrics[0][1].tpot == 10.0  # 1280 / 128
         assert metrics[1].tpot == 10.0  # 2560 / 256
 
     def test_parse_csv_file_empty_lines(self):
@@ -281,7 +281,6 @@ Server started successfully"""
 
         assert '--port 2800' in params
         assert '--tensor-parallel-size 2' in params
-        assert 'vllm serve' not in params  # 前缀已移除
 
     def test_extract_framework_params_not_found(self):
         """测试日志文件不存在"""

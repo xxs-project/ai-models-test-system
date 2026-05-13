@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Layout } from '@/components/Layout'
 import { Dashboard } from '@/pages/Dashboard'
+import { Board } from '@/pages/Board'
 import { DeviceList } from '@/pages/DeviceList'
 import { TaskList } from '@/pages/TaskList'
 import { ResourceCalc } from '@/pages/ResourceCalc'
@@ -19,6 +20,14 @@ function App() {
           element={
             <ErrorBoundary>
               <Dashboard />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="board"
+          element={
+            <ErrorBoundary>
+              <Board />
             </ErrorBoundary>
           }
         />

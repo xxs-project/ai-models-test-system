@@ -38,6 +38,15 @@ class Task(SQLModel, table=True):
     priority: int = Field(default=1)
     test_type: int = Field(default=1)
     test_mode: int = Field(default=1)
+    startup_mode: Optional[str] = Field(default="container")
+    base_url: Optional[str] = None
+    api_key: Optional[str] = None
+    parameter_combination: Optional[str] = None
+    processor_type: Optional[str] = Field(default="NPU")
+    server_model: Optional[str] = None
+    framework_startup_args: Optional[str] = None
+    accelerator_card: Optional[str] = None
+    dataset_name: Optional[str] = None
     status: int = Field(default=0)
     progress: int = Field(default=0)
     device_id: Optional[int] = Field(default=None, foreign_key="device.id")

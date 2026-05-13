@@ -1,0 +1,26 @@
+--- src/pages/TaskList.tsx
++++ src/pages/TaskList.tsx
+@@ -71,6 +71,7 @@
+   task_description: z.string().max(500, '最多500字符').optional(),
+   test_type: z.coerce.number(),
+   test_mode: z.coerce.number(),
++  startup_mode: z.enum(['api', 'container']).default('container'),
+ 
+   // Device Selection
+   device_selection_mode: z.enum(['list', 'manual']),
+@@ -93,6 +94,14 @@
+   test_path: z.string().min(1, '必填'),
+   execution_id: z.coerce.number(),
+   dataset_name: z.string().optional(),
++  
++  // API mode specific fields
++  base_url: z.string().optional(),
++  api_key: z.string().optional(),
++  parameter_combination: z.string().optional(),
++  processor_type: z.string().optional(),
++  server_model: z.string().optional(),
++  framework_startup_args: z.string().optional(),
+ }).superRefine((data, ctx) => {
+   // Device Validation
+-  if (data.device_selection_mode === 'list') {
++  if (data.startup_mode === 'container' && data.device_selection_mode === 'list') {

@@ -43,7 +43,15 @@ export interface Task {
   graph_mode?: string
   execution_id?: number
   execution_flag?: string
-  dataset_name?: string
+  dataset_name?: string;
+  startup_mode?: "api" | "container";
+  base_url?: string;
+  api_key?: string;
+  parameter_combination?: string;
+  processor_type?: string;
+  server_model?: string;
+  framework_startup_args?: string;
+  accelerator_card?: string;
   context_lengths: string
   concurrencies: string
   error_message?: string

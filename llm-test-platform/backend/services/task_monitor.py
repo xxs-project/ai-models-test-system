@@ -441,7 +441,7 @@ class RemoteScriptExecutor:
             # 使用 nohup 确保进程在SSH断开后继续运行
             full_command = f"""
 cd {script_path}
-nohup bash -c '
+nohup bash << 'EOF' > {log_file} 2>&1 &
 echo $$ > {pid_file}
 {command} 2>&1
 EXIT_CODE=$?
@@ -452,7 +452,7 @@ else
     echo "ERROR: Task failed with exit code $EXIT_CODE" >> {log_file}
 fi
 rm -f {pid_file}
-' > {log_file} 2>&1 &
+EOF
 echo $!
 """
             

@@ -8,6 +8,7 @@ interface TaskParams {
   search?: string
   status?: string
   test_type?: string
+  test_mode?: string
 }
 
 export function useTasks(params: TaskParams = {}) {
@@ -21,6 +22,7 @@ export function useTasks(params: TaskParams = {}) {
           search: params.search,
           status: params.status,
           test_type: params.test_type,
+          test_mode: params.test_mode,
         },
       })
       return response.data

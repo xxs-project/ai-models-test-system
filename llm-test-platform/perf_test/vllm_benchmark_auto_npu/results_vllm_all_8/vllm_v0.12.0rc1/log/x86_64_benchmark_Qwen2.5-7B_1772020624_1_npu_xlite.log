@@ -1,0 +1,169 @@
+🏃 Running perf test...
+Warmup requests: 10
+=====================================================
+Thread Num: 10 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 10
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2164.2
+=====================================================
+Total TPS with    prefill(tokens/s)         : 487.7335
+Total TPS without prefill                   : 504.2495
+Mean TPS with    prefill                    : 48.7734
+Mean TPS without prefill                    : 50.425
+=====================================================
+Mean TTFT(ms)                               : 1381.9326
+Max  TTFT(ms)                               : 1929.9197
+Min  TTFT(ms)                               : 629.2138
+=====================================================
+Mean TPOT(ms)                               : 19.8334
+Max  TPOT(ms)                               : 20.1232
+Min  TPOT(ms)                               : 19.4927
+=====================================================
+Total Time(s)                               : 44.3726
+Request Throughput(requests/s)              : 0.2254
+=====================================================
+Running test with P=1, I=2048, O=2048
+=====================================================
+Thread Num: 1 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 1
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2148.0
+=====================================================
+Total TPS with    prefill(tokens/s)         : 57.6069
+Total TPS without prefill                   : 57.8506
+Mean TPS with    prefill                    : 57.6069
+Mean TPS without prefill                    : 57.8506
+=====================================================
+Mean TTFT(ms)                               : 174.1812
+Max  TTFT(ms)                               : 174.1812
+Min  TTFT(ms)                               : 174.1812
+=====================================================
+Mean TPOT(ms)                               : 17.2859
+Max  TPOT(ms)                               : 17.2859
+Min  TPOT(ms)                               : 17.2859
+=====================================================
+Total Time(s)                               : 37.2872
+Request Throughput(requests/s)              : 0.0268
+=====================================================
+Running test with P=8, I=2048, O=2048
+=====================================================
+Thread Num: 8 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 8
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2143.5
+=====================================================
+Total TPS with    prefill(tokens/s)         : 409.1623
+Total TPS without prefill                   : 417.603
+Mean TPS with    prefill                    : 51.1453
+Mean TPS without prefill                    : 52.2004
+=====================================================
+Mean TTFT(ms)                               : 794.852
+Max  TTFT(ms)                               : 1204.4656
+Min  TTFT(ms)                               : 189.6477
+=====================================================
+Mean TPOT(ms)                               : 19.1583
+Max  TPOT(ms)                               : 19.4681
+Min  TPOT(ms)                               : 18.9376
+=====================================================
+Total Time(s)                               : 41.91
+Request Throughput(requests/s)              : 0.1909
+=====================================================
+Running test with P=16, I=2048, O=2048
+=====================================================
+Thread Num: 16 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 16
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2152.6875
+=====================================================
+Total TPS with    prefill(tokens/s)         : 708.1396
+Total TPS without prefill                   : 731.0431
+Mean TPS with    prefill                    : 44.2587
+Mean TPS without prefill                    : 45.6902
+=====================================================
+Mean TTFT(ms)                               : 1384.2242
+Max  TTFT(ms)                               : 2360.5349
+Min  TTFT(ms)                               : 193.9988
+=====================================================
+Mean TPOT(ms)                               : 21.8924
+Max  TPOT(ms)                               : 22.5296
+Min  TPOT(ms)                               : 21.3605
+=====================================================
+Total Time(s)                               : 48.6387
+Request Throughput(requests/s)              : 0.329
+=====================================================
+Running test with P=32, I=2048, O=2048
+=====================================================
+Thread Num: 32 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 32
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2151.2188
+=====================================================
+Total TPS with    prefill(tokens/s)         : 1125.6826
+Total TPS without prefill                   : 1181.9133
+Mean TPS with    prefill                    : 35.1776
+Mean TPS without prefill                    : 36.9348
+=====================================================
+Mean TTFT(ms)                               : 2568.5505
+Max  TTFT(ms)                               : 4751.3332
+Min  TTFT(ms)                               : 207.1052
+=====================================================
+Mean TPOT(ms)                               : 27.0875
+Max  TPOT(ms)                               : 28.2528
+Min  TPOT(ms)                               : 25.9845
+=====================================================
+Total Time(s)                               : 61.1531
+Request Throughput(requests/s)              : 0.5233
+=====================================================
+Running test with P=64, I=2048, O=2048
+=====================================================
+Thread Num: 64 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 64
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2150.5625
+=====================================================
+Total TPS with    prefill(tokens/s)         : 1558.2912
+Total TPS without prefill                   : 1668.3176
+Mean TPS with    prefill                    : 24.3483
+Mean TPS without prefill                    : 26.0675
+=====================================================
+Mean TTFT(ms)                               : 4962.7311
+Max  TTFT(ms)                               : 9762.5871
+Min  TTFT(ms)                               : 195.0867
+=====================================================
+Mean TPOT(ms)                               : 38.3923
+Max  TPOT(ms)                               : 40.4307
+Min  TPOT(ms)                               : 36.1537
+=====================================================
+Total Time(s)                               : 88.325
+Request Throughput(requests/s)              : 0.7246
+=====================================================
+Running test with P=128, I=2048, O=2048
+=====================================================
+Thread Num: 128 | Input Tokens: 2048 | Output Tokens: 2048
+=====================================================
+Actual Success Request Num                  : 128
+Actual Input Token Num                      : 2048.0
+Actual Output Token Num                     : 2149.8828
+=====================================================
+Total TPS with    prefill(tokens/s)         : 1981.6194
+Total TPS without prefill                   : 2180.6518
+Mean TPS with    prefill                    : 15.4814
+Mean TPS without prefill                    : 17.0363
+=====================================================
+Mean TTFT(ms)                               : 10315.5886
+Max  TTFT(ms)                               : 21512.9337
+Min  TTFT(ms)                               : 208.8466
+=====================================================
+Mean TPOT(ms)                               : 58.7824
+Max  TPOT(ms)                               : 62.5084
+Min  TPOT(ms)                               : 54.192
+=====================================================
+Total Time(s)                               : 138.8687
+Request Throughput(requests/s)              : 0.9217
+=====================================================

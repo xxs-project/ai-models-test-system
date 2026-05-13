@@ -1,0 +1,621 @@
+[2026-02-25 11:19:34] WARNING: Model 'Qwen3-8B' not found in configuration, using default configuration
+[2026-02-25 11:19:34] Available models: DeepSeek-R1 DeepSeek-R1-0528 DeepSeek-V3-0324 DeepSeek-V3.1 DeepSeek-V3.1-base DeepSeek-V3.2-Exp-w8a8 Qwen3-0.6B-FP8 Qwen3-1.7B-FP8 Qwen3-14B-FP8 Qwen3-30B-A3B-FP8 Qwen3-32B Qwen3-32B-FP8 Qwen3-32B-NVFP4 Qwen3-4B-FP8 Qwen3-8B-FP8 Qwen3-Next-80B-A3B-Instruct Qwen3-VL-30B-A3B-Instruct Qwen3-VL-32B-Instruct Qwen3-VL-8B-Instruct default 
+[2026-02-25 11:19:34] Starting VLLM server with model: Qwen3-8B, mode: aclgraph, NPU: 1, port: 2800
+[2026-02-25 11:19:35] Architecture: x86_64, Version key: default
+default
+Starting Installation and setup...,Architecture: x86_64, Version key: default
+default
+Writing to /root/.config/pip/pip.conf
+[2026-02-25 11:19:35] Installing packages for version: default
+default
+[2026-02-25 11:19:35] VLLM: 0.12.0, VLLM_ASCEND: 0.12.0rc1, TORCH_NPU: 2.8.0
+[2026-02-25 11:19:35] Uninstalling existing packages...
+Found existing installation: torch_npu 2.8.0
+Uninstalling torch_npu-2.8.0:
+  Successfully uninstalled torch_npu-2.8.0
+Found existing installation: vllm 0.12.0+empty
+Uninstalling vllm-0.12.0+empty:
+  Successfully uninstalled vllm-0.12.0+empty
+Found existing installation: vllm_ascend 0.12.0rc1
+Uninstalling vllm_ascend-0.12.0rc1:
+  Successfully uninstalled vllm_ascend-0.12.0rc1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple/
+Processing ./vllm-0.12.0+empty-py3-none-any.whl
+Processing ./vllm_ascend-0.12.0rc1-cp38-abi3-linux_x86_64.whl
+Processing ./torch_npu-2.8.0-cp311-cp311-linux_x86_64.whl
+Collecting datasets
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/fc/d5/0d563ea3c205eee226dc8053cf7682a8ac588db8acecd0eda2b587987a0b/datasets-4.5.0-py3-none-any.whl (515 kB)
+Requirement already satisfied: regex in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (2025.11.3)
+Requirement already satisfied: cachetools in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (6.2.3)
+Requirement already satisfied: psutil in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (7.1.3)
+Requirement already satisfied: sentencepiece in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.2.1)
+Requirement already satisfied: numpy in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.26.4)
+Requirement already satisfied: requests>=2.26.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (2.32.5)
+Requirement already satisfied: tqdm in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (4.67.1)
+Requirement already satisfied: blake3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.0.8)
+Requirement already satisfied: py-cpuinfo in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (9.0.0)
+Requirement already satisfied: transformers<5,>=4.56.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (4.57.1)
+Requirement already satisfied: tokenizers>=0.21.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.22.1)
+Requirement already satisfied: protobuf in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (6.33.2)
+Requirement already satisfied: fastapi>=0.115.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.124.4)
+Requirement already satisfied: aiohttp in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (3.13.2)
+Requirement already satisfied: openai>=1.99.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (2.11.0)
+Requirement already satisfied: pydantic>=2.12.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (2.12.5)
+Requirement already satisfied: prometheus_client>=0.18.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.23.1)
+Requirement already satisfied: pillow in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (12.0.0)
+Requirement already satisfied: prometheus-fastapi-instrumentator>=7.0.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (7.1.0)
+Requirement already satisfied: tiktoken>=0.6.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.12.0)
+Requirement already satisfied: lm-format-enforcer==0.11.3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.11.3)
+Requirement already satisfied: llguidance<1.4.0,>=1.3.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.3.0)
+Requirement already satisfied: outlines_core==0.2.11 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.2.11)
+Requirement already satisfied: diskcache==5.6.3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (5.6.3)
+Requirement already satisfied: lark==1.2.2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.2.2)
+Requirement already satisfied: xgrammar==0.1.27 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.1.27)
+Requirement already satisfied: typing_extensions>=4.10 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (4.15.0)
+Requirement already satisfied: filelock>=3.16.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (3.20.0)
+Requirement already satisfied: partial-json-parser in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.2.1.1.post7)
+Requirement already satisfied: pyzmq>=25.0.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (27.1.0)
+Requirement already satisfied: msgspec in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.20.0)
+Requirement already satisfied: gguf>=0.17.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.17.1)
+Requirement already satisfied: mistral_common>=1.8.5 in /usr/local/python3.11.13/lib/python3.11/site-packages (from mistral_common[image]>=1.8.5->vllm==0.12.0+empty) (1.8.6)
+Requirement already satisfied: opencv-python-headless>=4.11.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (4.11.0.86)
+Requirement already satisfied: pyyaml in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (6.0.3)
+Requirement already satisfied: einops in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.8.1)
+Requirement already satisfied: compressed-tensors==0.12.2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.12.2)
+Requirement already satisfied: depyf==0.20.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.20.0)
+Requirement already satisfied: cloudpickle in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (3.1.2)
+Requirement already satisfied: watchfiles in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.1.1)
+Requirement already satisfied: python-json-logger in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (4.0.0)
+Requirement already satisfied: scipy in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.15.3)
+Requirement already satisfied: ninja in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.13.0)
+Requirement already satisfied: pybase64 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.4.3)
+Requirement already satisfied: cbor2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (5.7.1)
+Requirement already satisfied: setproctitle in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (1.3.7)
+Requirement already satisfied: openai-harmony>=0.0.3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.0.8)
+Requirement already satisfied: anthropic==0.71.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.71.0)
+Requirement already satisfied: model-hosting-container-standards<1.0.0,>=0.1.9 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm==0.12.0+empty) (0.1.11)
+Collecting arctic-inference==0.1.1 (from vllm==0.12.0+empty)
+  Using cached arctic_inference-0.1.1-cp311-cp311-linux_x86_64.whl
+Requirement already satisfied: cmake>=3.26 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (4.2.0)
+Requirement already satisfied: decorator in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (5.2.1)
+Requirement already satisfied: packaging in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (25.0)
+Requirement already satisfied: pip in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (25.3)
+Requirement already satisfied: pybind11 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (3.0.1)
+Requirement already satisfied: pandas in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (2.3.3)
+Requirement already satisfied: setuptools>=64 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (65.5.0)
+Requirement already satisfied: setuptools-scm>=8 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (9.2.2)
+Requirement already satisfied: torch==2.8.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (2.8.0+cpu)
+Requirement already satisfied: torchvision in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (0.23.0+cpu)
+Requirement already satisfied: wheel in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (0.45.1)
+Requirement already satisfied: pandas-stubs in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (2.3.3.251201)
+Requirement already satisfied: msgpack in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (1.1.2)
+Requirement already satisfied: quart in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (0.20.0)
+Requirement already satisfied: numba in /usr/local/python3.11.13/lib/python3.11/site-packages (from vllm-ascend==0.12.0rc1) (0.63.1)
+Requirement already satisfied: anyio<5,>=3.5.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from anthropic==0.71.0->vllm==0.12.0+empty) (4.12.0)
+Requirement already satisfied: distro<2,>=1.7.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from anthropic==0.71.0->vllm==0.12.0+empty) (1.9.0)
+Requirement already satisfied: docstring-parser<1,>=0.15 in /usr/local/python3.11.13/lib/python3.11/site-packages (from anthropic==0.71.0->vllm==0.12.0+empty) (0.17.0)
+Requirement already satisfied: httpx<1,>=0.25.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from anthropic==0.71.0->vllm==0.12.0+empty) (0.28.1)
+Requirement already satisfied: jiter<1,>=0.4.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from anthropic==0.71.0->vllm==0.12.0+empty) (0.12.0)
+Requirement already satisfied: sniffio in /usr/local/python3.11.13/lib/python3.11/site-packages (from anthropic==0.71.0->vllm==0.12.0+empty) (1.3.1)
+Requirement already satisfied: loguru in /usr/local/python3.11.13/lib/python3.11/site-packages (from compressed-tensors==0.12.2->vllm==0.12.0+empty) (0.7.3)
+Requirement already satisfied: astor in /usr/local/python3.11.13/lib/python3.11/site-packages (from depyf==0.20.0->vllm==0.12.0+empty) (0.8.1)
+Requirement already satisfied: dill in /usr/local/python3.11.13/lib/python3.11/site-packages (from depyf==0.20.0->vllm==0.12.0+empty) (0.4.0)
+Requirement already satisfied: interegular>=0.3.2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from lm-format-enforcer==0.11.3->vllm==0.12.0+empty) (0.3.3)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from torch==2.8.0->vllm-ascend==0.12.0rc1) (1.14.0)
+Requirement already satisfied: networkx in /usr/local/python3.11.13/lib/python3.11/site-packages (from torch==2.8.0->vllm-ascend==0.12.0rc1) (3.6.1)
+Requirement already satisfied: jinja2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from torch==2.8.0->vllm-ascend==0.12.0rc1) (3.1.6)
+Requirement already satisfied: fsspec in /usr/local/python3.11.13/lib/python3.11/site-packages (from torch==2.8.0->vllm-ascend==0.12.0rc1) (2025.12.0)
+Collecting triton (from xgrammar==0.1.27->vllm==0.12.0+empty)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/e0/12/b05ba554d2c623bffa59922b94b0775673de251f468a9609bc9e45de95e9/triton-3.6.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (188.2 MB)
+Requirement already satisfied: idna>=2.8 in /usr/local/python3.11.13/lib/python3.11/site-packages (from anyio<5,>=3.5.0->anthropic==0.71.0->vllm==0.12.0+empty) (3.11)
+Requirement already satisfied: certifi in /usr/local/python3.11.13/lib/python3.11/site-packages (from httpx<1,>=0.25.0->anthropic==0.71.0->vllm==0.12.0+empty) (2025.11.12)
+Requirement already satisfied: httpcore==1.* in /usr/local/python3.11.13/lib/python3.11/site-packages (from httpx<1,>=0.25.0->anthropic==0.71.0->vllm==0.12.0+empty) (1.0.9)
+Requirement already satisfied: h11>=0.16 in /usr/local/python3.11.13/lib/python3.11/site-packages (from httpcore==1.*->httpx<1,>=0.25.0->anthropic==0.71.0->vllm==0.12.0+empty) (0.16.0)
+Requirement already satisfied: jmespath in /usr/local/python3.11.13/lib/python3.11/site-packages (from model-hosting-container-standards<1.0.0,>=0.1.9->vllm==0.12.0+empty) (1.0.1)
+Requirement already satisfied: starlette>=0.49.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from model-hosting-container-standards<1.0.0,>=0.1.9->vllm==0.12.0+empty) (0.50.0)
+Requirement already satisfied: supervisor>=4.2.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from model-hosting-container-standards<1.0.0,>=0.1.9->vllm==0.12.0+empty) (4.3.0)
+Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pydantic>=2.12.0->vllm==0.12.0+empty) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pydantic>=2.12.0->vllm==0.12.0+empty) (2.41.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pydantic>=2.12.0->vllm==0.12.0+empty) (0.4.2)
+Requirement already satisfied: huggingface-hub<1.0,>=0.34.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from transformers<5,>=4.56.0->vllm==0.12.0+empty) (0.36.0)
+Requirement already satisfied: safetensors>=0.4.3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from transformers<5,>=4.56.0->vllm==0.12.0+empty) (0.7.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.1.3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.34.0->transformers<5,>=4.56.0->vllm==0.12.0+empty) (1.2.0)
+Collecting pyarrow>=21.0.0 (from datasets)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/0b/62/96459ef5b67957eac38a90f541d1c28833d1b367f014a482cb63f3b7cd2d/pyarrow-23.0.1-cp311-cp311-manylinux_2_28_x86_64.whl (47.6 MB)
+Collecting xxhash (from datasets)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/a5/86/cf2c0321dc3940a7aa73076f4fd677a0fb3e405cb297ead7d864fd90847e/xxhash-3.6.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (193 kB)
+Collecting multiprocess<0.70.19 (from datasets)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/4b/88/9039f2fed1012ef584751d4ceff9ab4a51e5ae264898f0b7cbf44340a859/multiprocess-0.70.18-py311-none-any.whl (144 kB)
+Collecting fsspec (from torch==2.8.0->vllm-ascend==0.12.0rc1)
+  Using cached https://pypi.tuna.tsinghua.edu.cn/packages/eb/02/a6b21098b1d5d6249b7c5ab69dde30108a71e4e819d4a9778f1de1d5b70d/fsspec-2025.10.0-py3-none-any.whl (200 kB)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from aiohttp->vllm==0.12.0+empty) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from aiohttp->vllm==0.12.0+empty) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from aiohttp->vllm==0.12.0+empty) (25.4.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from aiohttp->vllm==0.12.0+empty) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /usr/local/python3.11.13/lib/python3.11/site-packages (from aiohttp->vllm==0.12.0+empty) (6.7.0)
+Requirement already satisfied: propcache>=0.2.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from aiohttp->vllm==0.12.0+empty) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from aiohttp->vllm==0.12.0+empty) (1.22.0)
+Requirement already satisfied: annotated-doc>=0.0.2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi>=0.115.0->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.0.4)
+Requirement already satisfied: fastapi-cli>=0.0.8 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.0.16)
+Requirement already satisfied: python-multipart>=0.0.18 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.0.20)
+Requirement already satisfied: email-validator>=2.0.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (2.3.0)
+Requirement already satisfied: uvicorn>=0.12.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.38.0)
+Requirement already satisfied: dnspython>=2.0.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from email-validator>=2.0.0->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (2.8.0)
+Requirement already satisfied: typer>=0.15.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.20.0)
+Requirement already satisfied: rich-toolkit>=0.14.8 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.17.0)
+Requirement already satisfied: fastapi-cloud-cli>=0.1.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.6.0)
+Requirement already satisfied: rignore>=0.5.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.7.6)
+Requirement already satisfied: sentry-sdk>=2.20.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (2.47.0)
+Requirement already satisfied: fastar>=0.8.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.8.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from jinja2->torch==2.8.0->vllm-ascend==0.12.0rc1) (3.0.3)
+Requirement already satisfied: jsonschema>=4.21.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from mistral_common>=1.8.5->mistral_common[image]>=1.8.5->vllm==0.12.0+empty) (4.25.1)
+Requirement already satisfied: pydantic-extra-types>=2.10.5 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pydantic-extra-types[pycountry]>=2.10.5->mistral_common>=1.8.5->mistral_common[image]>=1.8.5->vllm==0.12.0+empty) (2.10.6)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in /usr/local/python3.11.13/lib/python3.11/site-packages (from jsonschema>=4.21.1->mistral_common>=1.8.5->mistral_common[image]>=1.8.5->vllm==0.12.0+empty) (2025.9.1)
+Requirement already satisfied: referencing>=0.28.4 in /usr/local/python3.11.13/lib/python3.11/site-packages (from jsonschema>=4.21.1->mistral_common>=1.8.5->mistral_common[image]>=1.8.5->vllm==0.12.0+empty) (0.37.0)
+Requirement already satisfied: rpds-py>=0.7.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from jsonschema>=4.21.1->mistral_common>=1.8.5->mistral_common[image]>=1.8.5->vllm==0.12.0+empty) (0.30.0)
+Requirement already satisfied: pycountry>=23 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pydantic-extra-types[pycountry]>=2.10.5->mistral_common>=1.8.5->mistral_common[image]>=1.8.5->vllm==0.12.0+empty) (24.6.1)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from requests>=2.26.0->vllm==0.12.0+empty) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from requests>=2.26.0->vllm==0.12.0+empty) (2.5.0)
+Requirement already satisfied: click>=8.1.7 in /usr/local/python3.11.13/lib/python3.11/site-packages (from rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (8.3.1)
+Requirement already satisfied: rich>=13.7.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from markdown-it-py>=2.2.0->rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.1.2)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from sympy>=1.13.3->torch==2.8.0->vllm-ascend==0.12.0rc1) (1.3.0)
+Requirement already satisfied: shellingham>=1.3.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from typer>=0.15.1->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (1.5.4)
+Requirement already satisfied: httptools>=0.6.3 in /usr/local/python3.11.13/lib/python3.11/site-packages (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.7.1)
+Requirement already satisfied: python-dotenv>=0.13 in /usr/local/python3.11.13/lib/python3.11/site-packages (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (1.2.1)
+Requirement already satisfied: uvloop>=0.15.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (0.22.1)
+Requirement already satisfied: websockets>=10.4 in /usr/local/python3.11.13/lib/python3.11/site-packages (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard]>=0.115.0->vllm==0.12.0+empty) (15.0.1)
+Requirement already satisfied: llvmlite<0.47,>=0.46.0dev0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from numba->vllm-ascend==0.12.0rc1) (0.46.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pandas->vllm-ascend==0.12.0rc1) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pandas->vllm-ascend==0.12.0rc1) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pandas->vllm-ascend==0.12.0rc1) (2025.2)
+Requirement already satisfied: six>=1.5 in /usr/local/python3.11.13/lib/python3.11/site-packages (from python-dateutil>=2.8.2->pandas->vllm-ascend==0.12.0rc1) (1.17.0)
+Requirement already satisfied: types-pytz>=2022.1.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from pandas-stubs->vllm-ascend==0.12.0rc1) (2025.2.0.20251108)
+Requirement already satisfied: aiofiles in /usr/local/python3.11.13/lib/python3.11/site-packages (from quart->vllm-ascend==0.12.0rc1) (25.1.0)
+Requirement already satisfied: blinker>=1.6 in /usr/local/python3.11.13/lib/python3.11/site-packages (from quart->vllm-ascend==0.12.0rc1) (1.9.0)
+Requirement already satisfied: flask>=3.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from quart->vllm-ascend==0.12.0rc1) (3.1.2)
+Requirement already satisfied: hypercorn>=0.11.2 in /usr/local/python3.11.13/lib/python3.11/site-packages (from quart->vllm-ascend==0.12.0rc1) (0.18.0)
+Requirement already satisfied: itsdangerous in /usr/local/python3.11.13/lib/python3.11/site-packages (from quart->vllm-ascend==0.12.0rc1) (2.2.0)
+Requirement already satisfied: werkzeug>=3.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from quart->vllm-ascend==0.12.0rc1) (3.1.4)
+Requirement already satisfied: h2>=4.3.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from hypercorn>=0.11.2->quart->vllm-ascend==0.12.0rc1) (4.3.0)
+Requirement already satisfied: priority in /usr/local/python3.11.13/lib/python3.11/site-packages (from hypercorn>=0.11.2->quart->vllm-ascend==0.12.0rc1) (2.0.0)
+Requirement already satisfied: wsproto>=0.14.0 in /usr/local/python3.11.13/lib/python3.11/site-packages (from hypercorn>=0.11.2->quart->vllm-ascend==0.12.0rc1) (1.3.2)
+Requirement already satisfied: hyperframe<7,>=6.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from h2>=4.3.0->hypercorn>=0.11.2->quart->vllm-ascend==0.12.0rc1) (6.1.0)
+Requirement already satisfied: hpack<5,>=4.1 in /usr/local/python3.11.13/lib/python3.11/site-packages (from h2>=4.3.0->hypercorn>=0.11.2->quart->vllm-ascend==0.12.0rc1) (4.1.0)
+Installing collected packages: arctic-inference, xxhash, triton, pyarrow, multiprocess, fsspec, torch-npu, datasets, vllm-ascend, vllm
+  Attempting uninstall: fsspec
+    Found existing installation: fsspec 2025.12.0
+    Uninstalling fsspec-2025.12.0:
+      Successfully uninstalled fsspec-2025.12.0
+
+Successfully installed arctic-inference-0.1.1 datasets-4.5.0 fsspec-2025.10.0 multiprocess-0.70.18 pyarrow-23.0.1 torch-npu-2.8.0 triton-3.6.0 vllm-0.12.0+empty vllm-ascend-0.12.0rc1 xxhash-3.6.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.3 -> 26.0.1
+[notice] To update, run: pip install --upgrade pip
+[2026-02-25 11:19:57] Installing arctic-inference...
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple/
+Requirement already satisfied: arctic-inference in /usr/local/python3.11.13/lib/python3.11/site-packages (0.1.1)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.3 -> 26.0.1
+[notice] To update, run: pip install --upgrade pip
+[2026-02-25 11:19:58] Installing CANN package: CANN-custom_ops--linux-ascend910b.x86_64.run
+Verifying archive integrity...     0%    96%  100%   SHA256 checksums are OK. All good.
+Uncompressing version:1.0     0%    96%  100%  
+[ops_custom] [2026-02-25 11:19:58] [INFO] copy uninstall sh success
+[ops_custom] [2026-02-25 11:19:58] [INFO] upgrade framework
+[ops_custom] [2026-02-25 11:19:58] [INFO] create /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/customize/framework.
+[ops_custom] [2026-02-25 11:19:58] copy new ops framework files ......
+[ops_custom] [2026-02-25 11:19:58] [INFO] upgrade op proto
+[ops_custom] [2026-02-25 11:19:58] [INFO] create /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/customize/op_proto.
+[ops_custom] [2026-02-25 11:19:58] copy new ops op_proto files ......
+[ops_custom] [2026-02-25 11:19:58] [INFO] upgrade op impl
+[ops_custom] [2026-02-25 11:19:58] [INFO] create /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/customize/op_impl.
+[ops_custom] [2026-02-25 11:19:58] copy new ops op_impl files ......
+[ops_custom] [2026-02-25 11:19:58] [INFO] upgrade op api
+[ops_custom] [2026-02-25 11:19:58] [INFO] create /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/customize/op_api.
+[ops_custom] [2026-02-25 11:19:58] copy new ops op_api files ......
+[ops_custom] [2026-02-25 11:19:58] [INFO] upgrade version.info
+[ops_custom] [2026-02-25 11:19:58] copy new version.info files ......
+[ops_custom] [2026-02-25 11:19:58] [INFO] no need to upgrade custom.proto files
+[ops_custom] [2026-02-25 11:19:58] [INFO] using requirements: when custom module install finished or before you run the custom module, execute the command [ export LD_LIBRARY_PATH=/usr/local/Ascend/ascend-toolkit/latest/opp/vendors/customize/op_api/lib/:${LD_LIBRARY_PATH} ] to set the environment path
+SUCCESS
+Starting Installation and setup_model_specific_packages...
+Environment and command setup
+build_cmd_args
+CMD_ARGS: --port 2800 /data/models/Qwen3-8B --served-model-name Qwen3-8B --tensor-parallel-size 1 --disable-log-stats --disable-log-requests
+CMD_ARGS1: --port 2800 /data/models/Qwen3-8B --served-model-name Qwen3-8B --tensor-parallel-size 1 --disable-log-stats --disable-log-requests --load-format dummy
+[2026-02-25 11:19:59] WARNING: Mode 'aclgraph' is not defined in configuration, using default settings
+[2026-02-25 11:19:59] Available modes: eager torchair xlite 
+CMD_ARGS2: --port 2800 /data/models/Qwen3-8B --served-model-name Qwen3-8B --tensor-parallel-size 1 --disable-log-stats --disable-log-requests --load-format dummy
+[2026-02-25 11:19:59] === Environment Variables ===
+[2026-02-25 11:19:59] VLLM_ASCEND_ENABLE_NZ=0
+[2026-02-25 11:19:59] ==========================
+[2026-02-25 11:19:59] === Command Arguments ===
+[2026-02-25 11:19:59] CMD_ARGS[0] = '--port'
+[2026-02-25 11:19:59] CMD_ARGS[1] = '2800'
+[2026-02-25 11:19:59] CMD_ARGS[2] = '/data/models/Qwen3-8B'
+[2026-02-25 11:19:59] CMD_ARGS[3] = '--served-model-name'
+[2026-02-25 11:19:59] CMD_ARGS[4] = 'Qwen3-8B'
+[2026-02-25 11:19:59] CMD_ARGS[5] = '--tensor-parallel-size'
+[2026-02-25 11:19:59] CMD_ARGS[6] = '1'
+[2026-02-25 11:19:59] CMD_ARGS[7] = '--disable-log-stats'
+[2026-02-25 11:19:59] CMD_ARGS[8] = '--disable-log-requests'
+[2026-02-25 11:19:59] CMD_ARGS[9] = '--load-format'
+[2026-02-25 11:19:59] CMD_ARGS[10] = 'dummy'
+[2026-02-25 11:19:59] Final command: vllm serve --port 2800 /data/models/Qwen3-8B --served-model-name Qwen3-8B --tensor-parallel-size 1 --disable-log-stats --disable-log-requests --load-format dummy
+[2026-02-25 11:19:59] =======================
+[2026-02-25 11:19:59] Starting VLLM serve...
+port=2800
+model_path=/data/models/Qwen3-8B
+model_name=Qwen3-8B
+npu_count=1
+INFO 02-25 11:20:04 [__init__.py:43] Available plugins for group vllm.platform_plugins:
+INFO 02-25 11:20:04 [__init__.py:45] - ascend -> vllm_ascend:register
+INFO 02-25 11:20:04 [__init__.py:48] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 02-25 11:20:04 [__init__.py:217] Platform plugin ascend is activated
+INFO 02-25 11:20:07 [importing.py:44] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 02-25 11:20:07 [importing.py:68] Triton not installed or not compatible; certain GPU-related functions will not be available.
+INFO 02-25 11:20:08 [__init__.py:108] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [api_server.py:1772] vLLM API server version 0.12.0
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [utils.py:253] non-default args: {'model_tag': '/data/models/Qwen3-8B', 'port': 2800, 'model': '/data/models/Qwen3-8B', 'served_model_name': ['Qwen3-8B'], 'load_format': 'dummy', 'disable_log_stats': True}
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [model.py:637] Resolved architecture: Qwen3ForCausalLM
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [model.py:1750] Using max model len 40960
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [scheduler.py:228] Chunked prefill is enabled with max_num_batched_tokens=2048.
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [utils.py:972] FLASHCOMM2 not enable.
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [platform.py:234] PIECEWISE compilation enabled on NPU. use_inductor not supported - using only ACL Graph mode
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [utils.py:524] Calculated maximum supported batch sizes for ACL graph: 48
+[0;36m(APIServer pid=456)[0;0m WARNING 02-25 11:20:09 [utils.py:527] Currently, communication is performed using FFTS+ method, which reduces the number of available streams and, as a result, limits the range of runtime shapes that can be handled. To both improve communication performance and increase the number of supported shapes, set HCCL_OP_EXPANSION_MODE=AIV.
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:20:09 [utils.py:546] Adjusted ACL graph batch sizes for Qwen3ForCausalLM model (layers: 36): 51 → 48 sizes
+INFO 02-25 11:20:14 [__init__.py:43] Available plugins for group vllm.platform_plugins:
+INFO 02-25 11:20:14 [__init__.py:45] - ascend -> vllm_ascend:register
+INFO 02-25 11:20:14 [__init__.py:48] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 02-25 11:20:14 [__init__.py:217] Platform plugin ascend is activated
+INFO 02-25 11:20:17 [importing.py:44] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 02-25 11:20:17 [importing.py:68] Triton not installed or not compatible; certain GPU-related functions will not be available.
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:19 [__init__.py:108] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:19 [core.py:93] Initializing a V1 LLM engine (v0.12.0) with config: model='/data/models/Qwen3-8B', speculative_config=None, tokenizer='/data/models/Qwen3-8B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=40960, download_dir=None, load_format=dummy, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=True, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=npu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01), seed=0, served_model_name=Qwen3-8B, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'vllm_ascend.compilation.compiler_interface.AscendCompiler', 'custom_ops': ['all'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::mla_forward'], 'compile_mm_encoder': False, 'compile_sizes': [], 'inductor_compile_config': {'enable_auto_functionalized_v2': False}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.PIECEWISE: 1>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'eliminate_noops': True, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>}, 'local_cache_dir': None}
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:20 [utils.py:972] FLASHCOMM2 not enable.
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:21 [parallel_state.py:1200] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://7.6.52.110:41703 backend=hccl
+[rank0]:[W225 11:20:21.399420370 ProcessGroupGloo.cpp:514] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:21 [parallel_state.py:1408] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:21 [model_runner_v1.py:2348] Starting to load model /data/models/Qwen3-8B...
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:21 [compilation.py:903] Using OOT custom backend for compilation.
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:22 [compilation.py:903] Using OOT custom backend for compilation.
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:22 [model_runner_v1.py:2374] Loading model weights took 15.2684 GB
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:26 [backends.py:655] Using cache directory: /root/.cache/vllm/torch_compile_cache/25501cc291/rank_0_0/backbone for vLLM's torch.compile
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:26 [backends.py:715] Dynamo bytecode transform time: 3.82 s
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:34 [backends.py:288] Compiling a graph for dynamic shape takes 7.12 s
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:35 [monitor.py:34] torch.compile takes 10.94 s in total
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:36 [worker_v1.py:286] Available memory: 41400644608, total memory: 65452113920
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:36 [kv_cache_utils.py:1286] GPU KV cache size: 280,704 tokens
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:36 [kv_cache_utils.py:1291] Maximum concurrency for 40,960 tokens per request: 6.85x
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:20:36 [model_runner_v1.py:3084] Starting to capture ACL graphs for cases: [512, 496, 480, 464, 448, 432, 416, 400, 368, 352, 336, 320, 304, 288, 272, 256, 248, 240, 232, 224, 216, 208, 200, 192, 176, 168, 160, 152, 144, 136, 128, 120, 112, 104, 96, 88, 80, 72, 64, 56, 40, 32, 24, 16, 8, 4, 2, 1], mode: PIECEWISE, uniform_decode: False
+[0;36m(EngineCore_DP0 pid=596)[0;0m Capturing ACL graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/48 [00:00<?, ?it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):   2%|▏         | 1/48 [00:00<00:22,  2.07it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):   4%|▍         | 2/48 [00:00<00:22,  2.06it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):   6%|▋         | 3/48 [00:01<00:22,  2.02it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):   8%|▊         | 4/48 [00:01<00:22,  2.00it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  10%|█         | 5/48 [00:02<00:21,  1.97it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  12%|█▎        | 6/48 [00:03<00:21,  1.95it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  15%|█▍        | 7/48 [00:03<00:21,  1.95it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  17%|█▋        | 8/48 [00:04<00:20,  1.95it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  19%|█▉        | 9/48 [00:04<00:19,  1.96it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  21%|██        | 10/48 [00:05<00:19,  1.96it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  23%|██▎       | 11/48 [00:05<00:19,  1.95it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  25%|██▌       | 12/48 [00:06<00:18,  1.92it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  27%|██▋       | 13/48 [00:06<00:18,  1.93it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  29%|██▉       | 14/48 [00:07<00:18,  1.89it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  31%|███▏      | 15/48 [00:07<00:17,  1.89it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  33%|███▎      | 16/48 [00:08<00:16,  1.90it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  35%|███▌      | 17/48 [00:08<00:16,  1.88it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  38%|███▊      | 18/48 [00:09<00:16,  1.87it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  40%|███▉      | 19/48 [00:09<00:15,  1.86it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  42%|████▏     | 20/48 [00:10<00:15,  1.83it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  44%|████▍     | 21/48 [00:11<00:14,  1.81it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  46%|████▌     | 22/48 [00:11<00:14,  1.78it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  48%|████▊     | 23/48 [00:12<00:13,  1.80it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  50%|█████     | 24/48 [00:12<00:13,  1.80it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  52%|█████▏    | 25/48 [00:13<00:12,  1.82it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  54%|█████▍    | 26/48 [00:13<00:12,  1.82it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  56%|█████▋    | 27/48 [00:14<00:11,  1.82it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  58%|█████▊    | 28/48 [00:14<00:11,  1.81it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  60%|██████    | 29/48 [00:15<00:10,  1.83it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  62%|██████▎   | 30/48 [00:15<00:09,  1.83it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  65%|██████▍   | 31/48 [00:16<00:09,  1.85it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  67%|██████▋   | 32/48 [00:17<00:08,  1.84it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  69%|██████▉   | 33/48 [00:17<00:08,  1.84it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  71%|███████   | 34/48 [00:18<00:07,  1.83it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  73%|███████▎  | 35/48 [00:18<00:07,  1.81it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  75%|███████▌  | 36/48 [00:19<00:06,  1.82it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  77%|███████▋  | 37/48 [00:19<00:06,  1.80it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  79%|███████▉  | 38/48 [00:20<00:05,  1.82it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  81%|████████▏ | 39/48 [00:20<00:04,  1.81it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  83%|████████▎ | 40/48 [00:21<00:04,  1.80it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  85%|████████▌ | 41/48 [00:22<00:03,  1.76it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  88%|████████▊ | 42/48 [00:22<00:03,  1.77it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  90%|████████▉ | 43/48 [00:23<00:02,  1.74it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  92%|█████████▏| 44/48 [00:23<00:02,  1.75it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  94%|█████████▍| 45/48 [00:24<00:01,  1.73it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  96%|█████████▌| 46/48 [00:24<00:01,  1.75it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE):  98%|█████████▊| 47/48 [00:25<00:00,  1.76it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 48/48 [00:26<00:00,  1.76it/s]Capturing ACL graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 48/48 [00:26<00:00,  1.84it/s]
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:21:02 [model_runner_v1.py:3202] Graph capturing finished in 26 secs, took 0.14 GiB
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:21:02 [core.py:254] init engine (profile, create kv cache, warmup model) took 39.89 seconds
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:21:03 [platform.py:234] PIECEWISE compilation enabled on NPU. use_inductor not supported - using only ACL Graph mode
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:21:03 [utils.py:524] Calculated maximum supported batch sizes for ACL graph: 48
+[0;36m(EngineCore_DP0 pid=596)[0;0m WARNING 02-25 11:21:03 [utils.py:527] Currently, communication is performed using FFTS+ method, which reduces the number of available streams and, as a result, limits the range of runtime shapes that can be handled. To both improve communication performance and increase the number of supported shapes, set HCCL_OP_EXPANSION_MODE=AIV.
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:21:03 [utils.py:557] No adjustment needed for ACL graph batch sizes: Qwen3ForCausalLM model (layers: 36) with 48 sizes
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [api_server.py:1520] Supported tasks: ['generate']
+[0;36m(APIServer pid=456)[0;0m WARNING 02-25 11:21:03 [model.py:1576] Default sampling parameters have been overridden by the model's Hugging Face generation config recommended from the model creator. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [serving_responses.py:194] Using default chat sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [serving_chat.py:133] Using default chat sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [serving_completion.py:73] Using default completion sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [serving_chat.py:133] Using default chat sampling params from model: {'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [api_server.py:1847] Starting vLLM API server 0 on http://0.0.0.0:2800
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:38] Available routes are:
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /docs, Methods: GET, HEAD
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /health, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /load, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /pause, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /resume, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /is_paused, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /tokenize, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /detokenize, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/models, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /version, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/responses, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/messages, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/completions, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/audio/transcriptions, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/audio/translations, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /ping, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /ping, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /invocations, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /metrics, Methods: GET
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /classify, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/embeddings, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /score, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/score, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /rerank, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v1/rerank, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /v2/rerank, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:03 [launcher.py:46] Route: /pooling, Methods: POST
+[0;36m(APIServer pid=456)[0;0m INFO:     Started server process [456]
+[0;36m(APIServer pid=456)[0;0m INFO:     Waiting for application startup.
+[0;36m(APIServer pid=456)[0;0m INFO:     Application startup complete.
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:55348 - "GET /v1/models HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO 02-25 11:21:14 [chat_utils.py:574] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44808 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44814 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44830 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44844 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44846 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44850 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44866 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44882 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44890 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:44904 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(EngineCore_DP0 pid=596)[0;0m INFO 02-25 11:21:16 [acl_graph.py:185] Replaying aclgraph
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:54856 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52846 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52856 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52880 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52868 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52894 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52898 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52910 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:52918 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59732 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59738 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59740 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59742 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59750 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59758 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59774 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59776 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59782 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59794 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59812 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59804 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59810 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59816 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59820 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:59826 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48780 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48798 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48786 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48800 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48814 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48822 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48838 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48848 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48856 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48868 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48876 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48886 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48898 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48912 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48930 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48914 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48942 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48952 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48960 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48976 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48988 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48998 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49002 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49016 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49032 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49046 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49060 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49064 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49072 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49088 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49096 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:49104 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47518 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47526 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47524 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47542 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47546 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47562 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47564 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47576 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47592 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47596 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47610 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47626 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47642 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47648 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47664 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47676 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47682 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47684 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47696 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47686 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47712 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47728 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47738 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47746 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47750 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47760 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47770 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47782 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47790 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47792 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47808 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47816 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47836 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47824 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47850 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47866 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47874 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47884 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47888 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47894 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47904 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47910 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47918 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47928 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47948 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47940 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47952 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47954 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47960 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47968 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47970 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48002 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48018 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:47986 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48020 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48036 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48024 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48050 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48064 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48074 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48076 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48088 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48092 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:48104 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56050 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56062 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56056 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56068 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56084 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56096 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56102 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56110 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56126 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56138 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56144 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56146 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56156 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56160 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56172 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56188 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56216 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56200 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56226 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56234 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56244 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56254 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56260 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56274 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56284 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56286 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56294 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56300 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56318 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56316 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56328 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56340 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56350 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56360 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56366 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56386 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56378 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56390 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56402 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56418 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56428 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56434 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56442 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56452 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56454 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56456 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56464 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56468 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56474 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56490 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56500 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56512 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56522 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56516 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56524 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56538 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56548 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56540 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56556 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56566 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56582 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56594 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56604 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56616 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56618 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56640 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56624 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56636 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56648 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56662 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56674 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56668 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56688 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56690 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56720 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56702 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56714 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56736 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56754 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56752 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56768 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56778 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56788 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56796 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56812 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56802 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56826 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56832 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56828 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56842 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56856 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56838 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56864 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56876 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56874 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56882 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56894 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56896 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56908 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56938 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56922 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56946 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56958 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56974 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56984 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56994 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:56996 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57002 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57018 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57022 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57034 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57050 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57052 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57056 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57054 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57060 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57064 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57076 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57088 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57096 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57108 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57116 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57118 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57134 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57142 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57152 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57166 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[0;36m(APIServer pid=456)[0;0m INFO:     127.0.0.1:57176 - "POST /v1/chat/completions HTTP/1.1" 200 OK

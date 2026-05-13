@@ -1,42 +1,43 @@
 const fs = require('fs');
-let code = fs.readFileSync('src/pages/EvalResults.tsx', 'utf8');
+let code = fs.readFileSync('src/pages/TaskList.tsx', 'utf8');
 
-code = code.replace(
-  /\{activeComparisonReports\[0\]\.type !== 'IPD' && \(\s*<>\s*(<div className="space-y-4 mt-8">)/g,
-  `$1`
-);
-code = code.replace(
-  /\{activeComparisonReports\[0\]\?\.type !== 'IPD' && \(\s*<>\s*(<div className="space-y-4 mt-8">)/g,
-  `$1`
-);
+// handleEdit modifications
+const handleEditRegex = /const handleEdit = \(task: Task\) => \{\n    setEditingTask\(task\)/;
+const handleEditReplacement = `const handleEdit = (task: Task) => {
+    let parsedCombinations = [{ input_len: '', output_len: '', num_prompts: '', max_concurrency: '' }];
+    if (task.parameter_combination) {
+      try {
+        const parsed = JSON.parse(task.parameter_combination);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          parsedCombinations = parsed;
+        } else if (typeof parsed === 'object') {
+           // Handle old format if it was a single object
+           parsedCombinations = [ { input_len: String(parsed.input_len || ''), output_len: String(parsed.output_len || ''), num_prompts: String(parsed.num_prompts || ''), max_concurrency: String(parsed.max_concurrency || '') } ];
+        }
+      } catch (e) {
+        console.error("Failed to parse parameter_combination", e);
+      }
+    }
+    setEditingTask(task)`;
+code = code.replace(handleEditRegex, handleEditReplacement);
 
-code = code.replace(
-  /const pct = pack\.maxScore > 0 \? \(\(pack\.score \/ pack\.maxScore\) \* 100\)\.toFixed\(2\) : '0\.00';/g,
-  `const pct = pack.maxScore > 0 ? ((pack.score / pack.maxScore) * 100).toFixed(2) : '0.00';
-                                        const isIpd = activeComparisonReports[0]?.type === 'IPD';`
-);
+// form.reset inside handleEdit
+const resetRegex = /parameter_combination: task.parameter_combination \|\| '',/;
+const resetReplacement = `parameter_combination: task.parameter_combination || '',
+      parameter_combinations: parsedCombinations,`;
+code = code.replace(resetRegex, resetReplacement);
 
-code = code.replace(
-  /<span className="font-semibold text-gray-900">\{pct\}%<\/span>/g,
-  `<span className="font-semibold text-gray-900">{isIpd ? pack.score : \`\${pct}%\`}</span>`
-);
+// Create task default values
+const useFormRegex = /parameter_combination: '',\n      processor_type: 'NPU',/;
+const useFormReplacement = `parameter_combination: '',
+      parameter_combinations: [{ input_len: '', output_len: '', num_prompts: '', max_concurrency: '' }],
+      processor_type: 'NPU',`;
+code = code.replace(useFormRegex, useFormReplacement);
 
-code = code.replace(
-  /<span className="text-xs text-gray-500">\{pack\.score\} \/ \{pack\.maxScore\}<\/span>/g,
-  `{!isIpd && <span className="text-xs text-gray-500">{pack.score} / {pack.maxScore}</span>}`
-);
+const createBtnRegex = /parameter_combination: '',\n            processor_type: 'NPU',/;
+const createBtnReplacement = `parameter_combination: '',
+            parameter_combinations: [{ input_len: '', output_len: '', num_prompts: '', max_concurrency: '' }],
+            processor_type: 'NPU',`;
+code = code.replace(createBtnRegex, createBtnReplacement);
 
-code = code.replace(
-  /<h4 className="font-bold text-md text-gray-800 border-l-4 border-blue-500 pl-2">3\. 各维度得分率对比图<\/h4>/g,
-  `<h4 className="font-bold text-md text-gray-800 border-l-4 border-blue-500 pl-2">3. {activeComparisonReports[0]?.type === 'IPD' ? '各维度得分对比图' : '各维度得分率对比图'}</h4>`
-);
-
-// We need to fix the closing tags that we opened with <> in the original code, but we removed the `{condition && (<>`
-// The original had `</>\n                      )}`
-code = code.replace(
-  /<\/div>\n\s*<\/>\n\s*\)}/g,
-  `</div>`
-);
-
-
-fs.writeFileSync('src/pages/EvalResults.tsx', code);
+fs.writeFileSync('src/pages/TaskList.tsx', code);

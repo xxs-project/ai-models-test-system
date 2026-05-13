@@ -11,7 +11,7 @@ async def get_eval_results():
     import re
     from datetime import datetime
     
-    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "BenchLocal", "results")
+    bench_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bench_test", "BenchLocal", "results")
     if not os.path.exists(bench_dir):
         return {"reports": []}
         

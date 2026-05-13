@@ -1,0 +1,247 @@
+{
+  "proxy": {
+    "ip": "192.168.184.107",
+    "port": "10082"
+  },
+  "versions": {
+    "default": {
+      "vllm_version": "0.12.0",
+      "vllm_ascend_version": "0.12.0rc1",
+      "torch_npu_version": "2.8.0",
+      "release_path": "/data/xxs/release/0114_master"
+    },
+    "0.11.0": {
+      "vllm_version": "0.11.0",
+      "vllm_ascend_version": "0.11.0rc1",
+      "torch_npu_version": "2.7.1",
+      "release_path": "/data/xxs/release/1124"
+    }
+  },
+  "packages": {
+    "aarch64": {
+      "base_templates": [
+        "vllm-{vllm_version}+empty-py3-none-any.whl",
+        "vllm_ascend-{vllm_ascend_version}-cp38-abi3-linux_aarch64.whl",
+        "torch_npu-{torch_npu_version}-cp311-cp311-linux_aarch64.whl",
+        "datasets",
+        "evalscope"
+      ],
+      "cann": [
+        "CANN-custom_ops--linux-ascend910b.aarch64.run"
+      ]
+    },
+    "x86_64": {
+      "base_templates": [
+        "vllm-{vllm_version}+empty-py3-none-any.whl",
+        "vllm_ascend-{vllm_ascend_version}-cp38-abi3-linux_x86_64.whl",
+        "torch_npu-{torch_npu_version}-cp311-cp311-linux_x86_64.whl",
+        "datasets",
+	"evalscope"
+      ],
+      "cann": [
+        "CANN-custom_ops--linux-ascend910b.x86_64.run"
+      ]
+    }
+  },
+  "custom_packages": {
+    "DeepSeek-V3.2-Exp-w8a8": [
+      "custom_ops-1.0-cp311-cp311-linux_x86_64.whl"
+    ],
+    "Qwen3-Next-80B-A3B-Instruct": {
+      "uninstall": ["triton"],
+      "download": {
+        "bisheng": {
+          "url": "https://vllm-ascend.obs.cn-north-4.myhuaweicloud.com/vllm-ascend/{file}",
+          "file_template": "Ascend-BiSheng-toolkit_{arch}_20251225.run",
+          "install_path": "/usr/local/Ascend/8.5.0",
+          "env_script": "/usr/local/Ascend/8.5.0/share/info/ascendnpu-ir/bin/set_env.sh"
+        },
+        "triton": {
+          "url": "https://vllm-ascend.obs.cn-north-4.myhuaweicloud.com/vllm-ascend/{file}",
+          "file_template": "triton_ascend-3.2.0.dev20251229-cp311-cp311-manylinux_2_27_{arch}.manylinux_2_28_{arch}.whl"
+        }
+      }
+    }
+  },
+  "models": {
+    "DeepSeek-R1-0528": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "DeepSeek-V3-0324": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "DeepSeek-V3.1-base": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "DeepSeek-V3.1": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "DeepSeek-R1": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": [
+        "--quantization", "ascend",
+        "--max-model-len", "16000",
+        "--max-num-batched-tokens", "16000"
+      ]
+    },
+    "Qwen3-32B-FP8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "Qwen3-14B-FP8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "Qwen3-8B-FP8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "Qwen3-4B-FP8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "Qwen3-1.7B-FP8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "Qwen3-0.6B-FP8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "Qwen3-30B-A3B-FP8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "Qwen3-32B-NVFP4": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--quantization", "ascend"]
+    },
+    "DeepSeek-V3.2-Exp-w8a8": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": [
+        "--quantization", "ascend",
+        "--seed", "1024",
+        "--max-model-len", "17450",
+        "--max-num-batched-tokens", "17450",
+        "--trust-remote-code",
+        "--no-enable-prefix-caching",
+        "--gpu-memory-utilization", "0.9"
+      ]
+    },
+    "Qwen3-Next-80B-A3B-Instruct": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--gpu-memory-utilization", "0.7"],
+      "special_setup": "bisheng"
+    },
+    "Qwen3-VL-32B-Instruct": {
+      "env": {
+        "VLLM_ASCEND_ENABLE_NZ": "0",
+        "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1",
+        "VLLM_ASCEND_ENABLE_PREFETCH_MLP": "1",
+        "VLLM_ASCEND_ENABLE_DENSE_OPTIMIZE": "1"
+      },
+      "args": [
+        "--dtype", "bfloat16",
+        "--max-model-len", "16384",
+        "--max-num-batched-tokens", "16384",
+        "--gpu-memory-utilization", "0.9",
+        "--limit-mm-per-prompt", "{\"image\":4, \"video\":0}",
+        "--swap-space", "16"
+      ]
+    },
+    "Qwen3-VL-30B-A3B-Instruct": {
+      "env": {
+        "VLLM_ASCEND_ENABLE_NZ": "0",
+        "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1",
+        "VLLM_ASCEND_ENABLE_PREFETCH_MLP": "1",
+        "VLLM_ASCEND_ENABLE_DENSE_OPTIMIZE": "1"
+      },
+      "args": [
+        "--dtype", "bfloat16",
+        "--max-model-len", "16384",
+        "--max-num-batched-tokens", "16384",
+        "--gpu-memory-utilization", "0.9",
+        "--limit-mm-per-prompt", "{\"image\":4, \"video\":0}",
+        "--swap-space", "16"
+      ]
+    },
+    "Qwen3-VL-8B-Instruct": {
+      "env": {
+        "VLLM_ASCEND_ENABLE_NZ": "0",
+        "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1",
+        "VLLM_ASCEND_ENABLE_PREFETCH_MLP": "1",
+        "VLLM_ASCEND_ENABLE_DENSE_OPTIMIZE": "1"
+      },
+      "args": [
+        "--dtype", "bfloat16",
+        "--max-model-len", "16384",
+        "--max-num-batched-tokens", "16384",
+        "--gpu-memory-utilization", "0.9",
+        "--limit-mm-per-prompt", "{\"image\":4, \"video\":0}",
+        "--swap-space", "16"
+      ]
+    },
+    "Qwen3-32B": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "conditional": {
+        "eager": {
+          "env": {
+            "VLLM_ASCEND_ENABLE_NZ": "0",
+            "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1"
+          },
+          "args": ["--max-num-batched-tokens", "40960"],
+          "additional_config": {
+            "ascend_scheduler_config": {"enabled": true}
+          },
+          "compilation_config": {
+            "cudagraph_mode": "FULL_DECODE_ONLY",
+            "cudagraph_capture_sizes": [1,2,4,8,16,24,32,48,60,64,72,76,128,256]
+          },
+          "arch_specific": {
+            "aarch64": {"compilation_config": true}
+          },
+          "args": ["--swap-space", "16"]
+        },
+        "default": {
+          "args": ["--load-format", "dummy", "--swap-space", "16"]
+        }
+      }
+    },
+    "default": {
+      "env": {"VLLM_ASCEND_ENABLE_NZ": "0"},
+      "args": ["--load-format", "dummy"]
+    }
+  },
+  "modes": {
+    "eager": {
+      "args": ["--enforce-eager"]
+    },
+    "torchair": {
+      "conditional": {
+        "DeepSeek-V3.2-Exp-w8a8": {
+          "additional_config": {
+            "ascend_scheduler_config": {"enabled": true},
+            "torchair_graph_config": {"enabled": true, "graph_batch_sizes": [16]}
+          }
+        },
+        "default": {
+          "additional_config": {
+            "torchair_graph_config": {"enabled": true, "graph_batch_sizes_init": true},
+            "ascend_scheduler_config": {"enabled": true}
+          }
+        }
+      }
+    },
+    "xlite": {
+      "packages": ["xlite"],
+      "args": ["--block-size", "128"],
+      "additional_config": {
+        "xlite_graph_config": {"enabled": true, "full_mode": true}
+      }
+    }
+  }
+}
