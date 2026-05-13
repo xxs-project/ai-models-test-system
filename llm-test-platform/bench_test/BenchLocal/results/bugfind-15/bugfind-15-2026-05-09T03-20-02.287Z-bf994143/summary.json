@@ -1,0 +1,648 @@
+{
+  "runId": "bugfind-15-2026-05-09T03-20-02.287Z-bf994143",
+  "runDir": "/home/xxs/models-test-system/llm-test-platform/BenchLocal/results/bugfind-15/bugfind-15-2026-05-09T03-20-02.287Z-bf994143",
+  "benchPackId": "bugfind-15",
+  "benchPackName": "BugFind-15",
+  "executionMode": "parallel",
+  "startedAt": "2026-05-09T03:20:02.313Z",
+  "completedAt": "2026-05-09T03:20:02.333Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "run_started",
+      "runId": "bugfind-15-2026-05-09T03-20-02.287Z-bf994143",
+      "models": [
+        {
+          "id": "local_model:MiniMax-M2.5-Free",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-01",
+      "title": "Off-by-One in Python Loop",
+      "index": 1,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-02",
+      "title": "JavaScript Equality Trap",
+      "index": 2,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-03",
+      "title": "Rust Trap Scenario",
+      "index": 3,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-04",
+      "title": "Python Dictionary Mutation During Iteration",
+      "index": 4,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-05",
+      "title": "Go Goroutine Loop Variable Capture",
+      "index": 5,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-06",
+      "title": "JavaScript Async/Await Missing Await",
+      "index": 6,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-07",
+      "title": "Python Mutable Default Argument",
+      "index": 7,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-08",
+      "title": "Rust Integer Overflow in Release",
+      "index": 8,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-09",
+      "title": "Go Slice Aliasing",
+      "index": 9,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-10",
+      "title": "Python Red-Herring Trap",
+      "index": 10,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-11",
+      "title": "JavaScript Silent Failure on Invalid Discount",
+      "index": 11,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-12",
+      "title": "Rust Longest-Streak Double Bug",
+      "index": 12,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-13",
+      "title": "Python Ambiguous Behavior Report",
+      "index": 13,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-14",
+      "title": "JavaScript Environment-Dependent Bug",
+      "index": 14,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-15",
+      "title": "Go Race Condition Under Load",
+      "index": 15,
+      "total": 15
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-01",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-02",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-03",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-04",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-05",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-06",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-07",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-08",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-09",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-10",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-11",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-12",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-13",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-14",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-15",
+      "message": "Calling model"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-01",
+      "result": {
+        "scenarioId": "BF-01",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-01 Off-by-One in Python Loop\nlanguage=Python\ndifficulty=Easy\nuser_turn_1=This function should return the sum of all elements in a list, but it's throwing an IndexError. Can you find the bug?\n\n```python\ndef sum_list(numbers):\n    total = 0\n    for i in range(1, len(numbers) + 1):\n        total += numbers[i]\n    return total\n\n# sum_list([1, 2, 3])  -> IndexError: list index out of range\n# sum_list([10])       -> IndexError: list index out of range\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-02",
+      "result": {
+        "scenarioId": "BF-02",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-02 JavaScript Equality Trap\nlanguage=JavaScript\ndifficulty=Easy\nuser_turn_1=This validation function should reject empty strings, but `validateInput(\"\")` returns `true`. What's wrong?\n\n```javascript\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false) {\n        return true;\n    }\n    return false;\n}\n\n// validateInput(\"\")         -> true\n// validateInput(null)       -> false\n// validateInput(undefined)  -> false\n// validateInput(\"hello\")    -> true\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-03",
+      "result": {
+        "scenarioId": "BF-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-03 Rust Trap Scenario\nlanguage=Rust\ndifficulty=Easy\nuser_turn_1=This Rust code won't compile. The compiler says \"value used here after move\" but I don't understand why. Can you help?\n\n```rust\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-04",
+      "result": {
+        "scenarioId": "BF-04",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-04 Python Dictionary Mutation During Iteration\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=This function should remove all users with \"inactive\" status, but it crashes with `RuntimeError: dictionary changed size during iteration`. What am I doing wrong?\n\n```python\ndef remove_inactive_users(users):\n    for user_id, status in users.items():\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n\nusers = {\"u1\": \"active\", \"u2\": \"inactive\", \"u3\": \"active\", \"u4\": \"inactive\"}\nprint(remove_inactive_users(users))\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-05",
+      "result": {
+        "scenarioId": "BF-05",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-05 Go Goroutine Loop Variable Capture\nlanguage=Go\ndifficulty=Medium\nuser_turn_1=I'm running Go 1.21. I'm trying to print numbers 0-4 using goroutines, but the output is always `5 5 5 5 5` instead. What's going on?\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            fmt.Println(i)\n        }()\n    }\n    wg.Wait()\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-06",
+      "result": {
+        "scenarioId": "BF-06",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-06 JavaScript Async/Await Missing Await\nlanguage=JavaScript\ndifficulty=Medium\nuser_turn_1=This function should fetch a user and return their name, but it throws `TypeError: response.json is not a function`. The API is definitely working — I checked in the browser.\n\n```javascript\nasync function getUserName(userId) {\n    const response = fetch(`/api/users/${userId}`);\n    const data = response.json();\n    return data.name;\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-07",
+      "result": {
+        "scenarioId": "BF-07",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-07 Python Mutable Default Argument\nlanguage=Python\ndifficulty=Hard\nuser_turn_1=Every time I call `add_item`, items from previous calls show up in the list. The first call works fine but subsequent calls are broken. What's happening?\n\n```python\ndef add_item(item, item_list=[]):\n    item_list.append(item)\n    return item_list\n\nprint(add_item(\"apple\"))\nprint(add_item(\"banana\"))\nprint(add_item(\"cherry\"))\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-08",
+      "result": {
+        "scenarioId": "BF-08",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-08 Rust Integer Overflow in Release\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=This function calculates factorial. It works perfectly in debug mode, but in release mode `factorial(25)` returns a clearly wrong number instead of the correct astronomical value. No error, no crash — just a silently wrong answer. What's going on?\n\n```rust\nfn factorial(n: u64) -> u64 {\n    let mut result: u64 = 1;\n    for i in 1..=n {\n        result *= i;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-09",
+      "result": {
+        "scenarioId": "BF-09",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-09 Go Slice Aliasing\nlanguage=Go\ndifficulty=Hard\nuser_turn_1=I have a function that should return two separate filtered slices from the same input. But the results are wrong — the positive slice seems to get corrupted. What's going on?\n\n```go\npackage main\n\nimport \"fmt\"\n\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := nums[:0]\n    negative := nums[:0]\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-10",
+      "result": {
+        "scenarioId": "BF-10",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-10 Python Red-Herring Trap\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My coworker wrote this and I'm pretty sure there's a bug. The naming is weird and the logic looks off. Can you find the issue?\n\n```python\ndef process(data):\n    result = []\n    seen = set()\n    for item in data:\n        key = item.lower().strip()\n        if key not in seen:\n            seen.add(key)\n            result.append(item)\n    return result\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-11",
+      "result": {
+        "scenarioId": "BF-11",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-11 JavaScript Silent Failure on Invalid Discount\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=My discount calculator seems unreliable. For valid discounts like 15% off $100, it works fine. But I just realized that `applyDiscount(50, 110)` returns `50` instead of throwing an error. Same with `applyDiscount(50, -5)`. Is there a better way to handle this?\n\n```javascript\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        return price;\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-12",
+      "result": {
+        "scenarioId": "BF-12",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-12 Rust Longest-Streak Double Bug\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=I'm getting wrong results from my longest-streak function. For the input `[2, 2, 1, 1, 1]`, it returns `(2, 2)` instead of `(1, 3)`. I think there might be more than one issue but I can't figure out what's wrong.\n\n```rust\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == max_val {\n            current_count += 1;\n        } else if current_count > max_count {\n            max_count = current_count;\n            max_val = data[i - 1];\n            current_count = 1;\n        } else {\n            current_count = 1;\n        }\n    }\n    (max_val, max_count)\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-13",
+      "result": {
+        "scenarioId": "BF-13",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-13 Python Ambiguous Behavior Report\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My sorting function doesn't work. It's supposed to sort users by age but the output is wrong.\n\n```python\ndef sort_users(users):\n    return sorted(users, key=lambda u: u[\"age\"])\n\nusers = [\n    {\"name\": \"Alice\", \"age\": \"30\"},\n    {\"name\": \"Bob\", \"age\": \"5\"},\n    {\"name\": \"Charlie\", \"age\": \"25\"},\n]\nprint(sort_users(users))\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-14",
+      "result": {
+        "scenarioId": "BF-14",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-14 JavaScript Environment-Dependent Bug\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=This code works on my machine but crashes in production with `Cannot read properties of undefined (reading 'city')`. I have no idea what's different.\n\n```javascript\nfunction getShippingZone(order) {\n    const city = order.shipping_address.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:MiniMax-M2.5-Free",
+      "scenarioId": "BF-15",
+      "result": {
+        "scenarioId": "BF-15",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-15 Go Race Condition Under Load\nlanguage=Go\ndifficulty=Expert\nuser_turn_1=My counter service works fine in testing but gives wrong totals under heavy load. Sometimes the count is lower than expected. I'm using goroutines. Here's the code:\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\ntype Counter struct {\n    count int\n}\n\nfunc (c *Counter) Increment() {\n    c.count++\n}\n\nfunc (c *Counter) GetCount() int {\n    return c.count\n}\n\nfunc main() {\n    counter := &Counter{}\n    var wg sync.WaitGroup\n\n    for i := 0; i < 1000; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            counter.Increment()\n        }()\n    }\n\n    wg.Wait()\n    fmt.Println(\"Final count:\", counter.GetCount())\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-01"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-02"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-03"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-04"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-05"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-06"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-07"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-08"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-09"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-10"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-11"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-12"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-13"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-14"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-15"
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:MiniMax-M2.5-Free": {
+          "totalScore": 0,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Syntax & Surface",
+              "score": 0,
+              "weight": 15
+            },
+            {
+              "id": "B",
+              "label": "Logic & Algorithmic",
+              "score": 0,
+              "weight": 25
+            },
+            {
+              "id": "C",
+              "label": "Subtle & Tricky",
+              "score": 0,
+              "weight": 25
+            },
+            {
+              "id": "D",
+              "label": "Red Herring Resistance",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Multi-Turn Debugging",
+              "score": 0,
+              "weight": 15
+            }
+          ],
+          "summary": "★ Poor"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:MiniMax-M2.5-Free": [
+      {
+        "scenarioId": "BF-01",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-01 Off-by-One in Python Loop\nlanguage=Python\ndifficulty=Easy\nuser_turn_1=This function should return the sum of all elements in a list, but it's throwing an IndexError. Can you find the bug?\n\n```python\ndef sum_list(numbers):\n    total = 0\n    for i in range(1, len(numbers) + 1):\n        total += numbers[i]\n    return total\n\n# sum_list([1, 2, 3])  -> IndexError: list index out of range\n# sum_list([10])       -> IndexError: list index out of range\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-02",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-02 JavaScript Equality Trap\nlanguage=JavaScript\ndifficulty=Easy\nuser_turn_1=This validation function should reject empty strings, but `validateInput(\"\")` returns `true`. What's wrong?\n\n```javascript\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false) {\n        return true;\n    }\n    return false;\n}\n\n// validateInput(\"\")         -> true\n// validateInput(null)       -> false\n// validateInput(undefined)  -> false\n// validateInput(\"hello\")    -> true\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-03 Rust Trap Scenario\nlanguage=Rust\ndifficulty=Easy\nuser_turn_1=This Rust code won't compile. The compiler says \"value used here after move\" but I don't understand why. Can you help?\n\n```rust\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-04",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-04 Python Dictionary Mutation During Iteration\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=This function should remove all users with \"inactive\" status, but it crashes with `RuntimeError: dictionary changed size during iteration`. What am I doing wrong?\n\n```python\ndef remove_inactive_users(users):\n    for user_id, status in users.items():\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n\nusers = {\"u1\": \"active\", \"u2\": \"inactive\", \"u3\": \"active\", \"u4\": \"inactive\"}\nprint(remove_inactive_users(users))\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-05",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-05 Go Goroutine Loop Variable Capture\nlanguage=Go\ndifficulty=Medium\nuser_turn_1=I'm running Go 1.21. I'm trying to print numbers 0-4 using goroutines, but the output is always `5 5 5 5 5` instead. What's going on?\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            fmt.Println(i)\n        }()\n    }\n    wg.Wait()\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-06",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-06 JavaScript Async/Await Missing Await\nlanguage=JavaScript\ndifficulty=Medium\nuser_turn_1=This function should fetch a user and return their name, but it throws `TypeError: response.json is not a function`. The API is definitely working — I checked in the browser.\n\n```javascript\nasync function getUserName(userId) {\n    const response = fetch(`/api/users/${userId}`);\n    const data = response.json();\n    return data.name;\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-07",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-07 Python Mutable Default Argument\nlanguage=Python\ndifficulty=Hard\nuser_turn_1=Every time I call `add_item`, items from previous calls show up in the list. The first call works fine but subsequent calls are broken. What's happening?\n\n```python\ndef add_item(item, item_list=[]):\n    item_list.append(item)\n    return item_list\n\nprint(add_item(\"apple\"))\nprint(add_item(\"banana\"))\nprint(add_item(\"cherry\"))\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-08",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-08 Rust Integer Overflow in Release\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=This function calculates factorial. It works perfectly in debug mode, but in release mode `factorial(25)` returns a clearly wrong number instead of the correct astronomical value. No error, no crash — just a silently wrong answer. What's going on?\n\n```rust\nfn factorial(n: u64) -> u64 {\n    let mut result: u64 = 1;\n    for i in 1..=n {\n        result *= i;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-09",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-09 Go Slice Aliasing\nlanguage=Go\ndifficulty=Hard\nuser_turn_1=I have a function that should return two separate filtered slices from the same input. But the results are wrong — the positive slice seems to get corrupted. What's going on?\n\n```go\npackage main\n\nimport \"fmt\"\n\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := nums[:0]\n    negative := nums[:0]\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-10",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-10 Python Red-Herring Trap\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My coworker wrote this and I'm pretty sure there's a bug. The naming is weird and the logic looks off. Can you find the issue?\n\n```python\ndef process(data):\n    result = []\n    seen = set()\n    for item in data:\n        key = item.lower().strip()\n        if key not in seen:\n            seen.add(key)\n            result.append(item)\n    return result\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-11",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-11 JavaScript Silent Failure on Invalid Discount\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=My discount calculator seems unreliable. For valid discounts like 15% off $100, it works fine. But I just realized that `applyDiscount(50, 110)` returns `50` instead of throwing an error. Same with `applyDiscount(50, -5)`. Is there a better way to handle this?\n\n```javascript\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        return price;\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-12",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-12 Rust Longest-Streak Double Bug\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=I'm getting wrong results from my longest-streak function. For the input `[2, 2, 1, 1, 1]`, it returns `(2, 2)` instead of `(1, 3)`. I think there might be more than one issue but I can't figure out what's wrong.\n\n```rust\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == max_val {\n            current_count += 1;\n        } else if current_count > max_count {\n            max_count = current_count;\n            max_val = data[i - 1];\n            current_count = 1;\n        } else {\n            current_count = 1;\n        }\n    }\n    (max_val, max_count)\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-13",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-13 Python Ambiguous Behavior Report\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My sorting function doesn't work. It's supposed to sort users by age but the output is wrong.\n\n```python\ndef sort_users(users):\n    return sorted(users, key=lambda u: u[\"age\"])\n\nusers = [\n    {\"name\": \"Alice\", \"age\": \"30\"},\n    {\"name\": \"Bob\", \"age\": \"5\"},\n    {\"name\": \"Charlie\", \"age\": \"25\"},\n]\nprint(sort_users(users))\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-14",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-14 JavaScript Environment-Dependent Bug\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=This code works on my machine but crashes in production with `Cannot read properties of undefined (reading 'city')`. I have no idea what's different.\n\n```javascript\nfunction getShippingZone(order) {\n    const city = order.shipping_address.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      },
+      {
+        "scenarioId": "BF-15",
+        "status": "fail",
+        "score": 0,
+        "summary": "Provider request failed with 404.",
+        "rawLog": "model=MiniMax-M2.5-Free\nscenario=BF-15 Go Race Condition Under Load\nlanguage=Go\ndifficulty=Expert\nuser_turn_1=My counter service works fine in testing but gives wrong totals under heavy load. Sometimes the count is lower than expected. I'm using goroutines. Here's the code:\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\ntype Counter struct {\n    count int\n}\n\nfunc (c *Counter) Increment() {\n    c.count++\n}\n\nfunc (c *Counter) GetCount() int {\n    return c.count\n}\n\nfunc main() {\n    counter := &Counter{}\n    var wg sync.WaitGroup\n\n    for i := 0; i < 1000; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            counter.Increment()\n        }()\n    }\n\n    wg.Wait()\n    fmt.Println(\"Final count:\", counter.GetCount())\n}\n```\nerror=Provider request failed with 404.\nverdict=fail\nscore=0\nsummary=Provider request failed with 404."
+      }
+    ]
+  },
+  "scores": {
+    "local_model:MiniMax-M2.5-Free": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Syntax & Surface",
+          "score": 0,
+          "weight": 15
+        },
+        {
+          "id": "B",
+          "label": "Logic & Algorithmic",
+          "score": 0,
+          "weight": 25
+        },
+        {
+          "id": "C",
+          "label": "Subtle & Tricky",
+          "score": 0,
+          "weight": 25
+        },
+        {
+          "id": "D",
+          "label": "Red Herring Resistance",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Multi-Turn Debugging",
+          "score": 0,
+          "weight": 15
+        }
+      ],
+      "summary": "★ Poor"
+    }
+  }
+}

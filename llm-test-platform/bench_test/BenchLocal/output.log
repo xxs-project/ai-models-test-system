@@ -1,0 +1,140 @@
+
+==================================================
+▶ 开始评测: dataextract-15
+==================================================
+[benchpack:dataextract-15] Started BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:35667/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:35667/v1/',
+  modelCount: 1
+}
+[benchpack:dataextract-15] Stopped BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:35667/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:35667/v1/'
+}
+❌ 运行失败 dataextract-15: No enabled models are configured in BenchLocal.
+
+==================================================
+▶ 开始评测: instructfollow-15
+==================================================
+[benchpack:instructfollow-15] Started BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:41947/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:41947/v1/',
+  modelCount: 1
+}
+[benchpack:instructfollow-15] Stopped BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:41947/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:41947/v1/'
+}
+❌ 运行失败 instructfollow-15: No enabled models are configured in BenchLocal.
+
+==================================================
+▶ 开始评测: reasonmath-15
+==================================================
+[benchpack:reasonmath-15] Started BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:41223/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:41223/v1/',
+  modelCount: 1
+}
+[benchpack:reasonmath-15] Stopped BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:41223/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:41223/v1/'
+}
+❌ 运行失败 reasonmath-15: No enabled models are configured in BenchLocal.
+
+==================================================
+▶ 开始评测: toolcall-15
+==================================================
+[benchpack:toolcall-15] Started BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:43487/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:43487/v1/',
+  modelCount: 1
+}
+[benchpack:toolcall-15] Stopped BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:43487/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:43487/v1/'
+}
+❌ 运行失败 toolcall-15: No enabled models are configured in BenchLocal.
+
+==================================================
+▶ 开始评测: bugfind-15
+==================================================
+[benchpack:bugfind-15] Started BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:37849/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:37849/v1/',
+  modelCount: 1
+}
+[benchpack:bugfind-15] Stopped BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:37849/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:37849/v1/'
+}
+❌ 运行失败 bugfind-15: Docker is installed but not running.
+
+==================================================
+▶ 开始评测: structoutput-15
+==================================================
+[benchpack:structoutput-15] Started BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:41877/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:41877/v1/',
+  modelCount: 1
+}
+[benchpack:structoutput-15] Stopped BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:41877/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:41877/v1/'
+}
+❌ 运行失败 structoutput-15: Docker is installed but not running.
+
+==================================================
+▶ 开始评测: hermesagent-20
+==================================================
+[benchpack:hermesagent-20] Started BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:42041/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:42041/v1/',
+  modelCount: 1
+}
+[benchpack:hermesagent-20] Stopped BenchLocal inference relay. {
+  baseUrl: 'http://127.0.0.1:42041/v1/',
+  dockerBaseUrl: 'http://host.docker.internal:42041/v1/'
+}
+❌ 运行失败 hermesagent-20: Docker is installed but not running.
+
+
+📊 [4/4] 详细测评报告与大模型综合评分
+==================================================
+模型名称: gemma-4-26B-A4B-it
+测试接口: http://127.0.0.1:10093/v1
+存放路径: /home/xxs/BenchTest/BenchLocal/results/
+==================================================
+
+📦 测试集: [36mdataextract-15[0m | 状态: [31mRUN_FAILED[0m
+--------------------------------------------------------------------------------
+🚨 异常拦截原因: [31mNo enabled models are configured in BenchLocal....[0m
+
+📦 测试集: [36minstructfollow-15[0m | 状态: [31mRUN_FAILED[0m
+--------------------------------------------------------------------------------
+🚨 异常拦截原因: [31mNo enabled models are configured in BenchLocal....[0m
+
+📦 测试集: [36mreasonmath-15[0m | 状态: [31mRUN_FAILED[0m
+--------------------------------------------------------------------------------
+🚨 异常拦截原因: [31mNo enabled models are configured in BenchLocal....[0m
+
+📦 测试集: [36mtoolcall-15[0m | 状态: [31mRUN_FAILED[0m
+--------------------------------------------------------------------------------
+🚨 异常拦截原因: [31mNo enabled models are configured in BenchLocal....[0m
+
+📦 测试集: [36mbugfind-15[0m | 状态: [31mRUN_FAILED[0m
+--------------------------------------------------------------------------------
+🚨 异常拦截原因: [31mDocker is installed but not running....[0m
+
+📦 测试集: [36mstructoutput-15[0m | 状态: [31mRUN_FAILED[0m
+--------------------------------------------------------------------------------
+🚨 异常拦截原因: [31mDocker is installed but not running....[0m
+
+📦 测试集: [36mhermesagent-20[0m | 状态: [31mRUN_FAILED[0m
+--------------------------------------------------------------------------------
+🚨 异常拦截原因: [31mDocker is installed but not running....[0m
+
+==================================================
+🏆 大模型综合评分: [33m0 / 0[0m ([33m0%[0m)
+==================================================
+✨ 测评执行完毕，所有完整日志存入本地.
+📄 Markdown 测试报告已生成: /home/xxs/BenchTest/BenchLocal/results/benchmark_gemma-4-26B-A4B-it_20260430_085353_report.md

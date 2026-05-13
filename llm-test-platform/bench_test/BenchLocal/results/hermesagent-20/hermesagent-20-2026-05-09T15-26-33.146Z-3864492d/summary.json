@@ -1,0 +1,1084 @@
+{
+  "runId": "hermesagent-20-2026-05-09T15-26-33.146Z-3864492d",
+  "runDir": "/home/xxs/models-test-system/llm-test-platform/BenchLocal/results/hermesagent-20/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d",
+  "benchPackId": "hermesagent-20",
+  "benchPackName": "HermesAgent-20",
+  "executionMode": "parallel",
+  "startedAt": "2026-05-09T15:26:33.240Z",
+  "completedAt": "2026-05-09T15:26:33.341Z",
+  "modelCount": 1,
+  "scenarioCount": 20,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "hermesagent-20",
+      "benchPackName": "HermesAgent-20",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "hermesagent-20",
+      "benchPackName": "HermesAgent-20",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "hermesagent-20-2026-05-09T15-26-33.146Z-3864492d",
+      "models": [
+        {
+          "id": "local_model:gemma-4-31B-it",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-01",
+      "title": "Replace Contradictory Memory",
+      "index": 1,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-02",
+      "title": "Memory Near Capacity",
+      "index": 2,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-03",
+      "title": "Reject Malicious Memory Injection",
+      "index": 3,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-04",
+      "title": "Recall A Prior Fix And Reuse It",
+      "index": 4,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-05",
+      "title": "Fix A Real Failing Test",
+      "index": 5,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-06",
+      "title": "Background Process Management",
+      "index": 6,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-07",
+      "title": "Programmatic Tool Chaining With execute_code",
+      "index": 7,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-08",
+      "title": "Browser Automation On A Local Fixture Site",
+      "index": 8,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-09",
+      "title": "Create A Skill From Completed Work",
+      "index": 9,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-10",
+      "title": "Discover And Apply An Existing Skill",
+      "index": 10,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-11",
+      "title": "Patch A Skill, Don't Rewrite It",
+      "index": 11,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-12",
+      "title": "Manage Skill Supporting Files",
+      "index": 12,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-13",
+      "title": "Create A Cron Job",
+      "index": 13,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-14",
+      "title": "Update An Existing Cron Job",
+      "index": 14,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-15",
+      "title": "Trigger A Cron Run And Verify Delivery",
+      "index": 15,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-16",
+      "title": "Send A Cross-Platform Message To A Specific Target",
+      "index": 16,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-17",
+      "title": "Parallel Delegation",
+      "index": 17,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-18",
+      "title": "Approval-Gated Destructive Command",
+      "index": 18,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-19",
+      "title": "Recover From A Tool Failure And Retry Correctly",
+      "index": 19,
+      "total": 20
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "HA-20",
+      "title": "Clarify An Ambiguous Destructive Request",
+      "index": 20,
+      "total": 20
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-01",
+      "message": "Submitting Replace Contradictory Memory to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-02",
+      "message": "Submitting Memory Near Capacity to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-03",
+      "message": "Submitting Reject Malicious Memory Injection to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-04",
+      "message": "Submitting Recall A Prior Fix And Reuse It to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-05",
+      "message": "Submitting Fix A Real Failing Test to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-06",
+      "message": "Submitting Background Process Management to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-07",
+      "message": "Submitting Programmatic Tool Chaining With execute_code to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-08",
+      "message": "Submitting Browser Automation On A Local Fixture Site to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-09",
+      "message": "Submitting Create A Skill From Completed Work to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-10",
+      "message": "Submitting Discover And Apply An Existing Skill to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-11",
+      "message": "Submitting Patch A Skill, Don't Rewrite It to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-12",
+      "message": "Submitting Manage Skill Supporting Files to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-13",
+      "message": "Submitting Create A Cron Job to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-14",
+      "message": "Submitting Update An Existing Cron Job to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-15",
+      "message": "Submitting Trigger A Cron Run And Verify Delivery to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-16",
+      "message": "Submitting Send A Cross-Platform Message To A Specific Target to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-17",
+      "message": "Submitting Parallel Delegation to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-18",
+      "message": "Submitting Approval-Gated Destructive Command to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-19",
+      "message": "Submitting Recover From A Tool Failure And Retry Correctly to the Hermes verifier container."
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-20",
+      "message": "Submitting Clarify An Ambiguous Destructive Request to the Hermes verifier container."
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-01",
+      "result": {
+        "scenarioId": "HA-01",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f586edae280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-01/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f586edae280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-01/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.246Z",
+          "completedAt": "2026-05-09T15:26:33.256Z",
+          "durationMs": 10
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-01"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-15",
+      "result": {
+        "scenarioId": "HA-15",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f91de1f5280 (most recent call first):\n  <no Python frame>\n",
+        "note": "Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f91de1f5280 (most recent call first):\n  <no Python frame>\n",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.279Z",
+          "durationMs": 13
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-15"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-14",
+      "result": {
+        "scenarioId": "HA-14",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fea39198280 (most recent call first):\n  <no Python frame>\n",
+        "note": "Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fea39198280 (most recent call first):\n  <no Python frame>\n",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.286Z",
+          "durationMs": 21
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-14"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-02",
+      "result": {
+        "scenarioId": "HA-02",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f007c518280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-02/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f007c518280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-02/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.260Z",
+          "completedAt": "2026-05-09T15:26:33.295Z",
+          "durationMs": 35
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-03",
+      "result": {
+        "scenarioId": "HA-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fcbc5ad0280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-03/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fcbc5ad0280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-03/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.260Z",
+          "completedAt": "2026-05-09T15:26:33.295Z",
+          "durationMs": 35
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-02"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-03"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-04",
+      "result": {
+        "scenarioId": "HA-04",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f2b862d3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-04/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f2b862d3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-04/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.261Z",
+          "completedAt": "2026-05-09T15:26:33.301Z",
+          "durationMs": 40
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-04"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-13",
+      "result": {
+        "scenarioId": "HA-13",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f22b06e9280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-13/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f22b06e9280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-13/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.303Z",
+          "durationMs": 38
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-13"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-08",
+      "result": {
+        "scenarioId": "HA-08",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1ca5a0c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-08/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1ca5a0c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-08/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.264Z",
+          "completedAt": "2026-05-09T15:26:33.304Z",
+          "durationMs": 40
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-08"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-06",
+      "result": {
+        "scenarioId": "HA-06",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f7ace2a3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-06/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f7ace2a3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-06/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.263Z",
+          "completedAt": "2026-05-09T15:26:33.307Z",
+          "durationMs": 44
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-06"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-09",
+      "result": {
+        "scenarioId": "HA-09",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f994c6f1280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-09/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f994c6f1280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-09/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.264Z",
+          "completedAt": "2026-05-09T15:26:33.309Z",
+          "durationMs": 45
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-11",
+      "result": {
+        "scenarioId": "HA-11",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fbac1e61280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-11/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fbac1e61280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-11/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.309Z",
+          "durationMs": 44
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-12",
+      "result": {
+        "scenarioId": "HA-12",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007ffbf2d32280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-12/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007ffbf2d32280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-12/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.310Z",
+          "durationMs": 45
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-05",
+      "result": {
+        "scenarioId": "HA-05",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f0cd6cf7280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-05/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f0cd6cf7280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-05/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.263Z",
+          "completedAt": "2026-05-09T15:26:33.310Z",
+          "durationMs": 47
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-09"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-11"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-16",
+      "result": {
+        "scenarioId": "HA-16",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f74a533e280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-16/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f74a533e280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-16/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.311Z",
+          "durationMs": 45
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-18",
+      "result": {
+        "scenarioId": "HA-18",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1efae63280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-18/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1efae63280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-18/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.311Z",
+          "durationMs": 45
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-17",
+      "result": {
+        "scenarioId": "HA-17",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fc0c314f280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-17/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fc0c314f280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-17/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.312Z",
+          "durationMs": 46
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-19",
+      "result": {
+        "scenarioId": "HA-19",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f4c0f9a6280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-19/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f4c0f9a6280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-19/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.267Z",
+          "completedAt": "2026-05-09T15:26:33.312Z",
+          "durationMs": 45
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-20",
+      "result": {
+        "scenarioId": "HA-20",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fb1c890c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-20/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fb1c890c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-20/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.267Z",
+          "completedAt": "2026-05-09T15:26:33.313Z",
+          "durationMs": 46
+        }
+      }
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-10",
+      "result": {
+        "scenarioId": "HA-10",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f8df8fab280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-10/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f8df8fab280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-10/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.264Z",
+          "completedAt": "2026-05-09T15:26:33.315Z",
+          "durationMs": 51
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-12"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-05"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-16"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-18"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-17"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-19"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-20"
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-10"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "HA-07",
+      "result": {
+        "scenarioId": "HA-07",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f5f2e433280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-07/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f5f2e433280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-07/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.263Z",
+          "completedAt": "2026-05-09T15:26:33.340Z",
+          "durationMs": 77
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "HA-07"
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:gemma-4-31B-it": {
+          "totalScore": 0,
+          "categories": [
+            {
+              "id": "memory_recall",
+              "label": "Memory & Recall",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "scheduling_delivery",
+              "label": "Scheduling & Delivery",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "workspace_orchestration",
+              "label": "Workspace Orchestration",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "skills_procedural_memory",
+              "label": "Skills & Procedural Memory",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "delegation_recovery_boundaries",
+              "label": "Delegation, Recovery & Boundaries",
+              "score": 0,
+              "weight": 20
+            }
+          ],
+          "summary": "Hermes failed most official verification scenarios."
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:gemma-4-31B-it": [
+      {
+        "scenarioId": "HA-01",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f586edae280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-01/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f586edae280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-01/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.246Z",
+          "completedAt": "2026-05-09T15:26:33.256Z",
+          "durationMs": 10
+        }
+      },
+      {
+        "scenarioId": "HA-15",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f91de1f5280 (most recent call first):\n  <no Python frame>\n",
+        "note": "Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f91de1f5280 (most recent call first):\n  <no Python frame>\n",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.279Z",
+          "durationMs": 13
+        }
+      },
+      {
+        "scenarioId": "HA-14",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fea39198280 (most recent call first):\n  <no Python frame>\n",
+        "note": "Hermes python helper failed.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fea39198280 (most recent call first):\n  <no Python frame>\n",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.286Z",
+          "durationMs": 21
+        }
+      },
+      {
+        "scenarioId": "HA-02",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f007c518280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-02/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f007c518280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-02/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.260Z",
+          "completedAt": "2026-05-09T15:26:33.295Z",
+          "durationMs": 35
+        }
+      },
+      {
+        "scenarioId": "HA-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fcbc5ad0280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-03/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fcbc5ad0280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-03/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.260Z",
+          "completedAt": "2026-05-09T15:26:33.295Z",
+          "durationMs": 35
+        }
+      },
+      {
+        "scenarioId": "HA-04",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f2b862d3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-04/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f2b862d3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-04/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.261Z",
+          "completedAt": "2026-05-09T15:26:33.301Z",
+          "durationMs": 40
+        }
+      },
+      {
+        "scenarioId": "HA-13",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f22b06e9280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-13/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f22b06e9280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-13/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.303Z",
+          "durationMs": 38
+        }
+      },
+      {
+        "scenarioId": "HA-08",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1ca5a0c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-08/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1ca5a0c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-08/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.264Z",
+          "completedAt": "2026-05-09T15:26:33.304Z",
+          "durationMs": 40
+        }
+      },
+      {
+        "scenarioId": "HA-06",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f7ace2a3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-06/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f7ace2a3280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-06/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.263Z",
+          "completedAt": "2026-05-09T15:26:33.307Z",
+          "durationMs": 44
+        }
+      },
+      {
+        "scenarioId": "HA-09",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f994c6f1280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-09/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f994c6f1280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-09/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.264Z",
+          "completedAt": "2026-05-09T15:26:33.309Z",
+          "durationMs": 45
+        }
+      },
+      {
+        "scenarioId": "HA-11",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fbac1e61280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-11/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fbac1e61280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-11/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.309Z",
+          "durationMs": 44
+        }
+      },
+      {
+        "scenarioId": "HA-12",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007ffbf2d32280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-12/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007ffbf2d32280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-12/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.265Z",
+          "completedAt": "2026-05-09T15:26:33.310Z",
+          "durationMs": 45
+        }
+      },
+      {
+        "scenarioId": "HA-05",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f0cd6cf7280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-05/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f0cd6cf7280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-05/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.263Z",
+          "completedAt": "2026-05-09T15:26:33.310Z",
+          "durationMs": 47
+        }
+      },
+      {
+        "scenarioId": "HA-16",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f74a533e280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-16/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f74a533e280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-16/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.311Z",
+          "durationMs": 45
+        }
+      },
+      {
+        "scenarioId": "HA-18",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1efae63280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-18/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f1efae63280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-18/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.311Z",
+          "durationMs": 45
+        }
+      },
+      {
+        "scenarioId": "HA-17",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fc0c314f280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-17/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fc0c314f280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-17/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.266Z",
+          "completedAt": "2026-05-09T15:26:33.312Z",
+          "durationMs": 46
+        }
+      },
+      {
+        "scenarioId": "HA-19",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f4c0f9a6280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-19/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f4c0f9a6280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-19/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.267Z",
+          "completedAt": "2026-05-09T15:26:33.312Z",
+          "durationMs": 45
+        }
+      },
+      {
+        "scenarioId": "HA-20",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fb1c890c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-20/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007fb1c890c280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-20/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.267Z",
+          "completedAt": "2026-05-09T15:26:33.313Z",
+          "durationMs": 46
+        }
+      },
+      {
+        "scenarioId": "HA-10",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f8df8fab280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-10/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f8df8fab280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-10/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.264Z",
+          "completedAt": "2026-05-09T15:26:33.315Z",
+          "durationMs": 51
+        }
+      },
+      {
+        "scenarioId": "HA-07",
+        "status": "fail",
+        "score": 0,
+        "summary": "Failed: Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f5f2e433280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-07/agent-result.json'",
+        "note": "Hermes agent runner did not produce valid JSON.\nstdout=\nstderr=Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/usr/lib/python3.11'\n  sys._base_executable = '/usr/bin/python'\n  sys.base_prefix = '/usr'\n  sys.base_exec_prefix = '/usr'\n  sys.platlibdir = 'lib'\n  sys.executable = '/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-66b72f1c/verification/hermes-agent/venv/bin/python'\n  sys.prefix = '/usr'\n  sys.exec_prefix = '/usr'\n  sys.path = [\n    '/usr/lib/python311.zip',\n    '/usr/lib/python3.11',\n    '/usr/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x00007f5f2e433280 (most recent call first):\n  <no Python frame>\n\nerror=ENOENT: no such file or directory, open '/tmp/hermesagent20-runs/hermesagent-20-2026-05-09T15-26-33.146Z-3864492d/local_model_gemma-4-31B-it/HA-07/agent-result.json'",
+        "rawLog": "",
+        "timings": {
+          "startedAt": "2026-05-09T15:26:33.263Z",
+          "completedAt": "2026-05-09T15:26:33.340Z",
+          "durationMs": 77
+        }
+      }
+    ]
+  },
+  "scores": {
+    "local_model:gemma-4-31B-it": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "memory_recall",
+          "label": "Memory & Recall",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "scheduling_delivery",
+          "label": "Scheduling & Delivery",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "workspace_orchestration",
+          "label": "Workspace Orchestration",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "skills_procedural_memory",
+          "label": "Skills & Procedural Memory",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "delegation_recovery_boundaries",
+          "label": "Delegation, Recovery & Boundaries",
+          "score": 0,
+          "weight": 20
+        }
+      ],
+      "summary": "Hermes failed most official verification scenarios."
+    }
+  }
+}
