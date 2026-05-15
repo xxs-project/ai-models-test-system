@@ -63,51 +63,54 @@ export function Layout() {
   }, [isEvalManageActive])
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <div className="w-64 bg-white border-r">
-        <div className="flex items-center h-16 px-4 border-b">
-          <Cpu className="w-8 h-8 mr-2 text-blue-600" />
-          <span className="text-lg font-semibold">大模型测评平台</span>
+    <div className="flex h-screen bg-slate-50">
+      {/* Sidebar */}
+      <div className="w-64 bg-white border-r border-slate-200 shadow-sm z-10 flex flex-col">
+        <div className="flex items-center h-16 px-6 border-b border-slate-100 shrink-0">
+          <div className="p-1.5 bg-blue-600 rounded-lg mr-3 shadow-sm">
+            <Cpu className="w-6 h-6 text-white" />
+          </div>
+          <span className="text-lg font-bold text-slate-800 tracking-tight">开源大模型测评平台</span>
         </div>
-        <ScrollArea className="h-[calc(100vh-4rem)]">
-          <nav className="p-2 space-y-1">
+        <ScrollArea className="flex-1 py-4">
+          <nav className="px-3 space-y-1.5">
             {navigation.map((item) => {
               if (item.children) {
                 const isActive = item.children.some(child => location.pathname === child.href)
                 return (
                   <div key={item.name} className="space-y-1">
                     <Button
-                      variant={isActive ? 'secondary' : 'ghost'}
+                      variant="ghost"
                       className={cn(
-                        'w-full justify-between',
-                        isActive && 'bg-blue-50 text-blue-600'
+                        'w-full justify-between h-10 px-3 hover:bg-slate-100 hover:text-slate-900 transition-colors',
+                        isActive ? 'bg-blue-50/50 text-blue-700 font-semibold' : 'text-slate-600'
                       )}
                       onClick={() => setEvalManageOpen(!evalManageOpen)}
                     >
                       <div className="flex items-center">
-                        <item.icon className="w-4 h-4 mr-2" />
+                        <item.icon className={cn("w-4 h-4 mr-3", isActive ? "text-blue-600" : "text-slate-400")} />
                         {item.name}
                       </div>
                       {evalManageOpen ? (
-                        <ChevronDown className="w-4 h-4" />
+                        <ChevronDown className="w-4 h-4 text-slate-400" />
                       ) : (
-                        <ChevronRight className="w-4 h-4" />
+                        <ChevronRight className="w-4 h-4 text-slate-400" />
                       )}
                     </Button>
                     {evalManageOpen && (
-                      <div className="pl-4 space-y-1">
+                      <div className="pl-4 space-y-1 pt-1">
                         {item.children.map((child) => {
                           const isChildActive = location.pathname === child.href
                           return (
                             <Link key={child.name} to={child.href}>
                               <Button
-                                variant={isChildActive ? 'secondary' : 'ghost'}
+                                variant="ghost"
                                 className={cn(
-                                  'w-full justify-start',
-                                  isChildActive && 'bg-blue-50 text-blue-600'
+                                  'w-full justify-start h-9 px-3 hover:bg-slate-100 hover:text-slate-900 transition-colors text-sm',
+                                  isChildActive ? 'bg-blue-50 text-blue-700 font-medium' : 'text-slate-500'
                                 )}
                               >
-                                <child.icon className="w-4 h-4 mr-2" />
+                                <child.icon className={cn("w-3.5 h-3.5 mr-3", isChildActive ? "text-blue-600" : "text-slate-400")} />
                                 {child.name}
                               </Button>
                             </Link>
@@ -123,13 +126,13 @@ export function Layout() {
               return (
                 <Link key={item.name} to={item.href!}>
                   <Button
-                    variant={isActive ? 'secondary' : 'ghost'}
+                    variant="ghost"
                     className={cn(
-                      'w-full justify-start',
-                      isActive && 'bg-blue-50 text-blue-600'
+                      'w-full justify-start h-10 px-3 hover:bg-slate-100 hover:text-slate-900 transition-colors',
+                      isActive ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-slate-600'
                     )}
                   >
-                    <item.icon className="w-4 h-4 mr-2" />
+                    <item.icon className={cn("w-4 h-4 mr-3", isActive ? "text-blue-600" : "text-slate-400")} />
                     {item.name}
                   </Button>
                 </Link>
@@ -138,18 +141,26 @@ export function Layout() {
           </nav>
         </ScrollArea>
       </div>
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-16 bg-white border-b flex items-center justify-between px-6">
-          <div className="flex items-center text-sm text-gray-500">
-            <Monitor className="w-4 h-4 mr-2" />
-            <span>设备状态: </span>
-            <span className="ml-1 text-green-600">{onlineDevices} 在线 / {devices.length} 总数</span>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-50">
+        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 shadow-sm shrink-0 z-0">
+          <div className="flex items-center text-sm font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+            <Monitor className="w-4 h-4 mr-2 text-slate-500" />
+            <span>设备在线状态:</span>
+            <span className="ml-2 text-emerald-600 font-bold">{onlineDevices}</span>
+            <span className="mx-1 text-slate-400">/</span>
+            <span className="text-slate-600">{devices.length}</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-500">测试任务: {runningTasks} 执行中</span>
+            <div className="flex items-center text-sm font-medium text-slate-600 bg-orange-50 px-3 py-1.5 rounded-full border border-orange-100">
+              <span className="w-2 h-2 rounded-full bg-orange-500 mr-2 animate-pulse" />
+              <span>任务执行中:</span>
+              <span className="ml-2 text-orange-700 font-bold">{runningTasks}</span>
+            </div>
           </div>
         </header>
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto p-8 custom-scrollbar">
           <Outlet />
         </main>
       </div>

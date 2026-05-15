@@ -805,7 +805,9 @@ async def auto_import_single_model_result(
                 "operatorAcceleration": "",
                 "frameworkParams": framework_params,
                 "testDate": test_date,
-                "notes": notes_str
+                "notes": notes_str,
+                "scenario": getattr(task, 'scenario', ''),
+                "features": getattr(task, 'features', '')
             }
             
             # 分组处理
@@ -850,7 +852,8 @@ async def auto_import_single_model_result(
                         b.config.get('serverName') == config_dict.get('serverName') and
                         b.config.get('testDate') == config_dict.get('testDate') and
                         b.config.get('framework') == config_dict.get('framework') and
-                        b.config.get('graphMode') == config_dict.get('graphMode')):
+                        b.config.get('graphMode') == config_dict.get('graphMode') and
+                        b.config.get('notes') == config_dict.get('notes')):
                         existing_benchmark = b
                         break
                 
@@ -1047,7 +1050,9 @@ async def auto_import_all_models_result(
                         "operatorAcceleration": "",
                         "frameworkParams": framework_params,
                         "testDate": test_date,
-                        "notes": notes_str
+                        "notes": notes_str,
+                        "scenario": getattr(task, 'scenario', ''),
+                        "features": getattr(task, 'features', '')
                     }
                     
                     # 分组处理
@@ -1080,7 +1085,8 @@ async def auto_import_all_models_result(
                             if (b.config.get('modelName') == current_model_name and
                                 b.config.get('serverName') == config_dict.get('serverName') and
                                 b.config.get('testDate') == config_dict.get('testDate') and
-                                b.config.get('graphMode') == config_dict.get('graphMode')):
+                                b.config.get('graphMode') == config_dict.get('graphMode') and
+                                b.config.get('notes') == config_dict.get('notes')):
                                 existing_benchmark = b
                                 break
                         
@@ -1158,9 +1164,9 @@ async def auto_import_task_result(
         ValueError: 任务不存在或未完成
     """
     try:
-        from backend.services.command_builder import TaskStatus
-    except ImportError:
         from services.command_builder import TaskStatus
+    except ImportError:
+        from backend.services.command_builder import TaskStatus
     
     # 1. 获取任务信息
     task = session.get(Task, task_id)

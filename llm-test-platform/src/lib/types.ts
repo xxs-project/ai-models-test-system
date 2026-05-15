@@ -41,6 +41,8 @@ export interface Task {
   framework_version: string
   npu_count?: number
   graph_mode?: string
+  scenario?: string
+  features?: string | string[]
   execution_id?: number
   execution_flag?: string
   dataset_name?: string;
@@ -101,6 +103,8 @@ export interface BenchmarkConfig {
   frameworkParams?: string
   testDate: string
   notes?: string
+  scenario?: string
+  features?: string[] | string
 }
 
 export interface PerformanceMetrics {

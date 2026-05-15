@@ -322,6 +322,7 @@ for combo in "${combinations[@]}"; do
         --random-input-len "$input_len"
         --random-output-len "$output_len"
         --ignore-eos
+        --num-warmups '2'
         --goodput "tpot:5000"
         --num-prompts "$num_prompts"
         --max-concurrency "$max_concurrency"

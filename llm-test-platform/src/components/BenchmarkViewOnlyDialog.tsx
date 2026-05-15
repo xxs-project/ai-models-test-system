@@ -105,6 +105,14 @@ export function BenchmarkViewOnlyDialog({
                     <span className="text-sm text-muted-foreground">算子加速</span>
                     <p className="font-medium">{benchmark.config.operatorAcceleration || '-'}</p>
                   </div>
+                  <div className="space-y-1">
+                    <span className="text-sm text-muted-foreground">场景</span>
+                    <p className="font-medium">{benchmark.config.scenario || '-'}</p>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-sm text-muted-foreground">特性</span>
+                    <p className="font-medium">{Array.isArray(benchmark.config.features) ? benchmark.config.features.join(', ') : benchmark.config.features || '-'}</p>
+                  </div>
                   {benchmark.config.frameworkParams && (
                     <div className="col-span-2 space-y-1">
                       <span className="text-sm text-muted-foreground">框架启动参数</span>

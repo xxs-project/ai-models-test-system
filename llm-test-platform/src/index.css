@@ -25,19 +25,16 @@ body {
   min-height: 100vh;
 }
 
-/* Dialog Overlay - Lighter overlay for better visibility */
 [data-radix-dialog-overlay] {
   background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Ensure dialog is above everything */
 [data-radix-dialog-content] {
   background-color: #ffffff !important;
   border: 3px solid #475569 !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* Input fields - Ensure proper visibility and editability */
 input, select, textarea {
   font-size: 14px;
   line-height: 1.5;
@@ -52,21 +49,18 @@ input::placeholder, select::placeholder, textarea::placeholder {
   color: #64748b !important; /* Darker placeholder */
 }
 
-/* Ensure inputs are editable */
 input:not([disabled]):not([readonly]),
 textarea:not([disabled]):not([readonly]) {
   cursor: text !important;
   pointer-events: auto !important;
 }
 
-/* Label styling */
 label {
   font-size: 14px;
   font-weight: 600; /* Bolder font */
   color: #1e293b; /* Darker text */
 }
 
-/* Dialog Content - Ensure proper visibility with high contrast */
 [data-radix-dialog-content] {
   background-color: #ffffff !important;
   border: 2px solid #64748b !important; /* Dark border for visibility */

@@ -71,7 +71,7 @@ const formSchema = z.object({
   task_description: z.string().max(500, '最多500字符').optional(),
   test_type: z.coerce.number(),
   test_mode: z.coerce.number(),
-  startup_mode: z.enum(['api', 'container']).default('container'),
+  startup_mode: z.enum(['api', 'container']).default('api'),
 
   // API mode specific fields
   base_url: z.string().optional(),
@@ -108,6 +108,10 @@ const formSchema = z.object({
   test_path: z.string().min(1, '必填'),
   execution_id: z.coerce.number(),
   dataset_name: z.string().optional(),
+  
+  // New UI fields
+  scenario: z.string().optional(),
+  features: z.array(z.string()).optional(),
 }).superRefine((data, ctx) => {
   // Device Validation
   if (data.startup_mode === 'container') {
@@ -180,7 +184,7 @@ export function TaskList() {
       task_description: '',
       test_type: 1, // 性能测试
       test_mode: 1, // 单模型
-      startup_mode: 'container',
+      startup_mode: 'api',
       base_url: '',
       api_key: '',
       parameter_combination: '',
@@ -201,6 +205,8 @@ export function TaskList() {
       graph_mode: 'aclgraph',
       model_name: '',
       dataset_name: '',
+      scenario: '对话',
+      features: [],
       device_ip: '',
       username: '',
       password: '',
@@ -271,6 +277,8 @@ export function TaskList() {
         inference_framework: frameworkValue,  // Convert to number
         framework_version: values.framework_version,
         execution_flag: values.execution_id?.toString(),  // Map execution_id to execution_flag
+        scenario: values.scenario,
+        features: values.features ? values.features.join(',') : '',
         // Common fields update
         updated_at: new Date().toISOString(),
       }
@@ -361,6 +369,8 @@ export function TaskList() {
       graph_mode: task.graph_mode || 'aclgraph',
       model_name: task.model_name || '',
       dataset_name: task.dataset_name || '',
+      scenario: task.scenario || '对话',
+      features: Array.isArray(task.features) ? task.features : (typeof task.features === 'string' && task.features ? task.features.split(',') : []),
     })
     setIsDialogOpen(true)
   }
@@ -447,7 +457,7 @@ export function TaskList() {
             task_description: '',
             test_type: 1,
             test_mode: 1,
-            startup_mode: 'container',
+            startup_mode: 'api',
             base_url: '',
             api_key: '',
             parameter_combination: '',
@@ -468,6 +478,8 @@ export function TaskList() {
             graph_mode: 'aclgraph',
             model_name: '',
             dataset_name: '',
+            scenario: '对话',
+            features: [],
             device_ip: '',
             username: '',
             password: '',
@@ -602,17 +614,6 @@ export function TaskList() {
                           title="取消"
                         >
                           <XCircle className="w-4 h-4 text-yellow-500" />
-                        </Button>
-                      )}
-                      {task.status === 4 && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleAutoImport(task.id)}
-                          title="自动导入基准测试"
-                          disabled={autoImportTask.isPending}
-                        >
-                          <Download className="w-4 h-4 text-blue-500" />
                         </Button>
                       )}
                       <Button
@@ -869,17 +870,51 @@ export function TaskList() {
                   </div>
 
                   <div className="space-y-4 pb-6">
-                    <h3 className="font-semibold text-slate-900">服务器及推理框架配置</h3>
+                    <h3 className="font-semibold text-slate-900">推理配置</h3>
                     <div className="grid grid-cols-2 gap-4">
                       <FormField control={form.control} name="server_model" render={({ field }) => (
-                        <FormItem><FormLabel>服务器机型</FormLabel><FormControl><Input placeholder="Atlas 800T A2" {...field} /></FormControl><FormMessage /></FormItem>
+                        <FormItem><FormLabel>机型</FormLabel><FormControl><Input placeholder="Atlas 800T A2" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="accelerator_card" render={({ field }) => (
                         <FormItem><FormLabel>加速卡</FormLabel><FormControl><Input placeholder="比如910B等" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
                       <FormField control={form.control} name="npu_count" render={({ field }) => (
-                        <FormItem><FormLabel>加速卡数量 <span className="text-red-500">*</span></FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                        <FormItem><FormLabel>卡数 <span className="text-red-500">*</span></FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
+                      <FormField control={form.control} name="scenario" render={({ field }) => (
+                        <FormItem><FormLabel>场景</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                            <SelectContent><SelectItem value="对话">对话</SelectItem><SelectItem value="Agent">Agent</SelectItem></SelectContent>
+                          </Select><FormMessage />
+                        </FormItem>
+                      )} />
+                      <div className="col-span-2">
+                        <FormField control={form.control} name="features" render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>特性</FormLabel>
+                            <div className="flex flex-wrap gap-4 mt-2">
+                              {['FP4', 'FP8', '投机推理', 'KV Cache卸载', 'KV稀疏'].map((feat) => (
+                                <label key={feat} className="flex items-center space-x-2 cursor-pointer">
+                                  <Checkbox 
+                                    checked={field.value?.includes(feat)}
+                                    onCheckedChange={(checked) => {
+                                      const current = field.value || [];
+                                      if (checked) {
+                                        field.onChange([...current, feat]);
+                                      } else {
+                                        field.onChange(current.filter((f) => f !== feat));
+                                      }
+                                    }}
+                                  />
+                                  <span className="text-sm text-slate-700">{feat}</span>
+                                </label>
+                              ))}
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )} />
+                      </div>
                       <FormField control={form.control} name="inference_framework" render={({ field }) => (
                         <FormItem><FormLabel>推理框架 <span className="text-red-500">*</span></FormLabel>
                           <Select onValueChange={field.onChange} value={String(field.value)}>
@@ -891,9 +926,11 @@ export function TaskList() {
                       <FormField control={form.control} name="framework_version" render={({ field }) => (
                         <FormItem><FormLabel>推理框架版本 <span className="text-red-500">*</span></FormLabel><FormControl><Input placeholder="v1.0.1" {...field} /></FormControl><FormMessage /></FormItem>
                       )} />
-                      <FormField control={form.control} name="framework_startup_args" render={({ field }) => (
-                        <FormItem><FormLabel>框架启动参数</FormLabel><FormControl><Input placeholder="--tensor-parallel-size 1" {...field} /></FormControl><FormMessage /></FormItem>
-                      )} />
+                      <div className="col-span-2">
+                        <FormField control={form.control} name="framework_startup_args" render={({ field }) => (
+                          <FormItem><FormLabel>启动参数</FormLabel><FormControl><Input placeholder="--tensor-parallel-size 1" {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                      </div>
                     </div>
                   </div>
                 </>
@@ -1301,7 +1338,7 @@ export function TaskList() {
                            <span className="text-sm">{viewTask.model_name || '-'}</span>
                          </div>
                          <div>
-                           <span className="text-xs text-gray-500 block">加速卡数量</span>
+                           <span className="text-xs text-gray-500 block">卡数</span>
                            <span className="text-sm">{viewTask.npu_count || '-'}</span>
                          </div>
                          {/* 图模式 - 仅vLLM显示 */}
@@ -1344,15 +1381,23 @@ export function TaskList() {
                                </div>
 
                                <div>
-                                 <span className="text-xs text-gray-500 block">服务器机型</span>
+                                 <span className="text-xs text-gray-500 block">机型</span>
                                  <span className="text-sm">{viewTask.server_model || '-'}</span>
                                </div>
                                <div>
                                  <span className="text-xs text-gray-500 block">加速卡</span>
                                  <span className="text-sm">{viewTask.accelerator_card || '-'}</span>
                                </div>
+                               <div>
+                                 <span className="text-xs text-gray-500 block">场景</span>
+                                 <span className="text-sm">{viewTask.scenario || '-'}</span>
+                               </div>
+                               <div>
+                                 <span className="text-xs text-gray-500 block">特性</span>
+                                 <span className="text-sm">{Array.isArray(viewTask.features) ? viewTask.features.join(', ') : viewTask.features || '-'}</span>
+                               </div>
                                <div className="col-span-2">
-                                 <span className="text-xs text-gray-500 block">框架启动参数</span>
+                                 <span className="text-xs text-gray-500 block">启动参数</span>
                                  <span className="text-sm break-all">{viewTask.framework_startup_args || '-'}</span>
                                </div>
                                <div className="col-span-2">

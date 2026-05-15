@@ -58,6 +58,8 @@ class TaskBase(BaseModel):
     framework_startup_args: Optional[str] = None
     accelerator_card: Optional[str] = None
     dataset_name: Optional[str] = None
+    scenario: Optional[str] = None
+    features: Optional[str] = None
     device_id: Optional[int] = None
     device_ip: Optional[str] = None
     device_username: Optional[str] = None
@@ -89,6 +91,8 @@ class TaskUpdate(BaseModel):
     framework_startup_args: Optional[str] = None
     accelerator_card: Optional[str] = None
     dataset_name: Optional[str] = None
+    scenario: Optional[str] = None
+    features: Optional[str] = None
     status: Optional[int] = None
     device_id: Optional[int] = None
     device_ip: Optional[str] = None
