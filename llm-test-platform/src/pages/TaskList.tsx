@@ -62,8 +62,10 @@ import {
   Eye,
   Edit,
   Download,
+  HelpCircle,
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 const formSchema = z.object({
   task_name: z.string().min(1, '必填').max(100, '最多100字符'),
@@ -108,6 +110,7 @@ const formSchema = z.object({
   test_path: z.string().min(1, '必填'),
   execution_id: z.coerce.number(),
   dataset_name: z.string().optional(),
+  dataset_args: z.string().optional(),
   
   // New UI fields
   scenario: z.string().optional(),
@@ -205,6 +208,7 @@ export function TaskList() {
       graph_mode: 'aclgraph',
       model_name: '',
       dataset_name: '',
+      dataset_args: '',
       scenario: '对话',
       features: [],
       device_ip: '',
@@ -271,6 +275,7 @@ export function TaskList() {
         device_password: values.password,  // Map password to device_password
         script_path: values.test_path,     // Map test_path to script_path
         model_name: values.model_name,
+        dataset_args: values.dataset_args,
         npu_count: values.npu_count,
         graph_mode: values.graph_mode,
         model_path: values.model_path,
@@ -369,6 +374,7 @@ export function TaskList() {
       graph_mode: task.graph_mode || 'aclgraph',
       model_name: task.model_name || '',
       dataset_name: task.dataset_name || '',
+      dataset_args: task.dataset_args || '',
       scenario: task.scenario || '对话',
       features: Array.isArray(task.features) ? task.features : (typeof task.features === 'string' && task.features ? task.features.split(',') : []),
     })
@@ -478,6 +484,7 @@ export function TaskList() {
             graph_mode: 'aclgraph',
             model_name: '',
             dataset_name: '',
+            dataset_args: '',
             scenario: '对话',
             features: [],
             device_ip: '',
@@ -745,7 +752,6 @@ export function TaskList() {
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="1">性能测试</SelectItem>
-                            <SelectItem value="2">精度测试</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -854,6 +860,34 @@ export function TaskList() {
                       </div>
                       <FormField control={form.control} name="test_path" render={({ field }) => (
                         <FormItem><FormLabel>测试路径 <span className="text-red-500">*</span></FormLabel><FormControl><Input placeholder="/data/scripts/..." {...field} /></FormControl><FormMessage /></FormItem>
+                      )} />
+                      <FormField control={form.control} name="dataset_args" render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            数据集参数
+                            <TooltipProvider>
+                              <Tooltip delayDuration={0}>
+                                <TooltipTrigger type="button" onClick={(e) => e.preventDefault()} className="inline-flex items-center ml-1 align-middle text-gray-500 hover:text-gray-900 cursor-help">
+                                  <HelpCircle className="w-4 h-4" />
+                                </TooltipTrigger>
+                                <TooltipContent side="right" className="max-w-[450px] w-max p-4 bg-white text-gray-700 shadow-xl border border-gray-200">
+                                  <div className="space-y-2 text-sm leading-relaxed">
+                                    <p className="font-semibold text-gray-900 border-b pb-1">数据集参数格式要求参考如下:</p>
+                                    <ul className="list-disc pl-4 space-y-2">
+                                      <li><span className="font-medium text-blue-600">sonnet:</span> <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs block mt-1 break-all">--dataset-name sonnet --dataset-path /path/to/sonnet.txt</code></li>
+                                      <li><span className="font-medium text-blue-600">sharegpt:</span> <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs block mt-1 break-all">--dataset-name sharegpt --dataset-path /path/to/sharegpt.json</code></li>
+                                      <li><span className="font-medium text-blue-600">speed_bench:</span> <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs block mt-1 break-all">--dataset-name speed_bench --dataset-path /path/to/SPEED-Bench</code></li>
+                                      <li><span className="font-medium text-blue-600">prefix_repetition:</span> <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs block mt-1 break-all">--dataset-name prefix_repetition --prefix_rate 0.5（重复率比如0.5，必须填写，否则采用默认随机数据集）</code></li>
+                                    </ul>
+                                    <p className="text-xs text-gray-500 mt-2 break-words whitespace-normal">注: 如果不填写，将使用默认数据集配置。参数将被透传给执行脚本。</p>
+                                  </div>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          </FormLabel>
+                          <FormControl><Input placeholder="--dataset-name sonnet --dataset-path ..." {...field} /></FormControl>
+                          <FormMessage />
+                        </FormItem>
                       )} />
                       <FormField control={form.control} name="processor_type" render={({ field }) => (
                         <FormItem><FormLabel>处理器类型 <span className="text-red-500">*</span></FormLabel>
@@ -1395,6 +1429,10 @@ export function TaskList() {
                                <div>
                                  <span className="text-xs text-gray-500 block">特性</span>
                                  <span className="text-sm">{Array.isArray(viewTask.features) ? viewTask.features.join(', ') : viewTask.features || '-'}</span>
+                               </div>
+                               <div className="col-span-2">
+                                 <span className="text-xs text-gray-500 block">数据集参数</span>
+                                 <span className="text-sm break-all">{viewTask.dataset_args || '-'}</span>
                                </div>
                                <div className="col-span-2">
                                  <span className="text-xs text-gray-500 block">启动参数</span>

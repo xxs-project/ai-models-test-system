@@ -514,23 +514,25 @@ def download_remote_results_with_sftp(
             except FileNotFoundError:
                 raise FileNotFoundError(f"远程直连API结果目录不存在: {remote_results_path}")
                 
-            arch = getattr(device, 'arch', 'x86_64')
             if test_mode_label == 'single':
                 model_name = getattr(task, 'model_name', '')
-                prefix = f"{arch}_{model_name}_"
+                
+                def match_dir(name):
+                    return f"_{model_name}_" in name or name.startswith(f"{model_name}_")
             else:
-                prefix = f"{arch}_"
+                def match_dir(name):
+                    return True
                 
             remote_subdirs = []
             try:
                 for entry in sftp.listdir_attr(remote_results_path):
-                    if entry.st_mode & 0o40000 and entry.filename.startswith(prefix):  # 是目录且匹配前缀
+                    if entry.st_mode & 0o40000 and match_dir(entry.filename):  # 是目录且匹配前缀
                         remote_subdirs.append(entry)
             except Exception as e:
                 raise ValueError(f"无法列出远程目录 {remote_results_path}: {e}")
                 
             if not remote_subdirs:
-                raise FileNotFoundError(f"未找到匹配前缀 {prefix} 的API测试结果目录")
+                raise FileNotFoundError(f"未找到匹配模型 {getattr(task, 'model_name', '')} 的API测试结果目录")
                 
             if test_mode_label == 'single':
                 # 单模型获取最新的目录
@@ -807,7 +809,8 @@ async def auto_import_single_model_result(
                 "testDate": test_date,
                 "notes": notes_str,
                 "scenario": getattr(task, 'scenario', ''),
-                "features": getattr(task, 'features', '')
+                "features": getattr(task, 'features', ''),
+                "dataset_args": getattr(task, 'dataset_args', '')
             }
             
             # 分组处理

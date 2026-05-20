@@ -1,6 +1,6 @@
 /usr/local/lib/python3.10/dist-packages/tzlocal/unix.py:207: UserWarning: Can not find any timezone configuration, defaulting to UTC.
   warnings.warn("Can not find any timezone configuration, defaulting to UTC.")
-INFO:     Started server process [296920]
+INFO:     Started server process [55547]
 INFO:     Waiting for application startup.
 INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
 INFO:apscheduler.scheduler:Added job "设备状态自动监控" to job store "default"
@@ -8,15 +8,194 @@ INFO:apscheduler.scheduler:Scheduler started
 INFO:main:设备自动监控任务已启动，间隔: 60秒
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:34650 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:34666 - "GET /api/devices HTTP/1.1" 200 OK
 /usr/local/lib/python3.10/dist-packages/pydantic/type_adapter.py:677: UserWarning: Pydantic serializer warnings:
   PydanticSerializationUnexpectedValue(Expected `int` - serialized value may not be as expected [field_name='progress', input_value=1.6, input_type=float])
   return self.serializer.to_json(
-INFO:     127.0.0.1:58858 - "GET /api/tasks?page=1&size=20 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58868 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58876 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
-INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-15 12:31:42 UTC)" (scheduled at 2026-05-15 12:31:42.508832+00:00)
+INFO:     127.0.0.1:54402 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54416 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54428 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54430 - "GET /api/devices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60440 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 14:59:52 UTC)" (scheduled at 2026-05-20 14:59:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+INFO:     127.0.0.1:49692 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49694 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:00:52 UTC)" executed successfully
+INFO:     127.0.0.1:48738 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:01:52 UTC)" (scheduled at 2026-05-20 15:00:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:36932 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36942 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:01:52 UTC)" executed successfully
+INFO:     127.0.0.1:38974 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:02:52 UTC)" (scheduled at 2026-05-20 15:01:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:46732 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46736 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:02:52 UTC)" executed successfully
+INFO:     127.0.0.1:56864 - "POST /api/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56874 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56876 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:services.task_checker:开始任务预检: Qwen3-32B性能测试05
+INFO:services.task_checker:检查设备连接: 7.6.52.170:22
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:services.task_checker:设备连接检查通过: 7.6.52.170
+INFO:services.task_checker:任务预检通过
+INFO:     127.0.0.1:56882 - "POST /api/tasks/25/execute HTTP/1.1" 200 OK
+INFO:main:================================================================================
+INFO:main:开始执行任务 25
+INFO:main:================================================================================
+INFO:main:任务基本信息:
+INFO:main:  名称: Qwen3-32B性能测试05
+INFO:main:  类型: 1 (1=性能测试, 2=精度测试)
+INFO:main:  模式: 1 (1=单模型, 2=全套模型)
+INFO:main:  框架: 1
+INFO:main:  模型: Qwen3-32B
+INFO:main:设备信息:
+INFO:main:  device_id: None
+INFO:main:  device_ip: 
+INFO:main:  device_username: 
+INFO:main:  device_password: 缺失
+INFO:main:配置信息:
+INFO:main:  script_path: /home
+INFO:main:  model_path: /mnt1/00_weight/Qwen3-32B
+INFO:main:  framework_version: v0.19.1rc1
+INFO:main:  npu_count: 4
+INFO:main:  graph_mode: aclgraph
+INFO:main:  execution_flag: 1
+INFO:main:API模式，从配置解析目标机器 IP: 7.6.52.170
+INFO:main:尝试连接到设备: 7.6.52.170:22, 用户: root
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:     127.0.0.1:56890 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56894 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:main:SSH连接成功: 7.6.52.170
+INFO:main:测试执行命令: 'hostname'
+INFO:main:远程主机名: cp0
+INFO:main:构建的命令: cd perf_test/api_benchmark_auto && bash run_vllmbench.sh --model-path /mnt1/00_weight/Qwen3-32B --ba...
+INFO:main:验证脚本路径: /home
+INFO:main:[OK] 脚本路径存在: /home
+INFO:main:打包本地 perf_test 目录: /home/xxs/models-test-system_ucd/llm-test-platform/perf_test
+INFO:main:通过SFTP上传 perf_test.tar.gz 到目标机器
+INFO:paramiko.transport.sftp:[chan 2] Opened sftp connection (server version 3)
+INFO:paramiko.transport.sftp:[chan 2] sftp session closed.
+INFO:main:在目标机器上解压 perf_test.tar.gz
+INFO:main:解压 perf_test 完成
+INFO:main:验证模型路径: /mnt1/00_weight/Qwen3-32B
+INFO:main:[OK] 模型路径存在: /mnt1/00_weight/Qwen3-32B
+INFO:main:[OK] 成功进入脚本目录: /home
+INFO:main:在远程设备上启动后台测试脚本
+INFO:services.task_monitor:在远程设备上启动后台任务
+INFO:     127.0.0.1:50382 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:services.task_monitor:任务启动成功，PID: 2055008, 日志文件: /tmp/task_25_20260520_150237.log
+INFO:main:测试脚本已启动，任务已启动，PID: 2055008
+INFO:services.task_monitor:开始监控任务 25
+INFO:services.task_monitor:任务监控循环启动
+INFO:main:任务 25 监控已启动，将每分钟检查执行状态
+INFO:main:任务 25 状态更新为 3: 正在测试中
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:03:52 UTC)" (scheduled at 2026-05-20 15:02:52.951195+00:00)
 INFO:main:开始自动监控所有设备状态...
 INFO:monitor_impl:Checking device: 7.6.52.110
 INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
@@ -51,11 +230,11 @@ INFO:paramiko.transport:Authentication (password) successful!
 INFO:monitor_impl:SSH connection established to 7.6.16.150:22
 INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
 INFO:main:自动监控完成，共监控 6 台设备
-INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-15 12:32:42 UTC)" executed successfully
-INFO:     127.0.0.1:44032 - "GET /api/tasks?page=1&size=20 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:44038 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:44054 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
-INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-15 12:33:42 UTC)" (scheduled at 2026-05-15 12:32:42.508832+00:00)
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:03:52 UTC)" executed successfully
+INFO:     127.0.0.1:41992 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42006 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42008 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:04:52 UTC)" (scheduled at 2026-05-20 15:03:52.951195+00:00)
 INFO:main:开始自动监控所有设备状态...
 INFO:monitor_impl:Checking device: 7.6.52.110
 INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
@@ -90,11 +269,11 @@ INFO:paramiko.transport:Authentication (password) successful!
 INFO:monitor_impl:SSH connection established to 7.6.16.150:22
 INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
 INFO:main:自动监控完成，共监控 6 台设备
-INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-15 12:33:42 UTC)" executed successfully
-INFO:     127.0.0.1:39860 - "GET /api/tasks?page=1&size=20 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:39868 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:39876 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
-INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-15 12:34:42 UTC)" (scheduled at 2026-05-15 12:33:42.508832+00:00)
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:04:52 UTC)" executed successfully
+INFO:     127.0.0.1:47006 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47020 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47022 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:05:52 UTC)" (scheduled at 2026-05-20 15:04:52.951195+00:00)
 INFO:main:开始自动监控所有设备状态...
 INFO:monitor_impl:Checking device: 7.6.52.110
 INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
@@ -129,7 +308,1731 @@ INFO:paramiko.transport:Authentication (password) successful!
 INFO:monitor_impl:SSH connection established to 7.6.16.150:22
 INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
 INFO:main:自动监控完成，共监控 6 台设备
-INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-15 12:34:42 UTC)" executed successfully
-INFO:     127.0.0.1:46196 - "GET /api/tasks?page=1&size=20 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:46204 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:46220 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:05:52 UTC)" executed successfully
+INFO:     127.0.0.1:51212 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51226 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51238 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:06:52 UTC)" (scheduled at 2026-05-20 15:05:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:06:52 UTC)" executed successfully
+INFO:     127.0.0.1:34236 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34238 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34246 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:07:52 UTC)" (scheduled at 2026-05-20 15:06:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:07:52 UTC)" executed successfully
+INFO:     127.0.0.1:34062 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34064 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34076 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:08:52 UTC)" (scheduled at 2026-05-20 15:07:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:38836 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38842 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:08:52 UTC)" executed successfully
+INFO:     127.0.0.1:59878 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:09:52 UTC)" (scheduled at 2026-05-20 15:08:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:41890 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41902 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:09:52 UTC)" executed successfully
+INFO:     127.0.0.1:54910 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:10:52 UTC)" (scheduled at 2026-05-20 15:09:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:60326 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60336 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:10:52 UTC)" executed successfully
+INFO:     127.0.0.1:54890 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:11:52 UTC)" (scheduled at 2026-05-20 15:10:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:44154 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44158 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:11:52 UTC)" executed successfully
+INFO:     127.0.0.1:54698 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:12:52 UTC)" (scheduled at 2026-05-20 15:11:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+INFO:     127.0.0.1:40558 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40570 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:12:52 UTC)" executed successfully
+INFO:     127.0.0.1:35468 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:13:52 UTC)" (scheduled at 2026-05-20 15:12:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+INFO:     127.0.0.1:55830 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55844 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:13:52 UTC)" executed successfully
+INFO:     127.0.0.1:44674 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:14:52 UTC)" (scheduled at 2026-05-20 15:13:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:     127.0.0.1:50764 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50776 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:14:52 UTC)" executed successfully
+INFO:     127.0.0.1:55618 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:15:52 UTC)" (scheduled at 2026-05-20 15:14:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:60952 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60962 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:15:52 UTC)" executed successfully
+INFO:     127.0.0.1:50918 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:16:52 UTC)" (scheduled at 2026-05-20 15:15:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:59270 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59278 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:16:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:17:52 UTC)" (scheduled at 2026-05-20 15:16:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:     127.0.0.1:38910 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:57562 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57576 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:17:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:18:52 UTC)" (scheduled at 2026-05-20 15:17:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:     127.0.0.1:50172 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:33806 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33814 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:18:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:19:52 UTC)" (scheduled at 2026-05-20 15:18:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+INFO:     127.0.0.1:42498 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:54404 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54406 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:19:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:20:52 UTC)" (scheduled at 2026-05-20 15:19:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:59096 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:55208 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55214 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:20:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:21:52 UTC)" (scheduled at 2026-05-20 15:20:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:53770 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:42232 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42248 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:21:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:22:52 UTC)" (scheduled at 2026-05-20 15:21:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+INFO:     127.0.0.1:56032 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:34238 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34244 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:22:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:23:52 UTC)" (scheduled at 2026-05-20 15:22:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:main:任务 25 状态更新为 4: 测试完成
+INFO:main:任务 25 已完成，开始自动导入测试结果...
+INFO:services.auto_import_service:API模式，构造虚拟设备信息: IP=7.6.52.170, 用户=root
+INFO:services.auto_import_service:开始自动导入单模型性能测试结果，任务ID: 25
+INFO:services.auto_import_service:开始从远程设备 7.6.52.170 下载结果文件...
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:paramiko.transport.sftp:[chan 0] Opened sftp connection (server version 3)
+INFO:services.auto_import_service:定位到远程版本目录: ['x86_64_Qwen3-32B_7.6.52.170_10093_20260520_150304_aclgraph']
+INFO:services.auto_import_service:下载CSV文件: core_metrics.csv
+WARNING:services.auto_import_service:远程日志目录不存在: /home/perf_test/api_benchmark_auto/results/x86_64_Qwen3-32B_7.6.52.170_10093_20260520_150304_aclgraph/log，跳过日志下载
+INFO:paramiko.transport.sftp:[chan 0] sftp session closed.
+INFO:services.auto_import_service:找到CSV文件: /tmp/tmpiuo9r_kq/api_benchmark_auto/results/x86_64_Qwen3-32B_7.6.52.170_10093_20260520_150304_aclgraph/core_metrics.csv
+INFO:services.auto_import_service:从文件名提取 - 模型: Qwen3-32B, NPU: 4, 图模式: aclgraph
+INFO:services.auto_import_service:解析CSV文件: /tmp/tmpiuo9r_kq/api_benchmark_auto/results/x86_64_Qwen3-32B_7.6.52.170_10093_20260520_150304_aclgraph/core_metrics.csv, 表头: ['Process Num', 'Input Length', 'Output Length', 'total input Tokens', 'total output Tokens', 'duration (s)', 'output throughput (tok/s)', 'Mean TTFT (ms)', 'Mean TPOT (ms)', 'Mean ITL (ms)']
+INFO:services.auto_import_service:列映射 - concurrency: 0, input: 1, output: 2, ttft: 7, tpot: 8, tps: 6
+INFO:services.auto_import_service:配置列映射: {}
+INFO:services.auto_import_service:成功解析 2 条性能数据
+INFO:services.auto_import_service:服务器名称: G8600
+INFO:services.auto_import_service:切分参数: TP4
+INFO:services.auto_import_service:成功创建Benchmark记录，ID: 73, Unique ID: BM-20260520152258-0D00
+INFO:main:任务 25 自动导入成功: 成功导入 1 个基准测试配置，共 2 条数据
+INFO:services.task_monitor:停止监控任务 25
+INFO:     127.0.0.1:39554 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:41504 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41506 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:23:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:24:52 UTC)" (scheduled at 2026-05-20 15:23:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:36100 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:43304 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43308 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:24:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:25:52 UTC)" (scheduled at 2026-05-20 15:24:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:42314 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:56940 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56946 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:25:52 UTC)" executed successfully
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:26:52 UTC)" (scheduled at 2026-05-20 15:25:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:58734 - "POST /api/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58742 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58756 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:services.task_checker:开始任务预检: Meta-Llama-3-8B性能测试07
+INFO:services.task_checker:检查设备连接: 7.6.52.170:22
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:services.task_checker:设备连接检查通过: 7.6.52.170
+INFO:services.task_checker:任务预检通过
+INFO:main:================================================================================
+INFO:     127.0.0.1:58772 - "POST /api/tasks/26/execute HTTP/1.1" 200 OK
+INFO:main:开始执行任务 26
+INFO:main:================================================================================
+INFO:main:任务基本信息:
+INFO:main:  名称: Meta-Llama-3-8B性能测试07
+INFO:main:  类型: 1 (1=性能测试, 2=精度测试)
+INFO:main:  模式: 1 (1=单模型, 2=全套模型)
+INFO:main:  框架: 1
+INFO:main:  模型: Qwen3-32B
+INFO:main:设备信息:
+INFO:main:  device_id: None
+INFO:main:  device_ip: 
+INFO:main:  device_username: 
+INFO:main:  device_password: 缺失
+INFO:main:配置信息:
+INFO:main:  script_path: /home
+INFO:main:  model_path: /mnt1/00_weight/Qwen3-32B
+INFO:main:  framework_version: v0.19.1rc1
+INFO:main:  npu_count: 4
+INFO:main:  graph_mode: eager
+INFO:main:  execution_flag: 1
+INFO:main:API模式，从配置解析目标机器 IP: 7.6.52.170
+INFO:main:尝试连接到设备: 7.6.52.170:22, 用户: root
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:     127.0.0.1:58784 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58796 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:main:SSH连接成功: 7.6.52.170
+INFO:main:测试执行命令: 'hostname'
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+INFO:main:远程主机名: cp0
+INFO:main:构建的命令: cd perf_test/api_benchmark_auto && bash run_vllmbench.sh --model-path /mnt1/00_weight/Qwen3-32B --ba...
+INFO:main:验证脚本路径: /home
+INFO:main:[OK] 脚本路径存在: /home
+INFO:main:打包本地 perf_test 目录: /home/xxs/models-test-system_ucd/llm-test-platform/perf_test
+INFO:main:通过SFTP上传 perf_test.tar.gz 到目标机器
+INFO:     127.0.0.1:58808 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:paramiko.transport.sftp:[chan 2] Opened sftp connection (server version 3)
+INFO:paramiko.transport.sftp:[chan 2] sftp session closed.
+INFO:main:在目标机器上解压 perf_test.tar.gz
+INFO:main:解压 perf_test 完成
+INFO:main:验证模型路径: /mnt1/00_weight/Qwen3-32B
+INFO:main:[OK] 模型路径存在: /mnt1/00_weight/Qwen3-32B
+INFO:main:[OK] 成功进入脚本目录: /home
+INFO:main:在远程设备上启动后台测试脚本
+INFO:services.task_monitor:在远程设备上启动后台任务
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:58832 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58820 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:services.task_monitor:任务启动成功，PID: 2999126, 日志文件: /tmp/task_26_20260520_152600.log
+INFO:main:测试脚本已启动，任务已启动，PID: 2999126
+INFO:services.task_monitor:开始监控任务 26
+INFO:main:任务 26 监控已启动，将每分钟检查执行状态
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:26:52 UTC)" executed successfully
+INFO:     127.0.0.1:36614 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36628 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:27:52 UTC)" (scheduled at 2026-05-20 15:26:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:main:任务 26 状态更新为 5: 启动超时
+INFO:services.task_monitor:停止监控任务 26
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:     127.0.0.1:58350 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:27:52 UTC)" executed successfully
+INFO:     127.0.0.1:60408 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60420 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:28:52 UTC)" (scheduled at 2026-05-20 15:27:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+INFO:     127.0.0.1:44302 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:28:52 UTC)" executed successfully
+INFO:     127.0.0.1:42198 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42212 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:29:52 UTC)" (scheduled at 2026-05-20 15:28:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+INFO:     127.0.0.1:50616 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:29:52 UTC)" executed successfully
+INFO:     127.0.0.1:54960 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54976 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:30:52 UTC)" (scheduled at 2026-05-20 15:29:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:56590 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:30:52 UTC)" executed successfully
+INFO:     127.0.0.1:45104 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45114 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:31:52 UTC)" (scheduled at 2026-05-20 15:30:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:41390 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:31:52 UTC)" executed successfully
+INFO:     127.0.0.1:58762 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58770 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:32:52 UTC)" (scheduled at 2026-05-20 15:31:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:49028 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:32:52 UTC)" executed successfully
+INFO:     127.0.0.1:40674 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40686 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:33:52 UTC)" (scheduled at 2026-05-20 15:32:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:48830 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:33:52 UTC)" executed successfully
+INFO:     127.0.0.1:33770 - "POST /api/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33784 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33790 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:services.task_checker:开始任务预检: Meta-Llama-3-8B性能测试09
+INFO:services.task_checker:检查设备连接: 7.6.52.170:22
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:services.task_checker:设备连接检查通过: 7.6.52.170
+INFO:services.task_checker:任务预检通过
+INFO:main:================================================================================
+INFO:     127.0.0.1:33794 - "POST /api/tasks/27/execute HTTP/1.1" 200 OK
+INFO:main:开始执行任务 27
+INFO:main:================================================================================
+INFO:main:任务基本信息:
+INFO:main:  名称: Meta-Llama-3-8B性能测试09
+INFO:main:  类型: 1 (1=性能测试, 2=精度测试)
+INFO:main:  模式: 1 (1=单模型, 2=全套模型)
+INFO:main:  框架: 1
+INFO:main:  模型: Qwen3-32B
+INFO:main:设备信息:
+INFO:main:  device_id: None
+INFO:main:  device_ip: 
+INFO:main:  device_username: 
+INFO:main:  device_password: 缺失
+INFO:main:配置信息:
+INFO:main:  script_path: /home
+INFO:main:  model_path: /mnt1/00_weight/Qwen3-32B
+INFO:main:  framework_version: v0.19.1rc1
+INFO:main:  npu_count: 4
+INFO:main:  graph_mode: eager
+INFO:main:  execution_flag: 1
+INFO:main:API模式，从配置解析目标机器 IP: 7.6.52.170
+INFO:main:尝试连接到设备: 7.6.52.170:22, 用户: root
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:     127.0.0.1:33810 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33820 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:main:SSH连接成功: 7.6.52.170
+INFO:main:测试执行命令: 'hostname'
+INFO:main:远程主机名: cp0
+INFO:main:构建的命令: cd perf_test/api_benchmark_auto && bash run_vllmbench.sh --model-path /mnt1/00_weight/Qwen3-32B --ba...
+INFO:main:验证脚本路径: /home
+INFO:main:[OK] 脚本路径存在: /home
+INFO:main:打包本地 perf_test 目录: /home/xxs/models-test-system_ucd/llm-test-platform/perf_test
+INFO:main:通过SFTP上传 perf_test.tar.gz 到目标机器
+INFO:paramiko.transport.sftp:[chan 2] Opened sftp connection (server version 3)
+INFO:paramiko.transport.sftp:[chan 2] sftp session closed.
+INFO:main:在目标机器上解压 perf_test.tar.gz
+INFO:main:解压 perf_test 完成
+INFO:main:验证模型路径: /mnt1/00_weight/Qwen3-32B
+INFO:main:[OK] 模型路径存在: /mnt1/00_weight/Qwen3-32B
+INFO:main:[OK] 成功进入脚本目录: /home
+INFO:main:在远程设备上启动后台测试脚本
+INFO:services.task_monitor:在远程设备上启动后台任务
+INFO:     127.0.0.1:60798 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60794 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:services.task_monitor:任务启动成功，PID: 3341708, 日志文件: /tmp/task_27_20260520_153315.log
+INFO:main:测试脚本已启动，任务已启动，PID: 3341708
+INFO:services.task_monitor:开始监控任务 27
+INFO:main:任务 27 监控已启动，将每分钟检查执行状态
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:34:52 UTC)" (scheduled at 2026-05-20 15:33:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:main:任务 27 状态更新为 3: 正在测试中
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:51376 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:34:52 UTC)" executed successfully
+INFO:     127.0.0.1:55828 - "GET /api/tasks?page=2&size=20 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55838 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:35:52 UTC)" (scheduled at 2026-05-20 15:34:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:     127.0.0.1:33996 - "GET /api/eval/results HTTP/1.1" 200 OK
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:33998 - "GET /api/benchmarks?page=1&size=1000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56006 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:35:52 UTC)" executed successfully
+INFO:     127.0.0.1:48078 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46526 - "GET /api/eval/tasks HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:36:52 UTC)" (scheduled at 2026-05-20 15:35:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:53370 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:36:52 UTC)" executed successfully
+INFO:     127.0.0.1:43516 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:37:52 UTC)" (scheduled at 2026-05-20 15:36:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+INFO:     127.0.0.1:38186 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:37:52 UTC)" executed successfully
+INFO:     127.0.0.1:42464 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:38:52 UTC)" (scheduled at 2026-05-20 15:37:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:main:任务 27 状态更新为 4: 测试完成
+INFO:main:任务 27 已完成，开始自动导入测试结果...
+INFO:services.auto_import_service:API模式，构造虚拟设备信息: IP=7.6.52.170, 用户=root
+INFO:services.auto_import_service:开始自动导入单模型性能测试结果，任务ID: 27
+INFO:services.auto_import_service:开始从远程设备 7.6.52.170 下载结果文件...
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:paramiko.transport.sftp:[chan 0] Opened sftp connection (server version 3)
+INFO:services.auto_import_service:定位到远程版本目录: ['x86_64_Qwen3-32B_7.6.52.170_10093_20260520_153342_eager']
+INFO:services.auto_import_service:下载CSV文件: core_metrics.csv
+WARNING:services.auto_import_service:远程日志目录不存在: /home/perf_test/api_benchmark_auto/results/x86_64_Qwen3-32B_7.6.52.170_10093_20260520_153342_eager/log，跳过日志下载
+INFO:paramiko.transport.sftp:[chan 0] sftp session closed.
+INFO:services.auto_import_service:找到CSV文件: /tmp/tmppj31g9ee/api_benchmark_auto/results/x86_64_Qwen3-32B_7.6.52.170_10093_20260520_153342_eager/core_metrics.csv
+INFO:services.auto_import_service:从文件名提取 - 模型: Qwen3-32B, NPU: 4, 图模式: eager
+INFO:services.auto_import_service:解析CSV文件: /tmp/tmppj31g9ee/api_benchmark_auto/results/x86_64_Qwen3-32B_7.6.52.170_10093_20260520_153342_eager/core_metrics.csv, 表头: ['Process Num', 'Input Length', 'Output Length', 'total input Tokens', 'total output Tokens', 'duration (s)', 'output throughput (tok/s)', 'Mean TTFT (ms)', 'Mean TPOT (ms)', 'Mean ITL (ms)']
+INFO:services.auto_import_service:列映射 - concurrency: 0, input: 1, output: 2, ttft: 7, tpot: 8, tps: 6
+INFO:services.auto_import_service:配置列映射: {}
+INFO:services.auto_import_service:成功解析 2 条性能数据
+INFO:services.auto_import_service:服务器名称: G8600
+INFO:services.auto_import_service:切分参数: TP4
+INFO:services.auto_import_service:成功创建Benchmark记录，ID: 74, Unique ID: BM-20260520153803-E74F
+INFO:main:任务 27 自动导入成功: 成功导入 1 个基准测试配置，共 2 条数据
+INFO:services.task_monitor:停止监控任务 27
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:37504 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:38:52 UTC)" executed successfully
+INFO:     127.0.0.1:60768 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:39:52 UTC)" (scheduled at 2026-05-20 15:38:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:52030 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:39:52 UTC)" executed successfully
+INFO:     127.0.0.1:46556 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:40:52 UTC)" (scheduled at 2026-05-20 15:39:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:48660 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:40:52 UTC)" executed successfully
+INFO:     127.0.0.1:41112 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:41:52 UTC)" (scheduled at 2026-05-20 15:40:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:41:52 UTC)" executed successfully
+INFO:     127.0.0.1:35026 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55812 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:42:52 UTC)" (scheduled at 2026-05-20 15:41:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+INFO:     127.0.0.1:60398 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:42:52 UTC)" executed successfully
+INFO:     127.0.0.1:52330 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:43:52 UTC)" (scheduled at 2026-05-20 15:42:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:43:52 UTC)" executed successfully
+INFO:     127.0.0.1:50902 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43564 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:44:52 UTC)" (scheduled at 2026-05-20 15:43:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:44:52 UTC)" executed successfully
+INFO:     127.0.0.1:56368 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50368 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK
+INFO:apscheduler.executors.default:Running job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:45:52 UTC)" (scheduled at 2026-05-20 15:44:52.951195+00:00)
+INFO:main:开始自动监控所有设备状态...
+INFO:monitor_impl:Checking device: 7.6.52.110
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) failed.
+ERROR:monitor_impl:Authentication failed for 7.6.52.110: Authentication failed.
+WARNING:monitor_impl:Device 7.6.52.110 is offline
+INFO:monitor_impl:Checking device: 7.6.52.170
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.52.170:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+INFO:monitor_impl:Device 7.6.52.170 is online with 16 accelerators
+INFO:monitor_impl:Checking device: 7.6.16.202
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.8)
+INFO:paramiko.transport:Auth banner: b'\nAuthorized users only. All activities may be monitored and reported.\n'
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.202:22
+WARNING:monitor_impl:Command stderr: bash: line 1: nvidia-smi: command not found
+WARNING:monitor_impl:Command stderr: bash: line 1: npu-smi: command not found
+INFO:monitor_impl:Device 7.6.16.202 is online with 0 accelerators
+INFO:monitor_impl:Checking device: 7.6.52.148
+ERROR:monitor_impl:Connection failed to 7.6.52.148: timed out
+WARNING:monitor_impl:Device 7.6.52.148 is offline
+INFO:monitor_impl:Checking device: 7.6.50.28
+ERROR:monitor_impl:Connection failed to 7.6.50.28: timed out
+WARNING:monitor_impl:Device 7.6.50.28 is offline
+INFO:monitor_impl:Checking device: 7.6.16.150
+INFO:paramiko.transport:Connected (version 2.0, client OpenSSH_8.9p1)
+INFO:paramiko.transport:Authentication (password) successful!
+INFO:monitor_impl:SSH connection established to 7.6.16.150:22
+INFO:monitor_impl:Device 7.6.16.150 is online with 6 accelerators
+INFO:main:自动监控完成，共监控 6 台设备
+INFO:apscheduler.executors.default:Job "设备状态自动监控 (trigger: interval[0:01:00], next run at: 2026-05-20 15:45:52 UTC)" executed successfully
+INFO:     127.0.0.1:53818 - "GET /api/devices?page=1&size=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42914 - "GET /api/tasks?page=1&size=100 HTTP/1.1" 200 OK

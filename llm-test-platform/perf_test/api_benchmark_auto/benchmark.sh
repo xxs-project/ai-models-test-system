@@ -5,6 +5,7 @@ TEST_IP=127.0.0.1
 TEMPERATURE=0.65
 REQUEST_RATE=""
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+WARMUPS_NUM=1
 declare -a combinations=(
     "128 128 1 1"
     "256 256 1 1"
@@ -229,6 +230,7 @@ EOF
 BASE_URL=""
 API_KEY=""
 MODE=""
+DATASET_ARGS=""
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -270,6 +272,10 @@ while [[ $# -gt 0 ]]; do
             ;; 
         -M|--mode)
             MODE="$2"
+            shift 2
+            ;;
+        --dataset-args)
+            DATASET_ARGS="$2"
             shift 2
             ;;
         -c|--combinations)
@@ -380,6 +386,7 @@ GLOBAL_START_TIME=$(date +%s)
     echo ""
 } > "${RESULTS_DIR}/summary.log"
 
+TEST_FAILED=0
 for combo in "${combinations[@]}"; do
     read input_len output_len num_prompts max_concurrency <<< "$combo"
     COMBO_DIR="${RESULTS_DIR}/$(get_combo_dir_name "$input_len" "$output_len" "$num_prompts" "$max_concurrency")"
@@ -401,6 +408,105 @@ for combo in "${combinations[@]}"; do
         benchmark_base_url="http://${TEST_IP}:${PORT}"
     fi
 
+    PREFIX_RATE=""
+    if [[ -n "${DATASET_ARGS:-}" ]]; then
+        eval "dataset_args_arr=(${DATASET_ARGS})"
+        
+        # 提取 current_dataset_name 
+        current_dataset_name="$dataset_name"
+        if [[ "$DATASET_ARGS" =~ --dataset-name[[:space:]=]+([^[:space:]]+) ]]; then
+            current_dataset_name="${BASH_REMATCH[1]}"
+            # 去除可能包含的引号
+            current_dataset_name="${current_dataset_name%\"}"
+            current_dataset_name="${current_dataset_name#\"}"
+            current_dataset_name="${current_dataset_name%\'}"
+            current_dataset_name="${current_dataset_name#\'}"
+        fi
+
+        # 解析 --prefix_rate 值
+        if [[ "$DATASET_ARGS" =~ --prefix[-_]rate[[:space:]=]+([0-9.]+) ]]; then
+            PREFIX_RATE="${BASH_REMATCH[1]}"
+        fi
+
+        # 去掉 dataset_args_arr 中的 --prefix_rate 参数
+        if [[ "$DATASET_ARGS" =~ --prefix[-_]rate ]]; then
+            temp_args=()
+            skip_next=false
+            for arg in "${dataset_args_arr[@]}"; do
+                if [[ "$skip_next" == true ]]; then
+                    skip_next=false
+                    continue
+                fi
+                if [[ "$arg" == "--prefix_rate" || "$arg" == "--prefix-rate" ]]; then
+                    skip_next=true
+                elif [[ "$arg" =~ ^--prefix[-_]rate= ]]; then
+                    continue
+                else
+                    temp_args+=("$arg")
+                fi
+            done
+            dataset_args_arr=("${temp_args[@]}")
+        fi
+        
+        # 4、根据 dataset-name 追加长度参数
+        if [[ "$current_dataset_name" == "sonnet" ]]; then
+            dataset_args_arr+=(--sonnet-input-len "$input_len" --sonnet-output-len "$output_len")
+        elif [[ "$current_dataset_name" == "sharegpt" ]]; then
+            dataset_args_arr+=(--input-len "$input_len" --sharegpt-output-len "$output_len")
+        elif [[ "$current_dataset_name" == "burstgpt" ]]; then
+            dataset_args_arr+=(--burstgpt-input-len "$input_len" --burstgpt-output-len "$output_len")
+        elif [[ "$current_dataset_name" == "prefix_repetition" ]]; then
+            if [[ -n "$PREFIX_RATE" ]]; then
+                prefix_len=$(awk "BEGIN {printf \"%.0f\", $input_len * $PREFIX_RATE}")
+                suffix_len=$(awk "BEGIN {printf \"%.0f\", $input_len - $input_len * $PREFIX_RATE}")
+                dataset_args_arr+=(--prefix-repetition-prefix-len "$prefix_len" --prefix-repetition-suffix-len "$suffix_len" --prefix-repetition-output-len "$output_len")
+            else
+                default_dataset_args=(
+            	     --dataset-name "$dataset_name"
+                     --random-input-len "$input_len"
+                     --random-output-len "$output_len"
+        	)
+	        dataset_args_arr=("${default_dataset_args[@]}")
+
+            fi
+        elif [[ "$current_dataset_name" == "speed_bench" ]]; then
+            dataset_path=""
+            if [[ "$DATASET_ARGS" =~ --dataset-path[[:space:]=]+([^[:space:]]+) ]]; then
+                dataset_path="${BASH_REMATCH[1]}"
+                dataset_path="${dataset_path%\"}"
+                dataset_path="${dataset_path#\"}"
+                dataset_path="${dataset_path%\'}"
+                dataset_path="${dataset_path#\'}"
+            fi
+            
+            if [[ -n "$dataset_path" ]]; then
+                if (( input_len <= 1024 )); then
+                    dataset_subset="$dataset_path/throughput_1k"
+                elif (( input_len <= 2048 )); then
+                    dataset_subset="$dataset_path/throughput_2k"
+                elif (( input_len <= 8192 )); then
+                    dataset_subset="$dataset_path/throughput_8k"
+                elif (( input_len <= 16384 )); then
+                    dataset_subset="$dataset_path/throughput_16k"
+                elif (( input_len <= 32768 )); then
+                    dataset_subset="$dataset_path/throughput_32k"
+                else
+                    dataset_subset="$dataset_path/qualitative"
+                fi
+                dataset_args_arr+=(--input-len "$input_len" --speed-bench-output-len "$output_len" --speed-bench-dataset-subset "$dataset_subset")
+            else
+                dataset_args_arr+=(--input-len "$input_len" --speed-bench-output-len "$output_len")
+            fi
+        fi
+    else
+        default_dataset_args=(
+            --dataset-name "$dataset_name"
+            --random-input-len "$input_len"
+            --random-output-len "$output_len"
+        )
+        dataset_args_arr=("${default_dataset_args[@]}")
+    fi
+
     benchmark_args=(
         --backend openai-chat
         --base-url "$benchmark_base_url"
@@ -409,11 +515,9 @@ for combo in "${combinations[@]}"; do
         --tokenizer "$TOKENIZER_PATH"
         --trust-remote-code
         --temperature "$TEMPERATURE"
-        --dataset-name "$dataset_name"
-        --random-input-len "$input_len"
-        --random-output-len "$output_len"
+        "${dataset_args_arr[@]}"
         --ignore-eos
-        --num-warmups '2'
+        --num-warmups "1" 
         --num-prompts "$num_prompts"
         --max-concurrency "$max_concurrency"
         --save-result
@@ -464,6 +568,7 @@ for combo in "${combinations[@]}"; do
         echo ""
         log "测试组合失败 (input=${input_len}, output=${output_len}, prompts=${num_prompts}, concurrency=${max_concurrency})"
         log "根据配置，提前结束后续所有测试..."
+        TEST_FAILED=1
         break
     fi
 done
@@ -569,3 +674,8 @@ rm -f "$TEMP_SUMMARY"
 echo ""
 log "Benchmark completed. All results saved to:"
 echo "  $RESULTS_DIR"
+
+if [ "$TEST_FAILED" -ne 0 ]; then
+    log "Error: One or more test combinations failed."
+    exit 1
+fi

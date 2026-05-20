@@ -1,13 +1,15 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "ipd-lifecycle",
   "name": "IPD S6: 生命周期管理(Life Cycle)",
-  "description": "IPD流程S6阶段：持续运营、迭代与退市。运营监控、问题修复、版本迭代、EOL(退市)决策。生命周期复盘、技术/市场资产沉淀。",
+  "description": "IPD流程S6阶段：持续运营、迭代与退市。该Pack聚焦多轮上下文下的故障诊断、应急处置、根因归纳和结构化运维输出。",
   "ipd_stage": 6,
   "ipd_gate": "-",
   "ipd_objective": "持续运营、迭代与退市",
   "capabilities": {
-    "verification": false
+    "verification": false,
+    "history": true,
+    "structured_output": true
   },
   "cases": [
     {
@@ -16,13 +18,22 @@
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
       "domain": "某型号液冷服务器",
-      "feature": "边缘节点容器调度排障",
+      "feature": "边缘节点容器驱逐排障",
       "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
+      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请输出一份原始 JSON 节点诊断摘要。\n\n顶层必须包含：resource_pressure、current_available、threshold_quantity、affected_workload。resource_pressure 只能填写日志里的资源英文名。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "resource_pressure",
+        "current_available",
+        "threshold_quantity",
+        "affected_workload"
+      ],
+      "json_rules": {
+        "root_type": "object"
+      },
       "eval_rule": [
         "ephemeral-storage",
-        "低存储",
         "5%",
         "10%"
       ],
@@ -38,10 +49,10 @@
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_02",
@@ -51,13 +62,25 @@
       "domain": "某智能数据AI平台",
       "feature": "大型预训练组网 NCCL 排障",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请输出一份原始 JSON 根因摘要。\n\n顶层必须包含：failing_component、nic_state、training_impact、evidence。evidence 必须是数组且至少 2 项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "failing_component",
+        "nic_state",
+        "training_impact",
+        "evidence"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "evidence": 2
+        }
+      },
       "eval_rule": [
         "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
+        "mlx5",
+        "NCCL"
       ],
       "token_tier": "1K-10K",
       "history": [
@@ -71,769 +94,992 @@
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_03",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某智能数据AI平台",
-      "feature": "大型预训练组网 NCCL 排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】在 某智能数据AI平台 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_04",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
       "domain": "某服务器管理平台",
       "feature": "平台全局微服务与网关排障",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是SkyWalking全链路聚合的异常点：\n```log\n[API_Gateway_Nginx] 08:33 192.168.2.1 GET /api/v2/auth 503 10ms - upstream: 10.0.1.5:8080\n[Auth_Service@10.0.1.5] 08:33 WARN Circuit breaker 'SessionAuth' is OPEN. Fast-failing.\n[Redis_Client@10.0.1.5] 08:32 ERROR Failed to connect to Redis session cache at 10.0.5.5:6379\n```\n请根据跨组件日志，精准指出：触发最初报错的后端微服务(或组件)，以及导致API直接返回503的基础架构防御机制。\n【输出约束】：简短回答最初组件与防御机制术语。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下是 SkyWalking 聚合链路：\n```log\n[API_Gateway] 08:33 GET /api/v2/auth 503 upstream: auth-service:8080\n[auth-service] 08:33 WARN Circuit breaker 'SessionAuth' is OPEN\n[redis-client] 08:32 ERROR Failed to connect redis-session:6379\n```\n请输出一份原始 JSON 依赖故障摘要。\n\n顶层必须包含：initial_failed_component、protection_mechanism、gateway_status、session_path。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "initial_failed_component",
+        "protection_mechanism",
+        "gateway_status",
+        "session_path"
+      ],
+      "json_rules": {
+        "root_type": "object"
+      },
       "eval_rule": [
-        "Redis",
-        "10.0.5.5",
-        "Circuit breaker",
-        "熔断",
+        "redis",
+        "circuit breaker",
         "SessionAuth"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】我们的管理员面板 某服务器管理平台 登录一直报 503 错误。"
+          "content": "【故障上报】某服务器管理平台 管理员登录一直返回 503。"
         },
         {
           "role": "assistant",
-          "content": "收到，500系异常属于微服务网关常见问题，请给我提供API Gateway及下游链路追踪错误。"
+          "content": "收到，请提供 API Gateway 与下游认证服务的链路追踪日志。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S6_04",
+      "ipd_stage": "生命周期管理阶段(Lifecycle)",
+      "role": "某科技企业全球服务/SRE",
+      "dim": "生命周期管理",
+      "domain": "某HCI超融合基础设施",
+      "feature": "分布式存储脑裂与IO锁排障",
+      "difficulty": "High",
+      "prompt": "【深入排查】提取到了三节点的底层选举状态：\n```log\n[Node_A] INFO Network partition detected, marking Node_C as FAILED.\n[Node_C] INFO Network partition detected, marking Node_A as FAILED.\n[Node_B] WARN Received conflicting election votes.\n[Node_C] ERROR Cluster quorum lost. Suspending IO.\n[Node_A] CRITICAL VM disks locked.\n```\n请输出一份原始 JSON 集群故障摘要。\n\n顶层必须包含：cluster_state、isolated_nodes、impact_scope、containment_action。isolated_nodes 必须是数组且恰好 2 项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "cluster_state",
+        "isolated_nodes",
+        "impact_scope",
+        "containment_action"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_exact_items": {
+          "isolated_nodes": 2
+        }
+      },
+      "eval_rule": [
+        "Cluster quorum lost",
+        "Node_A",
+        "Node_C"
+      ],
+      "token_tier": "1K-10K",
+      "history": [
+        {
+          "role": "user",
+          "content": "【故障上报】客户使用 某HCI超融合基础设施 搭建的三节点集群在夜间虚拟机全部 I/O 卡死。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，请提供分布式存储选举日志和节点互联状态。"
+        }
+      ],
+      "sampling_defaults": {
+        "temperature": 0.2,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_05",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某HCI超融合基础设施",
-      "feature": "分布式存储脑裂与IO锁排障",
+      "domain": "某企业ERP系统",
+      "feature": "财务核心链路死锁排障",
       "difficulty": "High",
-      "prompt": "【深入排查】提取到了三节点的底层选举状态：\n```log\n[Node_A] INFO Network partition detected, marking Node_C as FAILED.\n[Node_C] INFO Network partition detected, marking Node_A as FAILED.\n[Node_B] WARN Received conflicting election votes.\n[Node_C] ERROR Cluster quorum lost. Suspending IO.\n[Node_A] CRITICAL VM disks locked.\n```\n请指出导致该客户虚拟机全盘锁死的集群异常状态术语，以及主要失去通讯的是哪两个节点？\n【输出约束】：短文本回复，提供状态与节点名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] MySQLTransactionRollbackException: Deadlock found\n```\n请输出一份原始 JSON 数据库故障摘要。\n\n顶层必须包含：db_error、locked_table、application_symptom、recommended_action。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "db_error",
+        "locked_table",
+        "application_symptom",
+        "recommended_action"
+      ],
+      "json_rules": {
+        "root_type": "object"
+      },
       "eval_rule": [
-        "Cluster quorum lost",
-        "脑裂",
-        "Network partition",
-        "Node_A",
-        "Node_C"
+        "Deadlock",
+        "gl_balances"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】客户使用 某HCI超融合基础设施 搭建的三节点集群在夜间虚拟机全部I/O卡死。"
+          "content": "【故障上报】某企业ERP系统 在月结时，总账模块超时卡死。"
         },
         {
           "role": "assistant",
-          "content": "收到，多节点存储I/O异常通常与集群状态有关，请提供分布式vSAN存储通讯日志。"
+          "content": "收到，请提供业务组件日志和数据库 processlist。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_06",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某型号液冷服务器",
-      "feature": "边缘节点容器调度排障",
+      "domain": "某服务器操作系统",
+      "feature": "系统级内核 OOM 崩溃分析",
       "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下是 dmesg 系统日志片段：\n```log\nApr 28 23:15:40 server-01 kernel: BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\nApr 28 23:16:01 server-01 kernel: Out of memory: Kill process 14562 (java) score 850\nApr 28 23:16:01 server-01 kernel: Killed process 14562 (java), UID 1001\n```\n请输出一份原始 JSON 内核事件摘要。\n\n顶层必须包含：kernel_mechanism、killed_pid、precursor_alert、business_process。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "kernel_mechanism",
+        "killed_pid",
+        "precursor_alert",
+        "business_process"
+      ],
+      "json_rules": {
+        "root_type": "object"
+      },
       "eval_rule": [
-        "ephemeral-storage",
-        "低存储",
-        "5%",
-        "10%"
+        "Out of memory",
+        "14562"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】某型号液冷服务器 的容器化应用频繁处于 Evicted（驱逐）和 CrashLoopBackOff 状态。"
+          "content": "【故障上报】某服务器操作系统 上的 Java 业务进程夜间自动退出。"
         },
         {
           "role": "assistant",
-          "content": "收到，节点容器频繁被驱逐，请提供该边缘节点的 Kubelet 守护进程事件监控。"
+          "content": "收到，请提供 dmesg 与内核告警日志。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_07",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某企业ERP系统",
-      "feature": "某ERP 财务核心链路死锁排障",
+      "domain": "某智能液冷超充站",
+      "feature": "IoT网关时序漂移排障",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] ... MySQLTransactionRollbackException: Deadlock found\n```\n请直接指出导致财务月结卡死的根本MySQL报错信息，以及发生死锁锁定的表名。\n【输出约束】：使用纯文本回复，指出报错与表名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】现场 IoT 网关时序传感器日志如下：\n```log\n2026-05-02T10:00:01Z sensor=temp-01 value=31.2 seq=1551\n2026-05-02T10:00:02Z sensor=temp-01 value=31.4 seq=1548\n2026-05-02T10:00:03Z sensor=temp-01 value=31.5 seq=1553\n2026-05-02T10:00:03Z gateway WARN dropped sample from temp-01 due to stale sequence\n```\n请输出一份原始 JSON 时序异常摘要。\n\n顶层必须包含：anomaly_reason、stale_sequence、sensor_id、gateway_action。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "anomaly_reason",
+        "stale_sequence",
+        "sensor_id",
+        "gateway_action"
+      ],
+      "json_rules": {
+        "root_type": "object"
+      },
       "eval_rule": [
-        "Deadlock",
-        "死锁",
-        "gl_balances"
+        "stale sequence",
+        "1548"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】业务部门反馈在 某企业ERP系统 进行月结时，总账模块超时卡死。"
+          "content": "【故障上报】某智能液冷超充站 的温控趋势图偶发倒序，运维怀疑数据上报异常。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供业务组件及数据库监控日志。"
+          "content": "收到，请提供 IoT 网关接收时序样本的原始日志。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_08",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某服务器操作系统",
-      "feature": "系统级内核 OOM 崩溃分析",
+      "domain": "某智能体平台",
+      "feature": "核心流转服务Tracing排障",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是 dmesg 系统日志片段：\n```log\nApr 28 23:15:40 server-01 kernel: BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\nApr 28 23:16:01 server-01 kernel: Out of memory: Kill process 14562 (java) score 850\nApr 28 23:16:01 server-01 kernel: Killed process 14562 (java), UID 1001\n```\n请问导致这台服务器业务进程挂掉的内核机制是什么？被杀死的 PID 是多少？\n【输出约束】：使用纯文本回复，指出机制与进程号。",
-      "expected_format": "text",
+      "prompt": "【深入排查】提取到了平台核心流转服务的 Tracing 日志：\n```log\ntrace=7fd1 span=router status=OK duration=12ms\ntrace=7fd1 span=session-loader status=ERROR duration=803ms detail=cache-miss-fallback-timeout\ntrace=7fd1 span=workflow-engine status=SKIPPED reason=dependency_failed\n```\n请输出一份原始 JSON tracing 故障摘要。\n\n顶层必须包含：first_error_span、workflow_skip_reason、fallback_signal、next_check。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "first_error_span",
+        "workflow_skip_reason",
+        "fallback_signal",
+        "next_check"
+      ],
+      "json_rules": {
+        "root_type": "object"
+      },
       "eval_rule": [
-        "OOM",
-        "Out of memory",
-        "14562"
+        "session-loader",
+        "dependency_failed"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】今天 某服务器操作系统 的某台核心中间件节点离奇失连并触发自动重启。"
+          "content": "【故障上报】某智能体平台 中，部分会话请求路由成功但后续工作流没有真正执行。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供 /var/log/messages 的系统日志以供内核级排查。"
+          "content": "收到，请提供核心链路的 tracing 明细。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_09",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某企业ERP系统",
-      "feature": "某ERP 财务核心链路死锁排障",
+      "domain": "某AI算力集群",
+      "feature": "GPU温控异常根因归纳",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] ... MySQLTransactionRollbackException: Deadlock found\n```\n请直接指出导致财务月结卡死的根本MySQL报错信息，以及发生死锁锁定的表名。\n【输出约束】：使用纯文本回复，指出报错与表名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】请基于以下日志输出一份结构化故障摘要。\n```log\nnode=gpu-17 temp=92 fan=100% throttle=1\nnode=gpu-17 power=690W coolant_flow=low\nnode=gpu-17 alarm=CRITICAL reason=coolant_pump_degraded\n```\n输出必须且只能是原始 JSON 对象，顶层必须包含：incident_id、root_cause、affected_node、severity、recommended_actions。recommended_actions 必须是数组且至少 2 项。\n【输出约束】：禁止 Markdown，禁止额外解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "incident_id",
+        "root_cause",
+        "affected_node",
+        "severity",
+        "recommended_actions"
+      ],
       "eval_rule": [
-        "Deadlock",
-        "死锁",
-        "gl_balances"
+        "coolant_pump_degraded",
+        "gpu-17",
+        "recommended_actions"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】业务部门反馈在 某企业ERP系统 进行月结时，总账模块超时卡死。"
+          "content": "【故障上报】某AI算力集群 一台训练节点持续降频，业务侧怀疑散热异常。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供业务组件及数据库监控日志。"
+          "content": "收到，请提供 GPU 温控、功耗与冷却告警日志。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_10",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某AI算力集群",
-      "feature": "大型预训练组网 NCCL 排障",
+      "domain": "某服务器管理平台",
+      "feature": "值班应急动作编排",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下是值班上下文：API 网关登录失败率 38%，认证服务熔断打开，缓存连接持续报错。请输出一份值班执行清单。\n\n格式要求：\n1. 必须使用 Markdown 一级标题 `# 结论`、`# 处置步骤`、`# 风险提示`。\n2. 每个标题下至少 2 条无序列表。\n3. 处置步骤中必须出现缓存恢复或熔断观察相关动作。\n【输出约束】：只输出 Markdown，禁止额外解释。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "结论",
+        "处置步骤",
+        "风险提示"
+      ],
       "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
+        "缓存",
+        "熔断",
+        "风险"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】在 某AI算力集群 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
+          "content": "【故障上报】某服务器管理平台 登录告警正在扩大，值班同学需要立刻处置。"
         },
         {
           "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
+          "content": "收到，请补充当前失败率和下游组件状态。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S6_11",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某企业ERP系统",
-      "feature": "某ERP 财务核心链路死锁排障",
+      "domain": "某边缘计算节点",
+      "feature": "现场应急排查矩阵",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] ... MySQLTransactionRollbackException: Deadlock found\n```\n请直接指出导致财务月结卡死的根本MySQL报错信息，以及发生死锁锁定的表名。\n【输出约束】：使用纯文本回复，指出报错与表名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】某边缘节点在弱网环境下频繁缓存堆积与推理超时。请输出一份 Markdown 表格形式的排查矩阵。\n\n表头必须且只能包含：排查对象、观测信号、判断标准、建议动作。\n至少输出 4 行，其中必须覆盖网络、磁盘、模型服务、消息队列四类对象。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "排查对象",
+        "观测信号",
+        "判断标准",
+        "建议动作"
+      ],
       "eval_rule": [
-        "Deadlock",
-        "死锁",
-        "gl_balances"
+        "网络",
+        "磁盘",
+        "消息队列",
+        "建议动作"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】业务部门反馈在 某企业ERP系统 进行月结时，总账模块超时卡死。"
+          "content": "【故障上报】某边缘计算节点 在弱网环境下任务延迟升高，现场需要一张快速排查表。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供业务组件及数据库监控日志。"
+          "content": "收到，请说明当前异常集中在缓存堆积、磁盘写入还是网络抖动。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S6_12",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某AI算力集群",
-      "feature": "大型预训练组网 NCCL 排障",
+      "domain": "某企业ERP系统",
+      "feature": "回滚决策摘要生成",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下是发布后观测摘要：\n- 月结批次失败率 27%\n- 账务补偿队列积压 18000 条\n- 数据库死锁告警持续 11 分钟\n请输出一份用于变更评审会的原始 JSON 决策摘要。\n\n顶层必须包含：decision、evidence、rollback_scope、owner。evidence 必须是数组且至少 3 项，decision 只能是 ROLLBACK、HOTFIX、OBSERVE 之一。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "decision",
+        "evidence",
+        "rollback_scope",
+        "owner"
+      ],
       "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
+        "ROLLBACK",
+        "evidence",
+        "rollback_scope"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】在 某AI算力集群 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
+          "content": "【故障上报】某企业ERP系统 发布后月结批次持续失败，评审会需要立刻给出回滚判断。"
         },
         {
           "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
+          "content": "收到，请提供失败率、队列积压和数据库告警摘要。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_13",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某AI算力集群",
-      "feature": "大型预训练组网 NCCL 排障",
+      "domain": "某智能液冷超充站",
+      "feature": "充电枪故障分流排障",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下为站点告警：\n```log\ncharger=gun-03 state=fault code=ISO_CHECK_FAIL\ncharger=gun-03 current=0A voltage=742V\nsite-controller INFO reroute sessions to gun-01, gun-02\n```\n请严格按 Markdown 表格输出 1 条站点处置记录。\n\n表头必须且只能包含：故障枪号、告警码、当前动作、影响范围。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "故障枪号",
+        "告警码",
+        "当前动作",
+        "影响范围"
+      ],
+      "markdown_table_rules": {
+        "exact_rows": 1,
+        "must_contain": [
+          "gun-03",
+          "ISO_CHECK_FAIL",
+          "reroute"
+        ]
+      },
       "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
+        "gun-03",
+        "ISO_CHECK_FAIL",
+        "reroute"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】在 某AI算力集群 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
+          "content": "【故障上报】某智能液冷超充站 一把充电枪突然无法出流，现场客户已排队。"
         },
         {
           "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
+          "content": "收到，请提供站控侧的枪口状态与告警日志。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S6_14",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某服务器操作系统",
-      "feature": "系统级内核 OOM 崩溃分析",
+      "domain": "某智能数据AI平台",
+      "feature": "数据摄取链路背压分析",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是 dmesg 系统日志片段：\n```log\nApr 28 23:15:40 server-01 kernel: BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\nApr 28 23:16:01 server-01 kernel: Out of memory: Kill process 14562 (java) score 850\nApr 28 23:16:01 server-01 kernel: Killed process 14562 (java), UID 1001\n```\n请问导致这台服务器业务进程挂掉的内核机制是什么？被杀死的 PID 是多少？\n【输出约束】：使用纯文本回复，指出机制与进程号。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下为数据摄取链路监控：\n```log\nkafka_ingest lag=280000\npreprocess_worker cpu=91% batch_time=18s\nfeature_writer queue_depth=120000\n```\n请输出一份原始 JSON 背压分析摘要。\n\n顶层必须包含：bottleneck_component、supporting_observations、upstream_signal、downstream_signal。supporting_observations 必须是数组且至少 2 项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "bottleneck_component",
+        "supporting_observations",
+        "upstream_signal",
+        "downstream_signal"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "supporting_observations": 2
+        }
+      },
       "eval_rule": [
-        "OOM",
-        "Out of memory",
-        "14562"
+        "preprocess_worker",
+        "batch_time",
+        "18s"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】今天 某服务器操作系统 的某台核心中间件节点离奇失连并触发自动重启。"
+          "content": "【故障上报】某智能数据AI平台 的数据摄取延迟持续升高，训练侧已拿不到最新样本。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供 /var/log/messages 的系统日志以供内核级排查。"
+          "content": "收到，请提供 ingest、预处理和写入链路的监控摘要。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_15",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某HCI超融合基础设施",
-      "feature": "分布式存储脑裂与IO锁排障",
+      "domain": "某AI算力集群",
+      "feature": "跨交换域训练作业恢复动作",
       "difficulty": "High",
-      "prompt": "【深入排查】提取到了三节点的底层选举状态：\n```log\n[Node_A] INFO Network partition detected, marking Node_C as FAILED.\n[Node_C] INFO Network partition detected, marking Node_A as FAILED.\n[Node_B] WARN Received conflicting election votes.\n[Node_C] ERROR Cluster quorum lost. Suspending IO.\n[Node_A] CRITICAL VM disks locked.\n```\n请指出导致该客户虚拟机全盘锁死的集群异常状态术语，以及主要失去通讯的是哪两个节点？\n【输出约束】：短文本回复，提供状态与节点名。",
-      "expected_format": "text",
+      "prompt": "【深入排查】某训练作业在跨交换域迁移后频繁超时，值班同学需要一份结构化恢复动作。请输出原始 JSON 对象。\n\n顶层必须包含：incident_level、suspected_root_cause、containment_actions、followup_checks。containment_actions 与 followup_checks 都必须是数组，且每个数组至少 2 项。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "incident_level",
+        "suspected_root_cause",
+        "containment_actions",
+        "followup_checks"
+      ],
       "eval_rule": [
-        "Cluster quorum lost",
-        "脑裂",
-        "Network partition",
-        "Node_A",
-        "Node_C"
+        "containment_actions",
+        "followup_checks",
+        "root_cause"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】客户使用 某HCI超融合基础设施 搭建的三节点集群在夜间虚拟机全部I/O卡死。"
+          "content": "【故障上报】某AI算力集群 中，跨交换域迁移后的训练作业频繁超时，需要先止血再复盘。"
         },
         {
           "role": "assistant",
-          "content": "收到，多节点存储I/O异常通常与集群状态有关，请提供分布式vSAN存储通讯日志。"
+          "content": "收到，请提供当前影响范围和临时止血目标。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_16",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某型号液冷服务器",
-      "feature": "边缘节点容器调度排障",
+      "domain": "某服务器操作系统",
+      "feature": "内核告警升级沟通摘要",
       "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
+      "prompt": "【深入排查】请根据以下告警摘要生成一份 Markdown 沟通稿：软锁死告警连续 4 次、单机 OOM 杀进程 2 次、业务已降级到只读。\n\n格式要求：\n1. 必须包含一级标题 `# 当前结论`、`# 对业务影响`、`# 下一步动作`。\n2. 每个标题下至少 2 条无序列表。\n3. 下一步动作中必须包含容量排查或内核参数复核。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "当前结论",
+        "对业务影响",
+        "下一步动作"
+      ],
       "eval_rule": [
-        "ephemeral-storage",
-        "低存储",
-        "5%",
-        "10%"
+        "只读",
+        "容量",
+        "内核"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】某型号液冷服务器 的容器化应用频繁处于 Evicted（驱逐）和 CrashLoopBackOff 状态。"
+          "content": "【故障上报】某服务器操作系统 上的内核告警已经影响业务连续性，业务负责人需要一份简洁沟通稿。"
         },
         {
           "role": "assistant",
-          "content": "收到，节点容器频繁被驱逐，请提供该边缘节点的 Kubelet 守护进程事件监控。"
+          "content": "收到，请说明当前是否已经出现进程被杀和业务降级。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S6_17",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某服务器操作系统",
-      "feature": "系统级内核 OOM 崩溃分析",
+      "domain": "某智能数据AI平台",
+      "feature": "日志平台异常摘要生成",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是 dmesg 系统日志片段：\n```log\nApr 28 23:15:40 server-01 kernel: BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\nApr 28 23:16:01 server-01 kernel: Out of memory: Kill process 14562 (java) score 850\nApr 28 23:16:01 server-01 kernel: Killed process 14562 (java), UID 1001\n```\n请问导致这台服务器业务进程挂掉的内核机制是什么？被杀死的 PID 是多少？\n【输出约束】：使用纯文本回复，指出机制与进程号。",
-      "expected_format": "text",
+      "prompt": "【深入排查】以下是日志与可视化平台告警摘要：\n```log\nlogging-ingest dropped_events=18000\nstorage-node disk_usage=94%\nvisual-panel status=stale refresh_delay=210s\n```\n请输出一份原始 JSON 运维摘要。\n\n顶层必须包含：incident_scope、suspect_components、evidence, immediate_actions。suspect_components 与 evidence 都必须是数组且至少 2 项。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "incident_scope",
+        "suspect_components",
+        "evidence",
+        "immediate_actions"
+      ],
       "eval_rule": [
-        "OOM",
-        "Out of memory",
-        "14562"
+        "logging-ingest",
+        "storage-node",
+        "immediate_actions"
       ],
       "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】今天 某服务器操作系统 的某台核心中间件节点离奇失连并触发自动重启。"
+          "content": "【故障上报】某智能数据AI平台 的日志平台出现事件丢失，值班同学还发现监控大盘刷新滞后。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供 /var/log/messages 的系统日志以供内核级排查。"
+          "content": "收到，请补充 ingest、存储节点与可视化面板的观测摘要。"
         }
       ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_18",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某智能液冷超充站",
-      "feature": "物联网边缘物理设备排障",
+      "domain": "某智能体平台",
+      "feature": "调用链根因归纳",
       "difficulty": "High",
-      "prompt": "【深入排查】现场IoT网关时序传感器日志如下：\n```json\n{\"time\":\"10:00:21\",\"device\":\"Pump_Controller_4\",\"msg\":\"Flow rate drops below minimal\"}\n{\"time\":\"10:00:22\",\"device\":\"Thermal_Sensor_4\",\"msg\":\"Coolant temperature rising rapidly > 45C\"}\n{\"time\":\"10:00:25\",\"device\":\"CAN_Bus_MCU\",\"msg\":\"ERR: Communication lost with BMS module.\"}\n{\"time\":\"10:00:26\",\"device\":\"Safety_Relay\",\"msg\":\"CRITICAL: Hardware E-Stop due to CAN heartbeat loss.\"}\n```\n请列出导致硬件直接急停的最终控制事件原因，以及引发整条灾难链的最初始物理传感器事件！\n【输出约束】：使用短文本指出最终控制原因与最初始事件信息。",
-      "expected_format": "text",
-      "eval_rule": [
-        "CAN heartbeat loss",
-        "Flow rate drops",
-        "Pump",
-        "心跳丢失",
-        "急停",
-        "冷却液"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】位于深圳的 某智能液冷超充站 C号终端突然紧急保护停机。"
+          "content": "【故障上报】某智能体平台 的用户请求经由网关进入后大面积超时，值班同学怀疑是下游单点服务异常。"
         },
         {
           "role": "assistant",
-          "content": "收到，这是纯物理与边缘控制场景，请提供对应的传感器与边缘IoT网关注册日志。"
+          "content": "收到，请提供最近一批 trace 片段和错误调用的耗时信息。"
         }
       ],
+      "prompt": "【深入排查】以下是调用链 trace 摘要：\n```log\n{\"source\":\"istio-ingressgateway\",\"target\":\"preserve\",\"delay\":100,\"status\":\"success\"}\n{\"source\":\"verification-code\",\"target\":\"preserve\",\"delay\":144,\"status\":\"success\"}\n{\"source\":\"preserve\",\"target\":\"security\",\"delay\":14400,\"status\":\"error\"}\n{\"source\":\"verification-code\",\"target\":\"security\",\"delay\":14400,\"status\":\"error\"}\n{\"source\":\"preserve\",\"target\":\"basic\",\"delay\":101,\"status\":\"success\"}\n```\n请输出一份原始 JSON 根因摘要。\n\n顶层必须包含：incident_summary、root_cause_service、error_path、immediate_actions。内容中必须明确体现 security、preserve 和 14400。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "incident_summary",
+        "root_cause_service",
+        "error_path",
+        "immediate_actions"
+      ],
+      "eval_rule": [
+        "security",
+        "preserve",
+        "14400",
+        "root_cause_service"
+      ],
+      "token_tier": "1K-10K",
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_19",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某服务器操作系统",
-      "feature": "系统级内核 OOM 崩溃分析",
+      "domain": "某智能数据AI平台",
+      "feature": "日志与监控联动处置矩阵",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是 dmesg 系统日志片段：\n```log\nApr 28 23:15:40 server-01 kernel: BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\nApr 28 23:16:01 server-01 kernel: Out of memory: Kill process 14562 (java) score 850\nApr 28 23:16:01 server-01 kernel: Killed process 14562 (java), UID 1001\n```\n请问导致这台服务器业务进程挂掉的内核机制是什么？被杀死的 PID 是多少？\n【输出约束】：使用纯文本回复，指出机制与进程号。",
-      "expected_format": "text",
-      "eval_rule": [
-        "OOM",
-        "Out of memory",
-        "14562"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】今天 某服务器操作系统 的某台核心中间件节点离奇失连并触发自动重启。"
+          "content": "【故障上报】日志采集链路出现积压，监控大盘又没法实时刷新，现场要求一份联动处置矩阵。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供 /var/log/messages 的系统日志以供内核级排查。"
+          "content": "收到，我会把日志模版识别、采集链路、可视化刷新和处置动作放到一张表里。"
         }
       ],
+      "prompt": "【深入排查】请根据以下观测信息输出一份 Markdown 表格联动处置矩阵：\n1. Filebeat 采集端提示 Pipeline 正在将日志发送到下游输出插件。\n2. 某类重复日志模版为 `Reading broadcast variable <*> took <*> ms`，最近出现多次耗时抖动。\n3. 可视化大盘需要依赖 Actions 实现动态交互，但当前面板刷新明显滞后。\n\n表头必须且只能包含：观测点、疑似组件、关键证据、立即动作。\n至少输出 4 行，并且内容中必须覆盖 Filebeat、Pipeline、Reading broadcast variable、Actions。\n【输出约束】：只输出 Markdown 表格，不要补充解释。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "观测点",
+        "疑似组件",
+        "关键证据",
+        "立即动作"
+      ],
+      "eval_rule": [
+        "Filebeat",
+        "Pipeline",
+        "Reading broadcast variable",
+        "Actions"
+      ],
+      "token_tier": "1K-10K",
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.3,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S6_20",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某智能体平台",
-      "feature": "大规模向量检索与AI服务排障",
+      "domain": "某服务器管理平台",
+      "feature": "时序异常归纳",
       "difficulty": "High",
-      "prompt": "【深入排查】提取到了平台核心流转服务的Tracing日志：\n```log\n[Agent_Controller] INFO Request received. Extracting user query.\n[Embeddings_API] OK Latency: 45ms. Vectors generated.\n[Milvus_Client] WARN Query latency exceeded 15000ms limit! \n[Milvus_Server] ERROR Search failed. Segment indices corrupted in memory. Require manual compaction.\n```\n请问：在整个RAG调用链上，真正阻塞且超时的大模型生态组件是哪一个？具体导致的底层内部结构报错是什么？\n【输出约束】：简要文本作答，包含组件英文原名与具体错误机制词。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Milvus",
-        "Segment indices corrupted",
-        "向量库",
-        "向量",
-        "索引损坏"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】业务线在 某智能体平台 进行智能体RAG查询时，全部遭遇接口请求超时(Timeout)。"
+          "content": "【故障上报】某服务器管理平台 的监控面板提示两个指标序列同时出现持续异常，值班同学需要先给出结构化归纳。"
         },
         {
           "role": "assistant",
-          "content": "智能体RAG超时大都与大模型推理延迟或向量库有关，请提供大模型网关与中间件耗时日志。"
+          "content": "收到，请补充异常指标的时间序列摘要和受影响组件。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】以下是最近 5 分钟的监控摘要：\n- api_p99_ms: 120, 135, 140, 980, 1020\n- queue_depth: 180, 210, 260, 5100, 5600\n- error_rate: 0.2%, 0.3%, 0.5%, 8.2%, 9.1%\n请输出一份原始 JSON 异常归纳。\n\n顶层必须包含：anomaly_metric、anomaly_pattern、suspected_component、response_actions。response_actions 必须是至少 2 项的数组。内容必须体现 api_p99_ms、queue_depth 和 error_rate。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "anomaly_metric",
+        "anomaly_pattern",
+        "suspected_component",
+        "response_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "response_actions": 2
+        }
       },
-      "verifier_type": "keyword_matcher"
+      "eval_rule": [
+        "api_p99_ms",
+        "queue_depth",
+        "error_rate",
+        "response_actions"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.2,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_21",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某企业ERP系统",
-      "feature": "某ERP 财务核心链路死锁排障",
+      "domain": "某智能数据AI平台",
+      "feature": "日志模版与监控联动处置",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] ... MySQLTransactionRollbackException: Deadlock found\n```\n请直接指出导致财务月结卡死的根本MySQL报错信息，以及发生死锁锁定的表名。\n【输出约束】：使用纯文本回复，指出报错与表名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Deadlock",
-        "死锁",
-        "gl_balances"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】业务部门反馈在 某企业ERP系统 进行月结时，总账模块超时卡死。"
+          "content": "【故障上报】日志链路里既有 Filebeat 采集问题，也有可视化动作配置失效，值班同学希望先出一张联动处置表。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供业务组件及数据库监控日志。"
+          "content": "收到，我会把日志模版、采集组件、可视化动作和处置动作统一整理成结构化矩阵。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】请根据以下观测信息输出一份 Markdown 表格联动处置矩阵：\n1. Filebeat 采集链路提示 Pipeline 正在将日志发往下游输出插件。\n2. 重复日志模版之一为 `Reading broadcast variable <*> took <*> ms`。\n3. 某告警样本为 `LOWMEM available.`。\n4. 可视化面板依赖 Actions 实现动态交互，但当前刷新滞后。\n\n表头必须且只能包含：观测样本、日志模版/组件、疑似影响、处置动作。至少输出 4 行，并且内容必须覆盖 Filebeat、Pipeline、Reading broadcast variable、LOWMEM available、Actions。\n【输出约束】：只输出 Markdown 表格，不要补充解释。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "观测样本",
+        "日志模版/组件",
+        "疑似影响",
+        "处置动作"
+      ],
+      "markdown_table_rules": {
+        "min_rows": 4,
+        "must_contain": [
+          "Filebeat",
+          "Pipeline",
+          "Reading broadcast variable",
+          "LOWMEM available",
+          "Actions"
+        ]
       },
-      "verifier_type": "keyword_matcher"
+      "eval_rule": [
+        "Filebeat",
+        "Pipeline",
+        "Reading broadcast variable",
+        "Actions"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.3,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S6_22",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某智能液冷超充站",
-      "feature": "物联网边缘物理设备排障",
+      "domain": "某服务器管理平台",
+      "feature": "时序分类与响应摘要",
       "difficulty": "High",
-      "prompt": "【深入排查】现场IoT网关时序传感器日志如下：\n```json\n{\"time\":\"10:00:21\",\"device\":\"Pump_Controller_4\",\"msg\":\"Flow rate drops below minimal\"}\n{\"time\":\"10:00:22\",\"device\":\"Thermal_Sensor_4\",\"msg\":\"Coolant temperature rising rapidly > 45C\"}\n{\"time\":\"10:00:25\",\"device\":\"CAN_Bus_MCU\",\"msg\":\"ERR: Communication lost with BMS module.\"}\n{\"time\":\"10:00:26\",\"device\":\"Safety_Relay\",\"msg\":\"CRITICAL: Hardware E-Stop due to CAN heartbeat loss.\"}\n```\n请列出导致硬件直接急停的最终控制事件原因，以及引发整条灾难链的最初始物理传感器事件！\n【输出约束】：使用短文本指出最终控制原因与最初始事件信息。",
-      "expected_format": "text",
-      "eval_rule": [
-        "CAN heartbeat loss",
-        "Flow rate drops",
-        "Pump",
-        "心跳丢失",
-        "急停",
-        "冷却液"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】位于深圳的 某智能液冷超充站 C号终端突然紧急保护停机。"
+          "content": "【故障上报】监控侧给了一段大部分为零、偶发突增的指标序列，值班同学要求先做时序分类再决定处置动作。"
         },
         {
           "role": "assistant",
-          "content": "收到，这是纯物理与边缘控制场景，请提供对应的传感器与边缘IoT网关注册日志。"
+          "content": "收到，我会把序列类型、异常证据和响应动作整理成结构化摘要。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】以下是一段最近采集的指标时间序列：\n[0.0,0.0,0.0,0.0,4.3,0.0,0.0,10.6,0.0,0.0,0.0,11.9,0.0,0.0,14.9,0.0]\n\n请输出一份原始 JSON 时序分类摘要。\n\n顶层必须包含：metric_name、series_classification、anomaly_evidence、response_actions。series_classification 只能是 稀疏、周期、平稳、突增 之一；anomaly_evidence 与 response_actions 都必须是至少 2 项的数组。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "metric_name",
+        "series_classification",
+        "anomaly_evidence",
+        "response_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "enum_fields": {
+          "series_classification": [
+            "稀疏",
+            "周期",
+            "平稳",
+            "突增"
+          ]
+        },
+        "array_min_items": {
+          "anomaly_evidence": 2,
+          "response_actions": 2
+        }
       },
-      "verifier_type": "keyword_matcher"
+      "eval_rule": [
+        "稀疏",
+        "anomaly_evidence",
+        "response_actions"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.2,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_23",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某AI算力集群",
-      "feature": "大型预训练组网 NCCL 排障",
+      "domain": "某边缘计算节点",
+      "feature": "节点容量与Pod承载排障摘要",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】在 某AI算力集群 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
+          "content": "【故障上报】边缘节点上的 Pod 数量不断增加，值班同学需要先判断这是不是 Node 容量问题。"
         },
         {
           "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
+          "content": "收到，我会把节点承载、资源容量和处置动作整理成结构化摘要。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】当前 Kubernetes 节点观测如下：\n- node=edge-node-07 allocatable_cpu=32 allocatable_mem=128Gi\n- running_pods=146\n- critical_pods_pending=11\n- system log: pod density approaching node capacity\n\n请输出一份原始 JSON 节点容量排障摘要。\n\n顶层必须包含：node_name、pod_density_assessment、capacity_evidence、recommended_actions。capacity_evidence 与 recommended_actions 都必须是至少 2 项的数组。内容必须体现 Node、Pod 和 capacity。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "node_name",
+        "pod_density_assessment",
+        "capacity_evidence",
+        "recommended_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "capacity_evidence": 2,
+          "recommended_actions": 2
+        }
       },
-      "verifier_type": "keyword_matcher"
+      "eval_rule": [
+        "Node",
+        "Pod",
+        "capacity",
+        "recommended_actions"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.2,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_24",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某HCI超融合基础设施",
-      "feature": "分布式存储脑裂与IO锁排障",
+      "domain": "某智能数据AI平台",
+      "feature": "日志采集与可视化恢复摘要",
       "difficulty": "High",
-      "prompt": "【深入排查】提取到了三节点的底层选举状态：\n```log\n[Node_A] INFO Network partition detected, marking Node_C as FAILED.\n[Node_C] INFO Network partition detected, marking Node_A as FAILED.\n[Node_B] WARN Received conflicting election votes.\n[Node_C] ERROR Cluster quorum lost. Suspending IO.\n[Node_A] CRITICAL VM disks locked.\n```\n请指出导致该客户虚拟机全盘锁死的集群异常状态术语，以及主要失去通讯的是哪两个节点？\n【输出约束】：短文本回复，提供状态与节点名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Cluster quorum lost",
-        "脑裂",
-        "Network partition",
-        "Node_A",
-        "Node_C"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】客户使用 某HCI超融合基础设施 搭建的三节点集群在夜间虚拟机全部I/O卡死。"
+          "content": "【故障上报】Filebeat 采集链路抖动时，监控大盘的交互动作也失效了，现场要求先出恢复摘要。"
         },
         {
           "role": "assistant",
-          "content": "收到，多节点存储I/O异常通常与集群状态有关，请提供分布式vSAN存储通讯日志。"
+          "content": "收到，我会把日志采集、Pipeline、可视化 Actions 和恢复动作整理成结构化结果。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】当前可观测系统观测如下：\n- Filebeat sidecar recently restarted 3 times\n- pipeline delivery latency = 18s\n- dashboard action bindings missing for one drill-down panel\n- operators report that interactive views cannot jump by Actions\n\n请输出一份原始 JSON 恢复摘要。\n\n顶层必须包含：logging_component_status、visualization_status、evidence、recovery_actions。evidence 与 recovery_actions 都必须是至少 2 项的数组。内容必须体现 Filebeat、pipeline、Actions。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "logging_component_status",
+        "visualization_status",
+        "evidence",
+        "recovery_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "evidence": 2,
+          "recovery_actions": 2
+        }
       },
-      "verifier_type": "keyword_matcher"
+      "eval_rule": [
+        "Filebeat",
+        "pipeline",
+        "Actions",
+        "recovery_actions"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.2,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_25",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某企业ERP系统",
-      "feature": "某ERP 财务核心链路死锁排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] ... MySQLTransactionRollbackException: Deadlock found\n```\n请直接指出导致财务月结卡死的根本MySQL报错信息，以及发生死锁锁定的表名。\n【输出约束】：使用纯文本回复，指出报错与表名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Deadlock",
-        "死锁",
-        "gl_balances"
-      ],
-      "token_tier": "1K-10K",
+      "domain": "某智能数据AI平台",
+      "feature": "Logging/Visualization 低复杂度联动排查",
+      "difficulty": "Low",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】业务部门反馈在 某企业ERP系统 进行月结时，总账模块超时卡死。"
+          "content": "【故障上报】日志采集和大盘交互偶发异常，值班同学想先要一张轻量处置表。"
         },
         {
           "role": "assistant",
-          "content": "收到，请提供业务组件及数据库监控日志。"
+          "content": "收到，我会先把 Logging 和 Visualization 的关键观测点整理成最小处置矩阵。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】当前观测摘要如下：\n- Filebeat 已启动，但最近 10 分钟日志吞吐明显下降\n- 一个仪表盘交互动作失效，点击后无法跳转明细页\n- 值班同学怀疑问题分别落在 Logging 与 Visualization 链路\n\n请严格按 Markdown 表格输出 2 条联动处置记录。\n\n表头必须且只能包含：观测点、疑似组件、立即动作、影响判断。内容必须覆盖 Filebeat、Logging、Visualization、Actions。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "观测点",
+        "疑似组件",
+        "立即动作",
+        "影响判断"
+      ],
+      "markdown_table_rules": {
+        "exact_rows": 2,
+        "must_contain": [
+          "Filebeat",
+          "Logging",
+          "Visualization",
+          "Actions"
+        ]
       },
-      "verifier_type": "keyword_matcher"
+      "eval_rule": [
+        "Filebeat",
+        "Logging",
+        "Visualization",
+        "Actions"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.2,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S6_26",
@@ -841,836 +1087,101 @@
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
       "domain": "某智能数据AI平台",
-      "feature": "大型预训练组网 NCCL 排障",
+      "feature": "Logging/Visualization 中复杂度恢复摘要",
       "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
-      ],
-      "token_tier": "1K-10K",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】在 某智能数据AI平台 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
+          "content": "【故障上报】值班群要求一份结构化恢复摘要，重点解释 Logging 的采集与 Pipeline 是否正常，以及 Visualization 为什么交互失效。"
         },
         {
           "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
+          "content": "收到，我会把日志采集、Pipeline 状态和大盘交互恢复动作整理成结构化结果。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】当前可观测系统信息如下：\n- Filebeat 安装已完成，配置文件中已指定日志来源与输出端\n- Pipeline 最近 15 分钟平均投递延迟 12s\n- 一个可视化仪表盘的 Actions 配置被误删，交互跳转失效\n- 业务方要求先恢复日志链路和交互大盘\n\n请输出一份原始 JSON 恢复摘要。\n\n顶层必须包含：logging_path_status、pipeline_status、visualization_status、recovery_actions。recovery_actions 必须是至少 2 项的数组。内容必须体现 Filebeat、Pipeline、Actions、Visualization。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "logging_path_status",
+        "pipeline_status",
+        "visualization_status",
+        "recovery_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "recovery_actions": 2
+        }
       },
-      "verifier_type": "keyword_matcher"
+      "eval_rule": [
+        "Filebeat",
+        "Pipeline",
+        "Actions",
+        "Visualization"
+      ],
+      "token_tier": "1K-10K",
+      "sampling_defaults": {
+        "temperature": 0.2,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S6_27",
       "ipd_stage": "生命周期管理阶段(Lifecycle)",
       "role": "某科技企业全球服务/SRE",
       "dim": "生命周期管理",
-      "domain": "某服务器操作系统",
-      "feature": "系统级内核 OOM 崩溃分析",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是 dmesg 系统日志片段：\n```log\nApr 28 23:15:40 server-01 kernel: BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\nApr 28 23:16:01 server-01 kernel: Out of memory: Kill process 14562 (java) score 850\nApr 28 23:16:01 server-01 kernel: Killed process 14562 (java), UID 1001\n```\n请问导致这台服务器业务进程挂掉的内核机制是什么？被杀死的 PID 是多少？\n【输出约束】：使用纯文本回复，指出机制与进程号。",
-      "expected_format": "text",
-      "eval_rule": [
-        "OOM",
-        "Out of memory",
-        "14562"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】今天 某服务器操作系统 的某台核心中间件节点离奇失连并触发自动重启。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，请提供 /var/log/messages 的系统日志以供内核级排查。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_28",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某服务器操作系统",
-      "feature": "系统级内核 OOM 崩溃分析",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是 dmesg 系统日志片段：\n```log\nApr 28 23:15:40 server-01 kernel: BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\nApr 28 23:16:01 server-01 kernel: Out of memory: Kill process 14562 (java) score 850\nApr 28 23:16:01 server-01 kernel: Killed process 14562 (java), UID 1001\n```\n请问导致这台服务器业务进程挂掉的内核机制是什么？被杀死的 PID 是多少？\n【输出约束】：使用纯文本回复，指出机制与进程号。",
-      "expected_format": "text",
-      "eval_rule": [
-        "OOM",
-        "Out of memory",
-        "14562"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】今天 某服务器操作系统 的某台核心中间件节点离奇失连并触发自动重启。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，请提供 /var/log/messages 的系统日志以供内核级排查。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_29",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
       "domain": "某智能数据AI平台",
-      "feature": "大型预训练组网 NCCL 排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
-      ],
-      "token_tier": "1K-10K",
+      "feature": "Logging/Visualization 高复杂度复盘纪要",
+      "difficulty": "Expert",
       "history": [
         {
           "role": "user",
-          "content": "【故障上报】在 某智能数据AI平台 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
+          "content": "【故障上报】管理层要求把 Logging 与 Visualization 的联动故障写成一份复盘纪要，不仅要说恢复动作，还要说明为什么之前没及时发现。"
         },
         {
           "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
+          "content": "收到，我会把故障结论、根因短板和后续治理动作整理成复盘纪要。"
         }
       ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+      "prompt": "【深入排查】请基于以下背景输出一份 Markdown 复盘纪要：\n1. Filebeat 侧日志采集延迟长期上升，但告警阈值未及时调整。\n2. Pipeline 投递延迟导致日志到达下游时间滞后。\n3. Visualization 仪表盘的 Actions 配置被变更后未经过回归验证，导致交互跳转失效。\n4. 当班同学直到业务反馈后才定位到 Logging 与 Visualization 的联动影响。\n\n格式要求：\n1. 必须包含一级标题 `# 故障结论`、`# 根因与暴露短板`、`# 后续治理动作`。\n2. 每个标题下至少 2 条无序列表。\n3. 根因与暴露短板部分必须体现 Logging、Pipeline、Visualization、Actions 中至少 3 项。\n4. 后续治理动作中必须体现告警阈值、回归验证或责任人。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "故障结论",
+        "根因与暴露短板",
+        "后续治理动作"
+      ],
+      "markdown_section_rules": {
+        "min_bullets_per_section": 2,
+        "must_contain_any_groups": [
+          [
+            "Logging",
+            "Pipeline",
+            "Visualization",
+            "Actions"
+          ],
+          [
+            "告警阈值",
+            "回归验证",
+            "责任人"
+          ]
+        ]
       },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_30",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某智能液冷超充站",
-      "feature": "物联网边缘物理设备排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】现场IoT网关时序传感器日志如下：\n```json\n{\"time\":\"10:00:21\",\"device\":\"Pump_Controller_4\",\"msg\":\"Flow rate drops below minimal\"}\n{\"time\":\"10:00:22\",\"device\":\"Thermal_Sensor_4\",\"msg\":\"Coolant temperature rising rapidly > 45C\"}\n{\"time\":\"10:00:25\",\"device\":\"CAN_Bus_MCU\",\"msg\":\"ERR: Communication lost with BMS module.\"}\n{\"time\":\"10:00:26\",\"device\":\"Safety_Relay\",\"msg\":\"CRITICAL: Hardware E-Stop due to CAN heartbeat loss.\"}\n```\n请列出导致硬件直接急停的最终控制事件原因，以及引发整条灾难链的最初始物理传感器事件！\n【输出约束】：使用短文本指出最终控制原因与最初始事件信息。",
-      "expected_format": "text",
       "eval_rule": [
-        "CAN heartbeat loss",
-        "Flow rate drops",
-        "Pump",
-        "心跳丢失",
-        "急停",
-        "冷却液"
+        "Logging",
+        "Pipeline",
+        "Visualization",
+        "Actions",
+        "告警阈值",
+        "回归验证"
       ],
       "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】位于深圳的 某智能液冷超充站 C号终端突然紧急保护停机。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，这是纯物理与边缘控制场景，请提供对应的传感器与边缘IoT网关注册日志。"
-        }
-      ],
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.2,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_31",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某边缘计算节点",
-      "feature": "边缘节点容器调度排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
-      "eval_rule": [
-        "ephemeral-storage",
-        "低存储",
-        "5%",
-        "10%"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】某边缘计算节点 的容器化应用频繁处于 Evicted（驱逐）和 CrashLoopBackOff 状态。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，节点容器频繁被驱逐，请提供该边缘节点的 Kubelet 守护进程事件监控。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_32",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某智能体平台",
-      "feature": "大规模向量检索与AI服务排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】提取到了平台核心流转服务的Tracing日志：\n```log\n[Agent_Controller] INFO Request received. Extracting user query.\n[Embeddings_API] OK Latency: 45ms. Vectors generated.\n[Milvus_Client] WARN Query latency exceeded 15000ms limit! \n[Milvus_Server] ERROR Search failed. Segment indices corrupted in memory. Require manual compaction.\n```\n请问：在整个RAG调用链上，真正阻塞且超时的大模型生态组件是哪一个？具体导致的底层内部结构报错是什么？\n【输出约束】：简要文本作答，包含组件英文原名与具体错误机制词。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Milvus",
-        "Segment indices corrupted",
-        "向量库",
-        "向量",
-        "索引损坏"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】业务线在 某智能体平台 进行智能体RAG查询时，全部遭遇接口请求超时(Timeout)。"
-        },
-        {
-          "role": "assistant",
-          "content": "智能体RAG超时大都与大模型推理延迟或向量库有关，请提供大模型网关与中间件耗时日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_33",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某AI算力集群",
-      "feature": "大型预训练组网 NCCL 排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】在 某AI算力集群 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_34",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某智能液冷超充站",
-      "feature": "物联网边缘物理设备排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】现场IoT网关时序传感器日志如下：\n```json\n{\"time\":\"10:00:21\",\"device\":\"Pump_Controller_4\",\"msg\":\"Flow rate drops below minimal\"}\n{\"time\":\"10:00:22\",\"device\":\"Thermal_Sensor_4\",\"msg\":\"Coolant temperature rising rapidly > 45C\"}\n{\"time\":\"10:00:25\",\"device\":\"CAN_Bus_MCU\",\"msg\":\"ERR: Communication lost with BMS module.\"}\n{\"time\":\"10:00:26\",\"device\":\"Safety_Relay\",\"msg\":\"CRITICAL: Hardware E-Stop due to CAN heartbeat loss.\"}\n```\n请列出导致硬件直接急停的最终控制事件原因，以及引发整条灾难链的最初始物理传感器事件！\n【输出约束】：使用短文本指出最终控制原因与最初始事件信息。",
-      "expected_format": "text",
-      "eval_rule": [
-        "CAN heartbeat loss",
-        "Flow rate drops",
-        "Pump",
-        "心跳丢失",
-        "急停",
-        "冷却液"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】位于深圳的 某智能液冷超充站 C号终端突然紧急保护停机。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，这是纯物理与边缘控制场景，请提供对应的传感器与边缘IoT网关注册日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_35",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某服务器管理平台",
-      "feature": "平台全局微服务与网关排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是SkyWalking全链路聚合的异常点：\n```log\n[API_Gateway_Nginx] 08:33 192.168.2.1 GET /api/v2/auth 503 10ms - upstream: 10.0.1.5:8080\n[Auth_Service@10.0.1.5] 08:33 WARN Circuit breaker 'SessionAuth' is OPEN. Fast-failing.\n[Redis_Client@10.0.1.5] 08:32 ERROR Failed to connect to Redis session cache at 10.0.5.5:6379\n```\n请根据跨组件日志，精准指出：触发最初报错的后端微服务(或组件)，以及导致API直接返回503的基础架构防御机制。\n【输出约束】：简短回答最初组件与防御机制术语。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Redis",
-        "10.0.5.5",
-        "Circuit breaker",
-        "熔断",
-        "SessionAuth"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】我们的管理员面板 某服务器管理平台 登录一直报 503 错误。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，500系异常属于微服务网关常见问题，请给我提供API Gateway及下游链路追踪错误。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_36",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某型号液冷服务器",
-      "feature": "边缘节点容器调度排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
-      "eval_rule": [
-        "ephemeral-storage",
-        "低存储",
-        "5%",
-        "10%"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】某型号液冷服务器 的容器化应用频繁处于 Evicted（驱逐）和 CrashLoopBackOff 状态。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，节点容器频繁被驱逐，请提供该边缘节点的 Kubelet 守护进程事件监控。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_37",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某HCI超融合基础设施",
-      "feature": "分布式存储脑裂与IO锁排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】提取到了三节点的底层选举状态：\n```log\n[Node_A] INFO Network partition detected, marking Node_C as FAILED.\n[Node_C] INFO Network partition detected, marking Node_A as FAILED.\n[Node_B] WARN Received conflicting election votes.\n[Node_C] ERROR Cluster quorum lost. Suspending IO.\n[Node_A] CRITICAL VM disks locked.\n```\n请指出导致该客户虚拟机全盘锁死的集群异常状态术语，以及主要失去通讯的是哪两个节点？\n【输出约束】：短文本回复，提供状态与节点名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Cluster quorum lost",
-        "脑裂",
-        "Network partition",
-        "Node_A",
-        "Node_C"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】客户使用 某HCI超融合基础设施 搭建的三节点集群在夜间虚拟机全部I/O卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，多节点存储I/O异常通常与集群状态有关，请提供分布式vSAN存储通讯日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_38",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某智能液冷超充站",
-      "feature": "物联网边缘物理设备排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】现场IoT网关时序传感器日志如下：\n```json\n{\"time\":\"10:00:21\",\"device\":\"Pump_Controller_4\",\"msg\":\"Flow rate drops below minimal\"}\n{\"time\":\"10:00:22\",\"device\":\"Thermal_Sensor_4\",\"msg\":\"Coolant temperature rising rapidly > 45C\"}\n{\"time\":\"10:00:25\",\"device\":\"CAN_Bus_MCU\",\"msg\":\"ERR: Communication lost with BMS module.\"}\n{\"time\":\"10:00:26\",\"device\":\"Safety_Relay\",\"msg\":\"CRITICAL: Hardware E-Stop due to CAN heartbeat loss.\"}\n```\n请列出导致硬件直接急停的最终控制事件原因，以及引发整条灾难链的最初始物理传感器事件！\n【输出约束】：使用短文本指出最终控制原因与最初始事件信息。",
-      "expected_format": "text",
-      "eval_rule": [
-        "CAN heartbeat loss",
-        "Flow rate drops",
-        "Pump",
-        "心跳丢失",
-        "急停",
-        "冷却液"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】位于深圳的 某智能液冷超充站 C号终端突然紧急保护停机。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，这是纯物理与边缘控制场景，请提供对应的传感器与边缘IoT网关注册日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_39",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某边缘计算节点",
-      "feature": "边缘节点容器调度排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
-      "eval_rule": [
-        "ephemeral-storage",
-        "低存储",
-        "5%",
-        "10%"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】某边缘计算节点 的容器化应用频繁处于 Evicted（驱逐）和 CrashLoopBackOff 状态。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，节点容器频繁被驱逐，请提供该边缘节点的 Kubelet 守护进程事件监控。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_40",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某智能体平台",
-      "feature": "大规模向量检索与AI服务排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】提取到了平台核心流转服务的Tracing日志：\n```log\n[Agent_Controller] INFO Request received. Extracting user query.\n[Embeddings_API] OK Latency: 45ms. Vectors generated.\n[Milvus_Client] WARN Query latency exceeded 15000ms limit! \n[Milvus_Server] ERROR Search failed. Segment indices corrupted in memory. Require manual compaction.\n```\n请问：在整个RAG调用链上，真正阻塞且超时的大模型生态组件是哪一个？具体导致的底层内部结构报错是什么？\n【输出约束】：简要文本作答，包含组件英文原名与具体错误机制词。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Milvus",
-        "Segment indices corrupted",
-        "向量库",
-        "向量",
-        "索引损坏"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】业务线在 某智能体平台 进行智能体RAG查询时，全部遭遇接口请求超时(Timeout)。"
-        },
-        {
-          "role": "assistant",
-          "content": "智能体RAG超时大都与大模型推理延迟或向量库有关，请提供大模型网关与中间件耗时日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_41",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某服务器管理平台",
-      "feature": "平台全局微服务与网关排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是SkyWalking全链路聚合的异常点：\n```log\n[API_Gateway_Nginx] 08:33 192.168.2.1 GET /api/v2/auth 503 10ms - upstream: 10.0.1.5:8080\n[Auth_Service@10.0.1.5] 08:33 WARN Circuit breaker 'SessionAuth' is OPEN. Fast-failing.\n[Redis_Client@10.0.1.5] 08:32 ERROR Failed to connect to Redis session cache at 10.0.5.5:6379\n```\n请根据跨组件日志，精准指出：触发最初报错的后端微服务(或组件)，以及导致API直接返回503的基础架构防御机制。\n【输出约束】：简短回答最初组件与防御机制术语。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Redis",
-        "10.0.5.5",
-        "Circuit breaker",
-        "熔断",
-        "SessionAuth"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】我们的管理员面板 某服务器管理平台 登录一直报 503 错误。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，500系异常属于微服务网关常见问题，请给我提供API Gateway及下游链路追踪错误。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_42",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某智能液冷超充站",
-      "feature": "物联网边缘物理设备排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】现场IoT网关时序传感器日志如下：\n```json\n{\"time\":\"10:00:21\",\"device\":\"Pump_Controller_4\",\"msg\":\"Flow rate drops below minimal\"}\n{\"time\":\"10:00:22\",\"device\":\"Thermal_Sensor_4\",\"msg\":\"Coolant temperature rising rapidly > 45C\"}\n{\"time\":\"10:00:25\",\"device\":\"CAN_Bus_MCU\",\"msg\":\"ERR: Communication lost with BMS module.\"}\n{\"time\":\"10:00:26\",\"device\":\"Safety_Relay\",\"msg\":\"CRITICAL: Hardware E-Stop due to CAN heartbeat loss.\"}\n```\n请列出导致硬件直接急停的最终控制事件原因，以及引发整条灾难链的最初始物理传感器事件！\n【输出约束】：使用短文本指出最终控制原因与最初始事件信息。",
-      "expected_format": "text",
-      "eval_rule": [
-        "CAN heartbeat loss",
-        "Flow rate drops",
-        "Pump",
-        "心跳丢失",
-        "急停",
-        "冷却液"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】位于深圳的 某智能液冷超充站 C号终端突然紧急保护停机。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，这是纯物理与边缘控制场景，请提供对应的传感器与边缘IoT网关注册日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_43",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某服务器管理平台",
-      "feature": "平台全局微服务与网关排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是SkyWalking全链路聚合的异常点：\n```log\n[API_Gateway_Nginx] 08:33 192.168.2.1 GET /api/v2/auth 503 10ms - upstream: 10.0.1.5:8080\n[Auth_Service@10.0.1.5] 08:33 WARN Circuit breaker 'SessionAuth' is OPEN. Fast-failing.\n[Redis_Client@10.0.1.5] 08:32 ERROR Failed to connect to Redis session cache at 10.0.5.5:6379\n```\n请根据跨组件日志，精准指出：触发最初报错的后端微服务(或组件)，以及导致API直接返回503的基础架构防御机制。\n【输出约束】：简短回答最初组件与防御机制术语。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Redis",
-        "10.0.5.5",
-        "Circuit breaker",
-        "熔断",
-        "SessionAuth"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】我们的管理员面板 某服务器管理平台 登录一直报 503 错误。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，500系异常属于微服务网关常见问题，请给我提供API Gateway及下游链路追踪错误。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_44",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某边缘计算节点",
-      "feature": "边缘节点容器调度排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
-      "eval_rule": [
-        "ephemeral-storage",
-        "低存储",
-        "5%",
-        "10%"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】某边缘计算节点 的容器化应用频繁处于 Evicted（驱逐）和 CrashLoopBackOff 状态。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，节点容器频繁被驱逐，请提供该边缘节点的 Kubelet 守护进程事件监控。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_45",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某型号液冷服务器",
-      "feature": "边缘节点容器调度排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】抓取到的 kubelet 系统守护日志与事件如下：\n```log\nWarning   Evicted   pod/camera-ai-app   The node was low on resource: ephemeral-storage. Threshold quantity: 10%, available: 5%.\nWarning   FailedMount   pod/sensor-daemon   MountVolume.SetUp failed for volume \"pvc-log\" : disk quota exceeded.\n```\n请回答：导致这个边缘计算节点主动驱逐 AI 算法应用容器的根因是哪个系统资源匮乏？资源可用率掉到了多少导致触发了底线阈值？\n【输出约束】：给出具体的资源英文名称以及百分比即可。",
-      "expected_format": "text",
-      "eval_rule": [
-        "ephemeral-storage",
-        "低存储",
-        "5%",
-        "10%"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】某型号液冷服务器 的容器化应用频繁处于 Evicted（驱逐）和 CrashLoopBackOff 状态。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，节点容器频繁被驱逐，请提供该边缘节点的 Kubelet 守护进程事件监控。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_46",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某企业ERP系统",
-      "feature": "某ERP 财务核心链路死锁排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] ... MySQLTransactionRollbackException: Deadlock found\n```\n请直接指出导致财务月结卡死的根本MySQL报错信息，以及发生死锁锁定的表名。\n【输出约束】：使用纯文本回复，指出报错与表名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Deadlock",
-        "死锁",
-        "gl_balances"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】业务部门反馈在 某企业ERP系统 进行月结时，总账模块超时卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，请提供业务组件及数据库监控日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_47",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某AI算力集群",
-      "feature": "大型预训练组网 NCCL 排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是捕获的混合日志：\n```log\nRank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\nRank 15: Watchdog detected stuck process 3922\nSystem Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\nSystem Log: mlx5_core 0000:b2:00.0: Port 1 link down\n```\n请从日志提取出导致训练同步挂起的底层网卡状态是什么？并指出发生报错的动态链接库名。\n【输出约束】：只输出纯文本状态和库名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "link down",
-        "EIO",
-        "NCCL",
-        "mlx5"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】在 某AI算力集群 测试千卡分布式预训练时，AllReduce 同步任务卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "大模型训练卡死常见于分布式通信框架或网卡，请提供 NCCL 与所在节点的 PCIe 设备日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_48",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某HCI超融合基础设施",
-      "feature": "分布式存储脑裂与IO锁排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】提取到了三节点的底层选举状态：\n```log\n[Node_A] INFO Network partition detected, marking Node_C as FAILED.\n[Node_C] INFO Network partition detected, marking Node_A as FAILED.\n[Node_B] WARN Received conflicting election votes.\n[Node_C] ERROR Cluster quorum lost. Suspending IO.\n[Node_A] CRITICAL VM disks locked.\n```\n请指出导致该客户虚拟机全盘锁死的集群异常状态术语，以及主要失去通讯的是哪两个节点？\n【输出约束】：短文本回复，提供状态与节点名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Cluster quorum lost",
-        "脑裂",
-        "Network partition",
-        "Node_A",
-        "Node_C"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】客户使用 某HCI超融合基础设施 搭建的三节点集群在夜间虚拟机全部I/O卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，多节点存储I/O异常通常与集群状态有关，请提供分布式vSAN存储通讯日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_49",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某HCI超融合基础设施",
-      "feature": "分布式存储脑裂与IO锁排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】提取到了三节点的底层选举状态：\n```log\n[Node_A] INFO Network partition detected, marking Node_C as FAILED.\n[Node_C] INFO Network partition detected, marking Node_A as FAILED.\n[Node_B] WARN Received conflicting election votes.\n[Node_C] ERROR Cluster quorum lost. Suspending IO.\n[Node_A] CRITICAL VM disks locked.\n```\n请指出导致该客户虚拟机全盘锁死的集群异常状态术语，以及主要失去通讯的是哪两个节点？\n【输出约束】：短文本回复，提供状态与节点名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Cluster quorum lost",
-        "脑裂",
-        "Network partition",
-        "Node_A",
-        "Node_C"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】客户使用 某HCI超融合基础设施 搭建的三节点集群在夜间虚拟机全部I/O卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，多节点存储I/O异常通常与集群状态有关，请提供分布式vSAN存储通讯日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S6_50",
-      "ipd_stage": "生命周期管理阶段(Lifecycle)",
-      "role": "某科技企业全球服务/SRE",
-      "dim": "生命周期管理",
-      "domain": "某企业ERP系统",
-      "feature": "某ERP 财务核心链路死锁排障",
-      "difficulty": "High",
-      "prompt": "【深入排查】以下是应用层和数据库捕获的日志：\n```log\n2026-04-29 INFO [AccountService] Starting monthly settlement.\n2026-04-29 WARN [HikariCP] Connection timed out after 30000ms.\n2026-04-29 ERROR [DBA] MySQL Processlist stuck on: UPDATE gl_balances SET amount=amount+? WHERE account_id=?\n2026-04-29 FATAL [AccountService] ... MySQLTransactionRollbackException: Deadlock found\n```\n请直接指出导致财务月结卡死的根本MySQL报错信息，以及发生死锁锁定的表名。\n【输出约束】：使用纯文本回复，指出报错与表名。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Deadlock",
-        "死锁",
-        "gl_balances"
-      ],
-      "token_tier": "1K-10K",
-      "history": [
-        {
-          "role": "user",
-          "content": "【故障上报】业务部门反馈在 某企业ERP系统 进行月结时，总账模块超时卡死。"
-        },
-        {
-          "role": "assistant",
-          "content": "收到，请提供业务组件及数据库监控日志。"
-        }
-      ],
-      "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
-      },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     }
   ]
 }

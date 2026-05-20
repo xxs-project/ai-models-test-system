@@ -376,6 +376,13 @@ export function ComparisonPanel({ benchmark1, benchmark2 }: ComparisonPanelProps
             value1={displayBenchmark1.config.frameworkParams || '无'} 
             value2={displayBenchmark2.config.frameworkParams || '无'} 
           />
+          {(displayBenchmark1.config.dataset_args || displayBenchmark2.config.dataset_args) && (
+            <ConfigRow 
+              label="数据集参数" 
+              value1={displayBenchmark1.config.dataset_args || '无'} 
+              value2={displayBenchmark2.config.dataset_args || '无'} 
+            />
+          )}
           <ConfigRow 
             label="测试日期" 
             value1={displayBenchmark1.config.testDate} 

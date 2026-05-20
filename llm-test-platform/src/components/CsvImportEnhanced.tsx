@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -54,6 +55,8 @@ const DEFAULT_CONFIG: BenchmarkConfig = {
   frameworkVersion: '',
   chipName: '',
   shardingConfig: '',
+  scenario: '对话',
+  features: [],
   graphMode: '',
   operatorAcceleration: '',
   frameworkParams: '',
@@ -371,6 +374,50 @@ export function CsvImportEnhanced({
                     value={importConfig.testDate}
                     onChange={(e) => setImportConfig({ ...importConfig, testDate: e.target.value })}
                   />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label>场景</Label>
+                  <Select
+                    value={importConfig.scenario || '对话'}
+                    onValueChange={(value) => setImportConfig({ ...importConfig, scenario: value })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="对话">对话</SelectItem>
+                      <SelectItem value="Agent">Agent</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="space-y-2 mt-4">
+                <Label>特性</Label>
+                <div className="flex flex-wrap gap-4 mt-2">
+                  {['FP4', 'FP8', '投机推理', 'KV Cache卸载', 'KV稀疏'].map((feature) => (
+                    <div key={feature} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`import-feature-${feature}`}
+                        checked={(Array.isArray(importConfig.features) ? importConfig.features : []).includes(feature)}
+                        onCheckedChange={(checked) => {
+                          const currentFeatures = Array.isArray(importConfig.features) ? [...importConfig.features] : []
+                          if (checked) {
+                            setImportConfig({ ...importConfig, features: [...currentFeatures, feature] })
+                          } else {
+                            setImportConfig({ ...importConfig, features: currentFeatures.filter(f => f !== feature) })
+                          }
+                        }}
+                      />
+                      <label
+                        htmlFor={`import-feature-${feature}`}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {feature}
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </div>
               

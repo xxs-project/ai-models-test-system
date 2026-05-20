@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "ipd-support",
   "name": "IPD 组织支撑与运营(Support)",
   "description": "跨阶段组织支撑活动：HRBP人才规划、行政运营保障、商务公文与沟通。贯穿IPD全流程的组织能力建设。",
@@ -7,76 +7,712 @@
   "ipd_gate": "-",
   "ipd_objective": "跨阶段组织支撑",
   "capabilities": {
-    "verification": false
+    "verification": false,
+    "structured_output": true
   },
   "cases": [
     {
       "id": "COMPANY_SUPPORT_01",
       "ipd_stage": "组织支撑与运营(Support)",
-      "role": "HRBP总监",
-      "dim": "组织与人才发展",
+      "role": "PMO运营经理",
+      "dim": "项目进度与风险治理",
       "domain": "某AI算力集群",
-      "feature": "千卡级大模型分布式训练加速",
+      "feature": "项目风险识别与节奏校准",
       "difficulty": "Hard",
-      "prompt": "你现在是某科技企业的HRBP总监。公司目前正在倾注海量资源研发【某AI算力集群】的【千卡级大模型分布式训练加速】特性。由于技术栈极度前沿，现有的C++与传统网络工程师无法满足对InfiniBand网络调优与CUDA底层算子优化的需求。\n\n请针对该痛点，制定一份为期3个月的『高端AI算力人才专项引援与内部活水计划』。要求：\n1. 明确至少2个核心岗位的精准画像（包含Hard Skills与Soft Skills）。\n2. 设计一套能吸引顶尖大厂或顶会(如NIPS/OSDI)背景人才的EVP（雇主价值主张）。\n3. 制定内部转岗培训(Upskilling)与“战火淬炼”的激励机制。\n\n【防超时/防死循环约束】：请直接输出最终的方案，严格控制输出在 600 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "项目周会上已经要求把当前 issue intention、里程碑风险和应对动作整理成可执行的项目治理摘要。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会按风险识别、进度影响和缓解动作输出结构化治理方案。"
+        }
+      ],
+      "prompt": "请为【某AI算力集群】的【项目风险识别与节奏校准】活动输出一份原始 JSON 风险治理摘要。\n\n背景线索：项目组近期 issue intention 反馈集中在“功能有价值但复杂度上升”；管理层要求先完成风险识别，再明确进度影响和缓解动作。\n\n顶层必须包含：risk_summary、risk_identification、schedule_impact、mitigation_actions。risk_identification 和 mitigation_actions 都必须是至少 2 项的数组。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "risk_summary",
+        "risk_identification",
+        "schedule_impact",
+        "mitigation_actions"
+      ],
       "eval_rule": [
-        "画像",
-        "EVP",
-        "培训"
+        "risk_identification",
+        "schedule_impact",
+        "mitigation_actions"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.5,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_SUPPORT_02",
       "ipd_stage": "组织支撑与运营(Support)",
-      "role": "高级行政运营专家",
-      "dim": "资产与后勤保障",
+      "role": "工程治理负责人",
+      "dim": "技术债务治理",
       "domain": "某型号液冷服务器",
-      "feature": "全新液冷实验室扩建",
+      "feature": "技术债与文档异味整治",
       "difficulty": "Hard",
-      "prompt": "你现在是某科技企业的高级行政与设施运营专家(Facility Manager)。随着【某型号液冷服务器】研发进入攻坚期，研发团队规模扩大了一倍，且新引入了重型液冷测试设备。原有的普通风冷机房和标准办公区已经完全无法满足需求（机房承重、电力冗余、漏水防护均告急）。\n\n请向公司行政VP提交一份紧急的『新一代液冷研发实验室与联合办公区升级改造方案』草案。要求方案中必须体现：\n1. 针对重型设备的承重与高功率电力的行政协调与改造周期评估。\n2. 针对液冷设备独有的『防漏液/防水浸』的行政安全与机房灾备应急预案。\n3. 为应对高强度连续加班的研发人员，提供极具温情的后勤关怀保障措施（如夜间阵地餐饮、休息舱等）。\n\n【防超时/防死循环约束】：请直接输出最终的方案，结构清晰，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请输出一份 Markdown 表格，用于治理【某型号液冷服务器】项目中的技术债与文档异味。\n\n背景线索：最近的 smell_doc 检查发现文档存在 fragmented / tangled / excessive / bloated / lazy 等潜在异味，需要在复盘会上统一编排行动。\n\n表头必须且只能包含：治理对象、异味信号、风险影响、整改动作。至少输出 4 行，并覆盖 fragmented、tangled、bloated、lazy 中的至少 3 项。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "治理对象",
+        "异味信号",
+        "风险影响",
+        "整改动作"
+      ],
       "eval_rule": [
-        "承重",
-        "漏液",
-        "后勤",
-        "预案"
+        "fragmented",
+        "tangled",
+        "bloated",
+        "整改动作"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.5,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_SUPPORT_03",
       "ipd_stage": "组织支撑与运营(Support)",
       "role": "总裁办高级文秘",
-      "dim": "商务公文与沟通",
+      "dim": "复盘纪要与管理沟通",
       "domain": "某企业ERP系统",
-      "feature": "核心网业务不停机在线热迁移",
+      "feature": "延期发布复盘与对外口径",
       "difficulty": "Hard",
-      "prompt": "你现在是某科技企业总裁办的高级文秘。在今天上午的EMT（企业管理团队）高管会议上，负责【某企业ERP系统】的产品线总裁汇报了一个坏消息：由于【核心网业务不停机在线热迁移】特性在极限压力测试中出现了一致性Bug，原定于下个月的产品全球发布会必须延期至少45天。会议现场气氛紧张，CEO做出了严厉指示要求彻查，并要求安抚已签约的早期VIP客户。\n\n作为会议记录与决议下发者，请你撰写一份面向全公司（抄送各级主管）的高管会议纪要及决议下发邮件。\n要求：\n1. 语言必须高度专业、得体。既要传达CEO的严肃态度与质量底线问责决心，又要避免在全公司引发过度恐慌，或对该产品线研发团队造成毁灭性的士气打击（极其考验高情商与职场“政治正确”）。\n2. 清晰列出关于延期发布、Bug彻查复盘机制、以及前线销售对客户安抚口径的3条核心决议(Action Items)。\n\n【防超时/防死循环约束】：请直接输出最终的邮件纪要，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请将【某企业ERP系统】的【延期发布复盘与对外口径】活动整理成一份 Markdown 会议纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 复盘结论`、`# 核心决议`、`# 对外口径`。\n2. 每个标题下至少 2 条无序列表。\n3. 核心决议中必须明确延期发布、风险复盘、客户安抚。\n4. 对外口径中必须体现质量底线或发布窗口。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "复盘结论",
+        "核心决议",
+        "对外口径"
+      ],
       "eval_rule": [
-        "决议",
-        "安抚",
         "延期",
-        "质量"
+        "安抚",
+        "质量",
+        "复盘"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
-        "temperature": 0.7,
-        "top_p": 0.95
+        "temperature": 0.5,
+        "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_04",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "HRBP总监",
+      "dim": "组织与人才发展",
+      "domain": "某AI算力集群",
+      "feature": "高端AI人才引援计划",
+      "difficulty": "Hard",
+      "prompt": "请为【某AI算力集群】的高端AI人才引援计划输出一份原始 JSON 人才方案。\n\n顶层必须包含：hiring_goals、core_roles、evp_points、upskilling_actions。core_roles 必须是数组且至少 2 项，每项对象必须包含：role_name、hard_skills、soft_skills。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "hiring_goals",
+        "core_roles",
+        "evp_points",
+        "upskilling_actions"
+      ],
+      "eval_rule": [
+        "role_name",
+        "hard_skills",
+        "upskilling_actions"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_05",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "高级行政运营专家",
+      "dim": "资产与后勤保障",
+      "domain": "某型号液冷服务器",
+      "feature": "液冷实验室升级改造",
+      "difficulty": "Hard",
+      "prompt": "请输出一份 Markdown 表格，用于汇总【某型号液冷服务器】液冷实验室升级改造的关键行政动作。\n\n表头必须且只能包含：改造项、关键约束、风险点、协调对象。至少输出 4 行，并覆盖承重、电力、防漏液、后勤保障。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "改造项",
+        "关键约束",
+        "风险点",
+        "协调对象"
+      ],
+      "eval_rule": [
+        "承重",
+        "电力",
+        "防漏液",
+        "后勤保障"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_table_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_06",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "总裁办高级文秘",
+      "dim": "商务公文与沟通",
+      "domain": "某企业ERP系统",
+      "feature": "延期发布高管沟通",
+      "difficulty": "Hard",
+      "prompt": "请将延期发布事件整理成一份 Markdown 会议纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 会议结论`、`# 核心决议`、`# 对外口径`。\n2. 每个标题下至少 2 条无序列表。\n3. 核心决议中必须明确延期、复盘和客户安抚。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "会议结论",
+        "核心决议",
+        "对外口径"
+      ],
+      "eval_rule": [
+        "延期",
+        "复盘",
+        "安抚"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_sections_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_07",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "采购与供应协同经理",
+      "dim": "采购与供应协同",
+      "domain": "某AI算力集群",
+      "feature": "关键器件保供协调",
+      "difficulty": "Hard",
+      "prompt": "请输出一份原始 JSON 保供协同方案，用于协调【某AI算力集群】关键器件保供。\n\n顶层必须包含：supply_risks、priority_parts、supplier_actions、escalation_path。priority_parts 必须是数组，且每项对象必须包含：part_name、risk_level、backup_option。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "supply_risks",
+        "priority_parts",
+        "supplier_actions",
+        "escalation_path"
+      ],
+      "eval_rule": [
+        "part_name",
+        "risk_level",
+        "backup_option"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_08",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "PMO运营经理",
+      "dim": "流程协同与节奏管理",
+      "domain": "某服务器管理平台",
+      "feature": "跨部门例会节奏对齐",
+      "difficulty": "Hard",
+      "prompt": "请输出一份 Markdown 表格，用于安排【某服务器管理平台】跨部门例会节奏。\n\n表头必须且只能包含：协同主题、参与角色、节奏频率、输出物。至少输出 4 行，并覆盖研发、测试、市场和供应链。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "协同主题",
+        "参与角色",
+        "节奏频率",
+        "输出物"
+      ],
+      "eval_rule": [
+        "研发",
+        "测试",
+        "供应链"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_table_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_09",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "项目管理办公室负责人",
+      "dim": "项目进度与复盘治理",
+      "domain": "某智能数据AI平台",
+      "feature": "项目风险与复盘行动摘要",
+      "difficulty": "Hard",
+      "prompt": "请根据某智能数据AI平台 当前项目状态，输出一份 Markdown 复盘纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 当前风险`、`# 进度判断`、`# 改进行动`。\n2. 每个标题下至少 2 条无序列表。\n3. 改进行动中必须体现责任人、时间点和技术债处理。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "当前风险",
+        "进度判断",
+        "改进行动"
+      ],
+      "eval_rule": [
+        "责任人",
+        "时间点",
+        "技术债"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_sections_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_10",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "项目管理办公室负责人",
+      "dim": "项目进度与治理沟通",
+      "domain": "某智能体平台",
+      "feature": "需求意图与风险治理摘要",
+      "difficulty": "Hard",
+      "history": [
+        {
+          "role": "user",
+          "content": "管理周会要求把近期 issue intention、RiskMgmt 和 smell_doc 线索合并成一份治理摘要，方便统一决策。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把需求信号、风险识别和文档异味一起整理成结构化治理方案。"
+        }
+      ],
+      "prompt": "请为【某智能体平台】的【需求意图与风险治理摘要】活动输出一份原始 JSON 治理摘要。\n\n背景线索：近期 issue intention 里既有“功能有价值”的正向反馈，也出现了交付复杂度上升的担忧；管理层要求先做 RiskMgmt 风险识别，再把 smell_doc 暴露出的文档异味纳入治理动作。\n\n顶层必须包含：issue_signal、intention_judgment、governance_risks、document_smells、action_plan。governance_risks、document_smells 和 action_plan 都必须是至少 2 项的数组。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "issue_signal",
+        "intention_judgment",
+        "governance_risks",
+        "document_smells",
+        "action_plan"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "governance_risks": 2,
+          "document_smells": 2,
+          "action_plan": 2
+        }
+      },
+      "eval_rule": [
+        "issue",
+        "RiskMgmt",
+        "smell_doc",
+        "action_plan"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_11",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "项目管理办公室负责人",
+      "dim": "项目进度与治理沟通",
+      "domain": "某服务器管理平台",
+      "feature": "项目治理例会决议纪要",
+      "difficulty": "Hard",
+      "history": [
+        {
+          "role": "user",
+          "content": "项目治理例会要求把需求优先级、风险识别和跨团队推进动作整理成一份统一纪要。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把需求判断、风险结论和推进动作整理成可执行纪要。"
+        }
+      ],
+      "prompt": "请将【某服务器管理平台】的【项目治理例会决议纪要】活动整理成一份 Markdown 会议纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 需求判断`、`# 风险结论`、`# 推进行动`。\n2. 每个标题下至少 2 条无序列表。\n3. 风险结论中必须体现需求优先级或风险识别。\n4. 推进行动中必须体现责任人、时间点和协同对象。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "需求判断",
+        "风险结论",
+        "推进行动"
+      ],
+      "markdown_section_rules": {
+        "min_bullets_per_section": 2,
+        "must_contain": [
+          "责任人",
+          "时间点",
+          "协同对象"
+        ],
+        "must_contain_any_groups": [
+          [
+            "需求优先级",
+            "风险识别",
+            "RiskMgmt"
+          ]
+        ]
+      },
+      "eval_rule": [
+        "需求优先级",
+        "风险识别",
+        "责任人",
+        "时间点"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_sections_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_12",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "项目管理办公室负责人",
+      "dim": "项目进度与治理沟通",
+      "domain": "某智能体平台",
+      "feature": "issue_intention 信号分流清单",
+      "difficulty": "Low",
+      "history": [
+        {
+          "role": "user",
+          "content": "周会先只要求把近期 issue_intention 信号做一轮分流，区分价值认可和复杂度担忧，便于项目进度管理。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会先把 issue_intention 信号按判断结果、进度影响和建议动作整理成表格。"
+        }
+      ],
+      "prompt": "请为【某智能体平台】的【issue_intention 信号分流清单】活动输出一份 Markdown 表格。\n\n背景线索：项目进度管理需要先对近期 issue_intention 做快速筛查，区分“功能有价值”的正向信号与“复杂度上升”的担忧信号，再决定是否进入周会讨论。\n\n表头必须且只能包含：issue信号、意图判断、进度影响、处理建议。至少输出 4 行，并覆盖 issue_intention、项目进度管理、价值信号、复杂度担忧。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "issue信号",
+        "意图判断",
+        "进度影响",
+        "处理建议"
+      ],
+      "markdown_table_rules": {
+        "min_rows": 4,
+        "must_contain": [
+          "issue_intention",
+          "项目进度管理",
+          "价值",
+          "复杂度"
+        ]
+      },
+      "eval_rule": [
+        "issue_intention",
+        "项目进度管理",
+        "价值",
+        "复杂度"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_table_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_13",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "项目管理办公室负责人",
+      "dim": "项目进度与治理沟通",
+      "domain": "某服务器管理平台",
+      "feature": "issue_intention 进度判断摘要",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "管理例会要求这次不只筛信号，还要把 issue_intention 聚类成几类判断，并明确对排期的影响。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把意图信号、聚类判断、进度结论和后续动作整理成结构化摘要。"
+        }
+      ],
+      "prompt": "请为【某服务器管理平台】的【issue_intention 进度判断摘要】活动输出一份原始 JSON 治理摘要。\n\n背景线索：项目进度管理需要根据近期多条 issue_intention 文本，区分价值认可、复杂度担忧、范围扩张等不同意图，并明确这些意图对当前排期和里程碑的影响。\n\n顶层必须包含：issue_signals、intention_clusters、schedule_judgment、follow_up_actions。issue_signals、intention_clusters 和 follow_up_actions 都必须是至少 2 项的数组。内容必须体现 issue_intention、项目进度管理、复杂度 或 里程碑。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "issue_signals",
+        "intention_clusters",
+        "schedule_judgment",
+        "follow_up_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "issue_signals": 2,
+          "intention_clusters": 2,
+          "follow_up_actions": 2
+        }
+      },
+      "eval_rule": [
+        "issue_intention",
+        "项目进度管理",
+        "复杂度",
+        "里程碑",
+        "follow_up_actions"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_14",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "项目管理办公室负责人",
+      "dim": "项目进度与治理沟通",
+      "domain": "某智能数据AI平台",
+      "feature": "issue_intention 管理决议纪要",
+      "difficulty": "Expert",
+      "history": [
+        {
+          "role": "user",
+          "content": "月度治理会要求把 issue_intention 的意图判断、进度影响和管理决议一次说清楚，方便决定是否调整优先级和里程碑。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把 issue_intention 的判断结论、进度影响和管理动作整理成可直接决策的纪要。"
+        }
+      ],
+      "prompt": "请将【某智能数据AI平台】的【issue_intention 管理决议纪要】活动整理成一份 Markdown 会议纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 意图判断`、`# 进度影响`、`# 管理动作`。\n2. 每个标题下至少 2 条无序列表。\n3. 意图判断部分必须体现 issue_intention、价值信号、复杂度担忧。\n4. 进度影响部分必须体现项目进度管理、里程碑或优先级调整。\n5. 管理动作部分必须体现责任人、时间点和协同对象。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "意图判断",
+        "进度影响",
+        "管理动作"
+      ],
+      "markdown_section_rules": {
+        "sections": {
+          "意图判断": {
+            "min_bullets": 2,
+            "must_contain": [
+              "issue_intention",
+              "价值",
+              "复杂度"
+            ]
+          },
+          "进度影响": {
+            "min_bullets": 2,
+            "must_contain_any_groups": [
+              [
+                "项目进度管理",
+                "里程碑",
+                "优先级"
+              ]
+            ]
+          },
+          "管理动作": {
+            "min_bullets": 2,
+            "must_contain": [
+              "责任人",
+              "时间点",
+              "协同对象"
+            ]
+          }
+        }
+      },
+      "eval_rule": [
+        "issue_intention",
+        "项目进度管理",
+        "里程碑",
+        "责任人",
+        "时间点",
+        "协同对象"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_sections_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_15",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "工程治理负责人",
+      "dim": "技术债务治理",
+      "domain": "某服务器管理平台",
+      "feature": "smell_doc 异味分拣清单",
+      "difficulty": "Low",
+      "history": [
+        {
+          "role": "user",
+          "content": "复盘会先只要求把近期 smell_doc 信号做一轮分拣，标出 lazy、tangled、fragmented 等最明显的文档异味。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会先把 smell_doc 异味按信号、风险和处理建议整理成表格。"
+        }
+      ],
+      "prompt": "请为【某服务器管理平台】的【smell_doc 异味分拣清单】活动输出一份 Markdown 表格。\n\n背景线索：技术债务管理需要先对近期文档样本做快速筛查，分拣出 lazy、tangled、fragmented、excessive 等主要 smell_doc 信号，再决定进入哪类治理动作。\n\n表头必须且只能包含：文档对象、异味信号、风险影响、处理建议。至少输出 4 行，并覆盖 smell_doc、lazy、tangled、fragmented。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "文档对象",
+        "异味信号",
+        "风险影响",
+        "处理建议"
+      ],
+      "markdown_table_rules": {
+        "min_rows": 4,
+        "must_contain": [
+          "smell_doc",
+          "lazy",
+          "tangled",
+          "fragmented"
+        ]
+      },
+      "eval_rule": [
+        "smell_doc",
+        "lazy",
+        "tangled",
+        "fragmented"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_table_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_16",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "工程治理负责人",
+      "dim": "技术债务治理",
+      "domain": "某智能数据AI平台",
+      "feature": "smell_doc 多标签治理摘要",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "治理评审要求这次不只列异味，还要把文档异味做多标签归类，并说明它们对技术债务管理的影响。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把 smell_doc 多标签判断、风险影响和治理动作整理成结构化摘要。"
+        }
+      ],
+      "prompt": "请为【某智能数据AI平台】的【smell_doc 多标签治理摘要】活动输出一份原始 JSON 治理摘要。\n\n背景线索：技术债务管理需要对近期文档样本进行多标签判断，识别 lazy、tangled、excessive、fragmented、bloated 等 smell_doc 信号，并明确这些异味对维护成本和交付效率的影响。\n\n顶层必须包含：document_samples、smell_judgment、debt_impact、governance_actions。document_samples、smell_judgment 和 governance_actions 都必须是至少 2 项的数组。内容必须体现 smell_doc、技术债务管理，以及至少 3 类具体异味标签。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "document_samples",
+        "smell_judgment",
+        "debt_impact",
+        "governance_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "document_samples": 2,
+          "smell_judgment": 2,
+          "governance_actions": 2
+        }
+      },
+      "eval_rule": [
+        "smell_doc",
+        "技术债务管理",
+        "lazy",
+        "tangled",
+        "excessive",
+        "governance_actions"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_SUPPORT_17",
+      "ipd_stage": "组织支撑与运营(Support)",
+      "role": "工程治理负责人",
+      "dim": "技术债务治理",
+      "domain": "某型号液冷服务器",
+      "feature": "smell_doc 技术债决议纪要",
+      "difficulty": "Expert",
+      "history": [
+        {
+          "role": "user",
+          "content": "月度技术债会要求把 smell_doc 的异味判断、技术债影响和治理决议一次说清楚，便于安排整改窗口。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把文档异味、技术债影响和治理决议整理成可直接执行的会议纪要。"
+        }
+      ],
+      "prompt": "请将【某型号液冷服务器】的【smell_doc 技术债决议纪要】活动整理成一份 Markdown 会议纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 异味判断`、`# 技术债影响`、`# 治理决议`。\n2. 每个标题下至少 2 条无序列表。\n3. 异味判断部分必须体现 smell_doc、lazy、tangled、fragmented。\n4. 技术债影响部分必须体现技术债务管理、维护成本或交付效率。\n5. 治理决议部分必须体现责任人、时间点和整改窗口。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "异味判断",
+        "技术债影响",
+        "治理决议"
+      ],
+      "markdown_section_rules": {
+        "sections": {
+          "异味判断": {
+            "min_bullets": 2,
+            "must_contain": [
+              "smell_doc",
+              "lazy",
+              "tangled",
+              "fragmented"
+            ]
+          },
+          "技术债影响": {
+            "min_bullets": 2,
+            "must_contain_any_groups": [
+              [
+                "技术债务管理",
+                "维护成本",
+                "交付效率"
+              ]
+            ]
+          },
+          "治理决议": {
+            "min_bullets": 2,
+            "must_contain": [
+              "责任人",
+              "时间点",
+              "整改窗口"
+            ]
+          }
+        }
+      },
+      "eval_rule": [
+        "smell_doc",
+        "技术债务管理",
+        "lazy",
+        "tangled",
+        "责任人",
+        "整改窗口"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.5,
+        "top_p": 0.9
+      },
+      "verifier_type": "markdown_sections_validator"
     }
   ]
 }

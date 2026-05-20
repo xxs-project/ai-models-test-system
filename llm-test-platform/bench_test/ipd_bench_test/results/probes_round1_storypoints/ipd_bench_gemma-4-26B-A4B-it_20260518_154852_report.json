@@ -1,0 +1,76 @@
+{
+  "model": "gemma-4-26B-A4B-it",
+  "backend": "vllm",
+  "base_url": "http://127.0.0.1:10093/v1/chat/completions",
+  "timestamp": "20260518_154852",
+  "total_cases": 3,
+  "summary": [
+    {
+      "stage_num": -1,
+      "stage_name": "Unknown",
+      "stage_gate": "-",
+      "stage_objective": "",
+      "dim": "机会识别",
+      "pack_name": "Probe: Opportunity Story Points Ladder",
+      "avg_score": 0.0,
+      "avg_format": 0.0,
+      "avg_logic": 0.0,
+      "avg_constraint": 0.0,
+      "cases": 3,
+      "failure_rate": 100.0,
+      "results": [
+        {
+          "id": "COMPANY_IPD_S0_15",
+          "eval_res": {
+            "total": 0,
+            "format": 0,
+            "logic": 0,
+            "constraint": 0,
+            "reason": "Failed or Timeout"
+          },
+          "latency": 2.005032777786255,
+          "status": "ClientError: Cannot connect to host 127.0.0.1:10093 ssl:default [远程计算机拒绝网络连接。]",
+          "attempts": 2,
+          "gen_text": "",
+          "gen_preview": ""
+        },
+        {
+          "id": "COMPANY_IPD_S0_16",
+          "eval_res": {
+            "total": 0,
+            "format": 0,
+            "logic": 0,
+            "constraint": 0,
+            "reason": "Failed or Timeout"
+          },
+          "latency": 2.004938840866089,
+          "status": "ClientError: Cannot connect to host 127.0.0.1:10093 ssl:default [远程计算机拒绝网络连接。]",
+          "attempts": 2,
+          "gen_text": "",
+          "gen_preview": ""
+        },
+        {
+          "id": "COMPANY_IPD_S0_17",
+          "eval_res": {
+            "total": 0,
+            "format": 0,
+            "logic": 0,
+            "constraint": 0,
+            "reason": "Failed or Timeout"
+          },
+          "latency": 2.0051639080047607,
+          "status": "ClientError: Cannot connect to host 127.0.0.1:10093 ssl:default [远程计算机拒绝网络连接。]",
+          "attempts": 2,
+          "gen_text": "",
+          "gen_preview": ""
+        }
+      ],
+      "duplicate_prompt_rate": 0.0,
+      "structured_case_rate": 100.0,
+      "history_case_rate": 100.0,
+      "warnings": [
+        "Pack sample size is too small"
+      ]
+    }
+  ]
+}

@@ -47,6 +47,7 @@ class Task(SQLModel, table=True):
     framework_startup_args: Optional[str] = None
     accelerator_card: Optional[str] = None
     dataset_name: Optional[str] = None
+    dataset_args: Optional[str] = None
     scenario: Optional[str] = None
     features: Optional[str] = None
     status: int = Field(default=0)

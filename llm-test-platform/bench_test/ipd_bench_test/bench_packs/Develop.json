@@ -1,13 +1,15 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "ipd-develop",
   "name": "IPD S3: 开发阶段(Development) - TR4技术评审",
-  "description": "IPD流程S3阶段：把设计变成可工作的产品。详细设计、模块开发、编码/硬件打样、单元/模块测试。TR4等技术评审。",
+  "description": "IPD流程S3阶段：把设计变成可工作的产品。该Pack聚焦真实编码实现、重构修复、并发控制、脚本自动化与技术边界识别。",
   "ipd_stage": 3,
   "ipd_gate": "TR4",
   "ipd_objective": "把设计变成可工作的产品",
   "capabilities": {
-    "verification": true
+    "verification": true,
+    "code_generation": true,
+    "structured_output": true
   },
   "cases": [
     {
@@ -18,38 +20,40 @@
       "domain": "某服务器操作系统",
       "feature": "技术边界与防幻觉测试",
       "difficulty": "Hell",
-      "prompt": "【架构极限挑战】请使用纯净的 MySQL 5.7 原生SQL语法，编写一个完整的能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。请直接给出SQL源码。",
-      "expected_format": "text",
+      "prompt": "【架构极限挑战】请使用纯净的 MySQL 5.7 原生SQL语法，编写一个完整的能够监听 8080 端口、解析 HTTP GET 请求并返回 JSON 的微服务。\n\n请输出一份 Markdown 边界判断纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 技术判断`、`# 不可实现原因`、`# 替代建议`。\n2. 每个标题下至少 2 条无序列表。\n3. 技术判断部分必须明确给出“不可实现”或同等结论。\n4. 不可实现原因中必须体现 MySQL、HTTP 或 8080 端口监听的技术边界。\n5. 禁止输出伪造 SQL 代码。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "技术判断",
+        "不可实现原因",
+        "替代建议"
+      ],
       "eval_rule": [
-        "不支持",
-        "做不到",
-        "无法实现",
-        "非编程语言",
-        "不是",
-        "不能"
+        "不可实现",
+        "替代",
+        "SQL"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S3_02",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "数据工程师",
       "dim": "开发阶段",
       "domain": "某智能数据AI平台",
-      "feature": "自动化与数据工程脚本",
+      "feature": "脏数据清洗与均值计算",
       "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "prompt": "【真实业务数据处理场景】请编写一段 Python 脚本，处理一批存在严重脏数据的 JSON 日志。\n【输入示例】`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n1. 返回独立函数 `calculate_avg_cost(data_list)`。\n2. 必须显式处理 KeyError、TypeError 与非数值 cost。\n3. 最终返回平均值或 `None`。\n\n【代码约束】：只允许输出 Markdown 的 Python 代码块，禁止解释。",
+      "expected_format": "python",
       "eval_rule": [
         "def calculate_avg_cost",
         "KeyError",
         "TypeError",
-        "Exception"
+        "return"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -61,18 +65,18 @@
     {
       "id": "COMPANY_IPD_S3_03",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "后端开发工程师",
       "dim": "开发阶段",
       "domain": "某边缘计算节点",
-      "feature": "C++高并发与内存安全审查",
+      "feature": "异步遥测聚合",
       "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
+      "prompt": "【并发处理场景】请编写一段 Python 协程代码，实现 `aggregate_telemetry(records)`：输入为设备温度、负载、节点ID组成的记录列表，要求按节点聚合平均温度与峰值负载。\n\n【开发要求】：\n1. 使用 `asyncio` 组织并发批处理。\n2. 输出结果为 `dict[str, dict]`。\n3. 需要包含最小可运行的 `async main()` 示例。\n\n【代码约束】：只输出 Markdown 的 Python 代码块。",
+      "expected_format": "python",
       "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
+        "async def aggregate_telemetry",
+        "asyncio",
+        "await",
+        "main"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -84,18 +88,18 @@
     {
       "id": "COMPANY_IPD_S3_04",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "C++系统工程师",
       "dim": "开发阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "前端TypeScript强类型并发",
+      "domain": "某边缘计算节点",
+      "feature": "C++高并发与内存安全审查",
       "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
+      "prompt": "【底软代码安全审计】请修复下面这段多线程内存管理代码的生命周期问题，并输出修复后的 C++11/14 代码块。\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n\n【重构要求】：\n1. 必须使用 `std::shared_ptr` 或 `std::unique_ptr`。\n2. 必须正确处理线程生命周期。\n3. 只输出修复代码。",
+      "expected_format": "cpp",
       "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
+        "std::shared_ptr",
+        "std::unique_ptr",
+        "join",
+        "thread"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -107,17 +111,18 @@
     {
       "id": "COMPANY_IPD_S3_05",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "前端工程师",
       "dim": "开发阶段",
-      "domain": "某智能体平台",
-      "feature": "复杂SQL与查询优化",
+      "domain": "某HCI超融合基础设施",
+      "feature": "前端TypeScript强类型并发",
       "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
+      "prompt": "【全栈研发场景】请实现 TypeScript 方法 `fetchDashboardData()`，并发请求 `/api/user`、`/api/orders`、`/api/metrics` 三个接口。\n\n【约束条件】：\n1. 使用 `Promise.all`。\n2. 必须定义 `User`、`Order`、`Metrics` 三个 interface。\n3. 任何一个接口超时或失败时需要优雅降级，不能抛出未处理异常。\n\n【代码约束】：仅输出完整 TypeScript 代码块。",
+      "expected_format": "typescript",
       "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
+        "Promise.all",
+        "interface User",
+        "try",
+        "catch"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -129,18 +134,18 @@
     {
       "id": "COMPANY_IPD_S3_06",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "数据库工程师",
       "dim": "开发阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "企业级后端架构规约设计",
+      "domain": "某智能体平台",
+      "feature": "复杂SQL与查询优化",
       "difficulty": "Expert",
-      "prompt": "【真实业务重构场景】你是一名资深的Java架构师。以下是由外包人员写的一段老旧Spring Controller代码，它将数据库查询、参数校验和业务逻辑全部柔和在了一起，同时也缺乏异常处理：\n```java\n@RestController\npublic class OrderController {\n    @Autowired\n    private JdbcTemplate jdbcTemplate;\n\n    @GetMapping(\"/createOrder\")\n    public String create(String userId, String productId) {\n        if(userId == null || productId == null) return \"error\";\n        jdbcTemplate.update(\"insert into orders (user_id, product_id) values (?, ?)\", userId, productId);\n        return \"success\";\n    }\n}\n```\n【重构要求】：\n1. 请使用Spring Boot推荐的依赖注入姿势（如构造器注入）。\n2. 将业务逻辑抽离到Service层，并为其添加@Transactional事务。\n3. 使用全局异常处理机制（@RestControllerAdvice）来替代硬编码的error返回。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Java代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "prompt": "【真实数据库场景】请编写一条 MySQL 5.7 兼容 SQL。\n已知表：`employees(emp_id, emp_name, dept_id, salary)` 与 `departments(dept_id, dept_name)`。\n\n【要求】：\n1. 找出每个部门薪资排名前 3 的员工。\n2. 不允许使用存储过程。\n3. 需要兼容 MySQL 5.7，不依赖窗口函数。\n\n【代码约束】：仅输出 ```sql 包裹的代码块。",
+      "expected_format": "sql",
       "eval_rule": [
-        "@Service",
-        "@Transactional",
-        "RestControllerAdvice",
-        "构造器"
+        "SELECT",
+        "JOIN",
+        "ORDER BY",
+        "salary"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -152,18 +157,18 @@
     {
       "id": "COMPANY_IPD_S3_07",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "Java架构师",
       "dim": "开发阶段",
-      "domain": "某边缘计算节点",
-      "feature": "自动化与数据工程脚本",
+      "domain": "某型号液冷服务器",
+      "feature": "企业级后端架构规约设计",
       "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "prompt": "【真实业务重构场景】请重构下面的 Spring Controller，并只输出 Java 代码块。\n```java\n@RestController\npublic class OrderController {\n    @Autowired\n    private JdbcTemplate jdbcTemplate;\n\n    @GetMapping(\"/createOrder\")\n    public String create(String userId, String productId) {\n        if(userId == null || productId == null) return \"error\";\n        jdbcTemplate.update(\"insert into orders (user_id, product_id) values (?, ?)\", userId, productId);\n        return \"success\";\n    }\n}\n```\n\n【重构要求】：\n1. 使用构造器注入。\n2. 抽离 Service 层并添加 `@Transactional`。\n3. 使用 `@RestControllerAdvice` 处理异常。",
+      "expected_format": "java",
       "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
+        "@Service",
+        "@Transactional",
+        "RestControllerAdvice",
+        "public class"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -175,18 +180,18 @@
     {
       "id": "COMPANY_IPD_S3_08",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "Go后端工程师",
       "dim": "开发阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "C++高并发与内存安全审查",
+      "domain": "某AI算力集群",
+      "feature": "高并发遥测写入服务",
       "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
+      "prompt": "【高并发服务场景】请用 Go 编写一个简化的遥测写入服务代码片段，要求支持：\n1. 使用 goroutine worker pool 并发处理写入请求。\n2. 暴露 `HandleBatch(records []Telemetry)` 函数。\n3. 对失败写入进行重试并记录日志。\n\n【代码约束】：只输出 ```go 代码块，禁止解释。",
+      "expected_format": "go",
       "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
+        "type Telemetry struct",
+        "go func",
+        "HandleBatch",
+        "retry"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -198,18 +203,18 @@
     {
       "id": "COMPANY_IPD_S3_09",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "运维开发工程师",
       "dim": "开发阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "前端TypeScript强类型并发",
+      "domain": "某服务器管理平台",
+      "feature": "灰度发布回滚脚本",
       "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
+      "prompt": "【运维自动化场景】请编写一个 Bash 脚本 `rollback_release.sh`，完成以下动作：\n1. 检查当前发布版本和目标回滚版本。\n2. 执行回滚前健康检查。\n3. 回滚失败时打印错误并返回非零退出码。\n\n【代码约束】：仅输出 ```bash 代码块。",
+      "expected_format": "bash",
       "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
+        "set -e",
+        "exit 1",
+        "rollback_release",
+        "health"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -221,17 +226,18 @@
     {
       "id": "COMPANY_IPD_S3_10",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "Python测试开发工程师",
       "dim": "开发阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "复杂SQL与查询优化",
+      "domain": "某企业ERP系统",
+      "feature": "结算引擎回归单测补齐",
       "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
+      "prompt": "【测试补齐场景】已有 Python 函数 `settle_amount(amount, discount, tax_rate)`，请使用 `pytest` 编写一组单元测试，覆盖正常路径、折扣为 0、非法税率三个场景。\n\n【代码约束】：只输出 Markdown 的 Python 代码块，测试函数名必须以 `test_` 开头。",
+      "expected_format": "python",
       "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
+        "import pytest",
+        "def test_",
+        "raises",
+        "assert"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -243,20 +249,18 @@
     {
       "id": "COMPANY_IPD_S3_11",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "Java后端工程师",
       "dim": "开发阶段",
-      "domain": "某智能体平台",
-      "feature": "技术边界与防幻觉测试",
-      "difficulty": "Hell",
-      "prompt": "【架构极限挑战】请使用纯净的 MySQL 5.7 原生SQL语法，编写一个完整的能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。请直接给出SQL源码。",
-      "expected_format": "text",
+      "domain": "某智能液冷超充站",
+      "feature": "充电订单幂等接口",
+      "difficulty": "Expert",
+      "prompt": "【企业接口开发场景】请用 Java 编写一个简化的充电订单创建接口代码，要求：\n1. Controller 接收 `requestId` 实现幂等。\n2. Service 中包含重复请求判断。\n3. 返回统一响应对象。\n\n【代码约束】：仅输出 Java 代码块，不要解释。",
+      "expected_format": "java",
       "eval_rule": [
-        "不支持",
-        "做不到",
-        "无法实现",
-        "非编程语言",
-        "不是",
-        "不能"
+        "requestId",
+        "@RestController",
+        "@Service",
+        "Response"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -268,18 +272,18 @@
     {
       "id": "COMPANY_IPD_S3_12",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "SQL工程师",
       "dim": "开发阶段",
-      "domain": "某服务器操作系统",
-      "feature": "自动化与数据工程脚本",
+      "domain": "某智能数据AI平台",
+      "feature": "增量同步对账SQL",
       "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "prompt": "【数据同步场景】请编写一条 SQL，用于对比 `source_orders` 与 `target_orders` 两张表中最近 1 天的数据差异，并输出缺失或金额不一致的订单。\n\n【代码约束】：只输出 ```sql 代码块。",
+      "expected_format": "sql",
       "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
+        "SELECT",
+        "LEFT JOIN",
+        "WHERE",
+        "amount"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
@@ -291,874 +295,644 @@
     {
       "id": "COMPANY_IPD_S3_13",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "研发效能工程师",
       "dim": "开发阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "C++高并发与内存安全审查",
+      "domain": "某服务器管理平台",
+      "feature": "缺陷修复执行计划",
       "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "昨天 TR4 评审指出 BMC 批量纳管链路在高并发下存在连接池泄漏风险，要求研发今天给出修复闭环。"
+        },
+        {
+          "role": "assistant",
+          "content": "已确认需要同时覆盖根因假设、修复任务拆解和回滚预案，输出应可供研发效能平台直接登记。"
+        }
+      ],
+      "prompt": "【修复执行场景】某服务器管理平台 刚发现一个 P1 缺陷：BMC 批量纳管时连接池泄漏，导致 30 分钟后纳管任务大面积超时。\n\n请输出一份原始 JSON 修复计划，顶层必须包含：issue_summary、root_cause_hypothesis、work_items、rollback_plan。work_items 必须是至少 3 项的数组，每项对象必须包含：task、owner_role、done_definition。\n\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "issue_summary",
+        "root_cause_hypothesis",
+        "work_items",
+        "rollback_plan"
+      ],
       "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
+        "work_items",
+        "owner_role",
+        "rollback_plan"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S3_14",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "测试架构师",
       "dim": "开发阶段",
-      "domain": "某智能体平台",
-      "feature": "前端TypeScript强类型并发",
+      "domain": "某企业ERP系统",
+      "feature": "结算引擎测试补齐计划",
       "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "上一轮修复已经解决折扣叠加错误，但测试经理认为异常路径覆盖仍然不足。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，需要补一份能直接落地到测试任务池的补测表，覆盖单测、集成、回归和异常路径。"
+        }
+      ],
+      "prompt": "【测试设计场景】某企业ERP系统 的结算引擎刚修复折扣计算缺陷，请输出一份 Markdown 表格形式的补测计划。\n\n表头必须且只能包含：测试类型、覆盖场景、关键数据、通过标准。至少输出 4 行，并覆盖单测、集成测试、回归测试、异常路径。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "测试类型",
+        "覆盖场景",
+        "关键数据",
+        "通过标准"
+      ],
       "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
+        "单测",
+        "回归测试",
+        "通过标准"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S3_15",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "架构师",
       "dim": "开发阶段",
-      "domain": "某AI算力集群",
-      "feature": "复杂SQL与查询优化",
+      "domain": "某HCI超融合基础设施",
+      "feature": "重构设计说明",
       "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "评审会上有人担心把同步串行流程改成异步分段提交后，会放大一致性和回滚风险。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，设计说明需要先回应目标和设计调整，再明确列出风险控制措施。"
+        }
+      ],
+      "prompt": "【设计说明场景】某HCI超融合基础设施 的存储写入链路准备从同步串行流程重构为异步分段提交。请输出一份 Markdown 设计说明。\n\n格式要求：\n1. 必须包含一级标题 `# 目标`、`# 设计调整`、`# 风险控制`。\n2. 每个标题下至少 2 条无序列表。\n3. 风险控制部分必须提到一致性或回滚。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "目标",
+        "设计调整",
+        "风险控制"
+      ],
       "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
+        "一致性",
+        "回滚",
+        "设计"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S3_16",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "发布经理",
       "dim": "开发阶段",
       "domain": "某智能液冷超充站",
-      "feature": "企业级后端架构规约设计",
+      "feature": "灰度发布执行清单",
       "difficulty": "Expert",
-      "prompt": "【真实业务重构场景】你是一名资深的Java架构师。以下是由外包人员写的一段老旧Spring Controller代码，它将数据库查询、参数校验和业务逻辑全部柔和在了一起，同时也缺乏异常处理：\n```java\n@RestController\npublic class OrderController {\n    @Autowired\n    private JdbcTemplate jdbcTemplate;\n\n    @GetMapping(\"/createOrder\")\n    public String create(String userId, String productId) {\n        if(userId == null || productId == null) return \"error\";\n        jdbcTemplate.update(\"insert into orders (user_id, product_id) values (?, ?)\", userId, productId);\n        return \"success\";\n    }\n}\n```\n【重构要求】：\n1. 请使用Spring Boot推荐的依赖注入姿势（如构造器注入）。\n2. 将业务逻辑抽离到Service层，并为其添加@Transactional事务。\n3. 使用全局异常处理机制（@RestControllerAdvice）来替代硬编码的error返回。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Java代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "业务负责人确认新版本只能先灰度到 2 个站点，且必须保留一键回退能力。"
+        },
+        {
+          "role": "assistant",
+          "content": "了解，发布清单需要突出灰度范围、发布前检查、执行步骤和回滚条件。"
+        }
+      ],
+      "prompt": "【工程交付场景】某智能液冷超充站 新版本准备进入灰度，请输出一份原始 JSON 发布执行清单。\n\n顶层必须包含：release_scope、prechecks、deployment_steps、rollback_conditions。prechecks 和 deployment_steps 都必须是数组，且每个数组至少 3 项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "release_scope",
+        "prechecks",
+        "deployment_steps",
+        "rollback_conditions"
+      ],
       "eval_rule": [
-        "@Service",
-        "@Transactional",
-        "RestControllerAdvice",
-        "构造器"
+        "prechecks",
+        "deployment_steps",
+        "rollback_conditions"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S3_17",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "技术负责人",
       "dim": "开发阶段",
-      "domain": "某服务器操作系统",
-      "feature": "自动化与数据工程脚本",
+      "domain": "某智能体平台",
+      "feature": "接口重构验收清单",
       "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "prompt": "【验收对齐场景】某智能体平台 刚完成工具调用网关的重构，请输出一份原始 JSON 验收清单。\n\n顶层必须包含：change_scope、acceptance_checks、blocking_risks、handover_notes。acceptance_checks 必须是至少 4 项的数组，每项对象必须包含：check_item、owner_role、pass_criteria。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "change_scope",
+        "acceptance_checks",
+        "blocking_risks",
+        "handover_notes"
+      ],
       "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
+        "acceptance_checks",
+        "pass_criteria",
+        "blocking_risks"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S3_18",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "研发经理",
       "dim": "开发阶段",
       "domain": "某AI算力集群",
-      "feature": "C++高并发与内存安全审查",
+      "feature": "联调问题复盘纪要",
       "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
+      "prompt": "【联调复盘场景】某AI算力集群 的训练调度链路在联调中发生作业抢占异常，请输出一份 Markdown 复盘纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 问题概览`、`# 根因分析`、`# 后续动作`。\n2. 每个标题下至少 2 条无序列表。\n3. 后续动作中必须体现负责人、时限和回归验证。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "问题概览",
+        "根因分析",
+        "后续动作"
+      ],
       "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
+        "负责人",
+        "时限",
+        "回归验证"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S3_19",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "前端TypeScript强类型并发",
+      "domain": "某智能数据AI平台",
+      "feature": "PR代码审查意见矩阵",
       "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
+      "prompt": "【代码审查场景】某智能数据AI平台 的一次 PR 涉及数据预处理、缓存刷新和异常重试三个模块，请输出一份 Markdown 表格形式的代码审查意见矩阵。\n\n表头必须且只能包含：审查对象、问题类型、风险说明、修改建议。至少输出 4 行，并覆盖资源释放、异常处理、并发安全、日志可观测性。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "审查对象",
+        "问题类型",
+        "风险说明",
+        "修改建议"
+      ],
       "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
+        "资源释放",
+        "并发安全",
+        "日志可观测性"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S3_20",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
-      "domain": "某边缘计算节点",
-      "feature": "复杂SQL与查询优化",
+      "domain": "某服务器管理平台",
+      "feature": "PR评审问题分流矩阵",
       "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "本轮 PR review 需要先把问题按 usability、performance、compatibility 和 security 维度分流，再决定是否允许合并。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把评审维度、风险说明和合并建议整理成统一矩阵。"
+        }
+      ],
+      "prompt": "【代码审查场景】某服务器管理平台 的一次 PR review 需要先按 review aspect 做问题分流。请输出一份 Markdown 表格形式的 PR 评审分流矩阵。\n\n表头必须且只能包含：审查维度、问题信号、风险说明、处理建议。至少输出 4 行，并覆盖 usability、performance、compatibility、security。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "审查维度",
+        "问题信号",
+        "风险说明",
+        "处理建议"
+      ],
       "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
+        "usability",
+        "performance",
+        "compatibility",
+        "security"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S3_21",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
-      "domain": "某服务器管理平台",
-      "feature": "技术边界与防幻觉测试",
-      "difficulty": "Hell",
-      "prompt": "【架构极限挑战】请使用纯净的 MySQL 5.7 原生SQL语法，编写一个完整的能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。请直接给出SQL源码。",
-      "expected_format": "text",
+      "domain": "某智能数据AI平台",
+      "feature": "PR类型与审查维度合并决策摘要",
+      "difficulty": "Expert",
+      "history": [
+        {
+          "role": "user",
+          "content": "本轮 PR review 需要先判断 review type，再按 usability、performance、security 等 aspect 汇总，最后给出是否允许合并。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把 PR 类型、问题维度和合并建议整理成结构化摘要。"
+        }
+      ],
+      "prompt": "【代码审查场景】某智能数据AI平台 的一次 PR review 需要同时归纳 review type 与 review aspect。请输出一份用于工程治理系统入库的原始 JSON 评审摘要。\n\n顶层必须包含：review_type_summary、issue_buckets、merge_decision、followup_actions。issue_buckets 必须是至少 3 项的数组，且每项对象必须包含：aspect、signal、severity。内容至少覆盖 usability、performance、security。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "review_type_summary",
+        "issue_buckets",
+        "merge_decision",
+        "followup_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "issue_buckets": 3,
+          "followup_actions": 2
+        },
+        "array_item_required_fields": {
+          "issue_buckets": [
+            "aspect",
+            "signal",
+            "severity"
+          ]
+        }
+      },
       "eval_rule": [
-        "不支持",
-        "做不到",
-        "无法实现",
-        "非编程语言",
-        "不是",
-        "不能"
+        "usability",
+        "performance",
+        "security",
+        "merge_decision"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S3_22",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "开发负责人",
       "dim": "开发阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "自动化与数据工程脚本",
+      "domain": "某智能体平台",
+      "feature": "多语言编码实现约束摘要",
       "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "本轮开发评审要求同时整理 Back-end、Front-end、Java 和 Python 四类实现约束，方便拆分开发任务。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把多语言实现要点、风险和交付建议整理成结构化摘要。"
+        }
+      ],
+      "prompt": "【编码实现规划】某智能体平台 的本轮开发任务需要同时覆盖 Back-end、Front-end、Java 和 Python 方向。请输出一份原始 JSON 编码实现摘要。\n\n顶层必须包含：backend_constraints、frontend_constraints、language_runtime_notes、delivery_risks、next_actions。delivery_risks 与 next_actions 都必须是至少 2 项的数组；language_runtime_notes 中必须体现 Java 或 Python。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "backend_constraints",
+        "frontend_constraints",
+        "language_runtime_notes",
+        "delivery_risks",
+        "next_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "delivery_risks": 2,
+          "next_actions": 2
+        }
+      },
       "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
+        "Back-end",
+        "Front-end",
+        "Java",
+        "Python"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S3_23",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
-      "domain": "某企业ERP系统",
-      "feature": "C++高并发与内存安全审查",
+      "domain": "某服务器管理平台",
+      "feature": "高频审查维度分流摘要",
       "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "本轮 PR review 想把高频的 review aspect 先统一归类，再决定哪些问题进入兼容性、安全或文档整改。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把高频审查维度、问题信号和后续处理建议整理成结构化摘要。"
+        }
+      ],
+      "prompt": "【代码审查场景】某服务器管理平台 的一次 PR review 需要先做高频 review aspect 分流。请输出一份原始 JSON 评审摘要。\n\n顶层必须包含：review_context、high_frequency_aspects、nonfunctional_risks、routing_actions。high_frequency_aspects 必须是至少 4 项的数组，且每项对象必须包含：aspect、signal、owner。内容至少覆盖 documentation、compatibility、security、portability。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "review_context",
+        "high_frequency_aspects",
+        "nonfunctional_risks",
+        "routing_actions"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "high_frequency_aspects": 4,
+          "nonfunctional_risks": 2,
+          "routing_actions": 2
+        },
+        "array_item_required_fields": {
+          "high_frequency_aspects": [
+            "aspect",
+            "signal",
+            "owner"
+          ]
+        }
+      },
       "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
+        "documentation",
+        "compatibility",
+        "security",
+        "portability"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S3_24",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
-      "domain": "某AI算力集群",
-      "feature": "前端TypeScript强类型并发",
+      "domain": "某边缘计算节点",
+      "feature": "可用性与可移植性审查矩阵",
       "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "这轮 PR review 的高频问题集中在 usability 和 portability，评审会要求先独立分流再决定是否延后合并。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把可用性、可移植性及相关非功能风险整理成统一矩阵。"
+        }
+      ],
+      "prompt": "【代码审查场景】某边缘计算节点 的一次 PR review 需要优先分流高频 review aspect。请严格按 Markdown 表格输出 4 条评审分流记录。\n\n表头必须且只能包含：审查维度、问题信号、非功能风险、处理建议。至少 1 行覆盖 usability，至少 1 行覆盖 portability，至少 1 行覆盖 documentation 或 compatibility，至少 1 行给出延后合并或补齐说明。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "审查维度",
+        "问题信号",
+        "非功能风险",
+        "处理建议"
+      ],
+      "markdown_table_rules": {
+        "exact_rows": 4,
+        "must_contain": [
+          "usability",
+          "portability"
+        ],
+        "must_contain_any_groups": [
+          [
+            "documentation",
+            "compatibility"
+          ],
+          [
+            "延后合并",
+            "补齐说明"
+          ]
+        ]
+      },
       "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
+        "usability",
+        "portability",
+        "documentation",
+        "compatibility"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S3_25",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "复杂SQL与查询优化",
-      "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
+      "domain": "某智能体平台",
+      "feature": "review_aspect 低复杂度分流摘要",
+      "difficulty": "Low",
+      "history": [
+        {
+          "role": "user",
+          "content": "这轮 PR 只有一个轻量 review aspect 需要先快速归类，评审会只要求给出简单分流结论。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会给出一份轻量结构化分流摘要，便于快速决定是否继续合并。"
+        }
+      ],
+      "prompt": "【代码审查场景】某智能体平台 的一次轻量 PR review 需要先做 review aspect 快速分流。请输出一份原始 JSON 评审摘要。\n\n顶层必须包含：primary_aspect、signal_summary、merge_hint、next_step。内容必须体现 usability、others 或 documentation 中的至少一项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "primary_aspect",
+        "signal_summary",
+        "merge_hint",
+        "next_step"
+      ],
+      "json_rules": {
+        "root_type": "object"
+      },
       "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
+        "usability",
+        "others",
+        "documentation"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S3_26",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
       "domain": "某服务器管理平台",
-      "feature": "企业级后端架构规约设计",
-      "difficulty": "Expert",
-      "prompt": "【真实业务重构场景】你是一名资深的Java架构师。以下是由外包人员写的一段老旧Spring Controller代码，它将数据库查询、参数校验和业务逻辑全部柔和在了一起，同时也缺乏异常处理：\n```java\n@RestController\npublic class OrderController {\n    @Autowired\n    private JdbcTemplate jdbcTemplate;\n\n    @GetMapping(\"/createOrder\")\n    public String create(String userId, String productId) {\n        if(userId == null || productId == null) return \"error\";\n        jdbcTemplate.update(\"insert into orders (user_id, product_id) values (?, ?)\", userId, productId);\n        return \"success\";\n    }\n}\n```\n【重构要求】：\n1. 请使用Spring Boot推荐的依赖注入姿势（如构造器注入）。\n2. 将业务逻辑抽离到Service层，并为其添加@Transactional事务。\n3. 使用全局异常处理机制（@RestControllerAdvice）来替代硬编码的error返回。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Java代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "feature": "review_aspect 中复杂度分流矩阵",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "这轮 PR review 同时出现 usability 和 portability 信号，评审会要求补一张中复杂度分流矩阵。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把高频维度、非功能风险和处理建议整理成统一矩阵。"
+        }
+      ],
+      "prompt": "【代码审查场景】某服务器管理平台 的一次 PR review 需要先做中复杂度 review aspect 分流。请严格按 Markdown 表格输出 4 条分流记录。\n\n表头必须且只能包含：审查维度、问题信号、非功能风险、处理建议。至少 1 行覆盖 usability，至少 1 行覆盖 portability，至少 1 行覆盖 compatibility 或 documentation，至少 1 行体现补齐说明。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "审查维度",
+        "问题信号",
+        "非功能风险",
+        "处理建议"
+      ],
+      "markdown_table_rules": {
+        "exact_rows": 4,
+        "must_contain": [
+          "usability",
+          "portability"
+        ],
+        "must_contain_any_groups": [
+          [
+            "compatibility",
+            "documentation"
+          ],
+          [
+            "补齐说明",
+            "补齐"
+          ]
+        ]
+      },
       "eval_rule": [
-        "@Service",
-        "@Transactional",
-        "RestControllerAdvice",
-        "构造器"
+        "usability",
+        "portability",
+        "compatibility",
+        "documentation"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S3_27",
       "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某企业ERP系统",
-      "feature": "自动化与数据工程脚本",
-      "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
-      "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_28",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某AI算力集群",
-      "feature": "C++高并发与内存安全审查",
-      "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
-      "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_29",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "前端TypeScript强类型并发",
-      "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_30",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某服务器管理平台",
-      "feature": "复杂SQL与查询优化",
-      "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
-      "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_31",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "技术边界与防幻觉测试",
-      "difficulty": "Hell",
-      "prompt": "【架构极限挑战】请使用纯净的 MySQL 5.7 原生SQL语法，编写一个完整的能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。请直接给出SQL源码。",
-      "expected_format": "text",
-      "eval_rule": [
-        "不支持",
-        "做不到",
-        "无法实现",
-        "非编程语言",
-        "不是",
-        "不能"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_32",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
+      "role": "代码审查负责人",
       "dim": "开发阶段",
       "domain": "某边缘计算节点",
-      "feature": "自动化与数据工程脚本",
+      "feature": "review_aspect 高复杂度审查纪要",
       "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "这轮 PR review 需要把多个 review aspect 的信号、风险和合并建议整理成可供决策的审查纪要。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会按审查结论、主要风险和处置建议输出完整纪要。"
+        }
+      ],
+      "prompt": "【代码审查场景】某边缘计算节点 的一次复杂 PR review 需要汇总多个 review aspect。请只输出 Markdown 审查纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 审查结论`、`# 主要风险`、`# 处理建议`。\n2. 每个标题下至少 2 条无序列表。\n3. 主要风险部分必须体现 usability、portability、compatibility、security 中至少 3 项。\n4. 处理建议中必须体现合并判断或补齐动作。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "审查结论",
+        "主要风险",
+        "处理建议"
+      ],
+      "markdown_section_rules": {
+        "min_bullets_per_section": 2,
+        "must_contain_any_groups": [
+          [
+            "usability",
+            "portability",
+            "compatibility",
+            "security"
+          ],
+          [
+            "合并判断",
+            "补齐动作"
+          ]
+        ]
+      },
       "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
+        "usability",
+        "portability",
+        "compatibility",
+        "security",
+        "合并判断",
+        "补齐动作"
       ],
       "token_tier": "10K-50K",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_33",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某AI算力集群",
-      "feature": "C++高并发与内存安全审查",
-      "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
-      "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_34",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "前端TypeScript强类型并发",
-      "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_35",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某服务器管理平台",
-      "feature": "复杂SQL与查询优化",
-      "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
-      "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_36",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "企业级后端架构规约设计",
-      "difficulty": "Expert",
-      "prompt": "【真实业务重构场景】你是一名资深的Java架构师。以下是由外包人员写的一段老旧Spring Controller代码，它将数据库查询、参数校验和业务逻辑全部柔和在了一起，同时也缺乏异常处理：\n```java\n@RestController\npublic class OrderController {\n    @Autowired\n    private JdbcTemplate jdbcTemplate;\n\n    @GetMapping(\"/createOrder\")\n    public String create(String userId, String productId) {\n        if(userId == null || productId == null) return \"error\";\n        jdbcTemplate.update(\"insert into orders (user_id, product_id) values (?, ?)\", userId, productId);\n        return \"success\";\n    }\n}\n```\n【重构要求】：\n1. 请使用Spring Boot推荐的依赖注入姿势（如构造器注入）。\n2. 将业务逻辑抽离到Service层，并为其添加@Transactional事务。\n3. 使用全局异常处理机制（@RestControllerAdvice）来替代硬编码的error返回。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Java代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
-      "eval_rule": [
-        "@Service",
-        "@Transactional",
-        "RestControllerAdvice",
-        "构造器"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_37",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某企业ERP系统",
-      "feature": "自动化与数据工程脚本",
-      "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
-      "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_38",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "C++高并发与内存安全审查",
-      "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
-      "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_39",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "前端TypeScript强类型并发",
-      "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_40",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "复杂SQL与查询优化",
-      "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
-      "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_41",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某企业ERP系统",
-      "feature": "技术边界与防幻觉测试",
-      "difficulty": "Hell",
-      "prompt": "【架构极限挑战】请使用纯净的 MySQL 5.7 原生SQL语法，编写一个完整的能够监听 8080 端口、解析 HTTP GET 请求并返回JSON的微服务。请直接给出SQL源码。",
-      "expected_format": "text",
-      "eval_rule": [
-        "不支持",
-        "做不到",
-        "无法实现",
-        "非编程语言",
-        "不是",
-        "不能"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_42",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某企业ERP系统",
-      "feature": "自动化与数据工程脚本",
-      "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
-      "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_43",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某服务器操作系统",
-      "feature": "C++高并发与内存安全审查",
-      "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
-      "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_44",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某智能体平台",
-      "feature": "前端TypeScript强类型并发",
-      "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_45",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某AI算力集群",
-      "feature": "复杂SQL与查询优化",
-      "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
-      "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_46",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某服务器操作系统",
-      "feature": "企业级后端架构规约设计",
-      "difficulty": "Expert",
-      "prompt": "【真实业务重构场景】你是一名资深的Java架构师。以下是由外包人员写的一段老旧Spring Controller代码，它将数据库查询、参数校验和业务逻辑全部柔和在了一起，同时也缺乏异常处理：\n```java\n@RestController\npublic class OrderController {\n    @Autowired\n    private JdbcTemplate jdbcTemplate;\n\n    @GetMapping(\"/createOrder\")\n    public String create(String userId, String productId) {\n        if(userId == null || productId == null) return \"error\";\n        jdbcTemplate.update(\"insert into orders (user_id, product_id) values (?, ?)\", userId, productId);\n        return \"success\";\n    }\n}\n```\n【重构要求】：\n1. 请使用Spring Boot推荐的依赖注入姿势（如构造器注入）。\n2. 将业务逻辑抽离到Service层，并为其添加@Transactional事务。\n3. 使用全局异常处理机制（@RestControllerAdvice）来替代硬编码的error返回。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Java代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
-      "eval_rule": [
-        "@Service",
-        "@Transactional",
-        "RestControllerAdvice",
-        "构造器"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_47",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "自动化与数据工程脚本",
-      "difficulty": "Expert",
-      "prompt": "【真实业务数据处理场景】你是一名Python数据工程师。需要处理一批存在严重脏数据的JSON日志（模拟由于网络抖动截断的日志和嵌套层级混乱的日志）。\n【输入示例】：\n`[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]`\n\n【开发要求】：\n请编写一段Python脚本（可以使用pandas或纯Python），安全地提取所有的 cost 值并计算平均值。\n核心约束：\n1. 必须捕获 KeyError 和 TypeError 数据缺失问题。\n2. 最终返回一个包含清洗逻辑的完整独立函数 `calculate_avg_cost(data_list)`。\n\n【代码约束】：ONLY_CODE！只允许输出Markdown的Python代码块，禁止包含任何人类解释！",
-      "expected_format": "text",
-      "eval_rule": [
-        "def calculate_avg_cost",
-        "KeyError",
-        "TypeError",
-        "Exception"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_48",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "C++高并发与内存安全审查",
-      "difficulty": "Expert",
-      "prompt": "【底软代码安全审计】你是一名底座软件的C++高级内核开发。研发提交了如下一段多线程内存管理的实验代码：\n```cpp\nvoid process() {\n    int* data = new int[100];\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    delete[] data;\n}\n```\n【任务】：\n直接指出代码中存在的2大核心隐患，并给出现代C++（C++11/14）的修复代码块。\n要求修复代码必须用到 `std::shared_ptr` 或 `std::unique_ptr`，并在需要时妥善处理线程生命周期（如 `std::thread::join`）。\n\n【输出约束】：只输出修复后的代码块，使用Markdown包围。严禁对隐患原理解释连篇累牍！",
-      "expected_format": "text",
-      "eval_rule": [
-        "std::shared_ptr",
-        "std::unique_ptr",
-        "join()",
-        "代码块"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_49",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "前端TypeScript强类型并发",
-      "difficulty": "Expert",
-      "prompt": "【全栈研发场景】你是一名资深前端研发，现在要请求多个Swagger接口。\n【需求】：\n你需要实现一个异步方法 `fetchDashboardData()`，它要并发请求3个后端接口 `/api/user`、`/api/orders`、`/api/metrics`。\n约束条件：\n1. 使用 `Promise.all` 处理并发。\n2. 必须包含严格的 TypeScript Interface 定义（User、Order、Metrics，字段随意合理即可）。\n3. 如果其中任何一个接口超时（假定提供了一个 `timeout(ms)` 辅助函数），或者返回失败，需要优雅降级，不能造成白屏前端崩溃。\n\n【代码约束】：ONLY_CODE！要求直接给出TypeScript (.ts) 文件的完整代码块。",
-      "expected_format": "text",
-      "eval_rule": [
-        "Promise.all",
-        "interface",
-        "try",
-        "catch"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
-    },
-    {
-      "id": "COMPANY_IPD_S3_50",
-      "ipd_stage": "开发阶段(Develop)",
-      "role": "算力底层开发工程师",
-      "dim": "开发阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "复杂SQL与查询优化",
-      "difficulty": "Expert",
-      "prompt": "【真实数据库场景】你是一名高级DBA。请写一条复杂的 MySQL 5.7+ 兼容SQL。\n目前有员工表 `employees(emp_id, emp_name, dept_id, salary)` 和部门表 `departments(dept_id, dept_name)`。\n要求：\n1. 找出每个部门员工薪水排名前3的人。\n2. 由于MySQL5.7可能不完全支持部分现代窗口函数，请酌情使用变量或标准SQL兼容写法。\n3. 不要使用存储过程，一条SELECT语句搞定。\n\n【代码约束】：要求仅输出带 ```sql 包裹的代码块。禁止返回其他任何说明。",
-      "expected_format": "text",
-      "eval_rule": [
-        "SELECT",
-        "JOIN",
-        "ORDER BY"
-      ],
-      "token_tier": "10K-50K",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "code_analyzer"
+      "verifier_type": "markdown_sections_validator"
     }
   ]
 }

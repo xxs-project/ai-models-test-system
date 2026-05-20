@@ -1,13 +1,14 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "ipd-plan",
   "name": "IPD S2: 计划阶段(Plan) - PDCP评审门",
-  "description": "IPD流程S2阶段：明确'怎么做'。需求规格(PRD)、系统架构、项目计划、成本/资源/风险规划。PDCP计划决策评审。",
+  "description": "IPD流程S2阶段：明确'怎么做'。需求规格(PRD)、系统架构、项目计划、成本/资源/风险规划。PDCP计划决策评审。该Pack聚焦原始JSON结构化输出、架构拆解、约束映射与风险控制。",
   "ipd_stage": 2,
   "ipd_gate": "PDCP",
   "ipd_objective": "明确'怎么做'",
   "capabilities": {
-    "verification": true
+    "verification": true,
+    "structured_output": true
   },
   "cases": [
     {
@@ -18,12 +19,20 @@
       "domain": "某企业ERP系统",
       "feature": "基于分布式强一致性事务的秒级账务对账",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某企业ERP系统】产品线进行升级，核心要满足客户对【基于分布式强一致性事务的秒级账务对账】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某企业ERP系统】产品线进行升级，核心要满足客户对【基于分布式强一致性事务的秒级账务对账】的硬性业务需求。\n\n场景焦点：客户要求月末关账窗口不超过 15 分钟，同时总部与异地灾备中心要具备双活切换能力。请完成从客户需求到技术软硬件架构的系统拆解映射。\n\n输出必须且只能是原始 JSON 对象，顶层必须包含以下字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。\n其中 modules 必须是长度为 3 的数组，每个模块对象都必须包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。deployment_constraints 与 risk_controls 均需至少 2 项。\n\n【系统指令约束 (System Critical)】：\n1. 输出的第一个字符必须是 {。\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
         "强一致性",
-        "module_name",
-        "interface_protocol"
+        "deployment_constraints",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -37,15 +46,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某智能体平台",
-      "feature": "支持千万级并发WebSocket保活与消息下发网关",
+      "domain": "某企业ERP系统",
+      "feature": "基于分布式强一致性事务的秒级账务对账",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能体平台】产品线进行升级，核心要满足客户对【支持千万级并发WebSocket保活与消息下发网关】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。针对【某企业ERP系统】产品线升级，请围绕【基于分布式强一致性事务的秒级账务对账】能力给出计划阶段架构方案。\n\n场景焦点：该客户是上市公司，要求财务权限严格分离、全链路审计可追溯，并且任何账务补偿动作都要能被审计系统复盘。请完成需求到架构的映射。\n\n输出必须且只能是原始 JSON 对象，顶层必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 为 3 个模块组成的数组，每个模块对象必须包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出的第一个字符必须是 {。\n2. 绝对禁止 Markdown 与解释性文本。\n3. JSON 中必须体现权限隔离、审计留痕与补偿控制。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "WebSocket",
-        "module_name",
-        "interface_protocol"
+        "审计",
+        "deployment_constraints",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -59,15 +76,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某服务器操作系统",
-      "feature": "eBPF内核级无侵入网络观测探针",
+      "domain": "某智能体平台",
+      "feature": "支持千万级并发WebSocket保活与消息下发网关",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器操作系统】产品线进行升级，核心要满足客户对【eBPF内核级无侵入网络观测探针】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某智能体平台】产品线围绕【支持千万级并发WebSocket保活与消息下发网关】能力设计计划阶段架构。\n\n场景焦点：客户要求在全球多地域同时在线，且移动端网络抖动明显，平台必须支持连接保活、分区广播和故障时优雅降级。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须为：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 数组固定为 3 项，每项必须包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 严禁 Markdown 代码块。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "eBPF",
-        "module_name",
-        "interface_protocol"
+        "WebSocket",
+        "deployment_constraints",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -81,15 +106,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某企业ERP系统",
-      "feature": "基于分布式强一致性事务的秒级账务对账",
+      "domain": "某智能体平台",
+      "feature": "支持千万级并发WebSocket保活与消息下发网关",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某企业ERP系统】产品线进行升级，核心要满足客户对【基于分布式强一致性事务的秒级账务对账】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某智能体平台】的【支持千万级并发WebSocket保活与消息下发网关】能力输出架构拆解。\n\n场景焦点：客户希望在成本可控前提下实现多租户隔离，租户之间的消息风暴不能相互影响，且需要支持逐租户限流和灰度发布。\n\n输出必须且只能是原始 JSON 对象，顶层必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls；modules 必须为 3 个模块对象，每项包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出 JSON，并显式体现多租户、限流与灰度控制。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "强一致性",
-        "module_name",
-        "interface_protocol"
+        "多租户",
+        "限流",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -103,15 +136,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某服务器管理平台",
-      "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
+      "domain": "某服务器操作系统",
+      "feature": "eBPF内核级无侵入网络观测探针",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器管理平台】产品线进行升级，核心要满足客户对【支持十万级节点的BMC Redfish并发纳管引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某服务器操作系统】的【eBPF内核级无侵入网络观测探针】能力设计计划阶段架构。\n\n场景焦点：目标部署环境是核心生产集群，不能显著增加 CPU 开销，并且必须兼容不同内核小版本。请完成需求到技术软硬件架构的拆解。\n\n输出必须且只能是原始 JSON 对象，顶层字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 项数组，每项字段为：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 禁止 Markdown 包裹。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "Redfish",
-        "module_name",
-        "interface_protocol"
+        "eBPF",
+        "内核",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -125,15 +166,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "基于RDMA的高性能分布式块存储引擎",
+      "domain": "某服务器操作系统",
+      "feature": "eBPF内核级无侵入网络观测探针",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某HCI超融合基础设施】产品线进行升级，核心要满足客户对【基于RDMA的高性能分布式块存储引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。针对【某服务器操作系统】产品线升级，请围绕【eBPF内核级无侵入网络观测探针】能力给出计划阶段架构方案。\n\n场景焦点：客户同时强调零信任安全基线，要求观测探针不能被普通租户滥用，也不能因为探针升级影响业务主机稳定性。请输出需求到架构的映射。\n\n输出必须且只能是原始 JSON 对象，包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 数组长度固定为 3，每项字段必须包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 严禁 Markdown 与额外解释。\n3. 仅输出 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "RDMA",
-        "module_name",
-        "interface_protocol"
+        "零信任",
+        "eBPF",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -150,12 +199,20 @@
       "domain": "某服务器管理平台",
       "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器管理平台】产品线进行升级，核心要满足客户对【支持十万级节点的BMC Redfish并发纳管引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某服务器管理平台】的【支持十万级节点的BMC Redfish并发纳管引擎】能力设计架构方案。\n\n场景焦点：客户要求 24 小时内完成十万节点首轮纳管，并对失败节点做分批重试与回滚，运维团队不能手工逐台介入。\n\n输出必须且只能是原始 JSON 对象，顶层字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 固定为 3 个模块，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 严禁 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
         "Redfish",
-        "module_name",
-        "interface_protocol"
+        "回滚",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -169,15 +226,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某边缘计算节点",
-      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
+      "domain": "某服务器管理平台",
+      "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某边缘计算节点】产品线进行升级，核心要满足客户对【断网容灾状态下的边缘本地推理与数据缓存】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某服务器管理平台】产品线的【支持十万级节点的BMC Redfish并发纳管引擎】能力输出计划阶段架构。\n\n场景焦点：客户要求所有 BMC 凭据按零信任方式轮转，纳管通道必须分域隔离，并对高危命令执行建立审批拦截。\n\n输出必须且只能是原始 JSON 对象，顶层必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls；modules 必须为 3 个模块对象，每项包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 禁止 Markdown 与额外解释。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "边缘",
-        "module_name",
-        "interface_protocol"
+        "Redfish",
+        "零信任",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -191,15 +256,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某AI算力集群",
-      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
+      "domain": "某HCI超融合基础设施",
+      "feature": "基于RDMA的高性能分布式块存储引擎",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某AI算力集群】产品线进行升级，核心要满足客户对【面向千卡规模的GPU算力池化与拓扑感知调度】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某HCI超融合基础设施】的【基于RDMA的高性能分布式块存储引擎】能力给出计划阶段架构。\n\n场景焦点：客户要求数据库型工作负载在混合 NVMe 与 SSD 节点上稳定运行，并且读写热点迁移不能影响业务高峰。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须为：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 为 3 项数组，每项包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 首字符必须为 {。\n2. 严禁 Markdown。\n3. 仅输出 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "算力池化",
-        "module_name",
-        "interface_protocol"
+        "RDMA",
+        "NVMe",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -213,15 +286,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某边缘计算节点",
-      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
+      "domain": "某HCI超融合基础设施",
+      "feature": "基于RDMA的高性能分布式块存储引擎",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某边缘计算节点】产品线进行升级，核心要满足客户对【断网容灾状态下的边缘本地推理与数据缓存】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某HCI超融合基础设施】的【基于RDMA的高性能分布式块存储引擎】能力设计计划阶段架构方案。\n\n场景焦点：客户在三机房部署，要求跨故障域容灾、脑裂防护与运维可观测性同时成立，不能只追求单一吞吐。\n\n输出必须且只能是原始 JSON 对象，顶层必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须为 3 个模块，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "边缘",
-        "module_name",
-        "interface_protocol"
+        "RDMA",
+        "脑裂",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -235,15 +316,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某AI算力集群",
-      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
+      "domain": "某边缘计算节点",
+      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某AI算力集群】产品线进行升级，核心要满足客户对【面向千卡规模的GPU算力池化与拓扑感知调度】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某边缘计算节点】的【断网容灾状态下的边缘本地推理与数据缓存】能力设计计划阶段架构。\n\n场景焦点：客户节点部署在矿区，链路经常中断，但现场识别业务不能停，恢复联网后还要确保数据回传顺序正确。\n\n输出必须且只能是原始 JSON 对象，顶层必须为：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 为 3 项数组，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 严禁 Markdown 与额外说明。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "算力池化",
-        "module_name",
-        "interface_protocol"
+        "断网",
+        "缓存",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -257,15 +346,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某AI算力集群",
-      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
+      "domain": "某边缘计算节点",
+      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某AI算力集群】产品线进行升级，核心要满足客户对【面向千卡规模的GPU算力池化与拓扑感知调度】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某边缘计算节点】的【断网容灾状态下的边缘本地推理与数据缓存】能力输出计划阶段架构。\n\n场景焦点：客户现场的边缘硬件资源紧张，要求在 CPU、显存和本地盘容量受限的前提下实现模型降级、缓存淘汰与远程运维接管。\n\n输出必须且只能是原始 JSON 对象，顶层字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 长度必须为 3，每项包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "算力池化",
-        "module_name",
-        "interface_protocol"
+        "降级",
+        "缓存",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -279,15 +376,33 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某服务器操作系统",
-      "feature": "eBPF内核级无侵入网络观测探针",
+      "domain": "某AI算力集群",
+      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器操作系统】产品线进行升级，核心要满足客户对【eBPF内核级无侵入网络观测探针】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 预审已经确认两点：必须提升 MFU，同时不能因为跨交换域调度让性能抖动失控。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，这份计划阶段架构需要把拓扑感知、资源池化和部署约束一起表达清楚。"
+        }
+      ],
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某AI算力集群】的【面向千卡规模的GPU算力池化与拓扑感知调度】能力设计架构。\n\n场景焦点：客户机房中同时存在多代 GPU 与不同网络拓扑，目标是提升训练作业 MFU，并避免跨交换域调度带来的性能抖动。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "eBPF",
-        "module_name",
-        "interface_protocol"
+        "拓扑",
+        "GPU",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -301,15 +416,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "兆瓦级柔性充电功率调度与V2G车网互动",
+      "domain": "某AI算力集群",
+      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能液冷超充站】产品线进行升级，核心要满足客户对【兆瓦级柔性充电功率调度与V2G车网互动】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某AI算力集群】的【面向千卡规模的GPU算力池化与拓扑感知调度】能力输出计划阶段架构。\n\n场景焦点：客户要将训练、微调与推理混部，要求作业配额隔离、抢占策略可解释，并支持跨集群借调但不能破坏成本预算。\n\n输出必须且只能是原始 JSON 对象，顶层字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 固定为 3 项，每项必须包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 严禁 Markdown。\n3. 仅输出 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "V2G",
-        "module_name",
-        "interface_protocol"
+        "配额",
+        "成本",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -323,15 +446,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "机柜级CDU(冷量分配单元)与漏液熔断联动控制",
+      "domain": "某智能液冷超充站",
+      "feature": "兆瓦级柔性充电功率调度与V2G车网互动",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某型号液冷服务器】产品线进行升级，核心要满足客户对【机柜级CDU(冷量分配单元)与漏液熔断联动控制】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某智能液冷超充站】的【兆瓦级柔性充电功率调度与V2G车网互动】能力设计架构。\n\n场景焦点：园区电网存在峰谷电价差，站点需要在充电收益、储能调度与并网安全之间动态平衡。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 固定为 3 个模块，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "CDU",
-        "module_name",
-        "interface_protocol"
+        "V2G",
+        "电网",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -345,15 +476,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "PB级多模态数据流式加载与预处理流水线",
+      "domain": "某智能液冷超充站",
+      "feature": "兆瓦级柔性充电功率调度与V2G车网互动",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能数据AI平台】产品线进行升级，核心要满足客户对【PB级多模态数据流式加载与预处理流水线】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某智能液冷超充站】的【兆瓦级柔性充电功率调度与V2G车网互动】能力输出计划阶段架构。\n\n场景焦点：客户要求站级集群支持多枪协同、车网互动安全联锁，以及电池健康度差异下的差异化调度策略。\n\n输出必须且只能是原始 JSON 对象，顶层字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 项数组，每项包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 首字符必须是 {。\n2. 严禁 Markdown。\n3. 仅输出 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "流式加载",
-        "module_name",
-        "interface_protocol"
+        "V2G",
+        "联锁",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -367,15 +506,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "基于RDMA的高性能分布式块存储引擎",
+      "domain": "某型号液冷服务器",
+      "feature": "机柜级CDU(冷量分配单元)与漏液熔断联动控制",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某HCI超融合基础设施】产品线进行升级，核心要满足客户对【基于RDMA的高性能分布式块存储引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某型号液冷服务器】的【机柜级CDU(冷量分配单元)与漏液熔断联动控制】能力设计架构。\n\n场景焦点：客户要求在高密度液冷机柜中实现秒级告警、联动关断与业务保护，且不能因为单个传感器误报导致整柜业务全部中断。\n\n输出必须且只能是原始 JSON 对象，顶层字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 固定为 3 项，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown 与解释性文本。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "RDMA",
-        "module_name",
-        "interface_protocol"
+        "CDU",
+        "漏液",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -389,15 +536,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某边缘计算节点",
-      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
+      "domain": "某型号液冷服务器",
+      "feature": "机柜级CDU(冷量分配单元)与漏液熔断联动控制",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某边缘计算节点】产品线进行升级，核心要满足客户对【断网容灾状态下的边缘本地推理与数据缓存】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某型号液冷服务器】的【机柜级CDU(冷量分配单元)与漏液熔断联动控制】能力输出计划阶段架构。\n\n场景焦点：客户强调可维护性，要求支持热插拔传感器、更换泵阀时最小化停机窗口，并对冷却回路健康状态做持续诊断。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 长度固定为 3，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 严禁 Markdown。\n3. 仅输出 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "边缘",
-        "module_name",
-        "interface_protocol"
+        "CDU",
+        "热插拔",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -411,15 +566,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某企业ERP系统",
-      "feature": "基于分布式强一致性事务的秒级账务对账",
+      "domain": "某智能数据AI平台",
+      "feature": "PB级多模态数据流式加载与预处理流水线",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某企业ERP系统】产品线进行升级，核心要满足客户对【基于分布式强一致性事务的秒级账务对账】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某智能数据AI平台】的【PB级多模态数据流式加载与预处理流水线】能力设计架构。\n\n场景焦点：客户数据来源复杂，要求文本、图像、视频混合接入，数据血缘必须可追踪，且预处理作业不能成为训练链路瓶颈。\n\n输出必须且只能是原始 JSON 对象，顶层字段：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "强一致性",
-        "module_name",
-        "interface_protocol"
+        "多模态",
+        "血缘",
+        "deployment_constraints"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -433,15 +596,23 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某服务器管理平台",
-      "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
+      "domain": "某智能数据AI平台",
+      "feature": "PB级多模态数据流式加载与预处理流水线",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器管理平台】产品线进行升级，核心要满足客户对【支持十万级节点的BMC Redfish并发纳管引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请为【某智能数据AI平台】的【PB级多模态数据流式加载与预处理流水线】能力输出计划阶段架构。\n\n场景焦点：客户希望控制云资源成本，要求冷热数据分层、离线与在线预处理协同，并在不同业务线之间实现数据权限隔离。\n\n输出必须且只能是原始 JSON 对象，顶层必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 为 3 项数组，每项字段必须包含：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 输出首字符必须是 {。\n2. 严禁 Markdown 与额外说明。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "Redfish",
-        "module_name",
-        "interface_protocol"
+        "分层",
+        "权限",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -456,14 +627,32 @@
       "role": "系统架构师",
       "dim": "计划阶段",
       "domain": "某服务器管理平台",
-      "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
+      "feature": "拓扑遍历分析工具架构拆解",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器管理平台】产品线进行升级，核心要满足客户对【支持十万级节点的BMC Redfish并发纳管引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 预审已经要求这次方案同时说明模块文件树、命令行执行方式和测试资产组织，不能只给抽象模块名。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，这份计划阶段架构会把模块拆解、依赖、接口和部署约束按结构化 JSON 一起给出。"
+        }
+      ],
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某服务器管理平台】的【拓扑遍历分析工具架构拆解】能力设计计划阶段架构。\n\n场景焦点：客户要求该工具支持 BFS/DFS 拓扑遍历、邻接矩阵与邻接表双存储结构、命令行输入文件执行，以及 makefile 与单元测试资产协同。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "Redfish",
-        "module_name",
-        "interface_protocol"
+        "命令行",
+        "makefile",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -477,15 +666,33 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某AI算力集群",
-      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
+      "domain": "某智能数据AI平台",
+      "feature": "服务/数据库/日志高可用架构拆解",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某AI算力集群】产品线进行升级，核心要满足客户对【面向千卡规模的GPU算力池化与拓扑感知调度】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 评审要求这次方案必须同时说明服务高可用、数据库同步方式和日志可用性设计，不能只给单一计算链路。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把服务、数据库和日志设计一起落到结构化架构方案中。"
+        }
+      ],
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某智能数据AI平台】的【服务/数据库/日志高可用架构拆解】能力设计计划阶段架构。\n\n场景焦点：客户要求服务侧具备高可用目标，数据库备库采用半同步复制，并确保日志记录和存储链路可持续可用。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
       "eval_rule": [
-        "算力池化",
-        "module_name",
-        "interface_protocol"
+        "半同步复制",
+        "日志",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -499,15 +706,52 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某AI算力集群",
-      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
+      "domain": "某智能体平台",
+      "feature": "云原生服务高可用与配置联动架构",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某AI算力集群】产品线进行升级，核心要满足客户对【面向千卡规模的GPU算力池化与拓扑感知调度】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 评审要求这次方案同时说明服务高可用、数据库同步、配置管理和日志可观测，不能只给单一接口链路。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把服务设计、配置联动和观测闭环统一落到结构化架构方案里。"
+        }
+      ],
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某智能体平台】的【云原生服务高可用与配置联动架构】能力设计计划阶段架构。\n\n场景焦点：客户要求核心服务具备高可用目标，数据库备库采用半同步复制，配置管理必须支持集中下发与回退，日志链路需要支撑故障复盘。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_exact_items": {
+          "modules": 3
+        },
+        "array_min_items": {
+          "deployment_constraints": 2,
+          "risk_controls": 2
+        },
+        "array_item_required_fields": {
+          "modules": [
+            "module_name",
+            "hw_sw_dependencies",
+            "interface_protocol",
+            "design_rationale"
+          ]
+        }
+      },
       "eval_rule": [
-        "算力池化",
-        "module_name",
-        "interface_protocol"
+        "高可用",
+        "半同步复制",
+        "配置管理",
+        "日志"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -521,15 +765,52 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某AI算力集群",
-      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
+      "domain": "某HCI超融合基础设施",
+      "feature": "容量与日志高可用架构拆解",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某AI算力集群】产品线进行升级，核心要满足客户对【面向千卡规模的GPU算力池化与拓扑感知调度】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 评审要求这次方案同时说明容量高可用设计和日志高可用设计，不能只给单一存储链路。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把容量目标、日志链路和控制策略合并成结构化架构方案。"
+        }
+      ],
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某HCI超融合基础设施】的【容量与日志高可用架构拆解】能力设计计划阶段架构。\n\n场景焦点：客户要求容量高可用设计同时考虑带宽、存储空间和内存大小；日志侧必须提供可靠的日志记录和存储，并在故障域切换后仍可用于复盘。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_exact_items": {
+          "modules": 3
+        },
+        "array_min_items": {
+          "deployment_constraints": 2,
+          "risk_controls": 2
+        },
+        "array_item_required_fields": {
+          "modules": [
+            "module_name",
+            "hw_sw_dependencies",
+            "interface_protocol",
+            "design_rationale"
+          ]
+        }
+      },
       "eval_rule": [
-        "算力池化",
-        "module_name",
-        "interface_protocol"
+        "带宽",
+        "存储空间",
+        "日志",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -543,15 +824,52 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某AI算力集群",
-      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某AI算力集群】产品线进行升级，核心要满足客户对【面向千卡规模的GPU算力池化与拓扑感知调度】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "domain": "某智能体平台",
+      "feature": "服务高可用基础架构草案",
+      "difficulty": "Low",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 预审先只要求把服务高可用最基础的设计说明清楚，重点是稳定可靠、服务发现和故障切换。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会先给出一版聚焦服务高可用基础能力的结构化架构草案。"
+        }
+      ],
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某智能体平台】的【服务高可用基础架构草案】能力设计计划阶段架构。\n\n场景焦点：客户当前首先关注服务侧高可用，要求核心服务稳定可靠，支持服务发现、健康检查和故障切换，但暂不要求展开复杂的数据库或容量建模。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_exact_items": {
+          "modules": 3
+        },
+        "array_min_items": {
+          "deployment_constraints": 2,
+          "risk_controls": 2
+        },
+        "array_item_required_fields": {
+          "modules": [
+            "module_name",
+            "hw_sw_dependencies",
+            "interface_protocol",
+            "design_rationale"
+          ]
+        }
+      },
       "eval_rule": [
-        "算力池化",
-        "module_name",
-        "interface_protocol"
+        "高可用",
+        "稳定可靠",
+        "服务发现",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -565,15 +883,52 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某服务器操作系统",
-      "feature": "eBPF内核级无侵入网络观测探针",
+      "domain": "某智能数据AI平台",
+      "feature": "服务与数据库高可用联动架构",
       "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器操作系统】产品线进行升级，核心要满足客户对【eBPF内核级无侵入网络观测探针】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 正式评审要求这次不能只讲服务高可用，还要把数据库备库同步和日志链路一起说清楚。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把服务、数据库和日志的高可用联动关系统一落到结构化架构里。"
+        }
+      ],
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某智能数据AI平台】的【服务与数据库高可用联动架构】能力设计计划阶段架构。\n\n场景焦点：客户要求服务侧提供稳定可靠的高可用能力，数据库备库采用半同步复制，并确保日志记录和存储链路在主备切换后仍可持续可用。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_exact_items": {
+          "modules": 3
+        },
+        "array_min_items": {
+          "deployment_constraints": 2,
+          "risk_controls": 2
+        },
+        "array_item_required_fields": {
+          "modules": [
+            "module_name",
+            "hw_sw_dependencies",
+            "interface_protocol",
+            "design_rationale"
+          ]
+        }
+      },
       "eval_rule": [
-        "eBPF",
-        "module_name",
-        "interface_protocol"
+        "高可用",
+        "半同步复制",
+        "日志",
+        "risk_controls"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
@@ -587,521 +942,54 @@
       "ipd_stage": "计划阶段(Plan)",
       "role": "系统架构师",
       "dim": "计划阶段",
-      "domain": "某企业ERP系统",
-      "feature": "基于分布式强一致性事务的秒级账务对账",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某企业ERP系统】产品线进行升级，核心要满足客户对【基于分布式强一致性事务的秒级账务对账】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "强一致性",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_28",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
       "domain": "某HCI超融合基础设施",
-      "feature": "基于RDMA的高性能分布式块存储引擎",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某HCI超融合基础设施】产品线进行升级，核心要满足客户对【基于RDMA的高性能分布式块存储引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "RDMA",
-        "module_name",
-        "interface_protocol"
+      "feature": "服务高可用与容量日志一体化架构",
+      "difficulty": "Expert",
+      "history": [
+        {
+          "role": "user",
+          "content": "PDCP 终审要求这次方案不只说明服务和数据库高可用，还要把容量因素、日志复盘能力和风险控制一起闭环。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把服务、数据库、日志和容量约束整合成一版更完整的一体化高可用架构方案。"
+        }
       ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_29",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某服务器操作系统",
-      "feature": "eBPF内核级无侵入网络观测探针",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器操作系统】产品线进行升级，核心要满足客户对【eBPF内核级无侵入网络观测探针】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
+      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。请围绕【某HCI超融合基础设施】的【服务高可用与容量日志一体化架构】能力设计计划阶段架构。\n\n场景焦点：客户要求服务侧持续稳定可靠，数据库备库采用半同步复制，日志链路必须支撑故障复盘，同时容量高可用设计需要明确带宽、存储空间和内存大小的约束影响。\n\n输出必须且只能是原始 JSON 对象，顶层字段必须包含：architecture_name、primary_goal、modules、deployment_constraints、risk_controls。modules 必须是 3 个模块对象，每项字段：module_name、hw_sw_dependencies、interface_protocol、design_rationale。deployment_constraints 与 risk_controls 都至少 3 项。\n\n【系统指令约束 (System Critical)】：\n1. 第一个字符必须是 {。\n2. 禁止 Markdown。\n3. 仅输出合法 JSON。",
       "expected_format": "json",
-      "eval_rule": [
-        "eBPF",
-        "module_name",
-        "interface_protocol"
+      "format_style": "raw_json",
+      "required_fields": [
+        "architecture_name",
+        "primary_goal",
+        "modules",
+        "deployment_constraints",
+        "risk_controls"
       ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
+      "json_rules": {
+        "root_type": "object",
+        "array_exact_items": {
+          "modules": 3
+        },
+        "array_min_items": {
+          "deployment_constraints": 3,
+          "risk_controls": 3
+        },
+        "array_item_required_fields": {
+          "modules": [
+            "module_name",
+            "hw_sw_dependencies",
+            "interface_protocol",
+            "design_rationale"
+          ]
+        }
       },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_30",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某边缘计算节点",
-      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某边缘计算节点】产品线进行升级，核心要满足客户对【断网容灾状态下的边缘本地推理与数据缓存】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
       "eval_rule": [
-        "边缘",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_31",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "PB级多模态数据流式加载与预处理流水线",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能数据AI平台】产品线进行升级，核心要满足客户对【PB级多模态数据流式加载与预处理流水线】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "流式加载",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_32",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "PB级多模态数据流式加载与预处理流水线",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能数据AI平台】产品线进行升级，核心要满足客户对【PB级多模态数据流式加载与预处理流水线】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "流式加载",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_33",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "兆瓦级柔性充电功率调度与V2G车网互动",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能液冷超充站】产品线进行升级，核心要满足客户对【兆瓦级柔性充电功率调度与V2G车网互动】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "V2G",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_34",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某企业ERP系统",
-      "feature": "基于分布式强一致性事务的秒级账务对账",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某企业ERP系统】产品线进行升级，核心要满足客户对【基于分布式强一致性事务的秒级账务对账】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "强一致性",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_35",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "PB级多模态数据流式加载与预处理流水线",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能数据AI平台】产品线进行升级，核心要满足客户对【PB级多模态数据流式加载与预处理流水线】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "流式加载",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_36",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某边缘计算节点",
-      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某边缘计算节点】产品线进行升级，核心要满足客户对【断网容灾状态下的边缘本地推理与数据缓存】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "边缘",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_37",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "基于RDMA的高性能分布式块存储引擎",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某HCI超融合基础设施】产品线进行升级，核心要满足客户对【基于RDMA的高性能分布式块存储引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "RDMA",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_38",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某服务器管理平台",
-      "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器管理平台】产品线进行升级，核心要满足客户对【支持十万级节点的BMC Redfish并发纳管引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "Redfish",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_39",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "机柜级CDU(冷量分配单元)与漏液熔断联动控制",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某型号液冷服务器】产品线进行升级，核心要满足客户对【机柜级CDU(冷量分配单元)与漏液熔断联动控制】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "CDU",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_40",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能体平台",
-      "feature": "支持千万级并发WebSocket保活与消息下发网关",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能体平台】产品线进行升级，核心要满足客户对【支持千万级并发WebSocket保活与消息下发网关】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "WebSocket",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_41",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "机柜级CDU(冷量分配单元)与漏液熔断联动控制",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某型号液冷服务器】产品线进行升级，核心要满足客户对【机柜级CDU(冷量分配单元)与漏液熔断联动控制】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "CDU",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_42",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "兆瓦级柔性充电功率调度与V2G车网互动",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能液冷超充站】产品线进行升级，核心要满足客户对【兆瓦级柔性充电功率调度与V2G车网互动】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "V2G",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_43",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能体平台",
-      "feature": "支持千万级并发WebSocket保活与消息下发网关",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能体平台】产品线进行升级，核心要满足客户对【支持千万级并发WebSocket保活与消息下发网关】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "WebSocket",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_44",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能体平台",
-      "feature": "支持千万级并发WebSocket保活与消息下发网关",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能体平台】产品线进行升级，核心要满足客户对【支持千万级并发WebSocket保活与消息下发网关】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "WebSocket",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_45",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某服务器操作系统",
-      "feature": "eBPF内核级无侵入网络观测探针",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器操作系统】产品线进行升级，核心要满足客户对【eBPF内核级无侵入网络观测探针】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "eBPF",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_46",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某服务器操作系统",
-      "feature": "eBPF内核级无侵入网络观测探针",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某服务器操作系统】产品线进行升级，核心要满足客户对【eBPF内核级无侵入网络观测探针】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "eBPF",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_47",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "基于RDMA的高性能分布式块存储引擎",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某HCI超融合基础设施】产品线进行升级，核心要满足客户对【基于RDMA的高性能分布式块存储引擎】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "RDMA",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_48",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "机柜级CDU(冷量分配单元)与漏液熔断联动控制",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某型号液冷服务器】产品线进行升级，核心要满足客户对【机柜级CDU(冷量分配单元)与漏液熔断联动控制】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "CDU",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_49",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某边缘计算节点",
-      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某边缘计算节点】产品线进行升级，核心要满足客户对【断网容灾状态下的边缘本地推理与数据缓存】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "边缘",
-        "module_name",
-        "interface_protocol"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "json_validator"
-    },
-    {
-      "id": "COMPANY_IPD_S2_50",
-      "ipd_stage": "计划阶段(Plan)",
-      "role": "系统架构师",
-      "dim": "计划阶段",
-      "domain": "某智能体平台",
-      "feature": "支持千万级并发WebSocket保活与消息下发网关",
-      "difficulty": "High",
-      "prompt": "你现在是某科技企业IPD流程【计划阶段】的系统架构师。我们将对【某智能体平台】产品线进行升级，核心要满足客户对【支持千万级并发WebSocket保活与消息下发网关】的硬性业务需求。\n\n请完成从客户需求到技术软硬件架构的系统拆解映射。\n你需要输出一个包含 3 个核心子模块的系统架构定义。每个模块必须包含：\n1. module_name (模块名称)\n2. hw_sw_dependencies (软硬件依赖项数组)\n3. interface_protocol (模块对外暴露的接口协议)\n\n【系统指令约束 (System Critical)】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符！\n2. 绝对禁止包含任何 Markdown 格式（绝对不能出现 ```json 等代码块包裹）。\n3. 严格输出标准合法的 JSON 文本，不能包含任何除了 JSON 之外的说明性文字。",
-      "expected_format": "json",
-      "eval_rule": [
-        "WebSocket",
-        "module_name",
-        "interface_protocol"
+        "高可用",
+        "半同步复制",
+        "日志",
+        "带宽",
+        "存储空间",
+        "内存大小"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {

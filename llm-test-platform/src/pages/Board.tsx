@@ -78,6 +78,14 @@ function EvalBoard() {
     return Array.from(bestScores.values())
   }, [reports, activeTab])
 
+  const getIpdDimName = (id: string) => {
+    const name = id.split(' - ')[1] || id;
+    if (name === '组织与人才发展' || name === '项目进度与风险治理') {
+      return '组织支撑与运营';
+    }
+    return name;
+  };
+
   const sortedReports = useMemo(() => {
     if (!sortConfig) return filteredReports
     
@@ -89,16 +97,16 @@ function EvalBoard() {
         valA = a.percent || 0
         valB = b.percent || 0
       } else {
-        const packA = a.packs.find((p: any) => (p.name && p.name.includes(sortConfig.key)) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => c.id.includes(sortConfig.key))))
-        const packB = b.packs.find((p: any) => (p.name && p.name.includes(sortConfig.key)) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => c.id.includes(sortConfig.key))))
+        const packA = a.packs.find((p: any) => (p.name && p.name.includes(sortConfig.key)) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => getIpdDimName(c.id).includes(sortConfig.key))))
+        const packB = b.packs.find((p: any) => (p.name && p.name.includes(sortConfig.key)) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => getIpdDimName(c.id).includes(sortConfig.key))))
         
         if (activeTab === 'BenchLocal') {
           valA = packA && packA.maxScore > 0 ? (packA.score / packA.maxScore) * 100 : 0
           valB = packB && packB.maxScore > 0 ? (packB.score / packB.maxScore) * 100 : 0
         } else {
           // IPD cases
-          const caseA = packA?.cases?.find((c: any) => c.id.includes(sortConfig.key))
-          const caseB = packB?.cases?.find((c: any) => c.id.includes(sortConfig.key))
+          const caseA = packA?.cases?.find((c: any) => getIpdDimName(c.id).includes(sortConfig.key))
+          const caseB = packB?.cases?.find((c: any) => getIpdDimName(c.id).includes(sortConfig.key))
           valA = caseA ? parseFloat(caseA.score) || 0 : 0
           valB = caseB ? parseFloat(caseB.score) || 0 : 0
         }
@@ -129,7 +137,7 @@ function EvalBoard() {
   const getIpdScore = (report: any, caseName: string) => {
     for (const pack of report.packs) {
       if (pack.cases) {
-        const c = pack.cases.find((c: any) => c.id.includes(caseName))
+        const c = pack.cases.find((c: any) => getIpdDimName(c.id).includes(caseName))
         if (c && c.score !== undefined) {
           const val = parseFloat(c.score)
           return isNaN(val) ? '-' : val.toFixed(2)
@@ -153,7 +161,7 @@ function EvalBoard() {
     tooltip: { trigger: 'item' },
     radar: {
       indicator: singleReport.type === 'IPD' && singleReport.packs.length > 0 
-        ? singleReport.packs[0].cases.map((c: any) => ({ name: c.id.split(' - ')[1] || c.id, max: 100 }))
+        ? singleReport.packs[0].cases.map((c: any) => ({ name: getIpdDimName(c.id), max: 100 }))
         : singleReport.packs.map((p: any) => ({ name: p.name, max: p.maxScore || 100 })),
       radius: '60%'
     },
@@ -178,7 +186,7 @@ function EvalBoard() {
     xAxis: { 
       type: 'category', 
       data: singleReport.type === 'IPD' && singleReport.packs.length > 0
-        ? singleReport.packs[0].cases.map((c: any) => c.id.split(' - ')[1] || c.id)
+        ? singleReport.packs[0].cases.map((c: any) => getIpdDimName(c.id))
         : singleReport.packs.map((p: any) => p.name),
       axisLabel: { interval: 0, rotate: 30 }
     },
@@ -291,8 +299,8 @@ function EvalBoard() {
                   <TableHead><SortButton columnKey="开发阶段" label="开发阶段" /></TableHead>
                   <TableHead><SortButton columnKey="验证阶段" label="验证阶段" /></TableHead>
                   <TableHead><SortButton columnKey="发布阶段" label="发布阶段" /></TableHead>
-                  <TableHead><SortButton columnKey="生命周期管理" label="生命周期管理" /></TableHead>
-                  <TableHead><SortButton columnKey="组织与人才发展" label="组织与人才发展" /></TableHead>
+                   <TableHead><SortButton columnKey="生命周期管理" label="生命周期管理" /></TableHead>
+                  <TableHead><SortButton columnKey="组织支撑与运营" label="组织支撑与运营" /></TableHead>
                   <TableHead>详情</TableHead>
                 </TableRow>
               )}
@@ -326,7 +334,7 @@ function EvalBoard() {
                       <TableCell>{getIpdScore(r, '验证阶段')}</TableCell>
                       <TableCell>{getIpdScore(r, '发布阶段')}</TableCell>
                       <TableCell>{getIpdScore(r, '生命周期管理')}</TableCell>
-                      <TableCell>{getIpdScore(r, '组织与人才发展')}</TableCell>
+                      <TableCell>{getIpdScore(r, '组织支撑与运营')}</TableCell>
                     </>
                   )}
                   <TableCell>

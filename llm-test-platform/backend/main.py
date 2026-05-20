@@ -968,6 +968,7 @@ def execute_task_background(task_id):
                 'graph_mode': task.graph_mode,
                 'execution_flag': task.execution_flag or '1',
                 'dataset_name': task.dataset_name,
+                'dataset_args': task.dataset_args,
             }
             
             # 4. 构建测试命令

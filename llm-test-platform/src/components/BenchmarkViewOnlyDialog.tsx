@@ -119,6 +119,12 @@ export function BenchmarkViewOnlyDialog({
                       <p className="font-mono text-sm bg-muted p-2 rounded">{benchmark.config.frameworkParams}</p>
                     </div>
                   )}
+                  {benchmark.config.dataset_args && (
+                    <div className="col-span-2 space-y-1">
+                      <span className="text-sm text-muted-foreground">数据集参数</span>
+                      <p className="font-mono text-sm bg-muted p-2 rounded">{benchmark.config.dataset_args}</p>
+                    </div>
+                  )}
                   {benchmark.config.notes && (
                     <div className="col-span-2 space-y-1">
                       <span className="text-sm text-muted-foreground">备注</span>

@@ -10,6 +10,14 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Search, Download, Share2, Trash2, Save, Link as LinkIcon, BarChart2, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 
+const getIpdDimName = (id: string) => {
+  const name = id.split(' - ')[1] || id;
+  if (name === '组织与人才发展' || name === '项目进度与风险治理') {
+    return '组织支撑与运营';
+  }
+  return name;
+};
+
 export default function EvalResults() {
   const [searchParams, setSearchParams] = useSearchParams();
   const compParam = searchParams.get('comp');
@@ -206,7 +214,7 @@ export default function EvalResults() {
     tooltip: { trigger: 'item' },
     radar: {
       indicator: singleReport.type === 'IPD' && singleReport.packs.length > 0 
-        ? singleReport.packs[0].cases.map((c: any) => ({ name: c.id.split(' - ')[1] || c.id, max: 100 }))
+        ? singleReport.packs[0].cases.map((c: any) => ({ name: getIpdDimName(c.id), max: 100 }))
         : singleReport.packs.map((p: any) => ({ name: p.name, max: p.maxScore || 100 })),
       radius: '60%'
     },
@@ -232,7 +240,7 @@ export default function EvalResults() {
     xAxis: { 
       type: 'category', 
       data: singleReport.type === 'IPD' && singleReport.packs.length > 0
-        ? singleReport.packs[0].cases.map((c: any) => c.id.split(' - ')[1] || c.id)
+        ? singleReport.packs[0].cases.map((c: any) => getIpdDimName(c.id))
         : singleReport.packs.map((p: any) => p.name),
       axisLabel: { interval: 0, rotate: 30 }
     },
@@ -270,7 +278,7 @@ export default function EvalResults() {
     legend: { bottom: 10, type: 'scroll', data: activeComparisonReports.map(r => `${r.model_name} (${r.time})`) },
     radar: {
       indicator: isIpdComparison
-        ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => ({ name: c.id.split(' - ')[1] || c.id, max: 100 }))
+        ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => ({ name: getIpdDimName(c.id), max: 100 }))
         : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name)))).map(name => ({ name, max: 100 })),
       radius: '50%'
     },
@@ -296,7 +304,7 @@ export default function EvalResults() {
     xAxis: { 
       type: 'category', 
       data: isIpdComparison
-        ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => c.id.split(' - ')[1] || c.id)
+        ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => getIpdDimName(c.id))
         : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name)))) 
     },
     yAxis: { type: 'value', ...(isIpdComparison ? {} : { max: 100 }) },
@@ -687,7 +695,7 @@ export default function EvalResults() {
                                 </TableHeader>
                                 <TableBody>
                                   {(activeComparisonReports[0]?.type === 'IPD'
-                                    ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => c.id.split(' - ')[1] || c.id)
+                                    ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => getIpdDimName(c.id))
                                     : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name))))
                                   ).map((rowName, i) => (
                                     <TableRow key={i}>
@@ -695,7 +703,7 @@ export default function EvalResults() {
                                       {activeComparisonReports.map((r, j) => {
                                         const isIpd = r.type === 'IPD';
                                         if (isIpd) {
-                                          const caseItem = (r.packs[0]?.cases || []).find((c: any) => (c.id.split(' - ')[1] || c.id) === rowName);
+                                          const caseItem = (r.packs[0]?.cases || []).find((c: any) => getIpdDimName(c.id) === rowName);
                                           if (!caseItem) return <TableCell key={j} className="text-gray-400">-</TableCell>;
                                           return (
                                             <TableCell key={j}>
@@ -852,17 +860,17 @@ export default function EvalResults() {
                                     </TableRow>
                                   </TableHeader>
                                   <TableBody>
-                                    {(activeComparisonReports[0]?.type === 'IPD'
-                                      ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => c.id.split(' - ')[1] || c.id)
-                                      : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name))))
-                                    ).map((rowName, i) => (
+                                  {(activeComparisonReports[0]?.type === 'IPD'
+                                    ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => getIpdDimName(c.id))
+                                    : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name))))
+                                  ).map((rowName, i) => (
                                       <TableRow key={i}>
                                         <TableCell className="font-medium text-gray-700">{rowName as string}</TableCell>
-                                        {activeComparisonReports.map((r, j) => {
-                                          const isIpd = r.type === 'IPD';
-                                          if (isIpd) {
-                                            const caseItem = (r.packs[0]?.cases || []).find((c: any) => (c.id.split(' - ')[1] || c.id) === rowName);
-                                            if (!caseItem) return <TableCell key={j} className="text-gray-400">-</TableCell>;
+                                      {activeComparisonReports.map((r, j) => {
+                                        const isIpd = r.type === 'IPD';
+                                        if (isIpd) {
+                                          const caseItem = (r.packs[0]?.cases || []).find((c: any) => getIpdDimName(c.id) === rowName);
+                                          if (!caseItem) return <TableCell key={j} className="text-gray-400">-</TableCell>;
                                             return (
                                               <TableCell key={j}>
                                                 <div className="flex flex-col">

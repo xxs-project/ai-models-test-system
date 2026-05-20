@@ -153,8 +153,9 @@ combinations_old=(
 
 generate_combo_dirs() {
     local combo_dirs=()
-    for combo in "${combinations[@]}"; do
-        read input_len output_len num_prompts max_concurrency <<< "$combo"
+TEST_FAILED=0
+for combo in "${combinations[@]}"; do
+    read input_len output_len num_prompts max_concurrency <<< "$combo"
         combo_dirs+=("$(get_combo_dir_name "$input_len" "$output_len" "$num_prompts" "$max_concurrency")")
     done
     echo "${combo_dirs[@]}"
@@ -367,6 +368,7 @@ for combo in "${combinations[@]}"; do
         echo ""
         log "测试组合失败 (input=${input_len}, output=${output_len}, prompts=${num_prompts}, concurrency=${max_concurrency})"
         log "根据配置，提前结束后续所有测试..."
+        TEST_FAILED=1
         break
     fi
 done
@@ -469,3 +471,8 @@ rm -f "$TEMP_SUMMARY"
 echo ""
 log "Benchmark completed. All results saved to:"
 echo "  $RESULTS_DIR"
+
+if [ "$TEST_FAILED" -ne 0 ]; then
+    log "Error: One or more test combinations failed."
+    exit 1
+fi

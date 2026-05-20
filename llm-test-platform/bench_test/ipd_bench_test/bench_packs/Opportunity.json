@@ -138,6 +138,417 @@
         "top_p": 0.95
       },
       "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_07",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某边缘计算节点",
+      "feature": "工业现场边缘自治计算",
+      "difficulty": "High",
+      "prompt": "【市场机会分析】作为战略规划分析师，请分析某边缘计算节点在工业现场边缘自治计算方向的市场机会。\n\n请输出一个 JSON 结构的市场分析报告，包含以下字段：market_size、market_trend、opportunity_keywords、pain_points、competitive_analysis。\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "market_size",
+        "market_trend",
+        "opportunity_keywords",
+        "pain_points",
+        "competitive_analysis"
+      ],
+      "eval_rule": [
+        "market_size",
+        "pain_points",
+        "competitive_analysis"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_08",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "产品经理/市场分析师",
+      "dim": "机会识别",
+      "domain": "某企业ERP系统",
+      "feature": "AI辅助财务闭环分析",
+      "difficulty": "High",
+      "prompt": "【用户需求洞察】作为产品经理，请分析企业客户对某企业ERP系统在 AI 辅助财务闭环分析方向的潜在需求。\n\n请输出一个 JSON 结构的需求分析报告，包含以下字段：primary_users、user_needs、willingness_to_pay、feature_priorities、market_gap。\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "primary_users",
+        "user_needs",
+        "willingness_to_pay",
+        "feature_priorities",
+        "market_gap"
+      ],
+      "eval_rule": [
+        "primary_users",
+        "feature_priorities",
+        "market_gap"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_09",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某服务器管理平台",
+      "feature": "研发项目立项与排期评估",
+      "difficulty": "High",
+      "prompt": "【项目立项与排期评估】作为战略规划分析师，请评估某服务器管理平台推进【研发项目立项与排期评估】方向的机会窗口。\n\n已知背景：客户希望下个季度完成首批 PoC，上游依赖 Redfish 纳管底座、统一权限中心和运维审计系统，当前研发资源只能并行支持 2 个核心模块。\n\n请输出一个 JSON 结构的立项评估报告，包含以下字段：\n1. opportunity_name\n2. launch_window\n3. priority_drivers (优先级驱动数组)\n4. dependency_risks (依赖风险数组)\n5. scheduling_recommendation\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 绝对禁止包含任何 Markdown。\n3. 严格输出标准合法的 JSON 文本。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "launch_window",
+        "priority_drivers",
+        "dependency_risks",
+        "scheduling_recommendation"
+      ],
+      "eval_rule": [
+        "priority_drivers",
+        "dependency_risks",
+        "scheduling_recommendation"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_10",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某智能体平台",
+      "feature": "需求故事点与立项排期评估",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "立项会要求这次不能只讲机会大小，还要结合需求故事点、自动配置能力和手工兜底成本一起判断机会窗口。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把用户需求信号、排期风险和立项建议整理成结构化机会评估。"
+        }
+      ],
+      "prompt": "【项目立项与需求信号评估】作为战略规划分析师，请评估某智能体平台推进【需求故事点与立项排期评估】方向的机会窗口。\n\n已知背景：客户希望产品支持关键依赖的 auto-configure 能力，但也接受失败后回退到手工配置；立项评审要求同时说明需求信号、故事点压力和排期兜底方案。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. demand_signals (需求信号数组)\n3. schedule_pressure\n4. fallback_plan\n5. launch_recommendation\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 绝对禁止包含任何 Markdown。\n3. 严格输出标准合法的 JSON 文本。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "demand_signals",
+        "schedule_pressure",
+        "fallback_plan",
+        "launch_recommendation"
+      ],
+      "eval_rule": [
+        "demand_signals",
+        "schedule_pressure",
+        "fallback_plan"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_11",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某服务器管理平台",
+      "feature": "功能/安全需求与故事点评估",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "立项评审要求这次把 functional requirement、security requirement 和 story points 压力一起说清楚，不能只讲市场空间。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把需求信号、安全底线和排期压力合并成结构化机会判断。"
+        }
+      ],
+      "prompt": "【立项机会综合评估】作为战略规划分析师，请评估【某服务器管理平台】推进【功能/安全需求与故事点评估】方向的机会窗口。\n\n背景线索：客户明确提出 1 条 functional requirement，要求平台支持自动发现与统一纳管；同时新增 1 条 security requirement，要求关键运维数据避免未授权泄露；评审会上还提出 story points 压力过高时必须提供手工兜底方案。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. requirement_signals (需求信号数组)\n3. security_baseline\n4. story_point_pressure\n5. go_to_concept_recommendation\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "requirement_signals",
+        "security_baseline",
+        "story_point_pressure",
+        "go_to_concept_recommendation"
+      ],
+      "eval_rule": [
+        "requirement_signals",
+        "security_baseline",
+        "story_point_pressure"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_12",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某边缘计算节点",
+      "feature": "PRD范围与需求优先级立项评估",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "立项会要求这次把 PRD 里的功能范围、REQM 的需求优先级和排期取舍一起讲清楚，不能只给机会描述。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把 PRD 范围、需求优先级和立项建议整合成结构化评估。"
+        }
+      ],
+      "prompt": "【PRD范围与优先级评估】作为战略规划分析师，请评估【某边缘计算节点】推进【PRD范围与需求优先级立项评估】方向的机会窗口。\n\n背景线索：PRD 初稿要求产品支持抽象能力、文件输入输出和基础命令行交互；REQM 评审要求优先完成需求收集、需求分析与需求优先级排序，再决定是否进入下一阶段。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. prd_scope_signals (PRD范围信号数组)\n3. priority_decision\n4. schedule_tradeoffs\n5. next_gate_recommendation\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "prd_scope_signals",
+        "priority_decision",
+        "schedule_tradeoffs",
+        "next_gate_recommendation"
+      ],
+      "eval_rule": [
+        "prd_scope_signals",
+        "priority_decision",
+        "schedule_tradeoffs"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_13",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某智能体平台",
+      "feature": "story points 压力与自动配置机会评估",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "立项会要求这次直接说明 story points 压力、auto-configure 收益和失败后手工兜底成本，避免只给泛化机会判断。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把排期压力、自动配置价值和手工兜底方案整理成结构化评估。"
+        }
+      ],
+      "prompt": "【story points 与自动配置机会评估】作为战略规划分析师，请评估【某智能体平台】推进【story points 压力与自动配置机会评估】方向的机会窗口。\n\n背景线索：需求方提出希望关键依赖优先支持 auto-configure；若自动配置失败，仍需允许手工进入偏好设置完成修复；立项评审同时要求给出 story points 压力和发布窗口判断。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. demand_signals\n3. story_point_pressure\n4. auto_configure_value\n5. fallback_cost_and_recommendation\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "demand_signals",
+        "story_point_pressure",
+        "auto_configure_value",
+        "fallback_cost_and_recommendation"
+      ],
+      "eval_rule": [
+        "story_point_pressure",
+        "auto_configure_value",
+        "fallback_cost_and_recommendation"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_14",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某服务器管理平台",
+      "feature": "升级副作用与排期窗口评估",
+      "difficulty": "Expert",
+      "history": [
+        {
+          "role": "user",
+          "content": "立项会担心升级最新基础组件会附带安装无关插件，要求这次把 story points、升级副作用和发布窗口一起评估。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把升级收益、附带风险和排期窗口统一整理成结构化机会评估。"
+        }
+      ],
+      "prompt": "【升级副作用与排期窗口评估】作为战略规划分析师，请评估【某服务器管理平台】推进【升级副作用与排期窗口评估】方向的机会窗口。\n\n背景线索：研发团队反馈升级到最新基础环境后可能附带安装额外插件，进而影响默认过滤器和控制台可见性；管理层要求同时给出 story points 压力、回退成本和发布窗口建议。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. upgrade_benefits\n3. side_effect_risks\n4. story_point_pressure\n5. release_window_recommendation\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "upgrade_benefits",
+        "side_effect_risks",
+        "story_point_pressure",
+        "release_window_recommendation"
+      ],
+      "eval_rule": [
+        "side_effect_risks",
+        "story_point_pressure",
+        "release_window_recommendation"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_15",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某智能体平台",
+      "feature": "story points 低复杂度机会判断",
+      "difficulty": "Low",
+      "history": [
+        {
+          "role": "user",
+          "content": "立项会上先想快速判断一个轻量需求值不值得做，只要求给出 story points 压力、收益和简单建议。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会先用轻量结构化方式给出需求收益和排期判断。"
+        }
+      ],
+      "prompt": "【story points 轻量机会判断】作为战略规划分析师，请评估【某智能体平台】推进【story points 低复杂度机会判断】方向的机会窗口。\n\n背景线索：当前需求只涉及一项轻量自动配置改进，管理层希望先快速判断 story points 压力是否可控，以及是否值得进入下一阶段。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. expected_user_value\n3. story_point_pressure\n4. quick_risks\n5. recommendation\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "expected_user_value",
+        "story_point_pressure",
+        "quick_risks",
+        "recommendation"
+      ],
+      "eval_rule": [
+        "story_point_pressure",
+        "quick_risks",
+        "recommendation"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_16",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某服务器管理平台",
+      "feature": "story points 中复杂度依赖评估",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "立项评审想看一个中等复杂度 story points 案例，重点是依赖不清晰时怎么判断排期和收益。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把需求收益、依赖不确定性和排期取舍整理成结构化评估。"
+        }
+      ],
+      "prompt": "【story points 中复杂度依赖评估】作为战略规划分析师，请评估【某服务器管理平台】推进【story points 中复杂度依赖评估】方向的机会窗口。\n\n背景线索：需求方希望升级某基础组件后自动获得更好的开发体验，但当前依赖链可能引入额外插件和默认过滤器变化；立项评审要求同时说明 story points 压力、依赖不确定性和排期取舍。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. demand_signals\n3. dependency_uncertainties\n4. story_point_pressure\n5. schedule_decision\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "demand_signals",
+        "dependency_uncertainties",
+        "story_point_pressure",
+        "schedule_decision"
+      ],
+      "eval_rule": [
+        "dependency_uncertainties",
+        "story_point_pressure",
+        "schedule_decision"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
+    },
+    {
+      "id": "COMPANY_IPD_S0_17",
+      "ipd_stage": "机会识别(Opportunity)",
+      "role": "战略规划分析师/SPT负责人",
+      "dim": "机会识别",
+      "domain": "某边缘计算节点",
+      "feature": "story points 高复杂度窗口与回退评估",
+      "difficulty": "Expert",
+      "history": [
+        {
+          "role": "user",
+          "content": "这次要看一个更难的 story points 案例：需求同时涉及配置修复、终端控制信号和文件系统异常，评审会要求把发布窗口与回退策略一起讲透。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把多依赖复杂度、窗口风险和回退建议整理成高复杂度机会评估。"
+        }
+      ],
+      "prompt": "【story points 高复杂度窗口与回退评估】作为战略规划分析师，请评估【某边缘计算节点】推进【story points 高复杂度窗口与回退评估】方向的机会窗口。\n\n背景线索：当前需求同时涉及自动配置失败后的手工修复、终端长任务无法通过 Ctrl+C 中断、以及 `No file system is defined for scheme` 一类环境异常；立项评审要求同时说明 story points 压力、跨模块回退成本和发布窗口策略。\n\n请输出一个 JSON 结构的机会评估报告，包含以下字段：\n1. opportunity_name\n2. cross_module_signals\n3. story_point_pressure\n4. rollback_costs\n5. release_window_strategy\n\n【系统指令约束】：\n1. 必须以 `{` 或 `[` 作为输出的第一个字符。\n2. 禁止任何 Markdown。\n3. 严格输出合法 JSON。\n4. 输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "opportunity_name",
+        "cross_module_signals",
+        "story_point_pressure",
+        "rollback_costs",
+        "release_window_strategy"
+      ],
+      "eval_rule": [
+        "cross_module_signals",
+        "story_point_pressure",
+        "rollback_costs",
+        "release_window_strategy"
+      ],
+      "token_tier": "Standard (2K-8K)",
+      "sampling_defaults": {
+        "temperature": 0.7,
+        "top_p": 0.95
+      },
+      "verifier_type": "json_validator"
     }
   ]
 }

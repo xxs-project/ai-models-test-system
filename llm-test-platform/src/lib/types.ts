@@ -105,6 +105,7 @@ export interface BenchmarkConfig {
   notes?: string
   scenario?: string
   features?: string[] | string
+  dataset_args?: string
 }
 
 export interface PerformanceMetrics {

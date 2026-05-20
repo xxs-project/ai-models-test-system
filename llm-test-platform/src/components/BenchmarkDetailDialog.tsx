@@ -46,6 +46,7 @@ export function BenchmarkDetailDialog({
         graphMode: benchmark.config?.graphMode || '',
         operatorAcceleration: benchmark.config?.operatorAcceleration || '',
         frameworkParams: benchmark.config?.frameworkParams || '',
+        dataset_args: benchmark.config?.dataset_args || '',
         testDate: benchmark.config?.testDate || '',
         notes: benchmark.config?.notes || '',
       })
@@ -221,6 +222,15 @@ export function BenchmarkDetailDialog({
                       onChange={(e) => setEditConfig(prev => prev ? { ...prev, frameworkParams: e.target.value } : null)}
                     />
                   </div>
+                  {editConfig?.dataset_args && (
+                    <div className="col-span-2 space-y-2">
+                      <Label>数据集参数</Label>
+                      <Input
+                        value={editConfig?.dataset_args || ''}
+                        onChange={(e) => setEditConfig(prev => prev ? { ...prev, dataset_args: e.target.value } : null)}
+                      />
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>

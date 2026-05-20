@@ -56,6 +56,8 @@ const defaultConfig: BenchmarkConfig = {
   frameworkVersion: '',
   chipName: '',
   shardingConfig: '',
+  scenario: '对话',
+  features: [],
   testDate: new Date().toISOString().split('T')[0],
 }
 
@@ -522,6 +524,50 @@ export function AddBenchmarkEnhanced({
               </div>
 
               <div className="grid gap-1.5">
+                <Label className="text-xs font-semibold text-slate-700">场景</Label>
+                <Select
+                  value={config.scenario || '对话'}
+                  onValueChange={(value) => updateConfig('scenario', value)}
+                >
+                  <SelectTrigger className="bg-white border-slate-300 h-9">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="对话">对话</SelectItem>
+                    <SelectItem value="Agent">Agent</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="grid gap-1.5 col-span-2">
+                <Label className="text-xs font-semibold text-slate-700">特性</Label>
+                <div className="flex flex-wrap gap-4 mt-1">
+                  {['FP4', 'FP8', '投机推理', 'KV Cache卸载', 'KV稀疏'].map((feature) => (
+                    <div key={feature} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`feature-${feature}`}
+                        checked={(Array.isArray(config.features) ? config.features : []).includes(feature)}
+                        onCheckedChange={(checked) => {
+                          const currentFeatures = Array.isArray(config.features) ? [...config.features] : []
+                          if (checked) {
+                            updateConfig('features', [...currentFeatures, feature])
+                          } else {
+                            updateConfig('features', currentFeatures.filter(f => f !== feature))
+                          }
+                        }}
+                      />
+                      <label
+                        htmlFor={`feature-${feature}`}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {feature}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-1.5">
                 <Label htmlFor="testDate" className="text-xs font-semibold text-slate-700">
                   测试日期
                 </Label>
@@ -569,6 +615,32 @@ export function AddBenchmarkEnhanced({
                   onChange={(e) => updateConfig('operatorAcceleration', e.target.value)}
                   placeholder="如：FlashAttention"
                   className="bg-white border-slate-300 focus:bg-white h-9"
+                />
+              </div>
+
+              <div className="col-span-2 grid gap-1.5">
+                <Label htmlFor="frameworkParams" className="text-xs font-semibold text-slate-700">
+                  框架启动参数
+                </Label>
+                <Textarea
+                  id="frameworkParams"
+                  value={config.frameworkParams || ''}
+                  onChange={(e) => updateConfig('frameworkParams', e.target.value)}
+                  placeholder="如：--max-model-len 4096 --gpu-memory-utilization 0.9"
+                  className="bg-white border-slate-300 focus:bg-white min-h-[60px]"
+                />
+              </div>
+
+              <div className="col-span-2 grid gap-1.5">
+                <Label htmlFor="dataset_args" className="text-xs font-semibold text-slate-700">
+                  数据集参数
+                </Label>
+                <Input
+                  id="dataset_args"
+                  value={config.dataset_args || ''}
+                  onChange={(e) => updateConfig('dataset_args', e.target.value)}
+                  placeholder="如：speed_bench 或 prefix_repetition"
+                  className="bg-white border-slate-300 focus:bg-white"
                 />
               </div>
 

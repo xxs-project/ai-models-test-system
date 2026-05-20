@@ -10,6 +10,7 @@ API_KEY=""
 C_VAL=""
 MODE=""
 PROCESSOR=""
+DATASET_ARGS=""
 
 show_help() {
     echo "Usage: $0 [options]"
@@ -20,6 +21,7 @@ show_help() {
     echo "  -c <val>                  Configuration string"
     echo "  --mode <mode>             Mode (e.g. eager)"
     echo "  --processor <GPU|NPU>     Processor type (GPU or NPU)"
+    echo "  --dataset-args <args>     Dataset arguments"
     exit 1
 }
 
@@ -47,6 +49,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --processor)
             PROCESSOR="$2"
+            shift 2
+            ;;
+        --dataset-args)
+            DATASET_ARGS="$2"
             shift 2
             ;;
         -h|--help)
@@ -124,11 +130,12 @@ echo "Starting container for $PROCESSOR using image $DOCKER_IMAGE..."
 
 # Build the inner command arguments
 INNER_ARGS=""
-[ -n "$MODEL_PATH" ] && INNER_ARGS="$INNER_ARGS --model-path \"$MODEL_PATH\""
-[ -n "$BASE_URL" ] && INNER_ARGS="$INNER_ARGS --base_url \"$BASE_URL\""
-[ -n "$API_KEY" ] && INNER_ARGS="$INNER_ARGS --api_key \"$API_KEY\""
-[ -n "$C_VAL" ] && INNER_ARGS="$INNER_ARGS -c \"$C_VAL\""
-[ -n "$MODE" ] && INNER_ARGS="$INNER_ARGS --mode \"$MODE\""
+[ -n "$MODEL_PATH" ] && INNER_ARGS="$INNER_ARGS --model-path '$(echo "$MODEL_PATH" | sed "s/'/'\\\\''/g")'"
+[ -n "$BASE_URL" ] && INNER_ARGS="$INNER_ARGS --base_url '$(echo "$BASE_URL" | sed "s/'/'\\\\''/g")'"
+[ -n "$API_KEY" ] && INNER_ARGS="$INNER_ARGS --api_key '$(echo "$API_KEY" | sed "s/'/'\\\\''/g")'"
+[ -n "$C_VAL" ] && INNER_ARGS="$INNER_ARGS -c '$(echo "$C_VAL" | sed "s/'/'\\\\''/g")'"
+[ -n "$MODE" ] && INNER_ARGS="$INNER_ARGS --mode '$(echo "$MODE" | sed "s/'/'\\\\''/g")'"
+[ -n "$DATASET_ARGS" ] && INNER_ARGS="$INNER_ARGS --dataset-args '$(echo "$DATASET_ARGS" | sed "s/'/'\\\\''/g")'"
 
 docker run --rm --privileged --net=host --name "$TASK_DIR" $DEVICE_ARGS \
     --entrypoint "" \
@@ -138,6 +145,7 @@ docker run --rm --privileged --net=host --name "$TASK_DIR" $DEVICE_ARGS \
     -v "$CODE_PATH":"$CODE_PATH" \
     -v /data:/data \
     -v /data2:/data2 \
+    -v /home:/home \
     -e PIP_CONFIG_FILE=/root/.pip/pip.conf \
     "$DOCKER_IMAGE" \
     bash -c "cd \"$CODE_PATH\" && bash benchmark.sh $INNER_ARGS"

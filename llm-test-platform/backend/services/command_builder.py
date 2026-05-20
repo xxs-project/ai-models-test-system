@@ -63,7 +63,7 @@ class CommandBuilder:
         # 注意：* 在路径中是通配符，应该保留用于glob模式
         # 危险字符包括：命令分隔符、管道、命令替换、IO重定向等
         # 注意：不再移除空格，因为 shlex.quote 会安全地处理带空格的参数
-        dangerous_chars = r'[;|&$`\<>!#?{}\[\]\n\r\(\)\'\"]'
+        dangerous_chars = r'[;|&$`\<>!#?{}\[\]\n\r\(\)]'
         sanitized = re.sub(dangerous_chars, '', str(value))
         return sanitized
     
@@ -184,44 +184,24 @@ class CommandBuilder:
             if raw_combos:
                 parsed = json.loads(raw_combos)
                 if isinstance(parsed, list):
-                    combo_list = []
-                    for p in parsed:
-                        if isinstance(p, dict):
-                            in_len_val = p.get('input_len', '')
-                            out_len_val = p.get('output_len', '')
-                            prompts_val = p.get('num_prompts', '')
-                            conc_val = p.get('max_concurrency', '')
-
-                            in_len = str(in_len_val).strip() if in_len_val is not None else ""
-                            out_len = str(out_len_val).strip() if out_len_val is not None else ""
-                            prompts = str(prompts_val).strip() if prompts_val is not None else ""
-                            conc = str(conc_val).strip() if conc_val is not None else ""
-                            
-                            if in_len in ('None', '0', ''): in_len = ""
-                            if out_len in ('None', '0', ''): out_len = ""
-                            if prompts in ('None', '0', ''): prompts = ""
-                            if conc in ('None', '0', ''): conc = ""
-                            
-                            # 如果有任意一个参数为空(或为0)，则认为无效，跳过该组合
-                            if not in_len or not out_len or not prompts or not conc:
-                                continue
-                                
-                            combo_list.append(f"{in_len} {out_len} {prompts} {conc}")
-                    
-                    parsed_combos_str = ",".join(combo_list) if combo_list else ""
-                elif not parsed: # 处理 {} 等空对象
-                    parsed_combos_str = ""
-        except Exception:
-            # 如果不是 JSON，但也是类似 "[{...}]" 格式的无效字符串，清空
-            if isinstance(raw_combos, str) and raw_combos.strip() in ("[]", "{}"):
-                parsed_combos_str = ""
+                    combos = []
+                    for item in parsed:
+                        input_len = item.get('input_len', '1024')
+                        output_len = item.get('output_len', '1024')
+                        num_prompts = item.get('num_prompts', '1')
+                        max_concurrency = item.get('max_concurrency', '1')
+                        combos.append(f"{input_len} {output_len} {num_prompts} {max_concurrency}")
+                    parsed_combos_str = ",".join(combos)
+        except json.JSONDecodeError:
             pass
             
         combo_arg = f"-c {CommandBuilder._escape_shell_arg(parsed_combos_str)} " if parsed_combos_str else ""
         mode = CommandBuilder._escape_shell_arg(task.get('graph_mode', 'eager'))
         processor = CommandBuilder._escape_shell_arg(task.get('processor_type', 'NPU'))
+        dataset_args = task.get('dataset_args', '')
+        dataset_args_cmd = f"--dataset-args {CommandBuilder._escape_shell_arg(dataset_args)} " if dataset_args else "--dataset-args '' "
         
-        return f"""cd perf_test/api_benchmark_auto && bash run_vllmbench.sh --model-path {model_path} --base_url {base_url} --api_key {api_key} {combo_arg}--mode {mode} --processor {processor}"""
+        return f"""cd perf_test/api_benchmark_auto && bash run_vllmbench.sh --model-path {model_path} --base_url {base_url} --api_key {api_key} {combo_arg}--mode {mode} --processor {processor} {dataset_args_cmd.strip()}"""
 
     @staticmethod
     def build_command_vllm_npu_single_model(task: dict) -> str:

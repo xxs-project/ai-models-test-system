@@ -1,13 +1,14 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "ipd-concept",
   "name": "IPD S1: 概念阶段(Concept) - CDCP评审门",
-  "description": "IPD流程S1阶段：判断'做不做'。市场/竞品分析、技术可行性、初步商业计划。输出：机会评估、初步产品设想。CDCP概念决策评审。",
+  "description": "IPD流程S1阶段：判断'做不做'。该Pack聚焦概念立项判断、风险识别、机会澄清与概念评审产物输出。",
   "ipd_stage": 1,
   "ipd_gate": "CDCP",
   "ipd_objective": "判断'做不做'",
   "capabilities": {
-    "verification": false
+    "verification": false,
+    "structured_output": true
   },
   "cases": [
     {
@@ -18,31 +19,44 @@
       "domain": "某服务器管理平台",
       "feature": "逻辑悖论与冲突识别",
       "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
+      "prompt": "【真实业务冲突场景】项目要求在 2026年5月1日 强制上线，但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日。\n\n请输出一份 Markdown 概念纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 结论`、`# 核心冲突`、`# 处理建议`。\n2. 每个标题下至少 2 条无序列表。\n3. 结论中必须明确给出 GO、HOLD、NO_GO 之一。\n4. 核心冲突部分必须体现上线时间与 6 个月沙箱公测之间的矛盾。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "结论",
+        "核心冲突",
+        "处理建议"
+      ],
       "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "6个月",
+        "上线"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_02",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某服务器管理平台",
-      "feature": "千卡级大模型分布式训练加速",
+      "domain": "某企业ERP系统",
+      "feature": "基于分布式强一致性事务的秒级账务对账",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器管理平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：千卡级大模型分布式训练加速\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器管理平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器管理平台 中全面落地【千卡级大模型分布式训练加速】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "你现在是概念阶段的产品专家。请基于以下线索判断【某企业ERP系统】是否值得继续推进【基于分布式强一致性事务的秒级账务对账】概念：组件耦合可能升高、跨地域资源调度复杂、额外能耗上升、高峰期稳定性存在抖动风险。\n\n请输出一份原始 JSON 概念评估摘要。\n\n顶层必须包含：concept_name、go_or_hold、top_risks、next_gate_recommendation。top_risks 必须是长度为 3 的数组，每项对象必须包含：risk_name、impact、trigger。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "concept_name",
+        "go_or_hold",
+        "top_risks",
+        "next_gate_recommendation"
+      ],
       "eval_rule": [
         "耦合",
         "能耗",
@@ -53,73 +67,93 @@
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S1_03",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "domain": "某智能液冷超充站",
+      "feature": "兆瓦级柔性充电功率调度与V2G车网互动",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能数据AI平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：冷板式液冷高密散热与盲插盲拔\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能数据AI平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能数据AI平台 中全面落地【冷板式液冷高密散热与盲插盲拔】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "你现在是概念阶段的产品专家。某智能液冷超充站 团队希望推进【兆瓦级柔性充电功率调度与V2G车网互动】概念。已知前提：站点电网容量受限、调度策略复杂、客户关注并网安全、设备维护窗口短。\n\n请输出一份 Markdown 表格，对概念评审维度进行整理。\n\n表头必须且只能包含：评审维度、支持信号、风险信号、建议结论。至少输出 4 行，并覆盖电网容量、调度复杂度、并网安全、维护窗口。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "评审维度",
+        "支持信号",
+        "风险信号",
+        "建议结论"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "电网",
+        "安全",
+        "结论"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S1_04",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某服务器操作系统",
-      "feature": "硬件级内存加密与防勒索隔离",
+      "domain": "某AI算力集群",
+      "feature": "面向千卡规模的GPU算力池化与拓扑感知调度",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器操作系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：硬件级内存加密与防勒索隔离\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器操作系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器操作系统 中全面落地【硬件级内存加密与防勒索隔离】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "你现在是概念阶段的产品专家。某AI算力集群 团队准备推进【面向千卡规模的GPU算力池化与拓扑感知调度】概念。已知风险线索：多代 GPU 混部、交换域复杂、运维团队对新调度栈掌握不足。\n\n请输出一份原始 JSON 概念评估摘要。\n\n顶层必须包含：concept_name、go_or_hold、top_risks、enablement_gaps。top_risks 必须是长度为 3 的数组，每项对象必须包含：risk_name、impact、trigger。enablement_gaps 至少 2 项。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "concept_name",
+        "go_or_hold",
+        "top_risks",
+        "enablement_gaps"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GPU",
+        "拓扑",
+        "运维"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S1_05",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某企业ERP系统",
-      "feature": "核心网业务不停机在线热迁移",
+      "domain": "某服务器操作系统",
+      "feature": "硬件级内存加密与防勒索隔离",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某企业ERP系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：核心网业务不停机在线热迁移\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某企业ERP系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某企业ERP系统 中全面落地【核心网业务不停机在线热迁移】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请为【某服务器操作系统】的【硬件级内存加密与防勒索隔离】概念输出一份原始 JSON 风险登记表。\n\n顶层必须包含：concept_name、go_or_hold、top_risks、open_questions。top_risks 必须是长度为 3 的数组，每项对象必须包含：risk_name、impact、trigger。open_questions 至少 2 项。\n【输出约束】：禁止 Markdown，禁止解释。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "concept_name",
+        "go_or_hold",
+        "top_risks",
+        "open_questions"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "risk_name",
+        "impact",
+        "trigger"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S1_06",
@@ -127,177 +161,236 @@
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
       "domain": "某智能数据AI平台",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
+      "feature": "PB级多模态数据流式加载与预处理流水线",
+      "difficulty": "Expert",
+      "prompt": "请为【某智能数据AI平台】的【PB级多模态数据流式加载与预处理流水线】概念输出一份原始 JSON 概念评估摘要。\n\n顶层必须包含：concept_name、go_or_hold、top_risks、open_questions。top_risks 必须是长度为 3 的数组，每项对象必须包含：risk_name、impact、trigger。open_questions 至少 2 项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "concept_name",
+        "go_or_hold",
+        "top_risks",
+        "open_questions"
+      ],
       "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
+        "多模态",
+        "risk_name",
+        "open_questions"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S1_07",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "业务微秒级时延与极速网络吞吐",
+      "domain": "某边缘计算节点",
+      "feature": "断网容灾状态下的边缘本地推理与数据缓存",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能数据AI平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：业务微秒级时延与极速网络吞吐\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能数据AI平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能数据AI平台 中全面落地【业务微秒级时延与极速网络吞吐】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请为【某边缘计算节点】的【断网容灾状态下的边缘本地推理与数据缓存】概念输出原始 JSON 风险清单。\n\n顶层必须包含：concept_name、go_or_hold、top_risks、open_questions。top_risks 必须为长度 3 的数组，每项包含：risk_name、impact、trigger。open_questions 至少 2 项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "concept_name",
+        "go_or_hold",
+        "top_risks",
+        "open_questions"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "断网",
+        "risk_name",
+        "trigger"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S1_08",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某企业ERP系统",
-      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "domain": "某服务器管理平台",
+      "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某企业ERP系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：冷板式液冷高密散热与盲插盲拔\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某企业ERP系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某企业ERP系统 中全面落地【冷板式液冷高密散热与盲插盲拔】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请为【某服务器管理平台】的【支持十万级节点的BMC Redfish并发纳管引擎】概念输出原始 JSON 立项摘要。\n\n顶层必须包含：concept_name、go_or_hold、top_risks、open_questions。top_risks 为长度 3 的数组，每项对象必须包含：risk_name、impact、trigger。open_questions 至少 2 项。\n【输出约束】：禁止 Markdown。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "concept_name",
+        "go_or_hold",
+        "top_risks",
+        "open_questions"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "Redfish",
+        "impact",
+        "open_questions"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S1_09",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某AI算力集群",
-      "feature": "云边端异构算力无缝跨域协同",
+      "domain": "某HCI超融合基础设施",
+      "feature": "基于RDMA的高性能分布式块存储引擎",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某AI算力集群】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：云边端异构算力无缝跨域协同\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某AI算力集群 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某AI算力集群 中全面落地【云边端异构算力无缝跨域协同】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "CDCP 预审会上，业务团队希望直接给出 GO，但架构团队认为还需要先把关键假设和主要风险写清楚。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，这份纪要需要同时承接概念结论、核心假设和主要风险，便于评审会上直接使用。"
+        }
+      ],
+      "prompt": "请为【某HCI超融合基础设施】的【基于RDMA的高性能分布式块存储引擎】概念输出一份 Markdown 决策纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 结论`、`# 核心假设`、`# 主要风险`。\n2. 每个标题下至少 2 条无序列表。\n3. 结论部分必须明确给出 GO、HOLD、NO_GO 中的一个。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "结论",
+        "核心假设",
+        "主要风险"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "风险"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_10",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "千卡级大模型分布式训练加速",
+      "domain": "某AI算力集群",
+      "feature": "超大规模集群智能故障自愈",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能液冷超充站】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：千卡级大模型分布式训练加速\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能液冷超充站 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能液冷超充站 中全面落地【千卡级大模型分布式训练加速】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请为【某AI算力集群】的【超大规模集群智能故障自愈】概念输出一份 Markdown 概念评审纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 结论`、`# 支撑依据`、`# 风险与前提`。\n2. 每个标题下至少 2 条无序列表。\n3. 结论部分必须明确给出 GO、HOLD、NO_GO 中的一个。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "结论",
+        "支撑依据",
+        "风险与前提"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "风险"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_11",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某服务器管理平台",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
+      "domain": "某服务器操作系统",
+      "feature": "eBPF内核级无侵入网络观测探针",
+      "difficulty": "Expert",
+      "prompt": "请为【某服务器操作系统】的【eBPF内核级无侵入网络观测探针】概念输出一份 Markdown 概念判断纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 概念结论`、`# 机会判断`、`# 风险边界`。\n2. 每个标题下至少 2 条无序列表。\n3. 概念结论中必须给出 GO、HOLD、NO_GO 之一。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "概念结论",
+        "机会判断",
+        "风险边界"
+      ],
       "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "机会"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_12",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某边缘计算节点",
-      "feature": "云边端异构算力无缝跨域协同",
+      "domain": "某智能液冷超充站",
+      "feature": "兆瓦级柔性充电功率调度与V2G车网互动",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某边缘计算节点】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：云边端异构算力无缝跨域协同\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某边缘计算节点 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某边缘计算节点 中全面落地【云边端异构算力无缝跨域协同】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请为【某智能液冷超充站】的【兆瓦级柔性充电功率调度与V2G车网互动】概念输出一份 Markdown 评审纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 结论`、`# 市场机会`、`# 风险前提`。\n2. 每个标题下至少 2 条无序列表。\n3. 结论中必须给出 GO、HOLD、NO_GO 中的一个。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "结论",
+        "市场机会",
+        "风险前提"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "市场"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_13",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某边缘计算节点",
-      "feature": "业务微秒级时延与极速网络吞吐",
+      "domain": "某企业ERP系统",
+      "feature": "核心网业务不停机在线热迁移",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某边缘计算节点】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：业务微秒级时延与极速网络吞吐\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某边缘计算节点 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某边缘计算节点 中全面落地【业务微秒级时延与极速网络吞吐】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请输出一份 Markdown 表格，对【某企业ERP系统】推进【核心网业务不停机在线热迁移】概念的决策维度进行比较。\n\n表头必须且只能包含：决策维度、积极信号、主要疑虑、初步判断。\n至少输出 4 行，并覆盖市场价值、技术复杂度、交付周期、风险暴露。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "决策维度",
+        "积极信号",
+        "主要疑虑",
+        "初步判断"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "市场价值",
+        "技术复杂度",
+        "风险暴露"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S1_14",
@@ -305,110 +398,161 @@
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
       "domain": "某智能体平台",
-      "feature": "核心网业务不停机在线热迁移",
+      "feature": "支持千万级并发WebSocket保活与消息下发网关",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能体平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：核心网业务不停机在线热迁移\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能体平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能体平台 中全面落地【核心网业务不停机在线热迁移】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请输出一份 Markdown 表格，对【某智能体平台】推进【支持千万级并发WebSocket保活与消息下发网关】概念的核心判断维度进行梳理。\n\n表头必须且只能包含：判断维度、机会描述、风险描述、建议动作。\n至少输出 4 行，并覆盖客户需求、平台复杂度、成本压力、生态协同。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "判断维度",
+        "机会描述",
+        "风险描述",
+        "建议动作"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "客户需求",
+        "成本压力",
+        "建议动作"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S1_15",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某服务器操作系统",
-      "feature": "超大规模集群智能故障自愈",
+      "domain": "某服务器管理平台",
+      "feature": "支持十万级节点的BMC Redfish并发纳管引擎",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器操作系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：超大规模集群智能故障自愈\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器操作系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器操作系统 中全面落地【超大规模集群智能故障自愈】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "prompt": "请输出一份 Markdown 表格，对【某服务器管理平台】推进【支持十万级节点的BMC Redfish并发纳管引擎】概念的评估维度进行整理。\n\n表头必须且只能包含：评估维度、收益信号、风险信号、结论建议。\n至少输出 4 行，并覆盖规模收益、协议兼容、运维复杂度、安全风险。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "评估维度",
+        "收益信号",
+        "风险信号",
+        "结论建议"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "规模收益",
+        "安全风险",
+        "结论建议"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S1_16",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某服务器管理平台",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
+      "domain": "某智能数据AI平台",
+      "feature": "业务微秒级时延与极速网络吞吐",
+      "difficulty": "Expert",
+      "prompt": "请输出一份 Markdown 表格，对【某智能数据AI平台】推进【业务微秒级时延与极速网络吞吐】概念的立项维度进行判断。\n\n表头必须且只能包含：立项维度、支持信号、反对信号、建议结论。\n至少输出 4 行，并覆盖市场价值、工程复杂度、资源消耗、稳定性。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "立项维度",
+        "支持信号",
+        "反对信号",
+        "建议结论"
+      ],
       "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
+        "市场价值",
+        "资源消耗",
+        "稳定性"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S1_17",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "云边端异构算力无缝跨域协同",
+      "domain": "某企业ERP系统",
+      "feature": "PRD需求范围与验收前提评审",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能数据AI平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：云边端异构算力无缝跨域协同\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能数据AI平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能数据AI平台 中全面落地【云边端异构算力无缝跨域协同】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "需求评审会上已经确认，这次概念不能只谈商业价值，还必须写清文件输入输出、CLI 交互和验收标准。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把概念结论、需求范围和验收前提整理成可以直接进入 CDCP 预审的纪要。"
+        }
+      ],
+      "prompt": "请为【某企业ERP系统】的【PRD需求范围与验收前提评审】概念输出一份 Markdown 概念纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 概念结论`、`# 需求范围`、`# 验收前提`。\n2. 每个标题下至少 2 条无序列表。\n3. 概念结论中必须给出 GO、HOLD、NO_GO 之一。\n4. 需求范围或验收前提中必须体现文件输入输出、命令行交互、验收标准。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "概念结论",
+        "需求范围",
+        "验收前提"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "文件输入输出",
+        "验收标准"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_18",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某服务器管理平台",
-      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "domain": "某边缘计算节点",
+      "feature": "PRD功能与质量要求评审",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器管理平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：兆瓦级(1040kW)柔性充电功率调度\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器管理平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器管理平台 中全面落地【兆瓦级(1040kW)柔性充电功率调度】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "CDCP 预审强调，这次概念评审必须同时覆盖功能要求、质量要求和安全要求，不能只给单一产品价值结论。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把概念结论、功能范围和质量/安全前提整理成可以直接评审的纪要。"
+        }
+      ],
+      "prompt": "请为【某边缘计算节点】的【PRD功能与质量要求评审】概念输出一份 Markdown 概念纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 概念结论`、`# 功能要求`、`# 质量与安全要求`。\n2. 每个标题下至少 2 条无序列表。\n3. 概念结论中必须给出 GO、HOLD、NO_GO 之一。\n4. 功能要求部分必须体现虚函数/抽象能力、文件输入输出或命令行交互中的至少一项。\n5. 质量与安全要求部分必须体现 quality requirement 或 security requirement 的评审信号。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "概念结论",
+        "功能要求",
+        "质量与安全要求"
+      ],
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "文件输入输出",
+        "security requirement"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_19",
@@ -416,66 +560,151 @@
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
       "domain": "某智能体平台",
-      "feature": "冷板式液冷高密散热与盲插盲拔",
+      "feature": "功能/安全需求与故事点概念评审",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能体平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：冷板式液冷高密散热与盲插盲拔\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能体平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能体平台 中全面落地【冷板式液冷高密散热与盲插盲拔】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "CDCP 预审要求这次概念结论必须同时体现 functional requirement、security requirement 和 story point 估算，不能只写愿景。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把概念结论、关键需求和估算约束整理成统一纪要。"
+        }
+      ],
+      "prompt": "请为【某智能体平台】的【功能/安全需求与故事点概念评审】输出一份 Markdown 概念纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 概念结论`、`# 关键需求`、`# 约束与估算`。\n2. 每个标题下至少 2 条无序列表。\n3. 概念结论中必须给出 GO、HOLD、NO_GO 之一。\n4. 关键需求部分必须同时体现 functional requirement 与 security requirement。\n5. 约束与估算部分必须体现 story point、自动配置或手工兜底中的至少两项。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "概念结论",
+        "关键需求",
+        "约束与估算"
+      ],
+      "markdown_section_rules": {
+        "min_bullets_per_section": 2,
+        "must_contain": [
+          "functional requirement",
+          "security requirement",
+          "story point"
+        ]
+      },
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "functional requirement",
+        "security requirement",
+        "story point"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_20",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某边缘计算节点",
-      "feature": "兆瓦级(1040kW)柔性充电功率调度",
+      "domain": "某型号液冷服务器",
+      "feature": "PRD范围与REQM概念纪要",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某边缘计算节点】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：兆瓦级(1040kW)柔性充电功率调度\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某边缘计算节点 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某边缘计算节点 中全面落地【兆瓦级(1040kW)柔性充电功率调度】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "CDCP 预审要求概念纪要把 PRD 功能范围、需求优先级和进入计划阶段的判断一起写清楚。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把 PRD 范围、优先级结论和概念判断整理成统一纪要。"
+        }
+      ],
+      "prompt": "请为【某型号液冷服务器】的【PRD范围与REQM概念纪要】输出一份 Markdown 概念纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 概念结论`、`# PRD范围`、`# 优先级与进入条件`。\n2. 每个标题下至少 2 条无序列表。\n3. 概念结论中必须给出 GO、HOLD、NO_GO 之一。\n4. PRD范围部分必须体现抽象能力、文件输入输出或命令行交互中的至少两项。\n5. 优先级与进入条件部分必须体现需求收集、需求分析或需求优先级排序中的至少两项。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "概念结论",
+        "PRD范围",
+        "优先级与进入条件"
+      ],
+      "markdown_section_rules": {
+        "min_bullets_per_section": 2,
+        "must_contain_any_groups": [
+          [
+            "抽象能力",
+            "文件输入输出",
+            "命令行交互"
+          ],
+          [
+            "需求收集",
+            "需求分析",
+            "需求优先级排序"
+          ]
+        ]
+      },
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "文件输入输出",
+        "需求优先级排序"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     },
     {
       "id": "COMPANY_IPD_S1_21",
       "ipd_stage": "概念阶段(Concept)",
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
-      "domain": "某企业ERP系统",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
+      "domain": "某智能体平台",
+      "feature": "functional requirement 初筛纪要",
+      "difficulty": "Low",
+      "history": [
+        {
+          "role": "user",
+          "content": "CDCP 预审先只要求把功能需求是否成立筛一遍，重点看需求收集和需求分析里能不能支撑继续立项。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会先输出一版聚焦 functional requirement 初筛的概念纪要。"
+        }
+      ],
+      "prompt": "请为【某智能体平台】的【functional requirement 初筛纪要】输出一份 Markdown 表格。\n\n背景线索：概念阶段当前只要求完成需求收集与分析，对候选能力逐条判断是否属于 functional requirement，并给出下一步处理建议。\n\n表头必须且只能包含：候选需求、判断结果、分析依据、下一步建议。至少输出 4 行，并且内容必须覆盖 functional requirement、需求收集、需求分析、GO/HOLD。\n【输出约束】：只输出 Markdown 表格。",
+      "expected_format": "markdown_table",
+      "required_fields": [
+        "候选需求",
+        "判断结果",
+        "分析依据",
+        "下一步建议"
+      ],
+      "markdown_table_rules": {
+        "min_rows": 4,
+        "must_contain": [
+          "functional requirement",
+          "需求收集",
+          "需求分析",
+          "GO",
+          "HOLD"
+        ]
+      },
       "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
+        "functional requirement",
+        "需求收集",
+        "需求分析",
+        "GO",
+        "HOLD"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_table_validator"
     },
     {
       "id": "COMPANY_IPD_S1_22",
@@ -483,21 +712,47 @@
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
       "domain": "某服务器管理平台",
-      "feature": "硬件级内存加密与防勒索隔离",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器管理平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：硬件级内存加密与防勒索隔离\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器管理平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器管理平台 中全面落地【硬件级内存加密与防勒索隔离】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "feature": "functional requirement 范围判断摘要",
+      "difficulty": "High",
+      "history": [
+        {
+          "role": "user",
+          "content": "CDCP 正式评审要求这次不只判断是不是功能需求，还要明确范围边界、核心场景和进入下一阶段的建议。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到，我会把 functional requirement 的判断、范围边界和推进建议整理成结构化摘要。"
+        }
+      ],
+      "prompt": "请为【某服务器管理平台】的【functional requirement 范围判断摘要】输出一份原始 JSON 概念摘要。\n\n背景线索：概念团队正在做需求收集与分析，需要判断若干候选能力是否属于 functional requirement，并明确范围边界、核心场景和进入计划阶段的建议。\n\n顶层必须包含：concept_name、requirement_judgment、functional_scope、core_scenarios、next_gate_recommendation。functional_scope 和 core_scenarios 都必须是至少 2 项的数组。内容必须体现 functional requirement、需求分析 和 GO/HOLD/NO_GO 中至少一项。\n【输出约束】：禁止 Markdown，只输出合法 JSON。",
+      "expected_format": "json",
+      "format_style": "raw_json",
+      "required_fields": [
+        "concept_name",
+        "requirement_judgment",
+        "functional_scope",
+        "core_scenarios",
+        "next_gate_recommendation"
+      ],
+      "json_rules": {
+        "root_type": "object",
+        "array_min_items": {
+          "functional_scope": 2,
+          "core_scenarios": 2
+        }
+      },
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "functional requirement",
+        "需求分析",
+        "functional_scope",
+        "next_gate_recommendation"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "json_validator"
     },
     {
       "id": "COMPANY_IPD_S1_23",
@@ -505,620 +760,66 @@
       "role": "产品经理/xIBT咨询专家",
       "dim": "概念阶段",
       "domain": "某智能数据AI平台",
-      "feature": "千卡级大模型分布式训练加速",
+      "feature": "functional requirement 决策梯度纪要",
       "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能数据AI平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：千卡级大模型分布式训练加速\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能数据AI平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能数据AI平台 中全面落地【千卡级大模型分布式训练加速】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
+      "history": [
+        {
+          "role": "user",
+          "content": "CDCP 终审要求这次把 functional requirement 的成立性、范围边界、优先级和推进结论一次说清楚，不能只停留在模糊愿景。"
+        },
+        {
+          "role": "assistant",
+          "content": "明白，我会把功能需求判断、优先级和概念结论整理成可直接评审的决策纪要。"
+        }
+      ],
+      "prompt": "请为【某智能数据AI平台】的【functional requirement 决策梯度纪要】输出一份 Markdown 概念纪要。\n\n格式要求：\n1. 必须包含一级标题 `# 概念结论`、`# 功能需求判断`、`# 优先级与进入条件`。\n2. 每个标题下至少 2 条无序列表。\n3. 概念结论中必须给出 GO、HOLD、NO_GO 之一。\n4. 功能需求判断部分必须体现 functional requirement、需求收集、需求分析。\n5. 优先级与进入条件部分必须体现需求优先级排序与进入计划阶段判断。\n【输出约束】：只输出 Markdown。",
+      "expected_format": "markdown_sections",
+      "required_sections": [
+        "概念结论",
+        "功能需求判断",
+        "优先级与进入条件"
+      ],
+      "markdown_section_rules": {
+        "sections": {
+          "概念结论": {
+            "min_bullets": 2,
+            "must_contain": [
+              "GO",
+              "HOLD",
+              "NO_GO"
+            ]
+          },
+          "功能需求判断": {
+            "min_bullets": 2,
+            "must_contain": [
+              "functional requirement",
+              "需求收集",
+              "需求分析"
+            ]
+          },
+          "优先级与进入条件": {
+            "min_bullets": 2,
+            "must_contain": [
+              "需求优先级排序",
+              "计划阶段"
+            ]
+          }
+        }
+      },
       "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
+        "GO",
+        "HOLD",
+        "NO_GO",
+        "functional requirement",
+        "需求优先级排序",
+        "计划阶段"
       ],
       "token_tier": "Standard (2K-8K)",
       "sampling_defaults": {
         "temperature": 0.0,
         "top_p": 0.9
       },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_24",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某服务器管理平台",
-      "feature": "业务微秒级时延与极速网络吞吐",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器管理平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：业务微秒级时延与极速网络吞吐\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器管理平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器管理平台 中全面落地【业务微秒级时延与极速网络吞吐】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_25",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "云边端异构算力无缝跨域协同",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某HCI超融合基础设施】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：云边端异构算力无缝跨域协同\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某HCI超融合基础设施 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某HCI超融合基础设施 中全面落地【云边端异构算力无缝跨域协同】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_26",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某AI算力集群",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
-      "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_27",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某AI算力集群",
-      "feature": "冷板式液冷高密散热与盲插盲拔",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某AI算力集群】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：冷板式液冷高密散热与盲插盲拔\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某AI算力集群 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某AI算力集群 中全面落地【冷板式液冷高密散热与盲插盲拔】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_28",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某服务器操作系统",
-      "feature": "兆瓦级(1040kW)柔性充电功率调度",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器操作系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：兆瓦级(1040kW)柔性充电功率调度\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器操作系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器操作系统 中全面落地【兆瓦级(1040kW)柔性充电功率调度】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_29",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "兆瓦级(1040kW)柔性充电功率调度",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某HCI超融合基础设施】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：兆瓦级(1040kW)柔性充电功率调度\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某HCI超融合基础设施 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某HCI超融合基础设施 中全面落地【兆瓦级(1040kW)柔性充电功率调度】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_30",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某边缘计算节点",
-      "feature": "硬件级内存加密与防勒索隔离",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某边缘计算节点】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：硬件级内存加密与防勒索隔离\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某边缘计算节点 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某边缘计算节点 中全面落地【硬件级内存加密与防勒索隔离】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_31",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
-      "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_32",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某企业ERP系统",
-      "feature": "超大规模集群智能故障自愈",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某企业ERP系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：超大规模集群智能故障自愈\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某企业ERP系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某企业ERP系统 中全面落地【超大规模集群智能故障自愈】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_33",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "超大规模集群智能故障自愈",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某型号液冷服务器】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：超大规模集群智能故障自愈\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某型号液冷服务器 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某型号液冷服务器 中全面落地【超大规模集群智能故障自愈】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_34",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "超大规模集群智能故障自愈",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某HCI超融合基础设施】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：超大规模集群智能故障自愈\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某HCI超融合基础设施 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某HCI超融合基础设施 中全面落地【超大规模集群智能故障自愈】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_35",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "冷板式液冷高密散热与盲插盲拔",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能液冷超充站】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：冷板式液冷高密散热与盲插盲拔\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能液冷超充站 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能液冷超充站 中全面落地【冷板式液冷高密散热与盲插盲拔】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_36",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能体平台",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
-      "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_37",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "业务微秒级时延与极速网络吞吐",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某HCI超融合基础设施】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：业务微秒级时延与极速网络吞吐\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某HCI超融合基础设施 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某HCI超融合基础设施 中全面落地【业务微秒级时延与极速网络吞吐】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_38",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能数据AI平台",
-      "feature": "核心网业务不停机在线热迁移",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能数据AI平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：核心网业务不停机在线热迁移\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能数据AI平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能数据AI平台 中全面落地【核心网业务不停机在线热迁移】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_39",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某企业ERP系统",
-      "feature": "硬件级内存加密与防勒索隔离",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某企业ERP系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：硬件级内存加密与防勒索隔离\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某企业ERP系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某企业ERP系统 中全面落地【硬件级内存加密与防勒索隔离】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_40",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某边缘计算节点",
-      "feature": "冷板式液冷高密散热与盲插盲拔",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某边缘计算节点】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：冷板式液冷高密散热与盲插盲拔\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某边缘计算节点 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某边缘计算节点 中全面落地【冷板式液冷高密散热与盲插盲拔】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_41",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
-      "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_42",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某服务器操作系统",
-      "feature": "千卡级大模型分布式训练加速",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某服务器操作系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：千卡级大模型分布式训练加速\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某服务器操作系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某服务器操作系统 中全面落地【千卡级大模型分布式训练加速】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_43",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能液冷超充站",
-      "feature": "云边端异构算力无缝跨域协同",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能液冷超充站】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：云边端异构算力无缝跨域协同\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能液冷超充站 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能液冷超充站 中全面落地【云边端异构算力无缝跨域协同】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_44",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某型号液冷服务器",
-      "feature": "千卡级大模型分布式训练加速",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某型号液冷服务器】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：千卡级大模型分布式训练加速\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某型号液冷服务器 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某型号液冷服务器 中全面落地【千卡级大模型分布式训练加速】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_45",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能体平台",
-      "feature": "业务微秒级时延与极速网络吞吐",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能体平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：业务微秒级时延与极速网络吞吐\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能体平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能体平台 中全面落地【业务微秒级时延与极速网络吞吐】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_46",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某服务器管理平台",
-      "feature": "逻辑悖论与冲突识别",
-      "difficulty": "Corner Case",
-      "prompt": "【真实业务冲突场景】作为高级项目经理，项目要在 2026年5月1日 强制上线。但公司红线规定：任何涉及核心支付的系统必须进行为期 6个月的沙箱公测。今天是 2026年4月28日，请为团队制定一份精确到天、确保5月1日顺利上线的排期表。",
-      "expected_format": "text",
-      "eval_rule": [
-        "矛盾",
-        "冲突",
-        "不可能",
-        "无法"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_47",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能体平台",
-      "feature": "云边端异构算力无缝跨域协同",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能体平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：云边端异构算力无缝跨域协同\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能体平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能体平台 中全面落地【云边端异构算力无缝跨域协同】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_48",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某HCI超融合基础设施",
-      "feature": "硬件级内存加密与防勒索隔离",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某HCI超融合基础设施】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：硬件级内存加密与防勒索隔离\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某HCI超融合基础设施 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某HCI超融合基础设施 中全面落地【硬件级内存加密与防勒索隔离】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_49",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某智能体平台",
-      "feature": "兆瓦级(1040kW)柔性充电功率调度",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某智能体平台】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：兆瓦级(1040kW)柔性充电功率调度\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某智能体平台 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某智能体平台 中全面落地【兆瓦级(1040kW)柔性充电功率调度】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
-    },
-    {
-      "id": "COMPANY_IPD_S1_50",
-      "ipd_stage": "概念阶段(Concept)",
-      "role": "产品经理/xIBT咨询专家",
-      "dim": "概念阶段",
-      "domain": "某企业ERP系统",
-      "feature": "千卡级大模型分布式训练加速",
-      "difficulty": "Expert",
-      "prompt": "你现在是某科技企业IPD流程【概念阶段】的产品专家。目前团队正在为【某企业ERP系统】进行下一代产品规划。\n\n以下是架构团队提交的《新特性概念立项评估书》核心摘要：\n【特性名称】：千卡级大模型分布式训练加速\n【目标场景】：提升系统在复杂业务场景下的竞争力。\n【当前现状评估】：架构团队在预研该特性时发现，若将其强行整合进当前的 某企业ERP系统 核心架构中，可能会导致底层组件耦合度过高。初步的沙盘推演显示，这可能引发资源调度冲突，从而增加系统的额外能耗，并在高负载波动时引发稳定性抖动。\n【立项要求】：在进入计划阶段前，必须排查潜在架构风险。\n\n作为产品专家，请基于上述提供的立项摘要进行评估：\n请推演并列举出，如果在 某企业ERP系统 中全面落地【千卡级大模型分布式训练加速】特性，项目组将面临的 Top 3 技术落地风险是什么？请严格基于上述提及的“组件耦合”、“资源调度冲突”、“能耗”与“稳定性抖动”等线索展开逻辑推演，不要凭空编造外部数据。\n\n【推理约束】：请使用思维链(CoT)模式作答。请先输出严格闭合的 <thinking>...</thinking> 标签包裹你的推理过程，然后再输出最终的风险结论。\n\n【防超时/防死循环约束】：请极其简明扼要地输出最终结果，严格控制输出在 500 个 Token 以内。输出完成后，请独立换行输出 `<|EOF|>` 表示回答结束。",
-      "expected_format": "text",
-      "eval_rule": [
-        "耦合",
-        "能耗",
-        "稳定"
-      ],
-      "token_tier": "Standard (2K-8K)",
-      "sampling_defaults": {
-        "temperature": 0.0,
-        "top_p": 0.9
-      },
-      "verifier_type": "keyword_matcher"
+      "verifier_type": "markdown_sections_validator"
     }
   ]
 }
