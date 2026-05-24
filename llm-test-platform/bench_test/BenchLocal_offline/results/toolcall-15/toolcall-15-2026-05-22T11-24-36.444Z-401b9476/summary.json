@@ -1,0 +1,108 @@
+{
+  "runId": "toolcall-15-2026-05-22T11-24-36.444Z-401b9476",
+  "runDir": "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results/toolcall-15/toolcall-15-2026-05-22T11-24-36.444Z-401b9476",
+  "benchPackId": "toolcall-15",
+  "benchPackName": "ToolCall-15",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T11:24:36.478Z",
+  "completedAt": "2026-05-22T11:24:36.480Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "run_started",
+      "runId": "toolcall-15-2026-05-22T11-24-36.444Z-401b9476",
+      "models": [
+        {
+          "id": "local_model:Qwen3-32B",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:Qwen3-32B": {
+          "totalScore": 0,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Tool Selection",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "B",
+              "label": "Parameter Precision",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "C",
+              "label": "Multi-Step Chains",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "D",
+              "label": "Restraint & Refusal",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Error Recovery",
+              "score": 0,
+              "weight": 20
+            }
+          ],
+          "summary": "★ Poor"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:Qwen3-32B": []
+  },
+  "scores": {
+    "local_model:Qwen3-32B": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Tool Selection",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "B",
+          "label": "Parameter Precision",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "C",
+          "label": "Multi-Step Chains",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "D",
+          "label": "Restraint & Refusal",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Error Recovery",
+          "score": 0,
+          "weight": 20
+        }
+      ],
+      "summary": "★ Poor"
+    }
+  }
+}

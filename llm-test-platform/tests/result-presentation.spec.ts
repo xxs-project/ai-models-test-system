@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Result Presentation - Functional Correctness', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -93,7 +93,7 @@ test.describe('Result Presentation - Functional Correctness', () => {
 
 test.describe('Result Presentation - Reliability', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -130,7 +130,7 @@ test.describe('Result Presentation - Reliability', () => {
 
 test.describe('Result Presentation - Security', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -155,7 +155,7 @@ test.describe('Result Presentation - Security', () => {
 
 test.describe('Result Presentation - Scalability', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 

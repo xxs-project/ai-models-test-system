@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Benchmark Features - Functional Correctness', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -82,7 +82,7 @@ test.describe('Benchmark Features - Functional Correctness', () => {
 
 test.describe('Benchmark Features - Reliability', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -141,7 +141,7 @@ test.describe('Benchmark Features - Reliability', () => {
 
 test.describe('Benchmark Features - Scalability', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -206,7 +206,7 @@ test.describe('Benchmark Features - Scalability', () => {
 
 test.describe('Benchmark Features - Security', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -272,7 +272,7 @@ test.describe('Benchmark Features - Security', () => {
 
 test.describe('Benchmark Features - Data Integrity', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -344,7 +344,7 @@ test.describe('Benchmark Features - Data Integrity', () => {
 
 test.describe('Benchmark Features - Edit Functionality', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -511,7 +511,7 @@ test.describe('Benchmark Features - Edit Functionality', () => {
 
 test.describe('Benchmark Features - User Experience', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 

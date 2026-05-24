@@ -1,0 +1,26 @@
+{
+  "name": "bugfind-15",
+  "version": "1.0.1",
+  "description": "Official BenchLocal Bench Pack for execution-backed bug finding and fixing.",
+  "license": "MIT",
+  "scripts": {
+    "build:benchlocal": "tsc -p tsconfig.benchlocal.json && tsc-alias -p tsconfig.benchlocal.json",
+    "build:cli": "tsc -p tsconfig.cli.json && tsc-alias -p tsconfig.cli.json",
+    "cli": "npm run build:cli && node dist-cli/cli/run.js",
+    "typecheck": "tsc --noEmit",
+    "verify:sandbox:build": "node scripts/verify-sandbox.mjs build",
+    "verify:canonical": "node scripts/verify-sandbox.mjs run",
+    "verify:canonical:rebuild": "node scripts/verify-sandbox.mjs rebuild",
+    "verify:sandbox:serve": "node scripts/verify-sandbox.mjs serve",
+    "verify:sandbox:stop": "node scripts/verify-sandbox.mjs stop"
+  },
+  "dependencies": {
+    "@benchlocal/core": "^0.1.0",
+    "@benchlocal/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsc-alias": "^1.8.10",
+    "typescript": "latest"
+  }
+}

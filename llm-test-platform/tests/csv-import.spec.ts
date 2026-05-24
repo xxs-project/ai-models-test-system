@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('CSV Import Functionality', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -44,7 +44,7 @@ test.describe('CSV Import Functionality', () => {
 
 test.describe('Manual Add Functionality', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -64,7 +64,7 @@ test.describe('Manual Add Functionality', () => {
 
 test.describe('UI/UX Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 

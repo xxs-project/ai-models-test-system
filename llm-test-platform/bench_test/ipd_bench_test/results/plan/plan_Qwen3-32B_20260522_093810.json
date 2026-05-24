@@ -1,0 +1,407 @@
+[
+  {
+    "id": "COMPANY_IPD_S2_01",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 38.54328751564026,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户关于ERP系统升级的架构设计请求。首先，用户的核心需求是支持分布式强一致性事务和秒级账务对账，同时满足15分钟的关账窗口和双活切换能力。我得先理清这些需求对应的技术点。\n\n首先，分布式强一致性事务通常需要像两阶段提交或三阶段提交这样的协议，或者使用更现代的共识算法如Raft或Paxos。但考虑到性能，可能需要采用一些优化策略，比如在业务层进行分片，减少跨节点事务的开销。同时，秒级对账意味着系统需要实时或近实时的数据同步和校验机制，可能需要引入内存数据库或高速缓存。\n\n然后是双活架构，总部和异地灾备中心需要同时处理业务，并且在故障时能快速切换。这涉及到网络延迟的问题，可能需要低延迟的网络连接，比如专线或者高速互联网连接。数据同步方面，可能需要使用同步复制，但同步复制可能会影响性能，需要权衡一致性与可用性。另外，双活切换需要自动化的故障检测和切换机制，比如使用健康检查探针和负载均衡器。\n\n接下来是模块划分。用户要求三个模块。第一个模块可能是分布式事务协调模块，负责处理跨节点的事务一致性，使用像Seata或者自研的协调服务，依赖于高性能的消息队列如Kafka或者RocketMQ，协议可能是gRPC或者REST。第二个模块是实时账务处理模块，需要高速处理账务数据，可能使用内存数据库如Redis或Apache Ignite，接口协议可能是gRPC。第三个模块是双活容灾模块，负责数据同步和切换，可能需要使用数据库的同步技术如MySQL的主主复制，或者分布式数据库如TiDB，协议可能是私有协议或标准数据库协议。\n\n部署约束方面，需要低延迟网络和高性能存储。低延迟网络确保双活中心的数据同步及时，高性能存储如SSD阵列保证事务处理速度。风险控制方面，数据一致性校验和自动切换回退机制是关键。数据一致性校验可以通过定期比对各节点数据，自动切换回退则需要在故障时快速切换，并在恢复后回退到正常状态，避免数据冲突。\n\n最后，架构名称需要体现核心目标，比如“分布式强一致双活ERP架构”。主目标就是满足关账时间和双活切换。各模块的依赖和协议要明确，设计理由要说明如何满足需求。比如事务协调模块使用强一致性协议，账务模块用内存数据库提升速度，双活模块用同步复制和自动切换。\n\n需要检查是否符合JSON格式，确保没有多余内容，字段正确，数组长度为3，约束和风险至少两项。可能还需要验证各模块的依赖是否合理，协议是否合适。比如gRPC适合高性能通信，同步复制确保数据一致性，但可能需要处理网络分区的问题，这里可能需要结合业务场景的容忍度来设计。\n</think>\n\n{\n  \"architecture_name\": \"分布式强一致双活ERP架构\",\n  \"primary_goal\": \"实现15分钟关账窗口与跨地域双活切换的秒级账务对账\",\n  \"modules\": [\n    {\n      \"module_name\": \"分布式事务协调模块\",\n      \"hw_sw_dependencies\": [\"分布式事务中间件(如Seata)\", \"RDMA网络卡\", \"NFS分布式文件系统\"],\n      \"interface_protocol\": \"gRPC+Two-Phase-Commit\",\n      \"design_rationale\": \"通过全局事务协调器保障跨数据中心的ACID特性，RDMA实现低延迟通信，NFS保障元数据一致性\"\n    },\n    {\n      \"module_name\": \"实时账务处理引擎\",\n      \"hw_sw_dependencies\": [\"列式内存数据库(如Apache Ignite)\", \"FPGA加速卡\", \"RDMA over Converged Ethernet\"],\n      \"interface_protocol\": \"Binary RPC\",\n      \"design_rationale\": \"基于内存计算实现毫秒级账务核算，FPGA加速对账算法，RoCE协议保障跨地域数据传输性能\"\n    },\n    {\n      \"module_name\": \"双活容灾控制平面\",\n      \"hw_sw_dependencies\": [\"SDN控制器\", \"BBU电池组\", \"GPS时钟同步设备\"],\n      \"interface_protocol\": \"Paxos协议变种\",\n      \"design_rationale\": \"通过软件定义网络实现流量实时调度，GPS时钟保障多活节点时间同步，BBU保障突发断电下的事务完整性\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"跨数据中心网络延迟必须<2ms\",\n    \"存储系统需支持同步双写且IOPS>100000\"\n  ],\n  \"risk_controls\": [\n    \"部署跨节点数据一致性校验服务(每秒级比对关键账务指标)\",\n    \"实施渐进式切换机制(先切换读流量再切换写流量)\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要处理用户关于ERP系统升级的架构设计请求。首先，用户的核心需求是支持分布式强一致性事务和秒级账务对账，同时满足15分钟的关账窗口和双活切换能力。我得先理清这些需求对应的技术点。\n\n首先，分布式强一致性事务通常需要像两阶段提交或三阶段提交这样的协议，或者使用更现代的共识算法如Raft或Paxos。但考虑到性能，可能需要采用一些优化策略，比如在业务层进行分片，减少跨节点..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_02",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0073511600494384766,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_03",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.00706791877746582,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_04",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.006834983825683594,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_05",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 39.97940731048584,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要为某服务器操作系统在IPD流程的计划阶段设计一个eBPF内核级无侵入网络观测探针的架构。首先，我得明确用户的需求和约束条件。目标部署环境是核心生产集群，这意味着不能显著增加CPU开销，同时必须兼容不同内核小版本。这两个要求非常关键，必须重点考虑。\n\n首先，架构名称需要简洁明了，可能结合核心功能和特点，比如“轻量级eBPF网络观测架构”之类的。主目标应该围绕高效、低开销和兼容性展开，确保在生产环境中稳定运行。\n\n接下来是模块拆解。用户要求三个模块，每个模块需要名称、依赖、接口协议和设计理由。第一个模块可能是数据采集层，负责使用eBPF程序收集网络数据。这里需要依赖内核的eBPF框架，可能还需要硬件支持，比如支持eBPF的CPU架构。接口协议可能用perf事件或ring buffer，因为它们高效。设计理由要说明如何满足低CPU开销和兼容性，比如利用内核特性，减少用户态交互。\n\n第二个模块可能是数据处理与分析模块，运行在用户态，处理从内核传来的数据。依赖项包括用户态eBPF库如libbpf，以及分析工具。接口协议可能用gRPC或Unix套接字，保证高效通信。设计理由要强调异步处理和资源隔离，避免影响内核性能。\n\n第三个模块是动态适配层，解决不同内核版本的兼容问题。依赖项包括内核头文件和版本检测工具。接口协议可能是配置文件或API，允许动态调整。设计理由需要说明如何通过预定义规则和运行时检测来适应不同内核，确保兼容性。\n\n部署约束方面，必须强调CPU开销不超过5%，兼容多个内核小版本，以及无侵入式部署，不修改内核源码。风险控制需要考虑性能回退机制、兼容性测试和实时监控，确保问题能及时发现和处理。\n\n需要检查每个模块是否符合要求，特别是依赖项和接口是否合理。比如，数据采集层是否真的不需要额外硬件依赖，或者是否需要特定CPU特性。另外，动态适配层如何具体实现版本兼容，可能需要更详细的机制，比如宏定义或条件编译。但根据用户要求，可能不需要太深入，保持高层次设计即可。\n\n最后，确保JSON格式正确，没有Markdown，首字符是{，并且所有字段都符合要求。检查是否有遗漏的必填字段，比如每个模块的四个属性是否齐全。可能还需要验证JSON的合法性，比如引号、逗号是否正确。\n</think>\n\n{\n  \"architecture_name\": \"轻量级eBPF网络观测架构\",\n  \"primary_goal\": \"实现生产环境内核级网络观测，CPU开销<5%且兼容多内核版本\",\n  \"modules\": [\n    {\n      \"module_name\": \"eBPF数据采集层\",\n      \"hw_sw_dependencies\": [\"Linux 4.9+内核\", \"x86_64/ARM64架构\", \"CONFIG_BPF_SYSCALL启用\"],\n      \"interface_protocol\": \"perf_event_ring_buffer + BPF_MAPS\",\n      \"design_rationale\": \"基于eBPF原生机制实现无侵入采集，通过ring buffer降低CPU竞争，利用BPF CO-RE技术保证内核版本兼容性\"\n    },\n    {\n      \"module_name\": \"用户态分析引擎\",\n      \"hw_sw_dependencies\": [\"glibc 2.28+\", \"libbpf 0.7+\", \"多线程CPU核心\"],\n      \"interface_protocol\": \"eBPF map轮询 + gRPC流式接口\",\n      \"design_rationale\": \"采用异步非阻塞IO处理观测数据，通过gRPC流式传输实现低延迟分析，内存池化设计控制资源消耗\"\n    },\n    {\n      \"module_name\": \"动态适配中间件\",\n      \"hw_sw_dependencies\": [\"内核头文件集合\", \"LLVM 12+编译器\", \"dlopen运行时加载\"],\n      \"interface_protocol\": \"eBPF字节码插桩 + 版本化配置API\",\n      \"design_rationale\": \"通过预定义内核版本差异处理规则，实现eBPF程序的动态适配和热更新，隔离不同内核版本的实现差异\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"单实例CPU占用必须<5% (CPI指标)\",\n    \"支持4.14/4.19/5.x等主流内核小版本\",\n    \"禁止修改内核源码和加载非签名模块\",\n    \"内存占用峰值<256MB\"\n  ],\n  \"risk_controls\": [\n    \"内置性能熔断机制：CPU使用率>8%时自动降采样\",\n    \"版本兼容性矩阵预验证机制\",\n    \"eBPF程序WASM验证器双重校验\",\n    \"运行时内核特性探测回滚机制\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要为某服务器操作系统在IPD流程的计划阶段设计一个eBPF内核级无侵入网络观测探针的架构。首先，我得明确用户的需求和约束条件。目标部署环境是核心生产集群，这意味着不能显著增加CPU开销，同时必须兼容不同内核小版本。这两个要求非常关键，必须重点考虑。\n\n首先，架构名称需要简洁明了，可能结合核心功能和特点，比如“轻量级eBPF网络观测架构”之类的。主目标应该围绕高效、低开..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_06",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.006602764129638672,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_07",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.006119966506958008,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_08",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.006245613098144531,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_09",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.006124973297119141,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_10",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 40.46792721748352,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要为某科技企业的IPD流程计划阶段设计一个系统架构方案，针对的是基于RDMA的高性能分布式块存储引擎，用于HCI超融合基础设施。客户要求在三个机房间部署，满足跨故障域容灾、脑裂防护和运维可观测性，同时不能只追求单一吞吐。输出必须是严格的JSON格式，包含指定的字段，并且模块必须有三个。\n\n首先，我需要确定架构名称。考虑到跨故障域和RDMA的高性能，可能用“Cross-Fault Domain RDMA-Optimized Block Storage Engine”这样的名字，既说明了跨故障域，又突出了RDMA优化。\n\n接下来是主要目标。客户的需求是跨故障域容灾、脑裂防护和可观测性，同时平衡性能。所以目标应该综合这些点，比如确保数据在三个机房间的高可用和一致性，同时保持低延迟和高吞吐，并具备实时监控能力。\n\n然后是模块设计。需要三个模块。第一个模块可能是数据分布与容灾模块，负责数据分片和跨机房复制，使用RDMA进行高速传输，依赖RDMA网卡和分布式共识算法。接口协议可能是RDMA over Converged Ethernet (RoCE) v2，设计理由是利用RDMA的低延迟和高带宽，同时通过多副本和纠删码实现容灾。\n\n第二个模块是脑裂防护与共识模块，需要处理网络分区时的决策，可能使用Paxos或Raft算法，依赖硬件时钟同步。接口协议可能是gRPC，设计理由是通过多数派决策避免脑裂，并结合硬件时钟减少依赖网络时间同步的不确定性。\n\n第三个模块是运维可观测性模块，需要收集和分析指标，可能依赖Prometheus和eBPF技术，接口协议是gRPC和HTTP/2。设计理由是通过实时监控和分布式追踪快速定位问题，同时利用eBPF减少性能开销。\n\n部署约束方面，必须跨三个机房，每个机房有独立电源和网络，RDMA网络延迟低于1ms，硬件时钟同步误差小于10微秒。这些确保容灾和低延迟的要求。\n\n风险控制方面，需要考虑网络分区导致的脑裂，通过共识算法和硬件时钟防护；RDMA性能波动可能需要QoS策略；监控盲区则通过多维度指标和eBPF覆盖。\n\n最后检查JSON结构是否符合要求，确保没有使用Markdown，首字符是{，字段正确，模块数量正确，各字段齐全。可能需要调整模块名称和依赖项，确保每个模块的职责明确，接口协议合理，设计理由充分支持客户需求。\n</think>\n\n{\n  \"architecture_name\": \"Cross-Fault Domain RDMA-Optimized Block Storage Engine\",\n  \"primary_goal\": \"实现跨三机房数据强一致性容灾，通过RDMA网络实现亚毫秒级延迟，同时构建端到端可观测性体系，平衡吞吐与容错能力\",\n  \"modules\": [\n    {\n      \"module_name\": \"数据分布与容灾模块\",\n      \"hw_sw_dependencies\": [\"RDMA网卡\", \"NVMe-oF Target\", \"分布式共识算法\"],\n      \"interface_protocol\": \"RDMA over Converged Ethernet (RoCE) v2\",\n      \"design_rationale\": \"采用多副本+纠删码混合架构，通过RDMA实现跨机房字节级数据同步，结合动态拓扑感知算法自动规避故障域，满足99.9999%可用性\"\n    },\n    {\n      \"module_name\": \"脑裂防护与共识模块\",\n      \"hw_sw_dependencies\": [\"PTP硬件时钟同步\", \"RDMA原子操作\", \"分布式锁服务\"],\n      \"interface_protocol\": \"gRPC with QUIC\",\n      \"design_rationale\": \"基于硬件时钟的逻辑时钟算法，结合RDMA Compare-and-Swap原语实现跨机房共识，通过法定人数(N/2+1)机制防止脑裂，确保CAP定理下CP特性\"\n    },\n    {\n      \"module_name\": \"运维可观测性模块\",\n      \"hw_sw_dependencies\": [\"eBPF探针\", \"分布式追踪系统\", \"Prometheus监控\"],\n      \"interface_protocol\": \"gRPC/HTTP/2\",\n      \"design_rationale\": \"构建四层监控体系（硬件层/协议层/服务层/业务层），通过RDMA性能计数器实时采集网络QoS指标，结合服务网格sidecar实现全链路追踪\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"三机房物理距离需满足网络延迟<1ms\",\n    \"每个故障域需配置独立供电与网络链路\",\n    \"RDMA网络需部署第2层桥接设备\",\n    \"硬件时钟同步精度需达到±10μs\"\n  ],\n  \"risk_controls\": [\n    \"通过法定人数机制与硬件时钟双保险防止脑裂\",\n    \"RDMA链路QoS策略保障最小带宽\",\n    \"部署混沌工程验证跨故障域恢复\",\n    \"监控告警收敛机制避免告警风暴\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要为某科技企业的IPD流程计划阶段设计一个系统架构方案，针对的是基于RDMA的高性能分布式块存储引擎，用于HCI超融合基础设施。客户要求在三个机房间部署，满足跨故障域容灾、脑裂防护和运维可观测性，同时不能只追求单一吞吐。输出必须是严格的JSON格式，包含指定的字段，并且模块必须有三个。\n\n首先，我需要确定架构名称。考虑到跨故障域和RDMA的高性能，可能用“Cross-..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_11",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.00128936767578125,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_12",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.004520893096923828,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_13",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0037186145782470703,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_14",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0038537979125976562,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_15",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0037169456481933594,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_16",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0040569305419921875,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_17",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.004042387008666992,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_18",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.003676891326904297,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_19",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.003246307373046875,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_20",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.003299713134765625,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_21",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0034110546112060547,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_22",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.003466367721557617,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_23",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0032575130462646484,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_24",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.003199338912963867,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_25",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0029900074005126953,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_26",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0018444061279296875,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S2_27",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0016353130340576172,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  }
+]

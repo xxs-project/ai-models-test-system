@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Benchmark Detail and Edit Features - Functional Correctness', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -123,7 +123,7 @@ test.describe('Benchmark Detail and Edit Features - Functional Correctness', () 
 
 test.describe('Multi-Version Trend Charts - Functional Correctness', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
     await page.click('text=性能趋势图');
   });
@@ -257,7 +257,7 @@ test.describe('Multi-Version Trend Charts - Functional Correctness', () => {
 
 test.describe('Benchmark Detail and Trend - Reliability', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 
@@ -300,7 +300,7 @@ test.describe('Benchmark Detail and Trend - Reliability', () => {
 
 test.describe('Benchmark Detail and Trend - Security', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
   });
 

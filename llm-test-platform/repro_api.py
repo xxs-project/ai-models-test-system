@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "http://localhost:8000/api/benchmarks"
+url = "http://localhost:8001/api/benchmarks"
 
 # Case 1: Fetch with size=1000
 params = {

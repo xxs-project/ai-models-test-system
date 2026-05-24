@@ -22,6 +22,7 @@ const MOCK_BENCH_PACKS = [
   { id: 'bugfind-15', name: 'bugfind-15', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
   { id: 'structoutput-15', name: 'structoutput-15', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
   { id: 'hermesagent-20', name: 'hermesagent-20', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
+  { id: 'cli-40', name: 'cli-40', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
 ]
 
 export default function EvalManage() {
@@ -40,7 +41,7 @@ export default function EvalManage() {
   const [logs, setLogs] = useState<{ time: string, step: string, detail: string }[]>([])
   
   // 表单状态
-  const [baseUrl, setBaseUrl] = useState('http://localhost:8000/v1')
+  const [baseUrl, setBaseUrl] = useState('http://localhost:8001/v1')
   const [apiKey, setApiKey] = useState('EMPTY')
   const [showApiKey, setShowApiKey] = useState(false)
   const [modelName, setModelName] = useState('')
@@ -120,18 +121,21 @@ export default function EvalManage() {
     setLogs([]);
     setProgress(0);
     
-    pollInterval = setInterval(async () => {
+    const fetchLogData = async () => {
       try {
         const logsRes = await fetch("/api/eval/logs");
+        let hasError = false;
         if (logsRes.ok) {
           const logsData = await logsRes.json();
           const newLines = logsData.logs || [];
           if (newLines.length > lastLineCount) {
             const formattedLogs = newLines.slice(lastLineCount).map((line: string) => {
               const now = new Date();
+              const isError = line.toLowerCase().includes("error") || line.toLowerCase().includes("traceback") || line.toLowerCase().includes("exception");
+              if (isError) hasError = true;
               return {
                 time: `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`,
-                step: "[Exec] 运行日志",
+                step: isError ? "[Exec] 错误异常" : "[Exec] 运行日志",
                 detail: line
               };
             });
@@ -140,20 +144,36 @@ export default function EvalManage() {
             setProgress(prev => Math.min(prev + Math.floor(Math.random() * 10) + 5, 95));
           }
         }
+        
+        if (pid === 0) return; // Not running
+
         const statusRes = await fetch(`/api/eval/status?pid=${pid}`);
         if (statusRes.ok) {
           const statusData = await statusRes.json();
           if (statusData.status === "completed") {
             clearInterval(pollInterval);
             setProgress(100);
-            toast.success("评测执行完毕，报告已生成！");
+            
+            // Check if there was actually an error in the logs
+            if (hasError) {
+              toast.error("评测进程已退出，但日志中检测到异常，请检查环境！");
+            } else {
+              toast.success("评测执行完毕，报告已生成！");
+            }
             fetchTasks();
           }
         }
       } catch (e) {
         console.error("Error polling logs:", e);
       }
-    }, 1500);
+    };
+    
+    // Fetch immediately once
+    fetchLogData();
+    
+    if (pid !== 0) {
+      pollInterval = setInterval(fetchLogData, 1500);
+    }
   }
 
 
@@ -180,7 +200,10 @@ export default function EvalManage() {
       if (res.ok) {
         const data = await res.json()
         toast.success('测评已启动')
+        task.pid = data.pid; // update locally to view logs
+        task.status = 'running';
         fetchTasks()
+        viewLogs(task)
       } else {
         const err = await res.json()
         toast.error('启动失败: ' + (err.detail || '未知错误'))
@@ -222,6 +245,9 @@ export default function EvalManage() {
     setView('logs')
     if (task.pid) {
       startLogPolling(task.pid)
+    } else {
+      // If no pid, maybe just fetch logs once
+      startLogPolling(0) 
     }
   }
   
@@ -308,14 +334,15 @@ export default function EvalManage() {
                         )}
 
                         {task.status === 'running' && (
-                          <>
-                            <Button variant="destructive" size="sm" className="h-8 text-xs" onClick={() => handleStopEval(task)}>
-                              <StopCircle size={14} className="mr-1" /> 停止
-                            </Button>
-                            <Button variant="outline" size="sm" className="h-8 text-xs text-blue-600 border-blue-200 hover:bg-blue-50" onClick={() => viewLogs(task)}>
-                              <Terminal size={14} className="mr-1" /> 日志
-                            </Button>
-                          </>
+                          <Button variant="destructive" size="sm" className="h-8 text-xs" onClick={() => handleStopEval(task)}>
+                            <StopCircle size={14} className="mr-1" /> 停止
+                          </Button>
+                        )}
+                        
+                        {(task.status === 'running' || task.status === 'completed' || task.status === 'failed') && (
+                          <Button variant="outline" size="sm" className="h-8 text-xs text-blue-600 border-blue-200 hover:bg-blue-50" onClick={() => viewLogs(task)}>
+                            <Terminal size={14} className="mr-1" /> 日志
+                          </Button>
                         )}
                         
                         {task.status !== 'running' && (
@@ -364,7 +391,7 @@ export default function EvalManage() {
                     接口地址 (Base URL) <span className="text-red-500">*</span>
                   </Label>
                   <Input 
-                    placeholder="如: http://localhost:8000/v1" 
+                    placeholder="如: http://localhost:8001/v1" 
                     value={baseUrl}
                     onChange={(e) => setBaseUrl(e.target.value)}
                     className="bg-white border-gray-300 focus-visible:ring-blue-500"
@@ -553,63 +580,56 @@ export default function EvalManage() {
 
       {view === 'logs' && activeTask && (
         <Card className="shadow-xl border-gray-200 overflow-hidden ring-1 ring-gray-900/5">
-          <div className="bg-[#0f111a] text-white p-5 flex items-center justify-between border-b border-gray-800">
+          <div className="bg-white text-gray-800 p-5 flex items-center justify-between border-b border-gray-200">
             <h2 className="text-lg font-bold flex items-center gap-3">
-              <Terminal className="w-5 h-5 text-green-400" />
-              状态与日志控制台 (任务 #{activeTask.id})
+              <Terminal className="w-5 h-5 text-blue-600" />
+              任务执行白板 (任务 #{activeTask.id})
             </h2>
             <div className="flex items-center gap-3">
-              <Badge variant="outline" className={`font-mono px-3 py-1 text-sm border-gray-700 text-blue-400 border-blue-500/30 bg-blue-500/10`}>
-                🔵 评测运行中 (Running)
+              <Badge variant="outline" className={`font-mono px-3 py-1 text-sm ${progress === 100 ? 'text-green-600 border-green-500/30 bg-green-50' : 'text-blue-600 border-blue-500/30 bg-blue-50'}`}>
+                {progress === 100 ? '✅ 评测已结束 (Finished)' : '🔵 评测运行中 (Running)'}
               </Badge>
               <Button 
                 size="sm" 
                 variant="destructive" 
                 onClick={() => handleStopEval(activeTask)}
-                className="font-bold shadow-md hover:bg-red-700"
+                className="font-bold shadow-sm hover:bg-red-700"
               >
                 停止测评
               </Button>
             </div>
           </div>
           
-          <div className="p-5 bg-white border-b">
+          <div className="p-5 bg-gray-50/50 border-b border-gray-100">
             <div className="flex justify-between items-center mb-3">
               <span className="text-sm font-semibold text-gray-600">全局执行进度 (Progress)</span>
               <span className="text-lg font-bold text-blue-600">{progress}%</span>
             </div>
-            <Progress value={progress} className="h-3 bg-blue-50 [&>div]:bg-gradient-to-r [&>div]:from-blue-500 [&>div]:to-blue-600 rounded-full" />
+            <Progress value={progress} className="h-3 bg-blue-50 [&>div]:bg-gradient-to-r [&>div]:from-blue-400 [&>div]:to-blue-600 rounded-full" />
           </div>
 
           <CardContent className="p-0">
-            <ScrollArea className="h-[450px] w-full bg-[#1e1e1e] font-mono text-[13px] leading-relaxed">
-              <div className="p-6">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="text-gray-500 border-b border-gray-800/60 uppercase tracking-wider text-xs">
-                      <th className="pb-3 px-4 w-32 font-medium">时间</th>
-                      <th className="pb-3 px-4 w-48 font-medium">执行引擎步骤</th>
-                      <th className="pb-3 px-4 font-medium">控制台日志追踪 (Trajectory)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="mt-2 block"></tbody>
-                  <tbody>
-                    {logs.map((log, i) => (
-                      <tr key={i} className="text-gray-300 border-b border-gray-800/30 hover:bg-gray-800/40 transition-colors">
-                        <td className="py-3 px-4 text-gray-500">{log.time}</td>
-                        <td className="py-3 px-4 text-emerald-400 font-semibold">{log.step}</td>
-                        <td className="py-3 px-4 break-all">{log.detail}</td>
-                      </tr>
-                    ))}
-                    {progress < 100 && (
-                      <tr className="text-gray-500 animate-pulse">
-                        <td className="py-3 px-4">--:--:--</td>
-                        <td className="py-3 px-4">... 等待调度</td>
-                        <td className="py-3 px-4">Awaiting next engine trajectory...</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+            <ScrollArea className="h-[450px] w-full bg-[#FAFAFA] font-mono text-[13px] leading-relaxed border-t border-gray-200 shadow-inner">
+              <div className="p-4 flex flex-col gap-1">
+                {logs.length === 0 && progress < 100 && (
+                   <div className="text-gray-400 italic">初始化评测环境，等待日志输出...</div>
+                )}
+                {logs.map((log, i) => (
+                  <div key={i} className="flex gap-4 hover:bg-white p-1.5 rounded transition-colors border border-transparent hover:border-gray-200">
+                    <span className="text-gray-400 shrink-0 w-20">{log.time}</span>
+                    <span className={`shrink-0 w-32 font-semibold ${log.step.includes('错误') ? 'text-red-500' : 'text-blue-500'}`}>
+                      {log.step}
+                    </span>
+                    <span className="text-gray-700 whitespace-pre-wrap break-words">{log.detail}</span>
+                  </div>
+                ))}
+                {progress < 100 && logs.length > 0 && (
+                  <div className="flex gap-4 p-1.5 animate-pulse text-gray-400">
+                    <span className="shrink-0 w-20">--:--:--</span>
+                    <span className="shrink-0 w-32">... 等待调度</span>
+                    <span>Awaiting next engine trajectory...</span>
+                  </div>
+                )}
               </div>
             </ScrollArea>
           </CardContent>

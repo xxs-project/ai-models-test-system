@@ -1,0 +1,23 @@
+{
+  "name": "cli-40",
+  "version": "1.0.2",
+  "description": "BenchLocal Bench Pack for executable CLI benchmarking across 40 Linux command-line scenarios.",
+  "license": "MIT",
+  "scripts": {
+    "build:benchlocal": "tsc -p tsconfig.benchlocal.json && tsc-alias -p tsconfig.benchlocal.json",
+    "build:cli": "tsc -p tsconfig.cli.json && tsc-alias -p tsconfig.cli.json",
+    "copy:runtime": "node scripts/copy-runtime.mjs",
+    "build": "npm run build:benchlocal && npm run build:cli && npm run copy:runtime",
+    "dev:run": "npm run build && node dist/cli/run.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@benchlocal/core": "0.2.0",
+    "@benchlocal/sdk": "0.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsc-alias": "^1.8.10",
+    "typescript": "latest"
+  }
+}

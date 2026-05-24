@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ "$1" = "rev-list" ]; then
+    echo "0"
+    exit 0
+fi
+if [ "$1" = "rev-parse" ]; then
+    if [ "$2" = "--short=8" ]; then
+        echo "ea74f61d"
+    else
+        echo "ea74f61d983ebdfd6a863c45761d1b38081f1d08"
+    fi
+    exit 0
+fi
+exit 0

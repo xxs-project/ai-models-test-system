@@ -1,0 +1,62 @@
+{
+  "runId": "cli-40-2026-05-22T11-24-38.770Z-c30517a7",
+  "runDir": "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results/cli-40/cli-40-2026-05-22T11-24-38.770Z-c30517a7",
+  "benchPackId": "cli-40",
+  "benchPackName": "CLI-40",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T11:24:38.800Z",
+  "completedAt": "2026-05-22T11:24:38.801Z",
+  "modelCount": 1,
+  "scenarioCount": 40,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "cli-40",
+      "benchPackName": "CLI-40",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "cli-40",
+      "benchPackName": "CLI-40",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "cli-40-2026-05-22T11-24-38.770Z-c30517a7",
+      "models": [
+        {
+          "id": "local_model:Qwen3-32B",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 40
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:Qwen3-32B": {
+          "totalScore": 0,
+          "categories": [],
+          "summary": "CLI-40 performance is poor and fails most benchmark conditions."
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:Qwen3-32B": []
+  },
+  "scores": {
+    "local_model:Qwen3-32B": {
+      "totalScore": 0,
+      "categories": [],
+      "summary": "CLI-40 performance is poor and fails most benchmark conditions."
+    }
+  }
+}

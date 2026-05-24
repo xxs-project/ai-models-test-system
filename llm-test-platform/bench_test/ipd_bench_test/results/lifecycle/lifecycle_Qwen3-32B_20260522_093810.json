@@ -1,0 +1,407 @@
+[
+  {
+    "id": "COMPANY_IPD_S6_01",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0069179534912109375,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_02",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 24.747360229492188,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要分析用户提供的日志，找出导致AllReduce同步任务卡死的根本原因。首先，用户提到在智能数据AI平台测试千卡分布式预训练时遇到了问题，AllReduce同步任务卡死。根据之前的建议，可能涉及分布式通信框架或网卡的问题。现在用户提供了混合日志，我需要仔细解析这些日志内容。\n\n首先看日志中的内容：\n- Rank 15的NCCL信息显示ibv_poll_cq()调用失败，错误码12。错误码12对应的是EAGAIN，但有时候也可能是其他问题，不过结合后面的错误，可能更严重。\n- 同样Rank 15的Watchdog检测到进程3922卡住，这说明进程没有响应，导致超时。\n- 系统日志显示mlx5_core在设备0000:b2:00.0上ib_query_port失败，错误是-EIO（输入/输出错误），并且Port 1的链路断开。\n\n接下来，我需要确定这些信息关联起来。NCCL使用InfiniBand进行通信，而ibv_poll_cq()是轮询完成队列的操作，失败可能意味着通信问题。mlx5_core是Mellanox的网卡驱动，ib_query_port失败和链路断开直接指向网卡的状态问题。Port 1的链路down说明物理连接可能有问题，比如网线松动、交换机故障，或者网卡硬件问题。\n\n错误码-EIO通常表示I/O错误，可能由硬件故障或连接问题引起。Port 1 link down进一步确认了网络连接口的连接问题。当网卡端口断开时，进程无法进行正常的通信，导致AllReduce同步任务无法完成，进而卡死。Watchdog检测到进程卡住，说明进程无法继续执行，可能是在等待某个永远无法完成的通信操作。\n\n因此，根本原因应该是网卡的端口状态异常，导致通信中断止。需要检查网卡的物理连接、驱动状态以及交换机配置。可能的解决方案包括重新插拔网线、检查交换机端口状态、更新或重新安装网卡驱动，或者更换故障网卡。\n\n现在需要将这些分析整理成JSON格式，包含failing_component、nic_state、training_impact和evidence。evidence需要至少两个条目。根据日志，证据包括ib_query_port失败和Port 1 link down，以及NCCL的ibv_poll_cq失败和进程卡住。所以，正确的JSON结构应该反映这些点。\n</think>\n\n{\n  \"failing_component\": \"Infini!Band网卡（mlx5_core）\",\n  \"nic_state\": \"Port 1链路断开（link down）\",\n  \"training_impact\": \"AllReduce同步任务阻塞导致分布式训练进程卡死\",\n  \"evidence\": [\n    \"mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\",\n    \"Rank 15 NCCL INFO Call to ibv_poll_cq() failed with error 12\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要分析用户提供的日志，找出导致AllReduce同步任务卡死的根本原因。首先，用户提到在智能数据AI平台测试千卡分布式预训练时遇到了问题，AllReduce同步任务卡死。根据之前的建议，可能涉及分布式通信框架或网卡的问题。现在用户提供了混合日志，我需要仔细解析这些日志内容。\n\n首先看日志中的内容：\n- Rank 15的NCCL信息显示ibv_poll_cq()调用失败..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_03",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 13.14585828781128,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我需要处理用户提供的故障信息，并生成符合要求的JSON故障摘要。首先，用户给出的SkyWalking链路显示，API网关在08:33调用auth-service时返回503，而auth-service的断路器处于OPEN状态，同时redis客户端在08:32无法redis-session失败。\n\n首先，确定initial_failed_component。根据日志，redis连接失败发生在08:32，早于其他事件，所以初始故障组件应该是redis-session。\n\n接下来是protection_mechanism。auth-service的断路器被触发，状态为OPEN，这说明熔断机制起作用了，所以这里应该填CircuitBreaker。\n\n然后看gateway_status，API网关返回的是503错误，所以直接填503 Service Unavailable。\n\nsession_path方面，用户登录需要会话管理，而redis连接失败导致会话无法处理，所以路径应该是/session或类似的路径。但用户提供的日志中auth-service的请求路径是/api/v2/auth，但问题出在redis连接上，可能session_path指的是会话存储的路径，这里可能需要推断为/session，但用户示例中的session_path是\"/session\"，所以直接采用这个值。\n\n需要确保JSON结构正确，顶层包含四个必须字段，并且不使用Markdown。检查所有\n\n</think>\n\n{\n  \"initial_failed_component\": \"redis-session:6379\",\n  \"protection_mechanism\": \"CircuitBreaker\",\n  \"gateway_status\": \"503 Service Unavailable\",\n  \"session_path\": \"/session\"\n}",
+    "gen_preview": "<think>\n好的，我需要处理用户提供的故障信息，并生成符合要求的JSON故障摘要。首先，用户给出的SkyWalking链路显示，API网关在08:33调用auth-service时返回503，而auth-service的断路器处于OPEN状态，同时redis客户端在08:32无法redis-session失败。\n\n首先，确定initial_failed_component。根据日志，redis..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_04",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 16.433513164520264,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户提供的故障日志，并生成符合要求的JSON摘要。首先，用户给出的是一个三节点集群在夜间出现I/O卡死的问题，现在需要根据提供的选举日志来分析。\n\n首先，我需要仔细阅读日志内容。日志显示Node_A和Node_C互相标记对方为FAILED，这说明它们之间可能发生了网络分区，无法通信。Node_B收到了冲突的选举投票，这可能是因为在选举过程中出现了不一致的情况。Node_C报告集群仲裁丢失并暂停I/O，而Node_A则出现了虚拟机磁盘锁定的严重错误。\n\n接下来，根据用户的要求，JSON的顶层必须包含cluster_state、isolated_nodes、impact_scope和containment_action。其中isolated_nodes必须是包含恰好两个节点的数组。我需要确定哪些节点被隔离了。从日志来看，Node_A和Node_C互相标记对方为失败，这可能意味着它们之间无法通信，而Node_B可能仍然在线，但收到了冲突的投票。因此，隔离的节点应该是Node_A和Node_C，而Node_B可能还在尝试处理，但集群仲裁丢失导致问题。\n\nCluster_state应该反映整体状态，这里因为仲裁丢失，所以可能处于“quorum_lost”状态。Impact_scope需要说明影响的范围，这里虚拟机I/O全部卡死，所以应该是“all_vms_io_blocked”。Containment_action需要建议采取的措施，比如手动恢复网络或强制仲裁，可能需要隔离故障节点并重启服务。\n\n现在需要确保JSON结构正确，没有使用Markdown，并且isolated_nodes数组有两个元素。检查日志中的节点名称是否正确，Node_A和Node_C是否确实被隔离。确认所有字段都符合用户，没有遗漏或错误。\n</think>\n\n{\n  \"cluster_state\": \"quorum_lost\",\n  \"isolated_nodes\": [\"Node_A\", \"Node_C\"],\n  \"impact_scope\": \"all_vms_io_blocked\",\n  \"containment_action\": \"manual_network_repair_required, force_quorum_reestablishment\"\n}",
+    "gen_preview": "<think>\n好的，我现在需要处理用户提供的故障日志，并生成符合要求的JSON摘要。首先，用户给出的是一个三节点集群在夜间出现I/O卡死的问题，现在需要根据提供的选举日志来分析。\n\n首先，我需要仔细阅读日志内容。日志显示Node_A和Node_C互相标记对方为FAILED，这说明它们之间可能发生了网络分区，无法通信。Node_B收到了冲突的选举投票，这可能是因为在选举过程中出现了不一致的情况。N..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_05",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 18.843229293823242,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户提供的关于ERP系统月结时总账模块超时卡死的故障信息。用户已经给出了应用层和数据库的日志，我需要根据这些信息生成一个符合要求的JSON故障摘要。\n\n首先，我需要仔细分析用户提供的日志内容。日志中有几个关键点：\n1. 应用层开始月结操作，记录了INFO级别的日志。\n2. HikariCP连接池出现超时警告，超时时间是30000毫秒。\n3. 数据库层面显示在执行UPDATE gl_balances语句时卡住了。\n4. 应用层抛出了MySQLTransactionRollbackException，并提示发现了死锁。\n\n接下来，我需要按照用户的要求构建JSON结构。顶层必须包含四个字段：db_error、locked_table、application_symptom、recommended_action。同时，用户要求禁止使用Markdown，所以输出必须是纯JSON格式，没有其他解释。\n\n首先确定db_error字段。根据日志中的ERROR和FATAL信息，数据库错误应该是死锁导致的事务回滚，所以db_error的值应该是“Deadlock found during transaction commit”。\n\nlocked_table需要指出被锁定的表，日日志中的UPDATE语句可以看出是gl_balances表，因此locked_table的值是“gl_balances”。\n\napplication_symptom描述应用层的症状，用户日志中提到总账模块超时卡死，所以这里应该写“Monthly settlement process timed out and became unresponsive”。\n\nrecommended_action是建议的处理措施。通常处理死锁的方法包括检查索引、优化事务逻辑、调整隔离级别或。因此，建议的措施可能包括检查gl_balances表的索引是否合适，优化UPDATE操作的事务逻辑，减少锁的持有时间，以及考虑调整数据库的隔离级别或死锁超时设置。\n\n现在需要将这些信息整合成一个JSON对象，并\n\n{\n  \"db_error\": \"Deadlock found during transaction commit\",\n  \"locked_table\": \"gl_balances\",\n  \"application_symptom\": \"Monthly settlement process timed out and became unresponsive\",\n  \"recommended_action\": [\n    \"Check and optimize indexes on gl_balances table\",\n    \"Review transaction logic for UPDATE operations\",\n    \"Reduce transaction scope to minimize lock contention\",\n    \"Consider adjusting isolation level or deadlock timeout settings\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要处理用户提供的关于ERP系统月结时总账模块超时卡死的故障信息。用户已经给出了应用层和数据库的日志，我需要根据这些信息生成一个符合要求的JSON故障摘要。\n\n首先，我需要仔细分析用户提供的日志内容。日志中有几个关键点：\n1. 应用层开始月结操作，记录了INFO级别的日志。\n2. HikariCP连接池出现超时警告，超时时间是30000毫秒。\n3. 数据库层面显示在执行..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_06",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON must be raw text without Markdown fences; JSON must be raw text without Markdown fences"
+    },
+    "latency": 18.6285240650177,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我需要分析用户提供的dmesg日志，并生成符合要求的JSON摘要。首先，用户给出的日志中有两个关键事件：soft lockup和Out of memory（OOM）导致Java进程被杀。\n\n首先，确定顶层结构必须包含kernel_mechanism、killed_pid、precursor_alert和business_process。我需要从日志中提取这些信息。\n\nkernel_mechanism应该描述内核采取的机制。这里有两个机制：soft lockup检测和OOM killer。需要将它们都包含进去。可能用数组或对象，但根据\n\nkilled_pid是被杀的进程ID，日志中显示的是14562，所以直接提取这个数字。\n\nprecursor_alert是事前警报，这里soft lockup是CPU#4卡住22秒，属于内核的BUG报告，应该作为precursor_alert的值。\n\nbusiness_process需要说明被终止的业务进程信息，包括进程名（java）、PID（14562）和用户ID（UID 1001）。\n\n现在需要将这些信息组织成JSON格式，确保不使用Markdown，并且顶层字段正确。注意日期时间可能需要解析，但用户没有要求，所以可能不需要包含时间戳。检查是否有遗漏的信息，比如OOM killer的触发原因，但用户只提供了日志片段，所以按现有信息处理。\n\n最后，验证JSON结构是否符合用户指定的约束，确保没有多余字段，并且数据类型正确。例如，killed_pid是整数，precursor_alert是字符串，kernel_mechanism可能是一个数组或字符串，但用户示例中可能希望用数组，但用户给的例子中可能希望用字符串。需要看用户提供的例子。用户给\n\n```json\n{\n  \"kernel_mechanism\": [\n    \"soft lockup detection\",\n    \"Out of memory (OOM) killer\"\n  ],\n  \"killed_pid\": 14562,\n  \"precursor_alert\": \"BUG: soft lockup - CPU#4 stuck for 22s! [java:14562]\",\n  \"business_process\": {\n    \"process_name\": \"java\",\n    \"pid\": 14562,\n    \"uid\": 1001\n  }\n}\n```",
+    "gen_preview": "<think>\n好的，我需要分析用户提供的dmesg日志，并生成符合要求的JSON摘要。首先，用户给出的日志中有两个关键事件：soft lockup和Out of memory（OOM）导致Java进程被杀。\n\n首先，确定顶层结构必须包含kernel_mechanism、killed_pid、precursor_alert和business_process。我需要从日志中提取这些信息。\n\nkern..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_07",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON must be raw text without Markdown fences; JSON must be raw text without Markdown fences"
+    },
+    "latency": 18.326015949249268,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户提供的关于智能液冷超充站温控趋势图偶发倒序的问题。用户之前已经给出了IoT网关的接收日志，现在需要生成一个原始JSON时序异常摘要，包含特定的顶层字段。\n\n首先，我需要仔细分析用户提供的日志内容。日志中有显示，传感器temp-01在短时间内上报的数据026-05-02T10:00:01Z到10:00:03Z的数据，但序列号（seq）分别是不连续的情况。例如，10:00:02Z的seq是1548，而10:00:01Z是1551，这明显是倒序的。接着在10:00:03Z，网关发出警告，丢弃了来自temp-01的样本，因为序列号过时（stale sequence）。\n\n接下来，我需要确定anomaly_reason。根据日志中的WARN信息，问题出在序列号过时，导致数据被丢弃，进而可能引起时序倒序。因此，anomaly_reason应该是序列号不连续或倒序导致数据被丢弃。\n\nstale_sequence字段需要列出具体的序列号。从日志看，10:00:02Z的seq=1548比前一个时间点的1551小，所以1548是stale的序列号。需要确认是否有其他stale的序列号，但根据提供的日志，只有这一处明显的问题。因此，stale_sequence数组应包含1548。\n\nsensor_id是temp-01，明确无误。gateway_action根据日志中的描述信息，是“dropped sample due to stale sequence”。\n\n现在需要将这些信息组织成JSON格式，确保顶层包含要求的四个字段，并\n\n```json\n{\n  \"anomaly_reason\": \"序列号不连续导致时序数据倒序，触发网关丢弃过时样本\",\n  \"stale_sequence\": [1548],\n  \"sensor_id\": \"temp-01\",\n  \"gateway_action\": \"dropped sample due to stale sequence\"\n}\n```",
+    "gen_preview": "<think>\n好的，我现在需要处理用户提供的关于智能液冷超充站温控趋势图偶发倒序的问题。用户之前已经给出了IoT网关的接收日志，现在需要生成一个原始JSON时序异常摘要，包含特定的顶层字段。\n\n首先，我需要仔细分析用户提供的日志内容。日志中有显示，传感器temp-01在短时间内上报的数据026-05-02T10:00:01Z到10:00:03Z的数据，但序列号（seq）分别是不连续的情况。例如，..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_08",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005872964859008789,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_09",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005697488784790039,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_10",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005518198013305664,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_11",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.014555931091308594,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_12",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.014652013778686523,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_13",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.014770746231079102,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_14",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.014622926712036133,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_15",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.007604837417602539,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_16",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0075531005859375,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_17",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.007523775100708008,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_18",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.007459402084350586,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_19",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002063274383544922,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_20",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002079486846923828,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_21",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0024111270904541016,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_22",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0024755001068115234,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_23",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002371072769165039,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_24",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0022416114807128906,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_25",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0017962455749511719,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_26",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002066373825073242,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S6_27",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0011479854583740234,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  }
+]

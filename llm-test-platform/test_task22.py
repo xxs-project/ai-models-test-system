@@ -9,7 +9,7 @@ task = {
     'test_mode': TestMode.SINGLE_MODEL,
     'startup_mode': 'api',
     'model_path': '/models/qwen',
-    'base_url': 'http://localhost:8000/v1',
+    'base_url': 'http://localhost:8001/v1',
     'api_key': '12345',
     'parameter_combination': '[{"input_len":"","output_len":"","num_prompts":"","max_concurrency":""}]',
     'processor_type': 'GPU',

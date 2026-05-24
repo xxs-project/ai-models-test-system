@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -12,18 +12,24 @@ import { useTasks } from '@/hooks/use-tasks'
 import {
   Server,
   FlaskConical,
-  BarChart3,
-  Layers,
-  Cpu,
   Activity,
   Clock,
   ArrowRight,
   TrendingUp,
   ClipboardList,
-  PieChart,
+  PlayCircle,
+  PlusCircle,
+  Zap,
+  CheckCircle2,
+  AlertCircle,
+  BarChart3,
+  PieChart as PieChartIcon,
+  Cpu
 } from 'lucide-react'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LabelList } from 'recharts'
 
 export function Dashboard() {
+  const navigate = useNavigate()
   const { data: devicesData, isLoading: devicesLoading } = useDevices({ size: 100 })
   const { data: tasksData, isLoading: tasksLoading } = useTasks({ size: 100 })
   const { data: evalData, isLoading: evalLoading } = useQuery({
@@ -34,15 +40,26 @@ export function Dashboard() {
       return res.json()
     }
   })
+  
+  const { data: evalResultsData, isLoading: resultsLoading } = useQuery({
+    queryKey: ['eval-results-dashboard'],
+    queryFn: async () => {
+      const res = await fetch('/api/eval/results')
+      if (!res.ok) return []
+      return res.json()
+    }
+  })
 
   const devices = devicesData?.items || []
   const tasks = tasksData?.items || []
   const evalTasks = evalData?.tasks || []
+  const evalResults = evalResultsData?.reports || (Array.isArray(evalResultsData) ? evalResultsData : [])
 
-  const isLoading = devicesLoading || tasksLoading || evalLoading
+  const isLoading = devicesLoading || tasksLoading || evalLoading || resultsLoading
 
   const onlineDevices = devices.filter((d) => d.status === 'Online').length
   const totalAccelerators = devices.reduce((sum, d) => sum + d.accelerator_count, 0)
+  const busyAccelerators = devices.reduce((sum, d) => sum + d.busy_count, 0)
   
   const runningPerfTasks = tasks.filter((t) => t.status === 3).length
   const completedPerfTasks = tasks.filter((t) => t.status === 4).length
@@ -53,108 +70,122 @@ export function Dashboard() {
   const totalRunningTasks = runningPerfTasks + runningEvalTasks
   const totalCompletedTasks = completedPerfTasks + completedEvalTasks
 
-  const recentPerfTasks = tasks
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-    .slice(0, 5)
+  const recentPerfTasks = useMemo(() => {
+    return [...tasks]
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      .slice(0, 5)
+  }, [tasks])
     
-  const recentEvalTasks = evalTasks
-    .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-    .slice(0, 5)
+  const recentEvalTasks = useMemo(() => {
+    return [...evalTasks]
+      .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      .slice(0, 5)
+  }, [evalTasks])
 
-  const [activeTaskTab, setActiveTaskTab] = useState('perf')
+  
+  // Chart Data: Top Models by Dataset (Top 3)
+  const topDatasetChartData = useMemo(() => {
+    if (!evalResults || evalResults.length === 0) return []
+    
+    const getTop3ForType = (type: string) => {
+      const byType = evalResults.filter((r: any) => r.type === type);
+      const bestScores = new Map<string, any>();
+      byType.forEach((r: any) => {
+        const existing = bestScores.get(r.model_name);
+        if (!existing || (r.percent || 0) > (existing.percent || 0)) {
+          bestScores.set(r.model_name, r);
+        }
+      });
+      return Array.from(bestScores.values()).sort((a, b) => (b.percent || 0) - (a.percent || 0)).slice(0, 3);
+    }
 
-  const statusConfig: Record<number, { color: string; label: string }> = {
-    0: { color: 'bg-gray-100 text-gray-800', label: '待执行' },
-    1: { color: 'bg-blue-100 text-blue-800', label: '队列中' },
-    2: { color: 'bg-yellow-100 text-yellow-800', label: '准备中' },
-    3: { color: 'bg-orange-100 text-orange-800', label: '执行中' },
-    4: { color: 'bg-green-100 text-green-800', label: '已完成' },
-    5: { color: 'bg-red-100 text-red-800', label: '失败' },
-    6: { color: 'bg-gray-100 text-gray-800', label: '已取消' },
-    7: { color: 'bg-red-100 text-red-800', label: '超时' },
+    const benchLocalTop3 = getTop3ForType('BenchLocal');
+    const ipdTop3 = getTop3ForType('IPD');
+
+    return [
+      {
+        name: 'BenchLocal',
+        fullName: 'BenchLocal 测评大盘',
+        top1Model: benchLocalTop3[0]?.model_name || '无',
+        top1Score: parseFloat((benchLocalTop3[0]?.percent || 0).toFixed(1)),
+        top2Model: benchLocalTop3[1]?.model_name || '无',
+        top2Score: parseFloat((benchLocalTop3[1]?.percent || 0).toFixed(1)),
+        top3Model: benchLocalTop3[2]?.model_name || '无',
+        top3Score: parseFloat((benchLocalTop3[2]?.percent || 0).toFixed(1)),
+      },
+      {
+        name: 'IPD',
+        fullName: 'IPD 测评大盘',
+        top1Model: ipdTop3[0]?.model_name || '无',
+        top1Score: parseFloat((ipdTop3[0]?.percent || 0).toFixed(1)),
+        top2Model: ipdTop3[1]?.model_name || '无',
+        top2Score: parseFloat((ipdTop3[1]?.percent || 0).toFixed(1)),
+        top3Model: ipdTop3[2]?.model_name || '无',
+        top3Score: parseFloat((ipdTop3[2]?.percent || 0).toFixed(1)),
+      }
+    ].filter(d => d.top1Score > 0 || d.top2Score > 0 || d.top3Score > 0);
+  }, [evalResults])
+
+
+
+
+  const [activeTaskTab, setActiveTaskTab] = useState('eval')
+
+  const statusConfig: Record<number, { color: string; label: string; icon: any }> = {
+    0: { color: 'bg-pageBg text-textMain border-border', label: '待执行', icon: Clock },
+    1: { color: 'bg-primary/10 text-primary border-primary/20', label: '队列中', icon: Clock },
+    2: { color: 'bg-pageBg text-textSec border-border', label: '准备中', icon: Activity },
+    3: { color: 'bg-primary text-white border-primary shadow-[0_2px_8px_rgba(22,93,255,0.3)]', label: '执行中', icon: PlayCircle },
+    4: { color: 'bg-accent/10 text-accent border-accent/20', label: '已完成', icon: CheckCircle2 },
+    5: { color: 'bg-danger/10 text-danger border-danger/20', label: '失败', icon: AlertCircle },
+    6: { color: 'bg-pageBg text-textSec border-border', label: '已取消', icon: AlertCircle },
+    7: { color: 'bg-danger/10 text-danger border-danger/20', label: '超时', icon: AlertCircle },
   }
 
+  const currentDate = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' })
+
   return (
-    <div className="space-y-8 max-w-[1600px] mx-auto">
-      {/* Header Area */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">仪表板</h1>
-          <p className="text-slate-500 mt-1">大模型测评平台全局数据概览与快速导航</p>
+    <div className="space-y-8 max-w-[1440px] mx-auto animate-in fade-in duration-500 pb-12 pt-4 px-4 sm:px-6 lg:px-8 font-sans">
+      
+      {/* Hero Header Area - Tech & Business Feel */}
+      <div className="relative overflow-hidden bg-white border border-slate-200/60 p-6 md:p-8 rounded-[16px] shadow-sm">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/80 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-50/80 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.02] pointer-events-none">
+          <Server className="w-72 h-72 text-slate-900" />
+        </div>
+        
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-slate-200/60 text-slate-600 text-xs font-semibold backdrop-blur-md shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              系统运行健康 | {currentDate}
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+              大模型综合评测平台
+            </h1>
+            <p className="text-slate-500 max-w-[650px] text-sm md:text-base leading-relaxed font-medium">
+              实时监控物理算力集群运行状态，自动化调度模型能力评测与性能压测流水线，多维度生成专业评测报告。
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 shrink-0">
+            <Button onClick={() => navigate('/tests')} variant="outline" className="bg-white hover:bg-slate-50 text-slate-700 border-slate-200 shadow-sm h-12 px-6 rounded-xl transition-all font-semibold">
+              <FlaskConical className="w-4 h-4 mr-2 text-blue-600" />
+              发起性能压测
+            </Button>
+            <Button onClick={() => navigate('/eval-manage')} className="bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/20 h-12 px-6 rounded-xl transition-all font-semibold border-0">
+              <PlusCircle className="w-4 h-4 mr-2" />
+              新建模型评测
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* Quick Navigation Area (Moved to top for better access) */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        <Link to="/devices" className="block">
-          <Card className="hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer bg-slate-50 border-slate-200">
-            <CardContent className="flex items-center gap-3 p-4">
-              <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
-                <Server className="w-5 h-5" />
-              </div>
-              <div className="font-medium text-slate-700">设备管理</div>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link to="/resource-calc" className="block">
-          <Card className="hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer bg-slate-50 border-slate-200">
-            <CardContent className="flex items-center gap-3 p-4">
-              <div className="p-2 bg-orange-100 text-orange-600 rounded-lg">
-                <Layers className="w-5 h-5" />
-              </div>
-              <div className="font-medium text-slate-700">资源测算</div>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link to="/tests" className="block">
-          <Card className="hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer bg-slate-50 border-slate-200">
-            <CardContent className="flex items-center gap-3 p-4">
-              <div className="p-2 bg-purple-100 text-purple-600 rounded-lg">
-                <FlaskConical className="w-5 h-5" />
-              </div>
-              <div className="font-medium text-slate-700">性能测试</div>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link to="/results" className="block">
-          <Card className="hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer bg-slate-50 border-slate-200">
-            <CardContent className="flex items-center gap-3 p-4">
-              <div className="p-2 bg-green-100 text-green-600 rounded-lg">
-                <BarChart3 className="w-5 h-5" />
-              </div>
-              <div className="font-medium text-slate-700">性能结果</div>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link to="/eval-manage" className="block">
-          <Card className="hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer bg-slate-50 border-slate-200">
-            <CardContent className="flex items-center gap-3 p-4">
-              <div className="p-2 bg-indigo-100 text-indigo-600 rounded-lg">
-                <ClipboardList className="w-5 h-5" />
-              </div>
-              <div className="font-medium text-slate-700">模型测评</div>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link to="/eval-results" className="block">
-          <Card className="hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer bg-slate-50 border-slate-200">
-            <CardContent className="flex items-center gap-3 p-4">
-              <div className="p-2 bg-teal-100 text-teal-600 rounded-lg">
-                <PieChart className="w-5 h-5" />
-              </div>
-              <div className="font-medium text-slate-700">测评结果</div>
-            </CardContent>
-          </Card>
-        </Link>
-      </div>
-
-      {/* Core Metrics Area */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {/* Core Metrics Cards */}
+      <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
         {isLoading ? (
           <>
             <StatsCardSkeleton />
@@ -164,291 +195,375 @@ export function Dashboard() {
           </>
         ) : (
           <>
-            <Card className="shadow-sm border-slate-200">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-semibold text-slate-600">设备总数</CardTitle>
-                <div className="p-2 bg-slate-100 rounded-full">
-                  <Server className="h-4 w-4 text-slate-600" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-slate-900">{devices.length}</div>
-                <div className="flex items-center gap-2 mt-3 text-sm">
-                  <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5" />
+            <Card className="rounded-[24px] border border-slate-200/60 shadow-sm hover:shadow-md transition-all bg-white group">
+              <CardContent className="p-6 md:p-7">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-blue-50/80 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                    <Server className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200/60 shadow-sm px-2.5 py-0.5 rounded-lg font-semibold">
                     {onlineDevices} 在线
                   </Badge>
-                  <Badge variant="outline" className="bg-slate-50 text-slate-600 border-slate-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mr-1.5" />
-                    {devices.length - onlineDevices} 离线
-                  </Badge>
                 </div>
+                <div className="text-sm font-semibold text-slate-500 mb-2">接入设备总数</div>
+                <div className="text-4xl font-black text-slate-900 tracking-tight">{devices.length}</div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-sm border-slate-200">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-semibold text-slate-600">加速卡总数</CardTitle>
-                <div className="p-2 bg-slate-100 rounded-full">
-                  <Cpu className="h-4 w-4 text-slate-600" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-slate-900">{totalAccelerators}</div>
-                <div className="flex items-center gap-2 mt-3 text-sm">
-                  <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                    {devices.reduce((sum, d) => sum + d.idle_count, 0)} 闲置
-                  </Badge>
-                  <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
-                    {devices.reduce((sum, d) => sum + d.busy_count, 0)} 忙碌
+            <Card className="rounded-[24px] border border-slate-200/60 shadow-sm hover:shadow-md transition-all bg-white group">
+              <CardContent className="p-6 md:p-7">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-indigo-50/80 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                    <Zap className="h-6 w-6 text-indigo-600" />
+                  </div>
+                  <Badge variant="outline" className="bg-indigo-50 text-indigo-700 border-indigo-200/60 shadow-sm px-2.5 py-0.5 rounded-lg font-semibold">
+                    {busyAccelerators} 运行中
                   </Badge>
                 </div>
+                <div className="text-sm font-semibold text-slate-500 mb-2">集群算力规模 (卡)</div>
+                <div className="text-4xl font-black text-slate-900 tracking-tight">{totalAccelerators}</div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-sm border-slate-200">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-semibold text-slate-600">执行中任务</CardTitle>
-                <div className="p-2 bg-slate-100 rounded-full">
-                  <Activity className="h-4 w-4 text-slate-600" />
+            <Card className="rounded-[24px] border border-slate-200/60 shadow-sm hover:shadow-md transition-all bg-white group relative overflow-hidden">
+              {totalRunningTasks > 0 && <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-400 bg-[length:200%_100%] animate-gradient"></div>}
+              <CardContent className="p-6 md:p-7">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-orange-50/80 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                    <Activity className="h-6 w-6 text-orange-600" />
+                  </div>
+                  {totalRunningTasks > 0 && (
+                    <span className="flex h-3 w-3 relative mr-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]"></span>
+                    </span>
+                  )}
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-slate-900">{totalRunningTasks}</div>
-                <div className="flex items-center gap-2 mt-3 text-sm">
-                  <Badge variant="outline" className="bg-indigo-50 text-indigo-700 border-indigo-200">
-                    性能 {runningPerfTasks}
-                  </Badge>
-                  <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-                    测评 {runningEvalTasks}
-                  </Badge>
-                </div>
+                <div className="text-sm font-semibold text-slate-500 mb-2">活跃流水线任务</div>
+                <div className="text-4xl font-black text-slate-900 tracking-tight">{totalRunningTasks}</div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-sm border-slate-200">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-semibold text-slate-600">已完成任务</CardTitle>
-                <div className="p-2 bg-slate-100 rounded-full">
-                  <TrendingUp className="h-4 w-4 text-slate-600" />
+            <Card className="rounded-[24px] border border-slate-200/60 shadow-sm hover:shadow-md transition-all bg-white group">
+              <CardContent className="p-6 md:p-7">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-emerald-50/80 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                    <TrendingUp className="h-6 w-6 text-emerald-600" />
+                  </div>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-slate-900">{totalCompletedTasks}</div>
-                <div className="flex items-center gap-2 mt-3 text-sm">
-                  <Badge variant="outline" className="bg-teal-50 text-teal-700 border-teal-200">
-                    性能 {completedPerfTasks}
-                  </Badge>
-                  <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
-                    测评 {completedEvalTasks}
-                  </Badge>
-                </div>
+                <div className="text-sm font-semibold text-slate-500 mb-2">累计完成测评</div>
+                <div className="text-4xl font-black text-slate-900 tracking-tight">{totalCompletedTasks}</div>
               </CardContent>
             </Card>
           </>
         )}
       </div>
 
-      {/* Lists Area */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-12">
-        <Card className="lg:col-span-5 shadow-sm border-slate-200 flex flex-col">
-          <CardHeader className="flex flex-row items-center justify-between border-b bg-slate-50/50 pb-4">
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Server className="w-5 h-5 text-slate-500" />
-              设备状态
-            </CardTitle>
-            <Link to="/devices">
-              <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50">
-                查看全部 <ArrowRight className="w-4 h-4 ml-1" />
+      
+      {/* Chart & Analytics Section */}
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+        {/* Top Models by Dataset */}
+        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm bg-white overflow-hidden">
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-4 bg-slate-50/50">
+            <div className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-blue-600" />
+              <CardTitle className="text-lg font-bold text-slate-900">测评榜单</CardTitle>
+            </div>
+            <div className="flex items-center gap-3 self-end sm:self-auto">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/board')} className="text-slate-500 hover:text-blue-600 hover:bg-blue-50 h-8 px-3 rounded-lg hidden sm:flex transition-all">
+                完整榜单 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
-            </Link>
+            </div>
           </CardHeader>
-          <CardContent className="p-0 flex-1">
+          <CardContent className="pt-6">
+            {isLoading ? (
+              <div className="h-[260px] flex items-center justify-center"><Skeleton className="w-full h-full rounded-2xl" /></div>
+            ) : topDatasetChartData.length > 0 ? (
+              <div className="h-[260px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={topDatasetChartData} margin={{ top: 20, right: 10, left: -20, bottom: 0 }} barCategoryGap="25%">
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 13, fill: '#475569', fontWeight: 600 }} dy={12} />
+                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#94a3b8' }} domain={[0, 100]} />
+                    <RechartsTooltip 
+                      cursor={{ fill: '#f8fafc' }}
+                      contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)', fontWeight: 500 }}
+                      formatter={(value: number, name: string, props: any) => {
+                        const payload = props.payload;
+                        let modelName = '';
+                        if (name === 'TOP 1') modelName = payload.top1Model;
+                        if (name === 'TOP 2') modelName = payload.top2Model;
+                        if (name === 'TOP 3') modelName = payload.top3Model;
+                        return [`${value} 分`, `${name}: ${modelName}`];
+                      }}
+                      labelFormatter={(label, payload) => payload?.[0]?.payload?.fullName || label}
+                    />
+                    <Legend iconType="circle" wrapperStyle={{ fontSize: '13px', paddingTop: '16px', color: '#64748b' }} />
+                    <Bar dataKey="top1Score" name="TOP 1" fill="#f59e0b" radius={[6, 6, 0, 0]} maxBarSize={32}>
+                      <LabelList dataKey="top1Score" position="top" style={{ fontSize: '11px', fill: '#64748b', fontWeight: 600 }} formatter={(val: number) => val > 0 ? val : ''} />
+                    </Bar>
+                    <Bar dataKey="top2Score" name="TOP 2" fill="#94a3b8" radius={[6, 6, 0, 0]} maxBarSize={32}>
+                      <LabelList dataKey="top2Score" position="top" style={{ fontSize: '11px', fill: '#64748b', fontWeight: 600 }} formatter={(val: number) => val > 0 ? val : ''} />
+                    </Bar>
+                    <Bar dataKey="top3Score" name="TOP 3" fill="#fb923c" radius={[6, 6, 0, 0]} maxBarSize={32}>
+                      <LabelList dataKey="top3Score" position="top" style={{ fontSize: '11px', fill: '#64748b', fontWeight: 600 }} formatter={(val: number) => val > 0 ? val : ''} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            ) : (
+              <div className="h-[260px] flex flex-col items-center justify-center text-slate-400 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+                <BarChart3 className="w-12 h-12 mb-3 opacity-20 text-slate-600" />
+                <p className="font-medium text-sm">暂无测评评分记录</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Task Pipeline Health & Status */}
+        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm bg-white overflow-hidden flex flex-col">
+          <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-slate-100 bg-slate-50/50">
+            <div className="flex items-center gap-2">
+              <Activity className="w-5 h-5 text-indigo-500" />
+              <CardTitle className="text-lg font-bold text-slate-900">流水线健康度</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-8 pb-6 flex-1 flex flex-col justify-center space-y-12 px-8">
+            {isLoading ? (
+              <div className="space-y-8">
+                <div className="space-y-3"><Skeleton className="h-4 w-1/3" /><Skeleton className="h-3 w-full rounded-full" /></div>
+                <div className="space-y-3"><Skeleton className="h-4 w-1/3" /><Skeleton className="h-3 w-full rounded-full" /></div>
+              </div>
+            ) : (
+              <>
+                {/* Performance Tasks */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2 font-bold text-slate-800">
+                      <div className="p-1.5 bg-blue-50/80 rounded-lg">
+                        <FlaskConical className="w-4 h-4 text-blue-600" />
+                      </div>
+                      性能压测任务
+                    </div>
+                    <div className="text-slate-500 font-mono font-medium">总计 {tasks.length}</div>
+                  </div>
+                  <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
+                    {(() => {
+                      const total = tasks.length || 1;
+                      const success = tasks.filter(t => t.status === 4).length;
+                      const running = tasks.filter(t => t.status === 3).length;
+                      const failed = tasks.filter(t => t.status === 5 || t.status === 7).length;
+                      return (
+                        <>
+                          <div style={{ width: `${(success/total)*100}%` }} className="bg-emerald-500 hover:opacity-90 transition-opacity cursor-pointer" title={`成功: ${success}`}></div>
+                          <div style={{ width: `${(running/total)*100}%` }} className="bg-blue-500 hover:opacity-90 transition-opacity cursor-pointer relative overflow-hidden" title={`执行中: ${running}`}>
+                            {running > 0 && <div className="absolute inset-0 bg-white/20 animate-pulse"></div>}
+                          </div>
+                          <div style={{ width: `${(failed/total)*100}%` }} className="bg-red-500 hover:opacity-90 transition-opacity cursor-pointer" title={`失败: ${failed}`}></div>
+                        </>
+                      )
+                    })()}
+                  </div>
+                  <div className="flex justify-between text-xs text-slate-500 font-medium px-1">
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm"></span> 成功 ({tasks.filter(t => t.status === 4).length})</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-sm"></span> 执行中 ({tasks.filter(t => t.status === 3).length})</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-sm"></span> 失败/超时 ({tasks.filter(t => t.status === 5 || t.status === 7).length})</span>
+                  </div>
+                </div>
+
+                {/* Evaluation Tasks */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2 font-bold text-slate-800">
+                      <div className="p-1.5 bg-purple-50/80 rounded-lg">
+                        <PieChartIcon className="w-4 h-4 text-purple-600" />
+                      </div>
+                      模型评测任务
+                    </div>
+                    <div className="text-slate-500 font-mono font-medium">总计 {evalTasks.length}</div>
+                  </div>
+                  <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
+                    {(() => {
+                      const total = evalTasks.length || 1;
+                      const success = evalTasks.filter((t: any) => t.status === 'completed').length;
+                      const running = evalTasks.filter((t: any) => t.status === 'running').length;
+                      const failed = evalTasks.filter((t: any) => t.status === 'failed' || t.status === 'stopped').length;
+                      return (
+                        <>
+                          <div style={{ width: `${(success/total)*100}%` }} className="bg-emerald-500 hover:opacity-90 transition-opacity cursor-pointer" title={`成功: ${success}`}></div>
+                          <div style={{ width: `${(running/total)*100}%` }} className="bg-purple-500 hover:opacity-90 transition-opacity cursor-pointer relative overflow-hidden" title={`执行中: ${running}`}>
+                            {running > 0 && <div className="absolute inset-0 bg-white/20 animate-pulse"></div>}
+                          </div>
+                          <div style={{ width: `${(failed/total)*100}%` }} className="bg-red-500 hover:opacity-90 transition-opacity cursor-pointer" title={`失败: ${failed}`}></div>
+                        </>
+                      )
+                    })()}
+                  </div>
+                  <div className="flex justify-between text-xs text-slate-500 font-medium px-1">
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm"></span> 成功 ({evalTasks.filter((t: any) => t.status === 'completed').length})</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm"></span> 执行中 ({evalTasks.filter((t: any) => t.status === 'running').length})</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-sm"></span> 失败/终止 ({evalTasks.filter((t: any) => t.status === 'failed' || t.status === 'stopped').length})</span>
+                  </div>
+                </div>
+              </>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Lists Area */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Task Pipeline (More Focus on Evaluation) */}
+        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm flex flex-col bg-white overflow-hidden">
+          <Tabs value={activeTaskTab} onValueChange={setActiveTaskTab} className="flex-1 flex flex-col">
+            <CardHeader className="flex flex-row items-center justify-between border-b border-slate-100 py-3 px-6 bg-slate-50/50">
+              <div className="flex items-center gap-4">
+                <CardTitle className="text-lg font-bold text-slate-900">任务执行看板</CardTitle>
+                <TabsList className="h-9 p-1 bg-slate-200/50 rounded-lg">
+                  <TabsTrigger value="eval" className="text-xs px-4 data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md font-semibold text-slate-600 data-[state=active]:text-blue-700">模型测评</TabsTrigger>
+                  <TabsTrigger value="perf" className="text-xs px-4 data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md font-semibold text-slate-600 data-[state=active]:text-blue-700">性能压测</TabsTrigger>
+                </TabsList>
+              </div>
+              <Button variant="ghost" size="sm" onClick={() => navigate(activeTaskTab === 'perf' ? "/tests" : "/eval-manage")} className="text-slate-500 hover:text-blue-600 hover:bg-blue-50 h-8 px-3 rounded-lg transition-all">
+                更多 <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </CardHeader>
+            <CardContent className="p-0">
+              <TabsContent value="eval" className="m-0 border-none outline-none">
+                <div className="divide-y divide-slate-100">
+                  {isLoading ? (
+                    Array.from({ length: 5 }).map((_, i) => (
+                      <div key={i} className="p-5 flex items-center justify-between"><Skeleton className="h-10 w-full" /></div>
+                    ))
+                  ) : recentEvalTasks.length === 0 ? (
+                    <div className="py-16 text-center text-slate-400"><ClipboardList className="w-12 h-12 mx-auto mb-3 opacity-20 text-slate-500" /><p className="font-medium text-sm">暂无记录</p></div>
+                  ) : recentEvalTasks.map((task: any) => {
+                      let statusBadge = { color: 'bg-slate-100 text-slate-500 border-slate-200', label: '未知', icon: Clock };
+                      if (task.status === 'completed') statusBadge = { color: 'bg-emerald-50 text-emerald-700 border-emerald-200/60 shadow-sm', label: '已完成', icon: CheckCircle2 };
+                      else if (task.status === 'running') statusBadge = { color: 'bg-blue-500 text-white border-blue-600 shadow-md shadow-blue-500/20', label: '测评中', icon: PlayCircle };
+                      else if (task.status === 'failed') statusBadge = { color: 'bg-red-50 text-red-700 border-red-200/60 shadow-sm', label: '失败', icon: AlertCircle };
+                      else if (task.status === 'pending') statusBadge = { color: 'bg-blue-50 text-blue-700 border-blue-200/60 shadow-sm', label: '队列中', icon: Clock };
+                      else if (task.status === 'stopped') statusBadge = { color: 'bg-slate-100 text-slate-600 border-slate-200/60 shadow-sm', label: '已停止', icon: AlertCircle };
+
+                      const StatusIcon = statusBadge.icon;
+
+                      return (
+                        <div key={task.id} className="flex items-center justify-between p-4 sm:p-5 hover:bg-slate-50 transition-colors group">
+                          <div className="flex-1 min-w-0 pr-4">
+                            <div className="font-semibold text-slate-800 text-sm truncate flex items-center gap-2 group-hover:text-blue-600 transition-colors" title={task.model_name}>
+                              {task.model_name}
+                              {task.eval_type?.includes('IPD') && <Badge variant="secondary" className="text-[10px] h-5 px-1.5 font-semibold bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-100">IPD流程</Badge>}
+                            </div>
+                            <div className="text-xs text-slate-500 mt-2 flex items-center gap-3 font-medium">
+                              <span className="font-mono text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">ID:{task.id}</span>
+                              <span>{new Date(task.created_at).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>
+                            </div>
+                          </div>
+                          <Badge className={`border flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold shadow-sm ${statusBadge.color}`}>
+                            <StatusIcon className="w-3.5 h-3.5" />
+                            {statusBadge.label}
+                          </Badge>
+                        </div>
+                      )
+                  })}
+                </div>
+              </TabsContent>
+              <TabsContent value="perf" className="m-0 border-none outline-none">
+                 <div className="divide-y divide-slate-100">
+                  {isLoading ? (
+                    Array.from({ length: 5 }).map((_, i) => (
+                      <div key={i} className="p-5 flex items-center justify-between"><Skeleton className="h-10 w-full" /></div>
+                    ))
+                  ) : recentPerfTasks.length === 0 ? (
+                    <div className="py-16 text-center text-slate-400"><FlaskConical className="w-12 h-12 mx-auto mb-3 opacity-20 text-slate-500" /><p className="font-medium text-sm">暂无记录</p></div>
+                  ) : recentPerfTasks.map((task) => {
+                      const status = statusConfig[task.status] || statusConfig[0];
+                      const StatusIcon = status.icon;
+                      return (
+                        <div key={task.id} className="flex items-center justify-between p-4 sm:p-5 hover:bg-slate-50 transition-colors group">
+                          <div className="flex-1 min-w-0 pr-4">
+                            <div className="font-semibold text-slate-800 text-sm truncate group-hover:text-blue-600 transition-colors" title={task.task_name}>
+                              {task.task_name}
+                            </div>
+                            <div className="text-xs text-slate-500 mt-2 flex items-center gap-3 font-medium">
+                              <span className="font-mono text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">ID:{task.id}</span>
+                              <span>{new Date(task.created_at).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-5 shrink-0">
+                            {task.progress > 0 && task.status === 3 && (
+                              <div className="w-24 hidden sm:block">
+                                <div className="flex justify-between text-[10px] font-bold text-blue-600 mb-1.5">
+                                  <span>进度</span>
+                                  <span>{task.progress}%</span>
+                                </div>
+                                <Progress value={task.progress} className="h-1.5 bg-blue-100 [&>div]:bg-blue-600" />
+                              </div>
+                            )}
+                            <Badge className={`border flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold shadow-sm ${status.color}`}>
+                              <StatusIcon className="w-3.5 h-3.5" />
+                              {status.label}
+                            </Badge>
+                          </div>
+                        </div>
+                      )
+                  })}
+                 </div>
+              </TabsContent>
+            </CardContent>
+          </Tabs>
+        </Card>
+
+        {/* Device Cluster Overview */}
+        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm flex flex-col bg-white overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between border-b border-slate-100 py-4 px-6 bg-slate-50/50">
+            <div>
+              <CardTitle className="text-lg font-bold text-slate-900">算力节点概览</CardTitle>
+            </div>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/devices')} className="text-slate-500 hover:text-blue-600 hover:bg-blue-50 h-8 px-3 rounded-lg transition-all">
+              管理集群 <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </CardHeader>
+          <CardContent className="p-0">
             <div className="divide-y divide-slate-100">
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="flex items-center justify-between p-4">
-                    <div className="flex items-center gap-4">
-                      <Skeleton className="h-3 w-3 rounded-full" />
-                      <div>
-                        <Skeleton className="h-4 w-28 mb-2" />
-                        <Skeleton className="h-3 w-20" />
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Skeleton className="h-6 w-14 rounded-md" />
-                      <Skeleton className="h-6 w-14 rounded-md" />
-                    </div>
-                  </div>
+                  <div key={i} className="p-5 flex items-center justify-between"><Skeleton className="h-10 w-full" /></div>
                 ))
               ) : devices.length === 0 ? (
-                <div className="p-8 text-center text-slate-500 text-sm">暂无设备信息</div>
-              ) : devices.slice(0, 6).map((device) => (
-                  <div
-                    key={device.id}
-                    className="flex items-center justify-between p-4 hover:bg-slate-50 transition-colors"
-                  >
+                <div className="py-16 text-center text-slate-400"><Server className="w-12 h-12 mx-auto mb-3 opacity-20 text-slate-500" /><p className="font-medium text-sm">暂无设备接入</p></div>
+              ) : devices.slice(0, 5).map((device) => (
+                  <div key={device.id} className="flex items-center justify-between p-4 sm:p-5 hover:bg-slate-50 transition-colors group">
                     <div className="flex items-center gap-4">
-                      <div className="relative flex h-3 w-3">
+                      <div className="relative flex h-3 w-3 shrink-0">
                         {device.status === 'Online' && (
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         )}
-                        <span className={`relative inline-flex rounded-full h-3 w-3 ${
-                          device.status === 'Online'
-                            ? 'bg-green-500'
-                            : device.status === 'Offline'
-                            ? 'bg-red-500'
-                            : 'bg-slate-400'
-                        }`}></span>
+                        <span className={`relative inline-flex rounded-full h-3 w-3 ${device.status === 'Online' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : device.status === 'Offline' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]' : 'bg-slate-400'}`}></span>
                       </div>
                       <div>
-                        <div className="font-medium text-slate-900">{device.ip}</div>
-                        <div className="text-xs text-slate-500 mt-1 flex items-center gap-1">
-                          <Cpu className="w-3 h-3" />
-                          {device.accelerator_type || '无加速卡'} × {device.accelerator_count}
+                        <div className="font-bold text-slate-900 text-sm font-mono tracking-tight group-hover:text-blue-600 transition-colors">{device.ip}</div>
+                        <div className="text-xs text-slate-500 mt-1.5 flex items-center gap-2 font-medium">
+                          <Cpu className="w-3.5 h-3.5" />
+                          <span>{device.accelerator_type || '通用计算节点'} ({device.accelerator_count}卡)</span>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="bg-slate-100 text-slate-700 hover:bg-slate-200">
-                        闲置: {device.idle_count}
-                      </Badge>
-                      {device.busy_count > 0 && (
-                        <Badge variant="secondary" className="bg-orange-100 text-orange-700 hover:bg-orange-200">
-                          忙碌: {device.busy_count}
-                        </Badge>
+                    <div className="flex items-center">
+                      {device.busy_count > 0 ? (
+                        <div className="flex items-center gap-1.5 bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg border border-blue-100 text-xs font-bold shadow-sm">
+                          <Activity className="w-3.5 h-3.5 animate-pulse" /> {device.busy_count} 卡运行中
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 bg-slate-50 text-slate-600 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+                          {device.idle_count} 卡闲置
+                        </div>
                       )}
                     </div>
                   </div>
                 ))}
             </div>
           </CardContent>
-        </Card>
-
-        <Card className="lg:col-span-7 shadow-sm border-slate-200 flex flex-col">
-          <Tabs value={activeTaskTab} onValueChange={setActiveTaskTab} className="flex-1 flex flex-col">
-            <CardHeader className="flex flex-row items-center justify-between border-b bg-slate-50/50 pb-0 pt-3 px-4">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 text-lg font-semibold text-slate-800 mb-3">
-                  <FlaskConical className="w-5 h-5 text-slate-500" />
-                  最近任务
-                </div>
-                <TabsList className="bg-transparent h-auto p-0 mb-0 space-x-4">
-                  <TabsTrigger 
-                    value="perf" 
-                    className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-blue-600 border-b-2 border-transparent rounded-none px-2 pb-3 pt-1 font-medium text-slate-600 data-[state=active]:text-blue-700"
-                  >
-                    性能测试
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="eval" 
-                    className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-indigo-600 border-b-2 border-transparent rounded-none px-2 pb-3 pt-1 font-medium text-slate-600 data-[state=active]:text-indigo-700"
-                  >
-                    模型测评
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-              <Link to={activeTaskTab === 'perf' ? "/tests" : "/eval-manage"} className="mb-3">
-                <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50">
-                  查看全部 <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
-            </CardHeader>
-            <CardContent className="p-0 flex-1 relative">
-              <TabsContent value="perf" className="m-0 border-none outline-none">
-                <div className="divide-y divide-slate-100">
-                  {isLoading ? (
-                    Array.from({ length: 5 }).map((_, i) => (
-                      <div key={i} className="flex items-center justify-between p-4">
-                        <div>
-                          <Skeleton className="h-4 w-40 mb-2" />
-                          <Skeleton className="h-3 w-32" />
-                        </div>
-                        <Skeleton className="h-6 w-20 rounded-full" />
-                      </div>
-                    ))
-                  ) : recentPerfTasks.length === 0 ? (
-                    <div className="p-8 text-center text-slate-500 text-sm">暂无性能测试任务</div>
-                  ) : recentPerfTasks.map((task) => (
-                      <div
-                        key={task.id}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 gap-3 hover:bg-slate-50 transition-colors"
-                      >
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium text-slate-900 truncate pr-4" title={task.task_name}>
-                            {task.task_name}
-                          </div>
-                          <div className="text-xs text-slate-500 mt-1 flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {new Date(task.created_at).toLocaleString()}
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4 sm:min-w-[140px] sm:justify-end shrink-0">
-                          {task.progress > 0 && task.status === 3 && (
-                            <div className="w-20 hidden sm:block">
-                              <div className="flex justify-between text-[10px] text-slate-500 mb-1">
-                                <span>进度</span>
-                                <span>{task.progress}%</span>
-                              </div>
-                              <Progress value={task.progress} className="h-1.5" />
-                            </div>
-                          )}
-                          <Badge className={`${statusConfig[task.status]?.color} border-0 whitespace-nowrap`}>
-                            {statusConfig[task.status]?.label}
-                          </Badge>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </TabsContent>
-              <TabsContent value="eval" className="m-0 border-none outline-none">
-                <div className="divide-y divide-slate-100">
-                  {isLoading ? (
-                    Array.from({ length: 5 }).map((_, i) => (
-                      <div key={i} className="flex items-center justify-between p-4">
-                        <div>
-                          <Skeleton className="h-4 w-40 mb-2" />
-                          <Skeleton className="h-3 w-32" />
-                        </div>
-                        <Skeleton className="h-6 w-20 rounded-full" />
-                      </div>
-                    ))
-                  ) : recentEvalTasks.length === 0 ? (
-                    <div className="p-8 text-center text-slate-500 text-sm">暂无模型测评任务</div>
-                  ) : recentEvalTasks.map((task: any) => {
-                      let statusBadge = { color: 'bg-gray-50 text-gray-700', label: '未知' };
-                      if (task.status === 'completed') statusBadge = { color: 'bg-emerald-50 text-emerald-700', label: '已完成' };
-                      else if (task.status === 'running') statusBadge = { color: 'bg-indigo-50 text-indigo-700', label: '测评中' };
-                      else if (task.status === 'failed') statusBadge = { color: 'bg-red-50 text-red-700', label: '失败' };
-                      else if (task.status === 'pending') statusBadge = { color: 'bg-blue-50 text-blue-700', label: '等待中' };
-                      else if (task.status === 'stopped') statusBadge = { color: 'bg-orange-50 text-orange-700', label: '已停止' };
-
-                      return (
-                        <div
-                          key={task.id}
-                          className="flex flex-col sm:flex-row sm:items-center justify-between p-4 gap-3 hover:bg-slate-50 transition-colors"
-                        >
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-slate-900 truncate pr-4" title={task.model_name}>
-                              {task.model_name} <span className="text-slate-400 font-normal text-sm ml-1">模型测评</span>
-                            </div>
-                            <div className="text-xs text-slate-500 mt-1 flex items-center gap-1">
-                              <Clock className="w-3 h-3" />
-                              {new Date(task.created_at).toLocaleString()}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-4 sm:min-w-[140px] sm:justify-end shrink-0">
-                            <Badge className={`${statusBadge.color} border-0 whitespace-nowrap`}>
-                              {statusBadge.label}
-                            </Badge>
-                          </div>
-                        </div>
-                      )
-                  })}
-                </div>
-              </TabsContent>
-            </CardContent>
-          </Tabs>
         </Card>
       </div>
     </div>

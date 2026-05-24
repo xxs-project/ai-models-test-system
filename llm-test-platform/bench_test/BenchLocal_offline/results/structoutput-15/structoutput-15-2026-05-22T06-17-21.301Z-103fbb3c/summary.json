@@ -1,0 +1,905 @@
+{
+  "runId": "structoutput-15-2026-05-22T06-17-21.301Z-103fbb3c",
+  "runDir": "/home/models-test-system_ucd/llm-test-platform/bench_test/BenchLocal/results/structoutput-15/structoutput-15-2026-05-22T06-17-21.301Z-103fbb3c",
+  "benchPackId": "structoutput-15",
+  "benchPackName": "StructOutput-15",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T06:17:21.336Z",
+  "completedAt": "2026-05-22T06:17:31.654Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "structoutput-15",
+      "benchPackName": "StructOutput-15",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "structoutput-15",
+      "benchPackName": "StructOutput-15",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "structoutput-15-2026-05-22T06-17-21.301Z-103fbb3c",
+      "models": [
+        {
+          "id": "local_model:gemma-4-31B-it",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-01",
+      "title": "Simple JSON Object",
+      "index": 1,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-02",
+      "title": "CSV with Headers",
+      "index": 2,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-03",
+      "title": "YAML Configuration",
+      "index": 3,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-04",
+      "title": "TOML Configuration",
+      "index": 4,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-05",
+      "title": "SQL CREATE + INSERT",
+      "index": 5,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-06",
+      "title": "ICS Calendar Event",
+      "index": 6,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-07",
+      "title": "Nested JSON with Arrays and Nulls",
+      "index": 7,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-08",
+      "title": "CSV with Special Characters",
+      "index": 8,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-09",
+      "title": "XML with Namespaces and Attributes",
+      "index": 9,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-10",
+      "title": "JSON to Markdown Table",
+      "index": 10,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-11",
+      "title": "Natural Language to Mermaid Diagram",
+      "index": 11,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-12",
+      "title": "HTML Table with Semantic Markup",
+      "index": 12,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-13",
+      "title": "JSON with Tricky Values",
+      "index": 13,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-14",
+      "title": "CSV Adversarial — The Delimiter Minefield",
+      "index": 14,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "SO-15",
+      "title": "Binary Format Boundary — BSON",
+      "index": 15,
+      "total": 15
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-01",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-02",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-03",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-04",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-05",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-06",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-07",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-08",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-09",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-10",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-11",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-12",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-13",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-14",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-15",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-15",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-15",
+      "result": {
+        "scenarioId": "SO-15",
+        "status": "partial",
+        "score": 65,
+        "summary": "Did not recognize the text/binary boundary cleanly.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-15 Binary Format Boundary — BSON\nuser_turn_1=Generate a BSON document with fields name \"Alice\" and age 30.\nassistant_turn_1={\n  \"name\": \"Alice\",\n  \"age\": 30\n}\nfinal_answer={\n  \"name\": \"Alice\",\n  \"age\": 30\n}\nvalidator_status=fail\nvalidator_summary=Did not recognize the text/binary boundary cleanly.\nverdict=partial\nscore=65\nsummary=Did not recognize the text/binary boundary cleanly.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:22.919Z",
+          "durationMs": 1581
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-15"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-01",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-01",
+      "result": {
+        "scenarioId": "SO-01",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid JSON with expected values.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-01 Simple JSON Object\nuser_turn_1=Generate a JSON object for a book with these details: title \"The Great Gatsby\", author \"F. Scott Fitzgerald\", year 1925, genre \"Novel\", in_print true.\nassistant_turn_1={\n  \"title\": \"The Great Gatsby\",\n  \"author\": \"F. Scott Fitzgerald\",\n  \"year\": 1925,\n  \"genre\": \"Novel\",\n  \"in_print\": true\n}\nfinal_answer={\n  \"title\": \"The Great Gatsby\",\n  \"author\": \"F. Scott Fitzgerald\",\n  \"year\": 1925,\n  \"genre\": \"Novel\",\n  \"in_print\": true\n}\nvalidator_status=pass\nvalidator_summary=Valid JSON with expected values.\nverdict=pass\nscore=100\nsummary=Valid JSON with expected values.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.337Z",
+          "completedAt": "2026-05-22T06:17:24.280Z",
+          "durationMs": 2943
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-01"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-02",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-02",
+      "result": {
+        "scenarioId": "SO-02",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid CSV with expected rows.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-02 CSV with Headers\nuser_turn_1=Generate a CSV file with headers: name, age, city, email. Include these 3 records:\n- Alice Johnson, 32, Portland, alice@example.com\n- Bob Smith, 45, Chicago, bob@example.com\n- Carol White, 28, Austin, carol@example.com\nassistant_turn_1=name,age,city,email\nAlice Johnson,32,Portland,alice@example.com\nBob Smith,45,Chicago,bob@example.com\nCarol White,28,Austin,carol@example.com\nfinal_answer=name,age,city,email\nAlice Johnson,32,Portland,alice@example.com\nBob Smith,45,Chicago,bob@example.com\nCarol White,28,Austin,carol@example.com\nvalidator_status=pass\nvalidator_summary=Valid CSV with expected rows.\nverdict=pass\nscore=100\nsummary=Valid CSV with expected rows.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:24.323Z",
+          "durationMs": 2985
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-02"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-14",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-10",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-14",
+      "result": {
+        "scenarioId": "SO-14",
+        "status": "partial",
+        "score": 83,
+        "summary": "CSV parsed but rows or escaping were incorrect.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-14 CSV Adversarial — The Delimiter Minefield\nuser_turn_1=Generate a CSV with headers: id, description, formula, notes. Include these 2 records:\nRow 1: id 1, description is: He said \"hello, world\" and left, formula is: =SUM(A1,B1), notes is: Line one\\nLine two (actual newline in the value)\nRow 2: id 2, description is: Simple value, formula is: =IF(A1>0,\"yes\",\"no\"), notes is empty\nassistant_turn_1=id,description,formula,notes\n1,\"He said \"\"hello, world\"\" and left\",=SUM(A1,B1),\"Line one\nLine two\"\n2,Simple value,\"=IF(A1>0,\"\"yes\"\",\"\"no\"\")\",\nfinal_answer=id,description,formula,notes\n1,\"He said \"\"hello, world\"\" and left\",=SUM(A1,B1),\"Line one\nLine two\"\n2,Simple value,\"=IF(A1>0,\"\"yes\"\",\"\"no\"\")\",\nvalidator_status=pass\nvalidator_summary=CSV parsed but rows or escaping were incorrect.\nverdict=partial\nscore=83\nsummary=CSV parsed but rows or escaping were incorrect.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:24.683Z",
+          "durationMs": 3345
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-14"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-10",
+      "result": {
+        "scenarioId": "SO-10",
+        "status": "pass",
+        "score": 100,
+        "summary": "Markdown table matched the expected rows.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-10 JSON to Markdown Table\nuser_turn_1=Convert this JSON array into a Markdown table:\n[{\"name\": \"Alice\", \"score\": 95, \"grade\": \"A\"}, {\"name\": \"Bob\", \"score\": 82, \"grade\": \"B+\"}, {\"name\": \"Carol\", \"score\": 78, \"grade\": \"C+\"}, {\"name\": \"Dave\", \"score\": 91, \"grade\": \"A-\"}]\nassistant_turn_1=| name | score | grade |\n| --- | --- | --- |\n| Alice | 95 | A |\n| Bob | 82 | B+ |\n| Carol | 78 | C+ |\n| Dave | 91 | A- |\nfinal_answer=| name | score | grade |\n| --- | --- | --- |\n| Alice | 95 | A |\n| Bob | 82 | B+ |\n| Carol | 78 | C+ |\n| Dave | 91 | A- |\nvalidator_status=pass\nvalidator_summary=Markdown table matched the expected rows.\nverdict=pass\nscore=100\nsummary=Markdown table matched the expected rows.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:24.685Z",
+          "durationMs": 3347
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-10"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-11",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-11",
+      "result": {
+        "scenarioId": "SO-11",
+        "status": "fail",
+        "score": 25,
+        "summary": "Mermaid syntax or branch coverage was incomplete.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-11 Natural Language to Mermaid Diagram\nuser_turn_1=Generate a Mermaid flowchart for this process: User submits a form. System validates the input. If valid, save to database and send confirmation email, then show success page. If invalid, show error message and return to form.\nassistant_turn_1=graph TD\n    A[User submits form] --> B{System validates input}\n    B -- Valid --> C[Save to database]\n    C --> D[Send confirmation email]\n    D --> E[Show success page]\n    B -- Invalid --> F[Show error message]\n    F --> G[Return to form]\nfinal_answer=graph TD\n    A[User submits form] --> B{System validates input}\n    B -- Valid --> C[Save to database]\n    C --> D[Send confirmation email]\n    D --> E[Show success page]\n    B -- Invalid --> F[Show error message]\n    F --> G[Return to form]\nvalidator_status=fail\nvalidator_summary=Mermaid syntax or branch coverage was incomplete.\nverdict=fail\nscore=25\nsummary=Mermaid syntax or branch coverage was incomplete.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.259Z",
+          "durationMs": 3921
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-11"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-04",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-04",
+      "result": {
+        "scenarioId": "SO-04",
+        "status": "pass",
+        "score": 100,
+        "summary": "TOML package metadata and dependencies were valid.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-04 TOML Configuration\nuser_turn_1=Generate a TOML configuration file for a Rust project with: package name \"my_cli\", version \"0.1.0\", edition \"2021\", authors list with \"Alice <alice@example.com>\". Dependencies section: serde version \"1.0\" with features [\"derive\"], clap version \"4.5\".\nassistant_turn_1=[package]\nname = \"my_cli\"\nversion = \"0.1.0\"\nedition = \"2021\"\nauthors = [\"Alice <alice@example.com>\"]\n\n[dependencies]\nserde = { version = \"1.0\", features = [\"derive\"] }\nclap = \"4.5\"\nfinal_answer=[package]\nname = \"my_cli\"\nversion = \"0.1.0\"\nedition = \"2021\"\nauthors = [\"Alice <alice@example.com>\"]\n\n[dependencies]\nserde = { version = \"1.0\", features = [\"derive\"] }\nclap = \"4.5\"\nvalidator_status=pass\nvalidator_summary=TOML package metadata and dependencies were valid.\nverdict=pass\nscore=100\nsummary=TOML package metadata and dependencies were valid.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.303Z",
+          "durationMs": 3965
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-04"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-03",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-03",
+      "result": {
+        "scenarioId": "SO-03",
+        "status": "pass",
+        "score": 100,
+        "summary": "YAML structure matched the requested configuration.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-03 YAML Configuration\nuser_turn_1=Generate a YAML configuration for a web server with these settings: host \"0.0.0.0\", port 8080, debug false, allowed_origins is a list containing \"https://example.com\" and \"https://app.example.com\", and database has nested fields: host \"localhost\", port 5432, name \"myapp_db\".\nassistant_turn_1=host: \"0.0.0.0\"\nport: 8080\ndebug: false\nallowed_origins:\n  - \"https://example.com\"\n  - \"https://app.example.com\"\ndatabase:\n  host: \"localhost\"\n  port: 5432\n  name: \"myapp_db\"\nfinal_answer=host: \"0.0.0.0\"\nport: 8080\ndebug: false\nallowed_origins:\n  - \"https://example.com\"\n  - \"https://app.example.com\"\ndatabase:\n  host: \"localhost\"\n  port: 5432\n  name: \"myapp_db\"\nvalidator_status=pass\nvalidator_summary=YAML structure matched the requested configuration.\nverdict=pass\nscore=100\nsummary=YAML structure matched the requested configuration.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.567Z",
+          "durationMs": 4229
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-03"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-08",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-08",
+      "result": {
+        "scenarioId": "SO-08",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid CSV with expected rows.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-08 CSV with Special Characters\nuser_turn_1=Generate a CSV with headers: company, description, revenue, ceo. Include these 3 records:\n- Acme, Inc., \"Makes everything, from anvils to rockets\", $1.2B, Jane \"JJ\" Smith\n- O'Brien & Sons, \"Family-owned since 1952\", $45M, Patrick O'Brien\n- 株式会社テスト (Test Corp), \"Japanese tech company\", ¥500B, 田中太郎\nassistant_turn_1=company,description,revenue,ceo\n\"Acme, Inc.\",\"Makes everything, from anvils to rockets\",$1.2B,\"Jane \"\"JJ\"\" Smith\"\n\"O'Brien & Sons\",\"Family-owned since 1952\",$45M,Patrick O'Brien\n\"株式会社テスト (Test Corp)\",\"Japanese tech company\",¥500B,田中太郎\nfinal_answer=company,description,revenue,ceo\n\"Acme, Inc.\",\"Makes everything, from anvils to rockets\",$1.2B,\"Jane \"\"JJ\"\" Smith\"\n\"O'Brien & Sons\",\"Family-owned since 1952\",$45M,Patrick O'Brien\n\"株式会社テスト (Test Corp)\",\"Japanese tech company\",¥500B,田中太郎\nvalidator_status=pass\nvalidator_summary=Valid CSV with expected rows.\nverdict=pass\nscore=100\nsummary=Valid CSV with expected rows.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.742Z",
+          "durationMs": 4404
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-08"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-13",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-13",
+      "result": {
+        "scenarioId": "SO-13",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid JSON with expected values.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-13 JSON with Tricky Values\nuser_turn_1=Generate a JSON object with these exact key-value pairs: empty_string should be \"\" (an empty string), null_value should be null, zero should be 0, false_value should be false, empty_array should be [], empty_object should be {}, special_chars should be the string containing a backslash, a double quote, a newline, and a tab: `\\\"\\n\\t`, nested_null should be an object with key \"a\" set to null and key \"b\" set to an array containing null and 1.\nassistant_turn_1={\n  \"empty_string\": \"\",\n  \"null_value\": null,\n  \"zero\": 0,\n  \"false_value\": false,\n  \"empty_array\": [],\n  \"empty_object\": {},\n  \"special_chars\": \"\\\\\\\"\\n\\t\",\n  \"nested_null\": {\n    \"a\": null,\n    \"b\": [\n      null,\n      1\n    ]\n  }\n}\nfinal_answer={\n  \"empty_string\": \"\",\n  \"null_value\": null,\n  \"zero\": 0,\n  \"false_value\": false,\n  \"empty_array\": [],\n  \"empty_object\": {},\n  \"special_chars\": \"\\\\\\\"\\n\\t\",\n  \"nested_null\": {\n    \"a\": null,\n    \"b\": [\n      null,\n      1\n    ]\n  }\n}\nvalidator_status=pass\nvalidator_summary=Valid JSON with expected values.\nverdict=pass\nscore=100\nsummary=Valid JSON with expected values.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:26.519Z",
+          "durationMs": 5181
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-13"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-05",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-05",
+      "result": {
+        "scenarioId": "SO-05",
+        "status": "pass",
+        "score": 100,
+        "summary": "SQL contained the expected table and two inserts.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-05 SQL CREATE + INSERT\nuser_turn_1=Generate SQL to create a table called \"employees\" with columns: id (integer, primary key, auto increment), name (varchar 100, not null), department (varchar 50), salary (decimal 10,2), hire_date (date). Then insert 2 rows: \"Alice Chen\", \"Engineering\", 95000.00, \"2023-06-15\" and \"Bob Park\", \"Marketing\", 78500.50, \"2024-01-10\".\nassistant_turn_1=CREATE TABLE employees (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(50),\n    salary DECIMAL(10,2),\n    hire_date DATE\n);\n\nINSERT INTO employees (name, department, salary, hire_date) VALUES \n('Alice Chen', 'Engineering', 95000.00, '2023-06-15'),\n('Bob Park', 'Marketing', 78500.50, '2024-01-10');\nfinal_answer=CREATE TABLE employees (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(50),\n    salary DECIMAL(10,2),\n    hire_date DATE\n);\n\nINSERT INTO employees (name, department, salary, hire_date) VALUES \n('Alice Chen', 'Engineering', 95000.00, '2023-06-15'),\n('Bob Park', 'Marketing', 78500.50, '2024-01-10');\nvalidator_status=pass\nvalidator_summary=SQL contained the expected table and two inserts.\nverdict=pass\nscore=100\nsummary=SQL contained the expected table and two inserts.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:27.723Z",
+          "durationMs": 6385
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-05"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-09",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-09",
+      "result": {
+        "scenarioId": "SO-09",
+        "status": "pass",
+        "score": 100,
+        "summary": "XML document matched the requested namespace and book data.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-09 XML with Namespaces and Attributes\nuser_turn_1=Generate an XML document representing a book catalog. The root element is \"catalog\" with namespace \"http://example.com/books\" and attribute version=\"2.0\". Include 2 books, each with attributes id and lang. Book 1: id=\"bk101\", lang=\"en\", title \"Rust Programming\", author \"Steve Klabnik\", price 39.99 with currency attribute \"USD\". Book 2: id=\"bk102\", lang=\"ja\", title \"プログラミングRust\", author \"Steve Klabnik\", price 4500 with currency attribute \"JPY\". Include an XML declaration.\nassistant_turn_1=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<catalog xmlns=\"http://example.com/books\" version=\"2.0\">\n  <book id=\"bk101\" lang=\"en\">\n    <title>Rust Programming</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"USD\">39.99</price>\n  </book>\n  <book id=\"bk102\" lang=\"ja\">\n    <title>プログラミングRust</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"JPY\">4500</price>\n  </book>\n</catalog>\nfinal_answer=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<catalog xmlns=\"http://example.com/books\" version=\"2.0\">\n  <book id=\"bk101\" lang=\"en\">\n    <title>Rust Programming</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"USD\">39.99</price>\n  </book>\n  <book id=\"bk102\" lang=\"ja\">\n    <title>プログラミングRust</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"JPY\">4500</price>\n  </book>\n</catalog>\nvalidator_status=pass\nvalidator_summary=XML document matched the requested namespace and book data.\nverdict=pass\nscore=100\nsummary=XML document matched the requested namespace and book data.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:28.833Z",
+          "durationMs": 7495
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-09"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-12",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-12",
+      "result": {
+        "scenarioId": "SO-12",
+        "status": "pass",
+        "score": 100,
+        "summary": "HTML table used the semantic wrappers and data cells correctly.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-12 HTML Table with Semantic Markup\nuser_turn_1=Generate an HTML table showing quarterly revenue. Headers: Quarter, Revenue, Growth. Data: Q1 $1.2M +5%, Q2 $1.4M +16.7%, Q3 $1.1M -21.4%, Q4 $1.8M +63.6%. Use thead, tbody, and th elements properly. Add a caption \"2025 Quarterly Revenue\".\nassistant_turn_1=<table>\n  <caption>2025 Quarterly Revenue</caption>\n  <thead>\n    <tr>\n      <th>Quarter</th>\n      <th>Revenue</th>\n      <th>Growth</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Q1</td>\n      <td>$1.2M</td>\n      <td>+5%</td>\n    </tr>\n    <tr>\n      <td>Q2</td>\n      <td>$1.4M</td>\n      <td>+16.7%</td>\n    </tr>\n    <tr>\n      <td>Q3</td>\n      <td>$1.1M</td>\n      <td>-21.4%</td>\n    </tr>\n    <tr>\n      <td>Q4</td>\n      <td>$1.8M</td>\n      <td>+63.6%</td>\n    </tr>\n  </tbody>\n</table>\nfinal_answer=<table>\n  <caption>2025 Quarterly Revenue</caption>\n  <thead>\n    <tr>\n      <th>Quarter</th>\n      <th>Revenue</th>\n      <th>Growth</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Q1</td>\n      <td>$1.2M</td>\n      <td>+5%</td>\n    </tr>\n    <tr>\n      <td>Q2</td>\n      <td>$1.4M</td>\n      <td>+16.7%</td>\n    </tr>\n    <tr>\n      <td>Q3</td>\n      <td>$1.1M</td>\n      <td>-21.4%</td>\n    </tr>\n    <tr>\n      <td>Q4</td>\n      <td>$1.8M</td>\n      <td>+63.6%</td>\n    </tr>\n  </tbody>\n</table>\nvalidator_status=pass\nvalidator_summary=HTML table used the semantic wrappers and data cells correctly.\nverdict=pass\nscore=100\nsummary=HTML table used the semantic wrappers and data cells correctly.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:29.384Z",
+          "durationMs": 8046
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-12"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-06",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-06",
+      "result": {
+        "scenarioId": "SO-06",
+        "status": "pass",
+        "score": 100,
+        "summary": "ICS event included the required calendar properties.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-06 ICS Calendar Event\nuser_turn_1=Generate an ICS calendar event for a team meeting on April 15, 2026, from 2:00 PM to 3:30 PM Eastern Time. Title: \"Q2 Planning Session\". Location: \"Conference Room B\". Description: \"Quarterly planning meeting - bring your project updates\". Organizer: alice@company.com.\nassistant_turn_1=BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Company//NONSGML Event Calendar//EN\nBEGIN:VEVENT\nUID:q2-planning-2026@company.com\nDTSTAMP:20231027T100000Z\nDTSTART;TZID=America/New_York:20260415T140000\nDTEND;TZID=America/New_York:20260415T153000\nSUMMARY:Q2 Planning Session\nDESCRIPTION:Quarterly planning meeting - bring your project updates\nLOCATION:Conference Room B\nORGANIZER;CN=Alice:mailto:alice@company.com\nEND:VEVENT\nEND:VCALENDAR\nfinal_answer=BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Company//NONSGML Event Calendar//EN\nBEGIN:VEVENT\nUID:q2-planning-2026@company.com\nDTSTAMP:20231027T100000Z\nDTSTART;TZID=America/New_York:20260415T140000\nDTEND;TZID=America/New_York:20260415T153000\nSUMMARY:Q2 Planning Session\nDESCRIPTION:Quarterly planning meeting - bring your project updates\nLOCATION:Conference Room B\nORGANIZER;CN=Alice:mailto:alice@company.com\nEND:VEVENT\nEND:VCALENDAR\nvalidator_status=pass\nvalidator_summary=ICS event included the required calendar properties.\nverdict=pass\nscore=100\nsummary=ICS event included the required calendar properties.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:29.719Z",
+          "durationMs": 8381
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-06"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-07",
+      "message": "Validating artifact in container"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:gemma-4-31B-it",
+      "scenarioId": "SO-07",
+      "result": {
+        "scenarioId": "SO-07",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid JSON with expected values.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-07 Nested JSON with Arrays and Nulls\nuser_turn_1=Generate a JSON object representing an API response for a user profile. The user has: id 42, username \"j_doe\", email null (not verified yet), roles array with \"editor\" and \"viewer\", address object with street \"123 Main St\", city \"Springfield\", state \"IL\", zip \"62704\", and phone_numbers array containing two objects: one with type \"mobile\", number \"+1-555-0123\", primary true, and one with type \"work\", number null, primary false. Include a metadata object with last_login \"2026-03-15T10:30:00Z\" and login_count 847.\nassistant_turn_1={\n  \"id\": 42,\n  \"username\": \"j_doe\",\n  \"email\": null,\n  \"roles\": [\n    \"editor\",\n    \"viewer\"\n  ],\n  \"address\": {\n    \"street\": \"123 Main St\",\n    \"city\": \"Springfield\",\n    \"state\": \"IL\",\n    \"zip\": \"62704\"\n  },\n  \"phone_numbers\": [\n    {\n      \"type\": \"mobile\",\n      \"number\": \"+1-555-0123\",\n      \"primary\": true\n    },\n    {\n      \"type\": \"work\",\n      \"number\": null,\n      \"primary\": false\n    }\n  ],\n  \"metadata\": {\n    \"last_login\": \"2026-03-15T10:30:00Z\",\n    \"login_count\": 847\n  }\n}\nfinal_answer={\n  \"id\": 42,\n  \"username\": \"j_doe\",\n  \"email\": null,\n  \"roles\": [\n    \"editor\",\n    \"viewer\"\n  ],\n  \"address\": {\n    \"street\": \"123 Main St\",\n    \"city\": \"Springfield\",\n    \"state\": \"IL\",\n    \"zip\": \"62704\"\n  },\n  \"phone_numbers\": [\n    {\n      \"type\": \"mobile\",\n      \"number\": \"+1-555-0123\",\n      \"primary\": true\n    },\n    {\n      \"type\": \"work\",\n      \"number\": null,\n      \"primary\": false\n    }\n  ],\n  \"metadata\": {\n    \"last_login\": \"2026-03-15T10:30:00Z\",\n    \"login_count\": 847\n  }\n}\nvalidator_status=pass\nvalidator_summary=Valid JSON with expected values.\nverdict=pass\nscore=100\nsummary=Valid JSON with expected values.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:31.652Z",
+          "durationMs": 10314
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "SO-07"
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:gemma-4-31B-it": {
+          "totalScore": 93,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Basic Single-Format",
+              "score": 100,
+              "weight": 15
+            },
+            {
+              "id": "B",
+              "label": "Less Common Formats",
+              "score": 100,
+              "weight": 20
+            },
+            {
+              "id": "C",
+              "label": "Complex Structures",
+              "score": 100,
+              "weight": 25
+            },
+            {
+              "id": "D",
+              "label": "Conversion & Multi-Format",
+              "score": 75,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Adversarial Edge Cases",
+              "score": 92,
+              "weight": 20
+            }
+          ],
+          "summary": "★★★★★ Excellent"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:gemma-4-31B-it": [
+      {
+        "scenarioId": "SO-15",
+        "status": "partial",
+        "score": 65,
+        "summary": "Did not recognize the text/binary boundary cleanly.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-15 Binary Format Boundary — BSON\nuser_turn_1=Generate a BSON document with fields name \"Alice\" and age 30.\nassistant_turn_1={\n  \"name\": \"Alice\",\n  \"age\": 30\n}\nfinal_answer={\n  \"name\": \"Alice\",\n  \"age\": 30\n}\nvalidator_status=fail\nvalidator_summary=Did not recognize the text/binary boundary cleanly.\nverdict=partial\nscore=65\nsummary=Did not recognize the text/binary boundary cleanly.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:22.919Z",
+          "durationMs": 1581
+        }
+      },
+      {
+        "scenarioId": "SO-01",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid JSON with expected values.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-01 Simple JSON Object\nuser_turn_1=Generate a JSON object for a book with these details: title \"The Great Gatsby\", author \"F. Scott Fitzgerald\", year 1925, genre \"Novel\", in_print true.\nassistant_turn_1={\n  \"title\": \"The Great Gatsby\",\n  \"author\": \"F. Scott Fitzgerald\",\n  \"year\": 1925,\n  \"genre\": \"Novel\",\n  \"in_print\": true\n}\nfinal_answer={\n  \"title\": \"The Great Gatsby\",\n  \"author\": \"F. Scott Fitzgerald\",\n  \"year\": 1925,\n  \"genre\": \"Novel\",\n  \"in_print\": true\n}\nvalidator_status=pass\nvalidator_summary=Valid JSON with expected values.\nverdict=pass\nscore=100\nsummary=Valid JSON with expected values.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.337Z",
+          "completedAt": "2026-05-22T06:17:24.280Z",
+          "durationMs": 2943
+        }
+      },
+      {
+        "scenarioId": "SO-02",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid CSV with expected rows.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-02 CSV with Headers\nuser_turn_1=Generate a CSV file with headers: name, age, city, email. Include these 3 records:\n- Alice Johnson, 32, Portland, alice@example.com\n- Bob Smith, 45, Chicago, bob@example.com\n- Carol White, 28, Austin, carol@example.com\nassistant_turn_1=name,age,city,email\nAlice Johnson,32,Portland,alice@example.com\nBob Smith,45,Chicago,bob@example.com\nCarol White,28,Austin,carol@example.com\nfinal_answer=name,age,city,email\nAlice Johnson,32,Portland,alice@example.com\nBob Smith,45,Chicago,bob@example.com\nCarol White,28,Austin,carol@example.com\nvalidator_status=pass\nvalidator_summary=Valid CSV with expected rows.\nverdict=pass\nscore=100\nsummary=Valid CSV with expected rows.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:24.323Z",
+          "durationMs": 2985
+        }
+      },
+      {
+        "scenarioId": "SO-14",
+        "status": "partial",
+        "score": 83,
+        "summary": "CSV parsed but rows or escaping were incorrect.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-14 CSV Adversarial — The Delimiter Minefield\nuser_turn_1=Generate a CSV with headers: id, description, formula, notes. Include these 2 records:\nRow 1: id 1, description is: He said \"hello, world\" and left, formula is: =SUM(A1,B1), notes is: Line one\\nLine two (actual newline in the value)\nRow 2: id 2, description is: Simple value, formula is: =IF(A1>0,\"yes\",\"no\"), notes is empty\nassistant_turn_1=id,description,formula,notes\n1,\"He said \"\"hello, world\"\" and left\",=SUM(A1,B1),\"Line one\nLine two\"\n2,Simple value,\"=IF(A1>0,\"\"yes\"\",\"\"no\"\")\",\nfinal_answer=id,description,formula,notes\n1,\"He said \"\"hello, world\"\" and left\",=SUM(A1,B1),\"Line one\nLine two\"\n2,Simple value,\"=IF(A1>0,\"\"yes\"\",\"\"no\"\")\",\nvalidator_status=pass\nvalidator_summary=CSV parsed but rows or escaping were incorrect.\nverdict=partial\nscore=83\nsummary=CSV parsed but rows or escaping were incorrect.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:24.683Z",
+          "durationMs": 3345
+        }
+      },
+      {
+        "scenarioId": "SO-10",
+        "status": "pass",
+        "score": 100,
+        "summary": "Markdown table matched the expected rows.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-10 JSON to Markdown Table\nuser_turn_1=Convert this JSON array into a Markdown table:\n[{\"name\": \"Alice\", \"score\": 95, \"grade\": \"A\"}, {\"name\": \"Bob\", \"score\": 82, \"grade\": \"B+\"}, {\"name\": \"Carol\", \"score\": 78, \"grade\": \"C+\"}, {\"name\": \"Dave\", \"score\": 91, \"grade\": \"A-\"}]\nassistant_turn_1=| name | score | grade |\n| --- | --- | --- |\n| Alice | 95 | A |\n| Bob | 82 | B+ |\n| Carol | 78 | C+ |\n| Dave | 91 | A- |\nfinal_answer=| name | score | grade |\n| --- | --- | --- |\n| Alice | 95 | A |\n| Bob | 82 | B+ |\n| Carol | 78 | C+ |\n| Dave | 91 | A- |\nvalidator_status=pass\nvalidator_summary=Markdown table matched the expected rows.\nverdict=pass\nscore=100\nsummary=Markdown table matched the expected rows.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:24.685Z",
+          "durationMs": 3347
+        }
+      },
+      {
+        "scenarioId": "SO-11",
+        "status": "fail",
+        "score": 25,
+        "summary": "Mermaid syntax or branch coverage was incomplete.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-11 Natural Language to Mermaid Diagram\nuser_turn_1=Generate a Mermaid flowchart for this process: User submits a form. System validates the input. If valid, save to database and send confirmation email, then show success page. If invalid, show error message and return to form.\nassistant_turn_1=graph TD\n    A[User submits form] --> B{System validates input}\n    B -- Valid --> C[Save to database]\n    C --> D[Send confirmation email]\n    D --> E[Show success page]\n    B -- Invalid --> F[Show error message]\n    F --> G[Return to form]\nfinal_answer=graph TD\n    A[User submits form] --> B{System validates input}\n    B -- Valid --> C[Save to database]\n    C --> D[Send confirmation email]\n    D --> E[Show success page]\n    B -- Invalid --> F[Show error message]\n    F --> G[Return to form]\nvalidator_status=fail\nvalidator_summary=Mermaid syntax or branch coverage was incomplete.\nverdict=fail\nscore=25\nsummary=Mermaid syntax or branch coverage was incomplete.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.259Z",
+          "durationMs": 3921
+        }
+      },
+      {
+        "scenarioId": "SO-04",
+        "status": "pass",
+        "score": 100,
+        "summary": "TOML package metadata and dependencies were valid.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-04 TOML Configuration\nuser_turn_1=Generate a TOML configuration file for a Rust project with: package name \"my_cli\", version \"0.1.0\", edition \"2021\", authors list with \"Alice <alice@example.com>\". Dependencies section: serde version \"1.0\" with features [\"derive\"], clap version \"4.5\".\nassistant_turn_1=[package]\nname = \"my_cli\"\nversion = \"0.1.0\"\nedition = \"2021\"\nauthors = [\"Alice <alice@example.com>\"]\n\n[dependencies]\nserde = { version = \"1.0\", features = [\"derive\"] }\nclap = \"4.5\"\nfinal_answer=[package]\nname = \"my_cli\"\nversion = \"0.1.0\"\nedition = \"2021\"\nauthors = [\"Alice <alice@example.com>\"]\n\n[dependencies]\nserde = { version = \"1.0\", features = [\"derive\"] }\nclap = \"4.5\"\nvalidator_status=pass\nvalidator_summary=TOML package metadata and dependencies were valid.\nverdict=pass\nscore=100\nsummary=TOML package metadata and dependencies were valid.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.303Z",
+          "durationMs": 3965
+        }
+      },
+      {
+        "scenarioId": "SO-03",
+        "status": "pass",
+        "score": 100,
+        "summary": "YAML structure matched the requested configuration.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-03 YAML Configuration\nuser_turn_1=Generate a YAML configuration for a web server with these settings: host \"0.0.0.0\", port 8080, debug false, allowed_origins is a list containing \"https://example.com\" and \"https://app.example.com\", and database has nested fields: host \"localhost\", port 5432, name \"myapp_db\".\nassistant_turn_1=host: \"0.0.0.0\"\nport: 8080\ndebug: false\nallowed_origins:\n  - \"https://example.com\"\n  - \"https://app.example.com\"\ndatabase:\n  host: \"localhost\"\n  port: 5432\n  name: \"myapp_db\"\nfinal_answer=host: \"0.0.0.0\"\nport: 8080\ndebug: false\nallowed_origins:\n  - \"https://example.com\"\n  - \"https://app.example.com\"\ndatabase:\n  host: \"localhost\"\n  port: 5432\n  name: \"myapp_db\"\nvalidator_status=pass\nvalidator_summary=YAML structure matched the requested configuration.\nverdict=pass\nscore=100\nsummary=YAML structure matched the requested configuration.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.567Z",
+          "durationMs": 4229
+        }
+      },
+      {
+        "scenarioId": "SO-08",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid CSV with expected rows.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-08 CSV with Special Characters\nuser_turn_1=Generate a CSV with headers: company, description, revenue, ceo. Include these 3 records:\n- Acme, Inc., \"Makes everything, from anvils to rockets\", $1.2B, Jane \"JJ\" Smith\n- O'Brien & Sons, \"Family-owned since 1952\", $45M, Patrick O'Brien\n- 株式会社テスト (Test Corp), \"Japanese tech company\", ¥500B, 田中太郎\nassistant_turn_1=company,description,revenue,ceo\n\"Acme, Inc.\",\"Makes everything, from anvils to rockets\",$1.2B,\"Jane \"\"JJ\"\" Smith\"\n\"O'Brien & Sons\",\"Family-owned since 1952\",$45M,Patrick O'Brien\n\"株式会社テスト (Test Corp)\",\"Japanese tech company\",¥500B,田中太郎\nfinal_answer=company,description,revenue,ceo\n\"Acme, Inc.\",\"Makes everything, from anvils to rockets\",$1.2B,\"Jane \"\"JJ\"\" Smith\"\n\"O'Brien & Sons\",\"Family-owned since 1952\",$45M,Patrick O'Brien\n\"株式会社テスト (Test Corp)\",\"Japanese tech company\",¥500B,田中太郎\nvalidator_status=pass\nvalidator_summary=Valid CSV with expected rows.\nverdict=pass\nscore=100\nsummary=Valid CSV with expected rows.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:25.742Z",
+          "durationMs": 4404
+        }
+      },
+      {
+        "scenarioId": "SO-13",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid JSON with expected values.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-13 JSON with Tricky Values\nuser_turn_1=Generate a JSON object with these exact key-value pairs: empty_string should be \"\" (an empty string), null_value should be null, zero should be 0, false_value should be false, empty_array should be [], empty_object should be {}, special_chars should be the string containing a backslash, a double quote, a newline, and a tab: `\\\"\\n\\t`, nested_null should be an object with key \"a\" set to null and key \"b\" set to an array containing null and 1.\nassistant_turn_1={\n  \"empty_string\": \"\",\n  \"null_value\": null,\n  \"zero\": 0,\n  \"false_value\": false,\n  \"empty_array\": [],\n  \"empty_object\": {},\n  \"special_chars\": \"\\\\\\\"\\n\\t\",\n  \"nested_null\": {\n    \"a\": null,\n    \"b\": [\n      null,\n      1\n    ]\n  }\n}\nfinal_answer={\n  \"empty_string\": \"\",\n  \"null_value\": null,\n  \"zero\": 0,\n  \"false_value\": false,\n  \"empty_array\": [],\n  \"empty_object\": {},\n  \"special_chars\": \"\\\\\\\"\\n\\t\",\n  \"nested_null\": {\n    \"a\": null,\n    \"b\": [\n      null,\n      1\n    ]\n  }\n}\nvalidator_status=pass\nvalidator_summary=Valid JSON with expected values.\nverdict=pass\nscore=100\nsummary=Valid JSON with expected values.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:26.519Z",
+          "durationMs": 5181
+        }
+      },
+      {
+        "scenarioId": "SO-05",
+        "status": "pass",
+        "score": 100,
+        "summary": "SQL contained the expected table and two inserts.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-05 SQL CREATE + INSERT\nuser_turn_1=Generate SQL to create a table called \"employees\" with columns: id (integer, primary key, auto increment), name (varchar 100, not null), department (varchar 50), salary (decimal 10,2), hire_date (date). Then insert 2 rows: \"Alice Chen\", \"Engineering\", 95000.00, \"2023-06-15\" and \"Bob Park\", \"Marketing\", 78500.50, \"2024-01-10\".\nassistant_turn_1=CREATE TABLE employees (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(50),\n    salary DECIMAL(10,2),\n    hire_date DATE\n);\n\nINSERT INTO employees (name, department, salary, hire_date) VALUES \n('Alice Chen', 'Engineering', 95000.00, '2023-06-15'),\n('Bob Park', 'Marketing', 78500.50, '2024-01-10');\nfinal_answer=CREATE TABLE employees (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    name VARCHAR(100) NOT NULL,\n    department VARCHAR(50),\n    salary DECIMAL(10,2),\n    hire_date DATE\n);\n\nINSERT INTO employees (name, department, salary, hire_date) VALUES \n('Alice Chen', 'Engineering', 95000.00, '2023-06-15'),\n('Bob Park', 'Marketing', 78500.50, '2024-01-10');\nvalidator_status=pass\nvalidator_summary=SQL contained the expected table and two inserts.\nverdict=pass\nscore=100\nsummary=SQL contained the expected table and two inserts.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:27.723Z",
+          "durationMs": 6385
+        }
+      },
+      {
+        "scenarioId": "SO-09",
+        "status": "pass",
+        "score": 100,
+        "summary": "XML document matched the requested namespace and book data.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-09 XML with Namespaces and Attributes\nuser_turn_1=Generate an XML document representing a book catalog. The root element is \"catalog\" with namespace \"http://example.com/books\" and attribute version=\"2.0\". Include 2 books, each with attributes id and lang. Book 1: id=\"bk101\", lang=\"en\", title \"Rust Programming\", author \"Steve Klabnik\", price 39.99 with currency attribute \"USD\". Book 2: id=\"bk102\", lang=\"ja\", title \"プログラミングRust\", author \"Steve Klabnik\", price 4500 with currency attribute \"JPY\". Include an XML declaration.\nassistant_turn_1=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<catalog xmlns=\"http://example.com/books\" version=\"2.0\">\n  <book id=\"bk101\" lang=\"en\">\n    <title>Rust Programming</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"USD\">39.99</price>\n  </book>\n  <book id=\"bk102\" lang=\"ja\">\n    <title>プログラミングRust</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"JPY\">4500</price>\n  </book>\n</catalog>\nfinal_answer=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<catalog xmlns=\"http://example.com/books\" version=\"2.0\">\n  <book id=\"bk101\" lang=\"en\">\n    <title>Rust Programming</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"USD\">39.99</price>\n  </book>\n  <book id=\"bk102\" lang=\"ja\">\n    <title>プログラミングRust</title>\n    <author>Steve Klabnik</author>\n    <price currency=\"JPY\">4500</price>\n  </book>\n</catalog>\nvalidator_status=pass\nvalidator_summary=XML document matched the requested namespace and book data.\nverdict=pass\nscore=100\nsummary=XML document matched the requested namespace and book data.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:28.833Z",
+          "durationMs": 7495
+        }
+      },
+      {
+        "scenarioId": "SO-12",
+        "status": "pass",
+        "score": 100,
+        "summary": "HTML table used the semantic wrappers and data cells correctly.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-12 HTML Table with Semantic Markup\nuser_turn_1=Generate an HTML table showing quarterly revenue. Headers: Quarter, Revenue, Growth. Data: Q1 $1.2M +5%, Q2 $1.4M +16.7%, Q3 $1.1M -21.4%, Q4 $1.8M +63.6%. Use thead, tbody, and th elements properly. Add a caption \"2025 Quarterly Revenue\".\nassistant_turn_1=<table>\n  <caption>2025 Quarterly Revenue</caption>\n  <thead>\n    <tr>\n      <th>Quarter</th>\n      <th>Revenue</th>\n      <th>Growth</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Q1</td>\n      <td>$1.2M</td>\n      <td>+5%</td>\n    </tr>\n    <tr>\n      <td>Q2</td>\n      <td>$1.4M</td>\n      <td>+16.7%</td>\n    </tr>\n    <tr>\n      <td>Q3</td>\n      <td>$1.1M</td>\n      <td>-21.4%</td>\n    </tr>\n    <tr>\n      <td>Q4</td>\n      <td>$1.8M</td>\n      <td>+63.6%</td>\n    </tr>\n  </tbody>\n</table>\nfinal_answer=<table>\n  <caption>2025 Quarterly Revenue</caption>\n  <thead>\n    <tr>\n      <th>Quarter</th>\n      <th>Revenue</th>\n      <th>Growth</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Q1</td>\n      <td>$1.2M</td>\n      <td>+5%</td>\n    </tr>\n    <tr>\n      <td>Q2</td>\n      <td>$1.4M</td>\n      <td>+16.7%</td>\n    </tr>\n    <tr>\n      <td>Q3</td>\n      <td>$1.1M</td>\n      <td>-21.4%</td>\n    </tr>\n    <tr>\n      <td>Q4</td>\n      <td>$1.8M</td>\n      <td>+63.6%</td>\n    </tr>\n  </tbody>\n</table>\nvalidator_status=pass\nvalidator_summary=HTML table used the semantic wrappers and data cells correctly.\nverdict=pass\nscore=100\nsummary=HTML table used the semantic wrappers and data cells correctly.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:29.384Z",
+          "durationMs": 8046
+        }
+      },
+      {
+        "scenarioId": "SO-06",
+        "status": "pass",
+        "score": 100,
+        "summary": "ICS event included the required calendar properties.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-06 ICS Calendar Event\nuser_turn_1=Generate an ICS calendar event for a team meeting on April 15, 2026, from 2:00 PM to 3:30 PM Eastern Time. Title: \"Q2 Planning Session\". Location: \"Conference Room B\". Description: \"Quarterly planning meeting - bring your project updates\". Organizer: alice@company.com.\nassistant_turn_1=BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Company//NONSGML Event Calendar//EN\nBEGIN:VEVENT\nUID:q2-planning-2026@company.com\nDTSTAMP:20231027T100000Z\nDTSTART;TZID=America/New_York:20260415T140000\nDTEND;TZID=America/New_York:20260415T153000\nSUMMARY:Q2 Planning Session\nDESCRIPTION:Quarterly planning meeting - bring your project updates\nLOCATION:Conference Room B\nORGANIZER;CN=Alice:mailto:alice@company.com\nEND:VEVENT\nEND:VCALENDAR\nfinal_answer=BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Company//NONSGML Event Calendar//EN\nBEGIN:VEVENT\nUID:q2-planning-2026@company.com\nDTSTAMP:20231027T100000Z\nDTSTART;TZID=America/New_York:20260415T140000\nDTEND;TZID=America/New_York:20260415T153000\nSUMMARY:Q2 Planning Session\nDESCRIPTION:Quarterly planning meeting - bring your project updates\nLOCATION:Conference Room B\nORGANIZER;CN=Alice:mailto:alice@company.com\nEND:VEVENT\nEND:VCALENDAR\nvalidator_status=pass\nvalidator_summary=ICS event included the required calendar properties.\nverdict=pass\nscore=100\nsummary=ICS event included the required calendar properties.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:29.719Z",
+          "durationMs": 8381
+        }
+      },
+      {
+        "scenarioId": "SO-07",
+        "status": "pass",
+        "score": 100,
+        "summary": "Valid JSON with expected values.",
+        "rawLog": "model=gemma-4-31B-it\nscenario=SO-07 Nested JSON with Arrays and Nulls\nuser_turn_1=Generate a JSON object representing an API response for a user profile. The user has: id 42, username \"j_doe\", email null (not verified yet), roles array with \"editor\" and \"viewer\", address object with street \"123 Main St\", city \"Springfield\", state \"IL\", zip \"62704\", and phone_numbers array containing two objects: one with type \"mobile\", number \"+1-555-0123\", primary true, and one with type \"work\", number null, primary false. Include a metadata object with last_login \"2026-03-15T10:30:00Z\" and login_count 847.\nassistant_turn_1={\n  \"id\": 42,\n  \"username\": \"j_doe\",\n  \"email\": null,\n  \"roles\": [\n    \"editor\",\n    \"viewer\"\n  ],\n  \"address\": {\n    \"street\": \"123 Main St\",\n    \"city\": \"Springfield\",\n    \"state\": \"IL\",\n    \"zip\": \"62704\"\n  },\n  \"phone_numbers\": [\n    {\n      \"type\": \"mobile\",\n      \"number\": \"+1-555-0123\",\n      \"primary\": true\n    },\n    {\n      \"type\": \"work\",\n      \"number\": null,\n      \"primary\": false\n    }\n  ],\n  \"metadata\": {\n    \"last_login\": \"2026-03-15T10:30:00Z\",\n    \"login_count\": 847\n  }\n}\nfinal_answer={\n  \"id\": 42,\n  \"username\": \"j_doe\",\n  \"email\": null,\n  \"roles\": [\n    \"editor\",\n    \"viewer\"\n  ],\n  \"address\": {\n    \"street\": \"123 Main St\",\n    \"city\": \"Springfield\",\n    \"state\": \"IL\",\n    \"zip\": \"62704\"\n  },\n  \"phone_numbers\": [\n    {\n      \"type\": \"mobile\",\n      \"number\": \"+1-555-0123\",\n      \"primary\": true\n    },\n    {\n      \"type\": \"work\",\n      \"number\": null,\n      \"primary\": false\n    }\n  ],\n  \"metadata\": {\n    \"last_login\": \"2026-03-15T10:30:00Z\",\n    \"login_count\": 847\n  }\n}\nvalidator_status=pass\nvalidator_summary=Valid JSON with expected values.\nverdict=pass\nscore=100\nsummary=Valid JSON with expected values.",
+        "timings": {
+          "startedAt": "2026-05-22T06:17:21.338Z",
+          "completedAt": "2026-05-22T06:17:31.652Z",
+          "durationMs": 10314
+        }
+      }
+    ]
+  },
+  "scores": {
+    "local_model:gemma-4-31B-it": {
+      "totalScore": 93,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Basic Single-Format",
+          "score": 100,
+          "weight": 15
+        },
+        {
+          "id": "B",
+          "label": "Less Common Formats",
+          "score": 100,
+          "weight": 20
+        },
+        {
+          "id": "C",
+          "label": "Complex Structures",
+          "score": 100,
+          "weight": 25
+        },
+        {
+          "id": "D",
+          "label": "Conversion & Multi-Format",
+          "score": 75,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Adversarial Edge Cases",
+          "score": 92,
+          "weight": 20
+        }
+      ],
+      "summary": "★★★★★ Excellent"
+    }
+  }
+}

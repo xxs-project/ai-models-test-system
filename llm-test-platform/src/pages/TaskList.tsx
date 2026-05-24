@@ -670,13 +670,24 @@ export function TaskList() {
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-white border-2 border-slate-300 shadow-2xl">
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-white border-2 border-slate-300 shadow-2xl">
           <DialogHeader className="border-b border-slate-200 pb-4">
             <DialogTitle className="text-xl font-bold text-slate-900">{editingTask ? '编辑测试任务' : '创建测试任务'}</DialogTitle>
           </DialogHeader>
           
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-6 py-6 h-[70vh]">
+              {/* Left sidebar */}
+              <div className="w-48 shrink-0 flex flex-col gap-2 border-r border-slate-100 pr-4">
+                <div className="px-3 py-2 bg-primary/10 text-primary rounded-md font-medium text-sm cursor-pointer">基本信息</div>
+                <div className="px-3 py-2 text-textSec hover:bg-pageBg rounded-md font-medium text-sm cursor-pointer">测试配置</div>
+                <div className="px-3 py-2 text-textSec hover:bg-pageBg rounded-md font-medium text-sm cursor-pointer">性能参数</div>
+                <div className="px-3 py-2 text-textSec hover:bg-pageBg rounded-md font-medium text-sm cursor-pointer">设备配置</div>
+              </div>
+              
+              {/* Right content */}
+              <div className="flex-1 overflow-y-auto pr-4 space-y-8">
+
               
               {/* 基础信息 */}
               <div className="space-y-4 border-b border-slate-100 pb-6">
@@ -1270,6 +1281,7 @@ export function TaskList() {
               </>
               )}
 
+                            </div>
               <DialogFooter className="gap-3">
                 <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                   取消

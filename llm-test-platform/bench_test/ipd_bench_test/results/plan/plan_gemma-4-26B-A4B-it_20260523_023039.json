@@ -1,0 +1,407 @@
+[
+  {
+    "id": "COMPANY_IPD_S2_01",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['强一致性']"
+    },
+    "latency": 20.025946855545044,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Distributed High-Consistency Financial Reconciliation System (DHF-RS)\",\n  \"primary_goal\": \"Achieve sub-second distributed transaction reconciliation and ensure <15min month-end closing with active-active disaster recovery.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Distributed Transactional Engine (DTE)\",\n      \"hw_sw_dependencies\": \"High-IOPS NVMe SSDs, RDMA-enabled NICs, TiDB or OceanBase distributed database cluster\",\n      \"interface_protocol\": \"gRPC with Paxos/Raft consensus protocol\",\n      \"design_rationale\": \"Utilizes multi-raft consensus to ensure strong consistency across distributed nodes, eliminating data drift during high-concurrency reconciliation.\"\n    },\n    {\n      \"module_name\": \"Parallel Reconciliation Processing Layer (PRPL)\",\n      \"hw_sw_dependencies\": \"High-core count CPU clusters, Kubernetes (K8s) orchestration, Apache Flink/Spark Streaming\",\n      \"interface_protocol\": \"RESTful API / Kafka Message Bus\",\n      \"design_rationale\": \"Implements data sharding and parallel task execution to compress the reconciliation window, meeting the 15-minute month-end closing requirement.\"\n    },\n    {\n      \"module_name\": \"Active-Active Geo-Replication Controller (AGRC)\",\n      \"hw_sw_dependencies\": \"Dedicated high-bandwidth low-latency fiber links (DWDM), Global Server Load Balancer (GSLB)\",\n      \"interface_protocol\": \"Synchronous Replication Protocol / BGP Anycast\",\n      \"design_rationale\": \"Manages state synchronization between headquarters and disaster recovery centers to enable seamless failover and zero RPO/RTO.\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Minimum inter-site network latency must be < 5ms to support synchronous distributed transactions.\",\n    \"Hardware must support hardware-level timestamping (PTP) for strict transaction ordering.\"\n  ],\n  \"risk_controls\": [\n    \"Implement 'Split-brain' detection mechanisms via quorum-based voting to prevent data divergence during network partitions.\",\n    \"Establish automated circuit breakers and back-pressure mechanisms to prevent cascading failures during peak reconciliation loads.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Distributed High-Consistency Financial Reconciliation System (DHF-RS)\",\n  \"primary_goal\": \"Achieve sub-second distributed transaction reconciliation and ensure <15min month-e..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_02",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.14210605621338,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Distributed-Consistent Financial Reconciliation Engine (DCFRE)\",\n  \"primary_goal\": \"实现基于分布式强一致性事务的秒级账务对账，确保上市公司级别的财务权限隔离、全链路审计追溯及补偿动作的可复盘性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"Distributed Transactional Reconciliation Core\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"High-IOPS NVMe SSD Storage Cluster\",\n        \"software\": \"Distributed Transaction Coordinator (e.g., Seata/TiDB), Distributed Message Queue (Kafka with Idempotency)\"\n      },\n      \"interface_protocol\": \"gRPC with TLS 1.3\",\n      \"design_rationale\": \"采用基于两阶段提交（2PC）或Saga模式的分布式事务框架，结合分库分表技术，确保在分布式环境下账务数据的一致性，实现秒级对账响应。\"\n    },\n    {\n      \"module_name\": \"Role-Based Access Control & Financial Isolation Module\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"Hardware Security Module (HSM)\",\n        \"software\": \"RBAC Engine, OAuth2.0/OIDC Provider\"\n      },\n      \"interface_protocol\": \"RESTful API (JSON/HTTPS)\",\n      \"design_rationale\": \"通过物理与逻辑双重隔离实现财务权限分离，确保对账操作、数据查询与账务修改权限严格解耦，防止越权操作。\"\n    },\n    {\n      \"module_name\": \"Immutable Audit & Compensation Traceability Module\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"WORM (Write Once Read Many) Storage\",\n        \"software\": \"Distributed Ledger Technology (DLT) or Append-only Audit Log Service\"\n      },\n      \"interface_protocol\": \"Asynchronous Event-Driven (AMQP)\",\n      \"design_rationale\": \"所有账务补偿动作必须触发不可篡改的审计日志，记录操作人、操作前状态、操作后状态及补偿逻辑，通过追加式存储确保审计链路完整且可复盘。\"\n    }\n  ],\n  \"deployment_constraints\": {\n    \"network\": \"Strictly isolated VPC with dedicated management plane\",\n    \"compliance\": \"Must comply with SOX/IFRS auditing standards\",\n    \"availability\": \"Multi-AZ deployment with RPO=0 and RTO<30s\"\n  },\n  \"risk_controls\": {\n    \"data_integrity\": \"Checksum validation for every transaction block\",\n    \"unauthorized_access\": \"Multi-factor authentication (MFA) for all financial compensation actions\",\n    \"compensation_failure\": \"Automated circuit breaker and manual intervention workflow with mandatory audit sign-off\"\n  }\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Distributed-Consistent Financial Reconciliation Engine (DCFRE)\",\n  \"primary_goal\": \"实现基于分布式强一致性事务的秒级账务对账，确保上市公司级别的财务权限隔离、全链路审计追溯及补偿动作的可复盘性。\",\n  \"modules\": [\n    {\n      \"modu..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 22.646437168121338,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Global-Scale Distributed WebSocket Gateway Architecture for Agentic Platforms\",\n  \"primary_goal\": \"Build a globally distributed, high-concurrency WebSocket gateway capable of maintaining 10M+ concurrent connections with resilient heartbeat mechanisms, localized partition broadcasting, and seamless failover during network volatility.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Geo-Distributed Edge Connection Layer\",\n      \"hw_sw_dependencies\": \"Anycast IP routing, High-performance Load Balancers (L4/L7), Linux Kernel tuning (epoll/io_uring), Envoy Proxy/Nginx.\",\n      \"interface_protocol\": \"WebSocket (RFC 6455), TLS 1.3, MQTT-over-WS (optional).\",\n      \"design_rationale\": \"To minimize latency and handle mobile network jitter, connections are terminated at the nearest edge POP. This layer implements adaptive heartbeat intervals based on client RTT to prevent premature disconnection during jitter.\"\n    },\n    {\n      \"module_name\": \"Distributed State & Pub/Sub Coordination Engine\",\n      \"hw_sw_dependencies\": \"Redis Cluster (Global/Local), Apache Pulsar or Kafka, Distributed Hash Table (DHT) service.\",\n      \"interface_protocol\": \"gRPC, RESP (Redis Serialization Protocol).\",\n      \"design_rationale\": \"Maintains a global mapping of UserID to GatewayNodeID. Uses a hierarchical Pub/Sub model to enable partition broadcasting, ensuring messages are routed only to relevant regional clusters to reduce cross-region traffic costs.\"\n    },\n    {\n      \"module_name\": \"Resilience & Graceful Degradation Controller\",\n      \"hw_sw_dependencies\": \"Service Mesh (Istio/Linkerd), Circuit Breaker libraries (Sentinel/Resilience4j), Observability Stack (Prometheus/Grafana).\",\n      \"interface_protocol\": \"RESTful API, Protobuf.\",\n      \"design_rationale\": \"Monitors connection density and regional health. In case of regional outage or massive congestion, it triggers graceful degradation: switching from real-time push to long-polling or prioritized message queuing to protect core agentic services.\"\n    }\n  ],\n  \"deployment_constraints\": \"Multi-region cloud deployment (AWS/Azure/GCP), strict data residency compliance (GDPR/CCPA), sub-100ms cross-region synchronization latency requirement.\",\n  \"risk_controls\": \"Implement 'Thundering Herd' protection via exponential backoff on reconnection; use 'Cellular Architecture' to isolate regional failures; deploy automated canary testing for global routing updates.\"\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Global-Scale Distributed WebSocket Gateway Architecture for Agentic Platforms\",\n  \"primary_goal\": \"Build a globally distributed, high-concurrency WebSocket gateway capable of..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_04",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['多租户', '限流']"
+    },
+    "latency": 28.820831060409546,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Multi-Tenant High-Concurrency WebSocket Gateway for Intelligent Agent Platform\",\n  \"primary_goal\": \"Achieve 10M+ concurrent WebSocket connections with strict multi-tenant isolation, per-tenant rate limiting, and canary deployment capabilities while optimizing infrastructure costs.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Distributed Connection Management Layer (DCM)\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"High-bandwidth NICs, Memory-optimized instances\",\n        \"software\": \"Netty/Rust-Tokio, Redis Cluster, Consistent Hashing Algorithm\"\n      },\n      \"interface_protocol\": \"WebSocket (WSS), gRPC (Internal)\",\n      \"design_rationale\": \"Utilizes a stateless gateway design with consistent hashing to distribute connections across nodes. Implements a 'Cellular Architecture' to isolate tenant connection pools, preventing a single tenant's connection storm from exhausting the file descriptors or memory of the entire cluster.\"\n    },\n    {\n      \"module_name\": \"Multi-Tenant Traffic Control & Isolation Engine (MT-TCI)\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"Standard Compute Instances\",\n        \"software\": \"Token Bucket/Leaky Bucket Algorithm, Lua Scripts in Redis, Sidecar Proxy\"\n      },\n      \"interface_protocol\": \"RESTful API, Protobuf\",\n      \"design_rationale\": \"Integrates a hierarchical rate-limiting mechanism. It applies limits at three levels: Global (System Protection), Tenant (SLA Enforcement), and User (Anti-Abuse). By using Redis-based distributed counters, it ensures that a message storm in Tenant A is throttled before it impacts the shared message bus or downstream services.\"\n    },\n    {\n      \"module_name\": \"Intelligent Message Routing & Canary Dispatcher (IMR-CD)\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"Standard Compute Instances\",\n        \"software\": \"Apache Pulsar/Kafka, Service Mesh (Istio/Envoy), Configuration Center (Apollo/Nacos)\"\n      },\n      \"interface_protocol\": \"Pub/Sub, gRPC\",\n      \"design_rationale\": \"Decouples message ingestion from delivery. The dispatcher uses a 'Tenant-ID + Version' routing key. This allows the system to route messages to specific gateway versions (Canary) based on tenant metadata, enabling seamless gray releases and ensuring that experimental features are isolated to specific tenant groups.\"\n    }\n  ],\n  \"deployment_constraints\": {\n    \"scaling_strategy\": \"Horizontal Pod Autoscaling (HPA) based on connection count and CPU/Memory utilization.\",\n    \"isolation_model\": \"Logical isolation via Tenant-ID in shared clusters; Physical isolation via dedicated node groups for Tier-1 tenants.\",\n    \"cost_optimization\": \"Spot instance utilization for non-critical worker nodes and aggressive connection idle-timeout management.\"\n  },\n  \"risk_controls\": {\n    \"cascading_failure_prevention\": \"Circuit breakers at the tenant level to prevent noisy neighbor effects.\",\n    \"data_integrity\": \"Idempotent message delivery and sequence tracking to handle reconnection scenarios.\",\n    \"security\": \"TLS termination at the edge and strict JWT-based tenant authentication per connection.\"\n  }\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Multi-Tenant High-Concurrency WebSocket Gateway for Intelligent Agent Platform\",\n  \"primary_goal\": \"Achieve 10M+ concurrent WebSocket connections with strict multi-tenant iso..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 22.36879873275757,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"eBPF-based Non-intrusive Network Observability Probe Architecture\",\n  \"primary_goal\": \"实现生产级核心集群的高性能、低开销、跨内核版本网络流量观测，确保在不修改业务代码的前提下获取内核态网络协议栈深度指标。\",\n  \"modules\": [\n    {\n      \"module_name\": \"eBPF Kernel-Space Probe Engine\",\n      \"hw_sw_dependencies\": \"Linux Kernel >= 4.18, BTF (BPF Type Format) support, CPU with hardware virtualization extensions\",\n      \"interface_protocol\": \"CO-RE (Compile Once – Run Everywhere) via libbpf\",\n      \"design_rationale\": \"通过CO-RE技术解决内核小版本兼容性问题，利用eBPF在内核态直接挂载kprobes/tracepoints，避免数据拷贝至用户态，最大限度降低CPU上下文切换开销。\"\n    },\n    {\n      \"module_name\": \"High-Performance Data Ring Buffer\",\n      \"hw_sw_dependencies\": \"Kernel BPF Ring Buffer (or Perf Buffer for older kernels), High-speed L3 Cache\",\n      \"interface_protocol\": \"Lockless Shared Memory Ring Buffer\",\n      \"design_rationale\": \"采用无锁环形缓冲区进行内核态与用户态的数据交换，减少锁竞争，确保在高并发网络流量下数据采集的实时性与系统稳定性。\"\n    },\n    {\n      \"module_name\": \"User-Space Telemetry Aggregator\",\n      \"hw_sw_dependencies\": \"x86_64/ARM64 CPU, Multi-core architecture, Go/Rust Runtime\",\n      \"interface_protocol\": \"gRPC / Prometheus Exporter\",\n      \"design_rationale\": \"在用户态进行数据聚合与降采样处理，减轻内核负担，并通过标准协议对外输出观测指标，实现与现有监控系统的无缝集成。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"CPU Overhead < 1% per core under peak load\",\n    \"Kernel Version Compatibility: Support range [4.18, 6.x]\",\n    \"Zero modification to existing application binaries or network configurations\"\n  ],\n  \"risk_controls\": [\n    \"Implement BPF Verifier strict validation to prevent kernel panic\",\n    \"Dynamic Load Shedding: Automatically drop probe events if CPU usage exceeds threshold\",\n    \"Resource Limiting: Use cgroups to sandbox the user-space agent\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"eBPF-based Non-intrusive Network Observability Probe Architecture\",\n  \"primary_goal\": \"实现生产级核心集群的高性能、低开销、跨内核版本网络流量观测，确保在不修改业务代码的前提下获取内核态网络协议栈深度指标。\",\n  \"modules\": [\n    {\n    ..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_06",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.349353313446045,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Zero-Trust Isolated eBPF Observability Framework (ZIOF)\",\n  \"primary_goal\": \"实现高性能、内核级无侵入网络观测，同时通过硬件隔离与权限最小化原则确保观测能力不被租户滥用且不影响业务稳定性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"Secure eBPF Kernel Probe Engine\",\n      \"hw_sw_dependencies\": \"Linux Kernel 5.8+ (BTF enabled), CPU Hardware Virtualization Extensions\",\n      \"interface_protocol\": \"eBPF Verifier-validated bytecode, CO-RE (Compile Once – Run Everywhere)\",\n      \"design_rationale\": \"通过内核验证器强制执行指令集安全性，利用BTF实现跨内核版本兼容，确保探针逻辑在内核态执行时不会触发Panic或死循环，保障业务稳定性。\"\n    },\n    {\n      \"module_name\": \"Privilege-Isolated Control Plane\",\n      \"hw_sw_dependencies\": \"Linux Capabilities (CAP_BPF, CAP_PERFMON), TPM 2.0 for Identity\",\n      \"interface_protocol\": \"gRPC over Unix Domain Socket (UDS) with mTLS\",\n      \"design_rationale\": \"将控制逻辑与数据采集分离，通过严格的Linux Capabilities限制权限，防止普通租户通过伪造指令篡改探针逻辑，实现零信任安全基线。\"\n    },\n    {\n      \"module_name\": \"Non-Intrusive Data Exfiltration Pipeline\",\n      \"hw_sw_dependencies\": \"Ring Buffer (eBPF Maps), High-speed DMA-capable NIC\",\n      \"interface_protocol\": \"Lockless Ring Buffer, Protobuf serialization\",\n      \"design_rationale\": \"采用无锁环形缓冲区进行内核态到用户态的数据传递，避免由于观测数据量过大导致的CPU上下文切换频繁或内存争抢，确保对业务性能的影响降至最低。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Must run in a dedicated system-level namespace, isolated from tenant user-space namespaces.\",\n    \"Probe updates must follow a 'Shadow-Loading' pattern: verify new bytecode in a sandbox before hot-swapping.\",\n    \"Resource consumption (CPU/Memory) must be capped via cgroups to prevent observability overhead from starving business workloads.\"\n  ],\n  \"risk_controls\": [\n    \"Kernel-level: eBPF Verifier strictly rejects any non-terminating or unsafe memory access instructions.\",\n    \"Security-level: Mandatory Access Control (MAC) via SELinux/AppArmor to prevent unauthorized probe manipulation.\",\n    \"Stability-level: Automated rollback mechanism triggered by real-time performance degradation detection.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Zero-Trust Isolated eBPF Observability Framework (ZIOF)\",\n  \"primary_goal\": \"实现高性能、内核级无侵入网络观测，同时通过硬件隔离与权限最小化原则确保观测能力不被租户滥用且不影响业务稳定性。\",\n  \"modules\": [\n    {\n      \"module_name..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_07",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['回滚']"
+    },
+    "latency": 21.26169204711914,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Massive-Scale Redfish Concurrent Management Engine (MSR-CME)\",\n  \"primary_goal\": \"Achieve full-scale discovery and management of 100,000 BMC nodes within a 24-hour window with automated error recovery and zero manual intervention.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Distributed Task Orchestration & Scheduling Engine\",\n      \"hw_sw_dependencies\": \"Kubernetes Cluster, Redis Cluster, Apache Kafka\",\n      \"interface_protocol\": \"gRPC, AMQP\",\n      \"design_rationale\": \"To meet the 24h deadline, the engine decomposes the 100k task into micro-batches. It uses a priority queue to manage task distribution across worker nodes, ensuring high throughput and preventing single-point bottlenecks during the initial burst.\"\n    },\n    {\n      \"module_name\": \"High-Concurrency Redfish Worker Pool\",\n      \"hw_sw_dependencies\": \"High-bandwidth NICs, Asynchronous I/O Runtime (Netty/Tokio)\",\n      \"interface_protocol\": \"HTTPS/TLS 1.2+, Redfish RESTful API\",\n      \"design_rationale\": \"Utilizes non-blocking I/O to handle massive concurrent HTTP connections. Each worker executes stateless Redfish requests, allowing the system to scale horizontally to match the required requests-per-second (RPS) for the 24h window.\"\n    },\n    {\n      \"module_name\": \"Automated Fault Tolerance & State Recovery Controller\",\n      \"hw_sw_dependencies\": \"Distributed Relational Database (PostgreSQL/TiDB)\",\n      \"interface_protocol\": \"SQL, Internal Event Bus\",\n      \"design_rationale\": \"Implements a state machine for every node. It tracks 'Success', 'Transient Failure', and 'Fatal Error' states. It automatically triggers exponential backoff retries for transient network issues and executes rollback procedures for partial configuration failures to maintain system consistency.\"\n    }\n  ],\n  \"deployment_constraints\": \"Must be deployed in a containerized environment with auto-scaling enabled; network bandwidth must support peak concurrent TLS handshakes; database IOPS must sustain high-frequency state updates.\",\n  \"risk_controls\": \"Implement adaptive rate limiting to prevent BMC/Network congestion; circuit breakers to isolate failing subnets; real-time telemetry dashboard for monitoring convergence progress and error rates.\"\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Massive-Scale Redfish Concurrent Management Engine (MSR-CME)\",\n  \"primary_goal\": \"Achieve full-scale discovery and management of 100,000 BMC nodes within a 24-hour window wit..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_08",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['零信任']"
+    },
+    "latency": 27.589123964309692,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Zero-Trust High-Concurrency BMC Redfish Management Engine\",\n  \"primary_goal\": \"Achieve massive-scale (100k+ nodes) Redfish management with zero-trust credential rotation, domain-isolated communication channels, and real-time high-risk command interception.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Distributed Zero-Trust Credential & Identity Orchestrator\",\n      \"hw_sw_dependencies\": \"Hardware Security Module (HSM), HashiCorp Vault or similar Secret Management System, Distributed Key-Value Store (etcd/Redis).\",\n      \"interface_protocol\": \"gRPC, RESTful API (TLS 1.3), KMIP\",\n      \"design_rationale\": \"To eliminate static credentials, this module implements automated lifecycle management for BMC accounts. It integrates with HSM for root-of-trust and uses a pull-based mechanism to rotate credentials per session or per time-window, ensuring that even if a management node is compromised, the blast radius is limited by short-lived, scoped tokens.\"\n    },\n    {\n      \"module_name\": \"Multi-Tenant Domain Isolation Proxy Layer\",\n      \"hw_sw_dependencies\": \"SmartNICs/DPUs for hardware offloading, Kubernetes CNI (Calico/Cilium) for network policy, High-performance Load Balancers.\",\n      \"interface_protocol\": \"Redfish (HTTPS), mTLS, SDN Control Plane API\",\n      \"design_rationale\": \"To meet the domain isolation requirement, this module utilizes a sidecar/proxy pattern where each management domain (e.g., different customer VPCs or data center zones) is assigned dedicated, isolated proxy instances. This prevents cross-domain lateral movement and allows for granular network policy enforcement at the L4/L7 layer.\"\n    },\n    {\n      \"module_name\": \"High-Concurrency Command Interceptor & Policy Engine\",\n      \"hw_sw_dependencies\": \"High-performance Stream Processing Engine (Flink/Kafka), Distributed Rule Engine (Drools/OPA).\",\n      \"interface_protocol\": \"JSON-RPC, Redfish Payload Schema, Webhook\",\n      \"design_rationale\": \"To handle 100k nodes while intercepting high-risk commands (e.g., firmware update, power cycle, reset), this module acts as a transparent proxy that parses Redfish JSON payloads in real-time. It compares requested actions against a dynamic policy set and triggers an asynchronous approval workflow for high-risk operations before forwarding the request to the BMC.\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Must support horizontal scaling across multiple availability zones.\",\n    \"Latency for command interception must be < 50ms to avoid management timeouts.\",\n    \"Strict compliance with FIPS 140-2/3 for all cryptographic operations.\"\n  ],\n  \"risk_controls\": [\n    \"Circuit breaker pattern to prevent cascading failures during massive credential rotation cycles.\",\n    \"Rate limiting per domain to prevent 'noisy neighbor' effects in the shared engine.\",\n    \"Audit logging of all intercepted and rejected commands to a tamper-proof immutable ledger.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Zero-Trust High-Concurrency BMC Redfish Management Engine\",\n  \"primary_goal\": \"Achieve massive-scale (100k+ nodes) Redfish management with zero-trust credential rotation, dom..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.47764301300049,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"RDMA-Accelerated Hybrid Tiering Distributed Block Engine (RHT-DBE)\",\n  \"primary_goal\": \"实现混合NVMe/SSD介质下的数据库级IO性能稳定性，通过RDMA零拷贝技术实现热点数据在非对称存储介质间的无感迁移，确保业务高峰期零抖动。\",\n  \"modules\": [\n    {\n      \"module_name\": \"RDMA-Enabled Data Plane & Zero-Copy Buffer\",\n      \"hw_sw_dependencies\": \"RoCE v2/iWARP NICs, Kernel-bypass drivers (ibverbs), NVMe-oF stack\",\n      \"interface_protocol\": \"RDMA Write/Read, NVMe-oF over RoCE\",\n      \"design_rationale\": \"利用RDMA直接内存访问特性绕过CPU内核协议栈，降低数据库高并发IO下的CPU中断开销，为热点数据迁移提供极低延迟的底层传输通道。\"\n    },\n    {\n      \"module_name\": \"Intelligent Heat-Aware Tiering Engine\",\n      \"hw_sw_dependencies\": \"NVMe/SSD heterogeneous storage pool, Metadata Service\",\n      \"interface_protocol\": \"Internal RPC, IO Pattern Analytics API\",\n      \"design_rationale\": \"通过实时IO特征分析识别热点块，采用后台异步迁移机制将热点数据从SSD提升至NVMe，利用RDMA带宽在不占用业务IO路径的前提下完成介质间搬迁。\"\n    },\n    {\n      \"module_name\": \"Consistency-Preserving Migration Controller\",\n      \"hw_sw_dependencies\": \"Distributed Lock Manager (DLM), Metadata Store\",\n      \"interface_protocol\": \"Two-Phase Commit (2PC) over RDMA\",\n      \"design_rationale\": \"针对数据库工作负载，设计基于版本号的原子迁移协议，确保在热点迁移过程中，读写请求能通过元数据重定向平滑切换，实现业务无感知的IO路径重定向。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Network must support lossless Ethernet (PFC/ECN) for RoCE stability\",\n    \"Storage nodes must have balanced NVMe and SSD capacity ratios\",\n    \"Minimum 100GbE fabric recommended to prevent migration-induced congestion\"\n  ],\n  \"risk_controls\": [\n    \"Implement IO Rate Limiting for background migration to prevent starving foreground DB traffic\",\n    \"Establish a 'Migration-Abort' threshold based on real-time latency spikes\",\n    \"Redundant Metadata paths to prevent single point of failure during tiering re-mapping\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"RDMA-Accelerated Hybrid Tiering Distributed Block Engine (RHT-DBE)\",\n  \"primary_goal\": \"实现混合NVMe/SSD介质下的数据库级IO性能稳定性，通过RDMA零拷贝技术实现热点数据在非对称存储介质间的无感迁移，确保业务高峰期零抖动。\",\n  \"modules\":..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.16031002998352,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"RDMA-Enabled Geo-Distributed High-Availability Block Storage Engine (RDMA-GDB)\",\n  \"primary_goal\": \"实现跨三机房故障域的强一致性数据容灾，在保障RDMA极低延迟性能的同时，通过分布式共识协议解决脑裂风险并提供全链路可观测性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"RDMA-Accelerated Data Plane (RADP)\",\n      \"hw_sw_dependencies\": \"RoCEv2/iWARP-capable NICs, Data Plane Development Kit (DPDK), Zero-copy Memory Management\",\n      \"interface_protocol\": \"Verbs API / RDMA Write-with-Imm\",\n      \"design_rationale\": \"利用RDMA的零拷贝与内核旁路特性，将I/O路径从传统TCP/IP栈剥离，降低跨机房长距离传输带来的CPU中断压力，确保高性能吞吐与低延迟。\"\n    },\n    {\n      \"module_name\": \"Multi-Site Consensus & Quorum Controller (MSCQ)\",\n      \"hw_sw_dependencies\": \"High-precision PTP/NTP Time Sync, Distributed Metadata Store\",\n      \"interface_protocol\": \"Raft Consensus Protocol / gRPC\",\n      \"design_rationale\": \"采用三机房部署的Raft算法实现多数派投票机制，通过Quorum机制在网络分区时自动隔离少数派节点，从根本上解决跨故障域的脑裂问题。\"\n    },\n    {\n      \"module_name\": \"Telemetry & Observability Mesh (TOM)\",\n      \"hw_sw_dependencies\": \"eBPF Runtime, Time-series Database (TSDB), Hardware Performance Counters\",\n      \"interface_protocol\": \"Prometheus Remote Write / OpenTelemetry\",\n      \"design_rationale\": \"通过eBPF在内核态采集RDMA传输与存储I/O的细粒度指标，结合硬件计数器实现从物理链路到逻辑块设备的端到端可观测性，支撑复杂网络环境下的故障定位。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Three-site deployment with strict fault domain isolation\",\n    \"Minimum bandwidth requirement for inter-site RDMA traffic\",\n    \"Strict latency bounds for consensus heartbeat messages\"\n  ],\n  \"risk_controls\": [\n    \"Split-brain prevention via majority quorum logic\",\n    \"Congestion control (PFC/ECN) to prevent RDMA head-of-line blocking\",\n    \"Automated failover testing via chaos engineering injection\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"RDMA-Enabled Geo-Distributed High-Availability Block Storage Engine (RDMA-GDB)\",\n  \"primary_goal\": \"实现跨三机房故障域的强一致性数据容灾，在保障RDMA极低延迟性能的同时，通过分布式共识协议解决脑裂风险并提供全链路可观测性。\",\n  \"module..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_11",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['缓存']"
+    },
+    "latency": 22.993165493011475,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Edge-Resilient Autonomous Inference & Sequential Data Sync Architecture (ER-AIS)\",\n  \"primary_goal\": \"实现矿区极端断网环境下的业务连续性，确保本地推理实时性与联网后数据回传的强一致性与时序完整性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"Autonomous Inference Engine (AIE)\",\n      \"hw_sw_dependencies\": \"NPU/GPU acceleration hardware, TensorRT/OpenVINO runtime, Local Model Weights\",\n      \"interface_protocol\": \"POSIX Shared Memory, gRPC (Local Loopback)\",\n      \"design_rationale\": \"通过将推理逻辑与云端解耦，利用本地算力实现毫秒级响应，确保在链路中断时识别业务不间断。\"\n    },\n    {\n      \"module_name\": \"Time-Stamped Circular Buffer & Cache (TCBC)\",\n      \"hw_sw_dependencies\": \"High-endurance Industrial SSD, SQLite/RocksDB storage engine\",\n      \"interface_protocol\": \"File System I/O, Local IPC\",\n      \"design_rationale\": \"采用带高精度时间戳的循环缓冲区，在断网期间将识别结果与原始数据持久化，解决存储空间溢出风险并为回传提供时序基准。\"\n    },\n    {\n      \"module_name\": \"Sequential Data Replay & Sync Manager (SDRS)\",\n      \"hw_sw_dependencies\": \"Network Interface Card (NIC), MQTT/AMQP Client\",\n      \"interface_protocol\": \"MQTT with QoS Level 2, HTTPS/TLS\",\n      \"design_rationale\": \"监测链路状态，一旦恢复联网，基于时间戳序列进行断点续传，通过确认机制确保数据回传顺序与原始发生顺序严格一致。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Hardware must support industrial-grade wide temperature range (-40°C to 75°C)\",\n    \"Storage capacity must accommodate at least 72 hours of continuous data buffering\",\n    \"Edge node must operate in a zero-trust network environment during reconnection\"\n  ],\n  \"risk_controls\": [\n    \"Storage Overflow Risk: Implement priority-based data pruning (drop low-priority frames if disk > 90%)\",\n    \"Data Corruption Risk: Use checksums (CRC32) for every cached data block to ensure integrity during power loss\",\n    \"Sync Congestion Risk: Implement adaptive bandwidth throttling during data replay to prevent saturating the recovered link\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Edge-Resilient Autonomous Inference & Sequential Data Sync Architecture (ER-AIS)\",\n  \"primary_goal\": \"实现矿区极端断网环境下的业务连续性，确保本地推理实时性与联网后数据回传的强一致性与时序完整性。\",\n  \"modules\": [\n    {\n ..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_12",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['降级', '缓存']"
+    },
+    "latency": 25.171870708465576,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Edge-Resilient Inference & Data Buffering Architecture (ERIDBA)\",\n  \"primary_goal\": \"In resource-constrained environments, ensure continuous local inference via model degradation and prevent data loss through intelligent cache management during network outages.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Adaptive Model Degradation Engine (AMDE)\",\n      \"hw_sw_dependencies\": \"CPU/NPU, TensorRT/OpenVINO Runtime, Quantized Model Weights (INT8/FP16)\",\n      \"interface_protocol\": \"gRPC / Local Shared Memory\",\n      \"design_rationale\": \"To address limited VRAM/CPU, the engine dynamically switches between high-precision large models and lightweight quantized/distilled models based on real-time hardware telemetry, ensuring inference availability at the cost of marginal accuracy loss.\"\n    },\n    {\n      \"module_name\": \"Tiered Intelligent Cache Manager (TICM)\",\n      \"hw_sw_dependencies\": \"Local SSD/eMMC, Linux Filesystem (XFS/EXT4), SQLite/LevelDB\",\n      \"interface_protocol\": \"POSIX File API / MQTT (for sync status)\",\n      \"design_rationale\": \"To manage limited disk capacity, a priority-based LRU-K eviction policy is implemented. Data is categorized by 'Criticality' and 'TTL'; during outages, high-priority inference results are cached first, while low-priority telemetry is overwritten to prevent storage overflow.\"\n    },\n    {\n      \"module_name\": \"Disconnected State Telemetry & Remote Recovery Bridge (DSTRB)\",\n      \"hw_sw_dependencies\": \"Network Interface Card (NIC), Watchdog Timer, SSH/Websocket\",\n      \"interface_protocol\": \"Protobuf over TCP/IP (with Heartbeat mechanism)\",\n      \"design_rationale\": \"Provides a lightweight state-machine to detect network loss. It buffers system logs and health metrics locally, and implements a 'Shadow Mode' for remote configuration updates that are queued and applied automatically once connectivity is restored.\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Strict CPU/VRAM ceiling: Total model footprint must not exceed 70% of available hardware capacity.\",\n    \"Storage limit: Local cache must be capped at 80% of disk capacity to prevent OS instability.\",\n    \"Latency requirement: Model switching must occur within <500ms to avoid inference pipeline stalls.\"\n  ],\n  \"risk_controls\": [\n    \"Model Switching Loop: Implement a cooldown period between degradation steps to prevent rapid oscillation.\",\n    \"Cache Exhaustion: Implement a hard-limit 'Emergency Purge' mode for non-critical data if disk reaches 95%.\",\n    \"Data Corruption: Use atomic write operations and checksums for all cached inference results to ensure integrity during sudden power loss.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Edge-Resilient Inference & Data Buffering Architecture (ERIDBA)\",\n  \"primary_goal\": \"In resource-constrained environments, ensure continuous local inference via model degrada..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_13",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['拓扑']"
+    },
+    "latency": 23.474440097808838,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Heterogeneous AI Cluster Topology-Aware Pooling & Scheduling Architecture\",\n  \"primary_goal\": \"Maximize Model Flops Utilization (MFU) through topology-aware resource pooling while eliminating performance jitter caused by cross-switch domain scheduling.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Multi-Generation Heterogeneous Resource Abstraction Layer\",\n      \"hw_sw_dependencies\": \"NVIDIA/AMD GPU Drivers, RDMA/RoCE Stack, PCIe/NVLink Topology Maps\",\n      \"interface_protocol\": \"gRPC / Unified Resource Descriptor (URD)\",\n      \"design_rationale\": \"To solve the heterogeneity issue, this module abstracts different GPU generations and interconnect speeds into standardized compute units, allowing the scheduler to treat diverse hardware as a unified pool while maintaining precise capability metadata.\"\n    },\n    {\n      \"module_name\": \"Topology-Aware Hierarchical Scheduling Engine\",\n      \"hw_sw_dependencies\": \"Leaf-Spine Network Topology Data, InfiniBand/RoCE Fabric Manager\",\n      \"interface_protocol\": \"RESTful API / Protobuf\",\n      \"design_rationale\": \"To prevent performance jitter, the engine implements a 'Locality-First' constraint. It maps large-scale training jobs to intra-switch or intra-pod domains by matching job communication patterns with the physical network hierarchy, ensuring high-bandwidth, low-latency collective operations.\"\n    },\n    {\n      \"module_name\": \"Dynamic MFU Optimization & Telemetry Module\",\n      \"hw_sw_dependencies\": \"GPU Performance Counters (NVML), Network Telemetry (INT/P4)\",\n      \"interface_protocol\": \"Prometheus / OpenTelemetry\",\n      \"design_rationale\": \"To drive MFU improvement, this module continuously monitors real-time compute-to-communication ratios. It provides feedback loops to the scheduler to re-adjust job placement or trigger proactive migration if communication bottlenecks are detected.\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Must support coexistence of InfiniBand and RoCE v2 fabrics.\",\n    \"Scheduling latency must be sub-second for thousand-card scale re-balancing.\",\n    \"Hardware abstraction must not introduce more than 1% overhead on GPU kernel execution.\"\n  ],\n  \"risk_controls\": [\n    \"Cross-domain isolation: Strict enforcement of domain boundaries for high-intensity collective communication tasks to prevent congestion spreading.\",\n    \"Degradation fallback: Automated fallback to intra-node scheduling if inter-node topology mapping fails.\",\n    \"Telemetry drift: Periodic synchronization between physical network state and the scheduler's topology graph to prevent stale routing decisions.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Heterogeneous AI Cluster Topology-Aware Pooling & Scheduling Architecture\",\n  \"primary_goal\": \"Maximize Model Flops Utilization (MFU) through topology-aware resource pooling ..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_14",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 26.83766007423401,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"AI-Cluster-Elastic-Topology-Aware-Orchestrator (AET-O)\",\n  \"primary_goal\": \"实现千卡规模下训练/微调/推理任务的异构混部，通过拓扑感知调度优化通信效率，并基于配额与成本约束实现可解释的资源抢占与跨集群借调。\",\n  \"modules\": [\n    {\n      \"module_name\": \"Topology-Aware Resource Virtualization Engine (TARVE)\",\n      \"hw_sw_dependencies\": \"NVIDIA NVLink/NVSwitch, InfiniBand/RoCE v2, Kubernetes, RDMA Driver\",\n      \"interface_protocol\": \"gRPC, PCIe/NVLink Topology Map API\",\n      \"design_rationale\": \"通过构建物理拓扑图（Hierarchical Topology Graph）将GPU、NVLink、Switch及网卡映射为逻辑资源池，解决千卡规模下通信瓶颈问题，确保训练任务分配在同机或同交换机域内。\"\n    },\n    {\n      \"module_name\": \"Multi-Tenant Policy & Preemption Controller (MTPC)\",\n      \"hw_sw_dependencies\": \"Etcd, Prometheus, Custom Scheduler Plugin\",\n      \"interface_protocol\": \"RESTful API, Admission Controller Webhook\",\n      \"design_rationale\": \"引入基于优先级（Priority）与配额（Quota）的双层调度模型。通过定义‘抢占权重’与‘弹性水位’实现可解释的抢占逻辑，确保推理任务的低延迟需求与训练任务的高吞吐需求在资源冲突时按预设策略平滑切换。\"\n    },\n    {\n      \"module_name\": \"Cross-Cluster Budget-Constrained Broker (CCBC)\",\n      \"hw_sw_dependencies\": \"Multi-Cluster K8s (Karmada/Federation), Cloud Billing API, Cost-Model Engine\",\n      \"interface_protocol\": \"Message Queue (Kafka), Cross-Cluster Control Plane API\",\n      \"design_rationale\": \"建立跨集群借调的‘虚拟预算池’。在借调资源时，通过实时成本计算引擎校验当前作业的预算消耗，若借调成本超过预设阈值则触发降级策略，实现资源扩展与成本控制的动态平衡。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"必须支持RDMA网络下的零拷贝数据传输\",\n    \"调度延迟需控制在毫秒级以应对大规模Pod扩缩容\",\n    \"必须兼容现有主流深度学习框架（PyTorch/DeepSpeed）的分布式通信库\"\n  ],\n  \"risk_controls\": [\n    \"拓扑感知失效风险：通过定期拓扑探测（Topology Probing）进行一致性校验\",\n    \"抢占导致的任务中断风险：引入Checkpoint-Aware调度，确保抢占前触发自动保存\",\n    \"跨集群成本失控风险：设置硬性预算熔断机制（Budget Hard-Limit Circuit Breaker）\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"AI-Cluster-Elastic-Topology-Aware-Orchestrator (AET-O)\",\n  \"primary_goal\": \"实现千卡规模下训练/微调/推理任务的异构混部，通过拓扑感知调度优化通信效率，并基于配额与成本约束实现可解释的资源抢占与跨集群借调。\",\n  \"modules\": [\n    {\n      \"mo..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_15",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.17072868347168,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"兆瓦级柔性液冷超充站功率调度与V2G协同控制架构\",\n  \"primary_goal\": \"在保障园区电网安全的前提下，通过液冷超充功率动态调节与V2G能量双向流动，实现峰谷电价套利最大化与站点运营成本最低化。\",\n  \"modules\": [\n    {\n      \"module_name\": \"边缘侧液冷功率感知与执行模块\",\n      \"hw_sw_dependencies\": \"高精度电流/电压传感器、液冷温控PLC、超充桩控制器(EVCC)、边缘计算网关(Edge Gateway)\",\n      \"interface_protocol\": \"Modbus TCP/RTU, CANopen, MQTT\",\n      \"design_rationale\": \"通过实时采集液冷循环状态与充电桩输出参数，实现毫秒级的功率指令下发，确保兆瓦级大电流切换时的热管理稳定性与电气安全。\"\n    },\n    {\n      \"module_name\": \"多能流协同调度决策引擎\",\n      \"hw_sw_dependencies\": \"高算力工业服务器、时序数据库(InfluxDB)、预测算法模型(LSTM/Transformer)\",\n      \"interface_protocol\": \"gRPC, RESTful API\",\n      \"design_rationale\": \"集成电价预测、车辆接入预测与储能SOC状态，利用启发式算法在充电收益、储能损耗与电网负荷约束之间寻找帕累托最优解。\"\n    },\n    {\n      \"module_name\": \"V2G车网互动与并网安全管控模块\",\n      \"hw_sw_dependencies\": \"双向DC/DC变换器、智能电表、并网保护继电器、EMS系统\",\n      \"interface_protocol\": \"OCPP 2.0.1, IEC 61850, IEEE 2030.5\",\n      \"design_rationale\": \"遵循标准V2G协议实现车辆侧能量回馈，并结合IEC 61850标准实现与园区微网的快速响应，确保在电网波动时实现毫秒级功率支撑。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"必须满足园区配电网容量上限约束，严禁瞬时功率超过变压器额定容量\",\n    \"液冷系统热交换效率需与充电功率动态匹配，防止局部过热\",\n    \"V2G放电过程需严格遵守电池健康度(SOH)保护策略\"\n  ],\n  \"risk_controls\": [\n    \"电网频率/电压异常触发的毫秒级断开保护机制\",\n    \"调度算法失效时的降级模式（固定功率模式）\",\n    \"通信链路中断时的本地自主安全控制逻辑\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"兆瓦级柔性液冷超充站功率调度与V2G协同控制架构\",\n  \"primary_goal\": \"在保障园区电网安全的前提下，通过液冷超充功率动态调节与V2G能量双向流动，实现峰谷电价套利最大化与站点运营成本最低化。\",\n  \"modules\": [\n    {\n      \"module_name\": \"边缘侧液冷功率感知与执行模块\",\n      ..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_16",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 29.247649669647217,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"兆瓦级柔性充电功率调度与V2G车网互动系统架构 (Phase: Planning)\",\n  \"primary_goal\": \"实现超充站级集群功率的毫秒级动态分配，通过感知电池健康度（SOH）实现差异化调度，并建立车网互动（V2G）过程中的电气安全联锁机制。\",\n  \"modules\": [\n    {\n      \"module_name\": \"集群功率协同调度引擎 (Cluster Power Orchestration Engine)\",\n      \"hw_sw_dependencies\": [\n        \"站级能量管理系统 (EMS)\",\n        \"多路直流充电模块 (DC Power Modules)\",\n        \"实时功率传感器\",\n        \"高精度时钟同步硬件\"\n      ],\n      \"interface_protocol\": \"Modbus TCP / EtherCAT / CANopen\",\n      \"design_rationale\": \"采用分层控制策略，将站级总功率需求分解为各充电枪的动态指令，通过预测算法解决多枪并发时的电压波动与功率分配冲突。\"\n    },\n    {\n      \"module_name\": \"电池健康度感知与差异化调度模块 (SOH-Aware Dispatch Module)\",\n      \"hw_sw_dependencies\": [\n        \"车载BMS数据采集终端\",\n        \"云端电池数字孪生模型\",\n        \"边缘计算网关\"\n      ],\n      \"interface_protocol\": \"ISO 15118-20 / MQTT / HTTPS\",\n      \"design_rationale\": \"基于ISO 15118-20协议获取车辆实时SOC/SOH数据，建立基于电池退化成本的调度模型，对高SOH车辆执行高倍率充电，对低SOH车辆执行温和充电或仅执行V2G放电。\"\n    },\n    {\n      \"module_name\": \"V2G安全联锁与电气保护模块 (V2G Safety Interlock & Protection)\",\n      \"hw_sw_dependencies\": [\n        \"高压继电器组\",\n        \"绝缘监测装置 (IMD)\",\n        \"快速断路器\",\n        \"实时电流/电压采样电路\"\n      ],\n      \"interface_protocol\": \"Hardwired Interlock / IEC 61850\",\n      \"design_rationale\": \"构建硬件级与软件级双重联锁机制，在V2G模式切换（充电转放电）时，通过实时监测绝缘电阻与接触器状态，确保在电网波动或车辆异常时实现微秒级断开。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"必须满足IEC 61851与ISO 15118标准合规性\",\n    \"边缘侧计算延迟需控制在50ms以内以支持功率平滑\",\n    \"需具备在弱网环境下的离线安全保护能力\"\n  ],\n  \"risk_controls\": [\n    \"电池热失控风险：通过实时温升预测模型与充电功率强制降额实现\",\n    \"电网频率波动风险：引入虚拟同步机（VSM）控制算法增强站侧惯量\",\n    \"数据隐私风险：采用车端数据脱敏技术，仅上传调度所需的关键参数\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"兆瓦级柔性充电功率调度与V2G车网互动系统架构 (Phase: Planning)\",\n  \"primary_goal\": \"实现超充站级集群功率的毫秒级动态分配，通过感知电池健康度（SOH）实现差异化调度，并建立车网互动（V2G）过程中的电气安全联锁机制。\",\n  \"modules\": [\n    {\n      \"module_name\": ..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_17",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['漏液']"
+    },
+    "latency": 23.10811710357666,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"High-Density Liquid Cooling CDU-Leakage Interlock Control Architecture\",\n  \"primary_goal\": \"Achieve sub-second leakage detection and coordinated shutdown of localized cooling circuits while preventing cascading business outages caused by single-sensor false positives.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Multi-Point Intelligent Leakage Sensing Layer\",\n      \"hw_sw_dependencies\": \"Capacitive/Resistive leak sensors, localized bus controllers, edge signal conditioning firmware.\",\n      \"interface_protocol\": \"I2C/SMBus for sensor-to-controller, Modbus TCP for controller-to-gateway.\",\n      \"design_rationale\": \"Implements spatial redundancy and signal cross-validation (voting logic) at the rack level to filter noise and prevent false-positive-induced shutdowns.\"\n    },\n    {\n      \"module_name\": \"CDU Intelligent Flow & Pressure Control Module\",\n      \"hw_sw_dependencies\": \"Variable frequency drives (VFD), solenoid valves, pressure/flow transducers, real-time control kernel.\",\n      \"interface_protocol\": \"CANopen or EtherCAT for high-speed deterministic valve/pump actuation.\",\n      \"design_rationale\": \"Enables granular zone-based isolation; upon detection, it executes a 'soft-stop' for non-affected zones and a 'hard-stop' for the compromised circuit to maintain thermal stability elsewhere.\"\n    },\n    {\n      \"module_name\": \"Business-Critical Interlock & Orchestration Engine\",\n      \"hw_sw_dependencies\": \"Server BMC (Baseboard Management Controller), CDU Logic Controller, Network Management System (NMS).\",\n      \"interface_protocol\": \"Redfish API / IPMI for server-side workload migration and graceful shutdown.\",\n      \"design_rationale\": \"Decouples physical safety from logical business continuity by triggering workload migration (Live Migration) before physical power-off, ensuring zero-downtime objectives.\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Latency must be < 500ms from sensor trigger to valve actuation.\",\n    \"Hardware must comply with IP67 ingress protection for sensor nodes.\",\n    \"Control logic must reside in local hardware to ensure functionality during network partition.\"\n  ],\n  \"risk_controls\": [\n    \"2-out-of-3 (2oo3) voting logic for sensor fusion to mitigate false alarms.\",\n    \"Fail-safe valve positioning (Normally Closed) to prevent uncontrolled fluid release.\",\n    \"Watchdog timers on the CDU controller to prevent logic hang during critical events.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"High-Density Liquid Cooling CDU-Leakage Interlock Control Architecture\",\n  \"primary_goal\": \"Achieve sub-second leakage detection and coordinated shutdown of localized cooling..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_18",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 26.242321252822876,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"机柜级CDU与漏液熔断联动控制系统架构 (V1.0)\",\n  \"primary_goal\": \"实现漏液检测与熔断控制的高可靠联动，通过模块化设计支持传感器热插拔与泵阀快速维护，并提供冷却回路全生命周期健康诊断能力。\",\n  \"modules\": [\n    {\n      \"module_name\": \"高可用感知与热插拔传感器管理模块\",\n      \"hw_sw_dependencies\": \"硬件：冗余漏液检测传感器、带热插拔保护的I/O扩展板；软件：传感器热插拔检测算法、信号去抖逻辑。\",\n      \"interface_protocol\": \"I2C/SMBus (传感器层), CANopen (控制层)\",\n      \"design_rationale\": \"通过硬件层面的电气隔离与软件层面的热插拔状态机，确保在更换传感器时不会触发误熔断，同时通过冗余采样消除单点失效风险。\"\n    },\n    {\n      \"module_name\": \"快速响应熔断与泵阀控制模块\",\n      \"hw_sw_dependencies\": \"硬件：高响应速度电磁阀、冗余液冷泵、熔断执行器；软件：实时控制逻辑、泵阀切换平滑算法。\",\n      \"interface_protocol\": \"Modbus TCP/RTU (执行层), GPIO (硬连线紧急熔断)\",\n      \"design_rationale\": \"采用‘软硬结合’策略：逻辑层通过Modbus实现泵阀精准控制以最小化停机窗口；物理层通过硬连线GPIO实现漏液瞬间的强制熔断，确保安全性。\"\n    },\n    {\n      \"module_name\": \"冷却回路健康诊断与预测模块\",\n      \"hw_sw_dependencies\": \"硬件：流量计、压力传感器、温度传感器；软件：数字孪生模型、趋势分析算法、故障诊断引擎。\",\n      \"interface_protocol\": \"MQTT (云端/管理平台), RESTful API (本地管理接口)\",\n      \"design_rationale\": \"通过采集压力、流量与温度的关联数据，构建回路健康模型，实现从‘事后响应’向‘事前预警’的转变，支持预测性维护以降低非计划停机。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"必须符合机柜级空间限制，控制单元体积需标准化\",\n    \"传感器热插拔过程中的电气瞬变不得干扰主控逻辑\",\n    \"熔断响应时间需满足毫秒级安全阈值\"\n  ],\n  \"risk_controls\": [\n    \"传感器失效风险：采用多点冗余采样与逻辑投票机制\",\n    \"维护停机风险：设计‘旁路模式’，支持在泵阀维护时维持基础循环\",\n    \"误触发风险：引入多维度特征校验（压力+流量+漏液信号）进行联合判定\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"机柜级CDU与漏液熔断联动控制系统架构 (V1.0)\",\n  \"primary_goal\": \"实现漏液检测与熔断控制的高可靠联动，通过模块化设计支持传感器热插拔与泵阀快速维护，并提供冷却回路全生命周期健康诊断能力。\",\n  \"modules\": [\n    {\n      \"module_name\": \"高可用感知与热插拔传感器管理模块\",\n ..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_19",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 27.85194993019104,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"PB-Scale Multimodal Streaming Ingestion & Preprocessing Pipeline (MSIPP)\",\n  \"primary_goal\": \"实现PB级多模态数据的高吞吐流式接入、自动化预处理与全链路血缘追踪，消除数据供给对AI训练任务的IO与计算瓶颈。\",\n  \"modules\": [\n    {\n      \"module_name\": \"Unified Multimodal Ingestion Gateway\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"High-bandwidth Network Interface Cards (100GbE+), NVMe Storage Clusters\",\n        \"software\": \"Apache Kafka/Pulsar, gRPC Framework, Schema Registry\"\n      },\n      \"interface_protocol\": \"gRPC for high-speed streaming, RESTful for metadata control, MQTT for IoT-edge sensors\",\n      \"design_rationale\": \"采用解耦的接入层设计，通过分布式消息队列缓冲异构数据流（文本、图像、视频），利用Schema Registry强制执行多模态数据格式规范，确保接入阶段的稳定性与扩展性。\"\n    },\n    {\n      \"module_name\": \"Distributed Elastic Preprocessing Engine\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"GPU-accelerated Compute Nodes (NVIDIA A100/H100), High-speed RDMA Interconnect\",\n        \"software\": \"Apache Flink, NVIDIA DALI, Ray, Kubernetes (K8s)\"\n      },\n      \"interface_protocol\": \"RDMA (Remote Direct Memory Access), Apache Arrow (Zero-copy memory sharing)\",\n      \"design_rationale\": \"利用Flink进行流式计算，结合NVIDIA DALI实现GPU加速的图像/视频解码与增强，通过Ray进行大规模分布式任务调度，利用Zero-copy技术减少内存拷贝开销，解决预处理性能瓶颈。\"\n    },\n    {\n      \"module_name\": \"Immutable Lineage & Metadata Store\",\n      \"hw_sw_dependencies\": {\n        \"hardware\": \"Distributed SSD-based Metadata Cluster\",\n        \"software\": \"Apache Atlas, Neo4j (Graph DB), TiDB (Distributed SQL)\"\n      },\n      \"interface_protocol\": \"GraphQL for complex lineage queries, OpenLineage API\",\n      \"design_rationale\": \"采用图数据库存储数据血缘关系，记录从原始数据源到预处理算子、再到训练样本的完整演变路径；结合分布式事务数据库确保元数据的一致性，满足合规性与可追溯性要求。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Must support hybrid-cloud deployment (On-premise data gravity vs. Cloud elasticity)\",\n    \"Strict isolation between data ingestion plane and training compute plane\",\n    \"Compliance with data privacy regulations (GDPR/CCPA) via automated PII masking\"\n  ],\n  \"risk_controls\": [\n    \"Backpressure mechanism in Flink to prevent downstream buffer overflow\",\n    \"Checkpointing and stateful recovery to ensure exactly-once processing semantics\",\n    \"Automated data quality profiling to detect multimodal drift or corruption early\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"PB-Scale Multimodal Streaming Ingestion & Preprocessing Pipeline (MSIPP)\",\n  \"primary_goal\": \"实现PB级多模态数据的高吞吐流式接入、自动化预处理与全链路血缘追踪，消除数据供给对AI训练任务的IO与计算瓶颈。\",\n  \"modules\": [\n    {\n..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_20",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['分层', '权限']"
+    },
+    "latency": 24.180809497833252,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"PB-Scale Multimodal Streaming Data Pipeline Architecture\",\n  \"primary_goal\": \"Achieve cost-efficient PB-level multimodal data ingestion and preprocessing through tiered storage, hybrid processing synergy, and multi-tenant isolation.\",\n  \"modules\": [\n    {\n      \"module_name\": \"Tiered Intelligent Ingestion & Storage Controller\",\n      \"hw_sw_dependencies\": \"Object Storage (S3/OSS), High-performance NVMe SSDs, Apache Kafka, Kubernetes (K8s)\",\n      \"interface_protocol\": \"gRPC, S3 API, Kafka Protocol\",\n      \"design_rationale\": \"Implements hot/warm/cold data tiering logic. Real-time streams land in NVMe-backed Kafka for immediate processing (Hot), while historical/bulk data is offloaded to Object Storage (Cold) to minimize TCO (Total Cost of Ownership).\"\n    },\n    {\n      \"module_name\": \"Hybrid Online-Offline Preprocessing Engine\",\n      \"hw_sw_dependencies\": \"GPU Clusters (NVIDIA A100/H100), Apache Flink, Apache Spark, Ray Framework\",\n      \"interface_protocol\": \"RESTful API, Arrow Flight, Protobuf\",\n      \"design_rationale\": \"Decouples lightweight feature extraction (Online/Flink) from heavy multimodal transformation/augmentation (Offline/Spark/Ray). Uses Apache Arrow for zero-copy memory transfer to reduce CPU overhead and latency.\"\n    },\n    {\n      \"module_name\": \"Multi-Tenant Security & Resource Governance Module\",\n      \"hw_sw_dependencies\": \"IAM Service, OPA (Open Policy Agent), Kubernetes Namespaces, Prometheus\",\n      \"interface_protocol\": \"OAuth2.0, JWT, SQL-based Policy Engine\",\n      \"design_rationale\": \"Enforces strict data isolation between business lines using logical namespaces and fine-grained IAM policies. Integrates resource quotas to prevent a single business line from exhausting the shared GPU/Storage budget.\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Must support hybrid-cloud deployment (On-premise + Public Cloud).\",\n    \"Strict adherence to data sovereignty and cross-tenant isolation compliance.\",\n    \"Auto-scaling must be triggered by both throughput (MB/s) and compute latency (ms).\"\n  ],\n  \"risk_controls\": [\n    \"Data Skew Risk: Implement dynamic re-partitioning in Flink to prevent hot partitions in multimodal streams.\",\n    \"Cost Overrun Risk: Implement hard-limit resource quotas and automated lifecycle policies for cold data migration.\",\n    \"Security Leakage Risk: Mandatory encryption at rest and in transit with per-tenant KMS (Key Management Service) integration.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"PB-Scale Multimodal Streaming Data Pipeline Architecture\",\n  \"primary_goal\": \"Achieve cost-efficient PB-level multimodal data ingestion and preprocessing through tiered stora..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_21",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['命令行']"
+    },
+    "latency": 27.461942434310913,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"Server Topology Traversal Analysis Tool Architecture\",\n  \"primary_goal\": \"Provide a high-performance, dual-structure topology traversal engine supporting BFS/DFS algorithms with automated build and test asset integration.\",\n  \"modules\": [\n    {\n      \"module_name\": \"core_engine_module\",\n      \"hw_sw_dependencies\": \"C++17 Standard Library, GCC/Clang Compiler\",\n      \"interface_protocol\": \"Internal API: void traverse(GraphStructure* g, TraversalType type);\",\n      \"design_rationale\": \"Implements the core logic for BFS and DFS. It decouples the traversal algorithm from the underlying data structure, allowing the same logic to operate on both Adjacency Matrix and Adjacency List via polymorphism to ensure algorithmic consistency.\"\n    },\n    {\n      \"module_name\": \"data_storage_module\",\n      \"hw_sw_dependencies\": \"None (Pure Memory Management)\",\n      \"interface_protocol\": \"Data Interface: GraphStructure* create_matrix(int nodes); GraphStructure* create_list(int nodes);\",\n      \"design_rationale\": \"Manages the dual-storage requirement. The Adjacency Matrix is optimized for dense connectivity checks, while the Adjacency List is optimized for sparse topology traversal, providing a memory-efficient alternative based on input scale.\"\n    },\n    {\n      \"module_name\": \"cli_interface_module\",\n      \"hw_sw_dependencies\": \"POSIX File System API\",\n      \"interface_protocol\": \"CLI Command: ./topo_tool --input <config_file> --mode <bfs|dfs> --struct <matrix|list>\",\n      \"design_rationale\": \"Handles file I/O for command-line execution. It parses the input configuration files to initialize the graph nodes and edges, acting as the entry point that orchestrates the storage and engine modules.\"\n    }\n  ],\n  \"deployment_constraints\": {\n    \"file_tree_structure\": {\n      \"src\": [\"core_engine.cpp\", \"storage.cpp\", \"cli_handler.cpp\"],\n      \"include\": [\"engine.h\", \"storage.h\", \"cli.h\"],\n      \"tests\": [\"test_bfs.cpp\", \"test_dfs.cpp\", \"test_storage.cpp\"],\n      \"assets\": [\"input_configs/sample_topology.cfg\"],\n      \"build\": [\"Makefile\"]\n    },\n    \"execution_method\": \"Command-line interface (CLI) via shell script or direct binary invocation with argument passing.\",\n    \"build_system\": \"Makefile-based build system that manages object file compilation and links unit test binaries with the core library.\"\n  },\n  \"risk_controls\": {\n    \"memory_risk\": \"Use of RAII and smart pointers to prevent memory leaks during large-scale adjacency matrix allocation.\",\n    \"complexity_risk\": \"Strict separation of algorithm and storage to prevent O(N^2) complexity from leaking into sparse graph operations.\",\n    \"integration_risk\": \"Automated unit test suite execution within the Makefile to ensure new algorithm updates do not break existing storage interfaces.\"\n  }\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"Server Topology Traversal Analysis Tool Architecture\",\n  \"primary_goal\": \"Provide a high-performance, dual-structure topology traversal engine supporting BFS/DFS algorithms w..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_22",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 22.64324378967285,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"智能数据AI平台高可用架构设计方案\",\n  \"primary_goal\": \"构建具备服务冗余、数据强一致性保障及日志链路持续可用性的三位一体高可用架构，满足PDCP评审对全链路可用性的要求。\",\n  \"modules\": [\n    {\n      \"module_name\": \"高可用服务计算层\",\n      \"hw_sw_dependencies\": \"Kubernetes集群, Nginx/LVS负载均衡器, 多可用区(AZ)计算节点\",\n      \"interface_protocol\": \"gRPC / RESTful API\",\n      \"design_rationale\": \"采用多副本(Replica)部署模式，通过负载均衡器实现流量分发。利用K8s的自愈能力与多AZ部署，消除单点故障，确保在单个计算节点或可用区故障时，服务仍能通过健康检查自动切换并保持业务连续性。\"\n    },\n    {\n      \"module_name\": \"半同步数据库存储层\",\n      \"hw_sw_dependencies\": \"MySQL/PostgreSQL集群, 高速存储网络, Keepalived/ProxySQL\",\n      \"interface_protocol\": \"SQL / JDBC\",\n      \"design_rationale\": \"采用主从架构并配置半同步复制(Semi-synchronous Replication)机制。确保事务提交时至少有一个从库接收到日志，在保证数据强一致性与降低RPO的同时，平衡了同步复制带来的延迟风险，实现数据库层面的高可用与数据防丢失。\"\n    },\n    {\n      \"module_name\": \"持续可用日志链路层\",\n      \"hw_sw_dependencies\": \"Kafka分布式消息队列, Elasticsearch集群, 对象存储(S3/OSS)\",\n      \"interface_protocol\": \"Fluentd/Logstash Protocol\",\n      \"design_rationale\": \"构建“采集-缓冲-存储”的三段式链路。通过Kafka作为高吞吐缓冲层，解耦日志产生与存储过程，防止日志高峰冲垮存储系统；结合分布式索引引擎与对象存储实现日志的实时检索与长期归档，确保审计与运维日志的可追溯性与链路稳定性。\"\n    }\n  ],\n  \"deployment_constraints\": \"必须跨可用区(Multi-AZ)部署；数据库半同步链路需保证网络延迟在毫秒级；日志缓冲层需具备足够的磁盘预留空间以应对突发流量。\",\n  \"risk_controls\": \"针对半同步复制可能导致的写延迟风险，需建立监控告警机制；针对日志链路，需设计本地磁盘临时缓存机制以应对网络分区导致的传输中断。\"\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"智能数据AI平台高可用架构设计方案\",\n  \"primary_goal\": \"构建具备服务冗余、数据强一致性保障及日志链路持续可用性的三位一体高可用架构，满足PDCP评审对全链路可用性的要求。\",\n  \"modules\": [\n    {\n      \"module_name\": \"高可用服务计算层\",\n      \"hw_sw_dependen..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_23",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Field risk_controls must be an array; Field deployment_constraints must be an array; Field risk_controls must be an array; Field deployment_constraints must be an array"
+    },
+    "latency": 21.02731990814209,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"智能体平台云原生高可用与配置联动架构\",\n  \"primary_goal\": \"构建具备容灾恢复能力、配置一致性保障及全链路观测能力的智能体核心服务体系，确保核心业务在单点故障下的连续性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"高可用计算与流量调度模块\",\n      \"hw_sw_dependencies\": \"Kubernetes Cluster, Service Mesh (Istio), L7 Load Balancer\",\n      \"interface_protocol\": \"gRPC, HTTP/2\",\n      \"design_rationale\": \"通过K8s多副本部署与Pod反亲和性策略实现计算层冗余；利用Service Mesh实现熔断、限流与自动重试，确保在单个实例故障时流量平滑切换，满足高可用目标。\"\n    },\n    {\n      \"module_name\": \"数据持久化与半同步复制模块\",\n      \"hw_sw_dependencies\": \"MySQL/PostgreSQL Cluster, Distributed Storage (Ceph/EBS)\",\n      \"interface_protocol\": \"SQL, Replication Protocol\",\n      \"design_rationale\": \"采用主从架构并配置半同步复制（Semi-synchronous Replication），确保事务提交时至少一个从库已接收日志，在平衡写入延迟的同时，最大限度降低主库宕机导致的数据丢失风险。\"\n    },\n    {\n      \"module_name\": \"配置中心与可观测性闭环模块\",\n      \"hw_sw_dependencies\": \"Etcd/Apollo, ELK Stack (Elasticsearch, Logstash, Kibana), Prometheus\",\n      \"interface_protocol\": \"RESTful API, Logstash Protocol\",\n      \"design_rationale\": \"配置管理通过Etcd实现集中化下发，并利用版本快照机制支持一键回退；日志链路通过Sidecar采集并统一汇聚至ELK，结合Prometheus指标实现从配置变更到系统性能波动的全链路故障复盘。\"\n    }\n  ],\n  \"deployment_constraints\": \"必须部署于多可用区（Multi-AZ）环境；数据库备库需跨可用区部署；配置中心需具备强一致性共识算法支持。\",\n  \"risk_controls\": \"建立配置变更预发布验证机制；实施数据库半同步延迟监控告警；配置自动化回退脚本与故障演练（Chaos Engineering）常态化。\"\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"智能体平台云原生高可用与配置联动架构\",\n  \"primary_goal\": \"构建具备容灾恢复能力、配置一致性保障及全链路观测能力的智能体核心服务体系，确保核心业务在单点故障下的连续性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"高可用计算与流量调度模块\",\n      \"hw_sw_depend..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_24",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.31331181526184,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"HCI-HA-Storage-Log-Integrated-Architecture\",\n  \"primary_goal\": \"实现超融合基础设施在容量资源（带宽/空间/内存）与日志链路上的双重高可用设计，确保故障域切换后业务连续性与审计追溯能力。\",\n  \"modules\": [\n    {\n      \"module_name\": \"Multi-Dimensional Capacity High Availability Module\",\n      \"hw_sw_dependencies\": \"NVMe/SAS SSDs, RDMA-enabled NICs, ECC RAM, Distributed Storage Controller (Software-Defined)\",\n      \"interface_protocol\": \"NVMe-oF, RoCE v2, iSCSI\",\n      \"design_rationale\": \"通过多路径冗余设计解决带宽瓶颈，利用纠删码(Erasure Coding)与副本机制平衡存储空间与可靠性，并结合内存保护技术与资源预留策略，确保在节点失效时容量资源平滑迁移。\"\n    },\n    {\n      \"module_name\": \"Distributed Log Persistence & Recovery Module\",\n      \"hw_sw_dependencies\": \"Dedicated Log SSDs, Distributed Log Agent, Metadata Service\",\n      \"interface_protocol\": \"gRPC, Kafka/Raft Consensus Protocol\",\n      \"design_rationale\": \"采用基于Raft协议的分布式日志存储架构，将日志流实时同步至跨故障域的独立存储节点，确保在计算节点或存储节点发生故障切换后，日志数据不丢失且可用于故障现场复盘。\"\n    },\n    {\n      \"module_name\": \"Fault Domain Isolation & Orchestration Module\",\n      \"hw_sw_dependencies\": \"Top-of-Rack Switches, Cluster Manager, Heartbeat Mechanism\",\n      \"interface_protocol\": \"RESTful API, SNMP, Keepalived/VRRP\",\n      \"design_rationale\": \"定义物理与逻辑故障域边界，通过心跳检测与自动化编排引擎实现故障后的快速漂移，确保容量资源与日志链路在切换过程中保持状态一致性。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"网络带宽必须满足纠删码重构时的峰值流量需求\",\n    \"日志存储必须与业务数据存储在不同的物理介质或逻辑卷中以防共损\",\n    \"内存预留需覆盖故障切换时的虚拟机热迁移开销\"\n  ],\n  \"risk_controls\": [\n    \"Split-brain (脑裂) 风险：通过仲裁机制(Quorum)强制决策\",\n    \"Log Overflow (日志溢出) 风险：实施基于容量阈值的动态降级与滚动清理策略\",\n    \"Bandwidth Contention (带宽争抢) 风险：实施QoS流量整形，优先保障日志同步与心跳流量\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"HCI-HA-Storage-Log-Integrated-Architecture\",\n  \"primary_goal\": \"实现超融合基础设施在容量资源（带宽/空间/内存）与日志链路上的双重高可用设计，确保故障域切换后业务连续性与审计追溯能力。\",\n  \"modules\": [\n    {\n      \"module_name\": \"Mult..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_25",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Field deployment_constraints must be an array; Field deployment_constraints must be an array"
+    },
+    "latency": 21.407544136047363,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"智能体平台服务高可用基础架构草案 (V1.0)\",\n  \"primary_goal\": \"构建核心服务层的稳定性基石，实现服务自动发现、实时健康监测及故障自动切换，确保智能体调度与执行链路的连续性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"服务注册与发现模块 (Service Registry & Discovery)\",\n      \"hw_sw_dependencies\": \"分布式协调服务 (如 Etcd 或 Consul), 容器编排平台 (Kubernetes)\",\n      \"interface_protocol\": \"gRPC / HTTP/2\",\n      \"design_rationale\": \"通过中心化的注册中心维护智能体服务实例的实时状态，解决动态扩缩容环境下的地址寻址问题，为负载均衡提供准确的实例列表。\"\n    },\n    {\n      \"module_name\": \"健康检查与状态监控模块 (Health Check & Monitoring)\",\n      \"hw_sw_dependencies\": \"Prometheus / Sidecar 代理, 网络探测工具\",\n      \"interface_protocol\": \"RESTful API / SNMP\",\n      \"design_rationale\": \"采用主动探测（Liveness/Readiness Probe）与被动观察相结合的方式，实时感知服务进程、网络连通性及业务逻辑可用性，为故障切换提供触发信号。\"\n    },\n    {\n      \"module_name\": \"流量调度与故障切换模块 (Traffic Routing & Failover)\",\n      \"hw_sw_dependencies\": \"负载均衡器 (L4/L7 Load Balancer), 服务网格 (Service Mesh)\",\n      \"interface_protocol\": \"TCP / HTTP/1.1\",\n      \"design_rationale\": \"基于健康检查结果实现自动剔除异常节点，通过重试机制与熔断策略将流量快速切换至健康实例，实现故障期间的服务无感恢复。\"\n    }\n  ],\n  \"deployment_constraints\": \"初期部署需支持多可用区 (Multi-AZ) 部署模式，确保单机房故障时服务仍能通过跨区调度保持可用。\",\n  \"risk_controls\": [\n    \"防止注册中心单点故障：采用 Raft/Paxos 协议实现注册中心集群化。\",\n    \"避免故障扩散：引入熔断机制，防止因单个服务响应慢导致的级联雪崩效应。\",\n    \"防止脑裂：在故障切换逻辑中引入严格的法定人数 (Quorum) 校验。\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"智能体平台服务高可用基础架构草案 (V1.0)\",\n  \"primary_goal\": \"构建核心服务层的稳定性基石，实现服务自动发现、实时健康监测及故障自动切换，确保智能体调度与执行链路的连续性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"服务注册与发现模块 (Service Registry &..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_26",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 25.46280789375305,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"智能数据AI平台服务-数据库-日志三位一体高可用联动架构\",\n  \"primary_goal\": \"构建服务层、数据库层与日志链路的深度耦合高可用机制，通过半同步复制确保数据强一致性，并实现主备切换时日志链路的无缝平滑转移，满足客户对业务连续性的严苛要求。\",\n  \"modules\": [\n    {\n      \"module_name\": \"弹性服务高可用集群模块\",\n      \"hw_sw_dependencies\": \"Kubernetes Cluster, L4 Load Balancer, Service Mesh (Istio)\",\n      \"interface_protocol\": \"gRPC, RESTful API, Health Check Protocol\",\n      \"design_rationale\": \"采用多副本容器化部署，通过L4负载均衡器进行流量分发。结合Service Mesh实现服务发现与熔断机制，当后端数据库发生切换时，通过Sidecar感知数据库Endpoint变化，实现业务请求的快速重定向。\"\n    },\n    {\n      \"module_name\": \"数据库半同步强一致性模块\",\n      \"hw_sw_dependencies\": \"Distributed Relational Database, High-speed RDMA Network\",\n      \"interface_protocol\": \"MySQL Semi-Synchronous Replication Protocol\",\n      \"design_rationale\": \"配置半同步复制模式，确保事务提交必须在至少一个备库接收到Binlog后才返回成功，平衡性能与数据安全性。配合Keepalived或虚拟IP技术，实现数据库主备切换时的自动漂移与服务感知。\"\n    },\n    {\n      \"module_name\": \"持久化日志链路连续性模块\",\n      \"hw_sw_dependencies\": \"Distributed Message Queue (Kafka), Distributed Storage (Ceph/S3)\",\n      \"interface_protocol\": \"Kafka Protocol, Syslog, Fluentd/Logstash Protocol\",\n      \"design_rationale\": \"日志采集端采用异步解耦设计，通过分布式消息队列作为缓冲层。日志存储链路采用多副本冗余架构，确保在数据库主备切换期间，日志采集代理（Agent）能自动重连至新的日志处理节点，实现日志流的零丢失与链路不中断。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"数据库节点必须部署在不同的可用区（AZ）以规避单点物理故障\",\n    \"半同步复制带来的网络延迟必须控制在业务可接受的毫秒级范围内\",\n    \"日志存储链路的吞吐量需预留3倍于峰值业务量的带宽冗余\"\n  ],\n  \"risk_controls\": [\n    \"针对半同步复制可能导致的写性能下降，需建立网络延迟监控与自动降级机制\",\n    \"针对主备切换瞬间的连接闪断，需在服务层实现指数退避重试策略\",\n    \"针对日志链路积压风险，需配置基于消息队列长度的自动扩容预警\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"智能数据AI平台服务-数据库-日志三位一体高可用联动架构\",\n  \"primary_goal\": \"构建服务层、数据库层与日志链路的深度耦合高可用机制，通过半同步复制确保数据强一致性，并实现主备切换时日志链路的无缝平滑转移，满足客户对业务连续性的严苛要求。\",\n  \"modules\": [\n    {\n      \"module_name\": \"..."
+  },
+  {
+    "id": "COMPANY_IPD_S2_27",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['内存大小']"
+    },
+    "latency": 24.10615086555481,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"architecture_name\": \"HCI-HA-Integrated-Capacity-Log-Architecture\",\n  \"primary_goal\": \"构建集服务高可用、半同步数据库复制、容量约束感知与全链路日志复盘于一体的超融合基础设施架构，确保系统在资源波动下的持续稳定性与故障可追溯性。\",\n  \"modules\": [\n    {\n      \"module_name\": \"High-Availability Service & Database Layer\",\n      \"hw_sw_dependencies\": \"Hypervisor (KVM/ESXi), Distributed Storage, Semi-synchronous Replication Engine\",\n      \"interface_protocol\": \"gRPC for service mesh, MySQL/PostgreSQL Semi-sync Protocol\",\n      \"design_rationale\": \"通过服务侧负载均衡与数据库半同步复制机制，确保在主节点故障时，备库已确认收到日志后再进行切换，实现RPO≈0，平衡数据一致性与写入延迟。\"\n    },\n    {\n      \"module_name\": \"Capacity-Aware Resource Management Module\",\n      \"hw_sw_dependencies\": \"Resource Monitor Agent, SDN Controller, Storage Controller\",\n      \"interface_protocol\": \"RESTful API, SNMP, Prometheus Exporter\",\n      \"design_rationale\": \"将带宽、存储空间与内存阈值作为硬约束引入调度算法，通过实时监控容量水位，防止因资源耗尽导致的级联故障，实现容量维度的动态高可用。\"\n    },\n    {\n      \"module_name\": \"Observability & Log Forensics Module\",\n      \"hw_sw_dependencies\": \"Distributed Log Collector (Fluentd/Filebeat), Time-series Database, Centralized Log Server\",\n      \"interface_protocol\": \"Syslog, Kafka Stream, ELK Stack Protocol\",\n      \"design_rationale\": \"构建全链路日志采集体系，将应用、数据库及底层HCI硬件日志统一汇聚，通过时间轴对齐技术支撑故障发生后的快速复盘与根因分析。\"\n    }\n  ],\n  \"deployment_constraints\": [\n    \"Network Bandwidth: Minimum 10GbE dedicated backbone for storage replication and log streaming to prevent congestion.\",\n    \"Storage Capacity: Minimum 30% overhead buffer required for snapshotting and log retention.\",\n    \"Memory Allocation: Reserved hypervisor memory overhead to prevent OOM during high-concurrency failover events.\"\n  ],\n  \"risk_controls\": [\n    \"Split-brain Prevention: Implementation of Quorum-based voting mechanism in the HCI cluster to avoid dual-master scenarios.\",\n    \"Capacity Threshold Alerting: Multi-level proactive alerting (Warning/Critical) based on real-time resource consumption trends.\",\n    \"Log Integrity Protection: Write-ahead logging (WAL) and remote log mirroring to ensure forensic data survives local node failures.\"\n  ]\n}",
+    "gen_preview": "{\n  \"architecture_name\": \"HCI-HA-Integrated-Capacity-Log-Architecture\",\n  \"primary_goal\": \"构建集服务高可用、半同步数据库复制、容量约束感知与全链路日志复盘于一体的超融合基础设施架构，确保系统在资源波动下的持续稳定性与故障可追溯性。\",\n  \"modules\": [\n    {\n      \"module_n..."
+  }
+]

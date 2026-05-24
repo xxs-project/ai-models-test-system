@@ -1,0 +1,124 @@
+{
+  "runId": "structoutput-15-2026-05-22T09-28-19.860Z-b297ddbe",
+  "runDir": "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results/structoutput-15/structoutput-15-2026-05-22T09-28-19.860Z-b297ddbe",
+  "benchPackId": "structoutput-15",
+  "benchPackName": "StructOutput-15",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T09:28:19.890Z",
+  "completedAt": "2026-05-22T09:28:19.891Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "structoutput-15",
+      "benchPackName": "StructOutput-15",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "structoutput-15",
+      "benchPackName": "StructOutput-15",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "structoutput-15-2026-05-22T09-28-19.860Z-b297ddbe",
+      "models": [
+        {
+          "id": "local_model:gemma-4-31B-it",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:gemma-4-31B-it": {
+          "totalScore": 0,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Basic Single-Format",
+              "score": 0,
+              "weight": 15
+            },
+            {
+              "id": "B",
+              "label": "Less Common Formats",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "C",
+              "label": "Complex Structures",
+              "score": 0,
+              "weight": 25
+            },
+            {
+              "id": "D",
+              "label": "Conversion & Multi-Format",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Adversarial Edge Cases",
+              "score": 0,
+              "weight": 20
+            }
+          ],
+          "summary": "★ Poor"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:gemma-4-31B-it": []
+  },
+  "scores": {
+    "local_model:gemma-4-31B-it": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Basic Single-Format",
+          "score": 0,
+          "weight": 15
+        },
+        {
+          "id": "B",
+          "label": "Less Common Formats",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "C",
+          "label": "Complex Structures",
+          "score": 0,
+          "weight": 25
+        },
+        {
+          "id": "D",
+          "label": "Conversion & Multi-Format",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Adversarial Edge Cases",
+          "score": 0,
+          "weight": 20
+        }
+      ],
+      "summary": "★ Poor"
+    }
+  }
+}

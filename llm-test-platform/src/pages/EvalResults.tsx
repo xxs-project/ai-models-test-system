@@ -561,7 +561,7 @@ export default function EvalResults() {
                             <TableHeader className="bg-gray-50">
                               <TableRow>
                                 <TableHead>评测维度 (测试集)</TableHead>
-                                <TableHead>状态</TableHead>
+                                <TableHead className="w-[100px] whitespace-nowrap">状态</TableHead>
                                 <TableHead>得分 / 满分</TableHead>
                                 <TableHead>得分率</TableHead>
                               </TableRow>
@@ -570,7 +570,7 @@ export default function EvalResults() {
                               {singleReport.packs.map((pack: any, i: number) => (
                                 <TableRow key={i}>
                                   <TableCell className="font-medium text-gray-700">{pack.name}</TableCell>
-                                  <TableCell>
+                                  <TableCell className="whitespace-nowrap">
                                     <span className={`px-2 py-1 rounded text-xs font-medium ${pack.status === 'SUCCESS' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                       {pack.status === 'SUCCESS' ? '✅ 完成' : '❌ 失败'}
                                     </span>
@@ -604,7 +604,7 @@ export default function EvalResults() {
                                 <TableHeader>
                                   <TableRow>
                                     <TableHead className="w-[180px]">{singleReport.type !== 'IPD' ? '用例 ID' : '评测维度'}</TableHead>
-                                    <TableHead className="w-[80px]">状态</TableHead>
+                                    <TableHead className="w-[100px] whitespace-nowrap">状态</TableHead>
                                     <TableHead className="w-[100px]">得分</TableHead>
                                     <TableHead>失败原因 / 备注</TableHead>
                                   </TableRow>
@@ -613,7 +613,7 @@ export default function EvalResults() {
                                   {pack.cases.map((c: any, j: number) => (
                                     <TableRow key={j}>
                                       <TableCell className="font-mono text-xs">{c.id}</TableCell>
-                                      <TableCell>{c.pass ? '✅ 通关' : '❌ 失败'}</TableCell>
+                                      <TableCell className="whitespace-nowrap">{c.pass ? '✅ 通关' : '❌ 失败'}</TableCell>
                                       <TableCell className="text-xs font-medium">{c.score}</TableCell>
                                       <TableCell className="text-xs text-gray-500">{c.error}</TableCell>
                                     </TableRow>

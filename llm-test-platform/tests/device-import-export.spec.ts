@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
-const BASE_URL = 'http://localhost:5173'
-const API_URL = 'http://localhost:8000'
+const BASE_URL = 'http://localhost:5175'
+const API_URL = 'http://localhost:8001'
 
 test.describe('设备管理导入导出功能测试', () => {
   

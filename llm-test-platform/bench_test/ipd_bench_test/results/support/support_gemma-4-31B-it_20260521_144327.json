@@ -1,0 +1,257 @@
+[
+  {
+    "id": "COMPANY_SUPPORT_01",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 21.128047227859497,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"risk_summary\": \"AI算力集群项目在功能迭代过程中出现需求复杂度攀升，导致原定研发节奏面临失控风险，亟需通过风险识别与节奏校准确保里程碑交付。\",\n  \"risk_identification\": [\n    {\n      \"risk_id\": \"R001\",\n      \"risk_item\": \"功能复杂度超预期\",\n      \"description\": \"部分高价值功能在实现过程中涉及底层算力调度逻辑重构，开发复杂度高于初步评估，导致单项Issue闭环周期延长。\"\n    },\n    {\n      \"risk_id\": \"R002\",\n      \"risk_item\": \"资源瓶颈与依赖冲突\",\n      \"description\": \"复杂度上升导致核心研发人员工作量饱和，且跨模块依赖关系增加，形成研发阻塞点。\"\n    }\n  ],\n  \"schedule_impact\": {\n    \"impact_level\": \"High\",\n    \"affected_milestone\": \"V1.0 算力集群交付里程碑\",\n    \"estimated_delay\": \"预计整体进度滞后 2-3 周\",\n    \"critical_path_impact\": \"影响核心调度模块的集成测试启动时间\"\n  },\n  \"mitigation_actions\": [\n    {\n      \"action_id\": \"A001\",\n      \"action_item\": \"功能优先级分级（MoSCoW法）\",\n      \"owner\": \"产品经理/架构师\",\n      \"execution_plan\": \"对当前所有高复杂度Issue进行价值与成本重新评估，将非核心功能下沉至后续版本，确保MVP版本按时交付。\"\n    },\n    {\n      \"action_id\": \"A002\",\n      \"action_item\": \"建立日级风险同步机制\",\n      \"owner\": \"项目经理\",\n      \"execution_plan\": \"针对复杂度上升的模块启动每日站会，快速解决技术阻塞点，并实时更新风险看板以校准进度预期。\"\n    }\n  ]\n}",
+    "gen_preview": "{\n  \"risk_summary\": \"AI算力集群项目在功能迭代过程中出现需求复杂度攀升，导致原定研发节奏面临失控风险，亟需通过风险识别与节奏校准确保里程碑交付。\",\n  \"risk_identification\": [\n    {\n      \"risk_id\": \"R001\",\n      \"risk_item\": \"功能复杂度超预期\",\n      \"description\": \"部分高..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_02",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 11.57813048362732,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 治理对象 | 异味信号 | 风险影响 | 整改动作 |\n| :--- | :--- | :--- | :--- |\n| 液冷循环系统接口定义 | Fragmented | 关键参数分散在多个临时文档中，导致研发与硬件对接时出现版本冲突 | 统一抽取接口定义至单一真理源（SSOT）文档，删除冗余碎片文件 |\n| 服务器散热模组安装指南 | Tangled | 步骤描述与逻辑链路交织，导致维护人员在执行操作时容易产生误解 | 重新梳理操作流向，将逻辑判断与执行步骤解耦，绘制标准流程图 |\n| 液冷服务器硬件规格书 | Bloated | 包含大量过时的历史迭代记录和重复的冗余描述，增加信息检索成本 | 执行内容裁剪，将历史版本迁移至归档库，仅保留当前生效的规格定义 |\n| 冷却液维护操作手册 | Lazy | 关键步骤仅以“参照相关标准”等模糊词汇代替，缺乏具体执行细节 | 补全缺失的操作细节与量化指标，将外部引用转化为具体的内部指导步骤 |",
+    "gen_preview": "| 治理对象 | 异味信号 | 风险影响 | 整改动作 |\n| :--- | :--- | :--- | :--- |\n| 液冷循环系统接口定义 | Fragmented | 关键参数分散在多个临时文档中，导致研发与硬件对接时出现版本冲突 | 统一抽取接口定义至单一真理源（SSOT）文档，删除冗余碎片文件 |\n| 服务器散热模组安装指南 | Tangled | 步骤描述与逻辑链路交织，导致维护人员..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 13.484351396560669,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 复盘结论\n\n* **技术债务积累**：由于前期开发周期压缩，导致系统在高并发压力测试中出现性能瓶颈，部分核心模块稳定性未达上线标准。\n* **测试覆盖不足**：端到端（E2E）集成测试场景覆盖率较低，在模拟真实业务流时发现了数个影响主流程的 P0 级缺陷。\n\n# 核心决议\n\n* **延期发布**：正式将 ERP 系统的上线日期由原定计划延后 [具体天数/日期]，确保所有阻塞性 Bug 彻底修复。\n* **风险复盘**：组织研发、测试与产品团队进行专项复盘，梳理需求变更记录，优化后续版本的发布准入机制。\n* **客户安抚**：由客户成功团队（CSM）一对一通知受影响的核心客户，提供临时替代方案或延长试用期以补偿延期带来的不便。\n\n# 对外口径\n\n* **质量底线**：强调公司始终将“系统稳定性”与“数据安全性”视为最高优先级，为了确保用户在生产环境拥有极致的可靠体验，决定在发布前进行最后一轮深度优化。\n* **发布窗口**：明确告知客户新的发布时间窗口，并承诺在正式上线前提供详细的更新日志（Release Notes）及操作指南。",
+    "gen_preview": "# 复盘结论\n\n* **技术债务积累**：由于前期开发周期压缩，导致系统在高并发压力测试中出现性能瓶颈，部分核心模块稳定性未达上线标准。\n* **测试覆盖不足**：端到端（E2E）集成测试场景覆盖率较低，在模拟真实业务流时发现了数个影响主流程的 P0 级缺陷。\n\n# 核心决议\n\n* **延期发布**：正式将 ERP 系统的上线日期由原定计划延后 [具体天数/日期]，确保所有阻塞性 Bug 彻底修复..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_04",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 26.263715744018555,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"hiring_goals\": {\n    \"strategic_objective\": \"构建世界级AI算力基础设施人才梯队，实现从底层芯片适配到上层大模型训练的全栈能力自研\",\n    \"headcount_target\": 50,\n    \"timeframe\": \"2024-2025\",\n    \"priority_levels\": [\n      \"Distributed Training Optimization\",\n      \"GPU Kernel Engineering\",\n      \"Cluster Reliability Engineering\"\n    ]\n  },\n  \"core_roles\": [\n    {\n      \"role_name\": \"AI算力架构师 (AI Infrastructure Architect)\",\n      \"hard_skills\": [\n        \"RDMA/RoCEv2 Network Topology\",\n        \"NVIDIA H100/B200 Architecture\",\n        \"Distributed Storage (Lustre/GPFS)\",\n        \"Kubernetes/Slurm Scheduling\"\n      ],\n      \"soft_skills\": [\n        \"Systemic Thinking\",\n        \"Cross-functional Leadership\",\n        \"Technical Roadmap Planning\"\n      ]\n    },\n    {\n      \"role_name\": \"高性能计算工程师 (HPC/Kernel Engineer)\",\n      \"hard_skills\": [\n        \"CUDA/Triton Programming\",\n        \"NCCL/RCCL Optimization\",\n        \"PyTorch/DeepSpeed Internals\",\n        \"C++/SIMD Optimization\"\n      ],\n      \"soft_skills\": [\n        \"Attention to Detail\",\n        \"Analytical Problem Solving\",\n        \"Performance Obsession\"\n      ]\n    }\n  ],\n  \"evp_points\": {\n    \"compensation\": \"Competitive base salary with high-upside equity/token grants\",\n    \"resources\": \"Access to 10k+ GPU cluster and cutting-edge interconnect hardware\",\n    \"impact\": \"Defining the foundational compute layer for next-generation AGI\",\n    \"culture\": \"Engineering-first culture with minimal bureaucracy and high autonomy\"\n  },\n  \"upskilling_actions\": [\n    {\n      \"action\": \"Internal Tech Seminars\",\n      \"frequency\": \"Bi-weekly\",\n      \"focus\": \"Latest LLM training efficiency papers\"\n    },\n    {\n      \"action\": \"Industry Partnership Program\",\n      \"frequency\": \"Quarterly\",\n      \"focus\": \"Collaborative research with chip vendors and top universities\"\n    },\n    {\n      \"action\": \"Certification Support\",\n      \"frequency\": \"Ongoing\",\n      \"focus\": \"Advanced Cloud Native and HPC certifications\"\n    }\n  ]\n}",
+    "gen_preview": "{\n  \"hiring_goals\": {\n    \"strategic_objective\": \"构建世界级AI算力基础设施人才梯队，实现从底层芯片适配到上层大模型训练的全栈能力自研\",\n    \"headcount_target\": 50,\n    \"timeframe\": \"2024-2025\",\n    \"priority_levels\": [\n      \"Distributed Tra..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 9.718799591064453,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 改造项 | 关键约束 | 风险点 | 协调对象 |\n| :--- | :--- | :--- | :--- |\n| 承重加固 | 需满足液冷服务器及冷却液满载后的单位面积压力标准 | 地板承重不足导致结构形变或塌陷 | 建筑工程部、物业管理处 |\n| 电力升级 | 需确保 PDU 功率匹配及冗余电源供电稳定性 | 电力过载导致跳闸或设备损坏 | 电力工程组、能源管理中心 |\n| 防漏液改造 | 需安装漏液检测传感器及配套的快速排水系统 | 冷却液渗漏导致电路短路或设备腐蚀 | 硬件工程部、环境安全组 |\n| 后勤保障 | 需建立冷却液补给机制及专业废液处置流程 | 耗材供应中断或危化品处置违规 | 采购部、后勤保障中心 |",
+    "gen_preview": "| 改造项 | 关键约束 | 风险点 | 协调对象 |\n| :--- | :--- | :--- | :--- |\n| 承重加固 | 需满足液冷服务器及冷却液满载后的单位面积压力标准 | 地板承重不足导致结构形变或塌陷 | 建筑工程部、物业管理处 |\n| 电力升级 | 需确保 PDU 功率匹配及冗余电源供电稳定性 | 电力过载导致跳闸或设备损坏 | 电力工程组、能源管理中心 |\n| 防漏液改造 |..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_06",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 11.03064250946045,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 会议结论\n\n- 确认原定发布计划无法按时交付，一致同意将发布日期延后。\n- 认定本次延期主因为开发周期预估不足及关键模块在集成测试阶段出现严重 Bug。\n\n# 核心决议\n\n- **延期发布**：正式将产品发布日期由原定日期推迟至 [具体日期]，以确保功能的稳定性与质量。\n- **深度复盘**：由项目负责人牵头，在下周三前组织技术与产品团队进行全链路复盘，分析风险管控失效原因并输出改进方案。\n- **客户安抚**：由客户成功团队启动分级安抚计划，针对受影响的核心客户提供专项补偿方案或提前试用权限。\n\n# 对外口径\n\n- **统一话术**：强调本次延期是为了“进一步优化用户体验”及“确保产品最高质量交付”，避免提及内部管理混乱或技术失误。\n- **沟通渠道**：通过官方公告、邮件通知及客户经理一对一沟通三种方式同步，确保信息传达的一致性。",
+    "gen_preview": "# 会议结论\n\n- 确认原定发布计划无法按时交付，一致同意将发布日期延后。\n- 认定本次延期主因为开发周期预估不足及关键模块在集成测试阶段出现严重 Bug。\n\n# 核心决议\n\n- **延期发布**：正式将产品发布日期由原定日期推迟至 [具体日期]，以确保功能的稳定性与质量。\n- **深度复盘**：由项目负责人牵头，在下周三前组织技术与产品团队进行全链路复盘，分析风险管控失效原因并输出改进方案。\n-..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_07",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 27.149384021759033,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"solution_name\": \"AI算力集群关键器件保供协同方案\",\n  \"version\": \"1.0\",\n  \"scope\": \"AI Compute Cluster Infrastructure\",\n  \"supply_risks\": {\n    \"geopolitical_risk\": \"High\",\n    \"logistics_bottleneck\": \"Medium\",\n    \"manufacturing_capacity\": \"High\",\n    \"single_source_dependency\": \"Critical\"\n  },\n  \"priority_parts\": [\n    {\n      \"part_name\": \"HBM3 High Bandwidth Memory\",\n      \"risk_level\": \"Critical\",\n      \"backup_option\": \"Diversify vendors to include secondary tier-1 suppliers; increase safety stock to 6 months\"\n    },\n    {\n      \"part_name\": \"AI Accelerator GPU/NPU\",\n      \"risk_level\": \"Critical\",\n      \"backup_option\": \"Establish long-term framework agreement (LTA); explore alternative architecture compatibility\"\n    },\n    {\n      \"part_name\": \"High-Speed Optical Transceivers\",\n      \"risk_level\": \"High\",\n      \"backup_option\": \"Qualify domestic alternative modules; implement cross-vendor interoperability testing\"\n    },\n    {\n      \"part_name\": \"High-Power Voltage Regulator Modules\",\n      \"risk_level\": \"Medium\",\n      \"backup_option\": \"Standardize component footprints for multi-source interchangeable parts\"\n    }\n  ],\n  \"supplier_actions\": {\n    \"inventory_management\": \"Weekly rolling forecast sharing and VMI (Vendor Managed Inventory) implementation\",\n    \"capacity_reservation\": \"Pre-payment for dedicated production line capacity for Q3-Q4\",\n    \"quality_assurance\": \"Accelerated qualification process for backup components\",\n    \"transparency\": \"Real-time shipment tracking and early warning system for lead-time fluctuations\"\n  },\n  \"escalation_path\": {\n    \"level_1\": {\n      \"trigger\": \"Lead-time increase > 15%\",\n      \"owner\": \"Procurement Manager\",\n      \"action\": \"Supplier coordination meeting\"\n    },\n    \"level_2\": {\n      \"trigger\": \"Critical part shortage > 10% of demand\",\n      \"owner\": \"Supply Chain Director\",\n      \"action\": \"Activate backup supplier and re-allocate internal resources\"\n    },\n    \"level_3\": {\n      \"trigger\": \"Supply chain disruption > 30 days\",\n      \"owner\": \"COO / CTO\",\n      \"action\": \"Executive-level negotiation and strategic redesign of hardware architecture\"\n    }\n  }\n}",
+    "gen_preview": "{\n  \"solution_name\": \"AI算力集群关键器件保供协同方案\",\n  \"version\": \"1.0\",\n  \"scope\": \"AI Compute Cluster Infrastructure\",\n  \"supply_risks\": {\n    \"geopolitical_risk\": \"High\",\n    \"logistics_bottleneck\": \"Medium\",\n..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_08",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 6.7687366008758545,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 协同主题 | 参与角色 | 节奏频率 | 输出物 |\n| :--- | :--- | :--- | :--- |\n| 需求评审与可行性分析 | 研发、市场 | 每两周一次 | 需求规格说明书 (PRD) |\n| 版本质量同步与缺陷评审 | 研发、测试 | 每周一次 | 测试报告 / Bug 修复清单 |\n| 硬件资源规划与到货跟踪 | 研发、供应链 | 每月一次 | 资源采购计划表 |\n| 产品路线图与市场反馈同步 | 市场、研发、测试 | 每季度一次 | 产品迭代路线图 (Roadmap) |",
+    "gen_preview": "| 协同主题 | 参与角色 | 节奏频率 | 输出物 |\n| :--- | :--- | :--- | :--- |\n| 需求评审与可行性分析 | 研发、市场 | 每两周一次 | 需求规格说明书 (PRD) |\n| 版本质量同步与缺陷评审 | 研发、测试 | 每周一次 | 测试报告 / Bug 修复清单 |\n| 硬件资源规划与到货跟踪 | 研发、供应链 | 每月一次 | 资源采购计划表 |\n| 产..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_09",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['责任人', '时间点']"
+    },
+    "latency": 11.89749264717102,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 当前风险\n\n* **数据质量波动风险**：由于上游数据源接口不稳定，导致 AI 训练集出现部分缺失值，可能影响模型推理的准确率。\n* **资源瓶颈风险**：当前 GPU 集群在高峰期负载过高，导致自动化 pipeline 调度延迟，影响迭代周期。\n\n# 进度判断\n\n* **整体进度**：处于【延迟】状态。原定于本周完成的特征工程模块由于需求变更，进度落后于计划 15%。\n* **关键里程碑**：模型基线（Baseline）已跑通，但端到端集成测试尚未启动，预计交付时间将顺延 3 个工作日。\n\n# 改进行动\n\n* **技术债清理**：针对前期快速迭代留下的硬编码配置和冗余冗余代码进行重构，由 **@张三** 负责，计划于 **10月25日前** 完成，以提升系统可维护性。\n* **稳定性增强**：引入数据质量监控预警机制，由 **@李四** 负责，在 **10月20日前** 实现异常数据自动拦截，减少无效训练。",
+    "gen_preview": "# 当前风险\n\n* **数据质量波动风险**：由于上游数据源接口不稳定，导致 AI 训练集出现部分缺失值，可能影响模型推理的准确率。\n* **资源瓶颈风险**：当前 GPU 集群在高峰期负载过高，导致自动化 pipeline 调度延迟，影响迭代周期。\n\n# 进度判断\n\n* **整体进度**：处于【延迟】状态。原定于本周完成的特征工程模块由于需求变更，进度落后于计划 15%。\n* **关键里程碑**..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_10",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['RiskMgmt', 'smell_doc']"
+    },
+    "latency": 21.664299964904785,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"project_name\": \"某智能体平台\",\n  \"report_type\": \"需求意图与风险治理摘要\",\n  \"issue_signal\": {\n    \"positive_feedback\": \"用户对智能体编排功能的业务价值认可度高，核心链路闭环完成\",\n    \"negative_feedback\": \"随着功能堆叠，交付周期延长，开发人员对实现复杂度的担忧增加\"\n  },\n  \"intention_judgment\": \"当前处于从【快速原型验证】向【工业级稳定交付】转型的关键期，需求意图已从单纯的功能增加转向对系统鲁棒性和可维护性的追求\",\n  \"governance_risks\": [\n    {\n      \"risk_id\": \"R01\",\n      \"description\": \"交付复杂度过高导致的项目延期风险\",\n      \"impact_level\": \"High\"\n    },\n    {\n      \"risk_id\": \"R02\",\n      \"description\": \"快速迭代导致的技术债累积，影响后续扩展性\",\n      \"impact_level\": \"Medium\"\n    }\n  ],\n  \"document_smells\": [\n    {\n      \"smell_id\": \"S01\",\n      \"type\": \"Outdated_Doc\",\n      \"description\": \"接口文档与实际代码实现不一致，导致联调成本增加\"\n    },\n    {\n      \"smell_id\": \"S02\",\n      \"type\": \"Fragmented_Knowledge\",\n      \"description\": \"核心逻辑散落在多个临时文档中，缺乏统一的架构设计索引\"\n    }\n  ],\n  \"action_plan\": [\n    {\n      \"task\": \"开展复杂度专项评审，对高风险模块进行解耦重构\",\n      \"owner\": \"架构组\",\n      \"priority\": \"P0\"\n    },\n    {\n      \"task\": \"启动文档治理专项，清理冗余信息并建立自动化同步机制\",\n      \"owner\": \"技术文档组\",\n      \"priority\": \"P1\"\n    }\n  ]\n}",
+    "gen_preview": "{\n  \"project_name\": \"某智能体平台\",\n  \"report_type\": \"需求意图与风险治理摘要\",\n  \"issue_signal\": {\n    \"positive_feedback\": \"用户对智能体编排功能的业务价值认可度高，核心链路闭环完成\",\n    \"negative_feedback\": \"随着功能堆叠，交付周期延长，开发人员对实现复杂度的担忧增加\"\n  },..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_11",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Missing required content: 责任人; Missing required content: 协同对象; Missing required content: 责任人; Missing required content: 协同对象"
+    },
+    "latency": 12.770724296569824,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 某服务器管理平台项目治理例会决议纪要\n\n# 需求判断\n- **资源监控看板升级**：判定为 P0 级核心需求，需支持多维度实时指标聚合，直接影响交付验收。\n- **自动化巡检脚本库**：判定为 P1 级增强需求，在确保核心看板功能稳定的前提下，分批次迭代上线。\n\n# 风险结论\n- **接口依赖风险**：底层 API 响应延迟较高，可能导致前端看板加载超时，识别为【高风险】，需调整需求优先级，优先优化接口性能。\n- **资源到位风险**：由于跨团队人力调配延迟，部分模块开发进度滞后，识别为【中风险】，需重新评估里程碑时间点。\n\n# 推进行动\n- **接口性能专项优化**：由 [后端开发组-张三] 牵头，协同 [基础架构组] 在 [10月25日前] 完成 API 响应时间降低至 200ms 以内的优化。\n- **跨团队人力对齐**：由 [项目经理-李四] 牵头，协同 [研发管理部] 在 [10月22日前] 完成缺失开发人力的补齐并同步至项目组。",
+    "gen_preview": "# 某服务器管理平台项目治理例会决议纪要\n\n# 需求判断\n- **资源监控看板升级**：判定为 P0 级核心需求，需支持多维度实时指标聚合，直接影响交付验收。\n- **自动化巡检脚本库**：判定为 P1 级增强需求，在确保核心看板功能稳定的前提下，分批次迭代上线。\n\n# 风险结论\n- **接口依赖风险**：底层 API 响应延迟较高，可能导致前端看板加载超时，识别为【高风险】，需调整需求优先级，优..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_12",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Missing required content: issue_intention; Missing required content: 项目进度管理; Missing required content: issue_intention; Missing required content: 项目进度管理"
+    },
+    "latency": 9.085219383239746,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| issue信号 | 意图判断 | 进度影响 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| 申请增加多模态输入能力 | 价值信号（功能认可） | 潜在范围扩张，需评估排期 | 纳入需求池，评估优先级后决定是否进入周会 |\n| 担忧复杂长链路导致响应延迟 | 复杂度担忧（性能风险） | 可能导致研发周期延长 | 提交技术方案预研，重点讨论性能优化路径 |\n| 建议优化智能体编排界面交互 | 价值信号（体验提升） | 低影响，可并行迭代 | 记录至优化清单，无需占用周会时间 |\n| 质疑跨平台同步的实现可行性 | 复杂度担忧（技术瓶颈） | 高风险，可能阻塞里程碑 | 立即升级至周会，组织技术评审确认方案 |",
+    "gen_preview": "| issue信号 | 意图判断 | 进度影响 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| 申请增加多模态输入能力 | 价值信号（功能认可） | 潜在范围扩张，需评估排期 | 纳入需求池，评估优先级后决定是否进入周会 |\n| 担忧复杂长链路导致响应延迟 | 复杂度担忧（性能风险） | 可能导致研发周期延长 | 提交技术方案预研，重点讨论性能优化路径 |\n| 建..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_13",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['项目进度管理']"
+    },
+    "latency": 33.27907848358154,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"project_name\": \"某服务器管理平台\",\n  \"report_type\": \"issue_intention 进度判断摘要\",\n  \"issue_signals\": [\n    {\n      \"issue_id\": \"ISSUE-2024-001\",\n      \"issue_intention\": \"用户反馈当前资源调度逻辑无法满足多租户隔离需求，要求增加精细化配额管理\",\n      \"signal_type\": \"Scope Expansion\"\n    },\n    {\n      \"issue_id\": \"ISSUE-2024-002\",\n      \"issue_intention\": \"架构组对底层存储接口的异步实现方案表示认可，认为能有效提升并发性能\",\n      \"signal_type\": \"Value Validation\"\n    },\n    {\n      \"issue_id\": \"ISSUE-2024-003\",\n      \"issue_intention\": \"开发团队反馈跨机房同步机制的边界条件过多，实现复杂度超出预期\",\n      \"signal_type\": \"Complexity Concern\"\n    }\n  ],\n  \"intention_clusters\": [\n    {\n      \"cluster_name\": \"需求范围扩张类\",\n      \"associated_intentions\": [\n        \"增加精细化配额管理\",\n        \"扩展多租户隔离逻辑\"\n      ],\n      \"impact_level\": \"High\",\n      \"judgment\": \"新增功能点将直接导致开发工作量增加，存在挤占原定里程碑时间的风险\"\n    },\n    {\n      \"cluster_name\": \"技术复杂度预警类\",\n      \"associated_intentions\": [\n        \"跨机房同步边界条件过多\",\n        \"异步实现方案的稳定性验证\"\n      ],\n      \"impact_level\": \"Medium\",\n      \"judgment\": \"复杂度提升将延长单项任务的研发周期，可能导致内部迭代节点延期\"\n    },\n    {\n      \"cluster_name\": \"价值认可与确认类\",\n      \"associated_intentions\": [\n        \"认可异步实现方案\",\n        \"确认性能提升预期\"\n      ],\n      \"impact_level\": \"Low\",\n      \"judgment\": \"方案达成共识，降低了后期返工风险，有利于确保核心里程碑的交付质量\"\n    }\n  ],\n  \"schedule_judgment\": {\n    \"current_status\": \"At Risk\",\n    \"milestone_impact\": \"由于范围扩张与复杂度增加，原定于 Q3 的‘资源管理模块’交付里程碑预计将延迟 1-2 周\",\n    \"critical_path_analysis\": \"跨机房同步机制已成为当前路径上的关键瓶颈\"\n  },\n  \"follow_up_actions\": [\n    {\n      \"action\": \"需求优先级对齐\",\n      \"owner\": \"Product Manager\",\n      \"deadline\": \"2024-06-15\",\n      \"goal\": \"对‘精细化配额管理’进行优先级评估，决定是否将其移至下一迭代版本以保证当前排期\"\n    },\n    {\n      \"action\": \"技术方案专项评审\",\n      \"owner\": \"Technical Lead\",\n      \"deadline\": \"2024-06-12\",\n      \"goal\": \"针对跨机房同步的复杂度问题进行方案简化，降低实现成本\"\n    }\n  ]\n}",
+    "gen_preview": "{\n  \"project_name\": \"某服务器管理平台\",\n  \"report_type\": \"issue_intention 进度判断摘要\",\n  \"issue_signals\": [\n    {\n      \"issue_id\": \"ISSUE-2024-001\",\n      \"issue_intention\": \"用户反馈当前资源调度逻辑无法满足多租户隔离需求，要求增加精细化配额管理\"..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_14",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.572265386581421,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 某智能数据AI平台 Issue_Intention 管理决议纪要\n\n# 意图判断\n- **Issue_Intention 定位**：本次 issue 核心意图为【增强 AI 平台对异构数据源的自动化映射能力】，旨在降低用户手动配置成本。\n- **价值信号分析**：该功能可显著提升头部客户的入驻效率，预计将数据接入周期从 3 天缩短至 0.5 天，具有极高的商业竞争力。\n- **复杂度担忧**：由于涉及底层元数据模型的重构，存在与现有版本兼容性风险，且对 AI 模型的推理准确率有较高依赖，技术实现复杂度较高。\n\n# 进度影响\n- **项目进度管理**：该需求的引入将导致当前 Sprint 的研发资源被占用约 30%，原定于本月交付的【报表可视化优化】模块将面临延期风险。\n- **里程碑与优先级调整**：决定将此 issue 优先级提升至 P0 级，并将其纳入 V2.1 核心里程碑；相应地，将非核心的【UI 皮肤自定义】功能移至 V2.2 版本交付。\n\n# 管理动作\n- **责任人与时间点**：由架构师张三负责在 10 月 20 日前完成技术可行性方案评审，并提交详细的设计文档。\n- **协同对象与机制**：由产品经理李四协同算法团队进行模型精度对齐，每周五召开一次专项同步会，确保意图实现与业务预期一致。",
+    "gen_preview": "# 某智能数据AI平台 Issue_Intention 管理决议纪要\n\n# 意图判断\n- **Issue_Intention 定位**：本次 issue 核心意图为【增强 AI 平台对异构数据源的自动化映射能力】，旨在降低用户手动配置成本。\n- **价值信号分析**：该功能可显著提升头部客户的入驻效率，预计将数据接入周期从 3 天缩短至 0.5 天，具有极高的商业竞争力。\n- **复杂度担忧**：..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_15",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Missing required content: smell_doc; Missing required content: smell_doc"
+    },
+    "latency": 9.229094505310059,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 文档对象 | 异味信号 | 风险影响 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| 核心 API 接口定义 | lazy | 关键参数缺失导致开发人员反复确认，增加沟通成本 | 补全缺失的入参定义与错误码映射表 |\n| 部署运维指南 | tangled | 基础环境配置与业务部署步骤混杂，导致新环境搭建易出错 | 将环境前置条件与部署流程解耦，拆分为独立章节 |\n| 权限管理模块文档 | fragmented | 信息散落在多个 Wiki 页面，导致权限变更时易遗漏更新 | 建立统一的权限模型索引页，整合碎片化信息 |\n| 平台概览介绍 | excessive | 包含大量过时的历史版本描述，干扰用户快速定位当前功能 | 剔除冗余的历史记录，将旧版本信息迁移至存档页 |",
+    "gen_preview": "| 文档对象 | 异味信号 | 风险影响 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| 核心 API 接口定义 | lazy | 关键参数缺失导致开发人员反复确认，增加沟通成本 | 补全缺失的入参定义与错误码映射表 |\n| 部署运维指南 | tangled | 基础环境配置与业务部署步骤混杂，导致新环境搭建易出错 | 将环境前置条件与部署流程解耦，拆分为独立章节..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_16",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['excessive']"
+    },
+    "latency": 25.532201051712036,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"activity_name\": \"某智能数据AI平台_smell_doc多标签治理摘要\",\n  \"context\": \"技术债务管理-文档质量专项评审\",\n  \"document_samples\": [\n    {\n      \"doc_id\": \"DOC-AI-001\",\n      \"doc_name\": \"智能数据处理流水线配置指南\",\n      \"version\": \"v1.2\"\n    },\n    {\n      \"doc_id\": \"DOC-AI-002\",\n      \"doc_name\": \"平台核心API接口定义文档\",\n      \"version\": \"v2.0\"\n    }\n  ],\n  \"smell_judgment\": [\n    {\n      \"doc_id\": \"DOC-AI-001\",\n      \"smell_labels\": [\n        \"fragmented\",\n        \"lazy\"\n      ],\n      \"evidence\": \"配置步骤分布在三个不同的Wiki页面，且关键参数仅标注为'详见代码'，缺乏具体定义。\"\n    },\n    {\n      \"doc_id\": \"DOC-AI-002\",\n      \"smell_labels\": [\n        \"bloated\",\n        \"tangled\"\n      ],\n      \"evidence\": \"文档包含大量过时的历史版本快照，且接口逻辑与底层数据库表结构描述严重耦合，导致单页长度超过2万字。\"\n    }\n  ],\n  \"debt_impact\": {\n    \"maintenance_cost\": \"由于 fragmented 和 lazy 异味，新入职工程师在环境搭建阶段的沟通成本增加 40%，导致知识传递链路断裂。\",\n    \"delivery_efficiency\": \"bloated 和 tangled 异味导致接口变更时的文档同步周期延长，文档更新滞后于代码发布，增加了生产环境配置错误的风险。\"\n  },\n  \"governance_actions\": [\n    {\n      \"action_item\": \"文档解耦与精简\",\n      \"target_smell\": [\n        \"bloated\",\n        \"tangled\"\n      ],\n      \"strategy\": \"执行文档瘦身计划，将历史快照迁移至归档库，将接口定义与物理存储描述分离。\"\n    },\n    {\n      \"action_item\": \"知识图谱化重构\",\n      \"target_smell\": [\n        \"fragmented\",\n        \"lazy\"\n      ],\n      \"strategy\": \"建立统一的配置索引页，强制要求所有'详见代码'的占位符替换为具体的参数矩阵表。\"\n    }\n  ]\n}",
+    "gen_preview": "{\n  \"activity_name\": \"某智能数据AI平台_smell_doc多标签治理摘要\",\n  \"context\": \"技术债务管理-文档质量专项评审\",\n  \"document_samples\": [\n    {\n      \"doc_id\": \"DOC-AI-001\",\n      \"doc_name\": \"智能数据处理流水线配置指南\",\n      \"version\": \"v1.2..."
+  },
+  {
+    "id": "COMPANY_SUPPORT_17",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 14.970218896865845,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 【某型号液冷服务器】smell_doc 技术债决议纪要\n\n# 异味判断\n- **smell_doc 与 lazy**：部分液冷散热模块的接口定义文档存在严重滞后，出现大量“待补充”或“参考旧版本”的 lazy 现象，导致实际代码实现与文档描述不一致。\n- **tangled 与 fragmented**：液冷控制逻辑的说明文档分布在多个碎片化（fragmented）的 Wiki 页面中，且各模块依赖关系交织（tangled），缺乏统一的架构视图，导致新成员难以快速理清调用链路。\n\n# 技术债影响\n- **维护成本增加**：由于文档异味导致排查问题时需反复核对源码，极大地提升了研发人员的认知负荷，增加了日常维护的沟通成本。\n- **交付效率下降**：在技术债务管理缺失的情况下，新功能的开发依赖于对旧文档的盲目信任，导致集成阶段出现频繁的 Bug 回滚，严重影响了该型号服务器的交付周期。\n\n# 治理决议\n- **责任人与执行计划**：由架构组负责人牵头，各模块 Owner 负责对 smell_doc 进行专项清理，将碎片化文档整合至统一的知识库中。\n- **时间点与整改窗口**：定于本月 15 日前完成初稿修订，并统一申请在下个版本的【稳定性维护窗口】（具体时间：下周三至周五）进行文档同步与代码对齐的最终验证。",
+    "gen_preview": "# 【某型号液冷服务器】smell_doc 技术债决议纪要\n\n# 异味判断\n- **smell_doc 与 lazy**：部分液冷散热模块的接口定义文档存在严重滞后，出现大量“待补充”或“参考旧版本”的 lazy 现象，导致实际代码实现与文档描述不一致。\n- **tangled 与 fragmented**：液冷控制逻辑的说明文档分布在多个碎片化（fragmented）的 Wiki 页面中，且各模..."
+  }
+]

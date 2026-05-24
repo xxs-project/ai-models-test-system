@@ -97,8 +97,8 @@ function EvalBoard() {
         valA = a.percent || 0
         valB = b.percent || 0
       } else {
-        const packA = a.packs.find((p: any) => (p.name && p.name.includes(sortConfig.key)) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => getIpdDimName(c.id).includes(sortConfig.key))))
-        const packB = b.packs.find((p: any) => (p.name && p.name.includes(sortConfig.key)) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => getIpdDimName(c.id).includes(sortConfig.key))))
+        const packA = a.packs.find((p: any) => (p.name && p.name.toLowerCase().includes(sortConfig.key.toLowerCase())) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => getIpdDimName(c.id).includes(sortConfig.key))))
+        const packB = b.packs.find((p: any) => (p.name && p.name.toLowerCase().includes(sortConfig.key.toLowerCase())) || (activeTab === 'IPD' && p.cases && p.cases.some((c: any) => getIpdDimName(c.id).includes(sortConfig.key))))
         
         if (activeTab === 'BenchLocal') {
           valA = packA && packA.maxScore > 0 ? (packA.score / packA.maxScore) * 100 : 0
@@ -127,7 +127,7 @@ function EvalBoard() {
   }
 
   const getPackScore = (report: any, packName: string) => {
-    const pack = report.packs.find((p: any) => p.name && p.name.includes(packName))
+    const pack = report.packs.find((p: any) => p.name && p.name.toLowerCase().includes(packName.toLowerCase()))
     if (pack && pack.maxScore > 0) {
       return ((pack.score / pack.maxScore) * 100).toFixed(2)
     }
@@ -286,6 +286,7 @@ function EvalBoard() {
                   <TableHead><SortButton columnKey="bugfind" label="bugfind" /></TableHead>
                   <TableHead><SortButton columnKey="structoutput" label="structoutput" /></TableHead>
                   <TableHead><SortButton columnKey="hermesagent" label="hermesagent" /></TableHead>
+                  <TableHead><SortButton columnKey="cli-40" label="cli-40" /></TableHead>
                   <TableHead>详情</TableHead>
                 </TableRow>
               ) : (
@@ -324,6 +325,7 @@ function EvalBoard() {
                       <TableCell>{getPackScore(r, 'bugfind')}</TableCell>
                       <TableCell>{getPackScore(r, 'structoutput')}</TableCell>
                       <TableCell>{getPackScore(r, 'hermesagent')}</TableCell>
+                      <TableCell>{getPackScore(r, 'cli-40')}</TableCell>
                     </>
                   ) : (
                     <>
@@ -435,7 +437,7 @@ function EvalBoard() {
                           <TableHeader>
                             <TableRow>
                               <TableHead className="w-[180px]">{singleReport.type !== 'IPD' ? '用例 ID' : '评测维度'}</TableHead>
-                              <TableHead className="w-[80px]">状态</TableHead>
+                              <TableHead className="w-[100px] whitespace-nowrap">状态</TableHead>
                               <TableHead className="w-[100px]">得分</TableHead>
                               <TableHead>失败原因 / 备注</TableHead>
                             </TableRow>
@@ -444,7 +446,7 @@ function EvalBoard() {
                             {pack.cases.map((c: any, j: number) => (
                               <TableRow key={j}>
                                 <TableCell className="font-mono text-xs">{c.id}</TableCell>
-                                <TableCell>{c.pass ? '✅ 通关' : '❌ 失败'}</TableCell>
+                                <TableCell className="whitespace-nowrap">{c.pass ? '✅ 通关' : '❌ 失败'}</TableCell>
                                 <TableCell className="text-xs font-medium">{c.score}</TableCell>
                                 <TableCell className="text-xs text-gray-500">{c.error}</TableCell>
                               </TableRow>

@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-  line-height: 1.5;
+  font-family: Inter, "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
   font-weight: 400;
   color-scheme: light;
-  color: #1a1a1a;
-  background-color: #ffffff;
+  color: #1D2129;
+  background-color: #F2F5FA;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,7 +18,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #f1f5f9;
+  background-color: #F2F5FA;
 }
 
 #root {
@@ -27,130 +27,176 @@ body {
 
 [data-radix-dialog-overlay] {
   background-color: rgba(0, 0, 0, 0.3) !important;
+  transition: opacity 0.2s ease;
 }
 
 [data-radix-dialog-content] {
-  background-color: #ffffff !important;
-  border: 3px solid #475569 !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
-}
-
-input, select, textarea {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #1e293b !important; /* Darker text color */
-  background-color: #ffffff !important;
-  cursor: text !important;
-  pointer-events: auto !important;
-  user-select: text !important;
-}
-
-input::placeholder, select::placeholder, textarea::placeholder {
-  color: #64748b !important; /* Darker placeholder */
-}
-
-input:not([disabled]):not([readonly]),
-textarea:not([disabled]):not([readonly]) {
-  cursor: text !important;
-  pointer-events: auto !important;
-}
-
-label {
-  font-size: 14px;
-  font-weight: 600; /* Bolder font */
-  color: #1e293b; /* Darker text */
-}
-
-[data-radix-dialog-content] {
-  background-color: #ffffff !important;
-  border: 2px solid #64748b !important; /* Dark border for visibility */
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.1) !important; /* Strong shadow + outline */
+  background-color: #FFFFFF !important;
+  border: 1px solid #E5E6EB !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.2s ease;
   max-height: 85vh;
   overflow-y: auto;
 }
 
+input, select, textarea {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1D2129 !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid #E5E6EB !important;
+  border-radius: 6px !important;
+  cursor: text !important;
+  pointer-events: auto !important;
+  user-select: text !important;
+  transition: all 0.2s ease;
+}
+
+input::placeholder, select::placeholder, textarea::placeholder {
+  color: #86909C !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #165DFF !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.2) !important;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1D2129;
+}
+
 [data-sonner-toast] {
   font-size: 14px;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
-}
-
-.skeleton {
-  background: linear-gradient(90deg, #f1f5f9 4px, #e2e8f0 36px, #f1f5f9 72px);
-  background-size: 200px 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #E5E6EB !important;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 4px;
+  background: #F2F5FA;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  background: #E5E6EB;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #86909C;
 }
 
 .badge {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 2px 8px;
-  border-radius: 9999px;
+  border-radius: 6px;
+  border: 1px solid transparent;
 }
 
 .progress {
-  height: 8px;
-  border-radius: 4px;
-  background-color: #e2e8f0;
+  height: 6px;
+  border-radius: 6px;
+  background-color: #E5E6EB;
 }
 
 .progress-bar {
   height: 100%;
-  border-radius: 4px;
-  background-color: #3b82f6;
-  transition: width 0.3s ease;
+  border-radius: 6px;
+  background-color: #0FC6C2;
+  transition: width 0.2s ease;
 }
 
 [data-radix-select-content] {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E6EB;
   border-radius: 6px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   z-index: 10000;
 }
 
 [data-radix-tabs-list] {
-  background-color: #f1f5f9;
+  background-color: #F2F5FA;
   border-radius: 6px;
   padding: 4px;
 }
 
 [data-radix-tabs-trigger] {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 6px 12px;
-  border-radius: 4px;
-  color: #64748b;
+  border-radius: 6px;
+  color: #4E5969;
+  transition: all 0.2s ease;
 }
 
 [data-radix-tabs-trigger][data-state="active"] {
-  background-color: #ffffff;
-  color: #1a1a1a;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #FFFFFF;
+  color: #165DFF;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+}
+
+.btn, button {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn:active, button:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: #165DFF !important;
+  color: #FFFFFF !important;
+}
+.btn-primary:hover {
+  background-color: #4080FF !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(22, 93, 255, 0.2);
+}
+
+.card {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #E5E6EB;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #F2F5FA;
+  color: #4E5969;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #E5E6EB;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #E5E6EB;
+  font-size: 14px;
+  color: #1D2129;
+}
+
+tbody tr:hover {
+  background-color: #F2F5FA;
 }

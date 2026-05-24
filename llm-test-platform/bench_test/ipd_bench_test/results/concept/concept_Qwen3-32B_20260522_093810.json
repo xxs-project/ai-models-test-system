@@ -1,0 +1,347 @@
+[
+  {
+    "id": "COMPANY_IPD_S1_01",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005677700042724609,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_02",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 19.75193190574646,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户关于企业ERP系统是否继续推进基于分布式强一致性事务的秒级账务对账的概念评估。首先，用户给了几个关键点：组件耦合可能升高、跨地域资源调度复杂、额外能耗上升、高峰期稳定性存在抖动风险。我需要把这些整理成JSON格式，包含concept_name、go_or_hold、top_risks和next_gate_recommendation。\n\n首先，concept_name应该明确，用户提到的是“基于分布式强一致性事务的秒级账务对账”，所以直接用这个名称。接下来是go_or_hold，用户没有明确说是否继续，但需要根据风险来判断。这里四个风险点，但top_risks需要三个，所以得选最严重的三个。组件耦合升高、跨地域调度复杂、高峰期稳定性风险这三个可能更关键，而能耗上升可能排第四。所以go_or_hold可能建议hold，因为风险较高。\n\n然后每个风险要命名，impact和trigger。组件耦合升高会导致系统维护困难，触发点可能是模块间依赖增加。跨地域资源调度复杂会影响部署和延迟，触发点可能是多地域扩展需求。高峰期稳定性风险会导致服务中断，触发点是高并发场景。接下来是next_gate_recommendation，应该建议进一步评估和优化，比如解耦设计、资源调度策略、稳定性测试。\n\n需要确保JSON结构正确，没有markdown，没有额外解释。检查每个字段是否符合要求，特别是top_risks数组长度为3，每个对象包含三个必要字段。最后确认输出是否符合用户的约束条件。\n</think>\n\n{\n  \"concept_name\": \"基于分布式强一致性事务的秒级账务对账\",\n  \"go_or_hold\": \"hold\",\n  \"top_risks\": [\n    {\n      \"risk_name\": \"组件耦合度升高\",\n      \"impact\": \"系统维护成本增加且扩展性受限\",\n      \"trigger\": \"强一致性事务需跨模块数据同步\"\n    },\n    {\n      \"risk_name\": \"跨地域资源调度复杂\",\n      \"impact\": \"部署延迟与网络开销显著增加\",\n      \"trigger\": \"多地域节点间事务协调需求\"\n    },\n    {\n      \"risk_name\": \"高峰期稳定性抖动\",\n      \"impact\": \"核心账务服务可能出现中断\",\n      \"trigger\": \"强一致性锁机制与高并发冲突\"\n    }\n  ],\n  \"next_gate_recommendation\": \"需完成解耦架构设计验证、跨地域容灾方案评估及压力测试基准线建立\"\n}",
+    "gen_preview": "<think>\n好的，我现在需要处理用户关于企业ERP系统是否继续推进基于分布式强一致性事务的秒级账务对账的概念评估。首先，用户给了几个关键点：组件耦合可能升高、跨地域资源调度复杂、额外能耗上升、高峰期稳定性存在抖动风险。我需要把这些整理成JSON格式，包含concept_name、go_or_hold、top_risks和next_gate_recommendation。\n\n首先，concept..."
+  },
+  {
+    "id": "COMPANY_IPD_S1_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 23.252235651016235,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要帮用户整理一个关于智能液冷超充站的兆瓦级柔性充电功率调度与V2G车网互动的概念评审表格。用户要求表格包含四个维度：电网容量、调度复杂度、并网安全、维护窗口，每个维度要有支持信号、风险信号和建议结论。首先，我得先理解每个评审维度的具体内容和相关因素。\n\n首先，电网容量受限是已知前提。支持信号可能包括动态负载管理、分时调度等，这些技术可以优化电网使用。风险信号可能涉及电网过载风险，尤其是在高峰时段。建议结论可能需要引入储能系统或与电网公司合作。\n\n接下来是调度策略复杂。支持信号可能有AI算法优化和模块化设计，这些能提升调度效率。风险信号可能包括系统集成难度大，需要多部门协作。建议结论可能需要分阶段实施和仿真测试。\n\n并网安全方面，客户关注这一点。支持信号可能有V2G双向认证和实时监控，而风险信号可能涉及通信延迟或协议不兼容。建议结论可能需要冗余设计和定期安全审计。\n\n维护窗口短的问题，支持信号可能包括模块化维护和预测性维护技术，风险信号则是维护响应时间不足。建议结论可能需要自动化工具和备件库存优化。\n\n需要确保每个维度都覆盖到，并且建议结论具体可行。还要检查是否满足至少四行，覆盖所有指定的维度。最后，按照用户要求只输出Markdown表格，没有其他内容。\n</think>\n\n```markdown\n| 评审维度     | 支持信号                                                                 | 风险信号                                                                 | 建议结论                                                                 |\n|--------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------|\n| 电网容量     | 动态负载管理可提升电网利用率，分时调度策略降低峰值负荷                   | 电网过载风险高，需依赖外部扩容或储能系统                                 | 引入储能系统平抑波动，与电网公司协商弹性负荷协议                         |\n| 调度复杂度   | AI算法优化调度效率，模块化设计支持灵活扩展                               | 多目标优化冲突（充电速度/电网稳定/设备寿命），跨系统集成难度大           | 分阶段实施调度策略，优先开发核心场景仿真验证                             |\n| 并网安全     | V2G双向认证机制保障交互安全，实时监控系统可预警异常                      | 通信延迟导致调度失效风险，非标设备协议兼容性问题                         | 采用冗余通信链路，建立电网-设备双向安全认证标准                          |\n| 维护窗口     | 模块化设计缩短单次维护时间，预测性维护降低突发故障率                     | 高功率设备维护响应窗口不足，系统冗余配置增加运维复杂度                   | 优化备件库存策略，开发自动化诊断工具缩短故障定位时间                     |\n```",
+    "gen_preview": "<think>\n好的，我现在需要帮用户整理一个关于智能液冷超充站的兆瓦级柔性充电功率调度与V2G车网互动的概念评审表格。用户要求表格包含四个维度：电网容量、调度复杂度、并网安全、维护窗口，每个维度要有支持信号、风险信号和建议结论。首先，我得先理解每个评审维度的具体内容和相关因素。\n\n首先，电网容量受限是已知前提。支持信号可能包括动态负载管理、分时调度等，这些技术可以优化电网使用。风险信号可能涉及电..."
+  },
+  {
+    "id": "COMPANY_IPD_S1_04",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005637645721435547,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_05",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005549192428588867,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_06",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 27.798990726470947,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要帮用户生成一个关于“某智能数据AI平台”的“PB级多模态数据流式加载与预处理流水线”的概念评估摘要的JSON。首先，我得仔细理解用户的需求。用户要求顶层包含concept_name、go_or_hold、top_risks和open_questions。其中top_risks必须是三个对象，每个对象包含risk_name、impact和trigger。open_questions至少两个问题。而且输出必须是原始JSON，不能使用Markdown。\n\n首先，确定concept_name，用户已经给出，直接填进去就行。go_or_hold应该是一个决策建议，可能需要根据风险评估来决定是继续（Go）还是暂停（Hold）。这里可能需要判断风险是否可控，如果风险较高但可管理，可能还是Go，但需要标注主要风险。\n\n接下来是top_risks。需要三个风险点。考虑到PB级数据处理，可能的风险包括数据处理延迟、数据丢失或损坏、资源消耗过高等。每个风险需要名称、影响和触发条件。例如，数据延迟可能导致实时性下降，影响模型训练；数据丢失会影响数据完整性；资源消耗过高可能导致成本增加或系统不稳定。\n\n然后是open_questions，至少两个问题。可能需要考虑现有基础设施是否支持，或者数据格式多样性如何处理。例如，如何确保不同模态数据的兼容性，或者现有的存储和计算资源是否足够处理PB级数据流。\n\n现在需要检查是否符合格式要求。确保JSON结构正确，没有使用Markdown，键名正确，数组长度符合要求。例如，top_risks必须正好三个对象，每个对象包含三个字段。open_questions是字符串数组，至少两个问题。\n\n可能还需要考虑用户可能的深层需求。用户可能希望评估该流水线的可行性，识别关键风险点，并明确需要进一步澄清的问题。因此，在生成内容时，需要确保风险点具有实际意义，问题具有针对性，能够帮助决策者做出是否推进的决定。\n\n最后，验证JSON的语法是否正确，比如引号、逗号、括号是否匹配。确保没有遗漏任何必填字段，并且所有键都是小写，符合用户示例中的格式。\n</think>\n\n{\n  \"concept_name\": \"PB级多模态数据流式加载与预处理流水线\",\n  \"go_or_hold\": \"Go with mitigation\",\n  \"top_risks\": [\n    {\n      \"risk_name\": \"数据处理延迟超出实时性要求\",\n      \"impact\": \"影响下游AI模型训练时效性\",\n      \"trigger\": \"突发数据洪峰导致缓冲队列积压\"\n    },\n    {\n      \"risk_name\": \"多模态数据格式兼容性问题\",\n      \"impact\": \"导致30%以上数据解析失败\",\n      \"trigger\": \"未覆盖新型传感器数据编码标准\"\n    },\n    {\n      \"risk_name\": \"分布式节点资源争用死锁\",\n      \"impact\": \"全链路处理吞吐量下降40%\",\n      \"trigger\": \"内存密集型视频处理与CPU密集型NLP任务并发执行\"\n    }\n  ],\n  \"open_questions\": [\n    \"现有对象存储系统能否支撑每秒10万+多模态数据对象的写入吞吐？\",\n    \"如何设计动态schema演化机制应对医疗影像/工业时序等15种异构数据源的结构变化？\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要帮用户生成一个关于“某智能数据AI平台”的“PB级多模态数据流式加载与预处理流水线”的概念评估摘要的JSON。首先，我得仔细理解用户的需求。用户要求顶层包含concept_name、go_or_hold、top_risks和open_questions。其中top_risks必须是三个对象，每个对象包含risk_name、impact和trigger。open_qu..."
+  },
+  {
+    "id": "COMPANY_IPD_S1_07",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 31.989091396331787,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要帮用户生成一个关于“某边缘计算节点在断网容灾状态下的边缘本地推理与数据缓存”的原始JSON风险清单。首先，我得仔细理解用户的需求。用户要求顶层包含concept_name、go_or_hold、top_risks和open_questions，其中top_risks必须是三个风险项，每个包含risk_name、impact和trigger，open_questions至少两个问题。而且输出必须是纯JSON，不能使用Markdown。\n\n首先，确定concept_name是否正确，用户已经给出明确的名称，所以直接使用即可。接下来是go_or_hold，这里可能需要判断是否继续推进该项目或者需要暂停，根据风险情况决定。不过用户没有给出具体意见，可能需要根据风险的严重性来建议，比如如果有高风险可能建议hold，否则go。但用户可能希望这里由我来判断，或者保持中立。可能需要根据风险的影响程度来决定，比如如果有高影响的风险，可能建议hold，否则go。但用户可能希望这里由我来填写，所以需要根据风险的严重性来判断。\n\n接下来是top_risks部分，需要三个风险。我需要考虑边缘计算节点在断网情况下的主要风险点。可能的方面包括数据缓存能力不足、本地推理的准确性下降、数据同步延迟、安全风险等。每个风险需要名称、影响和触发条件。例如，数据缓存溢出可能导致数据丢失，触发条件是缓存容量不足或数据量过大。本地推理模型性能不足可能影响决策准确性，触发条件是模型复杂度高或资源不足。数据同步延迟可能在恢复连接后导致数据冲突，触发条件是缓存数据量大或网络恢复时同步策略不当。\n\n然后是open_questions，至少两个问题。可能需要考虑如何优化缓存策略，或者如何确保模型在断网时的可靠性。例如，如何动态调整缓存策略以适应不同负载？或者如何验证本地推理模型在断网期间的准确性？\n\n现在需要确保每个部分符合格式要求。检查JSON结构是否正确，键名是否正确，数组长度是否符合。例如，top_risks必须是三个元素，每个元素包含三个字段。open_questions是字符串数组，至少两个问题。\n\n可能的风险点需要具体且相关。例如，数据缓存溢出、模型推理延迟、数据一致性问题。触发条件要具体，比如缓存容量不足、高数据吞吐量、模型复杂度高导致资源不足等。影响方面，数据丢失、响应延迟、数据冲突等。\n\n最后，确保没有使用Markdown，输出纯JSON，并且键名正确，没有语法错误。可能需要多次检查JSON格式，比如逗号是否正确，引号是否闭合等。\n</think>\n\n{\n  \"concept_name\": \"某边缘计算节点的断网容灾状态下的边缘本地推理与数据缓存\",\n  \"go_or_hold\": \"go\",\n  \"top_risks\": [\n    {\n      \"risk_name\": \"本地推理模型性能不足导致决策延迟\",\n      \"impact\": \"高\",\n      \"trigger\": \"断网期间模型复杂度与硬件算力不匹配\"\n    },\n    {\n      \"risk_name\": \"数据缓存溢出引发关键数据丢失\",\n      \"impact\": \"中\",\n      \"trigger\": \"缓存容量规划未覆盖峰值数据吞吐场景\"\n    },\n    {\n      \"risk_name\": \"断网恢复后数据同步冲突\",\n      \"impact\": \"中\",\n      \"trigger\": \"缓存数据与云端状态不一致且无有效合并策略\"\n    }\n  ],\n  \"open_questions\": [\n    \"如何动态调整缓存策略以平衡实时性与存储成本？\",\n    \"断网期间模型推理结果的置信度阈值应如何动态校准？\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要帮用户生成一个关于“某边缘计算节点在断网容灾状态下的边缘本地推理与数据缓存”的原始JSON风险清单。首先，我得仔细理解用户的需求。用户要求顶层包含concept_name、go_or_hold、top_risks和open_questions，其中top_risks必须是三个风险项，每个包含risk_name、impact和trigger，open_question..."
+  },
+  {
+    "id": "COMPANY_IPD_S1_08",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 30.636053800582886,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要帮用户生成一个关于“支持十万级节点的BMC Redfish并发纳管引擎”的立项摘要的JSON。首先，我得仔细理解用户的需求。用户要求顶层包含四个部分：concept_name、go_or_hold、top_risks和open_questions。其中top_risks需要三个风险项，每个风险项必须有risk_name、impact和trigger。open_questions至少两个问题。\n\n首先，concept_name应该直接使用用户提供的名称，所以这部分应该没问题。go_or_hold这里用户可能希望是一个建议，比如“Go”或者“Hold”，但用户没有给出具体信息，可能需要假设为“Go”或者留空，但根据示例可能需要填写“Go”。\n\n接下来是top_risks。我需要考虑在开发这样一个高并发的纳管引擎时可能遇到的主要风险。十万级节点意味着需要处理大量的并发连接和请求，所以性能瓶颈是一个风险。比如，Redfish API的并发处理能力可能不足，导致延迟或超时。第二个风险可能是资源竞争，比如在共享资源管理上出现死锁或资源争用，影响稳定性。第三个风险可能是兼容性问题，不同厂商的BMC实现可能有差异，导致纳管失败。每个风险需要描述影响和触发条件，比如性能瓶颈的影响是系统延迟增加，触发条件是节点数超过5万时。\n\n然后是open_questions。用户需要至少两个问题。可能的问题包括：如何优化Redfish协议的并发处理以达到十万级节点的性能要求？以及如何确保在不同厂商BMC上的兼容性测试覆盖？另外可能还有关于现有基础设施是否需要升级的问题，但用户只要求两个，所以选最关键的两个。\n\n现在需要确保JSON结构正确，没有使用Markdown，并且符合用户提供的schema。检查每个字段是否存在，数组长度是否符合要求。比如top_risks必须三个对象，每个包含三个字段，open_questions至少两个问题。同时，所有键名是否正确，比如risk_name而不是riskName，使用下划线。\n\n最后，验证JSON的语法是否正确，比如引号、逗号和括号是否正确闭合。确保没有遗漏任何必填字段，并且内容符合用户的需求。可能还需要考虑用户的实际应用场景，比如这个引擎可能用于大规模数据中心或云计算环境，因此风险需要针对这些场景来考虑。总之，确保输出的JSON准确、完整，并且符合用户的所有要求。\n</think>\n\n{\n  \"concept_name\": \"支持十万级节点的BMC Redfish并发纳管引擎\",\n  \"go_or_hold\": \"Go\",\n  \"top_risks\": [\n    {\n      \"risk_name\": \"Redfish协议并发性能瓶颈\",\n      \"impact\": \"节点规模扩大时可能出现API响应延迟或超时\",\n      \"trigger\": \"单节点Redfish请求处理耗时超过50ms且未实现连接复用\"\n    },\n    {\n      \"risk_name\": \"BMC固件兼容性碎片化\",\n      \"impact\": \"部分厂商/版本BMC可能出现纳管失败或功能异常\",\n      \"trigger\": \"未建立覆盖主流厂商的兼容性测试矩阵\"\n    },\n    {\n      \"risk_name\": \"大规模并发下的资源竞争死锁\",\n      \"impact\": \"线程池/连接池资源争用导致系统吞吐量下降30%+\",\n      \"trigger\": \"未实现分级优先级调度机制且内存占用超10GB\"\n    }\n  ],\n  \"open_questions\": [\n    \"如何设计分级缓存策略平衡实时性与性能开销？\",\n    \"是否需要预研基于eBPF的内核级连接追踪优化方案？\"\n  ]\n}",
+    "gen_preview": "<think>\n好的，我现在需要帮用户生成一个关于“支持十万级节点的BMC Redfish并发纳管引擎”的立项摘要的JSON。首先，我得仔细理解用户的需求。用户要求顶层包含四个部分：concept_name、go_or_hold、top_risks和open_questions。其中top_risks需要三个风险项，每个风险项必须有risk_name、impact和trigger。open_que..."
+  },
+  {
+    "id": "COMPANY_IPD_S1_09",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.004614830017089844,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 18.857879161834717,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，用户让我为某AI算力集群的超大规模集群智能故障自愈概念输出一份Markdown格式的评审纪要。首先，我需要明确用户的需求。他们需要三个一级标题：结论、支撑依据、风险与前提，每个标题下至少两条无序列表。结论部分必须明确给出GO、HOLD或NO_GO中的一个。\n\n首先，结论部分应该明确给出GO，因为用户可能希望推进这个项目，但需要确保支撑依据充分，风险可控。接下来是支撑依据，需要列出支持该概念实施的理由。比如现有的AI监控系统和自动化修复工具可能已经存在，可以整合。另外，超大规模集群的故障频率高，自愈能力能显著提升稳定性，这也是一个关键点。\n\n然后是风险与前提部分。这里需要考虑技术风险，比如算法误判导致故障扩大，以及实施前提如需要完善的故障模拟测试环境。另外，依赖外部系统如供应链的稳定性可能也是一个风险，需要提前确保合作方的可靠性。\n\n需要检查格式是否符合要求，每个部分是否有至少两个条目，是否使用无序列表。还要确保只输出Markdown，没有其他内容。可能用户是技术团队或项目管理者，需要这份纪要来评估项目可行性，所以内容需要专业且简洁。要确保用词准确，比如“多层冗余设计”这样的术语是否正确。最后，确认结论部分明确给出GO，支撑依据和风险部分合理，没有遗漏关键点。\n</think>\n\n# 结论  \n- **GO**：概念具备技术可行性和业务价值，建议进入原型验证阶段。  \n- **核心价值**：超大规模集群的智能故障自愈能力可显著提升算力可用性与运维效率。  \n\n# 支撑依据  \n- **技术成熟度**：现有AI驱动的异常检测算法（如时序预测、图神经网络）已能实现95%+的故障识别准确率。  \n- **业务需求**：AI算力集群规模扩大后，人工运维响应速度无法满足毫秒级故障恢复要求。  \n\n# 风险与前提  \n- **技术风险**：自愈策略的误判可能引发级联故障，需依赖多层冗余设计与回滚机制。  \n- **实施前提**：需预先构建覆盖硬件、网络、软件的全栈故障模拟测试环境，验证方案鲁棒性。",
+    "gen_preview": "<think>\n好的，用户让我为某AI算力集群的超大规模集群智能故障自愈概念输出一份Markdown格式的评审纪要。首先，我需要明确用户的需求。他们需要三个一级标题：结论、支撑依据、风险与前提，每个标题下至少两条无序列表。结论部分必须明确给出GO、HOLD或NO_GO中的一个。\n\n首先，结论部分应该明确给出GO，因为用户可能希望推进这个项目，但需要确保支撑依据充分，风险可控。接下来是支撑依据，需要..."
+  },
+  {
+    "id": "COMPANY_IPD_S1_11",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0020432472229003906,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_12",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002086162567138672,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_13",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0024385452270507812,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_14",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002508878707885742,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_15",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0025899410247802734,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_16",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002453327178955078,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_17",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002048969268798828,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_18",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002407073974609375,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_19",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0026068687438964844,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_20",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002980947494506836,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_21",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0028772354125976562,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_22",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002396821975708008,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S1_23",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0013151168823242188,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  }
+]

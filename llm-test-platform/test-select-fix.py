@@ -8,7 +8,7 @@ import requests
 import json
 import sys
 
-BASE_URL = "http://localhost:8000/api"
+BASE_URL = "http://localhost:8001/api"
 
 def test_api_endpoints():
     """测试所有API端点是否正常"""
@@ -217,7 +217,7 @@ def test_frontend_loading():
     for path, name in pages:
         print(f"\n[TC-FRONT] 测试页面: {name} ({path})")
         try:
-            response = requests.get(f"http://localhost:5173{path}", timeout=5)
+            response = requests.get(f"http://localhost:5175{path}", timeout=5)
             if response.status_code == 200:
                 content = response.text
 

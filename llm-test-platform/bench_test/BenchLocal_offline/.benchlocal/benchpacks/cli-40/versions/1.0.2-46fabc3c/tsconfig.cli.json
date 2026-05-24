@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": ".",
+    "outDir": "dist",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "ignoreDeprecations": "6.0",
+    "incremental": false,
+    "tsBuildInfoFile": "./tsconfig.cli.tsbuildinfo"
+  },
+  "include": ["lib/**/*.ts", "cli/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,945 @@
+{
+  "runId": "bugfind-15-2026-05-22T11-43-45.258Z-ec3b7097",
+  "runDir": "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results/bugfind-15/bugfind-15-2026-05-22T11-43-45.258Z-ec3b7097",
+  "benchPackId": "bugfind-15",
+  "benchPackName": "BugFind-15",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T11:43:45.293Z",
+  "completedAt": "2026-05-22T11:46:40.204Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "bugfind-15",
+      "benchPackName": "BugFind-15",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "bugfind-15",
+      "benchPackName": "BugFind-15",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "bugfind-15-2026-05-22T11-43-45.258Z-ec3b7097",
+      "models": [
+        {
+          "id": "local_model:Qwen3-32B",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-01",
+      "title": "Off-by-One in Python Loop",
+      "index": 1,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-02",
+      "title": "JavaScript Equality Trap",
+      "index": 2,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-03",
+      "title": "Rust Trap Scenario",
+      "index": 3,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-04",
+      "title": "Python Dictionary Mutation During Iteration",
+      "index": 4,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-05",
+      "title": "Go Goroutine Loop Variable Capture",
+      "index": 5,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-06",
+      "title": "JavaScript Async/Await Missing Await",
+      "index": 6,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-07",
+      "title": "Python Mutable Default Argument",
+      "index": 7,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-08",
+      "title": "Rust Integer Overflow in Release",
+      "index": 8,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-09",
+      "title": "Go Slice Aliasing",
+      "index": 9,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-10",
+      "title": "Python Red-Herring Trap",
+      "index": 10,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-11",
+      "title": "JavaScript Silent Failure on Invalid Discount",
+      "index": 11,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-12",
+      "title": "Rust Longest-Streak Double Bug",
+      "index": 12,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-13",
+      "title": "Python Ambiguous Behavior Report",
+      "index": 13,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-14",
+      "title": "JavaScript Environment-Dependent Bug",
+      "index": 14,
+      "total": 15
+    },
+    {
+      "type": "scenario_started",
+      "scenarioId": "BF-15",
+      "title": "Go Race Condition Under Load",
+      "index": 15,
+      "total": 15
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-01",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-02",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-03",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-04",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-05",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-06",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-07",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-08",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-09",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-10",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-11",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-12",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-13",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-14",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-15",
+      "message": "Calling model"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-13",
+      "message": "Requested clarification, continuing scripted follow-up"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-14",
+      "message": "Requested clarification, continuing scripted follow-up"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-07",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-07",
+      "result": {
+        "scenarioId": "BF-07",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose and fix the mutable default argument bug.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-07 Python Mutable Default Argument\nlanguage=Python\ndifficulty=Hard\nuser_turn_1=Every time I call `add_item`, items from previous calls show up in the list. The first call works fine but subsequent calls are broken. What's happening?\n\n```python\ndef add_item(item, item_list=[]):\n    item_list.append(item)\n    return item_list\n\nprint(add_item(\"apple\"))\nprint(add_item(\"banana\"))\nprint(add_item(\"cherry\"))\n```\nassistant_turn_1=The bug is in the default parameter `item_list=[]` of the `add_item` function. In Python, default arguments are evaluated once at function definition time, not at each call. This means the same list is reused across all calls, leading to unexpected accumulation of items.\n\n<solution language=\"python\" verdict=\"fix\">\ndef add_item(item, item_list=None):\n    if item_list is None:\n        item_list = []\n    item_list.append(item)\n    return item_list\n</solution>\nfinal_answer=The bug is in the default parameter `item_list=[]` of the `add_item` function. In Python, default arguments are evaluated once at function definition time, not at each call. This means the same list is reused across all calls, leading to unexpected accumulation of items.\n\n<solution language=\"python\" verdict=\"fix\">\ndef add_item(item, item_list=None):\n    if item_list is None:\n        item_list = []\n    item_list.append(item)\n    return item_list\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose and fix the mutable default argument bug.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:02.787Z",
+          "durationMs": 17492
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-07"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-11",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-11",
+      "result": {
+        "scenarioId": "BF-11",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to address the silent invalid-input path, not the rounding math.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-11 JavaScript Silent Failure on Invalid Discount\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=My discount calculator seems unreliable. For valid discounts like 15% off $100, it works fine. But I just realized that `applyDiscount(50, 110)` returns `50` instead of throwing an error. Same with `applyDiscount(50, -5)`. Is there a better way to handle this?\n\n```javascript\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        return price;\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n```\nassistant_turn_1=The current code returns the original price when the discount is invalid (e.g., 110% or -5%). Instead, it should throw an error to signal invalid input.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        throw new Error('Discount percentage must be between 0 and 100');\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n</solution>\nfinal_answer=The current code returns the original price when the discount is invalid (e.g., 110% or -5%). Instead, it should throw an error to signal invalid input.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        throw new Error('Discount percentage must be between 0 and 100');\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to address the silent invalid-input path, not the rounding math.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:05.465Z",
+          "durationMs": 20170
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-11"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-05",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-05",
+      "result": {
+        "scenarioId": "BF-05",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose loop-variable capture in Go 1.21.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-05 Go Goroutine Loop Variable Capture\nlanguage=Go\ndifficulty=Medium\nuser_turn_1=I'm running Go 1.21. I'm trying to print numbers 0-4 using goroutines, but the output is always `5 5 5 5 5` instead. What's going on?\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            fmt.Println(i)\n        }()\n    }\n    wg.Wait()\n}\n```\nassistant_turn_1=The issue arises because all goroutines share the same loop variable `i`. By the time the goroutines execute, the loop has already completed, leaving `i` with the value `5`. Each goroutine captures and prints this final value.\n\nTo fix this, pass the current value of `i` as a parameter to the goroutine, ensuring each closure captures its own copy of the value.\n\n<solution language=\"go\" verdict=\"fix\">\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func(j int) {\n            defer wg.Done()\n            fmt.Println(j)\n        }(i)\n    }\n    wg.Wait()\n}\n</solution>\nfinal_answer=The issue arises because all goroutines share the same loop variable `i`. By the time the goroutines execute, the loop has already completed, leaving `i` with the value `5`. Each goroutine captures and prints this final value.\n\nTo fix this, pass the current value of `i` as a parameter to the goroutine, ensuring each closure captures its own copy of the value.\n\n<solution language=\"go\" verdict=\"fix\">\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func(j int) {\n            defer wg.Done()\n            fmt.Println(j)\n        }(i)\n    }\n    wg.Wait()\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn go ENOENT\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose loop-variable capture in Go 1.21.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:07.183Z",
+          "durationMs": 21888
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-05"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-08",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-08",
+      "result": {
+        "scenarioId": "BF-08",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose overflow handling and provide a safe factorial fix.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-08 Rust Integer Overflow in Release\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=This function calculates factorial. It works perfectly in debug mode, but in release mode `factorial(25)` returns a clearly wrong number instead of the correct astronomical value. No error, no crash — just a silently wrong answer. What's going on?\n\n```rust\nfn factorial(n: u64) -> u64 {\n    let mut result: u64 = 1;\n    for i in 1..=n {\n        result *= i;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n```\nassistant_turn_1=The issue arises from integer overflow in release mode. The `u64` type cannot hold the value of 25! (which is ~1.55×10²⁵), exceeding `u64::MAX` (~1.84×10¹⁹). In debug mode, Rust panics on overflow, but in release mode, it wraps around silently. Using `u128` prevents overflow for 25!.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn factorial(n: u64) -> u128 {\n    let mut result: u128 = 1;\n    for i in 1..=n {\n        result *= i as u128;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n</solution>\nfinal_answer=The issue arises from integer overflow in release mode. The `u64` type cannot hold the value of 25! (which is ~1.55×10²⁵), exceeding `u64::MAX` (~1.84×10¹⁹). In debug mode, Rust panics on overflow, but in release mode, it wraps around silently. Using `u128` prevents overflow for 25!.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn factorial(n: u64) -> u128 {\n    let mut result: u128 = 1;\n    for i in 1..=n {\n        result *= i as u128;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn rustc ENOENT\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose overflow handling and provide a safe factorial fix.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:11.288Z",
+          "durationMs": 25993
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-08"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-01",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-01",
+      "result": {
+        "scenarioId": "BF-01",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to isolate the off-by-one loop bounds bug.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-01 Off-by-One in Python Loop\nlanguage=Python\ndifficulty=Easy\nuser_turn_1=This function should return the sum of all elements in a list, but it's throwing an IndexError. Can you find the bug?\n\n```python\ndef sum_list(numbers):\n    total = 0\n    for i in range(1, len(numbers) + 1):\n        total += numbers[i]\n    return total\n\n# sum_list([1, 2, 3])  -> IndexError: list index out of range\n# sum_list([10])       -> IndexError: list index out of range\n```\nassistant_turn_1=The bug is in the loop's range. The `range(1, len(numbers) + 1)` starts at index 1 and includes an index equal to the list's length, which is out of bounds. List indices are 0-based, so valid indices range from 0 to `len(numbers) - 1`.\n\n<solution language=\"python\" verdict=\"fix\">\ndef sum_list(numbers):\n    total = 0\n    for i in range(len(numbers)):\n        total += numbers[i]\n    return total\n</solution>\nfinal_answer=The bug is in the loop's range. The `range(1, len(numbers) + 1)` starts at index 1 and includes an index equal to the list's length, which is out of bounds. List indices are 0-based, so valid indices range from 0 to `len(numbers) - 1`.\n\n<solution language=\"python\" verdict=\"fix\">\ndef sum_list(numbers):\n    total = 0\n    for i in range(len(numbers)):\n        total += numbers[i]\n    return total\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to isolate the off-by-one loop bounds bug.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.294Z",
+          "completedAt": "2026-05-22T11:44:12.876Z",
+          "durationMs": 27582
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-01"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-06",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-06",
+      "result": {
+        "scenarioId": "BF-06",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to add both missing awaits and fix the Promise mismatch.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-06 JavaScript Async/Await Missing Await\nlanguage=JavaScript\ndifficulty=Medium\nuser_turn_1=This function should fetch a user and return their name, but it throws `TypeError: response.json is not a function`. The API is definitely working — I checked in the browser.\n\n```javascript\nasync function getUserName(userId) {\n    const response = fetch(`/api/users/${userId}`);\n    const data = response.json();\n    return data.name;\n}\n```\nassistant_turn_1=The error occurs because `fetch` returns a Promise, and the code does not `await` it. The `response` variable is a Promise object, not the HTTP response, so `response.json()` fails since Promises don't have a `json()` method.\n\nTo fix this, `await` the `fetch` call to get the actual `Response` object. Additionally, `response.json()` itself returns a Promise, which must also be `await`ed to extract the parsed JSON data.\n\n<solution language=\"javascript\" verdict=\"fix\">\nasync function getUserName(userId) {\n    const response = await fetch(`/api/users/${userId}`);\n    const data = await response.json();\n    return data.name;\n}\n</solution>\nfinal_answer=The error occurs because `fetch` returns a Promise, and the code does not `await` it. The `response` variable is a Promise object, not the HTTP response, so `response.json()` fails since Promises don't have a `json()` method.\n\nTo fix this, `await` the `fetch` call to get the actual `Response` object. Additionally, `response.json()` itself returns a Promise, which must also be `await`ed to extract the parsed JSON data.\n\n<solution language=\"javascript\" verdict=\"fix\">\nasync function getUserName(userId) {\n    const response = await fetch(`/api/users/${userId}`);\n    const data = await response.json();\n    return data.name;\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to add both missing awaits and fix the Promise mismatch.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:13.669Z",
+          "durationMs": 28374
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-06"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-15",
+      "message": "Requested clarification, continuing scripted follow-up"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-03",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-03",
+      "result": {
+        "scenarioId": "BF-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "Expected the model to recognize that the code is already correct.",
+        "note": "Trap scenarios must use verdict=\"no_bug\" with an empty solution block.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-03 Rust Trap Scenario\nlanguage=Rust\ndifficulty=Easy\nuser_turn_1=This Rust code won't compile. The compiler says \"value used here after move\" but I don't understand why. Can you help?\n\n```rust\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n```\nassistant_turn_1=The bug occurs because the `name` variable is moved into the `format!` macro, leaving it invalid for the subsequent `println!`. In Rust, when a value is moved, it can no longer be used unless explicitly cloned or referenced.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", &name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n</solution>\nfinal_answer=The bug occurs because the `name` variable is moved into the `format!` macro, leaving it invalid for the subsequent `println!`. In Rust, when a value is moved, it can no longer be used unless explicitly cloned or referenced.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", &name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n</solution>\nsandbox_status=fail\nsandbox_summary=Trap scenarios must use verdict=\"no_bug\" with an empty solution block.\nsandbox_candidates_tried=0\naxes.identification=0\naxes.fixQuality=0\naxes.discipline=0\nverdict=fail\nscore=0\nsummary=Expected the model to recognize that the code is already correct.\nnote=Trap scenarios must use verdict=\"no_bug\" with an empty solution block.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:23.055Z",
+          "durationMs": 37760
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-03"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-04",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-04",
+      "result": {
+        "scenarioId": "BF-04",
+        "status": "fail",
+        "score": 40,
+        "summary": "Expected the model to diagnose and fix dictionary mutation during iteration.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-04 Python Dictionary Mutation During Iteration\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=This function should remove all users with \"inactive\" status, but it crashes with `RuntimeError: dictionary changed size during iteration`. What am I doing wrong?\n\n```python\ndef remove_inactive_users(users):\n    for user_id, status in users.items():\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n\nusers = {\"u1\": \"active\", \"u2\": \"inactive\", \"u3\": \"active\", \"u4\": \"inactive\"}\nprint(remove_inactive_users(users))\n```\nassistant_turn_1=The bug occurs because the code modifies the `users` dictionary while iterating over it, which raises a `RuntimeError` in Python. The fix is to iterate over a static copy of the dictionary's items instead of the live view.\n\n<solution language=\"python\" verdict=\"fix\">\ndef remove_inactive_users(users):\n    for user_id, status in list(users.items()):\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n</solution>\nfinal_answer=The bug occurs because the code modifies the `users` dictionary while iterating over it, which raises a `RuntimeError` in Python. The fix is to iterate over a static copy of the dictionary's items instead of the live view.\n\n<solution language=\"python\" verdict=\"fix\">\ndef remove_inactive_users(users):\n    for user_id, status in list(users.items()):\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=0\naxes.fixQuality=2\naxes.discipline=0\nverdict=fail\nscore=40\nsummary=Expected the model to diagnose and fix dictionary mutation during iteration.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:27.514Z",
+          "durationMs": 42219
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-04"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-10",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-10",
+      "result": {
+        "scenarioId": "BF-10",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to resist the red herring and confirm the code is correct.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-no-bug\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-10 Python Red-Herring Trap\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My coworker wrote this and I'm pretty sure there's a bug. The naming is weird and the logic looks off. Can you find the issue?\n\n```python\ndef process(data):\n    result = []\n    seen = set()\n    for item in data:\n        key = item.lower().strip()\n        if key not in seen:\n            seen.add(key)\n            result.append(item)\n    return result\n```\nassistant_turn_1=The code is correct for its intended purpose of deduplicating items based on their lowercase, stripped versions while preserving the original formatting of the first occurrence. The logic ensures that only the first occurrence of each unique key (case-insensitive and whitespace-insensitive) is added to the result list. There is no bug in the provided code.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nfinal_answer=The code is correct for its intended purpose of deduplicating items based on their lowercase, stripped versions while preserving the original formatting of the first occurrence. The logic ensures that only the first occurrence of each unique key (case-insensitive and whitespace-insensitive) is added to the result list. There is no bug in the provided code.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-no-bug\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-no-bug (solution_tag_no_bug)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to resist the red herring and confirm the code is correct.\nnote=Sandbox verified a runnable fix via candidate \"tagged-no-bug\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:38.336Z",
+          "durationMs": 53041
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-10"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-02",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-02",
+      "result": {
+        "scenarioId": "BF-02",
+        "status": "pass",
+        "score": 88,
+        "summary": "Expected the model to identify the missing empty-string case.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-02 JavaScript Equality Trap\nlanguage=JavaScript\ndifficulty=Easy\nuser_turn_1=This validation function should reject empty strings, but `validateInput(\"\")` returns `true`. What's wrong?\n\n```javascript\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false) {\n        return true;\n    }\n    return false;\n}\n\n// validateInput(\"\")         -> true\n// validateInput(null)       -> false\n// validateInput(undefined)  -> false\n// validateInput(\"hello\")    -> true\n```\nassistant_turn_1=The current code allows empty strings because it only checks for `null`, `undefined`, and `false`, but not for empty strings (`\"\"`). An empty string is a valid JavaScript value that passes the existing condition.\n\nTo fix this, we need to explicitly check that the input is a string and has a length greater than zero.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false && typeof input === 'string' && input.length > 0) {\n        return true;\n    }\n    return false;\n}\n</solution>\nfinal_answer=The current code allows empty strings because it only checks for `null`, `undefined`, and `false`, but not for empty strings (`\"\"`). An empty string is a valid JavaScript value that passes the existing condition.\n\nTo fix this, we need to explicitly check that the input is a string and has a length greater than zero.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false && typeof input === 'string' && input.length > 0) {\n        return true;\n    }\n    return false;\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=1\nverdict=pass\nscore=88\nsummary=Expected the model to identify the missing empty-string case.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.294Z",
+          "completedAt": "2026-05-22T11:44:45.867Z",
+          "durationMs": 60573
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-02"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-15",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-15",
+      "result": {
+        "scenarioId": "BF-15",
+        "status": "partial",
+        "score": 70,
+        "summary": "Expected the model to isolate the `count++` data race under concurrent load.",
+        "note": "verdict=\"no_bug\" is only valid for trap scenarios. Targeted clarification question earned the multi-turn bonus.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-15 Go Race Condition Under Load\nlanguage=Go\ndifficulty=Expert\nuser_turn_1=My counter service works fine in testing but gives wrong totals under heavy load. Sometimes the count is lower than expected. I'm using goroutines. Here's the code:\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\ntype Counter struct {\n    count int\n}\n\nfunc (c *Counter) Increment() {\n    c.count++\n}\n\nfunc (c *Counter) GetCount() int {\n    return c.count\n}\n\nfunc main() {\n    counter := &Counter{}\n    var wg sync.WaitGroup\n\n    for i := 0; i < 1000; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            counter.Increment()\n        }()\n    }\n\n    wg.Wait()\n    fmt.Println(\"Final count:\", counter.GetCount())\n}\n```\nassistant_turn_1=The issue is a race condition in the `Increment` method. The `count++` operation is not atomic, leading to lost updates when multiple goroutines modify `count` concurrently. Even though the `WaitGroup` ensures all goroutines complete, the data race causes inconsistent results.\n\nTo fix this, we need to add a `sync.Mutex` to the `Counter` struct and use it to synchronize access to `count`.\n\n<solution language=\"go\" verdict=\"fix\">\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\ntype Counter struct {\n    mu    sync.Mutex\n    count int\n}\n\nfunc (c *Counter) Increment() {\n    c.mu.Lock()\n    defer c.mu.Unlock()\n    c.count++\n}\n\nfunc (c *Counter) GetCount() int {\n    c.mu.Lock()\n    defer c.mu.Unlock()\n    return c.count\n}\n\nfunc main() {\n    counter := &Counter{}\n    var wg sync.WaitGroup\n\n    for i := 0; i < 1000; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            counter.Increment()\n        }()\n    }\n\n    wg.Wait()\n    fmt.Println(\"Final count:\", counter.GetCount())\n}\n</solution>\nuser_turn_2=Yes, it's a 16-core production server. Locally on my laptop it sometimes gives 1000 correctly.\nassistant_turn_2=The fix with mutexes properly resolves the race condition. Under heavy load on a 16-core server, the original code would experience lost updates due to concurrent `count++` operations. The mutex ensures atomic access to the counter, guaranteeing correct behavior in production.\n\n<solution language=\"go\" verdict=\"no_bug\"></solution>\nfinal_answer=The fix with mutexes properly resolves the race condition. Under heavy load on a 16-core server, the original code would experience lost updates due to concurrent `count++` operations. The mutex ensures atomic access to the counter, guaranteeing correct behavior in production.\n\n<solution language=\"go\" verdict=\"no_bug\"></solution>\nsandbox_status=fail\nsandbox_summary=verdict=\"no_bug\" is only valid for trap scenarios.\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=0\naxes.discipline=2\nverdict=partial\nscore=70\nsummary=Expected the model to isolate the `count++` data race under concurrent load.\nnote=verdict=\"no_bug\" is only valid for trap scenarios. Targeted clarification question earned the multi-turn bonus.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:46.129Z",
+          "durationMs": 60834
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-15"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-14",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-14",
+      "result": {
+        "scenarioId": "BF-14",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose production-only missing `shipping_address` data.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\". Targeted clarification question earned the multi-turn bonus.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-14 JavaScript Environment-Dependent Bug\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=This code works on my machine but crashes in production with `Cannot read properties of undefined (reading 'city')`. I have no idea what's different.\n\n```javascript\nfunction getShippingZone(order) {\n    const city = order.shipping_address.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n```\nassistant_turn_1=The bug occurs when `order.shipping_address` is `undefined`, causing a runtime error when accessing `city`. The optional chaining operator (`?.`) prevents this by safely returning `undefined` instead of throwing an error.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction getShippingZone(order) {\n    const city = order.shipping_address?.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n</solution>\nuser_turn_2=Hmm, I just checked the production logs. Some orders from our mobile app don't have a shipping_address field at all — they're pickup orders.\nassistant_turn_2=The error occurs when `order.shipping_address` is missing (e.g., for pickup orders). The optional chaining (`?.`) safely handles this by returning `undefined`, which is then mapped to `\"standard\"`. The crash likely stems from **not deploying the fixed code** to production yet, or from a different part of the codebase still using the unpatched version.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction getShippingZone(order) {\n    const city = order.shipping_address?.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n</solution>\nfinal_answer=The error occurs when `order.shipping_address` is missing (e.g., for pickup orders). The optional chaining (`?.`) safely handles this by returning `undefined`, which is then mapped to `\"standard\"`. The crash likely stems from **not deploying the fixed code** to production yet, or from a different part of the codebase still using the unpatched version.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction getShippingZone(order) {\n    const city = order.shipping_address?.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose production-only missing `shipping_address` data.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\". Targeted clarification question earned the multi-turn bonus.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:45:29.759Z",
+          "durationMs": 104464
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-14"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-13",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-13",
+      "result": {
+        "scenarioId": "BF-13",
+        "status": "partial",
+        "score": 60,
+        "summary": "Expected the model to diagnose lexicographic string sorting in the age field.",
+        "note": "verdict=\"no_bug\" is only valid for trap scenarios.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-13 Python Ambiguous Behavior Report\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My sorting function doesn't work. It's supposed to sort users by age but the output is wrong.\n\n```python\ndef sort_users(users):\n    return sorted(users, key=lambda u: u[\"age\"])\n\nusers = [\n    {\"name\": \"Alice\", \"age\": \"30\"},\n    {\"name\": \"Bob\", \"age\": \"5\"},\n    {\"name\": \"Charlie\", \"age\": \"25\"},\n]\nprint(sort_users(users))\n```\nassistant_turn_1=The issue is that the `\"age\"` values are strings, leading to lexicographical sorting instead of numerical sorting. The lambda function in `sorted()` should convert `\"age\"` to an integer.\n\n<solution language=\"python\" verdict=\"fix\">\ndef sort_users(users):\n    return sorted(users, key=lambda u: int(u[\"age\"]))\n</solution>\nuser_turn_2=It outputs Bob last instead of first. Bob is 5, he should be youngest and sorted first.\nassistant_turn_2=The code is correct as written. The `sorted` function uses the integer value of `\"age\"` for sorting, which should place Bob (age 5) first. If Bob appears last, the issue likely stems from not applying the fix correctly or running outdated code. Ensure the `key` function is using `int(u[\"age\"])`.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nfinal_answer=The code is correct as written. The `sorted` function uses the integer value of `\"age\"` for sorting, which should place Bob (age 5) first. If Bob appears last, the issue likely stems from not applying the fix correctly or running outdated code. Ensure the `key` function is using `int(u[\"age\"])`.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nsandbox_status=fail\nsandbox_summary=verdict=\"no_bug\" is only valid for trap scenarios.\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=0\naxes.discipline=2\nverdict=partial\nscore=60\nsummary=Expected the model to diagnose lexicographic string sorting in the age field.\nnote=verdict=\"no_bug\" is only valid for trap scenarios.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:45:51.191Z",
+          "durationMs": 125896
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-13"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-09",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-09",
+      "result": {
+        "scenarioId": "BF-09",
+        "status": "partial",
+        "score": 80,
+        "summary": "Expected the model to diagnose slice aliasing and allocate independent slices.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-09 Go Slice Aliasing\nlanguage=Go\ndifficulty=Hard\nuser_turn_1=I have a function that should return two separate filtered slices from the same input. But the results are wrong — the positive slice seems to get corrupted. What's going on?\n\n```go\npackage main\n\nimport \"fmt\"\n\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := nums[:0]\n    negative := nums[:0]\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n```\nassistant_turn_1=The bug arises because both `positive` and `negative` slices are initialized as `nums[:0]`, which shares the same underlying array as `nums`. When elements are appended to these slices, they overwrite each other's data in the shared array, corrupting the results. The fix is to create independent slices using `make` to avoid sharing the same backing array.\n\n<solution language=\"go\" verdict=\"fix\">\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := make([]int, 0, len(nums))\n    negative := make([]int, 0, len(nums))\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n</solution>\nfinal_answer=The bug arises because both `positive` and `negative` slices are initialized as `nums[:0]`, which shares the same underlying array as `nums`. When elements are appended to these slices, they overwrite each other's data in the shared array, corrupting the results. The fix is to create independent slices using `make` to avoid sharing the same backing array.\n\n<solution language=\"go\" verdict=\"fix\">\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := make([]int, 0, len(nums))\n    negative := make([]int, 0, len(nums))\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn go ENOENT\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=1\naxes.discipline=2\nverdict=partial\nscore=80\nsummary=Expected the model to diagnose slice aliasing and allocate independent slices.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:46:00.367Z",
+          "durationMs": 135072
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-09"
+    },
+    {
+      "type": "model_progress",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-12",
+      "message": "Verifying candidate fix in sandbox"
+    },
+    {
+      "type": "scenario_result",
+      "modelId": "local_model:Qwen3-32B",
+      "scenarioId": "BF-12",
+      "result": {
+        "scenarioId": "BF-12",
+        "status": "fail",
+        "score": 50,
+        "summary": "Expected the model to diagnose both the missing current-value tracking and the missing final comparison.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-12 Rust Longest-Streak Double Bug\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=I'm getting wrong results from my longest-streak function. For the input `[2, 2, 1, 1, 1]`, it returns `(2, 2)` instead of `(1, 3)`. I think there might be more than one issue but I can't figure out what's wrong.\n\n```rust\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == max_val {\n            current_count += 1;\n        } else if current_count > max_count {\n            max_count = current_count;\n            max_val = data[i - 1];\n            current_count = 1;\n        } else {\n            current_count = 1;\n        }\n    }\n    (max_val, max_count)\n}\n```\nassistant_turn_1=The original code incorrectly uses `max_val` to determine whether to increment the current streak count. This leads to missed updates when a new streak starts. The correct approach is to track the current streak's value separately and update the maximum streak only when the current streak ends or during the streak itself.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_val = data[0];\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == current_val {\n            current_count += 1;\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n        } else {\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n            current_val = data[i];\n            current_count = 1;\n        }\n    }\n    if current_count > max_count {\n        max_count = current_count;\n        max_val = current_val;\n    }\n    (max_val, max_count)\n}\n</solution>\nfinal_answer=The original code incorrectly uses `max_val` to determine whether to increment the current streak count. This leads to missed updates when a new streak starts. The correct approach is to track the current streak's value separately and update the maximum streak only when the current streak ends or during the streak itself.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_val = data[0];\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == current_val {\n            current_count += 1;\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n        } else {\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n            current_val = data[i];\n            current_count = 1;\n        }\n    }\n    if current_count > max_count {\n        max_count = current_count;\n        max_val = current_val;\n    }\n    (max_val, max_count)\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn rustc ENOENT\nsandbox_candidates_tried=0\naxes.identification=1\naxes.fixQuality=1\naxes.discipline=1\nverdict=fail\nscore=50\nsummary=Expected the model to diagnose both the missing current-value tracking and the missing final comparison.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:46:40.203Z",
+          "durationMs": 174908
+        }
+      }
+    },
+    {
+      "type": "scenario_finished",
+      "scenarioId": "BF-12"
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:Qwen3-32B": {
+          "totalScore": 81,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Syntax & Surface",
+              "score": 63,
+              "weight": 15
+            },
+            {
+              "id": "B",
+              "label": "Logic & Algorithmic",
+              "score": 80,
+              "weight": 25
+            },
+            {
+              "id": "C",
+              "label": "Subtle & Tricky",
+              "score": 93,
+              "weight": 25
+            },
+            {
+              "id": "D",
+              "label": "Red Herring Resistance",
+              "score": 83,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Multi-Turn Debugging",
+              "score": 77,
+              "weight": 15
+            }
+          ],
+          "summary": "★★★★ Good"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:Qwen3-32B": [
+      {
+        "scenarioId": "BF-07",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose and fix the mutable default argument bug.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-07 Python Mutable Default Argument\nlanguage=Python\ndifficulty=Hard\nuser_turn_1=Every time I call `add_item`, items from previous calls show up in the list. The first call works fine but subsequent calls are broken. What's happening?\n\n```python\ndef add_item(item, item_list=[]):\n    item_list.append(item)\n    return item_list\n\nprint(add_item(\"apple\"))\nprint(add_item(\"banana\"))\nprint(add_item(\"cherry\"))\n```\nassistant_turn_1=The bug is in the default parameter `item_list=[]` of the `add_item` function. In Python, default arguments are evaluated once at function definition time, not at each call. This means the same list is reused across all calls, leading to unexpected accumulation of items.\n\n<solution language=\"python\" verdict=\"fix\">\ndef add_item(item, item_list=None):\n    if item_list is None:\n        item_list = []\n    item_list.append(item)\n    return item_list\n</solution>\nfinal_answer=The bug is in the default parameter `item_list=[]` of the `add_item` function. In Python, default arguments are evaluated once at function definition time, not at each call. This means the same list is reused across all calls, leading to unexpected accumulation of items.\n\n<solution language=\"python\" verdict=\"fix\">\ndef add_item(item, item_list=None):\n    if item_list is None:\n        item_list = []\n    item_list.append(item)\n    return item_list\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose and fix the mutable default argument bug.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:02.787Z",
+          "durationMs": 17492
+        }
+      },
+      {
+        "scenarioId": "BF-11",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to address the silent invalid-input path, not the rounding math.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-11 JavaScript Silent Failure on Invalid Discount\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=My discount calculator seems unreliable. For valid discounts like 15% off $100, it works fine. But I just realized that `applyDiscount(50, 110)` returns `50` instead of throwing an error. Same with `applyDiscount(50, -5)`. Is there a better way to handle this?\n\n```javascript\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        return price;\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n```\nassistant_turn_1=The current code returns the original price when the discount is invalid (e.g., 110% or -5%). Instead, it should throw an error to signal invalid input.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        throw new Error('Discount percentage must be between 0 and 100');\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n</solution>\nfinal_answer=The current code returns the original price when the discount is invalid (e.g., 110% or -5%). Instead, it should throw an error to signal invalid input.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction applyDiscount(price, discountPercent) {\n    if (discountPercent < 0 || discountPercent > 100) {\n        throw new Error('Discount percentage must be between 0 and 100');\n    }\n    const discounted = price * (1 - discountPercent / 100);\n    return Math.round(discounted * 100) / 100;\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to address the silent invalid-input path, not the rounding math.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:05.465Z",
+          "durationMs": 20170
+        }
+      },
+      {
+        "scenarioId": "BF-05",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose loop-variable capture in Go 1.21.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-05 Go Goroutine Loop Variable Capture\nlanguage=Go\ndifficulty=Medium\nuser_turn_1=I'm running Go 1.21. I'm trying to print numbers 0-4 using goroutines, but the output is always `5 5 5 5 5` instead. What's going on?\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            fmt.Println(i)\n        }()\n    }\n    wg.Wait()\n}\n```\nassistant_turn_1=The issue arises because all goroutines share the same loop variable `i`. By the time the goroutines execute, the loop has already completed, leaving `i` with the value `5`. Each goroutine captures and prints this final value.\n\nTo fix this, pass the current value of `i` as a parameter to the goroutine, ensuring each closure captures its own copy of the value.\n\n<solution language=\"go\" verdict=\"fix\">\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func(j int) {\n            defer wg.Done()\n            fmt.Println(j)\n        }(i)\n    }\n    wg.Wait()\n}\n</solution>\nfinal_answer=The issue arises because all goroutines share the same loop variable `i`. By the time the goroutines execute, the loop has already completed, leaving `i` with the value `5`. Each goroutine captures and prints this final value.\n\nTo fix this, pass the current value of `i` as a parameter to the goroutine, ensuring each closure captures its own copy of the value.\n\n<solution language=\"go\" verdict=\"fix\">\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\nfunc main() {\n    var wg sync.WaitGroup\n    for i := 0; i < 5; i++ {\n        wg.Add(1)\n        go func(j int) {\n            defer wg.Done()\n            fmt.Println(j)\n        }(i)\n    }\n    wg.Wait()\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn go ENOENT\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose loop-variable capture in Go 1.21.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:07.183Z",
+          "durationMs": 21888
+        }
+      },
+      {
+        "scenarioId": "BF-08",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose overflow handling and provide a safe factorial fix.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-08 Rust Integer Overflow in Release\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=This function calculates factorial. It works perfectly in debug mode, but in release mode `factorial(25)` returns a clearly wrong number instead of the correct astronomical value. No error, no crash — just a silently wrong answer. What's going on?\n\n```rust\nfn factorial(n: u64) -> u64 {\n    let mut result: u64 = 1;\n    for i in 1..=n {\n        result *= i;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n```\nassistant_turn_1=The issue arises from integer overflow in release mode. The `u64` type cannot hold the value of 25! (which is ~1.55×10²⁵), exceeding `u64::MAX` (~1.84×10¹⁹). In debug mode, Rust panics on overflow, but in release mode, it wraps around silently. Using `u128` prevents overflow for 25!.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn factorial(n: u64) -> u128 {\n    let mut result: u128 = 1;\n    for i in 1..=n {\n        result *= i as u128;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n</solution>\nfinal_answer=The issue arises from integer overflow in release mode. The `u64` type cannot hold the value of 25! (which is ~1.55×10²⁵), exceeding `u64::MAX` (~1.84×10¹⁹). In debug mode, Rust panics on overflow, but in release mode, it wraps around silently. Using `u128` prevents overflow for 25!.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn factorial(n: u64) -> u128 {\n    let mut result: u128 = 1;\n    for i in 1..=n {\n        result *= i as u128;\n    }\n    result\n}\n\nfn main() {\n    println!(\"{}\", factorial(20));\n    println!(\"{}\", factorial(25));\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn rustc ENOENT\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose overflow handling and provide a safe factorial fix.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:11.288Z",
+          "durationMs": 25993
+        }
+      },
+      {
+        "scenarioId": "BF-01",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to isolate the off-by-one loop bounds bug.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-01 Off-by-One in Python Loop\nlanguage=Python\ndifficulty=Easy\nuser_turn_1=This function should return the sum of all elements in a list, but it's throwing an IndexError. Can you find the bug?\n\n```python\ndef sum_list(numbers):\n    total = 0\n    for i in range(1, len(numbers) + 1):\n        total += numbers[i]\n    return total\n\n# sum_list([1, 2, 3])  -> IndexError: list index out of range\n# sum_list([10])       -> IndexError: list index out of range\n```\nassistant_turn_1=The bug is in the loop's range. The `range(1, len(numbers) + 1)` starts at index 1 and includes an index equal to the list's length, which is out of bounds. List indices are 0-based, so valid indices range from 0 to `len(numbers) - 1`.\n\n<solution language=\"python\" verdict=\"fix\">\ndef sum_list(numbers):\n    total = 0\n    for i in range(len(numbers)):\n        total += numbers[i]\n    return total\n</solution>\nfinal_answer=The bug is in the loop's range. The `range(1, len(numbers) + 1)` starts at index 1 and includes an index equal to the list's length, which is out of bounds. List indices are 0-based, so valid indices range from 0 to `len(numbers) - 1`.\n\n<solution language=\"python\" verdict=\"fix\">\ndef sum_list(numbers):\n    total = 0\n    for i in range(len(numbers)):\n        total += numbers[i]\n    return total\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to isolate the off-by-one loop bounds bug.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.294Z",
+          "completedAt": "2026-05-22T11:44:12.876Z",
+          "durationMs": 27582
+        }
+      },
+      {
+        "scenarioId": "BF-06",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to add both missing awaits and fix the Promise mismatch.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-06 JavaScript Async/Await Missing Await\nlanguage=JavaScript\ndifficulty=Medium\nuser_turn_1=This function should fetch a user and return their name, but it throws `TypeError: response.json is not a function`. The API is definitely working — I checked in the browser.\n\n```javascript\nasync function getUserName(userId) {\n    const response = fetch(`/api/users/${userId}`);\n    const data = response.json();\n    return data.name;\n}\n```\nassistant_turn_1=The error occurs because `fetch` returns a Promise, and the code does not `await` it. The `response` variable is a Promise object, not the HTTP response, so `response.json()` fails since Promises don't have a `json()` method.\n\nTo fix this, `await` the `fetch` call to get the actual `Response` object. Additionally, `response.json()` itself returns a Promise, which must also be `await`ed to extract the parsed JSON data.\n\n<solution language=\"javascript\" verdict=\"fix\">\nasync function getUserName(userId) {\n    const response = await fetch(`/api/users/${userId}`);\n    const data = await response.json();\n    return data.name;\n}\n</solution>\nfinal_answer=The error occurs because `fetch` returns a Promise, and the code does not `await` it. The `response` variable is a Promise object, not the HTTP response, so `response.json()` fails since Promises don't have a `json()` method.\n\nTo fix this, `await` the `fetch` call to get the actual `Response` object. Additionally, `response.json()` itself returns a Promise, which must also be `await`ed to extract the parsed JSON data.\n\n<solution language=\"javascript\" verdict=\"fix\">\nasync function getUserName(userId) {\n    const response = await fetch(`/api/users/${userId}`);\n    const data = await response.json();\n    return data.name;\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to add both missing awaits and fix the Promise mismatch.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:13.669Z",
+          "durationMs": 28374
+        }
+      },
+      {
+        "scenarioId": "BF-03",
+        "status": "fail",
+        "score": 0,
+        "summary": "Expected the model to recognize that the code is already correct.",
+        "note": "Trap scenarios must use verdict=\"no_bug\" with an empty solution block.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-03 Rust Trap Scenario\nlanguage=Rust\ndifficulty=Easy\nuser_turn_1=This Rust code won't compile. The compiler says \"value used here after move\" but I don't understand why. Can you help?\n\n```rust\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n```\nassistant_turn_1=The bug occurs because the `name` variable is moved into the `format!` macro, leaving it invalid for the subsequent `println!`. In Rust, when a value is moved, it can no longer be used unless explicitly cloned or referenced.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", &name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n</solution>\nfinal_answer=The bug occurs because the `name` variable is moved into the `format!` macro, leaving it invalid for the subsequent `println!`. In Rust, when a value is moved, it can no longer be used unless explicitly cloned or referenced.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn main() {\n    let name = String::from(\"Alice\");\n    let greeting = format!(\"Hello, {}\", &name);\n    println!(\"{}\", greeting);\n    println!(\"Name was: {}\", name);\n}\n</solution>\nsandbox_status=fail\nsandbox_summary=Trap scenarios must use verdict=\"no_bug\" with an empty solution block.\nsandbox_candidates_tried=0\naxes.identification=0\naxes.fixQuality=0\naxes.discipline=0\nverdict=fail\nscore=0\nsummary=Expected the model to recognize that the code is already correct.\nnote=Trap scenarios must use verdict=\"no_bug\" with an empty solution block.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:23.055Z",
+          "durationMs": 37760
+        }
+      },
+      {
+        "scenarioId": "BF-04",
+        "status": "fail",
+        "score": 40,
+        "summary": "Expected the model to diagnose and fix dictionary mutation during iteration.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-04 Python Dictionary Mutation During Iteration\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=This function should remove all users with \"inactive\" status, but it crashes with `RuntimeError: dictionary changed size during iteration`. What am I doing wrong?\n\n```python\ndef remove_inactive_users(users):\n    for user_id, status in users.items():\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n\nusers = {\"u1\": \"active\", \"u2\": \"inactive\", \"u3\": \"active\", \"u4\": \"inactive\"}\nprint(remove_inactive_users(users))\n```\nassistant_turn_1=The bug occurs because the code modifies the `users` dictionary while iterating over it, which raises a `RuntimeError` in Python. The fix is to iterate over a static copy of the dictionary's items instead of the live view.\n\n<solution language=\"python\" verdict=\"fix\">\ndef remove_inactive_users(users):\n    for user_id, status in list(users.items()):\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n</solution>\nfinal_answer=The bug occurs because the code modifies the `users` dictionary while iterating over it, which raises a `RuntimeError` in Python. The fix is to iterate over a static copy of the dictionary's items instead of the live view.\n\n<solution language=\"python\" verdict=\"fix\">\ndef remove_inactive_users(users):\n    for user_id, status in list(users.items()):\n        if status == \"inactive\":\n            del users[user_id]\n    return users\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=0\naxes.fixQuality=2\naxes.discipline=0\nverdict=fail\nscore=40\nsummary=Expected the model to diagnose and fix dictionary mutation during iteration.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:27.514Z",
+          "durationMs": 42219
+        }
+      },
+      {
+        "scenarioId": "BF-10",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to resist the red herring and confirm the code is correct.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-no-bug\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-10 Python Red-Herring Trap\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My coworker wrote this and I'm pretty sure there's a bug. The naming is weird and the logic looks off. Can you find the issue?\n\n```python\ndef process(data):\n    result = []\n    seen = set()\n    for item in data:\n        key = item.lower().strip()\n        if key not in seen:\n            seen.add(key)\n            result.append(item)\n    return result\n```\nassistant_turn_1=The code is correct for its intended purpose of deduplicating items based on their lowercase, stripped versions while preserving the original formatting of the first occurrence. The logic ensures that only the first occurrence of each unique key (case-insensitive and whitespace-insensitive) is added to the result list. There is no bug in the provided code.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nfinal_answer=The code is correct for its intended purpose of deduplicating items based on their lowercase, stripped versions while preserving the original formatting of the first occurrence. The logic ensures that only the first occurrence of each unique key (case-insensitive and whitespace-insensitive) is added to the result list. There is no bug in the provided code.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-no-bug\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-no-bug (solution_tag_no_bug)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to resist the red herring and confirm the code is correct.\nnote=Sandbox verified a runnable fix via candidate \"tagged-no-bug\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:38.336Z",
+          "durationMs": 53041
+        }
+      },
+      {
+        "scenarioId": "BF-02",
+        "status": "pass",
+        "score": 88,
+        "summary": "Expected the model to identify the missing empty-string case.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-02 JavaScript Equality Trap\nlanguage=JavaScript\ndifficulty=Easy\nuser_turn_1=This validation function should reject empty strings, but `validateInput(\"\")` returns `true`. What's wrong?\n\n```javascript\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false) {\n        return true;\n    }\n    return false;\n}\n\n// validateInput(\"\")         -> true\n// validateInput(null)       -> false\n// validateInput(undefined)  -> false\n// validateInput(\"hello\")    -> true\n```\nassistant_turn_1=The current code allows empty strings because it only checks for `null`, `undefined`, and `false`, but not for empty strings (`\"\"`). An empty string is a valid JavaScript value that passes the existing condition.\n\nTo fix this, we need to explicitly check that the input is a string and has a length greater than zero.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false && typeof input === 'string' && input.length > 0) {\n        return true;\n    }\n    return false;\n}\n</solution>\nfinal_answer=The current code allows empty strings because it only checks for `null`, `undefined`, and `false`, but not for empty strings (`\"\"`). An empty string is a valid JavaScript value that passes the existing condition.\n\nTo fix this, we need to explicitly check that the input is a string and has a length greater than zero.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction validateInput(input) {\n    if (input !== null && input !== undefined && input !== false && typeof input === 'string' && input.length > 0) {\n        return true;\n    }\n    return false;\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=1\nverdict=pass\nscore=88\nsummary=Expected the model to identify the missing empty-string case.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\".",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.294Z",
+          "completedAt": "2026-05-22T11:44:45.867Z",
+          "durationMs": 60573
+        }
+      },
+      {
+        "scenarioId": "BF-15",
+        "status": "partial",
+        "score": 70,
+        "summary": "Expected the model to isolate the `count++` data race under concurrent load.",
+        "note": "verdict=\"no_bug\" is only valid for trap scenarios. Targeted clarification question earned the multi-turn bonus.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-15 Go Race Condition Under Load\nlanguage=Go\ndifficulty=Expert\nuser_turn_1=My counter service works fine in testing but gives wrong totals under heavy load. Sometimes the count is lower than expected. I'm using goroutines. Here's the code:\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\ntype Counter struct {\n    count int\n}\n\nfunc (c *Counter) Increment() {\n    c.count++\n}\n\nfunc (c *Counter) GetCount() int {\n    return c.count\n}\n\nfunc main() {\n    counter := &Counter{}\n    var wg sync.WaitGroup\n\n    for i := 0; i < 1000; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            counter.Increment()\n        }()\n    }\n\n    wg.Wait()\n    fmt.Println(\"Final count:\", counter.GetCount())\n}\n```\nassistant_turn_1=The issue is a race condition in the `Increment` method. The `count++` operation is not atomic, leading to lost updates when multiple goroutines modify `count` concurrently. Even though the `WaitGroup` ensures all goroutines complete, the data race causes inconsistent results.\n\nTo fix this, we need to add a `sync.Mutex` to the `Counter` struct and use it to synchronize access to `count`.\n\n<solution language=\"go\" verdict=\"fix\">\npackage main\n\nimport (\n    \"fmt\"\n    \"sync\"\n)\n\ntype Counter struct {\n    mu    sync.Mutex\n    count int\n}\n\nfunc (c *Counter) Increment() {\n    c.mu.Lock()\n    defer c.mu.Unlock()\n    c.count++\n}\n\nfunc (c *Counter) GetCount() int {\n    c.mu.Lock()\n    defer c.mu.Unlock()\n    return c.count\n}\n\nfunc main() {\n    counter := &Counter{}\n    var wg sync.WaitGroup\n\n    for i := 0; i < 1000; i++ {\n        wg.Add(1)\n        go func() {\n            defer wg.Done()\n            counter.Increment()\n        }()\n    }\n\n    wg.Wait()\n    fmt.Println(\"Final count:\", counter.GetCount())\n}\n</solution>\nuser_turn_2=Yes, it's a 16-core production server. Locally on my laptop it sometimes gives 1000 correctly.\nassistant_turn_2=The fix with mutexes properly resolves the race condition. Under heavy load on a 16-core server, the original code would experience lost updates due to concurrent `count++` operations. The mutex ensures atomic access to the counter, guaranteeing correct behavior in production.\n\n<solution language=\"go\" verdict=\"no_bug\"></solution>\nfinal_answer=The fix with mutexes properly resolves the race condition. Under heavy load on a 16-core server, the original code would experience lost updates due to concurrent `count++` operations. The mutex ensures atomic access to the counter, guaranteeing correct behavior in production.\n\n<solution language=\"go\" verdict=\"no_bug\"></solution>\nsandbox_status=fail\nsandbox_summary=verdict=\"no_bug\" is only valid for trap scenarios.\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=0\naxes.discipline=2\nverdict=partial\nscore=70\nsummary=Expected the model to isolate the `count++` data race under concurrent load.\nnote=verdict=\"no_bug\" is only valid for trap scenarios. Targeted clarification question earned the multi-turn bonus.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:44:46.129Z",
+          "durationMs": 60834
+        }
+      },
+      {
+        "scenarioId": "BF-14",
+        "status": "pass",
+        "score": 100,
+        "summary": "Expected the model to diagnose production-only missing `shipping_address` data.",
+        "note": "Sandbox verified a runnable fix via candidate \"tagged-solution\". Targeted clarification question earned the multi-turn bonus.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-14 JavaScript Environment-Dependent Bug\nlanguage=JavaScript\ndifficulty=Hard\nuser_turn_1=This code works on my machine but crashes in production with `Cannot read properties of undefined (reading 'city')`. I have no idea what's different.\n\n```javascript\nfunction getShippingZone(order) {\n    const city = order.shipping_address.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n```\nassistant_turn_1=The bug occurs when `order.shipping_address` is `undefined`, causing a runtime error when accessing `city`. The optional chaining operator (`?.`) prevents this by safely returning `undefined` instead of throwing an error.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction getShippingZone(order) {\n    const city = order.shipping_address?.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n</solution>\nuser_turn_2=Hmm, I just checked the production logs. Some orders from our mobile app don't have a shipping_address field at all — they're pickup orders.\nassistant_turn_2=The error occurs when `order.shipping_address` is missing (e.g., for pickup orders). The optional chaining (`?.`) safely handles this by returning `undefined`, which is then mapped to `\"standard\"`. The crash likely stems from **not deploying the fixed code** to production yet, or from a different part of the codebase still using the unpatched version.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction getShippingZone(order) {\n    const city = order.shipping_address?.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n</solution>\nfinal_answer=The error occurs when `order.shipping_address` is missing (e.g., for pickup orders). The optional chaining (`?.`) safely handles this by returning `undefined`, which is then mapped to `\"standard\"`. The crash likely stems from **not deploying the fixed code** to production yet, or from a different part of the codebase still using the unpatched version.\n\n<solution language=\"javascript\" verdict=\"fix\">\nfunction getShippingZone(order) {\n    const city = order.shipping_address?.city;\n    const zones = {\n        \"New York\": \"east\",\n        \"Los Angeles\": \"west\",\n        \"Chicago\": \"central\",\n    };\n    return zones[city] || \"standard\";\n}\n</solution>\nsandbox_status=pass\nsandbox_summary=Sandbox verified a runnable fix via candidate \"tagged-solution\".\nsandbox_candidates_tried=1\nsandbox_candidate=tagged-solution (solution_tag)\naxes.identification=2\naxes.fixQuality=2\naxes.discipline=2\nverdict=pass\nscore=100\nsummary=Expected the model to diagnose production-only missing `shipping_address` data.\nnote=Sandbox verified a runnable fix via candidate \"tagged-solution\". Targeted clarification question earned the multi-turn bonus.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:45:29.759Z",
+          "durationMs": 104464
+        }
+      },
+      {
+        "scenarioId": "BF-13",
+        "status": "partial",
+        "score": 60,
+        "summary": "Expected the model to diagnose lexicographic string sorting in the age field.",
+        "note": "verdict=\"no_bug\" is only valid for trap scenarios.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-13 Python Ambiguous Behavior Report\nlanguage=Python\ndifficulty=Medium\nuser_turn_1=My sorting function doesn't work. It's supposed to sort users by age but the output is wrong.\n\n```python\ndef sort_users(users):\n    return sorted(users, key=lambda u: u[\"age\"])\n\nusers = [\n    {\"name\": \"Alice\", \"age\": \"30\"},\n    {\"name\": \"Bob\", \"age\": \"5\"},\n    {\"name\": \"Charlie\", \"age\": \"25\"},\n]\nprint(sort_users(users))\n```\nassistant_turn_1=The issue is that the `\"age\"` values are strings, leading to lexicographical sorting instead of numerical sorting. The lambda function in `sorted()` should convert `\"age\"` to an integer.\n\n<solution language=\"python\" verdict=\"fix\">\ndef sort_users(users):\n    return sorted(users, key=lambda u: int(u[\"age\"]))\n</solution>\nuser_turn_2=It outputs Bob last instead of first. Bob is 5, he should be youngest and sorted first.\nassistant_turn_2=The code is correct as written. The `sorted` function uses the integer value of `\"age\"` for sorting, which should place Bob (age 5) first. If Bob appears last, the issue likely stems from not applying the fix correctly or running outdated code. Ensure the `key` function is using `int(u[\"age\"])`.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nfinal_answer=The code is correct as written. The `sorted` function uses the integer value of `\"age\"` for sorting, which should place Bob (age 5) first. If Bob appears last, the issue likely stems from not applying the fix correctly or running outdated code. Ensure the `key` function is using `int(u[\"age\"])`.\n\n<solution language=\"python\" verdict=\"no_bug\"></solution>\nsandbox_status=fail\nsandbox_summary=verdict=\"no_bug\" is only valid for trap scenarios.\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=0\naxes.discipline=2\nverdict=partial\nscore=60\nsummary=Expected the model to diagnose lexicographic string sorting in the age field.\nnote=verdict=\"no_bug\" is only valid for trap scenarios.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:45:51.191Z",
+          "durationMs": 125896
+        }
+      },
+      {
+        "scenarioId": "BF-09",
+        "status": "partial",
+        "score": 80,
+        "summary": "Expected the model to diagnose slice aliasing and allocate independent slices.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-09 Go Slice Aliasing\nlanguage=Go\ndifficulty=Hard\nuser_turn_1=I have a function that should return two separate filtered slices from the same input. But the results are wrong — the positive slice seems to get corrupted. What's going on?\n\n```go\npackage main\n\nimport \"fmt\"\n\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := nums[:0]\n    negative := nums[:0]\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n```\nassistant_turn_1=The bug arises because both `positive` and `negative` slices are initialized as `nums[:0]`, which shares the same underlying array as `nums`. When elements are appended to these slices, they overwrite each other's data in the shared array, corrupting the results. The fix is to create independent slices using `make` to avoid sharing the same backing array.\n\n<solution language=\"go\" verdict=\"fix\">\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := make([]int, 0, len(nums))\n    negative := make([]int, 0, len(nums))\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n</solution>\nfinal_answer=The bug arises because both `positive` and `negative` slices are initialized as `nums[:0]`, which shares the same underlying array as `nums`. When elements are appended to these slices, they overwrite each other's data in the shared array, corrupting the results. The fix is to create independent slices using `make` to avoid sharing the same backing array.\n\n<solution language=\"go\" verdict=\"fix\">\nfunc filterPositiveAndNegative(nums []int) ([]int, []int) {\n    positive := make([]int, 0, len(nums))\n    negative := make([]int, 0, len(nums))\n\n    for _, n := range nums {\n        if n > 0 {\n            positive = append(positive, n)\n        } else if n < 0 {\n            negative = append(negative, n)\n        }\n    }\n    return positive, negative\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn go ENOENT\nsandbox_candidates_tried=0\naxes.identification=2\naxes.fixQuality=1\naxes.discipline=2\nverdict=partial\nscore=80\nsummary=Expected the model to diagnose slice aliasing and allocate independent slices.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:46:00.367Z",
+          "durationMs": 135072
+        }
+      },
+      {
+        "scenarioId": "BF-12",
+        "status": "fail",
+        "score": 50,
+        "summary": "Expected the model to diagnose both the missing current-value tracking and the missing final comparison.",
+        "rawLog": "model=Qwen3-32B\nscenario=BF-12 Rust Longest-Streak Double Bug\nlanguage=Rust\ndifficulty=Hard\nuser_turn_1=I'm getting wrong results from my longest-streak function. For the input `[2, 2, 1, 1, 1]`, it returns `(2, 2)` instead of `(1, 3)`. I think there might be more than one issue but I can't figure out what's wrong.\n\n```rust\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == max_val {\n            current_count += 1;\n        } else if current_count > max_count {\n            max_count = current_count;\n            max_val = data[i - 1];\n            current_count = 1;\n        } else {\n            current_count = 1;\n        }\n    }\n    (max_val, max_count)\n}\n```\nassistant_turn_1=The original code incorrectly uses `max_val` to determine whether to increment the current streak count. This leads to missed updates when a new streak starts. The correct approach is to track the current streak's value separately and update the maximum streak only when the current streak ends or during the streak itself.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_val = data[0];\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == current_val {\n            current_count += 1;\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n        } else {\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n            current_val = data[i];\n            current_count = 1;\n        }\n    }\n    if current_count > max_count {\n        max_count = current_count;\n        max_val = current_val;\n    }\n    (max_val, max_count)\n}\n</solution>\nfinal_answer=The original code incorrectly uses `max_val` to determine whether to increment the current streak count. This leads to missed updates when a new streak starts. The correct approach is to track the current streak's value separately and update the maximum streak only when the current streak ends or during the streak itself.\n\n<solution language=\"rust\" verdict=\"fix\">\nfn longest_streak(data: &Vec<i32>) -> (i32, usize) {\n    let mut max_val = data[0];\n    let mut max_count: usize = 1;\n    let mut current_val = data[0];\n    let mut current_count: usize = 1;\n\n    for i in 1..data.len() {\n        if data[i] == current_val {\n            current_count += 1;\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n        } else {\n            if current_count > max_count {\n                max_count = current_count;\n                max_val = current_val;\n            }\n            current_val = data[i];\n            current_count = 1;\n        }\n    }\n    if current_count > max_count {\n        max_count = current_count;\n        max_val = current_val;\n    }\n    (max_val, max_count)\n}\n</solution>\nsandbox_status=skip\nsandbox_summary=Sandbox error: spawn rustc ENOENT\nsandbox_candidates_tried=0\naxes.identification=1\naxes.fixQuality=1\naxes.discipline=1\nverdict=fail\nscore=50\nsummary=Expected the model to diagnose both the missing current-value tracking and the missing final comparison.",
+        "timings": {
+          "startedAt": "2026-05-22T11:43:45.295Z",
+          "completedAt": "2026-05-22T11:46:40.203Z",
+          "durationMs": 174908
+        }
+      }
+    ]
+  },
+  "scores": {
+    "local_model:Qwen3-32B": {
+      "totalScore": 81,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Syntax & Surface",
+          "score": 63,
+          "weight": 15
+        },
+        {
+          "id": "B",
+          "label": "Logic & Algorithmic",
+          "score": 80,
+          "weight": 25
+        },
+        {
+          "id": "C",
+          "label": "Subtle & Tricky",
+          "score": 93,
+          "weight": 25
+        },
+        {
+          "id": "D",
+          "label": "Red Herring Resistance",
+          "score": 83,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Multi-Turn Debugging",
+          "score": 77,
+          "weight": 15
+        }
+      ],
+      "summary": "★★★★ Good"
+    }
+  }
+}

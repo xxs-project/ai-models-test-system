@@ -1,0 +1,124 @@
+{
+  "runId": "bugfind-15-2026-05-22T11-24-37.070Z-59ed8b6e",
+  "runDir": "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results/bugfind-15/bugfind-15-2026-05-22T11-24-37.070Z-59ed8b6e",
+  "benchPackId": "bugfind-15",
+  "benchPackName": "BugFind-15",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T11:24:37.107Z",
+  "completedAt": "2026-05-22T11:24:37.108Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "bugfind-15",
+      "benchPackName": "BugFind-15",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "bugfind-15",
+      "benchPackName": "BugFind-15",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "bugfind-15-2026-05-22T11-24-37.070Z-59ed8b6e",
+      "models": [
+        {
+          "id": "local_model:Qwen3-32B",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:Qwen3-32B": {
+          "totalScore": 0,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Syntax & Surface",
+              "score": 0,
+              "weight": 15
+            },
+            {
+              "id": "B",
+              "label": "Logic & Algorithmic",
+              "score": 0,
+              "weight": 25
+            },
+            {
+              "id": "C",
+              "label": "Subtle & Tricky",
+              "score": 0,
+              "weight": 25
+            },
+            {
+              "id": "D",
+              "label": "Red Herring Resistance",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Multi-Turn Debugging",
+              "score": 0,
+              "weight": 15
+            }
+          ],
+          "summary": "★ Poor"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:Qwen3-32B": []
+  },
+  "scores": {
+    "local_model:Qwen3-32B": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Syntax & Surface",
+          "score": 0,
+          "weight": 15
+        },
+        {
+          "id": "B",
+          "label": "Logic & Algorithmic",
+          "score": 0,
+          "weight": 25
+        },
+        {
+          "id": "C",
+          "label": "Subtle & Tricky",
+          "score": 0,
+          "weight": 25
+        },
+        {
+          "id": "D",
+          "label": "Red Herring Resistance",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Multi-Turn Debugging",
+          "score": 0,
+          "weight": 15
+        }
+      ],
+      "summary": "★ Poor"
+    }
+  }
+}

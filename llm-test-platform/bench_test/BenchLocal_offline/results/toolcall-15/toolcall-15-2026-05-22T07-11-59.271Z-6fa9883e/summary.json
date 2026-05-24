@@ -1,0 +1,67 @@
+{
+  "runId": "toolcall-15-2026-05-22T07-11-59.271Z-6fa9883e",
+  "runDir": "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results/toolcall-15/toolcall-15-2026-05-22T07-11-59.271Z-6fa9883e",
+  "benchPackId": "toolcall-15",
+  "benchPackName": "ToolCall-15",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T07:11:59.306Z",
+  "completedAt": "2026-05-22T07:11:59.306Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "run_started",
+      "runId": "toolcall-15-2026-05-22T07-11-59.271Z-6fa9883e",
+      "models": [
+        {
+          "id": "local_model:Meta-Llama-3-8B",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    }
+  ],
+  "resultsByModel": {
+    "local_model:Meta-Llama-3-8B": []
+  },
+  "scores": {
+    "local_model:Meta-Llama-3-8B": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Tool Selection",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "B",
+          "label": "Parameter Precision",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "C",
+          "label": "Multi-Step Chains",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "D",
+          "label": "Restraint & Refusal",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Error Recovery",
+          "score": 0,
+          "weight": 20
+        }
+      ],
+      "summary": "★ Poor"
+    }
+  }
+}

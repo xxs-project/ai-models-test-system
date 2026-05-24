@@ -1,0 +1,108 @@
+{
+  "runId": "instructfollow-15-2026-05-22T09-28-18.704Z-868f95b5",
+  "runDir": "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results/instructfollow-15/instructfollow-15-2026-05-22T09-28-18.704Z-868f95b5",
+  "benchPackId": "instructfollow-15",
+  "benchPackName": "InstructFollow-15",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T09:28:18.721Z",
+  "completedAt": "2026-05-22T09:28:18.722Z",
+  "modelCount": 1,
+  "scenarioCount": 15,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "run_started",
+      "runId": "instructfollow-15-2026-05-22T09-28-18.704Z-868f95b5",
+      "models": [
+        {
+          "id": "local_model:gemma-4-31B-it",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 15
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:gemma-4-31B-it": {
+          "totalScore": 0,
+          "categories": [
+            {
+              "id": "A",
+              "label": "Format Constraints",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "B",
+              "label": "Ordering and Sorting",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "C",
+              "label": "Multi-Domain",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "D",
+              "label": "Precision Under Pressure",
+              "score": 0,
+              "weight": 20
+            },
+            {
+              "id": "E",
+              "label": "Adversarial",
+              "score": 0,
+              "weight": 20
+            }
+          ],
+          "summary": "★ Poor"
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:gemma-4-31B-it": []
+  },
+  "scores": {
+    "local_model:gemma-4-31B-it": {
+      "totalScore": 0,
+      "categories": [
+        {
+          "id": "A",
+          "label": "Format Constraints",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "B",
+          "label": "Ordering and Sorting",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "C",
+          "label": "Multi-Domain",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "D",
+          "label": "Precision Under Pressure",
+          "score": 0,
+          "weight": 20
+        },
+        {
+          "id": "E",
+          "label": "Adversarial",
+          "score": 0,
+          "weight": 20
+        }
+      ],
+      "summary": "★ Poor"
+    }
+  }
+}

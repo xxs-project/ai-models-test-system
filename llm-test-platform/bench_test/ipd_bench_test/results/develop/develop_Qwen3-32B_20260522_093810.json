@@ -1,0 +1,407 @@
+[
+  {
+    "id": "COMPANY_IPD_S3_01",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 30.218903064727783,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户的问题，用户希望用MySQL 5.7的原生SQL编写一个监听8080端口、处理HTTP GET请求并返回JSON的微服务。首先，我得确认MySQL 5.7是否具备这样的能力。\n\n首先，MySQL的主要功能是作为关系型数据库，处理数据存储和查询。虽然MySQL有一些扩展功能，比如存储过程、触发器，但网络服务监听并不是它的设计初衷。我记得MySQL本身并不提供内置的HTTP服务器功能，所以直接监听端口处理HTTP请求应该是不可能的。\n\n接下来，用户提到使用纯净的MySQL 5.7原生SQL语法。这意味着不能使用外部工具或插件，比如某些支持HTTP的UDF或者代理。MySQL的SQL语法主要针对数据操作，没有处理网络请求的语句。比如，没有LISTEN或者HTTP相关的命令，所以无法通过SQL语句直接实现端口监听。\n\n然后，关于8080端口的问题。通常，8080是HTTP代理或服务器使用的端口，但MySQL服务默认监听的是3306端口。即使用户想通过某种方式让MySQL监听8080，操作系统的权限也可能不允许，因为通常需要管理员权限才能绑定到1024以下的端口，而8080虽然高于1024，但可能需要特定的配置。不过，这可能不是主要问题，因为MySQL本身不支持HTTP协议。\n\n另外，处理HTTP请求需要解析请求行、头信息、参数等，这涉及到字符串处理和协议解析。虽然可以用存储过程处理一些字符串操作，但复杂的HTTP解析在SQL中实现会非常困难，且效率低下。返回JSON虽然MySQL 5.7有JSON类型，但生成动态JSON响应需要复杂的拼接，无法灵活应对不同的请求。\n\n用户可能的需求是希望用数据库直接处理HTTP请求，可能出于简化架构的考虑。但实际中，正确的做法是使用专门的Web服务器（如Nginx、Apache）或应用服务器（如Node.js、Python Flask）来处理HTTP请求，然后通过数据库连接访问MySQL。这样分层架构更合理，也更容易维护和扩展。\n\n总结下来，用户的要求在MySQL 5.7的原生SQL中是不可实现的，因为缺乏必要的网络监听和HTTP处理能力。需要向用户解释这些技术限制，并建议使用合适的工具组合来实现目标。\n</think>\n\n# 技术判断  \n- **不可实现**：MySQL 5.7 无法通过原生 SQL 监听网络端口或处理 HTTP 协议。  \n- **不可实现**：HTTP 请求解析与 JSON 动态生成超出了 MySQL 原生 SQL 的功能边界。  \n\n# 不可实现原因  \n- **MySQL 网络能力限制**：MySQL 5.7 仅支持通过 TCP/IP 协议提供数据库服务（默认端口 3306），其原生 SQL 语法无法监听 8080 端口或处理 HTTP 协议。  \n- **HTTP 协议解析缺失**：HTTP 请求的解析（如 URL 解码、Header 处理）需依赖应用层逻辑，而 MySQL 原生 SQL 仅能处理结构化数据查询，无法实现协议级交互。  \n\n# 替代建议  \n- **使用轻量级 Web 框架**：采用 Go/Python/Node.js 等语言编写微服务，通过 8080 端口监听 HTTP 请求，并使用 MySQL 客户端连接数据库。  \n- **利用数据库存储过程**：将业务逻辑拆分为 HTTP 服务层（处理请求/响应）与 MySQL 存储过程（处理数据逻辑），通过标准 SQL 接口通信。",
+    "gen_preview": "<think>\n好的，我现在需要处理用户的问题，用户希望用MySQL 5.7的原生SQL编写一个监听8080端口、处理HTTP GET请求并返回JSON的微服务。首先，我得确认MySQL 5.7是否具备这样的能力。\n\n首先，MySQL的主要功能是作为关系型数据库，处理数据存储和查询。虽然MySQL有一些扩展功能，比如存储过程、触发器，但网络服务监听并不是它的设计初衷。我记得MySQL本身并不提供内..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_02",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Expected python code fence, got py"
+    },
+    "latency": 73.76443862915039,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我需要编写一个Python函数calculate_avg_cost(data_list)，处理存在脏数据的JSON日志，并计算平均cost。首先，我得仔细分析输入示例和开发要求。\n\n输入示例中的数据有几种问题：比如info字段为null，或者id是字符串而不是数字，还有cost的值可能是非数值的，比如字符串\"invalid\"。我的任务是处理这些情况，并正确计算平均值，或者在无法计算时返回None。\n\n开发要求中提到必须显式处理KeyError、TypeError以及非数值的cost。所以，我需要遍历data_list中的每个元素，尝试获取每个数据项中的info下的cost值，并处理可能出现的异常。\n\n首先，我需要初始化总和sum_costs和有效数量count为0。然后遍历每个data在data_list中：\n\n对于每个data，首先检查它是否包含'info'键。如果不存在，或者data本身不是字典，那么可能会触发KeyError或者AttributeError？或者可能data是None？比如输入中的第二个元素是{\"id\": 2, \"info\": null}，这时候访问data['info']会得到None，接着访问'cost'的话就会报错，因为None没有'cost'属性。这时候应该处理KeyError或者AttributeError？\n\n或者，可能应该用try-except块来捕获KeyError和TypeError。比如，当尝试访问data['info']['cost']时，如果info不存在，会抛出KeyError；如果info是None，那么data['info']是None，访问['cost']会抛出AttributeError，这属于TypeError的子类吗？或者需要单独处理？\n\n根据开发要求，必须显式处理KeyError和TypeError。所以，可能需要捕获这两个异常。例如，在访问data['info']的时候，如果data中没有'info'键，会抛出KeyError；如果data本身不是字典，比如是None或者其他类型，访问data['info']会抛出TypeError。比如第三个输入项是{\"id\": 3}，缺少'info'键，这时候访问data['info']会抛出KeyError。这时候需要处理KeyError。\n\n所以，在获取每个data的cost时，需要处理可能的KeyError和TypeError。例如，在try块中尝试获取data['info']['cost']，然后在except KeyError: 跳过，或者记录错误；except TypeError: 同样处理。此外，即使获取到了cost的值，还需要检查它是否是数值类型，比如int或float。如果cost的值是字符串\"invalid\"，这时候需要处理非数值的情况。\n\n所以，处理步骤可能如下：\n\n对于每个data in data_list:\n\n尝试:\n\n   info = data['info']\n\n   cost = info['cost']\n\n除了 KeyError: 跳过这个data\n\n除了 TypeError: 比如当data['info']是None，这时候访问info['cost']会抛出AttributeError（属于TypeError的子类？），所以会被except TypeError捕获？\n\n或者，是否应该分开处理？比如，当data['info']是None的时候，访问info['cost']会抛出AttributeError，这属于TypeError的子类吗？在Python中，AttributeError是单独的异常类，可能不属于TypeError的子类。这时候，是否需要单独处理AttributeError？或者是否应该将所有异常都捕获为TypeError？\n\n或者，开发要求中的TypeError可能包括所有与类型相关的错误，比如当尝试对非字典结构进行键访问时。比如，当data['info']是None，那么info['cost']会抛出AttributeError: 'NoneType' object is not subscriptable。这时候，是否应该捕获这个错误？\n\n可能，正确的做法是，在try块中，尝试获取data['info']['cost']，并捕获KeyError和TypeError。因为当访问data['info']的时候，如果data没有'info'键，会抛出KeyError；如果data['info']的值不是可 subscript 的（比如是None或整数），那么访问其['cost']会抛出TypeError。所以，这两个异常都需要被捕获。\n\n所以，在try块中：\n\ncost_value = data['info']['cost']\n\n然后，检查这个cost_value是否是数值类型。如果不是，比如是字符串，那么需要处理非数值的情况。\n\n所以，整个处理流程可以是：\n\n初始化sum_costs和count为0。\n\n遍历每个data in data_list:\n\n   try:\n\n       cost_value = data['info']['cost']\n\n   except (KeyError, TypeError):\n\n       # 说明该data中没有正确的info或cost字段，跳过\n\n       continue\n\n   else:\n\n       # 检查cost_value是否为数值类型\n\n       if isinstance(cost_value, (int, float)):\n\n           sum_costs += cost_value\n\n           count +=1\n\n       elif isinstance(cost_value, (str, ...其他非数值类型)):\n\n           # 处理非数值的情况，比如记录或者跳过\n\n           continue\n\n这样，就能处理非数值的cost值。\n\n所以，在代码中，需要处理这三个部分：KeyError、TypeError，以及非数值的cost。\n\n现在，把这些转化为Python代码。\n\n函数定义为def calculate_avg_cost(data_list):\n\nsum_costs = 0.0\n\ncount = 0\n\nfor data in data_list:\n\n    try:\n\n        cost_value = data['info']['cost']\n\n    except (KeyError, TypeError):\n\n        continue\n\n    if isinstance(cost_value, (int, float)):\n\n        sum_costs += cost_value\n\n        count +=1\n\n    else:\n\n        # 非数值，跳过\n\n        continue\n\nif count ==0:\n\n    return None\n\nelse:\n\n    return sum_costs / count\n\n这样是否满足要求？\n\n测试输入示例中的情况：\n\n输入示例是：\n\n[{\"id\": 1, \"info\": {\"cost\": 12.5}}, {\"id\": 2, \"info\": null}, {\"id\": 3}, {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}}]\n\n第一个元素：正确，cost是12.5，会被加入sum和count。\n\n第二个元素：data['info']是null，访问data['info']['cost']会抛出AttributeError，属于TypeError，被except捕获，跳过。\n\n第三个元素：{\"id\":3}缺少'info'键，访问data['info']会抛出KeyError，被except捕获，跳过。\n\n第四个元素：data['info']['cost']是字符串\"invalid\"。在try块中，cost_value被获取到，但后续的isinstance检查失败，所以会被else分支处理，跳过。\n\n所以，总共有count=1，sum=12.5，平均值是12.5，返回正确。\n\n其他测试情况：\n\n比如，如果有一个data的cost是整数，比如3，会被正确计算。\n\n如果cost是字符串\"3\"，会被跳过。\n\n那这样是否满足开发要求？\n\n开发要求中的第三点：必须显式处理非数值的cost。这里的处理方式是检查类型是否为int或float，否则跳过。这应该满足要求。\n\n那现在，这个函数是否满足所有开发要求？\n\n是的。因为：\n\n- 处理了KeyError（比如第三个元素）\n\n- 处理了TypeError（比如第二个元素）\n\n- 处理了非数值的cost（比如第四个元素）\n\n返回平均值或者None，当count为0的时候返回None。\n\n那现在，是否还有其他可能的错误？\n\n比如，data本身不是字典？比如data_list中的元素可能不是字典？比如，假设有一个元素是整数，比如5，那么访问data['info']会抛出TypeError，因为整数没有__getitem__方法。这时候会被except (KeyError, TypeError)捕获吗？\n\n是的。比如，当data是整数，执行data['info']会抛出TypeError: 'int' object is not subscriptable，所以会被except捕获。所以这种情况被处理了。\n\n那这样，函数应该可以处理各种脏数据的情况。\n\n综上，代码应该如下：\n\ndef calculate_avg_cost(data_list):\n    total = 0.0\n    count = 0\n    for data in data_list:\n        try:\n            cost = data['info']['cost']\n        except (KeyError, TypeError):\n            continue\n        if isinstance(cost, (int, float)):\n            total += cost\n            count += 1\n        else:\n            continue\n    return total / count if count else None\n\n这样应该满足所有要求。测试一下可能的边界情况，比如所有数据都无效，返回None；或者部分有效，计算正确平均值。\n</think>\n\n```py\ndef calculate_avg_cost(data_list):\n    total = 0.0\n    count = 0\n    for data in data_list:\n        try:\n            cost = data['info']['cost']\n        except (KeyError, TypeError):\n            continue\n        if isinstance(cost, (int, float)):\n            total += cost\n            count += 1\n        else:\n            continue\n    return total / count if count else None\n```",
+    "gen_preview": "<think>\n好的，我需要编写一个Python函数calculate_avg_cost(data_list)，处理存在脏数据的JSON日志，并计算平均cost。首先，我得仔细分析输入示例和开发要求。\n\n输入示例中的数据有几种问题：比如info字段为null，或者id是字符串而不是数字，还有cost的值可能是非数值的，比如字符串\"invalid\"。我的任务是处理这些情况，并正确计算平均值，或者在无..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 95.48046541213989,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我需要编写一个Python协程函数aggregate_telemetry(records)，满足按节点聚合平均温度和峰值负载的要求。同时要使用asyncio进行并发批处理，并且输出特定的字典结构。还要提供一个可运行的async main示例。\n\n首先，我得理解输入的结构。输入的records应该是一个包含多个记录的列表，每个记录可能有设备的温度、负载和节点ID。比如，每个记录可能像这样：(温度, 负载, 节点ID)。或者可能是一个字典或者其他结构？题目里没说具体结构，可能需要假设。比如，假设每个记录是一个包含这三个字段的元组或者字典。比如，假设每个记录是字典，有temperature、load、node_id这三个键。或者可能传入的是元组的列表？比如，每个记录是(temperature, load, node_id)。这里可能需要明确结构。比如，假设每个record是一个字典，比如：{'temperature': 25, 'load': 0.5, 'node_id': 'node1'}。或者可能传入的是元组的列表？比如，(temp, load, node_id)。这里可能需要根据函数定义来定。题目中函数参数是records，但具体结构未说明。可能需要假设每个记录的结构。比如，假设每个记录是一个包含三个元素的元组：温度、负载、节点ID。或者可能更灵活的方式？\n\n接下来，函数需要按节点聚合。也就是说，对于每个节点ID，计算所有记录的平均温度，以及最大负载（峰值负载）。所以，处理每个节点的数据时，需要遍历所有属于该节点的记录，计算平均温度和最大负载。\n\n但问题是要用asyncio组织并发批处理。那如何将records分成多个批次，并发处理？比如，可以将不同的节点分组，每个协程处理一个节点的数据？或者将整个records分成多个批次，每个批次由不同的协程处理？或者可能每个节点的数据被单独处理？\n\n比如，可以先按节点ID将records分组，每个组对应一个节点。然后，为每个组创建一个协程任务，处理该组的数据，计算平均温度和峰值负载。这样，每个组的处理是并发的。这可能符合并发批处理的要求。\n\n那函数的大致步骤可能是：\n\n1. 按节点ID将records分组。比如，使用字典，键是node_id，值是该节点的所有记录。\n2. 为每个节点创建一个任务，用asyncio.gather并发执行这些任务。\n3. 每个任务处理该节点的记录，计算平均温度和最大负载。\n4. 收集所有结果，组成最终的字典。\n\n但如何将分组和并发结合起来？比如，分组可能需要先同步处理，然后每个组的处理用协程？\n\n比如，在aggregate_telemetry函数中，首先同步地将records按node_id分组。然后，创建多个协程任务，每个任务处理一个组的数据。每个协程的处理逻辑是计算该组的平均温度和最大负载。然后，将结果汇总。\n\n那函数的结构可能如下：\n\nasync def aggregate_telemetry(records):\n    # 分组逻辑\n    grouped = defaultdict(list)\n    for record in records:\n        node_id = record['node_id']\n        temperature = record['temperature']\n        load = record['load']\n        grouped[node_id].append( (temperature, load) )\n    # 创建任务列表\n    tasks = []\n    for node_id, data in grouped.items():\n        task = asyncio.create_task(process_node(node_id, data))\n        tasks.append(task)\n    # 等待所有任务完成\n    results = await asyncio.gather(*tasks)\n    # 将结果转换为字典\n    output = {node_id: {'avg_temp': avg, 'peak_load': peak} for node_id, avg, peak in results}\n    return output\n\n然后，process_node函数是一个协程，处理单个节点的数据：\n\nasync def process_node(node_id, data):\n    temps = [t for t, _ in data]\n    avg_temp = sum(temps)/len(temps)\n    peak_load = max([l for _, l in data])\n    return node_id, avg_temp, peak_load\n\n不过，这里process_node可能不需要异步操作，但为了符合并发结构，可能需要将其包装成一个协程。比如，可能计算过程是同步的，但用async def定义，这样create_task就可以。或者，可能在实际应用中，处理每个节点的数据可能涉及IO操作，所以需要异步。但在这个例子中，可能只是同步计算，所以可能不需要await，但为了符合asyncio的结构，还是需要定义为async函数。\n\n不过，这样处理的话，每个process_node协程内部只是做同步计算，不会有任何await操作。这在asyncio中是允许的，但可能无法利用并发优势，除非这些计算是CPU密集型的，并且使用像loop.run_in_executor这样的方式。不过，题目要求使用asyncio组织并发批处理，可能这里的并发只是结构上的，即用多个任务来组织处理流程，即使每个任务本身是同步计算。\n\n那这样的代码是否符合要求？\n\n接下来，需要考虑输入的record结构。比如，假设每个record是一个包含三个元素的元组：temperature, load, node_id？或者是一个字典？比如，假设输入的records是一个列表，每个元素是字典，包含这三个键。或者可能参数的结构需要明确？\n\n题目中描述输入为设备温度、负载、节点ID组成的记录列表。所以，可能每个记录的结构是三个元素，比如元组或者字典。比如，假设每个record的结构是（temperature, load, node_id）。或者可能更结构化的数据？\n\n比如，在示例中，可能需要处理类似这样的数据：\n\nrecords = [\n    (25, 0.5, 'node1'),\n    (26, 0.8, 'node1'),\n    (30, 0.3, 'node2'),\n]\n\n或者每个记录是字典，比如：\n\nrecords = [\n    {'temperature': 25, 'load': 0.5, 'node_id': 'node1'},\n    ...\n]\n\n这里可能需要明确。但题目中没有给出具体结构，可能需要假设。比如，假设每个record是一个字典，包含这三个键。或者可能更简单的结构？\n\n比如，在代码中，可能需要从每个record中提取这三个值。比如，在分组的时候：\n\n假设每个record的结构是字典，那么：\n\nfor record in records:\n    node_id = record['node_id']\n    temp = record['temperature']\n    load = record['load']\n    grouped[node_id].append( (temp, load) )\n\n或者，如果record是元组，比如每个record是 (temp, load, node_id)，那么：\n\nfor temp, load, node_id in records:\n    grouped[node_id].append( (temp, load) )\n\n这可能更简单。所以，可能在示例中，假设输入的records是这样的元组列表。这样代码更容易编写。\n\n所以，在示例的main函数中，可以构造这样的数据。比如：\n\n在async def main()中：\n\nrecords = [\n    (25, 0.5, 'node1'),\n    (26, 0.8, 'node1'),\n    (30, 0.3, 'node2'),\n]\nresult = await aggregate_telemetry(records)\nprint(result)\n\n输出应该像：\n\n{\n    'node1': {'avg_temp': 25.5, 'peak_load': 0.8},\n    'node2': {'avg_temp': 30, 'peak_load': 0.3}\n}\n\n那现在，回到代码结构。在aggregate_telemetry函数中，首先分组，然后并发处理每个组。\n\n现在，编写代码的大纲：\n\nimport asyncio\nfrom collections import defaultdict\n\nasync def aggregate_telemetry(records):\n    grouped = defaultdict(list)\n    for record in records:\n        temp, load, node_id = record\n        grouped[node_id].append( (temp, load) )\n    tasks = []\n    for node_id, data in grouped.items():\n        task = asyncio.create_task(process_node(node_id, data))\n        tasks.append(task)\n    results = await asyncio.gather(*tasks)\n    output = {}\n    for node_id, avg, peak in results:\n        output[node_id] = {'avg_temp': avg, 'peak_load': peak}\n    return output\n\nasync def process_node(node_id, data):\n    temps = sum(t for t, _ in data)\n    avg_temp = temps / len(data)\n    peak_load = max(l for _, l in data)\n    return node_id, avg_temp, peak_load\n\n然后，在main函数中：\n\nasync def main():\n    records = [\n        (25, 0.5, 'node1'),\n        (26, 0.8, 'node1'),\n        (30, 0.3, 'node2'),\n    ]\n    result = await aggregate_telemetry(records)\n    print(result)\n\nif __name__ == '__main__':\n    asyncio.run(main())\n\n这样应该可以运行。但需要测试是否正确。比如，node1的温度是（25+26）/2=25.5，peak是0.8。node2的温度是30，peak是0.3。输出的字典是否正确？\n\n是的。那这段代码是否符合要求？\n\n开发要求中的输出结果为dict[str, dict]，是的。每个节点ID作为键，对应的值是包含平均温度和峰值负载的字典。\n\n现在，是否满足使用asyncio组织并发批处理？是的，因为每个节点的处理是并发执行的。虽然每个process_node的处理是同步的，但通过asyncio.create_task和gather，它们被并发调度。不过，如果处理每个节点的数据是计算密集型的，这可能不会带来性能提升，因为Python的异步是单线程的。但题目可能只是要求结构上使用asyncio，而不管实际并发类型。\n\n所以，这样的代码应该满足要求。那现在需要将其写成Python代码块，并且包含在Markdown中。注意，用户要求只输出Markdown的Python代码块。\n\n可能需要注意缩进是否正确，以及是否导入必要的模块，比如collections.defaultdict和asyncio。\n\n综上，最终的代码应该如下。\n</think>\n\n```python\nimport asyncio\nfrom collections import defaultdict\n\nasync def aggregate_telemetry(records):\n    grouped = defaultdict(list)\n    for temp, load, node_id in records:\n        grouped[node_id].append((temp, load))\n    \n    tasks = []\n    for node_id, data in grouped.items():\n        task = asyncio.create_task(process_node(node_id, data))\n        tasks.append(task)\n    \n    results = await asyncio.gather(*tasks)\n    return {\n        node_id: {'avg_temp': avg_temp, 'peak_load': peak_load}\n        for node_id, avg_temp, peak_load in results\n    }\n\nasync def process_node(node_id, data):\n    temps = [t for t, _ in data]\n    avg_temp = sum(temps) / len(temps)\n    peak_load = max(l for _, l in data)\n    return node_id, avg_temp, peak_load\n\nasync def main():\n    records = [\n        (25, 0.5, 'node1'),\n        (26, 0.8, 'node1'),\n        (30, 0.3, 'node2'),\n    ]\n    result = await aggregate_telemetry(records)\n    print(result)\n\nif __name__ == '__main__':\n    asyncio.run(main())\n```",
+    "gen_preview": "<think>\n好的，我需要编写一个Python协程函数aggregate_telemetry(records)，满足按节点聚合平均温度和峰值负载的要求。同时要使用asyncio进行并发批处理，并且输出特定的字典结构。还要提供一个可运行的async main示例。\n\n首先，我得理解输入的结构。输入的records应该是一个包含多个记录的列表，每个记录可能有设备的温度、负载和节点ID。比如，每个记录..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_04",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::unique_ptr']"
+    },
+    "latency": 91.69157576560974,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要解决用户提供的C++代码中的生命周期问题。首先，我得仔细看看这段代码的问题在哪里。\n\n原代码中，process函数创建了一个int数组，用new分配内存，然后启动一个线程，捕获data的引用，并在稍后修改data[0]。然后线程被分离，接着立即delete[] data。这显然有问题，因为主线程可能在子线程还没执行完就释放了内存，导致子线程访问已释放的内存，引发未定义行为。\n\n用户的要求是使用shared_ptr或unique_ptr，正确处理线程生命周期。首先，我需要确定如何管理data的生命周期。因为线程在修改data，所以需要确保在所有线程使用完之后才释放内存。\n\n使用shared_ptr的话，可以通过shared_ptr的引用计数来管理。当主线程和子线程都持有shared_ptr的副本时，当最后一个shared_ptr被销毁时才会释放内存。这样就能确保线程执行完毕后再释放。\n\n原来的代码用的是裸指针，所以需要替换为shared_ptr。同时，线程函数中需要捕获shared_ptr的副本，这样引用计数会增加。当主线程结束时，它的shared_ptr会被销毁，但线程可能还在运行，所以此时引用计数不会为零，内存不会被释放，直到线程结束。\n\n另外，原代码中线程被分离，这样主线程不会等待它结束，可能导致主线程退出时，整个程序结束，而子线程还没执行完。不过，如果使用shared_ptr的话，即使主线程结束，只要线程还在运行，shared_ptr的引用计数会保持内存不被释放。不过，分离的线程可能在程序结束时被强制终止，这时候如果data已经被释放，可能还是有问题。不过，这里用shared_ptr应该能解决这个问题，因为线程内部的shared_ptr会保持引用计数。\n\n那具体怎么修改呢？首先，将data声明为shared_ptr，用new int[100]初始化。然后，在lambda中捕获data的共享指针。注意，这里需要确保shared_ptr的副本在线程内部被正确持有。这样，当主线程调用delete[]的时候，实际上应该用shared_ptr的释放机制，而不是直接delete。所以原来的delete[] data应该被移除，因为shared_ptr会自动处理。\n\n不过原代码中主线程在分离线程后立即delete，这会导致问题。所以正确的做法是让shared_ptr管理内存的释放，不需要手动delete。因此，应该将data改为shared_ptr，并且在线程中捕获这个shared_ptr的副本。这样，当主线程退出时，它的shared_ptr会被销毁，但线程中的shared_ptr仍然存在，直到线程执行完毕。这样，当线程执行data[0]=10的时候，内存仍然有效。\n\n那修改后的代码应该是这样的：\n\n用shared_ptr<int[]>来管理数组。注意，在C++11中，shared_ptr可以管理数组，但需要使用正确的删除器，或者用operator[]。不过，shared_ptr的默认删除器是用delete，而这里需要delete[]。所以需要确保正确使用数组形式的shared_ptr。\n\n例如，创建的时候应该用std::shared_ptr<int[]>(...), 这样析构时会调用delete[]。或者，如果使用普通的shared_ptr<int>，可能会有问题，因为默认删除器会用delete而不是delete[]。所以必须正确指定数组类型。\n\n所以正确的初始化应该是：\n\nauto data = std::shared_ptr<int[]>(new int[100], std::default_delete<int[]>());\n\n或者，可能更简单的方式是使用make_shared，但make_shared可能不直接支持数组，所以需要手动创建。\n\n或者，在C++11中，可以使用shared_ptr的数组形式，例如：\n\nstd::shared_ptr<int> data(new int[100], std::default_delete<int[]>());\n\n不过，可能更推荐使用unique_ptr来管理数组，但用户要求必须使用shared_ptr或unique_ptr。这里可能用shared_ptr更合适，因为需要多个所有者（主线程和线程t）。\n\n不过，unique_ptr是否可行？如果线程需要共享所有权，unique_ptr可能不合适，因为它不能复制。所以必须用shared_ptr。\n\n所以，正确的初始化方式是：\n\nstd::shared_ptr<int> data(new int[100], std::default_delete<int[]>());\n\n或者，更简洁的方式是使用lambda作为删除器，不过默认删除器应该足够。\n\n然后，在线程中，捕获data的共享指针，这样引用计数会增加。当线程执行时，data的引用计数在主线程中被销毁时会减一，但线程中的引用还在，所以内存不会被释放。\n\n然后，主线程不需要手动delete，所以删除原来的delete[] data语句。\n\n另外，原代码中线程被分离，这样主线程不会等待它。但此时，由于shared_ptr的引用计数机制，内存不会被提前释放。所以线程执行sleep_for(1s)后修改data[0]是安全的。\n\n所以修改后的代码大致如下：\n\nvoid process() {\n    auto data = std::shared_ptr<int[]>(new int[100], std::default_delete<int[]>());\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    // 不再需要手动delete\n}\n\n不过，这里有一个问题：shared_ptr<int[]>是否允许使用operator[]？或者是否需要通过get()获取原始指针？或者是否应该用shared_ptr<int>配合自定义删除器？\n\n比如，在C++中，shared_ptr的数组特化版本（std::shared_ptr<int[]>）允许使用operator[]访问元素。但可能在某些实现中，或者是否默认支持？\n\n或者，更常见的方式是使用shared_ptr<int>，并指定删除器为delete[]。例如：\n\nstd::shared_ptr<int> data(new int[100], std::default_delete<int[]>());\n\n这样，当data被销毁时，会调用delete[]。然后，在lambda中使用data.get()来访问数组，或者直接使用operator*或operator[]？或者，是否可以直接用data[0]？\n\n实际上，shared_ptr<int>对象是否支持operator[]？不，shared_ptr本身没有这个操作符。所以，如果data是shared_ptr<int>，那么data[0]是错误的。必须通过raw指针来访问数组元素。例如，* (data.get() + 0) 或者 data.get()[0]。\n\n所以，原代码中的data[0] = 10;在shared_ptr<int>的情况下是错误的。需要修改为(*data)[0]？或者，或者，应该使用shared_ptr<int[]>，这样operator[]可能被重载？\n\n例如，对于std::shared_ptr<int[]>，可以使用operator[]，例如：\n\nstd::shared_ptr<int[]> data(...);\ndata[0] = 10; // 这样是否可行？\n\n这可能取决于具体的实现。例如，在libstdc++中，shared_ptr的数组特化版本确实重载了operator[]，返回的是int&。所以，这可能是一个可行的方式。但需要确认是否符合标准。\n\n或者，另一种方法是使用shared_ptr<int>，但需要自己处理数组访问，比如：\n\ndata.get()[0] = 10;\n\n但这样，如果shared_ptr的删除器正确的话，是可行的。不过，使用shared_ptr<int[]>可能更安全，因为它明确管理数组，并允许operator[]操作。\n\n所以，在代码中，应该将data声明为std::shared_ptr<int[]>，这样就可以直接使用data[0]。\n\n因此，正确的初始化应该是：\n\nauto data = std::shared_ptr<int[]>(new int[100], std::default_delete<int[]>());\n\n或者，也可以写成：\n\nstd::shared_ptr<int[]> data(new int[100]);\n\n因为默认的删除器应该是正确的？或者是否需要显式指定？\n\n实际上，在C++11中，当创建shared_ptr<int[]>时，它会使用正确的delete[]来释放数组。例如，根据标准，数组形式的shared_ptr会使用数组删除器。因此，可以简单地用：\n\nauto data = std::shared_ptr<int[]>(new int[100]);\n\n而无需显式指定删除器，因为shared_ptr<int[]>的模板特化会自动使用delete[]。\n\n所以，修改后的代码：\n\nvoid process() {\n    auto data = std::shared_ptr<int[]>(new int[100]);\n    std::thread t([&data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n    // 不需要手动delete\n}\n\n这样，主线程在detach之后退出，但data的shared_ptr在主线程中被销毁时，引用计数减一。假设线程t还在运行，此时引用计数为1（线程中的shared_ptr），所以内存不会被释放。当线程执行完后，引用计数减到零，内存被正确释放。\n\n这样应该解决了生命周期的问题。同时，使用了shared_ptr满足用户的要求。\n\n不过，还需要考虑线程是否正确结束。原代码中，主线程detach之后，可能process函数返回，导致主线程结束。但子线程在1秒后执行，此时整个程序可能还在运行，因为主线程可能已经结束，但其他线程还在。在C++中，主线程结束时，其他线程会被终止吗？不，整个进程结束时，所有线程都会被终止。但如果主线程结束，而其他线程还在运行，程序会继续运行，直到所有线程结束。所以，只要线程t在分离后有足够的时间执行，应该没问题。这里sleep_for(1s)之后修改data[0]，而主线程可能已经退出，但data的shared_ptr在线程中保持有效，直到线程执行完毕。\n\n综上，这样的修改应该满足用户的要求。现在需要检查代码是否正确。\n\n另外，是否应该用join代替detach？比如，如果主线程等待子线程结束，那么可以确保子线程执行完毕后再继续。但原问题中用户可能希望使用detach，或者是否必须处理线程生命周期？用户的要求是“正确处理线程生命周期”，所以可能需要确保线程正确结束。但原代码中使用detach，可能无法保证主线程等待。不过，使用shared_ptr管理内存后，即使主线程结束，子线程仍然可以安全执行。所以，原代码中的线程处理方式可能不需要修改，只要内存管理正确即可。因此，用户可能希望保持detach，但需要确保内存正确释放。因此，当前的修改是正确的。\n\n综上，最终的修复代码应该如上述所示。\n</think>\n\n```cpp\n#include <memory>\n#include <thread>\n#include <chrono>\n\nvoid process() {\n    auto data = std::shared_ptr<int[]>(new int[100]);\n    std::thread t([data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        data[0] = 10;\n    });\n    t.detach();\n}\n```",
+    "gen_preview": "<think>\n好的，我现在需要解决用户提供的C++代码中的生命周期问题。首先，我得仔细看看这段代码的问题在哪里。\n\n原代码中，process函数创建了一个int数组，用new分配内存，然后启动一个线程，捕获data的引用，并在稍后修改data[0]。然后线程被分离，接着立即delete[] data。这显然有问题，因为主线程可能在子线程还没执行完就释放了内存，导致子线程访问已释放的内存，引发未定..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 111.90907216072083,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要实现一个TypeScript方法fetchDashboardData，它要并发请求三个接口：/api/user、/api/orders和/api/metrics。并且要使用Promise.all，定义三个interface，还要处理超时或失败的情况，不能抛出未处理的异常。让我仔细想想怎么满足这些条件。\n\n首先，按照约束条件，我需要定义User、Order和Metrics三个接口。这部分应该不难，先写出来。比如User可能有id和name，Order可能有id和amount，Metrics可能有stats字段，具体结构可能根据实际情况调整，但题目没给详细信息，所以先假设简单的结构。\n\n接下来是实现fetchDashboardData方法。并发请求三个接口，显然要用Promise.all，但还要处理错误和超时。这里可能需要给每个fetch请求加上超时处理，并且每个请求单独捕获错误，这样即使其中一个失败，也不会导致整个Promise.all失败。\n\n那如何给每个fetch请求添加超时呢？通常可以用Promise.race来竞争原请求和一个超时的Promise。比如，每个请求包装成一个Promise，在一定时间后如果没返回，就触发超时。或者题目中的超时可能指的是网络请求本身的超时，但fetch本身没有超时选项，需要手动处理。\n\n所以，我需要为每个请求创建一个带超时的fetch函数。例如，写一个async函数，比如fetchWithTimeout，里面用Promise.race来处理。比如：\n\nasync function fetchWithTimeout(url: string, timeout = 5000) {\n  return Promise.race([\n    fetch(url),\n    new Promise((_, reject) => \n      setTimeout(() => reject(new Error(`Timeout for ${url}`)), timeout)\n    )\n  ]);\n}\n\n不过，这样可能还不够，因为如果fetch本身失败（比如网络错误），也需要捕获。所以每个请求应该用try-catch包裹，或者在Promise里处理错误。\n\n但Promise.all的要求是所有Promise都成功，或者第一个失败的会触发整体失败。所以为了优雅降级，每个请求应该返回它们的错误或者默认值，而不是让Promise被reject。或者，使用Promise.allSettled？但题目要求必须使用Promise.all。这可能有问题，因为如果其中一个Promise被reject，Promise.all也会reject，导致整个函数失败。所以需要确保每个请求的Promise不会被reject，而是总是resolve，即使失败也返回某种错误信息。\n\n但题目中的约束条件是“任何一个接口超时或失败时需要优雅降级，不能抛出未处理异常”。所以可能需要每个请求的Promise在出错时返回null或者某种默认值，这样Promise.all会继续执行，而不会失败。或者，使用Promise.all包裹在try-catch里？\n\n或者，每个请求的Promise应该被处理，使其不会被reject。比如，每个请求用try-catch包裹，返回一个默认值或者错误对象。例如：\n\nasync function fetchUser() {\n  try {\n    const res = await fetchWithTimeout('/api/user');\n    if (!res.ok) throw new Error('User fetch not ok');\n    return await res.json() as User;\n  } catch (e) {\n    console.error('User fetch failed', e);\n    return null; // 或者默认的User对象\n  }\n}\n\n然后，Promise.all([fetchUser(), ...])，这样即使某个失败，返回null，Promise.all还是会继续。这样处理的话，每个请求的Promise都会resolve，不管成功与否。这样就不会触发未处理的异常。\n\n那整个fetchDashboardData函数的结构可能是这样的：\n\nasync function fetchDashboardData() {\n  try {\n    const userPromise = fetchUser();\n    const ordersPromise = fetchOrders();\n    const metricsPromise = fetchMetrics();\n    const [user, orders, metrics] = await Promise.all([userPromise, ordersPromise, metricsPromise]);\n    // 这里处理结果，可能有些是null，根据情况处理\n    return { user, orders, metrics };\n  } catch (e) {\n    console.error('All promises failed?', e);\n    // 这里可能不会进入，因为每个Promise都处理了错误，不会reject\n    return { user: null, orders: null, metrics: null };\n  }\n}\n\n不过，如果每个请求的Promise都被处理成不会reject，那么Promise.all的数组中的每个Promise都会resolve，所以外面的try-catch可能不会进入。但为了保险起见，可能还是需要加上，或者确保每个Promise都正确处理。\n\n现在，如何将这些组合起来？\n\n首先定义三个interface：\n\ninterface User { ... }\ninterface Order { ... }\ninterface Metrics { ... }\n\n然后，每个fetch函数，比如：\n\nasync function fetchUser(): Promise<User | null> {\n  try {\n    const res = await fetchWithTimeout('/api/user');\n    if (!res.ok) throw new Error('Network response was not ok');\n    return await res.json();\n  } catch (error) {\n    console.error('Failed to fetch user data:', error);\n    return null;\n  }\n}\n\n同理处理orders和metrics。\n\n然后，fetchDashboardData函数内部调用这三个函数，用Promise.all包装。这样，不管单个请求是否失败，都会返回结果数组，其中可能包含null。\n\n不过，题目中的三个接口是否需要返回具体的类型？比如，假设每个接口返回的数据类型分别是User、Order[]、Metrics。所以，可能需要调整返回类型。\n\n现在，关于超时的处理，需要实现fetchWithTimeout函数。比如，设定一个超时时间，比如5000ms。或者题目中没有指定超时时间，但需要处理超时的情况。所以，每个fetch请求需要设置一个超时，如果超过时间没有响应，就reject，然后被catch处理。\n\n综上，完整的代码可能如下：\n\n定义三个interface：\n\ninterface User {\n  id: number;\n  name: string;\n}\n\ninterface Order {\n  id: number;\n  amount: number;\n}\n\ninterface Metrics {\n  stats: { [key: string]: number };\n}\n\n然后，fetchWithTimeout函数：\n\nfunction fetchWithTimeout(url: string, timeout = 5000): Promise<Response> {\n  return Promise.race([\n    fetch(url),\n    new Promise<never>((_, reject) =>\n      setTimeout(() => {\n        reject(new Error(`Request to ${url} timed out after ${timeout}ms`));\n      }, timeout)\n    )\n  ]);\n}\n\n注意，这里返回的是Promise<Response>，但需要处理错误。然后每个具体的fetch函数（如fetchUser）调用这个函数，并处理错误。\n\n不过，这个fetchWithTimeout函数返回的是Promise<Response>，但可能需要更详细的处理。比如，在fetchUser中，调用fetchWithTimeout，然后检查res.ok等。\n\n然后，每个fetch函数：\n\nasync function fetchUser(): Promise<User | null> {\n  try {\n    const response = await fetchWithTimeout('/api/user');\n    if (!response.ok) {\n      throw new Error(`HTTP error! status: ${response.status}`);\n    }\n    return await response.json();\n  } catch (error) {\n    console.error('Error fetching user data:', error);\n    return null;\n  }\n}\n\n同理处理orders和metrics。\n\n最后，fetchDashboardData函数：\n\nexport async function fetchDashboardData() {\n  try {\n    const [user, orders, metrics] = await Promise.all([\n      fetchUser(),\n      fetchOrders(),\n      fetchMetrics(),\n    ]);\n    return { user, orders, metrics };\n  } catch (error) {\n    console.error('Unexpected error:', error);\n    return { user: null, orders: null, metrics: null };\n  }\n}\n\n不过，这里是否需要try-catch？因为每个fetch函数内部已经处理了错误，所以Promise.all中的每个Promise都会resolve为null或者数据，所以外面的try可能不会进入。但为了保险起见，加上这个try-catch可能更好，比如处理Promise.all本身可能的错误？或者是否存在其他情况？\n\n比如，如果fetchUser()返回的Promise在某个情况下还是reject了？比如，如果try-catch在fetchUser内部，应该不会。所以，外部的try-catch可能可以省略。但为了满足题目中的“不能抛出未处理异常”，可能还是需要处理。\n\n不过，在当前的结构中，每个Promise在fetchUser等函数中已经被处理，不会reject，所以Promise.all的数组中的每个Promise都会resolve，所以外部的try-catch可能不会触发。因此，可以省略外部的try-catch，或者保留作为额外保护。\n\n综上，最终的代码可能如下：\n\n将所有这些组合起来，确保每个请求都处理错误和超时，使用Promise.all并发执行，并返回结果对象。\n\n现在，检查约束条件：\n\n1. 使用Promise.all：是的，在fetchDashboardData中使用了。\n\n2. 定义三个interface：是的。\n\n3. 任何接口失败或超时，不会抛出异常：每个请求都有try-catch，返回null。\n\n所以，现在将这些写成代码。\n\n可能的代码：\n\ninterface User {\n  id: number;\n  name: string;\n}\n\ninterface Order {\n  id: number;\n  amount: number;\n}\n\ninterface Metrics {\n  stats: { [key: string]: number };\n}\n\nfunction fetchWithTimeout(url: string, timeout = 5000): Promise<Response> {\n  return Promise.race([\n    fetch(url),\n    new Promise<never>((_, reject) => {\n      setTimeout(() => {\n        reject(new Error(`Timeout for ${url}`));\n      }, timeout);\n    })\n  ]);\n}\n\nasync function fetchUser(): Promise<User | null> {\n  try {\n    const response = await fetchWithTimeout('/api/user');\n    if (!response.ok) throw new Error('User response not OK');\n    return await response.json();\n  } catch (e) {\n    console.error('User fetch error:', e);\n    return null;\n  }\n}\n\nasync function fetchOrders(): Promise<Order[] | null> {\n  try {\n    const response = await fetchWithTimeout('/api/orders');\n    if (!response.ok) throw new Error('Orders response not OK');\n    return await response.json();\n  } catch (e) {\n    console.error('Orders fetch error:', e);\n    return null;\n  }\n}\n\nasync function fetchMetrics(): Promise<Metrics | null> {\n  try {\n    const response = await fetchWithTimeout('/api/metrics');\n    if (!response.ok) throw new Error('Metrics response not OK');\n    return await response.json();\n  } catch (e) {\n    console.error('Metrics fetch error:', e);\n    return null;\n  }\n}\n\nexport async function fetchDashboardData() {\n  try {\n    const [user, orders, metrics] = await Promise.all([\n      fetchUser(),\n      fetchOrders(),\n      fetchMetrics(),\n    ]);\n    return { user, orders, metrics };\n  } catch (error) {\n    console.error('Unexpected error in fetchDashboardData:', error);\n    return { user: null, orders: null, metrics: null };\n  }\n}\n\n不过，这里有一个问题：在fetchWithTimeout中，Promise.race返回的是Promise<Response>，但当超时的时候，Promise被reject，所以在fetchUser中的try-catch会捕获到这个reject，从而返回null。这样是正确的处理。\n\n此外，在fetchDashboardData中，即使每个Promise都resolve（因为每个都处理了错误），所以外部的try-catch可能不会触发。但假设在某些极端情况下，比如Promise.all本身的错误？或者可能其他错误？比如，在数组解构的时候？不过应该不会。所以外部的try-catch可能可以省略，但加上更安全。\n\n不过，根据约束条件，不能抛出未处理的异常。所以，即使外部的try-catch可能不会触发，但加上它也是好的做法。\n\n现在，检查是否所有错误都被处理。比如，如果fetchWithTimeout中的Promise.race的reject会被fetchUser中的try-catch捕获，是的。所以每个请求的错误都被处理，不会抛出。\n\n这样应该满足所有约束条件。现在，将这些代码整合成一个完整的TypeScript代码块。\n</think>\n\n```typescript\ninterface User {\n  id: number;\n  name: string;\n}\n\ninterface Order {\n  id: number;\n  amount: number;\n}\n\ninterface Metrics {\n  stats: { [key: string]: number };\n}\n\nfunction fetchWithTimeout(url: string, timeout = 5000): Promise<Response> {\n  return Promise.race([\n    fetch(url),\n    new Promise<never>((_, reject) => {\n      setTimeout(() => {\n        reject(new Error(`Request to ${url} timed out after ${timeout}ms`));\n      }, timeout);\n    })\n  ]);\n}\n\nasync function fetchUser(): Promise<User | null> {\n  try {\n    const response = await fetchWithTimeout('/api/user');\n    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);\n    return await response.json();\n  } catch (error) {\n    console.error('Failed to fetch user data:', error);\n    return null;\n  }\n}\n\nasync function fetchOrders(): Promise<Order[] | null> {\n  try {\n    const response = await fetchWithTimeout('/api/orders');\n    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);\n    return await response.json();\n  } catch (error) {\n    console.error('Failed to fetch orders data:', error);\n    return null;\n  }\n}\n\nasync function fetchMetrics(): Promise<Metrics | null> {\n  try {\n    const response = await fetchWithTimeout('/api/metrics');\n    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);\n    return await response.json();\n  } catch (error) {\n    console.error('Failed to fetch metrics data:', error);\n    return null;\n  }\n}\n\nexport async function fetchDashboardData() {\n  try {\n    const [user, orders, metrics] = await Promise.all([\n      fetchUser(),\n      fetchOrders(),\n      fetchMetrics(),\n    ]);\n    return { user, orders, metrics };\n  } catch (error) {\n    console.error('Unexpected error in dashboard data fetching:', error);\n    return { user: null, orders: null, metrics: null };\n  }\n}\n```",
+    "gen_preview": "<think>\n好的，我现在需要实现一个TypeScript方法fetchDashboardData，它要并发请求三个接口：/api/user、/api/orders和/api/metrics。并且要使用Promise.all，定义三个interface，还要处理超时或失败的情况，不能抛出未处理的异常。让我仔细想想怎么满足这些条件。\n\n首先，按照约束条件，我需要定义User、Order和Metri..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_06",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 53.077274799346924,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n嗯，用户让我写一个MySQL 5.7兼容的SQL，找出每个部门薪资排名前3的员工。而且不能用存储过程，也不能用窗口函数。因为MySQL 5.7不支持窗口函数，所以得用传统的方法。\n\n首先，我需要理解这两个表的结构。employees表有emp_id、emp_name、dept_id和salary，而departments表有dept_id和dept_name。目标是每个部门薪资最高的前三名员工。那怎么在没有窗口函数的情况下实现呢？\n\n我记得在旧版的MySQL中，可以使用自连接和子查询来实现排名。基本思路是，对于每个员工，找出同一部门中薪资比他高的员工数量，如果这个数量小于3，那么他就属于前3名。不过要注意处理同薪的情况，比如如果有多个员工薪资相同，可能会导致结果不符合预期，但用户没有特别说明如何处理平局，所以可能默认按薪资降序，不管同薪的情况。\n\n那具体怎么做呢？可能需要将employees表自连接，外层查询每个员工，内层查询统计同一部门中薪资高于当前员工的员工数量。如果这个数量小于3，说明当前员工在部门中排前3。例如，如果一个员工是部门里薪资最高的，那么比他高的员工数量是0，满足条件。第二名的话，比他高的只有1个，以此类推。\n\n不过需要注意的是，这种方法可能会有重复或者遗漏的情况，比如当有多个员工薪资相同的时候。比如，如果部门里有三个员工薪资都是最高的，那么他们都会被选出来，而如果第四名的薪资和第三名相同，那么可能也会被错误地排除。不过用户没有说明如何处理这种情况，所以可能不需要特别处理，或者用户希望不管这些情况，只取前三名，不管是否有并列。\n\n接下来，我需要构造这样的子查询。例如，对于每个员工e，检查同一部门中薪资比e高的员工数量是否小于3。这可以通过以下条件：WHERE e.dept_id = d.dept_id AND d.salary > e.salary，然后统计这样的d的数量。如果这个数量小于3，那么e就是部门前3。\n\n然后，将这个逻辑写成一个子查询，在WHERE子句中使用EXISTS或者直接在HAVING中处理？或者可能需要使用GROUP BY和HAVING？\n\n或者，可以使用自连接的方式，比如对于每个员工，选择那些在同一个部门中，薪资比他高的员工数量少于3人的记录。\n\n可能的SQL结构是：\n\nSELECT e1.*\nFROM employees e1\nWHERE (\n    SELECT COUNT(*) \n    FROM employees e2 \n    WHERE e1.dept_id = e2.dept_id AND e2.salary > e1.salary\n) < 3\nORDER BY e1.dept_id, e1.salary DESC;\n\n这样，每个员工e1，在同一个部门中，统计有多少人的薪资比他高，如果这个数小于3，那么他就是部门前3。这可能有效。但需要测试一下。\n\n比如，假设一个部门有5个员工，薪资分别是10000，9000，8000，7000，6000。那么前三个就是10000、9000、8000。对于10000的员工，比他高的数量是0，符合条件；9000的是1个，也符合；8000的是2个，符合；7000的是3个，不符合，所以被排除。所以结果正确。\n\n如果有并列的情况，比如两个员工薪资都是10000，那么对于其中每个来说，比他们高的数量是0，所以都会被选中。如果有三个10000，那么他们每个的计数都是0，所以都会被选中，这时候可能部门前三名会有三个，但用户要求的是前3，所以这可能没问题。\n\n接下来，用户可能还需要部门名称，所以需要连接departments表。因此，最终的查询可能需要将employees和departments连接起来，获取部门名称。\n\n所以整个查询可能需要选择e.emp_name, d.dept_name, e.salary，并连接两个表。\n\n所以完整的SQL可能是：\n\nSELECT e.emp_name, d.dept_name, e.salary\nFROM employees e\nJOIN departments d ON e.dept_id = d.dept_id\nWHERE (\n    SELECT COUNT(*) \n    FROM employees e2 \n    WHERE e2.dept_id = e.dept_id AND e2.salary > e.salary\n) < 3\nORDER BY e.dept_id, e.salary DESC;\n\n这样应该可以满足每个部门薪资前三的员工。不过需要注意，如果同一部门有多个相同薪资的员工，可能会导致返回的行数超过3，但用户没有特别说明如何处理，所以可能接受这种情况。\n\n另外，这个子查询对于每个员工都会执行一次，可能效率不高，但对于MySQL 5.7来说，这可能是一个可行的解决方案。\n\n现在需要验证是否正确。例如，假设部门A有五个员工，薪资分别是5000、5000、5000、4000、3000。那么前三名应该是三个5000的员工，而第四个4000的会被排除。此时，对于每个5000的员工来说，比他们高的数量是0，所以三个都会被选中。而4000的员工比他们高的有3个，所以不满足条件。这样结果正确。\n\n另一个例子，如果有四个员工薪资分别为10k, 9k, 9k, 8k。那么前三个应该是10k, 9k, 9k。对于第一个10k来说，count是0；每个9k的count是1（只有10k比他们高）；8k的count是3（10k和两个9k），所以不会被选中。所以结果正确。\n\n因此，这样的SQL应该满足用户的需求。同时，这个查询没有使用窗口函数，也没有使用存储过程，符合用户的要求。\n</think>\n\n```sql\nSELECT e.emp_id, e.emp_name, d.dept_name, e.salary\nFROM employees e\nJOIN departments d ON e.dept_id = d.dept_id\nWHERE (\n    SELECT COUNT(DISTINCT e2.salary)\n    FROM employees e2\n    WHERE e2.dept_id = e.dept_id AND e2.salary > e.salary\n) < 3\nORDER BY e.dept_id, e.salary DESC;\n```",
+    "gen_preview": "<think>\n嗯，用户让我写一个MySQL 5.7兼容的SQL，找出每个部门薪资排名前3的员工。而且不能用存储过程，也不能用窗口函数。因为MySQL 5.7不支持窗口函数，所以得用传统的方法。\n\n首先，我需要理解这两个表的结构。employees表有emp_id、emp_name、dept_id和salary，而departments表有dept_id和dept_name。目标是每个部门薪资最高..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_07",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.003892660140991211,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_08",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0038585662841796875,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 57.536324977874756,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我需要编写一个Bash脚本rollback_release.sh，满足用户提到的几个要求。首先，我得仔细分析需求。\n\n第一个要求是检查当前发布版本和目标回滚版本。那我得想，怎么获取当前版本呢？可能需要查看某个文件或者环境变量。比如，假设当前版本存储在VERSION文件里，或者用git标签之类的。这里用户没有具体说明，所以可能需要假设。比如，用cat current_version这样的方式。同样，目标版本可能需要作为参数传入，或者从某个地方获取。这里可能需要让用户输入或者作为参数传递。比如，脚本的参数是目标版本，比如./rollback_release.sh v1.0.0。\n\n第二个步骤是执行回滚前的健康检查。健康检查可能包括检查服务状态，比如是否所有服务都在运行，或者某些指标是否正常。比如，用curl检查API是否响应，或者调用某个健康检查脚本。这里可能需要定义一个函数来执行这些检查，并在失败时返回错误。\n\n第三个要求是回滚失败时打印错误并返回非零退出码。所以整个脚本需要处理错误，比如在某个步骤失败时，捕获错误码，输出信息，并退出非零。\n\n现在，我需要把这些步骤整合到脚本中。首先，处理参数。假设目标版本作为参数传入，所以检查参数数量是否正确。如果没有参数，输出用法并退出。\n\n然后，获取当前版本。比如，假设有一个文件叫current_version，里面保存了当前版本号。如果文件不存在，可能报错。或者可能用其他方式，比如git describe --tags之类的。这里可能需要具体例子，但用户没有说明，所以假设用文件。\n\n接下来，健康检查。比如，定义一个函数pre_rollback_check，里面执行一些命令，比如检查服务是否运行，或者调用某个健康检查API。如果检查失败，返回非零，脚本应该捕获并退出。\n\n回滚操作本身可能包括替换版本，比如用新版本的文件替换当前文件，或者运行某个部署脚本。这里用户没有具体说明，所以可能需要模拟，比如用echo命令表示执行回滚步骤。\n\n错误处理方面，每个关键步骤后检查 $?，或者使用set -e让脚本在任何命令失败时退出。不过可能需要更精细的控制，比如在某个步骤失败时，执行清理操作或者输出错误信息。\n\n现在，把这些步骤写成脚本：\n\n1. 参数处理：检查是否传入目标版本。\n2. 读取当前版本。\n3. 健康检查。\n4. 执行回滚。\n5. 检查回滚是否成功，失败则退出非零。\n\n可能的错误点：比如，获取当前版本失败，或者健康检查失败，或者回滚过程中出现错误。\n\n例如，脚本结构：\n\n#!/bin/bash\n\nset -eo pipefail\n\nif [ $# -ne 1 ]; then\n    echo \"Usage: $0 <target_version>\"\n    exit 1\nfi\n\nTARGET_VERSION=$1\n\nCURRENT_VERSION=$(cat /path/to/current_version 2>/dev/null)\nif [ $? -ne 0 ]; then\n    echo \"Failed to read current version\"\n    exit 1\nfi\n\necho \"Current version: $CURRENT_VERSION\"\necho \"Target version: $TARGET_VERSION\"\n\npre_rollback_check() {\n    # 这里执行健康检查，比如检查服务状态\n    # 假设用curl检查某个端点\n    curl -s http://localhost:8080/health | grep -q \"OK\"\n    if [ $? -ne 0 ]; then\n        echo \"Health check failed\"\n        return 1\n    fi\n    return 0\n}\n\necho \"Running pre-rollback health check...\"\nif ! pre_rollback_check; then\n    exit 1\nfi\n\n# 执行回滚操作，比如替换版本\necho \"Rolling back to version $TARGET_VERSION...\"\n# 这里可能调用实际的部署或回滚命令，比如替换文件或运行其他脚本\n# 模拟一个可能失败的操作\nif [ \"$TARGET_VERSION\" == \"bad_version\" ]; then\n    echo \"Rollback failed intentionally for demo\"\n    exit 1\nfi\n\necho \"Rollback successful\"\nexit 0\n\n这样，当回滚失败时，比如目标版本是bad_version，就会退出1。否则成功退出0。\n\n但需要考虑更多的错误处理。比如，在回滚步骤中，可能需要更具体的命令，并检查它们的返回值。比如，假设回滚是运行一个脚本，或者替换文件，如果这些操作失败，脚本应该退出。\n\n另外，用户可能需要更通用的结构，所以可能需要将各个步骤函数化，并在每个步骤中处理错误。\n\n可能还需要比较当前版本和目标版本是否相同，如果相同的话，是否需要回滚？或者是否提示用户？\n\n不过用户没有提到这点，可能不需要处理。\n\n综上，按照上述结构编写脚本，满足用户的需求。需要注意的是，具体的获取当前版本和健康检查的命令需要根据实际情况调整，但用户可能希望看到示例代码，所以用假设的命令即可。\n</think>\n\n```bash\n#!/bin/bash\n\nset -eo pipefail\n\nif [ $# -ne 1 ]; then\n    echo \"Usage: $0 <target_version>\"\n    exit 1\nfi\n\nTARGET_VERSION=\"$1\"\n\n# 1. Check current version\nif [ -f /var/app/current_version ]; then\n    CURRENT_VERSION=$(cat /var/app/current_version)\nelse\n    echo \"Error: Current version file not found\"\n    exit 1\nfi\n\necho \"Current version: $CURRENT_VERSION\"\necho \"Target version: $TARGET_VERSION\"\n\n# 2. Pre-rollback health check\npre_rollback_check() {\n    # Check if service is running\n    if ! systemctl is-active --quiet app-service; then\n        echo \"Service health check failed: app-service not running\"\n        return 1\n    fi\n\n    # Check API endpoint responsiveness\n    if ! curl -s --head http://localhost:8080/health | grep \"200 OK\" > /dev/null; then\n        echo \"API health check failed: Non-200 response\"\n        return 1\n    fi\n    return 0\n}\n\necho \"Performing pre-rollback health checks...\"\nif ! pre_rollback_check; then\n    echo \"Pre-rollback checks failed, aborting\"\n    exit 1\nfi\n\n# 3. Execute rollback\necho \"Initiating rollback to version $TARGET_VERSION...\"\nif ! /opt/rollback_script.sh \"$TARGET_VERSION\"; then\n    echo \"Error: Rollback execution failed\"\n    exit 1\nfi\n\n# 4. Post-rollback verification\nif ! systemctl is-active --quiet app-service; then\n    echo \"Post-rollback check failed: Service not running after rollback\"\n    exit 1\nfi\n\necho \"Rollback completed successfully\"\nexit 0\n```",
+    "gen_preview": "<think>\n好的，我需要编写一个Bash脚本rollback_release.sh，满足用户提到的几个要求。首先，我得仔细分析需求。\n\n第一个要求是检查当前发布版本和目标回滚版本。那我得想，怎么获取当前版本呢？可能需要查看某个文件或者环境变量。比如，假设当前版本存储在VERSION文件里，或者用git标签之类的。这里用户没有具体说明，所以可能需要假设。比如，用cat current_versi..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 32.91922450065613,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要为用户提供的Python函数settle_amount编写单元测试，使用pytest框架，并且覆盖正常路径、折扣为0和非法税率三个场景。首先，我得先理解这个函数的功能。根据函数名和参数，推测它可能是计算结算金额的，参数包括金额、折扣和税率。\n\n首先，正常路径的情况应该是一个典型的例子，比如金额100，折扣0.9（即10%折扣），税率0.05（5%税）。这时候计算应该是先应用折扣，再加税。所以原价100，折扣后是90，加上5%税就是94.5。这时候函数应该返回正确的数值。\n\n接下来是折扣为0的情况。这里的折扣为0可能有两种情况：一种是折扣率0，即没有折扣，这时候结算金额应该是原价加上税；另一种可能是折扣为0%的意思，比如参数是0的话，那折扣率是0.0？需要看函数内部的处理方式。假设这里的discount参数是小数形式，比如0.9代表90%的折扣，即打九折。那如果discount是0的话，可能表示没有折扣？或者是否允许？比如用户可能输入0的话，可能函数会处理为没有折扣，即原价。这时候测试用例应该传入discount=0，比如金额100，税率0.05，结果应该是100*(1+0.05)=105。\n\n第三个场景是非法税率。税率可能是负数或者超过合理范围，比如-0.1或者2.0。这时候函数应该如何处理？可能应该抛出异常或者返回错误。但原函数的实现可能没有处理这种情况，所以测试的时候需要检查是否抛出ValueError。比如，当tax_rate是-0.1的时候，测试用例应该期望函数抛出ValueError异常。\n\n现在需要编写对应的测试用例。使用pytest的mark功能来标记不同的场景。每个测试函数以test_开头。例如：\n\n对于正常路径，可以写test_normal_case，断言结果是否正确。\n对于折扣为0的情况，写test_discount_zero，同样断言结果。\n对于非法税率，使用pytest.raises来捕获异常。\n\n需要注意的是，函数的参数是否正确处理，比如是否对输入参数进行类型或范围检查。比如，如果tax_rate是负数，是否在函数内部抛出异常？假设原函数在tax_rate <0的时候抛出ValueError，那么测试用例需要验证这一点。\n\n现在，编写测试函数的代码结构：\n\n使用三个测试函数，分别对应三个场景。每个测试函数调用settle_amount并断言结果。对于异常情况，使用pytest.raises作为上下文管理器。\n\n例如：\n\ndef test_normal_case():\n    assert settle_amount(100, 0.9, 0.05) == 94.5\n\ndef test_discount_zero():\n    assert settle_amount(100, 0, 0.05) == 105.0\n\ndef test_invalid_tax_rate():\n    with pytest.raises(ValueError):\n        settle_amount(100, 0.9, -0.1)\n\n但需要确认函数是否真的会抛出ValueError。如果原函数没有处理非法税率的情况，可能需要假设函数内部有相应的检查。比如，可能在函数内部对tax_rate进行判断，如果小于0则抛出异常。\n\n综上，按照用户的要求，编写这三个测试用例，并确保函数名以test_开头，使用pytest的断言方式。同时，用户要求只输出Markdown的Python代码块，所以不需要其他解释，直接给出代码。\n</think>\n\n```python\nimport pytest\n\ndef test_normal_case():\n    assert settle_amount(100, 0.9, 0.05) == 94.5\n\ndef test_discount_zero():\n    assert settle_amount(100, 0, 0.05) == 105.0\n\ndef test_invalid_tax_rate():\n    with pytest.raises(ValueError):\n        settle_amount(100, 0.9, -0.1)\n```",
+    "gen_preview": "<think>\n好的，我现在需要为用户提供的Python函数settle_amount编写单元测试，使用pytest框架，并且覆盖正常路径、折扣为0和非法税率三个场景。首先，我得先理解这个函数的功能。根据函数名和参数，推测它可能是计算结算金额的，参数包括金额、折扣和税率。\n\n首先，正常路径的情况应该是一个典型的例子，比如金额100，折扣0.9（即10%折扣），税率0.05（5%税）。这时候计算应该..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_11",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0013613700866699219,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_12",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0013375282287597656,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_13",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.001386404037475586,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_14",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.001363992691040039,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_15",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.001318216323852539,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_16",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0013158321380615234,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_17",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0012221336364746094,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_18",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.001222372055053711,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_19",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0012903213500976562,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_20",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0012831687927246094,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_21",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0012950897216796875,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_22",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0012919902801513672,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_23",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0013141632080078125,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_24",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0013184547424316406,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_25",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0012807846069335938,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_26",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0012862682342529297,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S3_27",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0009129047393798828,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  }
+]

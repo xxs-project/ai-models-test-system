@@ -1,0 +1,407 @@
+[
+  {
+    "id": "COMPANY_IPD_S3_01",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 16.4414701461792,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 技术判断\n\n* **结论：不可实现**\n* **核心逻辑：** MySQL 5.7 的原生 SQL 语法仅限于数据定义（DDL）、数据操作（DML）及存储过程/触发器逻辑，其执行环境处于数据库引擎层，不具备操作系统层面的网络套接字（Socket）监听能力。\n* **协议冲突：** SQL 语言无法直接操作 TCP/IP 协议栈，无法完成 HTTP 协议所需的握手、报文解析及状态码响应逻辑。\n\n# 不可实现原因\n\n* **MySQL 引擎边界：**\n    * MySQL 5.7 的监听机制（Listener）是硬编码在二进制程序中的，仅支持 MySQL 协议（通常为 3306 端口），无法通过 SQL 指令动态开启或绑定至 8080 端口。\n    * SQL 语法缺乏对系统调用（System Call）的封装，无法调用 `bind()`、`listen()` 或 `accept()` 等网络编程核心函数。\n* **HTTP 协议解析边界：**\n    * HTTP 协议是基于文本的应用层协议，要求对请求头（Headers）进行流式解析，而 MySQL 的 SQL 解析器仅能解析符合语法规范的结构化查询语句。\n    * 纯 SQL 环境下不存在处理 HTTP 响应报文（如 `Content-Type: application/json`）的缓冲区管理机制。\n\n# 替代建议\n\n* **中间件架构方案：**\n    * 使用轻量级 Web 框架（如 Python Flask、Node.js 或 Go）作为 HTTP 监听层，通过标准驱动（Connector）调用 MySQL 执行查询，并将结果集序列化为 JSON 返回。\n* **数据库集成方案：**\n    * 若需在数据库层面实现逻辑，应使用 MySQL 的 `JSON` 数据类型存储数据，并配合外部 API 网关（如 Kong 或 Nginx）进行协议转换。",
+    "gen_preview": "# 技术判断\n\n* **结论：不可实现**\n* **核心逻辑：** MySQL 5.7 的原生 SQL 语法仅限于数据定义（DDL）、数据操作（DML）及存储过程/触发器逻辑，其执行环境处于数据库引擎层，不具备操作系统层面的网络套接字（Socket）监听能力。\n* **协议冲突：** SQL 语言无法直接操作 TCP/IP 协议栈，无法完成 HTTP 协议所需的握手、报文解析及状态码响应逻辑。\n\n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_02",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 19.823671340942383,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```python\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    处理包含脏数据的 JSON 日志列表，计算 cost 的平均值。\n    \"\"\"\n    if not isinstance(data_list, list) or not data_list:\n        return None\n\n    total_cost = 0.0\n    valid_count = 0\n\n    for entry in data_list:\n        try:\n            # 1. 处理 KeyError: 检查 entry 是否为字典以及是否存在 'info' 键\n            if not isinstance(entry, dict):\n                continue\n            \n            info = entry['info']\n            \n            # 2. 处理 TypeError: 检查 info 是否为 None 或非字典类型\n            if info is None or not isinstance(info, dict):\n                continue\n            \n            # 3. 处理 KeyError: 检查 'cost' 是否在 info 中\n            cost_value = info['cost']\n            \n            # 4. 处理非数值 cost: 尝试转换为 float，失败则捕获 ValueError\n            # 显式处理 TypeError (如 cost 为 None) 和 ValueError (如 cost 为 \"invalid\")\n            cost_float = float(cost_value)\n            \n            total_cost += cost_float\n            valid_count += 1\n\n        except (KeyError, TypeError, ValueError):\n            # 显式跳过不符合格式或无法转换的数据行\n            continue\n\n    if valid_count == 0:\n        return None\n\n    return total_cost / valid_count\n\n# 测试用例\nif __name__ == \"__main__\":\n    raw_data = [\n        {\"id\": 1, \"info\": {\"cost\": 12.5}}, \n        {\"id\": 2, \"info\": None}, \n        {\"id\": 3}, \n        {\"id\": \"4\", \"info\": {\"cost\": \"invalid\"}},\n        {\"id\": 5, \"info\": {\"cost\": \"10.5\"}},  # 测试字符串数值\n        {\"id\": 6, \"info\": {\"cost\": None}}     # 测试 cost 为 None\n    ]\n    \n    result = calculate_avg_cost(raw_data)\n    print(f\"Average Cost: {result}\")\n```",
+    "gen_preview": "```python\ndef calculate_avg_cost(data_list):\n    \"\"\"\n    处理包含脏数据的 JSON 日志列表，计算 cost 的平均值。\n    \"\"\"\n    if not isinstance(data_list, list) or not data_list:\n        return None\n\n    total_cost = 0.0\n   ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 30.125340700149536,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```python\nimport asyncio\nfrom collections import defaultdict\nfrom typing import List, Dict, Any, Tuple\n\nasync def process_node_batch(node_id: str, records: List[Tuple[float, float]]) -> Dict[str, Any]:\n    \"\"\"\n    模拟对单个节点的计算任务（模拟 I/O 或 CPU 密集型计算）\n    records 格式: [(temperature, load), ...]\n    \"\"\"\n    # 模拟异步延迟\n    await asyncio.sleep(0.01)\n    \n    if not records:\n        return {node_id: {\"avg_temp\": 0.0, \"max_load\": 0.0}}\n\n    temps = [r[0] for r in records]\n    loads = [r[1] for r in records]\n    \n    return {\n        node_id: {\n            \"avg_temp\": sum(temps) / len(temps),\n            \"max_load\": max(loads)\n        }\n    }\n\nasync def aggregate_telemetry(records: List[Dict[str, Any]]) -> Dict[str, Dict[str, float]]:\n    \"\"\"\n    输入: [{'node_id': 'A', 'temp': 25.0, 'load': 80.0}, ...]\n    输出: {'A': {'avg_temp': 25.0, 'max_load': 80.0}}\n    \"\"\"\n    # 1. 按节点 ID 进行分组\n    grouped_data = defaultdict(list)\n    for rec in records:\n        node_id = rec['node_id']\n        grouped_data[node_id].append((rec['temp'], rec['load']))\n\n    # 2. 创建并发任务列表\n    tasks = [\n        process_node_batch(node_id, data) \n        for node_id, data in grouped_data.items()\n    ]\n\n    # 3. 并发执行并收集结果\n    results = await asyncio.gather(*tasks)\n\n    # 4. 合并结果字典\n    final_aggregation = {}\n    for res in results:\n        final_aggregation.update(res)\n        \n    return final_aggregation\n\nasync def main():\n    # 测试数据\n    telemetry_data = [\n        {\"node_id\": \"node_01\", \"temp\": 30.5, \"load\": 70.0},\n        {\"node_id\": \"node_02\", \"temp\": 40.0, \"load\": 90.0},\n        {\"node_id\": \"node_01\", \"temp\": 32.5, \"load\": 85.0},\n        {\"node_id\": \"node_03\", \"temp\": 20.0, \"load\": 50.0},\n        {\"node_id\": \"node_02\", \"temp\": 42.0, \"load\": 95.0},\n        {\"node_id\": \"node_03\", \"temp\": 22.0, \"load\": 40.0},\n    ]\n\n    print(\"Starting telemetry aggregation...\")\n    result = await aggregate_telemetry(telemetry_data)\n    \n    import json\n    print(json.dumps(result, indent=4))\n\nif __name__ == \"__main__\":\n    asyncio.run(main())\n```",
+    "gen_preview": "```python\nimport asyncio\nfrom collections import defaultdict\nfrom typing import List, Dict, Any, Tuple\n\nasync def process_node_batch(node_id: str, records: List[Tuple[float, float]]) -> Dict[str, Any]..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_04",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['std::shared_ptr', 'std::unique_ptr']"
+    },
+    "latency": 9.114331722259521,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```cpp\n#include <memory>\n#include <thread>\n#include <vector>\n\nvoid process() {\n    // 使用 shared_ptr 管理内存生命周期，确保在多线程环境下引用计数正确\n    auto data = std::make_shared<std::vector<int>>(100);\n\n    // 通过值传递 (capture by value) 拷贝 shared_ptr，增加引用计数\n    // 即使主线程函数结束，只要线程还在运行，data 指向的内存就不会被释放\n    std::thread t([data]() {\n        std::this_thread::sleep_for(std::chrono::seconds(1));\n        if (!data->empty()) {\n            (*data)[0] = 10;\n        }\n    });\n\n    // 修复生命周期风险：严禁在存在后台线程访问内存时使用 detach()\n    // 必须使用 join() 等待线程执行完毕，确保内存访问安全\n    if (t.joinable()) {\n        t.join();\n    }\n}\n```",
+    "gen_preview": "```cpp\n#include <memory>\n#include <thread>\n#include <vector>\n\nvoid process() {\n    // 使用 shared_ptr 管理内存生命周期，确保在多线程环境下引用计数正确\n    auto data = std::make_shared<std::vector<int>>(100);\n\n    // 通过值传递 (cap..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 32.18136215209961,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```typescript\n/**\n * 定义数据模型接口\n */\ninterface User {\n  id: string;\n  name: string;\n  email: string;\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status: 'pending' | 'completed' | 'failed';\n}\n\ninterface Metrics {\n  activeUsers: number;\n  revenue: number;\n  conversionRate: number;\n}\n\n/**\n * 定义仪表盘聚合数据的结构\n * 使用 Partial 或允许 null/undefined 以实现降级逻辑\n */\ninterface DashboardData {\n  user: User | null;\n  orders: Order[] | null;\n  metrics: Metrics | null;\n}\n\n/**\n * 模拟 API 请求函数\n * 实际场景中会替换为 fetch 或 axios\n */\nasync function mockApiCall<T>(url: string, timeout: number = 3000): Promise<T> {\n  return new Promise((resolve, reject) => {\n    const timer = setTimeout(() => reject(new Error(`Timeout: ${url}`)), timeout);\n    \n    // 模拟网络延迟\n    setTimeout(() => {\n      clearTimeout(timer);\n      // 模拟成功返回（实际开发中此处为 fetch 调用）\n      if (url === '/api/user') resolve({ id: '1', name: 'John Doe', email: 'john@example.com' } as any);\n      if (url === '/api/orders') resolve([{ id: 'o1', amount: 100, status: 'completed' }] as any);\n      if (url === '/api/metrics') resolve({ activeUsers: 1200, revenue: 5000, conversionRate: 0.05 } as any);\n      else reject(new Error('404 Not Found'));\n    }, 500);\n  });\n}\n\n/**\n * 核心方法：并发请求并实现优雅降级\n */\nasync function fetchDashboardData(): Promise<DashboardData> {\n  /**\n   * 策略：将每个 Promise 包装在一个 catch 块中。\n   * 这样即使某个请求失败，Promise.all 也会继续执行，\n   * 最终返回的结果中，失败的部分将为 null 而不是抛出异常。\n   */\n  const requestTasks = [\n    mockApiCall<User>('/api/user').catch((err) => {\n      console.error('Failed to fetch user data:', err.message);\n      return null;\n    }),\n    mockApiCall<Order[]>('/api/orders').catch((err) => {\n      console.error('Failed to fetch orders data:', err.message);\n      return null;\n    }),\n    mockApiCall<Metrics>('/api/metrics').catch((err) => {\n      console.error('Failed to fetch metrics data:', err.message);\n      return null;\n    }),\n  ];\n\n  try {\n    const [user, orders, metrics] = await Promise.all(requestTasks);\n\n    return {\n      user,\n      orders,\n      metrics,\n    };\n  } catch (error) {\n    // 理论上由于内部已 catch，此处不会进入，但作为防御性编程保留\n    console.error('Unexpected error in Promise.all:', error);\n    return { user: null, orders: null, metrics: null };\n  }\n}\n\n// --- 测试执行 ---\n(async () => {\n  console.log('Fetching dashboard data...');\n  const data = await fetchDashboardData();\n  console.log('Dashboard Data Result:', JSON.stringify(data, null, 2));\n})();\n```",
+    "gen_preview": "```typescript\n/**\n * 定义数据模型接口\n */\ninterface User {\n  id: string;\n  name: string;\n  email: string;\n}\n\ninterface Order {\n  id: string;\n  amount: number;\n  status: 'pending' | 'completed' | 'failed';\n}\n\n..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_06",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 5.792069435119629,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```sql\nSELECT \n    e1.dept_id, \n    d.dept_name, \n    e1.emp_name, \n    e1.salary\nFROM \n    employees e1\nJOIN \n    departments d ON e1.dept_id = d.dept_id\nWHERE (\n    SELECT COUNT(*) \n    FROM employees e2 \n    WHERE e2.dept_id = e1.dept_id \n      AND e2.salary > e1.salary\n) < 3\nORDER BY \n    e1.dept_id, \n    e1.salary DESC;\n```",
+    "gen_preview": "```sql\nSELECT \n    e1.dept_id, \n    d.dept_name, \n    e1.emp_name, \n    e1.salary\nFROM \n    employees e1\nJOIN \n    departments d ON e1.dept_id = d.dept_id\nWHERE (\n    SELECT COUNT(*) \n    FROM employe..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_07",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 16.082578897476196,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```java\n// --- Domain/DTO ---\npublic record OrderRequest(String userId, String productId) {}\n\n// --- Exception ---\npublic class BusinessException extends RuntimeException {\n    public BusinessException(String message) {\n        super(message);\n    }\n}\n\n// --- Service Layer ---\n@Service\npublic class OrderService {\n    private final JdbcTemplate jdbcTemplate;\n\n    public OrderService(JdbcTemplate jdbcTemplate) {\n        this.jdbcTemplate = jdbcTemplate;\n    }\n\n    @Transactional\n    public void createOrder(OrderRequest request) {\n        if (request.userId() == null || request.productId() == null) {\n            throw new BusinessException(\"Invalid order parameters\");\n        }\n        jdbcTemplate.update(\n            \"insert into orders (user_id, product_id) values (?, ?)\", \n            request.userId(), \n            request.productId()\n        );\n    }\n}\n\n// --- Global Exception Handler ---\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n\n    @ExceptionHandler(BusinessException.class)\n    public ResponseEntity<String> handleBusinessException(BusinessException e) {\n        return ResponseEntity.badRequest().body(e.getMessage());\n    }\n\n    @ExceptionHandler(Exception.class)\n    public ResponseEntity<String> handleGeneralException(Exception e) {\n        return ResponseEntity.internalServerError().body(\"Internal Server Error\");\n    }\n}\n\n// --- Controller Layer ---\n@RestController\n@RequestMapping(\"/api/orders\")\npublic class OrderController {\n    private final OrderService orderService;\n\n    public OrderController(OrderService orderService) {\n        this.orderService = orderService;\n    }\n\n    @PostMapping\n    public ResponseEntity<String> create(@RequestBody OrderRequest request) {\n        orderService.createOrder(request);\n        return ResponseEntity.ok(\"success\");\n    }\n}\n```",
+    "gen_preview": "```java\n// --- Domain/DTO ---\npublic record OrderRequest(String userId, String productId) {}\n\n// --- Exception ---\npublic class BusinessException extends RuntimeException {\n    public BusinessExceptio..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_08",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid syntax (<unknown>, line 1)"
+    },
+    "latency": 31.904290199279785,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```go\npackage main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"log\"\n\t\"sync\"\n\t\"time\"\n)\n\ntype Telemetry struct {\n\tID    string\n\tValue float64\n}\n\ntype TelemetryService struct {\n\ttaskChan    chan []Telemetry\n\tworkerCount int\n\tmaxRetries  int\n\twg          sync.WaitGroup\n}\n\nfunc NewTelemetryService(workerCount int, bufferSize int, maxRetries int) *TelemetryService {\n\treturn &TelemetryService{\n\t\ttaskChan:    make(chan []Telemetry, bufferSize),\n\t\tworkerCount: workerCount,\n\t\tmaxRetries:  maxRetries,\n\t}\n}\n\nfunc (s *TelemetryService) Start(ctx context.Context) {\n\tfor i := 0; i < s.workerCount; i++ {\n\t\ts.wg.Add(1)\n\t\tgo s.worker(ctx, i)\n\t}\n}\n\nfunc (s *TelemetryService) Stop() {\n\tclose(s.taskChan)\n\ts.wg.Wait()\n}\n\nfunc (s *TelemetryService) HandleBatch(records []Telemetry) {\n\tif len(records) == 0 {\n\t\treturn\n\t}\n\ts.taskChan <- records\n}\n\nfunc (s *TelemetryService) worker(ctx context.Context, id int) {\n\tdefer s.wg.Done()\n\tfor {\n\t\tselect {\n\t\tcase <-ctx.Done():\n\t\t\treturn\n\t\tcase batch, ok := <-s.taskChan:\n\t\t\tif !ok {\n\t\t\t\treturn\n\t\t\t}\n\t\t\ts.processWithRetry(batch)\n\t\t}\n\t}\n}\n\nfunc (s *TelemetryService) processWithRetry(batch []Telemetry) {\n\tvar err error\n\tfor attempt := 0; attempt <= s.maxRetries; attempt++ {\n\t\terr = s.writeToStorage(batch)\n\t\tif err == nil {\n\t\t\treturn\n\t\t}\n\n\t\tlog.Printf(\"[Worker] Attempt %d failed: %v\", attempt+1, err)\n\t\tif attempt < s.maxRetries {\n\t\t\ttime.Sleep(time.Millisecond * 100 * time.Duration(attempt+1)) // Exponential backoff\n\t\t}\n\t}\n\tlog.Printf(\"[Error] Failed to write batch after %d retries: %v\", s.maxRetries, err)\n}\n\n// Mock storage write function\nfunc (s *TelemetryService) writeToStorage(batch []Telemetry) error {\n\t// Simulate random failure\n\tif time.Now().UnixNano()%3 == 0 {\n\t\treturn fmt.Errorf(\"storage connection timeout\")\n\t}\n\tfmt.Printf(\"Successfully wrote batch of size %d\\n\", len(batch))\n\treturn nil\n}\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tdefer cancel()\n\n\tservice := NewTelemetryService(5, 100, 3)\n\tservice.Start(ctx)\n\n\t// Simulate incoming high-concurrency traffic\n\tfor i := 0; i < 10; i++ {\n\t\tbatch := []Telemetry{\n\t\t\t{ID: fmt.Sprintf(\"req-%d-1\", i), Value: 1.1},\n\t\t\t{ID: fmt.Sprintf(\"req-%d-2\", i), Value: 2.2},\n\t\t}\n\t\tservice.HandleBatch(batch)\n\t}\n\n\ttime.Sleep(time.Second * 2)\n\tservice.Stop()\n}\n```",
+    "gen_preview": "```go\npackage main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"log\"\n\t\"sync\"\n\t\"time\"\n)\n\ntype Telemetry struct {\n\tID    string\n\tValue float64\n}\n\ntype TelemetryService struct {\n\ttaskChan    chan []Telemetry\n\tworkerCou..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 41.61930179595947,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```bash\n#!/bin/bash\n\n# ==============================================================================\n# 脚本名称: rollback_release.sh\n# 功能描述: 执行版本回滚，包含版本校验与回滚前健康检查\n# 使用方法: ./rollback_release.sh <current_version> <target_version>\n# ==============================================================================\n\nset -e  # 遇到错误立即退出\n\n# 配置区（实际场景中可改为配置文件或环境变量）\nHEALTH_CHECK_URL=\"http://localhost:8080/health\"\nMAX_RETRIES=3\nRETRY_INTERVAL=5\n\n# 颜色定义\nRED='\\033[0;31m'\nGREEN='\\033[0;32m'\nYELLOW='\\033[1;33m'\nNC='\\033[0m' # No Color\n\nlog_info() { echo -e \"${GREEN}[INFO] $(date +'%Y-%m-%d %H:%M:%S') - $1${NC}\"; }\nlog_warn() { echo -e \"${YELLOW}[WARN] $(date +'%Y-%m-%d %H:%M:%S') - $1${NC}\"; }\nlog_error() { echo -e \"${RED}[ERROR] $(date +'%Y-%m-%d %H:%M:%S') - $1${NC}\"; }\n\n# 1. 检查参数与版本有效性\ncheck_args() {\n    local current=$1\n    local target=$2\n\n    if [[ -z \"$current\" || -z \"$target\" ]]; then\n        log_error \"参数缺失！用法: $0 <current_version> <target_version>\"\n        exit 1\n    fi\n\n    if [[ \"$current\" == \"$target\" ]]; then\n        log_error \"当前版本 ($current) 与目标回滚版本 ($target) 相同，无需回滚。\"\n        exit 1\n    fi\n\n    log_info \"版本校验通过: 当前版本 [$current] -> 目标版本 [$target]\"\n}\n\n# 2. 执行回滚前健康检查 (确保当前环境是可观测的)\npre_rollback_health_check() {\n    log_info \"正在执行回滚前健康检查...\"\n    \n    local attempt=1\n    while [ $attempt -le $MAX_RETRIES ]; do\n        # 使用 curl 检查 HTTP 状态码\n        status_code=$(curl -s -o /dev/null -w \"%{http_code}\" \"$HEALTH_CHECK_URL\" || echo \"000\")\n        \n        if [ \"$status_code\" -eq 200 ]; then\n            log_info \"当前系统状态健康 (HTTP 200)。\"\n            return 0\n        else\n            log_warn \"健康检查失败 (Status: $status_code)，正在进行第 $attempt/$MAX_RETRIES 次重试...\"\n            sleep $RETRY_INTERVAL\n            ((attempt++))\n        fi\n    done\n\n    log_error \"回滚前健康检查失败！当前系统状态异常，为防止回滚风险，终止操作。\"\n    return 1\n}\n\n# 3. 执行回滚逻辑 (模拟动作)\nexecute_rollback() {\n    local target=$1\n    log_info \"开始执行回滚动作，切换至版本: $target ...\"\n    \n    # 模拟回滚命令，实际场景中此处应为: \n    # docker stack deploy, kubectl apply, 或 ln -sfn 等\n    sleep 2 \n    \n    # 模拟回滚成功\n    local success=true \n    \n    if [ \"$success\" = true ]; then\n        log_info \"回滚指令执行成功。\"\n    else\n        log_error \"回滚指令执行过程中发生异常！\"\n        return 1\n    fi\n}\n\n# 主流程\nmain() {\n    local current_ver=$1\n    local target_ver=$2\n\n    # Step 1: 校验\n    check_args \"$current_ver\" \"$target_ver\"\n\n    # Step 2: 健康检查\n    if ! pre_rollback_health_check; then\n        log_error \"回滚流程终止：前置检查未通过。\"\n        exit 1\n    fi\n\n    # Step 3: 执行回滚\n    if ! execute_rollback \"$target_ver\"; then\n        log_error \"回滚失败！请立即人工介入检查。\"\n        exit 1\n    fi\n\n    log_info \"========================================\"\n    log_info \"回滚任务圆满完成！当前版本已切换至: $target_ver\"\n    log_info \"========================================\"\n}\n\n# 启动脚本\nmain \"$@\"\n```",
+    "gen_preview": "```bash\n#!/bin/bash\n\n# ==============================================================================\n# 脚本名称: rollback_release.sh\n# 功能描述: 执行版本回滚，包含版本校验与回滚前健康检查\n# 使用方法: ./rollback_release.sh <current_v..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 17.07698345184326,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```python\nimport pytest\n\n# 假设被测函数定义如下（实际测试时应从模块导入）\ndef settle_amount(amount, discount, tax_rate):\n    if not (0 <= tax_rate < 1):\n        raise ValueError(\"Invalid tax rate\")\n    if amount < 0 or discount < 0:\n        raise ValueError(\"Amount and discount must be non-negative\")\n    \n    after_discount = amount - discount\n    if after_discount < 0:\n        after_discount = 0\n        \n    return round(after_discount * (1 + tax_rate), 2)\n\n# --- 单元测试开始 ---\n\ndef test_settle_amount_normal_path():\n    \"\"\"覆盖正常路径：金额 100，折扣 10，税率 0.05 -> (100-10)*1.05 = 94.5\"\"\"\n    assert settle_amount(100, 10, 0.05) == 94.5\n\ndef test_settle_amount_zero_discount():\n    \"\"\"覆盖折扣为 0 的场景：金额 100，折扣 0，税率 0.1 -> 100*1.1 = 110.0\"\"\"\n    assert settle_amount(100, 0, 0.1) == 110.0\n\ndef test_settle_amount_invalid_tax_rate():\n    \"\"\"覆盖非法税率场景：税率大于等于 1 或小于 0 时应抛出 ValueError\"\"\"\n    with pytest.raises(ValueError, match=\"Invalid tax rate\"):\n        settle_amount(100, 10, 1.2)\n    \n    with pytest.raises(ValueError, match=\"Invalid tax rate\"):\n        settle_amount(100, 10, -0.1)\n```",
+    "gen_preview": "```python\nimport pytest\n\n# 假设被测函数定义如下（实际测试时应从模块导入）\ndef settle_amount(amount, discount, tax_rate):\n    if not (0 <= tax_rate < 1):\n        raise ValueError(\"Invalid tax rate\")\n    if amount < 0 or disc..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_11",
+    "eval_res": {
+      "total": 60,
+      "format": 40,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Syntax Error: invalid character '：' (U+FF1A) (<unknown>, line 75)"
+    },
+    "latency": 25.717451333999634,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```java\nimport lombok.AllArgsConstructor;\nimport lombok.Data;\nimport lombok.NoArgsConstructor;\nimport org.springframework.stereotype.Service;\nimport org.springframework.web.bind.annotation.*;\n\nimport java.util.Map;\nimport java.util.concurrent.ConcurrentHashMap;\n\n// --- 统一响应对象 ---\n@Data\n@AllArgsConstructor\n@NoArgsConstructor\nclass Result<T> {\n    private int code;\n    private String message;\n    private T data;\n\n    public static <T> Result<T> success(T data) {\n        return new Result<>(200, \"success\", data);\n    }\n\n    public static <T> Result<T> error(int code, String message) {\n        return new Result<>(code, message, null);\n    }\n}\n\n// --- 请求参数 ---\n@Data\nclass OrderRequest {\n    private String requestId; // 用于幂等校验\n    private String userId;\n    private Double amount;\n    private String stationId;\n}\n\n// --- 响应数据 ---\n@Data\n@AllArgsConstructor\nclass OrderResponse {\n    private String orderId;\n    private String status;\n}\n\n// --- Controller 层 ---\n@RestController\n@RequestMapping(\"/api/v1/orders\")\nclass OrderController {\n\n    private final OrderService orderService;\n\n    public OrderController(OrderService orderService) {\n        this.orderService = orderService;\n    }\n\n    @PostMapping(\"/create\")\n    public Result<OrderResponse> createOrder(@RequestBody OrderRequest request) {\n        if (request.getRequestId() == null || request.getRequestId().isEmpty()) {\n            return Result.error(400, \"requestId is required\");\n        }\n        return Result.success(orderService.createOrder(request));\n    }\n}\n\n// --- Service 层 ---\n@Service\nclass OrderService {\n\n    // 模拟数据库/Redis 存储已处理的 requestId (幂等表)\n    private final Map<String, OrderResponse> idempotencyStore = new ConcurrentHashMap<>();\n\n    public OrderResponse createOrder(OrderRequest request) {\n        String requestId = request.getRequestId();\n\n        // 1. 幂等检查：判断请求是否已处理过\n        if (idempotencyStore.containsKey(requestId)) {\n            return idempotencyStore.get(requestId);\n        }\n\n        // 2. 模拟业务逻辑：创建订单\n        OrderResponse newOrder = processBusinessLogic(request);\n\n        // 3. 写入幂等记录 (实际生产中应在同一个事务内完成)\n        idempotencyStore.put(requestId, newOrder);\n\n        return newOrder;\n    }\n\n    private OrderResponse processBusinessLogic(OrderRequest request) {\n        // 模拟生成订单 ID\n        String orderId = \"ORD_\" + System.currentTimeMillis();\n        return new OrderResponse(orderId, \"CREATED\");\n    }\n}\n```",
+    "gen_preview": "```java\nimport lombok.AllArgsConstructor;\nimport lombok.Data;\nimport lombok.NoArgsConstructor;\nimport org.springframework.stereotype.Service;\nimport org.springframework.web.bind.annotation.*;\n\nimport ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_12",
+    "eval_res": {
+      "total": 90,
+      "format": 40,
+      "logic": 30,
+      "constraint": 20,
+      "reason": "Missing: ['LEFT JOIN']"
+    },
+    "latency": 9.559591054916382,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "```sql\nSELECT\n    COALESCE(s.order_id, t.order_id) AS order_id,\n    CASE \n        WHEN t.order_id IS NULL THEN 'Missing in Target'\n        WHEN s.order_id IS NULL THEN 'Missing in Source'\n        WHEN s.amount <> t.amount THEN 'Amount Mismatch'\n        ELSE 'Other Mismatch'\n    END AS diff_type,\n    s.amount AS source_amount,\n    t.amount AS target_amount\nFROM (\n    SELECT order_id, amount \n    FROM source_orders \n    WHERE create_time >= CURRENT_DATE - INTERVAL '1 day'\n) s\nFULL OUTER JOIN (\n    SELECT order_id, amount \n    FROM target_orders \n    WHERE create_time >= CURRENT_DATE - INTERVAL '1 day'\n) t ON s.order_id = t.order_id\nWHERE s.order_id IS NULL \n   OR t.order_id IS NULL \n   OR s.amount <> t.amount;\n```",
+    "gen_preview": "```sql\nSELECT\n    COALESCE(s.order_id, t.order_id) AS order_id,\n    CASE \n        WHEN t.order_id IS NULL THEN 'Missing in Target'\n        WHEN s.order_id IS NULL THEN 'Missing in Source'\n        WHEN..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_13",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 14.199448347091675,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"issue_summary\": \"BMC批量纳管任务在高并发场景下触发连接池泄漏，导致系统资源耗尽，纳管任务在启动约30分钟后出现大面积超时故障。\",\n  \"root_cause_hypothesis\": \"在高并发纳管请求下，部分异步回调逻辑或异常分支未正确执行连接释放操作（close/release），导致连接池中的连接无法回收，最终耗尽可用连接数。\",\n  \"work_items\": [\n    {\n      \"task\": \"排查并定位泄漏代码路径\",\n      \"owner_role\": \"Backend Developer\",\n      \"done_definition\": \"通过堆栈分析（Heap Dump）和日志追踪，确定未释放连接的具体代码行及异常触发条件。\"\n    },\n    {\n      \"task\": \"实施连接池资源回收修复\",\n      \"owner_role\": \"Backend Developer\",\n      \"done_definition\": \"在 finally 块中增加连接释放逻辑，并优化异常捕获机制，确保所有分支均能正确归还连接。\"\n    },\n    {\n      \"task\": \"高并发压力测试与验证\",\n      \"owner_role\": \"QA Engineer\",\n      \"done_definition\": \"模拟TR4评审场景下的高并发纳管压力，观察30分钟以上连接池指标，确认连接数呈正态波动且无持续增长趋势。\"\n    }\n  ],\n  \"rollback_plan\": \"若修复版本上线后连接池指标仍持续上升，立即执行版本回滚，恢复至上一个稳定版本，并同步重启管理平台服务以强制释放存量泄漏连接。\"\n}",
+    "gen_preview": "{\n  \"issue_summary\": \"BMC批量纳管任务在高并发场景下触发连接池泄漏，导致系统资源耗尽，纳管任务在启动约30分钟后出现大面积超时故障。\",\n  \"root_cause_hypothesis\": \"在高并发纳管请求下，部分异步回调逻辑或异常分支未正确执行连接释放操作（close/release），导致连接池中的连接无法回收，最终耗尽可用连接数。\",\n  \"work_items\"..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_14",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 11.893088579177856,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 测试类型 | 覆盖场景 | 关键数据 | 通过标准 |\n| :--- | :--- | :--- | :--- |\n| **单测 (Unit Test)** | 验证折扣计算逻辑函数（Discount Engine Core） | 输入：基础价 100，折扣 A (0.9)，折扣 B (0.8) | 计算结果严格符合预设算法（如：100 * 0.9 * 0.8 = 72），无精度丢失 |\n| **集成测试 (Integration Test)** | 验证结算引擎与订单模块、促销模块的接口调用 | 订单金额 1000，叠加促销券 50 元 + 会员折扣 9 折 | 结算接口返回的最终应付金额与促销规则引擎计算结果一致 |\n| **回归测试 (Regression Test)** | 验证修复折扣叠加后，原有单一折扣及无折扣场景的稳定性 | 场景 1：仅单折扣；场景 2：无任何折扣 | 原有结算逻辑不受影响，金额计算结果与修复前版本保持一致 |\n| **异常路径 (Exception Path)** | 验证极端/非法数据下的计算鲁棒性 | 折扣率为负数、折扣率为 0、折扣率为大于 1 的值、金额为 Null | 系统抛出业务异常或拦截非法输入，不产生负数金额或系统崩溃 |",
+    "gen_preview": "| 测试类型 | 覆盖场景 | 关键数据 | 通过标准 |\n| :--- | :--- | :--- | :--- |\n| **单测 (Unit Test)** | 验证折扣计算逻辑函数（Discount Engine Core） | 输入：基础价 100，折扣 A (0.9)，折扣 B (0.8) | 计算结果严格符合预设算法（如：100 * 0.9 * 0.8 = 72），无精度丢失 |\n| ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_15",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 21.064563751220703,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 目标\n\n* **提升存储写入吞吐量**：通过将原本阻塞式的同步串行链路拆解，减少 CPU 等待 I/O 完成的空转时间，提升系统在高并发场景下的 IOPS 表现。\n* **降低写入延迟**：利用异步分段提交机制，将长链路的同步等待拆分为多个阶段的并行或流水线处理，缩短单个请求从发起至响应的端到端延迟。\n* **优化资源利用率**：通过异步化改造，使存储引擎能够更平滑地调度计算与存储资源，避免因单点同步阻塞导致的系统级性能抖动。\n\n# 设计调整\n\n* **流程解耦与分段化**：将原有的“接收-校验-日志-数据写入-确认”单向串行链路，重构为“请求接收-内存缓冲-异步分段提交-状态更新”的多阶段流水线模型。\n* **引入中间状态管理**：在异步提交过程中引入 Pending/Committed 状态机，通过内存中的提交队列（Commit Queue）管理各分段的执行进度，而非依赖调用栈的同步返回。\n* **采用批量提交机制**：由原有的“一请求一提交”改为“多请求聚合分段提交”，通过合并小 I/O 请求来减少元数据更新和日志刷盘的频率。\n\n# 风险控制\n\n* **一致性保障机制**：\n    * **引入 WAL（预写日志）与 Checkpoint 机制**：在异步分段提交前，必须先完成顺序化的日志持久化，确保在系统崩溃后能通过重放日志（Redo Log）恢复至一致状态。\n    * **版本号与序列号校验**：为每个分段提交分配全局单调递增的序列号（Sequence Number），防止异步乱序执行导致的数据覆盖或版本冲突。\n* **回滚与异常处理策略**：\n    * **分段补偿与原子回滚**：设计“全成功或全失败”的逻辑边界，若某一分段提交失败，系统将触发补偿机制（Compensating Transaction），利用 Undo Log 或快照技术将已提交的分段回滚至初始状态。\n    * **超时与重试限流**：针对异步链路中的超时异常，建立严格的重试退避算法（Exponential Backoff），并设置最大重试阈值，防止因单点故障引发的异步任务堆积导致系统雪崩。",
+    "gen_preview": "# 目标\n\n* **提升存储写入吞吐量**：通过将原本阻塞式的同步串行链路拆解，减少 CPU 等待 I/O 完成的空转时间，提升系统在高并发场景下的 IOPS 表现。\n* **降低写入延迟**：利用异步分段提交机制，将长链路的同步等待拆分为多个阶段的并行或流水线处理，缩短单个请求从发起至响应的端到端延迟。\n* **优化资源利用率**：通过异步化改造，使存储引擎能够更平滑地调度计算与存储资源，避免因..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_16",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 13.7041597366333,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"release_scope\": {\n    \"target_version\": \"v2.1.0-beta\",\n    \"deployment_mode\": \"canary\",\n    \"max_sites\": 2,\n    \"site_ids\": [\n      \"STATION_SH_001\",\n      \"STATION_SZ_002\"\n    ],\n    \"strategy\": \"sequential_canary\"\n  },\n  \"prechecks\": [\n    \"Verify current firmware version and hardware compatibility for target sites\",\n    \"Confirm backup of existing site configuration and local database state\",\n    \"Check network connectivity and cloud-to-edge communication stability\",\n    \"Validate that the rollback package is pre-staged on the edge gateway\"\n  ],\n  \"deployment_steps\": [\n    \"Step 1: Deploy new version to STATION_SH_001 and monitor telemetry for 30 minutes\",\n    \"Step 2: Perform functional validation of liquid cooling and charging modules on site 1\",\n    \"Step 3: If site 1 is stable, proceed to deploy to STATION_SZ_002\",\n    \"Step 4: Execute full system health check across both canary sites\"\n  ],\n  \"rollback_conditions\": [\n    \"Any critical error in liquid cooling temperature control logic\",\n    \"Charging failure rate exceeds 5% within the first hour of deployment\",\n    \"Loss of communication between the edge gateway and the central management platform\",\n    \"Manual trigger by the business owner due to unexpected site behavior\"\n  ]\n}",
+    "gen_preview": "{\n  \"release_scope\": {\n    \"target_version\": \"v2.1.0-beta\",\n    \"deployment_mode\": \"canary\",\n    \"max_sites\": 2,\n    \"site_ids\": [\n      \"STATION_SH_001\",\n      \"STATION_SZ_002\"\n    ],\n    \"strategy\":..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_17",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 21.161699056625366,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"change_scope\": \"工具调用网关（Tool Calling Gateway）架构重构，涵盖协议转换层、鉴权插件、路由分发逻辑及流量监控模块的升级。\",\n  \"acceptance_checks\": [\n    {\n      \"check_item\": \"协议兼容性测试：验证重构后网关是否支持原有所有工具定义的 JSON Schema 格式，确保 Agent 发起的调用请求无解析错误。\",\n      \"owner_role\": \"QA Engineer\",\n      \"pass_criteria\": \"100% 存量工具调用成功率，无 Schema 校验失败报错。\"\n    },\n    {\n      \"check_item\": \"鉴权与安全校验：验证新网关对 API Key、OAuth2 及内部服务鉴权逻辑的正确性，防止越权调用。\",\n      \"owner_role\": \"Security Engineer\",\n      \"pass_criteria\": \"非法凭证请求被拦截率 100%，合法请求延迟增加在 5ms 以内。\"\n    },\n    {\n      \"check_item\": \"高并发性能压测：模拟智能体集群大规模并发调用工具的场景，测试网关的吞吐量与响应延迟。\",\n      \"owner_role\": \"SRE / Performance Engineer\",\n      \"pass_criteria\": \"P99 响应延迟不高于重构前基准值，在高并发下无内存泄漏或连接池耗尽现象。\"\n    },\n    {\n      \"check_item\": \"链路追踪与日志完整性：验证重构后的网关是否能正确透传 TraceID，并记录完整的 Request/Response Payload。\",\n      \"owner_role\": \"Backend Developer\",\n      \"pass_criteria\": \"在日志平台可完整检索到单次工具调用的全链路日志，且 TraceID 与 Agent 端一致。\"\n    }\n  ],\n  \"blocking_risks\": [\n    \"旧版工具定义的 Schema 兼容性缺失可能导致存量 Agent 业务中断。\",\n    \"重构后的鉴权逻辑若存在逻辑漏洞，可能导致敏感工具接口暴露。\",\n    \"流量切换瞬间的缓存失效可能导致瞬时响应延迟剧增。\"\n  ],\n  \"handover_notes\": \"验收通过后需立即更新 API 文档及网关配置管理手册；建议在灰度阶段观察 24 小时后再进行全量流量切换；需保留旧版网关实例以备紧急回滚。\"\n}",
+    "gen_preview": "{\n  \"change_scope\": \"工具调用网关（Tool Calling Gateway）架构重构，涵盖协议转换层、鉴权插件、路由分发逻辑及流量监控模块的升级。\",\n  \"acceptance_checks\": [\n    {\n      \"check_item\": \"协议兼容性测试：验证重构后网关是否支持原有所有工具定义的 JSON Schema 格式，确保 Agent 发起的调用请求无..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_18",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.704366207122803,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 问题概览\n\n* **事件描述**：在 AI 算力集群联调阶段，系统出现非预期的作业抢占（Preemption）异常，导致正在运行的高优先级训练任务被异常中断，并触发了低优先级任务的错误调度。\n* **影响范围**：涉及调度器（Scheduler）核心逻辑、资源隔离策略以及任务优先级队列，导致联调进度延迟约 4 小时，部分 Checkpoint 写入异常。\n* **异常现象**：\n    * 监控显示高优先级任务在资源充足的情况下被标记为 `Preempted`。\n    * 调度日志记录显示，系统错误地将空闲资源识别为“极度紧缺”，从而触发了抢占机制。\n\n# 根因分析\n\n* **调度算法逻辑缺陷**：\n    * 优先级计算公式中，资源权重（Resource Weight）与任务存活时间（Runtime）的耦合逻辑存在边界值错误，导致长时运行任务的优先级在特定条件下发生突变。\n    * 抢占触发阈值（Preemption Threshold）设置过窄，未能有效区分“资源碎片化”与“资源耗尽”两种场景。\n* **状态同步延迟**：\n    * 算力节点（Node）的状态上报与调度中心（Control Plane）的缓存存在同步时差，导致调度器基于过时的资源占用数据进行了错误的抢占决策。\n    * 容器运行时（Runtime）上报的 GPU 利用率数据在极端负载下出现丢包，触发了调度器的保护性抢占逻辑。\n\n# 后续动作\n\n* **代码逻辑修复与优化**：\n    * **负责人**：调度算法组 - 张三\n    * **时限**：2023-10-27 18:00 前\n    * **内容**：重构优先级计算模块，增加优先级平滑函数，防止权重突变；调整抢占触发阈值，引入资源缓冲带。\n* **状态同步机制加固**：\n    * **负责人**：基础设施组 - 李四\n    * **时限**：2023-10-28 12:00 前\n    * **内容**：引入基于版本号的状态一致性校验机制，降低调度中心与计算节点间的数据同步延迟。\n* **回归验证方案**：\n    * **负责人**：测试组 - 王五\n    * **时限**：修复完成后立即执行\n    * **内容**：\n        1. **压力测试**：模拟大规模高低优先级任务混合场景，验证抢占触发的准确性。\n        2. **边界测试**：构造资源临界点场景，确保调度器在资源碎片化时不会误触发抢占。\n        3. **稳定性回归**：连续运行 24 小时自动化训练脚本，观察是否存在非预期中断。",
+    "gen_preview": "# 问题概览\n\n* **事件描述**：在 AI 算力集群联调阶段，系统出现非预期的作业抢占（Preemption）异常，导致正在运行的高优先级训练任务被异常中断，并触发了低优先级任务的错误调度。\n* **影响范围**：涉及调度器（Scheduler）核心逻辑、资源隔离策略以及任务优先级队列，导致联调进度延迟约 4 小时，部分 Checkpoint 写入异常。\n* **异常现象**：\n    * 监..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_19",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 14.422699689865112,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 审查对象 | 问题类型 | 风险说明 | 修改建议 |\n| :--- | :--- | :--- | :--- |\n| 数据预处理模块 | 资源释放 | 在处理大规模数据集时，文件句柄或网络连接未在 `finally` 块中关闭，可能导致系统句柄耗尽，引发 OOM 或服务崩溃。 | 使用 `try-with-resources` (Java) 或 `with` 语句 (Python) 确保资源在异常发生时也能被正确释放。 |\n| 异常重试模块 | 异常处理 | 重试机制未对特定类型的异常（如业务逻辑错误）进行区分，导致对不可恢复的错误进行无效重试，浪费计算资源并延长故障恢复时间。 | 引入异常分类机制，仅针对网络抖动、超时等可恢复异常进行重试，并增加指数退避（Exponential Backoff）策略。 |\n| 缓存刷新模块 | 并发安全 | 在多线程环境下刷新缓存时，未对“检查-更新”操作进行原子化处理，可能导致缓存击穿或多个线程同时执行高耗时的预处理任务。 | 使用分布式锁（如 Redis Lock）或本地同步锁（如 `ReentrantLock`）确保同一时间只有一个线程执行缓存刷新逻辑。 |\n| 异常重试模块 | 日志可观测性 | 重试过程仅记录了简单的错误信息，缺乏重试次数、当前尝试索引及上下文 TraceID，导致线上故障时难以定位重试链路。 | 在重试日志中补全关键上下文信息（如 `retry_count`, `attempt_id`, `correlation_id`），并确保日志级别与业务场景匹配。 |",
+    "gen_preview": "| 审查对象 | 问题类型 | 风险说明 | 修改建议 |\n| :--- | :--- | :--- | :--- |\n| 数据预处理模块 | 资源释放 | 在处理大规模数据集时，文件句柄或网络连接未在 `finally` 块中关闭，可能导致系统句柄耗尽，引发 OOM 或服务崩溃。 | 使用 `try-with-resources` (Java) 或 `with` 语句 (Python) 确保资源..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_20",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 10.742248058319092,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 审查维度 | 问题信号 | 风险说明 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| **Usability** | 交互逻辑不一致、错误提示模糊、缺乏操作确认、UI 布局错乱 | 降低用户操作效率，增加误操作风险，导致平台易用性下降 | **Block**：必须修改交互逻辑或完善提示信息后方可合并 |\n| **Performance** | 循环内调用 API、未索引的数据库查询、内存泄漏风险、同步阻塞 IO | 导致服务器响应延迟、资源耗尽或系统在高并发下崩溃 | **Block**：必须进行性能优化或异步化处理后方可合并 |\n| **Compatibility** | 依赖库版本冲突、未考虑浏览器/OS 差异、破坏现有 API 协议 | 导致现有功能回归失败、环境迁移困难或客户端无法正常使用 | **Block**：必须通过兼容性测试或提供版本平滑过渡方案 |\n| **Security** | SQL 注入风险、权限校验缺失、敏感信息明文传输、越权访问漏洞 | 导致服务器数据泄露、系统被非法控制或面临严重安全合规风险 | **Critical Block**：严禁合并，必须修复所有安全漏洞 |",
+    "gen_preview": "| 审查维度 | 问题信号 | 风险说明 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| **Usability** | 交互逻辑不一致、错误提示模糊、缺乏操作确认、UI 布局错乱 | 降低用户操作效率，增加误操作风险，导致平台易用性下降 | **Block**：必须修改交互逻辑或完善提示信息后方可合并 |\n| **Performance** | 循环内调用 AP..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_21",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 12.681442737579346,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"review_type_summary\": \"Feature Enhancement & Optimization\",\n  \"issue_buckets\": [\n    {\n      \"aspect\": \"usability\",\n      \"signal\": \"The error message returned by the AI model inference API is too generic, making it difficult for end-users to debug prompt syntax errors.\",\n      \"severity\": \"medium\"\n    },\n    {\n      \"aspect\": \"performance\",\n      \"signal\": \"The new data preprocessing pipeline introduces an O(n^2) complexity in the feature scaling module, which will cause latency spikes on large datasets.\",\n      \"severity\": \"high\"\n    },\n    {\n      \"aspect\": \"security\",\n      \"signal\": \"Hardcoded API credentials detected in the integration test suite for the vector database connection.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"aspect\": \"maintainability\",\n      \"signal\": \"The new module lacks unit test coverage for edge cases in the tokenization logic.\",\n      \"severity\": \"low\"\n    }\n  ],\n  \"merge_decision\": \"REJECTED\",\n  \"followup_actions\": [\n    \"Refactor the feature scaling algorithm to use vectorized operations.\",\n    \"Move all hardcoded credentials to the environment secret manager.\",\n    \"Implement detailed error handling and specific exception types for the inference API.\",\n    \"Increase unit test coverage to at least 80% for the new module.\"\n  ]\n}",
+    "gen_preview": "{\n  \"review_type_summary\": \"Feature Enhancement & Optimization\",\n  \"issue_buckets\": [\n    {\n      \"aspect\": \"usability\",\n      \"signal\": \"The error message returned by the AI model inference API is to..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_22",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['Back-end', 'Front-end']"
+    },
+    "latency": 16.62552309036255,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"backend_constraints\": {\n    \"architecture\": \"Microservices-based orchestration for agent workflows\",\n    \"api_design\": \"RESTful endpoints for task management and WebSocket for real-time agent status streaming\",\n    \"data_consistency\": \"Distributed locking mechanism required for concurrent agent execution tasks\",\n    \"security\": \"JWT-based authentication and fine-grained RBAC for workspace access control\"\n  },\n  \"frontend_constraints\": {\n    \"framework\": \"React-based component library with state management via Redux/Zustand\",\n    \"ui_ux\": \"Low-code drag-and-drop canvas for agent workflow orchestration\",\n    \"performance\": \"Virtual scrolling for long conversation history and real-time log streaming\",\n    \"responsiveness\": \"Adaptive layout supporting both desktop management and mobile monitoring\"\n  },\n  \"language_runtime_notes\": {\n    \"java_implementation\": \"Spring Boot 3.x for core business logic, high-concurrency task scheduling, and enterprise-grade service orchestration\",\n    \"python_implementation\": \"FastAPI/LangChain for LLM integration, agentic reasoning loops, and heavy-duty AI model inference processing\",\n    \"interop_strategy\": \"gRPC or high-speed Message Queue (RabbitMQ/Kafka) for communication between Java backend and Python AI services\"\n  },\n  \"delivery_risks\": [\n    \"Latency overhead caused by cross-language communication between Java and Python services\",\n    \"Potential memory leaks in Python runtime during long-running agentic reasoning loops\",\n    \"Complexity in synchronizing real-time WebSocket states between the frontend and distributed backend\"\n  ],\n  \"next_actions\": [\n    \"Define Protobuf schemas for Java-Python inter-service communication\",\n    \"Establish a unified CI/CD pipeline supporting multi-language containerization\",\n    \"Conduct a performance benchmark on the agent workflow orchestration latency\"\n  ]\n}",
+    "gen_preview": "{\n  \"backend_constraints\": {\n    \"architecture\": \"Microservices-based orchestration for agent workflows\",\n    \"api_design\": \"RESTful endpoints for task management and WebSocket for real-time agent sta..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_23",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Field routing_actions must be an array; Field routing_actions must be an array"
+    },
+    "latency": 16.66367745399475,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"review_context\": {\n    \"project_name\": \"Server Management Platform\",\n    \"review_type\": \"High-frequency Aspect Classification\",\n    \"objective\": \"Categorize recurring review signals to determine routing for compatibility, security, and documentation remediation.\"\n  },\n  \"high_frequency_aspects\": [\n    {\n      \"aspect\": \"documentation\",\n      \"signal\": \"Missing API endpoint descriptions, outdated README instructions, or lack of inline comments for complex logic.\",\n      \"owner\": \"Technical Writer / Feature Developer\"\n    },\n    {\n      \"aspect\": \"compatibility\",\n      \"signal\": \"Hardcoded OS paths, deprecated library usage, or breaking changes in existing API schemas.\",\n      \"owner\": \"Platform Engineer\"\n    },\n    {\n      \"aspect\": \"security\",\n      \"signal\": \"Unsanitized user input in shell commands, hardcoded credentials, or overly permissive IAM roles.\",\n      \"owner\": \"Security Engineer\"\n    },\n    {\n      \"aspect\": \"portability\",\n      \"signal\": \"Environment-specific configuration dependencies, non-standard container entrypoints, or architecture-specific assembly instructions.\",\n      \"owner\": \"DevOps Engineer\"\n    }\n  ],\n  \"nonfunctional_risks\": [\n    \"Potential regression in cross-OS server management capabilities.\",\n    \"Increased technical debt due to undocumented architectural shifts.\",\n    \"Security vulnerability exposure in automated provisioning scripts.\"\n  ],\n  \"routing_actions\": {\n    \"to_compatibility_squad\": [\n      \"API breaking changes\",\n      \"OS-specific pathing issues\"\n    ],\n    \"to_security_squad\": [\n      \"Input validation failures\",\n      \"Credential exposure\"\n    ],\n    \"to_documentation_squad\": [\n      \"Missing docstrings\",\n      \"Outdated deployment guides\"\n    ]\n  }\n}",
+    "gen_preview": "{\n  \"review_context\": {\n    \"project_name\": \"Server Management Platform\",\n    \"review_type\": \"High-frequency Aspect Classification\",\n    \"objective\": \"Categorize recurring review signals to determine ..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_24",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['documentation']"
+    },
+    "latency": 10.112514019012451,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 审查维度 | 问题信号 | 非功能风险 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| Usability (可用性) | 边缘端日志格式不统一、缺乏关键指标的健康检查接口 | 运维监控盲区，导致节点故障时难以快速定位根因 | 强制要求实现标准化的 Prometheus Metrics 及结构化日志 |\n| Portability (可移植性) | 代码中硬编码了特定硬件的路径、寄存器地址或特定 CPU 指令集 | 无法在不同型号的边缘计算节点间迁移，导致硬件锁死 | 抽象硬件抽象层 (HAL)，通过配置文件或环境变量注入差异化参数 |\n| Compatibility (兼容性) | 依赖库版本与当前边缘 OS 内核版本存在冲突 | 运行时环境崩溃或出现不可预知的系统调用错误 | 验证容器镜像/依赖包的兼容性矩阵，确保向下兼容 |\n| 合并决策 (Merge Decision) | 存在上述高频问题的未修复项 | 引入技术债，增加后续版本迭代的回归成本 | **延后合并**：要求开发者针对上述维度提交补丁，通过回归测试后再行合并 |",
+    "gen_preview": "| 审查维度 | 问题信号 | 非功能风险 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| Usability (可用性) | 边缘端日志格式不统一、缺乏关键指标的健康检查接口 | 运维监控盲区，导致节点故障时难以快速定位根因 | 强制要求实现标准化的 Prometheus Metrics 及结构化日志 |\n| Portability (可移植性) | 代码中硬编..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_25",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['others', 'documentation']"
+    },
+    "latency": 3.8340864181518555,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"primary_aspect\": \"usability\",\n  \"signal_summary\": \"The PR introduces a new configuration interface for agent tool-calling. While the logic is sound, the UI feedback for failed tool execution is currently minimal, which may impact user troubleshooting experience.\",\n  \"merge_hint\": \"conditional_merge\",\n  \"next_step\": \"Approve with minor suggestions to enhance error message clarity in the next iteration.\"\n}",
+    "gen_preview": "{\n  \"primary_aspect\": \"usability\",\n  \"signal_summary\": \"The PR introduces a new configuration interface for agent tool-calling. While the logic is sound, the UI feedback for failed tool execution is c..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_26",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['documentation']"
+    },
+    "latency": 9.281169414520264,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 审查维度 | 问题信号 | 非功能风险 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| Usability | 交互反馈链路缺失或错误提示过于技术化 | 用户操作成本增加，导致运维误操作风险 | 增加异步操作的状态反馈，并将底层错误码转化为业务语义化提示 |\n| Portability | 配置文件中硬编码了特定 OS 的文件路径或环境变量 | 跨环境部署失败，导致容器化或多云迁移受阻 | 抽象路径访问层，统一使用相对路径或通过配置中心注入环境参数 |\n| Compatibility | API 接口变更未进行版本号标注或向下兼容测试 | 存量管理插件/脚本失效，引发系统集成崩溃 | 实施 API 版本化管理，并在变更日志中明确标注 Breaking Changes |\n| 补齐说明 | 现有 Review 维度覆盖度不足，缺乏复杂度分流标准 | 评审标准不统一，导致高风险逻辑被低优先级维度掩盖 | 引入中复杂度分流矩阵，按维度权重对 PR 进行分级评审 |",
+    "gen_preview": "| 审查维度 | 问题信号 | 非功能风险 | 处理建议 |\n| :--- | :--- | :--- | :--- |\n| Usability | 交互反馈链路缺失或错误提示过于技术化 | 用户操作成本增加，导致运维误操作风险 | 增加异步操作的状态反馈，并将底层错误码转化为业务语义化提示 |\n| Portability | 配置文件中硬编码了特定 OS 的文件路径或环境变量 | 跨环境部署失败..."
+  },
+  {
+    "id": "COMPANY_IPD_S3_27",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.986910104751587,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 审查结论\n* **综合评估**：本次 PR 涉及边缘计算节点核心调度逻辑的重构，代码逻辑复杂度较高，虽解决了当前版本的性能瓶颈，但引入了多项系统级风险。\n* **合并状态**：**暂缓合并 (Hold)**。当前代码质量尚未达到生产环境发布标准，需在完成风险修复及回归测试后重新发起评审。\n\n# 主要风险\n* **Usability (可用性)**：新增的边缘节点配置参数缺乏有效的边界校验机制，若用户输入非法参数，可能导致节点服务在启动阶段陷入死循环，且缺乏清晰的错误日志输出。\n* **Portability (可移植性)**：部分底层驱动调用硬编码了特定架构（x86_64）的内存对齐方式，这会导致代码在 ARM 架构的边缘计算设备上运行时出现内存访问异常。\n* **Security (安全性)**：在处理节点间通信的 RPC 调用时，未对 Payload 进行严格的长度限制与签名校验，存在潜在的缓冲区溢出风险及中间人攻击风险。\n* **Compatibility (兼容性)**：新版数据协议格式与存量边缘节点的旧版 API 不向下兼容，直接部署可能导致存量节点无法接入集群。\n\n# 处理建议\n* **补齐动作**：\n    * 开发者需针对 ARM 架构编写单元测试，验证内存对齐逻辑的通用性。\n    * 必须补齐针对配置参数的 Schema 校验逻辑，并增加异常捕获与日志记录。\n    * 需补充一份关于协议版本平滑升级的方案说明。\n* **合并判断**：\n    * 待上述风险点修复并提交新的 Commit 后，需由架构师进行二次 Review。\n    * 在通过自动化集成测试（CI）及兼容性回归测试后，方可批准合并（Approve & Merge）。",
+    "gen_preview": "# 审查结论\n* **综合评估**：本次 PR 涉及边缘计算节点核心调度逻辑的重构，代码逻辑复杂度较高，虽解决了当前版本的性能瓶颈，但引入了多项系统级风险。\n* **合并状态**：**暂缓合并 (Hold)**。当前代码质量尚未达到生产环境发布标准，需在完成风险修复及回归测试后重新发起评审。\n\n# 主要风险\n* **Usability (可用性)**：新增的边缘节点配置参数缺乏有效的边界校验机制，..."
+  }
+]

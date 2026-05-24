@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": ".",
+    "outDir": "dist",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "incremental": false,
+    "tsBuildInfoFile": "./tsconfig.benchlocal.tsbuildinfo"
+  },
+  "include": ["benchlocal/**/*.ts", "lib/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

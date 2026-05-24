@@ -1,8 +1,8 @@
 import { test, expect, APIRequestContext } from '@playwright/test';
 import { execSync } from 'child_process';
 
-const BASE_URL = 'http://localhost:5173';
-const API_URL = 'http://localhost:8000';
+const BASE_URL = 'http://localhost:5175';
+const API_URL = 'http://localhost:8001';
 
 function initDatabase() {
   try {

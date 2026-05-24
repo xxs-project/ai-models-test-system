@@ -698,14 +698,14 @@ print('数据库初始化完成')
 stop_services() {
     log_info "停止已有服务..."
     
-    if fuser 8000/tcp &>/dev/null; then
-        fuser -k 8000/tcp 2>/dev/null || true
-        log_info "已停止后端服务 (端口8000)"
+    if fuser 8001/tcp &>/dev/null; then
+        fuser -k 8001/tcp 2>/dev/null || true
+        log_info "已停止后端服务 (端口8001)"
     fi
     
-    if fuser 5173/tcp &>/dev/null; then
-        fuser -k 5173/tcp 2>/dev/null || true
-        log_info "已停止前端服务 (端口5173)"
+    if fuser 5175/tcp &>/dev/null; then
+        fuser -k 5175/tcp 2>/dev/null || true
+        log_info "已停止前端服务 (端口5175)"
     fi
     
     sleep 1
@@ -719,13 +719,13 @@ start_backend() {
     
     export PYTHONPATH="${PROJECT_DIR}:$PYTHONPATH"
     
-    nohup python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 > "${PROJECT_DIR}/logs/backend.log" 2>&1 &
+    nohup python3 -m uvicorn main:app --host 0.0.0.0 --port 8001 > "${PROJECT_DIR}/logs/backend.log" 2>&1 &
     BACKEND_PID=$!
     
     sleep 3
     
-    if fuser 8000/tcp &>/dev/null; then
-        log_info "后端服务已启动 (端口8000, PID: $BACKEND_PID)"
+    if fuser 8001/tcp &>/dev/null; then
+        log_info "后端服务已启动 (端口8001, PID: $BACKEND_PID)"
     else
         log_error "后端服务启动失败"
         exit 1
@@ -743,7 +743,7 @@ start_frontend() {
     
     if [ ! -d "dist" ]; then
         log_warn "前端未构建，将使用开发模式"
-        npm run dev -- --host 0.0.0.0 --port 5173 > "${PROJECT_DIR}/logs/frontend.log" 2>&1 &
+        npm run dev -- --host 0.0.0.0 --port 5175 > "${PROJECT_DIR}/logs/frontend.log" 2>&1 &
     else
         node "${SERVER_FILE}" > "${PROJECT_DIR}/logs/frontend.log" 2>&1 &
     fi
@@ -751,8 +751,8 @@ start_frontend() {
     
     sleep 3
     
-    if fuser 5173/tcp &>/dev/null; then
-        log_info "前端服务已启动 (端口5173, PID: $FRONTEND_PID)"
+    if fuser 5175/tcp &>/dev/null; then
+        log_info "前端服务已启动 (端口5175, PID: $FRONTEND_PID)"
     else
         log_error "前端服务启动失败"
         exit 1
@@ -765,25 +765,25 @@ check_status() {
     echo "  服务状态"
     echo "========================================"
     
-    if fuser 8000/tcp &>/dev/null; then
-        echo -e "  后端服务: ${GREEN}运行中${NC} (端口8000)"
+    if fuser 8001/tcp &>/dev/null; then
+        echo -e "  后端服务: ${GREEN}运行中${NC} (端口8001)"
     else
-        echo -e "  后端服务: ${RED}未运行${NC} (端口8000)"
+        echo -e "  后端服务: ${RED}未运行${NC} (端口8001)"
     fi
     
-    if fuser 5173/tcp &>/dev/null; then
-        echo -e "  前端服务: ${GREEN}运行中${NC} (端口5173)"
+    if fuser 5175/tcp &>/dev/null; then
+        echo -e "  前端服务: ${GREEN}运行中${NC} (端口5175)"
     else
-        echo -e "  前端服务: ${RED}未运行${NC} (端口5173)"
+        echo -e "  前端服务: ${RED}未运行${NC} (端口5175)"
     fi
     
     echo ""
     echo "========================================"
     echo "  访问地址"
     echo "========================================"
-    echo "  前端界面: http://localhost:5173"
-    echo "  后端API: http://localhost:8000/api"
-    echo "  API文档:  http://localhost:8000/docs"
+    echo "  前端界面: http://localhost:5175"
+    echo "  后端API: http://localhost:8001/api"
+    echo "  API文档:  http://localhost:8001/docs"
     echo "========================================"
 }
 
@@ -793,7 +793,7 @@ verify_services() {
     ERRORS=0
     
     # 测试后端健康检查
-    if curl -s http://localhost:8000/ > /dev/null 2>&1; then
+    if curl -s http://localhost:8001/ > /dev/null 2>&1; then
         log_info "后端API正常响应"
     else
         log_error "后端API无响应"
@@ -801,7 +801,7 @@ verify_services() {
     fi
     
     # 测试前端
-    if curl -s http://localhost:5173/ > /dev/null 2>&1; then
+    if curl -s http://localhost:5175/ > /dev/null 2>&1; then
         log_info "前端页面正常响应"
     else
         log_error "前端页面无响应"
@@ -809,7 +809,7 @@ verify_services() {
     fi
     
     # 测试API代理
-    if curl -s http://localhost:5173/api/devices > /dev/null 2>&1; then
+    if curl -s http://localhost:5175/api/devices > /dev/null 2>&1; then
         log_info "API代理正常"
     else
         log_warn "API代理可能存在问题"
@@ -877,13 +877,13 @@ run_device_tests() {
     
     echo ""
     echo "=== 测试设备列表API ==="
-    DEVICES_RESPONSE=$(curl -s http://localhost:8000/api/devices)
+    DEVICES_RESPONSE=$(curl -s http://localhost:8001/api/devices)
     DEVICE_COUNT=$(echo "$DEVICES_RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['total'])" 2>/dev/null || echo "0")
     echo "设备总数: $DEVICE_COUNT"
     
     echo ""
     echo "=== 测试设备创建API ==="
-    CREATE_RESULT=$(curl -s -X POST http://localhost:8000/api/devices \
+    CREATE_RESULT=$(curl -s -X POST http://localhost:8001/api/devices \
         -H "Content-Type: application/json" \
         -d '{"ip":"192.168.1.99","port":22,"username":"root","password":"test","remark":"测试设备"}' 2>/dev/null)
     if echo "$CREATE_RESULT" | python3 -c "import sys,json; json.load(sys.stdin); print('设备创建成功')" 2>/dev/null; then
@@ -897,7 +897,7 @@ run_device_tests() {
     if [ "$DEVICE_COUNT" -gt 0 ]; then
         DEVICE_ID=$(echo "$DEVICES_RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['items'][0]['id'])" 2>/dev/null)
         if [ -n "$DEVICE_ID" ]; then
-            REFRESH_RESULT=$(curl -s -X POST "http://localhost:8000/api/devices/${DEVICE_ID}/refresh" 2>/dev/null)
+            REFRESH_RESULT=$(curl -s -X POST "http://localhost:8001/api/devices/${DEVICE_ID}/refresh" 2>/dev/null)
             if echo "$REFRESH_RESULT" | python3 -c "import sys,json; json.load(sys.stdin); print('设备刷新成功')" 2>/dev/null; then
                 echo "设备刷新API: 正常"
             else
@@ -908,7 +908,7 @@ run_device_tests() {
     
     echo ""
     echo "=== 测试设备模板下载API ==="
-    TEMPLATE_RESPONSE=$(curl -s http://localhost:8000/api/devices/template 2>/dev/null)
+    TEMPLATE_RESPONSE=$(curl -s http://localhost:8001/api/devices/template 2>/dev/null)
     if echo "$TEMPLATE_RESPONSE" | python3 -c "import sys; content=sys.stdin.read(); sys.exit(0 if 'IP地址' in content else 1)" 2>/dev/null; then
         echo "模板下载API: 正常"
     else
@@ -921,7 +921,7 @@ run_device_tests() {
     echo 'IP地址,端口,用户名,密码,备注' > "$TEMP_CSV"
     echo '192.168.250.1,22,root,testpass,导入测试设备' >> "$TEMP_CSV"
     
-    IMPORT_RESPONSE=$(curl -s -X POST http://localhost:8000/api/devices/import \
+    IMPORT_RESPONSE=$(curl -s -X POST http://localhost:8001/api/devices/import \
         -F "file=@${TEMP_CSV}" 2>/dev/null)
     
     if echo "$IMPORT_RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); print('导入成功' if d.get('success') else '导入失败')" 2>/dev/null; then
@@ -934,7 +934,7 @@ run_device_tests() {
     
     echo ""
     echo "=== 测试设备导出API ==="
-    EXPORT_RESPONSE=$(curl -s http://localhost:8000/api/devices/export 2>/dev/null)
+    EXPORT_RESPONSE=$(curl -s http://localhost:8001/api/devices/export 2>/dev/null)
     if echo "$EXPORT_RESPONSE" | python3 -c "import sys; content=sys.stdin.read(); sys.exit(0 if 'IP地址' in content else 1)" 2>/dev/null; then
         echo "设备导出API: 正常"
     else
@@ -948,7 +948,7 @@ run_device_tests() {
             DEVICE_ID=$(echo "$DEVICES_RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['items'][0]['id'])" 2>/dev/null)
         fi
         if [ -n "$DEVICE_ID" ]; then
-            UPDATE_RESULT=$(curl -s -X PUT "http://localhost:8000/api/devices/${DEVICE_ID}" \
+            UPDATE_RESULT=$(curl -s -X PUT "http://localhost:8001/api/devices/${DEVICE_ID}" \
                 -H "Content-Type: application/json" \
                 -d '{"remark":"更新后的备注信息"}' 2>/dev/null)
             if echo "$UPDATE_RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print('备注更新成功' if d.get('remark') else '备注更新失败')" 2>/dev/null; then
@@ -961,7 +961,7 @@ run_device_tests() {
     
     echo ""
     echo "=== 测试设备筛选功能 ==="
-    FILTER_RESPONSE=$(curl -s "http://localhost:8000/api/devices?status=Online" 2>/dev/null)
+    FILTER_RESPONSE=$(curl -s "http://localhost:8001/api/devices?status=Online" 2>/dev/null)
     if echo "$FILTER_RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); sys.exit(0 if 'items' in d else 1)" 2>/dev/null; then
         echo "设备筛选API: 正常"
     else
@@ -970,7 +970,7 @@ run_device_tests() {
     
     echo ""
     echo "=== 测试设备搜索功能 ==="
-    SEARCH_RESPONSE=$(curl -s "http://localhost:8000/api/devices?search=192.168" 2>/dev/null)
+    SEARCH_RESPONSE=$(curl -s "http://localhost:8001/api/devices?search=192.168" 2>/dev/null)
     if echo "$SEARCH_RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); sys.exit(0 if 'items' in d else 1)" 2>/dev/null; then
         echo "设备搜索API: 正常"
     else
@@ -979,7 +979,7 @@ run_device_tests() {
     
     echo ""
     echo "=== 测试安全性：密码不在响应中 ==="
-    SECRET_CHECK=$(curl -s http://localhost:8000/api/devices 2>/dev/null)
+    SECRET_CHECK=$(curl -s http://localhost:8001/api/devices 2>/dev/null)
     if ! echo "$SECRET_CHECK" | grep -q "testpass"; then
         echo "密码安全测试: 通过"
     else
@@ -992,7 +992,7 @@ run_device_tests() {
     echo 'IP地址,端口,用户名,密码,备注' > "$TEMP_CSV2"
     echo '192.168.250.1,22,root,testpass,重复导入测试' >> "$TEMP_CSV2"
     
-    IMPORT_RESPONSE2=$(curl -s -X POST http://localhost:8000/api/devices/import \
+    IMPORT_RESPONSE2=$(curl -s -X POST http://localhost:8001/api/devices/import \
         -F "file=@${TEMP_CSV2}" 2>/dev/null)
     
     if echo "$IMPORT_RESPONSE2" | python3 -c "import sys,json; d=json.load(sys.stdin); sys.exit(0 if d.get('failed_count', 0) > 0 else 1)" 2>/dev/null; then
@@ -1006,12 +1006,12 @@ run_device_tests() {
     echo ""
     echo "=== 测试可扩展性：大数据量分页 ==="
     for i in {1..30}; do
-        curl -s -X POST http://localhost:8000/api/devices \
+        curl -s -X POST http://localhost:8001/api/devices \
             -H "Content-Type: application/json" \
             -d "{\"ip\":\"192.168.2.${i}\",\"port\":22,\"username\":\"user${i}\",\"password\":\"pass${i}\",\"remark\":\"批量测试设备${i}\"}" > /dev/null 2>&1
     done
     
-    PAGING_RESPONSE=$(curl -s "http://localhost:8000/api/devices?page=1&size=10" 2>/dev/null)
+    PAGING_RESPONSE=$(curl -s "http://localhost:8001/api/devices?page=1&size=10" 2>/dev/null)
     if echo "$PAGING_RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); sys.exit(0 if len(d.get('items', [])) == 10 else 1)" 2>/dev/null; then
         echo "分页功能测试: 通过"
     else
@@ -1033,15 +1033,15 @@ run_tests() {
     
     echo ""
     echo "=== 测试任务管理API ==="
-    curl -s http://localhost:8000/api/tasks | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'任务数量: {d[\"total\"]}')" 2>/dev/null || echo "任务API测试失败"
+    curl -s http://localhost:8001/api/tasks | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'任务数量: {d[\"total\"]}')" 2>/dev/null || echo "任务API测试失败"
     
     echo ""
     echo "=== 测试基准测试API ==="
-    curl -s http://localhost:8000/api/benchmarks | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'基准测试数量: {d[\"total\"]}')" 2>/dev/null || echo "基准测试API测试失败"
+    curl -s http://localhost:8001/api/benchmarks | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'基准测试数量: {d[\"total\"]}')" 2>/dev/null || echo "基准测试API测试失败"
     
     echo ""
     echo "=== 测试报告API ==="
-    REPORT_CHECK=$(curl -s -X POST http://localhost:8000/api/reports/check \
+    REPORT_CHECK=$(curl -s -X POST http://localhost:8001/api/reports/check \
         -H "Content-Type: application/json" \
         -d '{"benchmark_id1": 1, "benchmark_id2": 2}' 2>/dev/null)
     if echo "$REPORT_CHECK" | python3 -c "import sys,json; json.load(sys.stdin); print('报告检查API正常')" 2>/dev/null; then
@@ -1050,7 +1050,7 @@ run_tests() {
         echo "报告检查API测试失败（可能没有数据）"
     fi
     
-    REPORT_LIST=$(curl -s http://localhost:8000/api/reports 2>/dev/null)
+    REPORT_LIST=$(curl -s http://localhost:8001/api/reports 2>/dev/null)
     if echo "$REPORT_LIST" | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'报告数量: {len(d)}')" 2>/dev/null; then
         echo "报告列表API: 正常"
     else
@@ -1203,13 +1203,13 @@ main() {
         devicee2e)
             check_node
             # Start services if not running
-            if ! fuser 8000/tcp &>/dev/null; then start_backend; fi
-            if ! fuser 5173/tcp &>/dev/null; then start_frontend; fi
+            if ! fuser 8001/tcp &>/dev/null; then start_backend; fi
+            if ! fuser 5175/tcp &>/dev/null; then start_frontend; fi
             
             # Robust wait for frontend
             log_info "Waiting for frontend to be ready..."
             for i in {1..30}; do
-                if curl -s http://localhost:5173 > /dev/null; then
+                if curl -s http://localhost:5175 > /dev/null; then
                     log_info "Frontend is ready!"
                     break
                 fi

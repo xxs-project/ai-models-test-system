@@ -100,7 +100,7 @@ npm install
 cd backend
 python3 main.py
 
-# 启动前端服务 (端口5173)
+# 启动前端服务 (端口5175)
 cd ..
 npm run dev
 ```
@@ -116,7 +116,7 @@ chmod +x deploy.sh
 
 | 服务 | 地址 |
 |------|------|
-| 前端界面 | http://localhost:5173 |
+| 前端界面 | http://localhost:5175 |
 | 后端API | http://localhost:8000 |
 | API文档 | http://localhost:8000/docs |
 

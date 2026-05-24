@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 proc = subprocess.Popen(
-    [sys.executable, "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"],
+    [sys.executable, "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"],
     cwd="backend",
     stdout=open("backend/backend.log", "a"),
     stderr=subprocess.STDOUT,

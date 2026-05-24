@@ -87,16 +87,16 @@ fi
 
 # 验证前端服务是否运行
 log_info "验证前端服务..."
-if curl -s http://localhost:5173 > /dev/null 2>&1; then
-    echo "  ✓ 前端服务正在运行 (端口5173)"
+if curl -s http://localhost:5175 > /dev/null 2>&1; then
+    echo "  ✓ 前端服务正在运行 (端口5175)"
 else
     log_warn "  ! 前端服务未运行，需要启动服务"
 fi
 
 # 验证后端服务是否运行
 log_info "验证后端服务..."
-if curl -s http://localhost:8000 > /dev/null 2>&1; then
-    echo "  ✓ 后端服务正在运行 (端口8000)"
+if curl -s http://localhost:8001 > /dev/null 2>&1; then
+    echo "  ✓ 后端服务正在运行 (端口8001)"
 else
     log_warn "  ! 后端服务未运行，需要启动服务"
 fi

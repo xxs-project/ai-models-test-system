@@ -1,0 +1,62 @@
+{
+  "runId": "hermesagent-20-2026-05-22T02-24-42.254Z-bccb777e",
+  "runDir": "/home/models-test-system_ucd/llm-test-platform/bench_test/BenchLocal/results/hermesagent-20/hermesagent-20-2026-05-22T02-24-42.254Z-bccb777e",
+  "benchPackId": "hermesagent-20",
+  "benchPackName": "HermesAgent-20",
+  "executionMode": "parallel",
+  "runsPerTest": 1,
+  "startedAt": "2026-05-22T02:24:42.293Z",
+  "completedAt": "2026-05-22T02:24:42.295Z",
+  "modelCount": 1,
+  "scenarioCount": 20,
+  "cancelled": false,
+  "events": [
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "hermesagent-20",
+      "benchPackName": "HermesAgent-20",
+      "verifierId": "verifier",
+      "phase": "checking_docker",
+      "message": "Checking Local Docker availability."
+    },
+    {
+      "type": "verifier_preparing",
+      "benchPackId": "hermesagent-20",
+      "benchPackName": "HermesAgent-20",
+      "verifierId": "verifier",
+      "phase": "waiting_for_healthcheck",
+      "message": "Reusing the running verifier."
+    },
+    {
+      "type": "run_started",
+      "runId": "hermesagent-20-2026-05-22T02-24-42.254Z-bccb777e",
+      "models": [
+        {
+          "id": "local_model:gemma-4-31B-it",
+          "label": "Gemma 4 31B IT"
+        }
+      ],
+      "totalScenarios": 20
+    },
+    {
+      "type": "run_finished",
+      "scores": {
+        "local_model:gemma-4-31B-it": {
+          "totalScore": 0,
+          "categories": [],
+          "summary": "Hermes failed most official verification scenarios."
+        }
+      }
+    }
+  ],
+  "resultsByModel": {
+    "local_model:gemma-4-31B-it": []
+  },
+  "scores": {
+    "local_model:gemma-4-31B-it": {
+      "totalScore": 0,
+      "categories": [],
+      "summary": "Hermes failed most official verification scenarios."
+    }
+  }
+}

@@ -197,7 +197,7 @@ tail -f logs/frontend.log
 
 | 服务 | 地址 |
 |------|------|
-| 前端界面 | http://localhost:5173 |
+| 前端界面 | http://localhost:5175 |
 | 后端 API | http://localhost:8000/api |
 | API 文档 | http://localhost:8000/docs |
 | 健康检查 | http://localhost:8000/health |
@@ -349,7 +349,7 @@ ps aux | grep node
 # 只开放必要端口
 sudo ufw allow 80
 sudo ufw allow 443
-sudo ufw allow 5173
+sudo ufw allow 5175
 sudo ufw allow 8000
 sudo ufw enable
 ```

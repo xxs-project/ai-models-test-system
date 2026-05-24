@@ -1,0 +1,32 @@
+schema_version = 1
+default_benchpack = ""
+run_storage_dir = "/home/models-test-system_ucd_v1.2/llm-test-platform/bench_test/BenchLocal/results"
+benchpack_storage_dir = "~/.benchlocal/benchpacks"
+log_storage_dir = "~/.benchlocal/logs"
+cache_dir = "~/.benchlocal/cache"
+
+[registry]
+official_url = "https://ghproxy.net/https://raw.githubusercontent.com/stevibe/benchlocal-registry/main/registry.json"
+
+[providers.local_model]
+kind = "openai_compatible"
+name = "Local Gemma"
+enabled = true
+base_url = "http://127.0.0.1:10093/v1"
+api_key = "sk-dummy"
+
+[[models]]
+id = "local_model:dummy"
+provider = "local_model"
+model = "dummy"
+label = "Gemma 4 31B IT"
+group = "local"
+enabled = true
+
+
+
+
+
+
+
+

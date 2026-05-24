@@ -1,0 +1,962 @@
+[
+  {
+    "id": "COMPANY_IPD_S4_01",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 24.73976230621338,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要为某科技企业IPD流程中的验证阶段设计三个核心功能测试用例，针对的是ERP系统的海量业财凭证期末一键对账与结账功能。首先，我得要理解这个业务场景的边界值定义。海量数据处理中的边界值通常是指系统数据量、处理并发用户数或处理时间的极限情况。例如，当系统处理的数据量接近或设计上限时，或者在高并发操作情况下，系统是否能稳定运行。\n\n接下来，我需要设计三个用例，其中至少一个必须包含边界值或异常路径。首先考虑正常流程的用例，确保基本功能正确。然后，设计边界值的情况，比如处理接近最大最大处理能力的数据量。最后，设计一个异常路径的用例，比如网络中断或数据错误的情况。\n\n对于用例名称，需要明确描述测试的场景。测试数据需要具体，比如数据量、用户数等。操作步骤要详细但简洁，预期结果要明确系统应如何响应。\n\n第一个用例可以是正常的一下的对账和结账，验证中等数据量，验证基本流程。第二个用例测试最大数据量，确保系统在极限情况下不会崩溃。第三个用例模拟网络中断，验证异常处理是否正确。\n\n需要确保表格中的每个用例都包含用例名称、测试数据、操作步骤和预期结果，并且符合边界值的要求。同时，要控制输出在500个token以内，避免过多细节。\n</think>\n\n边界值定义理解：海量业财凭证的边界值可定义为系统支持的最大并发数据量（如1000万条凭证）或最小有效数据集（如零余额科目），以及并发时间临界点（如月末最后1分钟触发结账）。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n|---------|---------|---------|---------|\n| 正常对账结账流程验证 | 50万条有效凭证，包含1000个科目 | 1. 选择目标期间<br>2. 点击【一键对账】<br>3. 确认对账结果后点击【期末结账】 | 系统在30秒内完成对账，生成结账日志，财务期间状态变为已结账 |\n| 最大数据量边界测试 | 999万条凭证（系统标称上限95%） | 1. 导入999万条凭证<br>2. 执行一键对账与结账 | 系统完成内存占用不超过85%，响应时间≤2分钟，无OOM错误 |\n| 异常网络中断测试 | 50万条凭证，对账完成时模拟网络网络中断 | 1. 歧行对账流程至50%进度<br>2. 断开网络连接<br>3. 恢复网络后重新结账 | 系统记录断点状态，网络网络点续传机制，最终生成完整结账结果 |\n\n<|EOF|>",
+    "gen_preview": "<think>\n好的，我现在需要为某科技企业IPD流程中的验证阶段设计三个核心功能测试用例，针对的是ERP系统的海量业财凭证期末一键对账与结账功能。首先，我得要理解这个业务场景的边界值定义。海量数据处理中的边界值通常是指系统数据量、处理并发用户数或处理时间的极限情况。例如，当系统处理的数据量接近或设计上限时，或者在高并发操作情况下，系统是否能稳定运行。\n\n接下来，我需要设计三个用例，其中至少一个必..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_02",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005989789962768555,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 13.578322172164917,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要设计三个核心的功能验证用例，针对HCI超融合基础设施的计算存储网络融合自愈与集群扩容特性。首先必须包含至少一个边界值或异常路径的用例。首先，我得先理解这个业务场景的边界值定义。\n\n业务场景中的边界值可能包括集群节点数量的极限，比如最低和最高节点数，或者存储容量接近满载的情况，以及网络延迟或带宽的极限值。异常\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n|---------|---------|---------|---------|\n| 集群扩容后自愈能力验证 | 初始3节点集群，新增2节点后移1节点故障 | 1. 扩容至5节点<br>2. 模拟1个节点故障<br>3. 检查数据自动与服务状态 | 数据自动迁移，集群状态正常，故障服务持续 |\n| 存储容量临值扩容测试 | 集群存储使用率95%时扩容 | 1. 填充存储至95%<br>2. 添加�行1节点扩容<br>3. 检查存储重新与扩容均衡 | 存储自动均衡，剩余容量分配合理，无服务中断 |\n| 网络高延迟下的自愈验证处理 | 模拟网络延迟>500ms的节点 | 1. 设置节点网络延迟550ms<br>2. 触发自愈机制<br>3. 检查节点状态与数据同步 | 节点标记为异常，数据自动迁移，服务无 |\n\n<|EOF|>",
+    "gen_preview": "<think>\n好的，我现在需要设计三个核心的功能验证用例，针对HCI超融合基础设施的计算存储网络融合自愈与集群扩容特性。首先必须包含至少一个边界值或异常路径的用例。首先，我得先理解这个业务场景的边界值定义。\n\n业务场景中的边界值可能包括集群节点数量的极限，比如最低和最高节点数，或者存储容量接近满载的情况，以及网络延迟或带宽的极限值。异常\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 ..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_04",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0062408447265625,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 29.969159364700317,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要帮用户设计三个功能验证用例，针对边缘计算节点的断网弱网下的边缘业务自恢复特性。用户，我得理解用户的需求。用户是IPD流程中的系统功能测试专家，所以用例需要符合验证流程中的验证阶段要求，必须包含至少一个边界值或异常路径的用例。\n\n首先，我需要明确“断网弱网下的边缘业务自恢复”这一特场景的边界值。边界值通常指的是输入或条件的极限情况，比如网络延迟的最大值、最小值，或者断中断的时间长度等。例如，网络网络恢复时间刚好达到系统设定的阈时阈值时，系统应该能正确处理。异常可能是一个关键的边界值。\n\n接下来，设计三个用例。第一个应该是正常情况下的恢复测试，比如断网后重新连接，验证自动自动恢复。第二个可以是弱网情况下的下的测试，比如高延迟或低带宽，检查系统是否能维持基本功能。第三个需要是边界值或异常路径，比如断网时间超过系统阈值，或者系统是否有超时处理机制，或者是否进入降级模式。\n\n测试数据方面，正常断网可以用例的数据可能包括断网持续时间、网络延迟等。边界值用例可能需要设置断网时间刚好等于或超过阈值。操作步骤需要明确如何模拟这些网或弱网，比如使用网络模拟工具，然后触发业务操作，观察恢复情况。预期结果需要详细说明系统在不同情况下的正确行为，比如断网后恢复连接，业务状态常；弱网下功能受限；超时后触发告机制。\n\n需要注意用例之间的覆盖范围，确保涵盖正常、异常和边界情况。同时，每个用例的步骤要具体，数据要明确，结果可验证。例如，用例1模拟断网30秒，用例2模拟500ms延迟，用例3模拟断网时间超过阈值，比如60秒。预期结果中，用例3可能需要系统进入降级模式，并在恢复后恢复正常。\n\n最后，检查是否符合用户的要求：三个用例，至少一个边界值，表格形式，表头正确。确保没有遗漏，并且每个简洁，符合Token限制。\n</think>\n\n对【断网弱网下的边缘业务自恢复】场景的边界值定义理解：该中断持续的临恢复阈阈值（如断网持续时间、网络延迟上限界值）以及系统自恢复机制的触发条件，边界值通常围绕该阈值的临界点（等于、略高于、略低于）设计。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n|---------|---------|---------|---------|\n| 正常断网恢复测试 | 断网30秒后恢复 | 1. 模拟边缘断节点断网30秒<br>2. 触发边缘业务请求 | 业务请求在断网后自动缓存，恢复网恢复后30秒内业务请求并完成处理 |\n| 弱网高延迟测试 | 网络延迟500ms（阈系统阈值） | 1. 设置网络延迟500ms<br>2. 执行实时数据同步任务 | 系统维持基本运行功能，数据传输延迟不超过800ms，无数据丢失 |\n| 超时阈值边界测试 | 断网时间=恢复配置的恢复阈值（如60秒） | 1. 模拟断网60秒<br>2. 不恢复网络连接 | 系统触发降级模式，业务切换至本地缓存处理，并在断网超时后记录告警日志 |\n\n<|EOF|>",
+    "gen_preview": "<think>\n好的，我现在需要帮用户设计三个功能验证用例，针对边缘计算节点的断网弱网下的边缘业务自恢复特性。用户，我得理解用户的需求。用户是IPD流程中的系统功能测试专家，所以用例需要符合验证流程中的验证阶段要求，必须包含至少一个边界值或异常路径的用例。\n\n首先，我需要明确“断网弱网下的边缘业务自恢复”这一特场景的边界值。边界值通常指的是输入或条件的极限情况，比如网络延迟的最大值、最小值，或者断..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_06",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "JSON Parse Error: Expecting value: line 1 column 1 (char 0); JSON Parse Error: Expecting value: line 1 column 1 (char 0)"
+    },
+    "latency": 2.3089330196380615,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户的问题，他\n好的，我现在需要处理用户的问题。用户希望我作为IPD流程验证\n{\"summary\": \"财务结账异常回归分流验证完成\n\n{\"summary\": \"财务结账异常回归分流验证完成\n",
+    "gen_preview": "<think>\n好的，我现在需要处理用户的问题，他\n好的，我现在需要处理用户的问题。用户希望我作为IPD流程验证\n{\"summary\": \"财务结账异常回归分流验证完成\n\n{\"summary\": \"财务结账异常回归分流验证完成\n"
+  },
+  {
+    "id": "COMPANY_IPD_S4_07",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 31.90221929550171,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要为某科技企业的IPD流程中的验证阶段设计三个核心功能测试用例，针对的是服务器管理平台的整机柜节点秒级带外配置下发特性。首先，我得理解这个业务场景。整机柜节点秒级带外配置下发，应该是指在服务器整平台中，能够快速（秒级）通过带外管理接口（比如IPMI、iLO等）向整个机柜的节点下发配置。这里的“秒级”可能指的是响应时间或处理时间的严格限制，而“带外”通常是指通过独立的管理网络通道配置，不依赖于主机的正常操作系统运行状态。\n\n接下来，用户要求设计包括至少一个边界值或异常路径的用例。首先，我需要明确边界值的定义。边界值分析通常关注输入或输出范围的边界情况，比如最小值、最大值、刚好超过或不足的值。在时间相关的场景中，边界值可能涉及配置下发的时间限制，比如刚好在1秒内完成，或刚好时间限制的情况。异常路径可能包括网络中断、配置参数错误、权限不足等情况。\n\n接下来，设计三个用例。第一个可以应该验证正常流程，确保在秒级内成功配置下发。第二个可以测试边界值，比如在配置下发时间刚好等于或略低于秒时的表现。第三个则需要涉及异常情况，比如在下发过程中网络中断，验证系统是否能正确处理并恢复。\n\n具体来说，第一个正常用例的测试数据可能包括一个合法的配置文件，操作步骤是触发节点节点并下发配置，预期结果是在规定时间内完成节点成功应用配置。第二个边界值用例可能测试一个接近时间上限的配置，比如在允许的最长时间内执行，确保系统仍能处理。第三个异常用例可以模拟网络中断，检查系统是否能够检测到并并给出相应的错误提示，同时可能需要回滚或重试机制。\n\n需要确保用例的可操作性和可验证性，测试数据要具体，比如配置文件的大小、节点数量等。同时，预期结果需要明确，比如返回状态码、日志记录、节点状态变化等。\n\n现在，需要将这些思考整理成三个用例，并以Markdown表格形式输出，表头包括用例名称、测试数据、操作步骤、预期结果。同时，用户要求先前用一句话说明边界值的定义，这里可能说明边界时间限制或节点参数的边界情况。\n</think>\n\n边界值定义理解：针对“秒级”时间约束，边界值应在1秒内的的极限情况（如0.999秒）及刚好超时间阈值的异常场景（如1.001秒）。\n\n| 用例名称 | 测试数据 | 操作步骤 | 预期结果 |\n|----------|----------|----------|----------|\n| 歴机柜节点带秒下发 | 100节点，标准配置文件（5KB） | 1. 选择100个节点；2. 上传带外配置文件；3. 触发秒级下发指令 | 所有节点在1秒内完成配置应用，系统状态码200，日志显示无超时 |\n| 超时边界值测试 | 500节点，合法配置文件（500KB） | 1. 选择500个节点；2. 上传配置时临界配置（设定1.001秒延迟）；3. 触发下发 | 系统在1.001秒时中断下发，返回超时错误（504），未完成节点标记为失败 |\n| 网络异常中断 | 20节点，合法配置文件 | 1. 选择20个节点；2. 触发下发时断开带外管理网络；3. 恢复网络后检查状态 | 系统检测到网络中断并重试3次，最终标记为失败，日志记录异常原因 |\n\n<|EOF|>",
+    "gen_preview": "<think>\n好的，我现在需要为某科技企业的IPD流程中的验证阶段设计三个核心功能测试用例，针对的是服务器管理平台的整机柜节点秒级带外配置下发特性。首先，我得理解这个业务场景。整机柜节点秒级带外配置下发，应该是指在服务器整平台中，能够快速（秒级）通过带外管理接口（比如IPMI、iLO等）向整个机柜的节点下发配置。这里的“秒级”可能指的是响应时间或处理时间的严格限制，而“带外”通常是指通过独立的管..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_08",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0059359073638916016,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_09",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 20.71870994567871,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "<think>\n好的，我现在需要处理用户的要求，帮他整理一份Markdown格式的评审纪要。首先，用户是某科技企业IPD流程中验证阶段的测试运营负责人，针对的是服务器管理平台的整机柜变更回归放行会议。用户明确要求三个一级标题：阻塞项、放行条件、补测安排，每个标题下至少两条无序列表，并且必须提到带外配置、批量回滚和灰度验证。\n\n首先，我需要确定每个部分的内容。阻塞项通常是指当前阻碍项目进展的问题。这里需要包含带外配置的问题，可能涉及配置不完整或兼容性问题。另外，批量回滚可能存在问题，比如机制未验证，导致风险。这两个点都符合要求\n\n接下来是放行条件，需要列出满足后才能放行的条件。灰度验证肯定是其中之一，可能需要分阶段验证稳定性。另外，带外配置的完整性和批量回滚的自动化测试通过也是关键点。这样要确保提到这三个关键词。\n\n补测安排部分需要需要说明后续的测试计划。比如包括针对带外配置的专项测试，以及批量回滚的全链路测试。同时，灰度验证阶段的监控和数据收集也是必要的。需要确保每个点都覆盖到用户提到的关键词。\n\n然后要检查格式是否符合要求：三个一级标题，每个下至少两个无序列表，且必须包含指定的三个术语。还要确保只输出Markdown，没有其他内容。可能需要注意用词的专业性，比如“阻塞项”而不是“问题”，以及使用正确的技术术语。\n\n最后，检查是否有遗漏或格式错误。比如，是否每个标题下都有两个项目，是否所有要求的关键词都被正确提及。确认无误后，就可以生成最终的Markdown内容了。\n</think>\n\n# 阻塞项  \n- 带外配置模块存在兼容性问题，部分整机柜型号的SNMP协议版本未覆盖  \n- 批量回滚功能未完成全链路验证，灰度环境中发现配置丢失风险  \n\n# 放行条件  \n- 灰度验证阶段需完成3轮压力测试，带外配置成功率需≥99.9%  \n- 批量回滚功能必须通过自动化测试套件，且回滚耗时需控制在5分钟内  \n\n# 补测安排  \n- 周三上午带外配置专项测试，覆盖12种整机柜型号的协议适配场景  \n- 周四执行批量回滚全链路补测，同步启动灰度验证环境的72小时稳定性监控",
+    "gen_preview": "<think>\n好的，我现在需要处理用户的要求，帮他整理一份Markdown格式的评审纪要。首先，用户是某科技企业IPD流程中验证阶段的测试运营负责人，针对的是服务器管理平台的整机柜变更回归放行会议。用户明确要求三个一级标题：阻塞项、放行条件、补测安排，每个标题下至少两条无序列表，并且必须提到带外配置、批量回滚和灰度验证。\n\n首先，我需要确定每个部分的内容。阻塞项通常是指当前阻碍项目进展的问题。这..."
+  },
+  {
+    "id": "COMPANY_IPD_S4_10",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.005198955535888672,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_11",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0017130374908447266,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_12",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0023186206817626953,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_13",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0023670196533203125,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_14",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0023491382598876953,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_15",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0018396377563476562,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_16",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002295255661010742,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_17",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0023040771484375,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_18",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002126932144165039,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_19",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021097660064697266,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_20",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002012014389038086,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_21",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002073049545288086,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_22",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002131223678588867,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_23",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021848678588867188,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_24",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002260446548461914,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_25",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0020520687103271484,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_26",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021097660064697266,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_27",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0018894672393798828,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_28",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002124786376953125,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_29",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021839141845703125,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_30",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021507740020751953,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_31",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0020911693572998047,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_32",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021109580993652344,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_33",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0020737648010253906,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_34",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0020258426666259766,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_35",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0019600391387939453,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_36",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0022318363189697266,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_37",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0022275447845458984,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_38",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021674633026123047,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_39",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002227783203125,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_40",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021131038665771484,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_41",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002118825912475586,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_42",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002118349075317383,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_43",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.001992940902709961,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_44",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002180337905883789,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_45",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021734237670898438,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_46",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002140045166015625,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_47",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002079010009765625,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_48",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021295547485351562,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_49",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021467208862304688,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_50",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002130270004272461,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_51",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002048015594482422,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_52",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0022661685943603516,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_53",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0022525787353515625,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_54",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002197265625,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_55",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002130270004272461,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_56",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002214670181274414,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_57",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0022106170654296875,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_58",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021631717681884766,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_59",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002232074737548828,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_60",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002300739288330078,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_61",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.002394437789916992,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_62",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0022101402282714844,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_63",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.0021047592163085938,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  },
+  {
+    "id": "COMPANY_IPD_S4_64",
+    "eval_res": {
+      "total": 0,
+      "format": 0,
+      "logic": 0,
+      "constraint": 0,
+      "reason": "Failed or Timeout"
+    },
+    "latency": 0.000997781753540039,
+    "status": "HTTP 404: {\"error\":{\"message\":\"The model `Qwen3-32B` does not exist.\",\"type\":\"NotFoundError\",\"param\":\"model\",\"code\":404}}",
+    "attempts": 1,
+    "gen_text": "",
+    "gen_preview": ""
+  }
+]

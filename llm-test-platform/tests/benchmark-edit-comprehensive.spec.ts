@@ -2,7 +2,7 @@ import { test, expect, describe } from '@playwright/test';
 
 describe('Benchmark Edit Feature - Comprehensive Testing', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/results');
+    await page.goto('http://localhost:5175/results');
     await page.waitForLoadState('networkidle');
     await page.waitForSelector('table tbody tr', { timeout: 10000 });
   });

@@ -6,9 +6,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = 5173;
+const PORT = 5175;
 const API_HOST = '127.0.0.1';
-const API_PORT = 8000;
+const API_PORT = 8001;
 
 const distPath = path.join(__dirname, 'dist');
 const indexPath = path.join(distPath, 'index.html');

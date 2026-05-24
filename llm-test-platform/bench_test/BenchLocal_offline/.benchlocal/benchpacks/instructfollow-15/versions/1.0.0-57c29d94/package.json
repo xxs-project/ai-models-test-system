@@ -1,0 +1,21 @@
+{
+  "name": "instructfollow-15",
+  "version": "1.0.0",
+  "description": "Official BenchLocal Bench Pack for constraint-heavy instruction following.",
+  "license": "MIT",
+  "scripts": {
+    "build:benchlocal": "tsc -p tsconfig.benchlocal.json && tsc-alias -p tsconfig.benchlocal.json",
+    "build:cli": "tsc -p tsconfig.cli.json && tsc-alias -p tsconfig.cli.json",
+    "cli": "npm run build:cli && node dist-cli/cli/run.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@benchlocal/core": "^0.1.0",
+    "@benchlocal/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsc-alias": "^1.8.10",
+    "typescript": "latest"
+  }
+}
