@@ -10,6 +10,19 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Search, Download, Share2, Trash2, Save, Link as LinkIcon, BarChart2, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 
+const PACK_NAME_MAP: Record<string, string> = {
+  'toolcall-15': '工具调用',
+  'instructfollow-15': '指令遵循',
+  'reasonmath-15': '数理推理',
+  'dataextract-15': '信息抽取',
+  'bugfind-15': '代码漏洞',
+  'structoutput-15': '结构化输出',
+  'hermesagent-20': 'Agent调度',
+  'cli-40': '运维命令',
+  'IPD': 'IPD'
+};
+const getPackName = (rawName: string) => PACK_NAME_MAP[rawName] || rawName;
+
 const getIpdDimName = (id: string) => {
   const name = id.split(' - ')[1] || id;
   if (name === '组织与人才发展' || name === '项目进度与风险治理') {
@@ -215,7 +228,7 @@ export default function EvalResults() {
     radar: {
       indicator: singleReport.type === 'IPD' && singleReport.packs.length > 0 
         ? singleReport.packs[0].cases.map((c: any) => ({ name: getIpdDimName(c.id), max: 100 }))
-        : singleReport.packs.map((p: any) => ({ name: p.name, max: p.maxScore || 100 })),
+        : singleReport.packs.map((p: any) => ({ name: getPackName(p.name), max: p.maxScore || 100 })),
       radius: '60%'
     },
     series: [{
@@ -241,7 +254,7 @@ export default function EvalResults() {
       type: 'category', 
       data: singleReport.type === 'IPD' && singleReport.packs.length > 0
         ? singleReport.packs[0].cases.map((c: any) => getIpdDimName(c.id))
-        : singleReport.packs.map((p: any) => p.name),
+        : singleReport.packs.map((p: any) => getPackName(p.name)),
       axisLabel: { interval: 0, rotate: 30 }
     },
     yAxis: { type: 'value', ...(singleReport.type === 'IPD' ? {} : { max: 100 }) },
@@ -279,7 +292,7 @@ export default function EvalResults() {
     radar: {
       indicator: isIpdComparison
         ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => ({ name: getIpdDimName(c.id), max: 100 }))
-        : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name)))).map(name => ({ name, max: 100 })),
+        : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => getPackName(p.name))))).map(name => ({ name, max: 100 })),
       radius: '50%'
     },
     series: [{
@@ -305,7 +318,7 @@ export default function EvalResults() {
       type: 'category', 
       data: isIpdComparison
         ? (activeComparisonReports[0].packs[0]?.cases || []).map((c: any) => getIpdDimName(c.id))
-        : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name)))) 
+        : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => getPackName(p.name))))) 
     },
     yAxis: { type: 'value', ...(isIpdComparison ? {} : { max: 100 }) },
     series: activeComparisonReports.map(r => ({
@@ -569,7 +582,7 @@ export default function EvalResults() {
                             <TableBody>
                               {singleReport.packs.map((pack: any, i: number) => (
                                 <TableRow key={i}>
-                                  <TableCell className="font-medium text-gray-700">{pack.name}</TableCell>
+                                  <TableCell className="font-medium text-gray-700">{getPackName(pack.name)}</TableCell>
                                   <TableCell className="whitespace-nowrap">
                                     <span className={`px-2 py-1 rounded text-xs font-medium ${pack.status === 'SUCCESS' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                       {pack.status === 'SUCCESS' ? '✅ 完成' : '❌ 失败'}
@@ -592,7 +605,7 @@ export default function EvalResults() {
                           <Card key={i} className="shadow-sm border-gray-200">
                             <CardHeader className="py-3 bg-gray-50/80 border-b">
                               <div className="flex justify-between items-center">
-                                <CardTitle className="text-sm font-semibold">{pack.name}</CardTitle>
+                                <CardTitle className="text-sm font-semibold">{getPackName(pack.name)}</CardTitle>
                                 <span className={`text-xs font-mono px-2 py-1 rounded ${pack.status === 'SUCCESS' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                   {pack.status === 'SUCCESS' ? '✅ 完成' : '❌ 失败'} 
                                   {singleReport.type !== 'IPD' && ` | ${pack.score}/${pack.maxScore}`}
@@ -699,7 +712,9 @@ export default function EvalResults() {
                                     : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name))))
                                   ).map((rowName, i) => (
                                     <TableRow key={i}>
-                                      <TableCell className="font-medium text-gray-700">{rowName as string}</TableCell>
+                                      <TableCell className="font-medium text-gray-700">
+                                        {activeComparisonReports[0]?.type !== 'IPD' ? getPackName(rowName as string) : rowName as string}
+                                      </TableCell>
                                       {activeComparisonReports.map((r, j) => {
                                         const isIpd = r.type === 'IPD';
                                         if (isIpd) {
@@ -865,7 +880,9 @@ export default function EvalResults() {
                                     : Array.from(new Set(activeComparisonReports.flatMap(r => r.packs.map((p: any) => p.name))))
                                   ).map((rowName, i) => (
                                       <TableRow key={i}>
-                                        <TableCell className="font-medium text-gray-700">{rowName as string}</TableCell>
+                                        <TableCell className="font-medium text-gray-700">
+                                          {activeComparisonReports[0]?.type !== 'IPD' ? getPackName(rowName as string) : rowName as string}
+                                        </TableCell>
                                       {activeComparisonReports.map((r, j) => {
                                         const isIpd = r.type === 'IPD';
                                         if (isIpd) {

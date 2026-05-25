@@ -1,0 +1,407 @@
+[
+  {
+    "id": "COMPANY_IPD_S6_01",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 3.706664562225342,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n\"resource_pressure\": \"ephemeral-storage\",\n\"current_available\": \"5%\",\n\"threshold_quantity\": \"10%\",\n\"affected_workload\": [\n\"pod/camera-ai-app\",\n\"pod/sensor-daemon\"\n]\n}",
+    "gen_preview": "{\n\"resource_pressure\": \"ephemeral-storage\",\n\"current_available\": \"5%\",\n\"threshold_quantity\": \"10%\",\n\"affected_workload\": [\n\"pod/camera-ai-app\",\n\"pod/sensor-daemon\"\n]\n}"
+  },
+  {
+    "id": "COMPANY_IPD_S6_02",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 7.531286001205444,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n\"failing_component\": \"Mellanox NIC (mlx5_core)\",\n\"nic_state\": \"Link Down\",\n\"training_impact\": \"AllReduce synchronization deadlock leading to process hang\",\n\"evidence\": [\n\"System Log: mlx5_core 0000:b2:00.0: Port 1 link down\",\n\"Rank 15: NCCL INFO Call to ibv_poll_cq() failed with error 12\",\n\"System Log: mlx5_core 0000:b2:00.0: ib_query_port failed (-EIO)\"\n]\n}",
+    "gen_preview": "{\n\"failing_component\": \"Mellanox NIC (mlx5_core)\",\n\"nic_state\": \"Link Down\",\n\"training_impact\": \"AllReduce synchronization deadlock leading to process hang\",\n\"evidence\": [\n\"System Log: mlx5_core 0000:..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_03",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 5.803943634033203,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"initial_failed_component\": \"redis-session:6379\",\n  \"protection_mechanism\": \"Circuit breaker 'SessionAuth' OPEN\",\n  \"gateway_status\": \"503 Service Unavailable\",\n  \"session_path\": \"API_Gateway -> auth-service -> redis-client -> redis-session\",\n  \"root_cause\": \"Redis connection failure triggered circuit breaker in auth-service\",\n  \"timestamp\": \"08:33\"\n}",
+    "gen_preview": "{\n  \"initial_failed_component\": \"redis-session:6379\",\n  \"protection_mechanism\": \"Circuit breaker 'SessionAuth' OPEN\",\n  \"gateway_status\": \"503 Service Unavailable\",\n  \"session_path\": \"API_Gateway -> a..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_04",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['Cluster quorum lost']"
+    },
+    "latency": 3.750808000564575,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n\"cluster_state\": \"Split-Brain\",\n\"isolated_nodes\": [\"Node_A\", \"Node_C\"],\n\"impact_scope\": \"All VMs I/O suspended due to quorum loss\",\n\"containment_action\": \"Suspend IO to prevent data corruption\"\n}",
+    "gen_preview": "{\n\"cluster_state\": \"Split-Brain\",\n\"isolated_nodes\": [\"Node_A\", \"Node_C\"],\n\"impact_scope\": \"All VMs I/O suspended due to quorum loss\",\n\"containment_action\": \"Suspend IO to prevent data corruption\"\n}"
+  },
+  {
+    "id": "COMPANY_IPD_S6_05",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 3.9477288722991943,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n\"db_error\": \"Deadlock found\",\n\"locked_table\": \"gl_balances\",\n\"application_symptom\": \"Monthly settlement timeout and system freeze\",\n\"recommended_action\": \"Analyze transaction lock order, optimize UPDATE statement indexing, and implement retry mechanism for deadlock exceptions\"\n}",
+    "gen_preview": "{\n\"db_error\": \"Deadlock found\",\n\"locked_table\": \"gl_balances\",\n\"application_symptom\": \"Monthly settlement timeout and system freeze\",\n\"recommended_action\": \"Analyze transaction lock order, optimize UP..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_06",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['Out of memory']"
+    },
+    "latency": 3.006047487258911,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n\"kernel_mechanism\": \"OOM Killer\",\n\"killed_pid\": 14562,\n\"precursor_alert\": \"soft lockup\",\n\"business_process\": \"java\"\n}",
+    "gen_preview": "{\n\"kernel_mechanism\": \"OOM Killer\",\n\"killed_pid\": 14562,\n\"precursor_alert\": \"soft lockup\",\n\"business_process\": \"java\"\n}"
+  },
+  {
+    "id": "COMPANY_IPD_S6_07",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['stale sequence']"
+    },
+    "latency": 3.4800705909729004,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n\"anomaly_reason\": \"Out-of-order sequence numbers detected in sensor data stream\",\n\"stale_sequence\": 1548,\n\"sensor_id\": \"temp-01\",\n\"gateway_action\": \"dropped sample\"\n}",
+    "gen_preview": "{\n\"anomaly_reason\": \"Out-of-order sequence numbers detected in sensor data stream\",\n\"stale_sequence\": 1548,\n\"sensor_id\": \"temp-01\",\n\"gateway_action\": \"dropped sample\"\n}"
+  },
+  {
+    "id": "COMPANY_IPD_S6_08",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 10.38878607749939,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"trace_id\": \"7fd1\",\n  \"first_error_span\": \"session-loader\",\n  \"workflow_skip_reason\": \"dependency_failed\",\n  \"fallback_signal\": \"cache-miss-fallback-timeout\",\n  \"next_check\": \"session-cache-cluster-latency\",\n  \"spans\": [\n    {\n      \"span\": \"router\",\n      \"status\": \"OK\",\n      \"duration\": \"12ms\"\n    },\n    {\n      \"span\": \"session-loader\",\n      \"status\": \"ERROR\",\n      \"duration\": \"803ms\",\n      \"detail\": \"cache-miss-fallback-timeout\"\n    },\n    {\n      \"span\": \"workflow-engine\",\n      \"status\": \"SKIPPED\",\n      \"reason\": \"dependency_failed\"\n    }\n  ]\n}",
+    "gen_preview": "{\n  \"trace_id\": \"7fd1\",\n  \"first_error_span\": \"session-loader\",\n  \"workflow_skip_reason\": \"dependency_failed\",\n  \"fallback_signal\": \"cache-miss-fallback-timeout\",\n  \"next_check\": \"session-cache-cluste..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_09",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['coolant_pump_degraded']"
+    },
+    "latency": 6.609461545944214,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"incident_id\": \"INC-GPU17-THERMAL-001\",\n  \"root_cause\": \"Coolant pump degradation leading to low coolant flow and GPU thermal throttling\",\n  \"affected_node\": \"gpu-17\",\n  \"severity\": \"CRITICAL\",\n  \"recommended_actions\": [\n    \"Immediately isolate node gpu-17 from the training cluster to prevent hardware damage\",\n    \"Inspect and replace the degraded coolant pump\",\n    \"Verify coolant levels and check for leaks in the cooling loop\"\n  ]\n}",
+    "gen_preview": "{\n  \"incident_id\": \"INC-GPU17-THERMAL-001\",\n  \"root_cause\": \"Coolant pump degradation leading to low coolant flow and GPU thermal throttling\",\n  \"affected_node\": \"gpu-17\",\n  \"severity\": \"CRITICAL\",\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_10",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 11.656992197036743,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 结论\n- 故障根因初步判定为缓存组件异常导致认证服务请求堆积，触发熔断机制，导致 API 网关登录失败率上升。\n- 当前核心链路处于中断状态，需优先恢复缓存连接并逐步解除熔断。\n\n# 处置步骤\n- **缓存恢复**：检查缓存集群健康状态，清理僵死连接，必要时重启缓存实例或切换至备用节点以恢复连接。\n- **熔断观察**：在缓存恢复后，手动或自动尝试重置认证服务的熔断状态，并密切监控登录成功率及响应时间。\n- **流量管控**：若恢复瞬间压力过大，通过 API 网关实施临时限流，防止缓存重启后的缓存击穿导致服务再次崩溃。\n\n# 风险提示\n- **雪崩风险**：快速解除熔断可能导致大量积压请求瞬间涌入缓存，引发二次宕机。\n- **数据一致性**：若缓存切换至备用节点，需关注短时间内可能出现的认证状态不一致或登录失效问题。",
+    "gen_preview": "# 结论\n- 故障根因初步判定为缓存组件异常导致认证服务请求堆积，触发熔断机制，导致 API 网关登录失败率上升。\n- 当前核心链路处于中断状态，需优先恢复缓存连接并逐步解除熔断。\n\n# 处置步骤\n- **缓存恢复**：检查缓存集群健康状态，清理僵死连接，必要时重启缓存实例或切换至备用节点以恢复连接。\n- **熔断观察**：在缓存恢复后，手动或自动尝试重置认证服务的熔断状态，并密切监控登录成功率及..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_11",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 10.886456727981567,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 排查对象 | 观测信号 | 判断标准 | 建议动作 |\n| :--- | :--- | :--- | :--- |\n| 网络 | 丢包率 / RTT 延迟 | 丢包率 > 5% 或 RTT 波动剧烈 | 开启数据压缩，调整 TCP Keepalive 或切换轻量级传输协议 |\n| 磁盘 | I/O Wait / 磁盘队列长度 | I/O Wait > 20% 或 写入延迟升高 | 检查缓存落盘策略，清理冗余日志，升级至高性能存储介质 |\n| 模型服务 | 推理响应时间 (RT) / GPU 利用率 | RT 超过预设阈值且 GPU 负载低 | 检查输入队列积压情况，优化 Batch Size 或启用模型量化 |\n| 消息队列 | 堆积量 (Lag) / 消费速率 | 消费速率 $\\ll$ 生产速率且 Lag 持续增长 | 增加消费者实例，实施丢弃过期数据的降级策略，优化 ACK 机制 |",
+    "gen_preview": "| 排查对象 | 观测信号 | 判断标准 | 建议动作 |\n| :--- | :--- | :--- | :--- |\n| 网络 | 丢包率 / RTT 延迟 | 丢包率 > 5% 或 RTT 波动剧烈 | 开启数据压缩，调整 TCP Keepalive 或切换轻量级传输协议 |\n| 磁盘 | I/O Wait / 磁盘队列长度 | I/O Wait > 20% 或 写入延迟升高 | 检查缓存落盘..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_12",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 5.869795322418213,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n\"decision\": \"ROLLBACK\",\n\"evidence\": [\n\"月结批次失败率达到27%，严重影响财务结账进度\",\n\"账务补偿队列积压18000条，系统处理能力已饱和且无法自愈\",\n\"数据库死锁告警持续11分钟，存在数据一致性风险及数据库崩溃隐患\"\n],\n\"rollback_scope\": \"ERP-Accounting-Module-v2.1.0\",\n\"owner\": \"Financial-System-SRE-Team\"\n}",
+    "gen_preview": "{\n\"decision\": \"ROLLBACK\",\n\"evidence\": [\n\"月结批次失败率达到27%，严重影响财务结账进度\",\n\"账务补偿队列积压18000条，系统处理能力已饱和且无法自愈\",\n\"数据库死锁告警持续11分钟，存在数据一致性风险及数据库崩溃隐患\"\n],\n\"rollback_scope\": \"ERP-Accounting-Module-v2.1.0\",\n\"owner\": \"Fin..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_13",
+    "eval_res": {
+      "total": 20,
+      "format": 0,
+      "logic": 0,
+      "constraint": 20,
+      "reason": "Missing required content: reroute; Missing required content: reroute"
+    },
+    "latency": 3.442629814147949,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 故障枪号 | 告警码 | 当前动作 | 影响范围 |\n| :--- | :--- | :--- | :--- |\n| gun-03 | ISO_CHECK_FAIL | 将充电任务重定向至 gun-01, gun-02 | gun-03 无法出流 |",
+    "gen_preview": "| 故障枪号 | 告警码 | 当前动作 | 影响范围 |\n| :--- | :--- | :--- | :--- |\n| gun-03 | ISO_CHECK_FAIL | 将充电任务重定向至 gun-01, gun-02 | gun-03 无法出流 |"
+  },
+  {
+    "id": "COMPANY_IPD_S6_14",
+    "eval_res": {
+      "total": 85,
+      "format": 40,
+      "logic": 25,
+      "constraint": 20,
+      "reason": "Missing: ['batch_time']"
+    },
+    "latency": 5.1740946769714355,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"bottleneck_component\": \"preprocess_worker\",\n  \"supporting_observations\": [\n    \"cpu_utilization_at_91_percent\",\n    \"batch_processing_time_elevated_to_18s\"\n  ],\n  \"upstream_signal\": \"kafka_ingest_lag_280000\",\n  \"downstream_signal\": \"feature_writer_queue_depth_120000\"\n}",
+    "gen_preview": "{\n  \"bottleneck_component\": \"preprocess_worker\",\n  \"supporting_observations\": [\n    \"cpu_utilization_at_91_percent\",\n    \"batch_processing_time_elevated_to_18s\"\n  ],\n  \"upstream_signal\": \"kafka_ingest..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_15",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 6.942833662033081,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"incident_level\": \"P1\",\n  \"suspected_root_cause\": \"Cross-domain network latency increase or routing loop caused by suboptimal topology mapping after migration\",\n  \"containment_actions\": [\n    \"Roll back the job to the original switch domain to verify if timeouts persist\",\n    \"Increase the NCCL_TIMEOUT and collective communication timeout parameters in the training configuration\"\n  ],\n  \"followup_checks\": [\n    \"Perform a full-mesh ping and bandwidth test across the new switch domain boundaries\",\n    \"Analyze the network telemetry data to identify packet loss or congestion on the inter-domain links\"\n  ]\n}",
+    "gen_preview": "{\n  \"incident_level\": \"P1\",\n  \"suspected_root_cause\": \"Cross-domain network latency increase or routing loop caused by suboptimal topology mapping after migration\",\n  \"containment_actions\": [\n    \"Rol..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_16",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 12.877939939498901,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 当前结论\n- **内核状态异常**：服务器触发连续 4 次软锁死（Soft Lockup）告警，表明 CPU 核心被内核任务长时间占用，导致系统响应严重迟缓。\n- **内存资源枯竭**：系统触发 2 次 OOM（Out of Memory）杀进程机制，强制终止了部分业务进程以维持系统基本运行。\n\n# 对业务影响\n- **服务可用性下降**：由于关键进程被 OOM 杀死，业务已触发自我保护机制，目前处于“只读”降级状态，无法处理写请求。\n- **响应延迟增加**：内核软锁死导致系统调度效率降低，部分存活请求出现明显的响应超时或卡顿。\n\n# 下一步动作\n- **容量与资源排查**：核查当前业务流量峰值，分析内存增长曲线，评估现有硬件资源是否足以支撑当前业务负载。\n- **内核参数复核**：重点复核 `vm.overcommit_memory` 及 `kernel.panic` 等内核参数配置，排查是否存在内存碎片过高或驱动兼容性问题。\n- **服务恢复引导**：在完成资源扩容或参数优化后，逐步引导业务从只读模式恢复至全功能模式。",
+    "gen_preview": "# 当前结论\n- **内核状态异常**：服务器触发连续 4 次软锁死（Soft Lockup）告警，表明 CPU 核心被内核任务长时间占用，导致系统响应严重迟缓。\n- **内存资源枯竭**：系统触发 2 次 OOM（Out of Memory）杀进程机制，强制终止了部分业务进程以维持系统基本运行。\n\n# 对业务影响\n- **服务可用性下降**：由于关键进程被 OOM 杀死，业务已触发自我保护机制，..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_17",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 7.371819496154785,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"incident_scope\": \"Log data loss and visualization latency in AI Data Platform\",\n  \"suspect_components\": [\n    \"storage-node\",\n    \"logging-ingest\"\n  ],\n  \"evidence\": [\n    \"logging-ingest dropped_events=18000\",\n    \"storage-node disk_usage=94%\",\n    \"visual-panel refresh_delay=210s\"\n  ],\n  \"immediate_actions\": [\n    \"Expand storage capacity or clear old logs to resolve disk pressure\",\n    \"Check ingest buffer and backpressure mechanism\",\n    \"Restart visualization cache or optimize query performance\"\n  ]\n}",
+    "gen_preview": "{\n  \"incident_scope\": \"Log data loss and visualization latency in AI Data Platform\",\n  \"suspect_components\": [\n    \"storage-node\",\n    \"logging-ingest\"\n  ],\n  \"evidence\": [\n    \"logging-ingest dropped..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_18",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 6.30887508392334,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"incident_summary\": \"User requests are experiencing widespread timeouts due to a critical latency spike of 14400ms in the security service.\",\n  \"root_cause_service\": \"security\",\n  \"error_path\": \"istio-ingressgateway -> preserve -> security (14400ms)\",\n  \"immediate_actions\": [\n    \"Check security service resource utilization and logs\",\n    \"Evaluate if preserve service can implement a circuit breaker for security\",\n    \"Scale up security service instances to mitigate 14400ms delay\"\n  ]\n}",
+    "gen_preview": "{\n  \"incident_summary\": \"User requests are experiencing widespread timeouts due to a critical latency spike of 14400ms in the security service.\",\n  \"root_cause_service\": \"security\",\n  \"error_path\": \"i..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_19",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.234131574630737,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 观测点 | 疑似组件 | 关键证据 | 立即动作 |\n| :--- | :--- | :--- | :--- |\n| 采集端状态 | Filebeat | Pipeline 正在将日志发送到下游输出插件 | 检查下游接收端背压（Backpressure）状态 |\n| 日志内容 | Pipeline | 重复出现 `Reading broadcast variable <*> took <*> ms` | 针对该模版配置丢弃策略或采样率限制 |\n| 性能抖动 | Pipeline | 广播变量读取耗时抖动导致日志量激增 | 联动开发排查计算集群广播变量分发性能 |\n| 面板交互 | Actions | 可视化大盘依赖 Actions 刷新明显滞后 | 清理 Actions 队列积压并重启前端渲染服务 |",
+    "gen_preview": "| 观测点 | 疑似组件 | 关键证据 | 立即动作 |\n| :--- | :--- | :--- | :--- |\n| 采集端状态 | Filebeat | Pipeline 正在将日志发送到下游输出插件 | 检查下游接收端背压（Backpressure）状态 |\n| 日志内容 | Pipeline | 重复出现 `Reading broadcast variable <*> took <*> ..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_20",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 6.571678161621094,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"anomaly_metric\": [\n    \"api_p99_ms\",\n    \"queue_depth\",\n    \"error_rate\"\n  ],\n  \"anomaly_pattern\": \"Concurrent spike in latency, queue depth and error rate\",\n  \"suspected_component\": \"Backend API Service / Message Queue Consumer\",\n  \"response_actions\": [\n    \"Check for resource saturation or deadlocks causing queue_depth surge and api_p99_ms increase\",\n    \"Analyze error logs to identify the root cause of the 9.1% error_rate spike\"\n  ]\n}",
+    "gen_preview": "{\n  \"anomaly_metric\": [\n    \"api_p99_ms\",\n    \"queue_depth\",\n    \"error_rate\"\n  ],\n  \"anomaly_pattern\": \"Concurrent spike in latency, queue depth and error rate\",\n  \"suspected_component\": \"Backend API..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_21",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.80499529838562,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 观测样本 | 日志模版/组件 | 疑似影响 | 处置动作 |\n| :--- | :--- | :--- | :--- |\n| Pipeline 正在将日志发往下游 | Filebeat / Pipeline | 采集链路阻塞或背压导致延迟 | 检查下游输出插件状态，扩容 Pipeline 实例 |\n| Reading broadcast variable <*> took <*> ms | 日志模版 | 广播变量读取耗时过高导致日志量激增 | 优化代码广播变量分发逻辑，配置日志采样过滤 |\n| LOWMEM available. | 日志模版 | 节点内存不足触发 OOM 风险 | 检查 JVM 堆内存配置，清理僵尸进程或扩容内存 |\n| 刷新滞后 | Actions | 可视化动作配置失效或响应超时 | 校验 Actions 触发链路，重启可视化服务缓存 |",
+    "gen_preview": "| 观测样本 | 日志模版/组件 | 疑似影响 | 处置动作 |\n| :--- | :--- | :--- | :--- |\n| Pipeline 正在将日志发往下游 | Filebeat / Pipeline | 采集链路阻塞或背压导致延迟 | 检查下游输出插件状态，扩容 Pipeline 实例 |\n| Reading broadcast variable <*> took <*> ms | 日..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_22",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 5.242629766464233,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"metric_name\": \"unnamed_metric\",\n  \"series_classification\": \"稀疏\",\n  \"anomaly_evidence\": [\n    \"大部分采样点值为0.0\",\n    \"存在偶发性的非零突增值（如14.9）\"\n  ],\n  \"response_actions\": [\n    \"核查触发突增的具体请求日志\",\n    \"确认指标是否为计数器或错误触发类指标\"\n  ]\n}",
+    "gen_preview": "{\n  \"metric_name\": \"unnamed_metric\",\n  \"series_classification\": \"稀疏\",\n  \"anomaly_evidence\": [\n    \"大部分采样点值为0.0\",\n    \"存在偶发性的非零突增值（如14.9）\"\n  ],\n  \"response_actions\": [\n    \"核查触发突增的具体请求日志\",\n    \"确认指标是否为..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_23",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 5.8521199226379395,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"node_name\": \"edge-node-07\",\n  \"pod_density_assessment\": \"Node capacity exceeded\",\n  \"capacity_evidence\": [\n    \"Running pods count (146) has reached the maximum pod density limit of the node\",\n    \"Critical pods are pending (11) due to insufficient node capacity\"\n  ],\n  \"recommended_actions\": [\n    \"Scale out by adding more edge nodes to redistribute pod load\",\n    \"Review and optimize pod resource requests to increase node capacity\"\n  ]\n}",
+    "gen_preview": "{\n  \"node_name\": \"edge-node-07\",\n  \"pod_density_assessment\": \"Node capacity exceeded\",\n  \"capacity_evidence\": [\n    \"Running pods count (146) has reached the maximum pod density limit of the node\",\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_24",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 8.264642477035522,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"logging_component_status\": {\n    \"filebeat_sidecar\": \"unstable\",\n    \"pipeline_latency\": \"18s\",\n    \"status\": \"degraded\"\n  },\n  \"visualization_status\": {\n    \"action_bindings\": \"missing\",\n    \"interactive_jump\": \"failed\",\n    \"status\": \"unavailable\"\n  },\n  \"evidence\": [\n    \"Filebeat sidecar restarted 3 times recently\",\n    \"Pipeline delivery latency reached 18s\",\n    \"Drill-down panel action bindings are missing\"\n  ],\n  \"recovery_actions\": [\n    \"Stabilize Filebeat sidecar and optimize pipeline throughput to reduce latency\",\n    \"Re-bind and validate dashboard Action configurations for interactive views\"\n  ]\n}",
+    "gen_preview": "{\n  \"logging_component_status\": {\n    \"filebeat_sidecar\": \"unstable\",\n    \"pipeline_latency\": \"18s\",\n    \"status\": \"degraded\"\n  },\n  \"visualization_status\": {\n    \"action_bindings\": \"missing\",\n    \"in..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_25",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 5.354612827301025,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "| 观测点 | 疑似组件 | 立即动作 | 影响判断 |\n| :--- | :--- | :--- | :--- |\n| 日志吞吐下降 | Filebeat / Logging | 检查 Filebeat 采集状态及 Logging 写入队列积压情况 | 确认是否为采集端丢包或后端写入瓶颈导致数据缺失 |\n| 交互动作失效 | Visualization / Actions | 验证跳转 URL 配置及 Actions 接口响应状态 | 确认是否为前端路由失效或后端跳转服务不可用 |",
+    "gen_preview": "| 观测点 | 疑似组件 | 立即动作 | 影响判断 |\n| :--- | :--- | :--- | :--- |\n| 日志吞吐下降 | Filebeat / Logging | 检查 Filebeat 采集状态及 Logging 写入队列积压情况 | 确认是否为采集端丢包或后端写入瓶颈导致数据缺失 |\n| 交互动作失效 | Visualization / Actions | 验证跳转 URL ..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_26",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 5.091499328613281,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "{\n  \"logging_path_status\": \"Filebeat installed and configured with source and output endpoints\",\n  \"pipeline_status\": \"Operational with an average delivery latency of 12s over the last 15 minutes\",\n  \"visualization_status\": \"Interactive jumps failed due to accidental deletion of Actions configuration\",\n  \"recovery_actions\": [\n    \"Verify Filebeat log collection flow and monitor Pipeline delivery latency\",\n    \"Restore deleted Actions configuration to recover Visualization interactive functionality\"\n  ]\n}",
+    "gen_preview": "{\n  \"logging_path_status\": \"Filebeat installed and configured with source and output endpoints\",\n  \"pipeline_status\": \"Operational with an average delivery latency of 12s over the last 15 minutes\",\n  ..."
+  },
+  {
+    "id": "COMPANY_IPD_S6_27",
+    "eval_res": {
+      "total": 100,
+      "format": 40,
+      "logic": 40,
+      "constraint": 20,
+      "reason": "Perfect"
+    },
+    "latency": 15.760915517807007,
+    "status": "success",
+    "attempts": 1,
+    "gen_text": "# 故障结论\n\n- **故障现象**：Logging 与 Visualization 联动失效，导致用户在仪表盘通过 Actions 跳转查看详细日志时，出现数据缺失或跳转无响应，严重影响了故障排查效率。\n- **恢复动作**：紧急回滚 Visualization 仪表盘的 Actions 配置至稳定版本，并对 Pipeline 积压队列进行清理，恢复日志投递的实时性。\n\n# 根因与暴露短板\n\n- **链路延迟累积**：Filebeat 采集端延迟长期上升且 Pipeline 投递出现滞后，导致日志到达下游的时间戳与实时业务时间脱节，而告警阈值未随业务量增长及时调整，导致监控失效。\n- **配置变更缺乏验证**：Visualization 仪表盘的 Actions 配置在变更后未经过完整的回归验证，导致联动跳转逻辑失效，在无日志延迟的情况下也无法正确跳转。\n- **监控盲区与响应滞后**：缺乏端到端的联动健康检查机制，当班人员过度依赖单一组件告警，导致在业务方反馈前未能及时发现 Logging 与 Visualization 之间的链路中断。\n\n# 后续治理动作\n\n- **优化监控告警体系**：重新评估并动态调整 Filebeat 及 Pipeline 的延迟告警阈值，建立基于端到端时延的监控指标，确保延迟上升能第一时间触发告警。\n- **建立变更回归机制**：针对 Visualization 等可视化配置变更，强制执行回归验证流程，确保 Actions 跳转等关键交互功能在发布前经过测试。\n- **明确责任人与巡检制度**：指定各模块责任人定期对联动链路进行健康度巡检，并将“联动可用性”纳入日常运维检查清单。",
+    "gen_preview": "# 故障结论\n\n- **故障现象**：Logging 与 Visualization 联动失效，导致用户在仪表盘通过 Actions 跳转查看详细日志时，出现数据缺失或跳转无响应，严重影响了故障排查效率。\n- **恢复动作**：紧急回滚 Visualization 仪表盘的 Actions 配置至稳定版本，并对 Pipeline 积压队列进行清理，恢复日志投递的实时性。\n\n# 根因与暴露短板\n\n-..."
+  }
+]

@@ -1,0 +1,142 @@
+function EvalLadderBoard() {
+  const [reports, setReports] = useState<any[]>([])
+  const [activeTab, setActiveTab] = useState('BenchLocal')
+
+  useEffect(() => {
+    fetch('/api/eval/results')
+      .then(res => res.json())
+      .then(data => setReports(data.reports || []))
+      .catch(console.error)
+  }, [])
+
+  const getDimensionScore = (r: any, dimKey: string) => {
+    if (dimKey === 'score') return r.percent || 0;
+    
+    if (activeTab === 'BenchLocal') {
+      const pack = r.packs.find((p: any) => p.name && p.name.toLowerCase().includes(dimKey.toLowerCase()))
+      if (pack && pack.maxScore > 0) {
+        return (pack.score / pack.maxScore) * 100
+      }
+      return 0
+    } else {
+      for (const pack of r.packs) {
+        if (pack.cases) {
+          const c = pack.cases.find((c: any) => {
+            const name = c.id.split(' - ')[1] || c.id;
+            const finalName = (name === '组织与人才发展' || name === '项目进度与风险治理') ? '组织支撑与运营' : name;
+            return finalName.includes(dimKey);
+          })
+          if (c && c.score !== undefined) {
+            return parseFloat(c.score) || 0;
+          }
+        }
+      }
+      return 0
+    }
+  }
+
+  const getTopModels = (dimKey: string) => {
+    const byType = reports.filter(r => r.type === activeTab)
+    const bestScores = new Map<string, any>()
+    byType.forEach(r => {
+      const existing = bestScores.get(r.model_name)
+      const currentScore = getDimensionScore(r, dimKey)
+      const existingScore = existing ? getDimensionScore(existing, dimKey) : -1
+      
+      if (!existing || currentScore > existingScore) {
+        bestScores.set(r.model_name, r)
+      }
+    })
+    
+    return Array.from(bestScores.values())
+      .map(r => ({ model_name: r.model_name, score: getDimensionScore(r, dimKey) }))
+      .sort((a, b) => b.score - a.score)
+  }
+
+  const dimensionsBenchLocal = [
+    { title: '综合能力榜单', key: 'score' },
+    { title: '工具调用榜单', key: 'toolcall' },
+    { title: '指令遵循榜单', key: 'instructfollow' },
+    { title: '数理推理榜单', key: 'reasonmath' },
+    { title: '信息抽取榜单', key: 'dataextract' },
+    { title: '代码漏洞榜单', key: 'bugfind' },
+    { title: '结构化输出榜单', key: 'structoutput' },
+    { title: 'Agent规划榜单', key: 'hermesagent' },
+    { title: '运维命令榜单', key: 'cli-40' }
+  ]
+
+  const dimensionsIPD = [
+    { title: '综合能力榜单', key: 'score' },
+    { title: '机会识别榜单', key: '机会识别' },
+    { title: '概念阶段榜单', key: '概念阶段' },
+    { title: '计划阶段榜单', key: '计划阶段' },
+    { title: '开发阶段榜单', key: '开发阶段' },
+    { title: '验证阶段榜单', key: '验证阶段' },
+    { title: '发布阶段榜单', key: '发布阶段' },
+    { title: '生命周期管理榜单', key: '生命周期管理' },
+    { title: '组织支撑与运营榜单', key: '组织支撑与运营' }
+  ]
+
+  const currentDimensions = activeTab === 'BenchLocal' ? dimensionsBenchLocal : dimensionsIPD;
+
+  const LadderColumn = ({ title, data }: { title: string, data: { model_name: string, score: number }[] }) => {
+    return (
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 flex flex-col h-full hover:shadow-md transition-shadow">
+        <div className="flex items-center gap-2 mb-6 pb-4 border-b border-slate-100">
+          <div className="w-1.5 h-5 bg-blue-600 rounded-full"></div>
+          <h3 className="text-lg font-bold text-slate-800">{title}</h3>
+        </div>
+        
+        <div className="space-y-3 flex-1">
+          {data.length === 0 && <div className="text-sm text-slate-400 text-center py-8">暂无数据</div>}
+          {data.slice(0, 10).map((item, idx) => (
+            <div key={idx} className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition-colors">
+              <div className={`w-6 h-6 shrink-0 flex items-center justify-center rounded-full text-xs font-bold
+                ${idx === 0 ? 'bg-amber-100 text-amber-600 shadow-sm' : 
+                  idx === 1 ? 'bg-slate-200 text-slate-600 shadow-sm' : 
+                  idx === 2 ? 'bg-orange-100 text-orange-600 shadow-sm' : 
+                  'bg-slate-50 text-slate-400'}`}>
+                {idx + 1}
+              </div>
+              <div className="flex-1 text-sm font-semibold text-slate-700 truncate" title={item.model_name}>
+                {item.model_name}
+              </div>
+              <div className="text-sm font-bold text-blue-600 w-12 text-right">
+                {item.score.toFixed(1)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-8">
+      <div className="flex justify-center mb-8">
+        <div className="inline-flex bg-slate-100/80 p-1.5 rounded-xl">
+          <button 
+            className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'BenchLocal' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            onClick={() => setActiveTab('BenchLocal')}
+          >
+            BenchLocal 测试集
+          </button>
+          <button 
+            className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'IPD' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            onClick={() => setActiveTab('IPD')}
+          >
+            IPD 测试集
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {currentDimensions.map(dim => (
+          <LadderColumn key={dim.key} title={dim.title} data={getTopModels(dim.key)} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PerfDragonTigerBoard() {

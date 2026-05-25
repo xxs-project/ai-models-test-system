@@ -24,9 +24,12 @@ import {
   AlertCircle,
   BarChart3,
   PieChart as PieChartIcon,
-  Cpu
+  Cpu,
+  Crown,
+  Medal,
+  Award
 } from 'lucide-react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LabelList } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LabelList, PieChart, Pie, Cell } from 'recharts'
 
 export function Dashboard() {
   const navigate = useNavigate()
@@ -105,7 +108,7 @@ export function Dashboard() {
     return [
       {
         name: 'BenchLocal',
-        fullName: 'BenchLocal 测评大盘',
+        fullName: 'BenchLocal 测评集',
         top1Model: benchLocalTop3[0]?.model_name || '无',
         top1Score: parseFloat((benchLocalTop3[0]?.percent || 0).toFixed(1)),
         top2Model: benchLocalTop3[1]?.model_name || '无',
@@ -115,7 +118,7 @@ export function Dashboard() {
       },
       {
         name: 'IPD',
-        fullName: 'IPD 测评大盘',
+        fullName: 'IPD测评集',
         top1Model: ipdTop3[0]?.model_name || '无',
         top1Score: parseFloat((ipdTop3[0]?.percent || 0).toFixed(1)),
         top2Model: ipdTop3[1]?.model_name || '无',
@@ -260,14 +263,16 @@ export function Dashboard() {
       </div>
 
       
-      {/* Chart & Analytics Section */}
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
-        {/* Top Models by Dataset */}
-        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm bg-white overflow-hidden">
+      {/* Main Layout Section */}
+      <div className="grid gap-6 grid-cols-1 xl:grid-cols-3">
+        
+        {/* ROW 1: Leaderboard (Left) + Pipeline Health (Right) */}
+        {/* Top Models by Dataset Integrated View */}
+        <Card className="xl:col-span-2 rounded-[24px] border border-slate-200/60 shadow-sm bg-white overflow-hidden flex flex-col">
           <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-4 bg-slate-50/50">
             <div className="flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-blue-600" />
-              <CardTitle className="text-lg font-bold text-slate-900">测评榜单</CardTitle>
+              <CardTitle className="text-lg font-bold text-slate-900">核心评测大盘 (Top 3)</CardTitle>
             </div>
             <div className="flex items-center gap-3 self-end sm:self-auto">
               <Button variant="ghost" size="sm" onClick={() => navigate('/board')} className="text-slate-500 hover:text-blue-600 hover:bg-blue-50 h-8 px-3 rounded-lg hidden sm:flex transition-all">
@@ -275,44 +280,62 @@ export function Dashboard() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="pt-6">
+          <CardContent className="p-6 flex-1 flex flex-col justify-center">
             {isLoading ? (
-              <div className="h-[260px] flex items-center justify-center"><Skeleton className="w-full h-full rounded-2xl" /></div>
+              <div className="h-full flex items-center justify-center"><Skeleton className="w-full h-[250px] rounded-2xl" /></div>
             ) : topDatasetChartData.length > 0 ? (
-              <div className="h-[260px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={topDatasetChartData} margin={{ top: 20, right: 10, left: -20, bottom: 0 }} barCategoryGap="25%">
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 13, fill: '#475569', fontWeight: 600 }} dy={12} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#94a3b8' }} domain={[0, 100]} />
-                    <RechartsTooltip 
-                      cursor={{ fill: '#f8fafc' }}
-                      contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)', fontWeight: 500 }}
-                      formatter={(value: number, name: string, props: any) => {
-                        const payload = props.payload;
-                        let modelName = '';
-                        if (name === 'TOP 1') modelName = payload.top1Model;
-                        if (name === 'TOP 2') modelName = payload.top2Model;
-                        if (name === 'TOP 3') modelName = payload.top3Model;
-                        return [`${value} 分`, `${name}: ${modelName}`];
-                      }}
-                      labelFormatter={(label, payload) => payload?.[0]?.payload?.fullName || label}
-                    />
-                    <Legend iconType="circle" wrapperStyle={{ fontSize: '13px', paddingTop: '16px', color: '#64748b' }} />
-                    <Bar dataKey="top1Score" name="TOP 1" fill="#f59e0b" radius={[6, 6, 0, 0]} maxBarSize={32}>
-                      <LabelList dataKey="top1Score" position="top" style={{ fontSize: '11px', fill: '#64748b', fontWeight: 600 }} formatter={(val: number) => val > 0 ? val : ''} />
-                    </Bar>
-                    <Bar dataKey="top2Score" name="TOP 2" fill="#94a3b8" radius={[6, 6, 0, 0]} maxBarSize={32}>
-                      <LabelList dataKey="top2Score" position="top" style={{ fontSize: '11px', fill: '#64748b', fontWeight: 600 }} formatter={(val: number) => val > 0 ? val : ''} />
-                    </Bar>
-                    <Bar dataKey="top3Score" name="TOP 3" fill="#fb923c" radius={[6, 6, 0, 0]} maxBarSize={32}>
-                      <LabelList dataKey="top3Score" position="top" style={{ fontSize: '11px', fill: '#64748b', fontWeight: 600 }} formatter={(val: number) => val > 0 ? val : ''} />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[300px]">
+                {topDatasetChartData.map((data, idx) => {
+                  const chartData = [
+                    { name: 'TOP 1', model: data.top1Model, score: data.top1Score, fill: '#f59e0b' },
+                    { name: 'TOP 2', model: data.top2Model, score: data.top2Score, fill: '#94a3b8' },
+                    { name: 'TOP 3', model: data.top3Model, score: data.top3Score, fill: '#fb923c' },
+                  ].filter(d => d.score > 0);
+                  
+                  return (
+                    <div key={idx} className="flex flex-col h-full bg-slate-50/50 rounded-2xl p-4 border border-slate-100/80 hover:shadow-md transition-shadow">
+                      <div className="flex items-center justify-center gap-2 mb-4">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                        <h3 className="font-bold text-slate-800 text-sm tracking-wider uppercase">{data.fullName}</h3>
+                      </div>
+                      <div className="flex-1 w-full min-h-0">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={chartData} margin={{ top: 20, right: 10, left: -20, bottom: 0 }} barCategoryGap="30%">
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                            <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b', fontWeight: 600 }} dy={10} />
+                            <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#94a3b8' }} domain={[0, 100]} />
+                            <RechartsTooltip 
+                              cursor={{ fill: '#f8fafc' }}
+                              contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)', fontWeight: 500 }}
+                              formatter={(value: number, name: string, props: any) => [`${value} 分`, `${props.payload.model}`]}
+                              labelFormatter={(label) => label}
+                            />
+                            <Bar dataKey="score" radius={[6, 6, 0, 0]} maxBarSize={48}>
+                              {chartData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={entry.fill} />
+                              ))}
+                              <LabelList dataKey="score" position="top" content={(props: any) => {
+                                const { x, y, width, value, index } = props;
+                                if (!value || value <= 0) return null;
+                                const modelName = chartData[index]?.model || '';
+                                const displayModel = modelName.length > 12 ? modelName.substring(0, 10) + '...' : modelName;
+                                return (
+                                  <g transform={`translate(${x + width / 2}, ${y - 20})`}>
+                                    <text x={0} y={0} fill="#475569" textAnchor="middle" fontSize="10" fontWeight="600">{displayModel}</text>
+                                    <text x={0} y={14} fill={chartData[index].fill} textAnchor="middle" fontSize="12" fontWeight="800">{value}</text>
+                                  </g>
+                                );
+                              }} />
+                            </Bar>
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             ) : (
-              <div className="h-[260px] flex flex-col items-center justify-center text-slate-400 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+              <div className="h-full flex flex-col items-center justify-center text-slate-400 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50 min-h-[250px]">
                 <BarChart3 className="w-12 h-12 mb-3 opacity-20 text-slate-600" />
                 <p className="font-medium text-sm">暂无测评评分记录</p>
               </div>
@@ -320,102 +343,116 @@ export function Dashboard() {
           </CardContent>
         </Card>
 
-        {/* Task Pipeline Health & Status */}
-        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm bg-white overflow-hidden flex flex-col">
+        {/* Pipeline Health */}
+        <Card className="xl:col-span-1 rounded-[24px] border border-slate-200/60 shadow-sm bg-white overflow-hidden flex flex-col">
           <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-slate-100 bg-slate-50/50">
             <div className="flex items-center gap-2">
               <Activity className="w-5 h-5 text-indigo-500" />
               <CardTitle className="text-lg font-bold text-slate-900">流水线健康度</CardTitle>
             </div>
           </CardHeader>
-          <CardContent className="pt-8 pb-6 flex-1 flex flex-col justify-center space-y-12 px-8">
+          <CardContent className="p-6 flex-1 flex flex-col justify-center gap-6">
             {isLoading ? (
-              <div className="space-y-8">
-                <div className="space-y-3"><Skeleton className="h-4 w-1/3" /><Skeleton className="h-3 w-full rounded-full" /></div>
-                <div className="space-y-3"><Skeleton className="h-4 w-1/3" /><Skeleton className="h-3 w-full rounded-full" /></div>
+              <div className="space-y-6 h-full flex flex-col justify-center">
+                <div className="flex flex-col items-center justify-center gap-3"><Skeleton className="h-24 w-24 rounded-full" /></div>
+                <div className="flex flex-col items-center justify-center gap-3"><Skeleton className="h-24 w-24 rounded-full" /></div>
               </div>
             ) : (
               <>
-                {/* Performance Tasks */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2 font-bold text-slate-800">
-                      <div className="p-1.5 bg-blue-50/80 rounded-lg">
-                        <FlaskConical className="w-4 h-4 text-blue-600" />
+                {/* Performance Tasks Chart */}
+                {(() => {
+                  const success = tasks.filter(t => t.status === 4).length;
+                  const running = tasks.filter(t => t.status === 3).length;
+                  const failed = tasks.filter(t => t.status === 5 || t.status === 7).length;
+                  const total = success + running + failed || 1;
+                  const data = [
+                    { name: '成功', value: success, fill: '#10b981' },
+                    { name: '运行', value: running, fill: '#3b82f6' },
+                    { name: '异常', value: failed, fill: '#ef4444' }
+                  ].filter(d => d.value > 0);
+                  
+                  return (
+                    <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-100/80 shadow-sm flex-1 flex items-center gap-4 hover:shadow-md transition-shadow">
+                      <div className="w-[100px] h-[100px] shrink-0 relative">
+                        {data.length > 0 ? (
+                          <ResponsiveContainer width="100%" height="100%">
+                            <PieChart>
+                              <Pie data={data} innerRadius={30} outerRadius={45} paddingAngle={2} dataKey="value" stroke="none">
+                                {data.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.fill} />)}
+                              </Pie>
+                              <RechartsTooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', fontSize: '12px', padding: '4px 8px' }} />
+                            </PieChart>
+                          </ResponsiveContainer>
+                        ) : (
+                          <div className="w-full h-full rounded-full border-4 border-slate-100 flex items-center justify-center"><span className="text-xs text-slate-400">暂无</span></div>
+                        )}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          <FlaskConical className="w-5 h-5 text-blue-500 opacity-80" />
+                        </div>
                       </div>
-                      性能压测任务
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-slate-800 mb-1 flex items-center justify-between">性能压测 <span className="text-xs font-mono text-slate-500 bg-white px-1.5 py-0.5 rounded border border-slate-100">{tasks.length} 总计</span></div>
+                        <div className="space-y-1.5 mt-2">
+                          <div className="flex justify-between items-center text-xs"><span className="flex items-center gap-1.5 text-slate-600"><span className="w-2 h-2 rounded-full bg-emerald-500"></span>成功</span><span className="font-bold text-slate-700">{success}</span></div>
+                          <div className="flex justify-between items-center text-xs"><span className="flex items-center gap-1.5 text-slate-600"><span className="w-2 h-2 rounded-full bg-blue-500"></span>运行</span><span className="font-bold text-slate-700">{running}</span></div>
+                          <div className="flex justify-between items-center text-xs"><span className="flex items-center gap-1.5 text-slate-600"><span className="w-2 h-2 rounded-full bg-red-500"></span>异常</span><span className="font-bold text-slate-700">{failed}</span></div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-slate-500 font-mono font-medium">总计 {tasks.length}</div>
-                  </div>
-                  <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
-                    {(() => {
-                      const total = tasks.length || 1;
-                      const success = tasks.filter(t => t.status === 4).length;
-                      const running = tasks.filter(t => t.status === 3).length;
-                      const failed = tasks.filter(t => t.status === 5 || t.status === 7).length;
-                      return (
-                        <>
-                          <div style={{ width: `${(success/total)*100}%` }} className="bg-emerald-500 hover:opacity-90 transition-opacity cursor-pointer" title={`成功: ${success}`}></div>
-                          <div style={{ width: `${(running/total)*100}%` }} className="bg-blue-500 hover:opacity-90 transition-opacity cursor-pointer relative overflow-hidden" title={`执行中: ${running}`}>
-                            {running > 0 && <div className="absolute inset-0 bg-white/20 animate-pulse"></div>}
-                          </div>
-                          <div style={{ width: `${(failed/total)*100}%` }} className="bg-red-500 hover:opacity-90 transition-opacity cursor-pointer" title={`失败: ${failed}`}></div>
-                        </>
-                      )
-                    })()}
-                  </div>
-                  <div className="flex justify-between text-xs text-slate-500 font-medium px-1">
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm"></span> 成功 ({tasks.filter(t => t.status === 4).length})</span>
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-sm"></span> 执行中 ({tasks.filter(t => t.status === 3).length})</span>
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-sm"></span> 失败/超时 ({tasks.filter(t => t.status === 5 || t.status === 7).length})</span>
-                  </div>
-                </div>
+                  )
+                })()}
 
-                {/* Evaluation Tasks */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2 font-bold text-slate-800">
-                      <div className="p-1.5 bg-purple-50/80 rounded-lg">
-                        <PieChartIcon className="w-4 h-4 text-purple-600" />
+                {/* Evaluation Tasks Chart */}
+                {(() => {
+                  const success = evalTasks.filter((t: any) => t.status === 'completed').length;
+                  const running = evalTasks.filter((t: any) => t.status === 'running').length;
+                  const failed = evalTasks.filter((t: any) => t.status === 'failed' || t.status === 'stopped').length;
+                  const total = success + running + failed || 1;
+                  const data = [
+                    { name: '成功', value: success, fill: '#10b981' },
+                    { name: '运行', value: running, fill: '#a855f7' },
+                    { name: '异常', value: failed, fill: '#ef4444' }
+                  ].filter(d => d.value > 0);
+                  
+                  return (
+                    <div className="bg-slate-50/80 rounded-2xl p-4 border border-slate-100/80 shadow-sm flex-1 flex items-center gap-4 hover:shadow-md transition-shadow">
+                      <div className="w-[100px] h-[100px] shrink-0 relative">
+                        {data.length > 0 ? (
+                          <ResponsiveContainer width="100%" height="100%">
+                            <PieChart>
+                              <Pie data={data} innerRadius={30} outerRadius={45} paddingAngle={2} dataKey="value" stroke="none">
+                                {data.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.fill} />)}
+                              </Pie>
+                              <RechartsTooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', fontSize: '12px', padding: '4px 8px' }} />
+                            </PieChart>
+                          </ResponsiveContainer>
+                        ) : (
+                          <div className="w-full h-full rounded-full border-4 border-slate-100 flex items-center justify-center"><span className="text-xs text-slate-400">暂无</span></div>
+                        )}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          <PieChartIcon className="w-5 h-5 text-purple-500 opacity-80" />
+                        </div>
                       </div>
-                      模型评测任务
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-slate-800 mb-1 flex items-center justify-between">模型评测 <span className="text-xs font-mono text-slate-500 bg-white px-1.5 py-0.5 rounded border border-slate-100">{evalTasks.length} 总计</span></div>
+                        <div className="space-y-1.5 mt-2">
+                          <div className="flex justify-between items-center text-xs"><span className="flex items-center gap-1.5 text-slate-600"><span className="w-2 h-2 rounded-full bg-emerald-500"></span>成功</span><span className="font-bold text-slate-700">{success}</span></div>
+                          <div className="flex justify-between items-center text-xs"><span className="flex items-center gap-1.5 text-slate-600"><span className="w-2 h-2 rounded-full bg-purple-500"></span>运行</span><span className="font-bold text-slate-700">{running}</span></div>
+                          <div className="flex justify-between items-center text-xs"><span className="flex items-center gap-1.5 text-slate-600"><span className="w-2 h-2 rounded-full bg-red-500"></span>异常</span><span className="font-bold text-slate-700">{failed}</span></div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-slate-500 font-mono font-medium">总计 {evalTasks.length}</div>
-                  </div>
-                  <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
-                    {(() => {
-                      const total = evalTasks.length || 1;
-                      const success = evalTasks.filter((t: any) => t.status === 'completed').length;
-                      const running = evalTasks.filter((t: any) => t.status === 'running').length;
-                      const failed = evalTasks.filter((t: any) => t.status === 'failed' || t.status === 'stopped').length;
-                      return (
-                        <>
-                          <div style={{ width: `${(success/total)*100}%` }} className="bg-emerald-500 hover:opacity-90 transition-opacity cursor-pointer" title={`成功: ${success}`}></div>
-                          <div style={{ width: `${(running/total)*100}%` }} className="bg-purple-500 hover:opacity-90 transition-opacity cursor-pointer relative overflow-hidden" title={`执行中: ${running}`}>
-                            {running > 0 && <div className="absolute inset-0 bg-white/20 animate-pulse"></div>}
-                          </div>
-                          <div style={{ width: `${(failed/total)*100}%` }} className="bg-red-500 hover:opacity-90 transition-opacity cursor-pointer" title={`失败: ${failed}`}></div>
-                        </>
-                      )
-                    })()}
-                  </div>
-                  <div className="flex justify-between text-xs text-slate-500 font-medium px-1">
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm"></span> 成功 ({evalTasks.filter((t: any) => t.status === 'completed').length})</span>
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm"></span> 执行中 ({evalTasks.filter((t: any) => t.status === 'running').length})</span>
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-sm"></span> 失败/终止 ({evalTasks.filter((t: any) => t.status === 'failed' || t.status === 'stopped').length})</span>
-                  </div>
-                </div>
+                  )
+                })()}
               </>
             )}
           </CardContent>
         </Card>
-      </div>
 
-      {/* Lists Area */}
-      <div className="grid gap-6 lg:grid-cols-2">
+        {/* ROW 2: Task Lists (Left) + Device Cluster (Right) */}
         {/* Task Pipeline (More Focus on Evaluation) */}
-        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm flex flex-col bg-white overflow-hidden">
-          <Tabs value={activeTaskTab} onValueChange={setActiveTaskTab} className="flex-1 flex flex-col">
+        <Card className="xl:col-span-2 rounded-[24px] border border-slate-200/60 shadow-sm flex flex-col bg-white overflow-hidden">
+          <Tabs value={activeTaskTab} onValueChange={setActiveTaskTab} className="flex-1 flex flex-col h-full">
             <CardHeader className="flex flex-row items-center justify-between border-b border-slate-100 py-3 px-6 bg-slate-50/50">
               <div className="flex items-center gap-4">
                 <CardTitle className="text-lg font-bold text-slate-900">任务执行看板</CardTitle>
@@ -428,9 +465,9 @@ export function Dashboard() {
                 更多 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </CardHeader>
-            <CardContent className="p-0">
-              <TabsContent value="eval" className="m-0 border-none outline-none">
-                <div className="divide-y divide-slate-100">
+            <CardContent className="p-0 flex-1">
+              <TabsContent value="eval" className="m-0 border-none outline-none h-full">
+                <div className="divide-y divide-slate-100 h-full">
                   {isLoading ? (
                     Array.from({ length: 5 }).map((_, i) => (
                       <div key={i} className="p-5 flex items-center justify-between"><Skeleton className="h-10 w-full" /></div>
@@ -468,8 +505,8 @@ export function Dashboard() {
                   })}
                 </div>
               </TabsContent>
-              <TabsContent value="perf" className="m-0 border-none outline-none">
-                 <div className="divide-y divide-slate-100">
+              <TabsContent value="perf" className="m-0 border-none outline-none h-full">
+                 <div className="divide-y divide-slate-100 h-full">
                   {isLoading ? (
                     Array.from({ length: 5 }).map((_, i) => (
                       <div key={i} className="p-5 flex items-center justify-between"><Skeleton className="h-10 w-full" /></div>
@@ -515,7 +552,7 @@ export function Dashboard() {
         </Card>
 
         {/* Device Cluster Overview */}
-        <Card className="rounded-[24px] border border-slate-200/60 shadow-sm flex flex-col bg-white overflow-hidden">
+        <Card className="xl:col-span-1 rounded-[24px] border border-slate-200/60 shadow-sm flex flex-col bg-white overflow-hidden h-full">
           <CardHeader className="flex flex-row items-center justify-between border-b border-slate-100 py-4 px-6 bg-slate-50/50">
             <div>
               <CardTitle className="text-lg font-bold text-slate-900">算力节点概览</CardTitle>
@@ -524,8 +561,8 @@ export function Dashboard() {
               管理集群 <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="divide-y divide-slate-100">
+          <CardContent className="p-0 flex-1">
+            <div className="divide-y divide-slate-100 h-full">
               {isLoading ? (
                 Array.from({ length: 5 }).map((_, i) => (
                   <div key={i} className="p-5 flex items-center justify-between"><Skeleton className="h-10 w-full" /></div>

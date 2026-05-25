@@ -30,7 +30,7 @@ const navGroups = [
     label: '总览看板',
     items: [
       { name: '仪表盘', href: '/', icon: Home, desc: '全局资源与任务运行概览' },
-      { name: '测评大盘', href: '/board', icon: LayoutDashboard, desc: '多维测评数据汇总视图' },
+      { name: '测评看板', href: '/board', icon: LayoutDashboard, desc: '多维测评数据汇总视图' },
     ]
   },
   {

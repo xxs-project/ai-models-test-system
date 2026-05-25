@@ -1,0 +1,89 @@
+schema_version = 1
+default_benchpack = ""
+run_storage_dir = "/home/models-test-system_ucd/llm-test-platform/bench_test/BenchLocal/results"
+benchpack_storage_dir = "~/.benchlocal/benchpacks"
+log_storage_dir = "~/.benchlocal/logs"
+cache_dir = "~/.benchlocal/cache"
+
+[registry]
+official_url = "https://ghproxy.net/https://raw.githubusercontent.com/stevibe/benchlocal-registry/main/registry.json"
+
+[ui]
+theme = "system"
+
+[agent]
+enabled = false
+access = "localhost"
+
+[providers.local_model]
+kind = "openai_compatible"
+name = "Local Gemma"
+enabled = true
+base_url = "http://7.6.16.150:10092/v1/"
+api_key = "Xfusion@2026"
+
+[[models]]
+id = "local_model:gemma-4-31B-it"
+provider = "local_model"
+model = "gemma-4-31B-it"
+label = "Gemma 4 31B IT"
+group = "local"
+enabled = true
+
+[benchpacks.toolcall-15]
+enabled = true
+source = "registry"
+path = "/root/.benchlocal/benchpacks/toolcall-15/versions/1.0.1-c656dcab"
+version = "1.0.1"
+
+[benchpacks.toolcall-15.verifiers]
+[benchpacks.instructfollow-15]
+enabled = true
+source = "registry"
+path = "/root/.benchlocal/benchpacks/instructfollow-15/versions/1.0.0-57c29d94"
+version = "1.0.0"
+
+[benchpacks.instructfollow-15.verifiers]
+[benchpacks.reasonmath-15]
+enabled = true
+source = "registry"
+path = "/root/.benchlocal/benchpacks/reasonmath-15/versions/1.0.0-7048de77"
+version = "1.0.0"
+
+[benchpacks.reasonmath-15.verifiers]
+[benchpacks.dataextract-15]
+enabled = true
+source = "registry"
+path = "/root/.benchlocal/benchpacks/dataextract-15/versions/1.0.0-4b3b13c1"
+version = "1.0.0"
+
+[benchpacks.dataextract-15.verifiers]
+[benchpacks.bugfind-15]
+enabled = true
+source = "registry"
+path = "/root/.benchlocal/benchpacks/bugfind-15/versions/1.0.1-88ac3819"
+version = "1.0.1"
+
+[benchpacks.bugfind-15.verifiers.verifier]
+mode = "docker"
+auto_start = true
+
+[benchpacks.structoutput-15]
+enabled = true
+source = "registry"
+path = "/root/.benchlocal/benchpacks/structoutput-15/versions/1.0.0-a2c6ee5e"
+version = "1.0.0"
+
+[benchpacks.structoutput-15.verifiers.verifier]
+mode = "docker"
+auto_start = true
+
+[benchpacks.hermesagent-20]
+enabled = true
+source = "registry"
+path = "/root/.benchlocal/benchpacks/hermesagent-20/versions/1.0.0-e8860ecc"
+version = "1.0.0"
+
+[benchpacks.hermesagent-20.verifiers.verifier]
+mode = "docker"
+auto_start = true

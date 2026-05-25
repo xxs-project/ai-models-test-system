@@ -14,15 +14,15 @@ import { Play, Terminal, Code, Bug, Link2, Key, Box, Eye, EyeOff, List, StopCirc
 
 // 模拟的基准包数据
 const MOCK_BENCH_PACKS = [
-  { id: 'toolcall-15', name: 'toolcall-15', type: '常规能力', isSandbox: false, isIpd: false },
-  { id: 'instructfollow-15', name: 'instructfollow-15', type: '常规能力', isSandbox: false, isIpd: false },
-  { id: 'reasonmath-15', name: 'reasonmath-15', type: '常规能力', isSandbox: false, isIpd: false },
-  { id: 'dataextract-15', name: 'dataextract-15', type: '常规能力', isSandbox: false, isIpd: false },
+  { id: 'toolcall-15', name: '工具调用', type: '常规能力', isSandbox: false, isIpd: false },
+  { id: 'instructfollow-15', name: '指令遵循', type: '常规能力', isSandbox: false, isIpd: false },
+  { id: 'reasonmath-15', name: '数理推理', type: '常规能力', isSandbox: false, isIpd: false },
+  { id: 'dataextract-15', name: '信息抽取', type: '常规能力', isSandbox: false, isIpd: false },
   { id: 'IPD', name: 'IPD', type: '开发流程支撑能力', isSandbox: false, isIpd: true, description: '包含IPD各个阶段能力验证' },
-  { id: 'bugfind-15', name: 'bugfind-15', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
-  { id: 'structoutput-15', name: 'structoutput-15', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
-  { id: 'hermesagent-20', name: 'hermesagent-20', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
-  { id: 'cli-40', name: 'cli-40', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
+  { id: 'bugfind-15', name: '代码漏洞', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
+  { id: 'structoutput-15', name: '结构化输出', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
+  { id: 'hermesagent-20', name: 'Agent调度', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
+  { id: 'cli-40', name: '运维命令', type: '隔离沙盒能力', isSandbox: true, isIpd: false },
 ]
 
 export default function EvalManage() {
@@ -52,7 +52,9 @@ export default function EvalManage() {
       const res = await fetch('/api/eval/tasks')
       if (res.ok) {
         const data = await res.json()
-        setTasks(data.tasks || [])
+        const newTasks = data.tasks || []
+        setTasks(newTasks)
+        setActiveTask(prev => prev ? (newTasks.find((t: any) => t.id === prev.id) || prev) : prev)
       }
     } catch (e) {
       console.error(e)
@@ -569,7 +571,9 @@ export default function EvalManage() {
                         <Label className="text-gray-500 text-xs mb-2 block">已选测试包 (Packs)</Label>
                         <div className="flex flex-wrap gap-2">
                             {activeTask.packs.split(',').map((p: string) => (
-                                <Badge key={p} variant="secondary">{p}</Badge>
+                                <Badge key={p} variant="secondary">
+                                    {MOCK_BENCH_PACKS.find(mp => mp.id === p)?.name || p}
+                                </Badge>
                             ))}
                         </div>
                     </div>
@@ -586,17 +590,19 @@ export default function EvalManage() {
               任务执行白板 (任务 #{activeTask.id})
             </h2>
             <div className="flex items-center gap-3">
-              <Badge variant="outline" className={`font-mono px-3 py-1 text-sm ${progress === 100 ? 'text-green-600 border-green-500/30 bg-green-50' : 'text-blue-600 border-blue-500/30 bg-blue-50'}`}>
-                {progress === 100 ? '✅ 评测已结束 (Finished)' : '🔵 评测运行中 (Running)'}
+              <Badge variant="outline" className={`font-mono px-3 py-1 text-sm ${activeTask.status === 'completed' || activeTask.status === 'stopped' || activeTask.status === 'failed' ? 'text-green-600 border-green-500/30 bg-green-50' : 'text-blue-600 border-blue-500/30 bg-blue-50'}`}>
+                {activeTask.status === 'completed' || activeTask.status === 'stopped' || activeTask.status === 'failed' ? '✅ 评测已结束 (Finished)' : '🔵 评测运行中 (Running)'}
               </Badge>
-              <Button 
-                size="sm" 
-                variant="destructive" 
-                onClick={() => handleStopEval(activeTask)}
-                className="font-bold shadow-sm hover:bg-red-700"
-              >
-                停止测评
-              </Button>
+              {activeTask.status === 'running' && (
+                <Button 
+                  size="sm" 
+                  variant="destructive" 
+                  onClick={() => handleStopEval(activeTask)}
+                  className="font-bold shadow-sm hover:bg-red-700"
+                >
+                  停止测评
+                </Button>
+              )}
             </div>
           </div>
           

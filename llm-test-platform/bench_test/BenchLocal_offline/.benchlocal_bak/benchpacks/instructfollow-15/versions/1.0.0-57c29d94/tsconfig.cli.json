@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "./dist-cli",
+    "rootDir": ".",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "incremental": false,
+    "tsBuildInfoFile": "./tsconfig.cli.tsbuildinfo"
+  },
+  "include": ["cli/**/*.ts", "lib/**/*.ts"],
+  "exclude": ["node_modules", "dist-cli", ".next"]
+}
