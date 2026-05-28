@@ -120,7 +120,7 @@ export function AddBenchmarkEnhanced({
     setTemplates(loadTemplates())
   }, [])
 
-  const updateConfig = (field: keyof BenchmarkConfig, value: string) => {
+  const updateConfig = (field: keyof BenchmarkConfig, value: any) => {
     setConfig(prev => ({ ...prev, [field]: value }))
     if (errors[field]) {
       setErrors(prev => { const newErrors = { ...prev }; delete newErrors[field]; return newErrors })
@@ -534,7 +534,11 @@ export function AddBenchmarkEnhanced({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="对话">对话</SelectItem>
-                    <SelectItem value="Agent">Agent</SelectItem>
+                      <SelectItem value="Agent">Agent</SelectItem>
+                      <SelectItem value="AI Coding">AI Coding</SelectItem>
+                      <SelectItem value="Openclaw">Openclaw</SelectItem>
+                      <SelectItem value="文档写作">文档写作</SelectItem>
+                      <SelectItem value="通用">通用</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

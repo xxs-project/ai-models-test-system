@@ -670,23 +670,16 @@ export function TaskList() {
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-white border-2 border-slate-300 shadow-2xl">
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-white border-2 border-slate-300 shadow-2xl">
           <DialogHeader className="border-b border-slate-200 pb-4">
             <DialogTitle className="text-xl font-bold text-slate-900">{editingTask ? '编辑测试任务' : '创建测试任务'}</DialogTitle>
           </DialogHeader>
           
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-6 py-6 h-[70vh]">
-              {/* Left sidebar */}
-              <div className="w-48 shrink-0 flex flex-col gap-2 border-r border-slate-100 pr-4">
-                <div className="px-3 py-2 bg-primary/10 text-primary rounded-md font-medium text-sm cursor-pointer">基本信息</div>
-                <div className="px-3 py-2 text-textSec hover:bg-pageBg rounded-md font-medium text-sm cursor-pointer">测试配置</div>
-                <div className="px-3 py-2 text-textSec hover:bg-pageBg rounded-md font-medium text-sm cursor-pointer">性能参数</div>
-                <div className="px-3 py-2 text-textSec hover:bg-pageBg rounded-md font-medium text-sm cursor-pointer">设备配置</div>
-              </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6 py-2">
               
-              {/* Right content */}
-              <div className="flex-1 overflow-y-auto pr-4 space-y-8">
+              
+              <div className="px-2 space-y-8">
 
               
               {/* 基础信息 */}
@@ -930,7 +923,14 @@ export function TaskList() {
                         <FormItem><FormLabel>场景</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
-                            <SelectContent><SelectItem value="对话">对话</SelectItem><SelectItem value="Agent">Agent</SelectItem></SelectContent>
+                            <SelectContent>
+                              <SelectItem value="对话">对话</SelectItem>
+                              <SelectItem value="Agent">Agent</SelectItem>
+                              <SelectItem value="AI Coding">AI Coding</SelectItem>
+                              <SelectItem value="Openclaw">Openclaw</SelectItem>
+                              <SelectItem value="文档写作">文档写作</SelectItem>
+                              <SelectItem value="通用">通用</SelectItem>
+                            </SelectContent>
                           </Select><FormMessage />
                         </FormItem>
                       )} />
@@ -1218,6 +1218,23 @@ export function TaskList() {
                      )}
                     />
                     )}
+
+                    {/* 场景 */}
+                    <FormField control={form.control} name="scenario" render={({ field }) => (
+                      <FormItem><FormLabel>场景</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                          <SelectContent>
+                            <SelectItem value="对话">对话</SelectItem>
+                            <SelectItem value="Agent">Agent</SelectItem>
+                            <SelectItem value="AI Coding">AI Coding</SelectItem>
+                            <SelectItem value="Openclaw">Openclaw</SelectItem>
+                            <SelectItem value="文档写作">文档写作</SelectItem>
+                            <SelectItem value="通用">通用</SelectItem>
+                          </SelectContent>
+                        </Select><FormMessage />
+                      </FormItem>
+                    )} />
                     
                     {/* 7. 图模式 */}
                     {Number(testMode) === 1 && Number(inferenceFramework) === 1 && (
@@ -1282,14 +1299,14 @@ export function TaskList() {
               )}
 
                             </div>
-              <DialogFooter className="gap-3">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 shrink-0 px-2">
                 <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                   取消
                 </Button>
                 <Button type="submit" disabled={createTask.isPending || updateTask.isPending}>
                   {createTask.isPending || updateTask.isPending ? (editingTask ? '保存中...' : '创建中...') : (editingTask ? '保存修改' : '创建任务')}
                 </Button>
-              </DialogFooter>
+              </div>
             </form>
           </Form>
         </DialogContent>
@@ -1354,6 +1371,10 @@ export function TaskList() {
                 <div className="border-t pt-4">
                   <h4 className="text-sm font-medium text-gray-500 mb-2">配置详情</h4>
                   <div className="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-md">
+                      <div>
+                        <span className="text-xs text-gray-500 block">场景</span>
+                        <span className="text-sm font-semibold text-blue-600">{viewTask.scenario || '-'}</span>
+                      </div>
                       <div>
                        <span className="text-xs text-gray-500 block">推理框架</span>
                        <span className="text-sm">{viewTask.inference_framework === 1 ? 'vLLM' : 'MindIE'}</span>
@@ -1434,10 +1455,7 @@ export function TaskList() {
                                  <span className="text-xs text-gray-500 block">加速卡</span>
                                  <span className="text-sm">{viewTask.accelerator_card || '-'}</span>
                                </div>
-                               <div>
-                                 <span className="text-xs text-gray-500 block">场景</span>
-                                 <span className="text-sm">{viewTask.scenario || '-'}</span>
-                               </div>
+
                                <div>
                                  <span className="text-xs text-gray-500 block">特性</span>
                                  <span className="text-sm">{Array.isArray(viewTask.features) ? viewTask.features.join(', ') : viewTask.features || '-'}</span>

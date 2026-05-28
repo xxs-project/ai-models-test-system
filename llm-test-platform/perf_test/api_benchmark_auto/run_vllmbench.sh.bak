@@ -74,23 +74,35 @@ get_latest_local_image() {
     local repo="$1"
     local default_tag="$2"
     
-    # 仅获取以 'v' 开头的 tags
-    local tags=$(docker images --format '{{.Tag}}' "$repo" | grep '^v' 2>/dev/null)
+    # 获取该仓库的所有 tag，排除 <none> 和 latest
+    local tags=$(docker images --format '{{.Tag}}' "$repo" | grep -v '^<none>$' | grep -v 'latest' 2>/dev/null)
     
-    if [ -n "$tags" ]; then
-        # 利用 sort -V 直接对带 v 前缀的版本号排序，取出最高版本
-        local highest_tag=$(echo "$tags" | sort -V | tail -n 1)
+    local selected_tag=""
+    for tag in $tags; do
+        # 去掉 v 前缀以便比较
+        local clean_tag=$(echo "$tag" | sed -E 's/^v//')
         
-        # 验证获取到的最高版本是否大于 v0.11.0
-        local lowest=$(printf "v0.11.0\n%s" "$highest_tag" | sort -V | head -n 1)
-        if [ "$lowest" = "v0.11.0" ] && [ "$highest_tag" != "v0.11.0" ]; then
-            echo "${repo}:${highest_tag}"
-            return
+        # 判断版本是否大于 0.11.0
+        local higher=$(printf "0.11.0\n%s" "$clean_tag" | sort -V | tail -n 1)
+        if [ "$higher" == "$clean_tag" ] && [ "$clean_tag" != "0.11.0" ]; then
+            if [ -z "$selected_tag" ]; then
+                selected_tag="$tag"
+            else
+                local clean_selected=$(echo "$selected_tag" | sed -E 's/^v//')
+                local highest=$(printf "%s\n%s" "$clean_selected" "$clean_tag" | sort -V | tail -n 1)
+                if [ "$highest" == "$clean_tag" ]; then
+                    selected_tag="$tag"
+                fi
+            fi
         fi
+    done
+
+    if [ -n "$selected_tag" ]; then
+        echo "${repo}:${selected_tag}"
+    else
+        # 如果没有找到满足条件的镜像，则使用默认的 tag
+        echo "${repo}:${default_tag}"
     fi
-    
-    # 如果没有找到符合条件的镜像，使用默认的 tag
-    echo "${repo}:${default_tag}"
 }
 
 if [ "$PROCESSOR" == "GPU" ]; then

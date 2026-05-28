@@ -44,6 +44,43 @@ const getPackName = (rawName: string) => {
   return PACK_NAME_MAP[rawName] || rawName;
 };
 
+const getModelVendor = (modelName: string) => {
+  if (!modelName) return '未知厂商';
+  const name = modelName.toLowerCase();
+  if (name.includes('gpt') || name.includes('o1') || name.includes('codex') || name.includes('dall')) return 'OpenAI';
+  if (name.includes('claude')) return 'Anthropic';
+  if (name.includes('gemini') || name.includes('palm') || name.includes('gemma')) return 'Google';
+  if (name.includes('grok')) return 'xAI';
+  if (name.includes('command')) return 'Cohere';
+  if (name.includes('pi-') || name === 'pi') return 'Inflection AI';
+  if (name.includes('mistral') || name.includes('mixtral') || name.includes('codestral')) return 'Mistral AI';
+  if (name.includes('llama')) return 'Meta';
+  if (name.includes('phi')) return 'Microsoft';
+  if (name.includes('dbrx')) return 'Databricks';
+  if (name.includes('nemotron')) return 'NVIDIA';
+  if (name.includes('starcoder') || name.includes('zephyr')) return 'Hugging Face';
+  if (name.includes('ernie') || name.includes('文心')) return '百度';
+  if (name.includes('doubao') || name.includes('豆包') || name.includes('hailuo') || name.includes('海螺') || name.includes('bytedance')) return '字节跳动';
+  if (name.includes('qwen') || name.includes('通义')) return '阿里巴巴';
+  if (name.includes('hunyuan') || name.includes('混元')) return '腾讯';
+  if (name.includes('kimi') || name.includes('moonshot') || name.includes('claw') || name.includes('k0-') || name.includes('k1.') || name.includes('k2')) return '月之暗面';
+  if (name.includes('abab') || name.includes('minimax') || name.includes('vl-01') || name.includes('m1') || name.includes('m2')) return '稀宇科技';
+  if (name.includes('spark') || name.includes('星火')) return '科大讯飞';
+  if (name.includes('pangu') || name.includes('盘古')) return '华为';
+  if (name.includes('sensenova') || name.includes('日日新')) return '商汤科技';
+  if (name.includes('tiangong') || name.includes('天工')) return '昆仑万维';
+  if (name.includes('taichu') || name.includes('太初')) return '中科院自动化所';
+  if (name.includes('wudao') || name.includes('悟道')) return '智源研究院';
+  if (name.includes('glm') || name.includes('zhipu') || name.includes('chatglm')) return '智谱AI';
+  if (name.includes('deepseek')) return '深度求索';
+  if (name.includes('baichuan') || name.includes('百川')) return '百川智能';
+  if (name.includes('yi-') || name.includes('零一万物')) return '零一万物';
+  if (name.includes('moss')) return '复旦大学';
+  if (name.includes('linly')) return '中科院';
+  if (name.includes('internlm') || name.includes('internvl') || name.includes('书生')) return '上海AI实验室/商汤';
+  return '未知厂商';
+};
+
 export function Board() {
   const [activeMainTab, setActiveMainTab] = useState('eval-ladder')
   
@@ -60,9 +97,9 @@ export function Board() {
         <TabsList className="mb-6 bg-slate-100/80 p-1 w-full sm:w-auto inline-flex flex-wrap h-auto">
           <TabsTrigger value="eval-ladder" className="flex-1 sm:flex-none px-6 py-2">测评天梯榜</TabsTrigger>
           <TabsTrigger value="perf-dragon" className="flex-1 sm:flex-none px-6 py-2">性能龙虎榜</TabsTrigger>
-          <TabsTrigger value="eval" className="flex-1 sm:flex-none px-6 py-2">测评榜单</TabsTrigger>
-          <TabsTrigger value="perf" className="flex-1 sm:flex-none px-6 py-2">性能榜单</TabsTrigger>
-          <TabsTrigger value="interactive" className="flex-1 sm:flex-none px-6 py-2">交互跑分面板</TabsTrigger>
+          <TabsTrigger value="eval" className="flex-1 sm:flex-none px-6 py-2">测评总榜单</TabsTrigger>
+          <TabsTrigger value="perf" className="flex-1 sm:flex-none px-6 py-2">性能总榜单</TabsTrigger>
+          {/* <TabsTrigger value="interactive" className="flex-1 sm:flex-none px-6 py-2">交互跑分面板</TabsTrigger> */}
         </TabsList>
         
         <TabsContent value="eval-ladder" className="space-y-4 focus-visible:outline-none">
@@ -81,9 +118,9 @@ export function Board() {
           <PerfBoard />
         </TabsContent>
 
-        <TabsContent value="interactive" className="space-y-4 focus-visible:outline-none">
+        {/* <TabsContent value="interactive" className="space-y-4 focus-visible:outline-none">
           <InteractiveBoard />
-        </TabsContent>
+        </TabsContent> */}
       </Tabs>
     </div>
   )
@@ -282,6 +319,7 @@ function EvalBoard() {
                       TOP {i + 1}
                     </div>
                     <div className="font-bold text-slate-800 text-lg truncate max-w-[150px]" title={r.model_name}>{r.model_name}</div>
+                    <div className="text-[10px] font-medium text-slate-400 mt-0.5 truncate">{getModelVendor(r.model_name)}</div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -316,6 +354,7 @@ function EvalBoard() {
               {activeTab === 'BenchLocal' ? (
                 <TableRow>
                   <TableHead>模型名称</TableHead>
+                  <TableHead>模型厂商</TableHead>
                   <TableHead>测评时间</TableHead>
                   <TableHead><SortButton columnKey="score" label="综合评分" /></TableHead>
                   <TableHead><SortButton columnKey="toolcall" label="工具调用" /></TableHead>
@@ -331,6 +370,7 @@ function EvalBoard() {
               ) : (
                 <TableRow>
                   <TableHead>模型名称</TableHead>
+                  <TableHead>模型厂商</TableHead>
                   <TableHead>测评时间</TableHead>
                   <TableHead><SortButton columnKey="score" label="综合评分" /></TableHead>
                   <TableHead><SortButton columnKey="机会识别" label="机会识别" /></TableHead>
@@ -353,6 +393,7 @@ function EvalBoard() {
               ) : sortedReports.map((r, i) => (
                 <TableRow key={i}>
                   <TableCell className="font-medium">{r.model_name}</TableCell>
+                  <TableCell className="text-gray-500 text-xs">{getModelVendor(r.model_name)}</TableCell>
                   <TableCell className="text-gray-500">{r.time}</TableCell>
                   <TableCell>{r.percent != null ? r.percent.toFixed(2) : '-'}</TableCell>
                   {activeTab === 'BenchLocal' ? (
@@ -518,6 +559,7 @@ function PerfBoard() {
   const { data: benchmarksData, isLoading } = useBenchmarks({ size: 1000 })
   const benchmarks = benchmarksData?.items || []
 
+  const [filterScenario, setFilterScenario] = useState<string>('all')
   const [filterModel, setFilterModel] = useState<string>('all')
   const [filterFeatures, setFilterFeatures] = useState<string[]>([])
   const [filterServer, setFilterServer] = useState<string>('all')
@@ -547,6 +589,7 @@ function PerfBoard() {
     </div>
   )
 
+  const scenarioOptions = useMemo(() => Array.from(new Set([...benchmarks.map(b => b.config.scenario), '对话', 'Agent', 'AI Coding', 'Openclaw', '文档写作', '通用'].filter(Boolean))), [benchmarks])
   const modelOptions = useMemo(() => Array.from(new Set(benchmarks.map(b => b.config.modelName).filter(Boolean))), [benchmarks])
   const featuresOptions = ['FP4', 'FP8', '投机推理', 'KV Cache卸载', 'KV稀疏']
   const serverOptions = useMemo(() => Array.from(new Set(benchmarks.map(b => b.config.serverName).filter(Boolean))), [benchmarks])
@@ -568,6 +611,7 @@ function PerfBoard() {
   const rows = useMemo(() => {
     const result: any[] = []
     benchmarks.forEach(b => {
+      if (filterScenario !== 'all' && (b.config.scenario || '对话') !== filterScenario) return
       if (filterModel !== 'all' && b.config.modelName !== filterModel) return
       
       const bFeatures = b.config.features || []
@@ -625,6 +669,8 @@ function PerfBoard() {
         <CardContent className="p-5 bg-slate-50/50">
           <div className="flex flex-col gap-5">
             <div className="flex flex-wrap gap-5 items-end">
+
+
               <div className="flex flex-col gap-2">
                 <Label className="text-slate-600 text-xs font-semibold uppercase tracking-wider">模型名称</Label>
                 <Select value={filterModel} onValueChange={setFilterModel}>
@@ -716,9 +762,8 @@ function PerfBoard() {
                     {featuresOptions.map(f => {
                       const isSelected = filterFeatures.includes(f);
                       return (
-                        <button
+                        <button type="button"
                           key={f}
-                          type="button"
                           onClick={() => {
                             setFilterFeatures(prev => 
                               isSelected ? prev.filter(item => item !== f) : [...prev, f]
@@ -738,6 +783,7 @@ function PerfBoard() {
                 </div>
                 
                 <Button variant="outline" className="bg-white text-slate-600 border-slate-200 hover:bg-slate-50 shrink-0" onClick={() => {
+                  setFilterScenario('all')
                   setFilterModel('all')
                   setFilterFeatures([])
                   setFilterServer('all')
@@ -814,6 +860,7 @@ function InteractiveBoard() {
   const { data: benchmarksData, isLoading } = useBenchmarks({ size: 1000 })
   const benchmarks = benchmarksData?.items || []
 
+  const [scenario, setScenario] = useState<string>('')
   const [model, setModel] = useState<string>('')
   const [features, setFeatures] = useState<string[]>([])
   const [server, setServer] = useState<string>('')
@@ -824,6 +871,7 @@ function InteractiveBoard() {
   
   const [viewDetails, setViewDetails] = useState<any | null>(null)
 
+  const scenarioOptions = useMemo(() => Array.from(new Set([...benchmarks.map(b => b.config.scenario), '对话', 'Agent', 'AI Coding', 'Openclaw', '文档写作', '通用'].filter(Boolean))), [benchmarks])
   const modelOptions = useMemo(() => Array.from(new Set(benchmarks.map(b => b.config.modelName).filter(Boolean))), [benchmarks])
   
   const featuresOptions = ['FP4', 'FP8', '投机推理', 'KV Cache卸载', 'KV稀疏']
@@ -832,6 +880,7 @@ function InteractiveBoard() {
 
   const filteredByModelAndFeatures = useMemo(() => {
     return benchmarks.filter(b => {
+      if (scenario && (b.config.scenario || '对话') !== scenario) return false
       if (model && b.config.modelName !== model) return false
       
       const bFeatures = b.config.features || []
@@ -956,6 +1005,8 @@ function InteractiveBoard() {
         <CardContent className="p-5">
           <div className="flex flex-col gap-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+
               <div className="flex flex-col gap-2">
                 <Label className="text-slate-600 text-xs font-semibold uppercase tracking-wider">模型列表</Label>
                 <Select value={model} onValueChange={setModel}>
@@ -1026,9 +1077,8 @@ function InteractiveBoard() {
                     {featuresOptions.map(f => {
                       const isSelected = features.includes(f);
                       return (
-                        <button
+                        <button type="button"
                           key={f}
-                          type="button"
                           onClick={() => {
                             setFeatures(prev => 
                               isSelected ? prev.filter(item => item !== f) : [...prev, f]
@@ -1048,6 +1098,7 @@ function InteractiveBoard() {
                 </div>
 
                 <Button variant="outline" className="bg-white text-slate-600 border-slate-200 hover:bg-slate-50 shrink-0" onClick={() => {
+                  setScenario('')
                   setModel('')
                   setFeatures([])
                   setServer('')
@@ -1125,45 +1176,6 @@ function InteractiveBoard() {
     </div>
   )
 }
-
-
-
-const getModelVendor = (modelName: string) => {
-  if (!modelName) return '未知厂商';
-  const name = modelName.toLowerCase();
-  if (name.includes('gpt') || name.includes('o1') || name.includes('codex') || name.includes('dall')) return 'OpenAI';
-  if (name.includes('claude')) return 'Anthropic';
-  if (name.includes('gemini') || name.includes('palm') || name.includes('gemma')) return 'Google';
-  if (name.includes('grok')) return 'xAI';
-  if (name.includes('command')) return 'Cohere';
-  if (name.includes('pi-') || name === 'pi') return 'Inflection AI';
-  if (name.includes('mistral') || name.includes('mixtral') || name.includes('codestral')) return 'Mistral AI';
-  if (name.includes('llama')) return 'Meta';
-  if (name.includes('phi')) return 'Microsoft';
-  if (name.includes('dbrx')) return 'Databricks';
-  if (name.includes('nemotron')) return 'NVIDIA';
-  if (name.includes('starcoder') || name.includes('zephyr')) return 'Hugging Face';
-  if (name.includes('ernie') || name.includes('文心')) return '百度';
-  if (name.includes('doubao') || name.includes('豆包') || name.includes('hailuo') || name.includes('海螺') || name.includes('bytedance')) return '字节跳动';
-  if (name.includes('qwen') || name.includes('通义')) return '阿里巴巴';
-  if (name.includes('hunyuan') || name.includes('混元')) return '腾讯';
-  if (name.includes('kimi') || name.includes('moonshot') || name.includes('claw') || name.includes('k0-') || name.includes('k1.') || name.includes('k2')) return '月之暗面';
-  if (name.includes('abab') || name.includes('minimax') || name.includes('vl-01') || name.includes('m1') || name.includes('m2')) return '稀宇科技';
-  if (name.includes('spark') || name.includes('星火')) return '科大讯飞';
-  if (name.includes('pangu') || name.includes('盘古')) return '华为';
-  if (name.includes('sensenova') || name.includes('日日新')) return '商汤科技';
-  if (name.includes('tiangong') || name.includes('天工')) return '昆仑万维';
-  if (name.includes('taichu') || name.includes('太初')) return '中科院自动化所';
-  if (name.includes('wudao') || name.includes('悟道')) return '智源研究院';
-  if (name.includes('glm') || name.includes('zhipu') || name.includes('chatglm')) return '智谱AI';
-  if (name.includes('deepseek')) return '深度求索';
-  if (name.includes('baichuan') || name.includes('百川')) return '百川智能';
-  if (name.includes('yi-') || name.includes('零一万物')) return '零一万物';
-  if (name.includes('moss')) return '复旦大学';
-  if (name.includes('linly')) return '中科院';
-  if (name.includes('internlm') || name.includes('internvl') || name.includes('书生')) return '上海AI实验室/商汤';
-  return '未知厂商';
-};
 
 function EvalLadderBoard() {
   const [reports, setReports] = useState<any[]>([])
@@ -1283,13 +1295,13 @@ function EvalLadderBoard() {
     <div className="space-y-8">
       <div className="flex justify-center mb-8">
         <div className="inline-flex bg-slate-100/80 p-1.5 rounded-xl">
-          <button 
+          <button type="button" 
             className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'BenchLocal' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
             onClick={() => setActiveTab('BenchLocal')}
           >
             BenchLocal 测试集
           </button>
-          <button 
+          <button type="button" 
             className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${activeTab === 'IPD' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
             onClick={() => setActiveTab('IPD')}
           >
@@ -1307,10 +1319,49 @@ function EvalLadderBoard() {
   )
 }
 
+  const ButtonGroup = ({ label, options, value, onChange, isMulti = false, optionLabels }: any) => {
+    if (!options || options.length === 0) return null;
+    return (
+      <div className="flex flex-col gap-3 py-3 border-b border-slate-200 border-dashed last:border-0 relative">
+        <div className="flex items-center gap-2">
+          <div className="w-1 h-3.5 bg-blue-400 rounded-full"></div>
+          <Label className="text-sm font-bold text-slate-700">{label}</Label>
+        </div>
+        <div className="flex flex-wrap gap-3 pl-3">
+          {options.map((opt: string) => {
+            const isSelected = isMulti ? value.includes(opt) : value === opt;
+            const displayLabel = optionLabels ? (optionLabels[opt] || opt) : opt;
+            return (
+              <button type="button"
+                key={opt}
+                title={displayLabel}
+                onClick={() => {
+                  if (isMulti) {
+                    onChange(isSelected ? value.filter((v: string) => v !== opt) : [...value, opt])
+                  } else {
+                    onChange(isSelected ? '' : opt)
+                  }
+                }}
+                className={`w-[150px] px-3 py-2 rounded-xl text-sm font-medium transition-all truncate ${
+                  isSelected 
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' 
+                    : 'bg-white text-slate-600 border border-slate-200 hover:border-blue-400 hover:bg-blue-50'
+                }`}
+              >
+                {displayLabel}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
 function PerfDragonTigerBoard() {
   const { data: benchmarksData, isLoading } = useBenchmarks({ size: 1000 })
   const benchmarks = benchmarksData?.items || []
 
+  const [scenario, setScenario] = useState<string>('')
   const [model, setModel] = useState<string>('')
   const [features, setFeatures] = useState<string[]>([])
   const [server, setServer] = useState<string>('')
@@ -1319,12 +1370,14 @@ function PerfDragonTigerBoard() {
   const [frameworkVersion, setFrameworkVersion] = useState<string>('')
   const [dimension, setDimension] = useState<string>('')
 
+  const scenarioOptions = useMemo(() => Array.from(new Set([...benchmarks.map(b => b.config.scenario), '对话', 'Agent', 'AI Coding', 'Openclaw', '文档写作', '通用'].filter(Boolean))), [benchmarks])
   const modelOptions = useMemo(() => Array.from(new Set(benchmarks.map(b => b.config.modelName).filter(Boolean))), [benchmarks])
   const featuresOptions = ['FP4', 'FP8', '投机推理', 'KV Cache卸载', 'KV稀疏']
   const serverOptions = useMemo(() => Array.from(new Set(benchmarks.map(b => b.config.serverName).filter(Boolean))), [benchmarks])
 
   const filteredByModelAndFeatures = useMemo(() => {
     return benchmarks.filter(b => {
+      if (scenario && (b.config.scenario || '对话') !== scenario) return false
       if (model && b.config.modelName !== model) return false
       const bFeatures = b.config.features || []
       const bFeaturesArr = Array.isArray(bFeatures) ? bFeatures : (typeof bFeatures === 'string' ? bFeatures.split(',') : [])
@@ -1427,43 +1480,7 @@ function PerfDragonTigerBoard() {
     return bests
   }, [allSelected, filteredByModelAndFeatures, server, card, framework, frameworkVersion, dimension])
 
-  const ButtonGroup = ({ label, options, value, onChange, isMulti = false, optionLabels }: any) => {
-    if (!options || options.length === 0) return null;
-    return (
-      <div className="flex flex-col gap-4 py-5 border-b border-slate-200 border-dashed last:border-0 relative">
-        <div className="flex items-center gap-2">
-          <div className="w-1 h-3.5 bg-blue-400 rounded-full"></div>
-          <Label className="text-sm font-bold text-slate-700">{label}</Label>
-        </div>
-        <div className="flex flex-wrap gap-3 pl-3">
-          {options.map((opt: string) => {
-            const isSelected = isMulti ? value.includes(opt) : value === opt;
-            const displayLabel = optionLabels ? (optionLabels[opt] || opt) : opt;
-            return (
-              <button
-                key={opt}
-                title={displayLabel}
-                onClick={() => {
-                  if (isMulti) {
-                    onChange(isSelected ? value.filter((v: string) => v !== opt) : [...value, opt])
-                  } else {
-                    onChange(isSelected ? '' : opt)
-                  }
-                }}
-                className={`w-[150px] px-3 py-2 rounded-xl text-sm font-medium transition-all truncate ${
-                  isSelected 
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' 
-                    : 'bg-white text-slate-600 border border-slate-200 hover:border-blue-400 hover:bg-blue-50'
-                }`}
-              >
-                {displayLabel}
-              </button>
-            )
-          })}
-        </div>
-      </div>
-    )
-  }
+
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
@@ -1473,11 +1490,9 @@ function PerfDragonTigerBoard() {
             <div className="w-1.5 h-5 bg-blue-600 rounded-full" />
             龙虎榜筛选配置
           </div>
-          <Button variant="ghost" size="sm" className="text-slate-500 hover:text-slate-800" onClick={() => {
-            setModel(''); setFeatures([]); setServer(''); setCard(''); setFramework(''); setFrameworkVersion(''); setDimension('');
-          }}>重置所有条件</Button>
+
         </div>
-        <CardContent className="p-6 bg-slate-50/30">
+        <CardContent className="p-4 sm:p-5 bg-slate-50/30">
           <ButtonGroup label="模型列表" options={modelOptions} value={model} onChange={setModel} />
           <ButtonGroup label="机型列表" options={serverOptions} value={server} onChange={setServer} />
           <ButtonGroup label="加速卡列表" options={cardOptions} value={card} onChange={setCard} />
@@ -1486,67 +1501,59 @@ function PerfDragonTigerBoard() {
           <ButtonGroup label="对比维度" options={['ttft', 'tps']} value={dimension} onChange={setDimension} optionLabels={{'ttft': 'TTFT', 'tps': '每卡 TPS'}} />
           <ButtonGroup label="特性列表" options={featuresOptions} value={features} onChange={setFeatures} isMulti={true} />
         </CardContent>
+        <div className="bg-slate-50/80 border-t border-slate-200 p-3 sm:p-4 flex justify-center">
+          <Button variant="outline" className="min-w-[120px] bg-white text-slate-600 border-slate-200 shadow-sm hover:bg-slate-100 hover:text-slate-900 transition-colors" onClick={() => {
+            setScenario(''); setModel(''); setFeatures([]); setServer(''); setCard(''); setFramework(''); setFrameworkVersion(''); setDimension('');
+          }}>
+            重置条件
+          </Button>
+        </div>
       </Card>
 
       {allSelected ? (
         bestRecords.length > 0 ? (
-          <div className="space-y-6 pt-4">
-            <div className="flex items-center gap-2 text-xl font-bold text-slate-800">
-              <Trophy className="w-7 h-7 text-yellow-500" />
-              龙虎霸榜记录
+          <Card className="shadow-sm border-slate-200">
+          <CardHeader className="bg-slate-50/50 border-b pb-4">
+            <CardTitle className="text-lg font-bold text-slate-800">vLLM Benchmark结果</CardTitle>
+            <p className="text-sm text-slate-500 mt-1">当前：{model} / {features.join(',')} / {server}+{card} / {dimension === 'ttft' ? 'TTFT' : '每卡 TPS'}</p>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>场景</TableHead>
+                    <TableHead>并发数</TableHead>
+                    <TableHead>输入长度</TableHead>
+                    <TableHead>输出长度</TableHead>
+                    <TableHead>TTFT (ms)</TableHead>
+                    <TableHead>每卡TPS</TableHead>
+                    
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {bestRecords.flatMap(record => 
+                    record.metrics.map((m: any, i: number) => {
+                      const cardCount = parseCardCount(record.config.shardingConfig)
+                      const tps = m.tokensPerSecond / cardCount
+                      return (
+                        <TableRow key={`${record.id}-${i}`}>
+                          <TableCell>{record.config.scenario || '-'}</TableCell>
+                          <TableCell>{m.concurrency}</TableCell>
+                          <TableCell>{m.inputLength}</TableCell>
+                          <TableCell>{m.outputLength}</TableCell>
+                          <TableCell>{m.ttft.toFixed(2)}</TableCell>
+                          <TableCell className="font-semibold">{tps.toFixed(2)}</TableCell>
+                          
+                        </TableRow>
+                      )
+                    })
+                  )}
+                </TableBody>
+              </Table>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {bestRecords.flatMap(record => 
-                record.metrics.map((m: any, i: number) => {
-                  const cardCount = parseCardCount(record.config.shardingConfig)
-                  const tps = m.tokensPerSecond / cardCount
-                  return (
-                    <div key={`${record.id}-${i}`} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
-                      <div className="absolute -right-12 -top-12 w-32 h-32 bg-gradient-to-br from-blue-50 to-indigo-50/50 rounded-full group-hover:scale-150 transition-transform duration-500 z-0" />
-                      <div className="relative z-10">
-                        <div className="flex justify-between items-start mb-4">
-                          <div className="px-3 py-1 bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold rounded-md">
-                            {record.config.scenario || '通用对话'}
-                          </div>
-                          <div className="text-right">
-                            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">并发数</div>
-                            <div className="text-2xl font-black text-slate-800 leading-none">{m.concurrency}</div>
-                          </div>
-                        </div>
-                        
-                        <div className="flex gap-4 mb-6 bg-slate-50/80 rounded-xl p-3 border border-slate-100">
-                          <div className="flex-1 text-center">
-                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">输入长度</div>
-                            <div className="text-lg font-bold text-slate-700">{m.inputLength}</div>
-                          </div>
-                          <div className="w-px bg-slate-200" />
-                          <div className="flex-1 text-center">
-                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">输出长度</div>
-                            <div className="text-lg font-bold text-slate-700">{m.outputLength}</div>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className={`p-4 rounded-xl flex flex-col items-center justify-center ${dimension === 'ttft' ? 'bg-blue-50 border-2 border-blue-200 shadow-inner' : 'bg-slate-50 border border-slate-100'}`}>
-                            <div className="text-xs font-bold text-slate-500 mb-1">TTFT</div>
-                            <div className={`text-xl font-black ${dimension === 'ttft' ? 'text-blue-600' : 'text-slate-800'}`}>
-                              {m.ttft.toFixed(2)}<span className="text-xs font-semibold text-slate-400 ml-1">ms</span>
-                            </div>
-                          </div>
-                          <div className={`p-4 rounded-xl flex flex-col items-center justify-center ${dimension === 'tps' ? 'bg-green-50 border-2 border-green-200 shadow-inner' : 'bg-slate-50 border border-slate-100'}`}>
-                            <div className="text-xs font-bold text-slate-500 mb-1">TPS/卡</div>
-                            <div className={`text-xl font-black ${dimension === 'tps' ? 'text-green-600' : 'text-slate-800'}`}>
-                              {tps.toFixed(2)}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })
-              )}
-            </div>
-          </div>
+          </CardContent>
+        </Card>
         ) : (
           <div className="bg-slate-50/50 border-2 border-dashed border-slate-200 rounded-2xl p-16 text-center">
             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-slate-100">

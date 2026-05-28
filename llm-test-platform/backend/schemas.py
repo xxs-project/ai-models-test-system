@@ -1,4 +1,4 @@
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, Union
 from pydantic import BaseModel
 
 class DeviceBase(BaseModel):
@@ -122,6 +122,8 @@ class BenchmarkConfig(BaseModel):
     frameworkParams: Optional[str] = None
     testDate: str
     notes: Optional[str] = None
+    scenario: Optional[str] = None
+    features: Optional[Union[str, List[str]]] = None
 
 class BenchmarkMetricsEntry(BaseModel):
     concurrency: int

@@ -168,7 +168,7 @@ export function Dashboard() {
               系统运行健康 | {currentDate}
             </div>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-              大模型综合评测平台
+              大模型测评平台
             </h1>
             <p className="text-slate-500 max-w-[650px] text-sm md:text-base leading-relaxed font-medium">
               实时监控物理算力集群运行状态，自动化调度模型能力评测与性能压测流水线，多维度生成专业评测报告。
@@ -272,7 +272,7 @@ export function Dashboard() {
           <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-4 bg-slate-50/50">
             <div className="flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-blue-600" />
-              <CardTitle className="text-lg font-bold text-slate-900">核心评测大盘 (Top 3)</CardTitle>
+              <CardTitle className="text-lg font-bold text-slate-900">测评综合榜单</CardTitle>
             </div>
             <div className="flex items-center gap-3 self-end sm:self-auto">
               <Button variant="ghost" size="sm" onClick={() => navigate('/board')} className="text-slate-500 hover:text-blue-600 hover:bg-blue-50 h-8 px-3 rounded-lg hidden sm:flex transition-all">
@@ -489,7 +489,7 @@ export function Dashboard() {
                           <div className="flex-1 min-w-0 pr-4">
                             <div className="font-semibold text-slate-800 text-sm truncate flex items-center gap-2 group-hover:text-blue-600 transition-colors" title={task.model_name}>
                               {task.model_name}
-                              {task.eval_type?.includes('IPD') && <Badge variant="secondary" className="text-[10px] h-5 px-1.5 font-semibold bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-100">IPD流程</Badge>}
+                              {task.eval_type && <Badge variant="secondary" className="text-[10px] h-5 px-1.5 font-semibold bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-100">{task.eval_type}</Badge>}
                             </div>
                             <div className="text-xs text-slate-500 mt-2 flex items-center gap-3 font-medium">
                               <span className="font-mono text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-500">ID:{task.id}</span>

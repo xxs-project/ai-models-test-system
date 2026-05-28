@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -46,6 +47,8 @@ export function BenchmarkDetailDialog({
         graphMode: benchmark.config?.graphMode || '',
         operatorAcceleration: benchmark.config?.operatorAcceleration || '',
         frameworkParams: benchmark.config?.frameworkParams || '',
+        scenario: benchmark.config?.scenario || '对话',
+        features: benchmark.config?.features || [],
         dataset_args: benchmark.config?.dataset_args || '',
         testDate: benchmark.config?.testDate || '',
         notes: benchmark.config?.notes || '',

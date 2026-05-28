@@ -388,6 +388,10 @@ export function CsvImportEnhanced({
                     <SelectContent>
                       <SelectItem value="对话">对话</SelectItem>
                       <SelectItem value="Agent">Agent</SelectItem>
+                      <SelectItem value="AI Coding">AI Coding</SelectItem>
+                      <SelectItem value="Openclaw">Openclaw</SelectItem>
+                      <SelectItem value="文档写作">文档写作</SelectItem>
+                      <SelectItem value="通用">通用</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

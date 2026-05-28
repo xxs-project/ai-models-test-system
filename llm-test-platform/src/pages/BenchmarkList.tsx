@@ -422,10 +422,10 @@ export function BenchmarkList() {
           <p className="text-gray-500 mt-1">查看和分析测试结果，对比性能数据</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={() => setEnhancedAddOpen(true)}>
+          {/* <Button variant="outline" onClick={() => setEnhancedAddOpen(true)}>
             <ClipboardPlus className="w-4 h-4 mr-2" />
             手动添加
-          </Button>
+          </Button> */}
           <Button onClick={() => setEnhancedImportOpen(true)}>
             <FileUp className="w-4 h-4 mr-2" />
             导入CSV
@@ -977,6 +977,7 @@ export function BenchmarkList() {
           try {
             await createBenchmark.mutateAsync({
               config: {
+                ...importData.config,
                 submitter: importData.config.submitter || importConfig.submitter,
                 modelName: importData.config.modelName || importConfig.modelName,
                 serverName: importData.config.serverName || importConfig.serverName,
@@ -988,6 +989,9 @@ export function BenchmarkList() {
                 operatorAcceleration: importData.config.operatorAcceleration,
                 frameworkParams: importData.config.frameworkParams,
                 notes: importData.config.notes,
+                graphMode: importData.config.graphMode,
+                scenario: importData.config.scenario,
+                features: importData.config.features,
               },
               metrics: importData.metrics,
             })
